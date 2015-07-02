@@ -1,15 +1,18 @@
-using UnityEngine;
-using System.Collections;
-
 public abstract class Accessory : InventoryItem {
 
-	public readonly int damage;
-	public readonly int stamina;
-	public readonly int HP;
-	public readonly int hitChance;
-	public readonly int critChance;
-	public readonly int inventory;
-	public readonly int speed;
+	public int Damage {get; protected set; }
+
+	public  int Stamina {get; protected set;}
+
+	public int HP  { get; protected set; }
+
+	public int HitChance  { get; protected set; }
+
+	public int CritChance { get; protected set; }
+
+	public int Inventory {get; protected set; }
+
+	public int Speed {get; protected set;}
 
 	public Accessory(string typeID) : base(0, typeID) {}
 }

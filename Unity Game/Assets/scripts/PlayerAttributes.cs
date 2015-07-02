@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class PlayerAttributes : MonoBehaviour {
@@ -33,7 +32,11 @@ public class PlayerAttributes : MonoBehaviour {
 	void Update() {
 		/* Called Once per frame */
 	}
-	
+	public float hitChance() {
+		float tmp = 0.6;
+	}
+
+
 
 	public void setAttributes (int xp, LinkedList <InventoryItem> inventory, int inventoryMax){
 		this.xp = xp;
@@ -64,7 +67,7 @@ public class PlayerAttributes : MonoBehaviour {
 		case 1:
 			return equipWeapon((Weapon) item);
 		default:
-			throw new System.Exception("Unknown Item");
+			throw new RulesException("Unknown Item");
 		}
 	}
 	/**
@@ -78,7 +81,7 @@ public class PlayerAttributes : MonoBehaviour {
 			this.weapon = weapon;
 			return true;
 		}
-		throw new System.Exception("Weapon Level too high");
+		throw new RulesException("Weapon Level too high");
 	}
 
 	private bool equipAccessory(Accessory a) {
@@ -87,7 +90,7 @@ public class PlayerAttributes : MonoBehaviour {
 			accessories.AddLast(a);
 			return true;
 		} 
-		throw new System.Exception("Unequip another one first");
+		throw new RulesException("Unequip another one first");
 	}
 
 	private bool unequipAccessory(Accessory a) {
@@ -95,8 +98,17 @@ public class PlayerAttributes : MonoBehaviour {
 			accessories.Remove (a);
 			return true;
 		} else {
-				throw new System.Exception("Accessory not equippoed");
+				throw new RulesException("Accessory not equippoed");
 		}
+	}
+
+	public bool addToInventory(InventoryItem a) {
+		if (inventory.Count < maxInventory) {
+			
+			inventory.AddLast(a);
+			return true;
+		} 
+		throw new RulesException("Inventory Full");
 	}
 
 	public bool attack(Enemy e) {
@@ -114,7 +126,7 @@ public class PlayerAttributes : MonoBehaviour {
 	public int inventorySize() {
 		int tmp = maxInventory;
 		foreach (Accessory a in accessories) {
-			tmp += a.inventory;
+			tmp += a.Inventory;
 		}
 		return tmp;
 	}
@@ -138,15 +150,15 @@ public class PlayerAttributes : MonoBehaviour {
 	public int maxStamina() {
 		var tmp =  Mathf.RoundToInt(HP_BASE * Mathf.Pow(HP_MULT, level -1));	
 		foreach (Accessory a in accessories) {
-			tmp += a.stamina;
+			tmp += a.Stamina;
 		}
 		return tmp;
 	}
 
-	public int damage() {
+	public int Damage() {
 		int tmp = baseAttack () + weapon.damage;
 		foreach (Accessory a in accessories) {
-			tmp += a.damage;
+			tmp += a.Damage;
 		}
 		return tmp;
 	}
