@@ -3,12 +3,13 @@ using System.Collections.Generic;
 
 public class PlayerAttributes : MonoBehaviour {
 
-	public const int HP_BASE = 100;
-	public const float HP_MULT = 1.8f;
-	public const int XP_BASE = 100;
-	public const float XP_MULT = 2;
-	public const int ATTACK_BASE = 6;
-	public const float ATTACK_MULT = 1.2f;
+	const int HP_BASE = 100;
+	const float HP_MULT = 1.8f;
+	const int XP_BASE = 100;
+	const float XP_MULT = 2;
+	const int ATTACK_BASE = 6;
+	const float ATTACK_MULT = 1.2f;
+	const int CRIT_MULT = 2;
 
 	/** 
 	 * We need to persist this between levels....
@@ -31,11 +32,23 @@ public class PlayerAttributes : MonoBehaviour {
 
 	void Update() {
 		/* Called Once per frame */
+		/** Health regenration etc. */
 	}
 	public float hitChance() {
-		float tmp = 0.6;
+		float tmp = 0.6f;
+		foreach (Accessory a in accessories) {
+			tmp += a.HitChance;
+		}
+		return tmp;
 	}
 
+	public float critChance() {
+		float tmp = 0.05f;
+		foreach (Accessory a in accessories) {
+			tmp += a.getCritChance();
+		}
+		return tmp;
+	}
 
 
 	public void setAttributes (int xp, LinkedList <InventoryItem> inventory, int inventoryMax){
@@ -111,8 +124,29 @@ public class PlayerAttributes : MonoBehaviour {
 		throw new RulesException("Inventory Full");
 	}
 
-	public bool attack(Enemy e) {
-		return false;
+	public string attack(Enemy e) {
+		float ran = Random.value;
+		float hc = hitChance();
+		string message = "Miss!";
+
+		if (ran <= hc){			
+			message = "Hit! ";
+			float cc = critChance ();
+			int damage = Damage ();
+
+			if (ran <= cc) {
+				damage *= CRIT_MULT;
+				message = "Critical Hit! ";
+			}
+			bool dead = e.loseHP(damage);
+			stamina -= weapon.staminaLoss;
+			if (dead) {
+				xp += e.xpGain;
+				message += levelUp();
+			}
+		} 
+
+		return message;
 	}
 
 	/**
@@ -120,7 +154,7 @@ public class PlayerAttributes : MonoBehaviour {
 	 * */
 	public bool loseHP(int hp) {
 		this.hp -= hp;
-		return this.hp <= 0;
+		return isDead();
 	}
 
 	public int inventorySize() {
@@ -170,5 +204,11 @@ public class PlayerAttributes : MonoBehaviour {
 	public int maxAccessories() {
 		return (level >= 5) ? 2 : 1;
 	}
+
+	public bool isDead() {
+		return hp <= 0;
+	}
+
+	
 
 }
