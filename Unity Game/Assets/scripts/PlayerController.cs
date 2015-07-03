@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		moveDir = new Vector3 (Input.GetAxisRaw("Horizontal"), 0 , Input.GetAxisRaw("Vertical")).normalized;
+		moveDir = new Vector3 (Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Jump") , Input.GetAxisRaw("Vertical")).normalized;
 	}
 
 	void FixedUpdate() {
