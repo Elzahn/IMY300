@@ -37,7 +37,7 @@ public class PlayerAttributes : MonoBehaviour {
 	public float hitChance() {
 		float tmp = 0.6f;
 		foreach (Accessory a in accessories) {
-			tmp += a.HitChance;
+			tmp += a.hitChance;
 		}
 		return tmp;
 	}
@@ -45,7 +45,7 @@ public class PlayerAttributes : MonoBehaviour {
 	public float critChance() {
 		float tmp = 0.05f;
 		foreach (Accessory a in accessories) {
-			tmp += a.getCritChance();
+			tmp += a.critChance;
 		}
 		return tmp;
 	}
@@ -86,12 +86,12 @@ public class PlayerAttributes : MonoBehaviour {
 	/**
 	 * Return Error or Success Message
 	 * */
-	private bool equipWeapon(Weapon weapon) {
-		if (weapon == null)
+	private bool equipWeapon(Weapon weap) {
+		if (weap == null)
 			throw new System.ArgumentNullException ("weapon");
 		//If level >= wepon min then Equip
-		if (weapon.level <= level) {
-			this.weapon = weapon;
+		if (weap.level <= level) {
+			this.weapon = weap;
 			return true;
 		}
 		throw new RulesException("Weapon Level too high");
@@ -132,7 +132,7 @@ public class PlayerAttributes : MonoBehaviour {
 		if (ran <= hc){			
 			message = "Hit! ";
 			float cc = critChance ();
-			int damage = Damage ();
+			int damage = damage ();
 
 			if (ran <= cc) {
 				damage *= CRIT_MULT;
@@ -160,7 +160,7 @@ public class PlayerAttributes : MonoBehaviour {
 	public int inventorySize() {
 		int tmp = maxInventory;
 		foreach (Accessory a in accessories) {
-			tmp += a.Inventory;
+			tmp += a.inventory;
 		}
 		return tmp;
 	}
@@ -176,7 +176,7 @@ public class PlayerAttributes : MonoBehaviour {
 	public int maxHP() {
 		var tmp = Mathf.RoundToInt(HP_BASE * Mathf.Pow(HP_MULT, level -1));		
 		foreach (Accessory a in accessories) {
-			tmp += a.HP;
+			tmp += a.hp;
 		}
 		return tmp;
 	}
@@ -184,15 +184,15 @@ public class PlayerAttributes : MonoBehaviour {
 	public int maxStamina() {
 		var tmp =  Mathf.RoundToInt(HP_BASE * Mathf.Pow(HP_MULT, level -1));	
 		foreach (Accessory a in accessories) {
-			tmp += a.Stamina;
+			tmp += a.stamina;
 		}
 		return tmp;
 	}
 
-	public int Damage() {
+	public int damage() {
 		int tmp = baseAttack () + weapon.damage;
 		foreach (Accessory a in accessories) {
-			tmp += a.Damage;
+			tmp += a.damage;
 		}
 		return tmp;
 	}
