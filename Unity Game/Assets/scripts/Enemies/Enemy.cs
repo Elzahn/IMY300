@@ -1,13 +1,10 @@
-﻿using UnityEngine;
-using System.Collections;
+using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour {
 	protected abstract void init(int lev);
-	protected void init(){
-		init (this.level)
-	}
 
 	public int hp { get; protected set; }
+
 	//private int _level;
 	public int level { get {return level;}  set {level = value; init(level); } }
 	public int damage { get; protected set;}
