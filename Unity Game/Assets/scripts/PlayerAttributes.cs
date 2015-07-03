@@ -132,13 +132,13 @@ public class PlayerAttributes : MonoBehaviour {
 		if (ran <= hc){			
 			message = "Hit! ";
 			float cc = critChance ();
-			int damage = damage ();
+			int tmpdamage = damage ();
 
 			if (ran <= cc) {
-				damage *= CRIT_MULT;
+				tmpdamage *= CRIT_MULT;
 				message = "Critical Hit! ";
 			}
-			bool dead = e.loseHP(damage);
+			bool dead = e.loseHP(tmpdamage);
 			stamina -= weapon.staminaLoss;
 			if (dead) {
 				xp += e.xpGain;
