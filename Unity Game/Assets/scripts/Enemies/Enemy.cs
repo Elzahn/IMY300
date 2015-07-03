@@ -1,18 +1,30 @@
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour {
-	protected abstract void init(int lev);
+	/**
+	 * Automatically called after level is set. Should initilze other attributes based on level;
+	 */
+	protected abstract void init();
+
+	void Start () {
+		/* Any other initlization */	
+	}
+	
+	void Update () {
+		/* Called once per frame. AI comes Here */
+	}
+
+
 
 	public int hp { get; protected set; }
-
-	//private int _level;
-	public int level { get {return level;}  set {level = value; init(level); } }
+	public int level { get {return level;}  set {level = value; init(); } }
 	public int damage { get; protected set;}
 	public float hitChance { get; protected set;}
 	public float critChance { get; protected set;}
 	public float lootChance { get; protected set;}
-
+	public int maxLoot {get; protected set;}
 	public int xpGain { get; protected set;}
+	public string typeID {get; protected set;}
 
 	public bool isDead() {
 		return hp <= 0;
@@ -23,15 +35,7 @@ public abstract class Enemy : MonoBehaviour {
 		return isDead();
 	}
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		/* AI comes Here */
-	}
+
 
 	public string attack(PlayerAttributes e) {
 		float ran = Random.value;
