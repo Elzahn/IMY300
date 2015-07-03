@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Weapon : InventoryItem{
-	public readonly int damage;
-	public readonly int level;
-	public readonly int staminaLoss;
+public abstract class Weapon : InventoryItem{
+	public int damage {get;};
+	public int level {get; };
+	public float staminaLoss {get; };
 	// Use this for initialization
-	public Weapon (int damage, int level, string typeID) : base(1, typeID) {
+	public Weapon (int level, int damage, float stamina, string typeID) : base(1, typeID) {
 		this.damage = damage;
 		this.level = level;
+		this.staminaLoss = stamina;
 	}
 
 }
