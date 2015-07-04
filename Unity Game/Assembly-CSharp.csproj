@@ -54,6 +54,7 @@
      <Compile Include="Assets\scripts\Enemies\Enemy.cs" />
      <Compile Include="Assets\scripts\Enemies\MossAlien.cs" />
      <Compile Include="Assets\scripts\Enemies\TranslucentAlien.cs" />
+     <Compile Include="Assets\scripts\FallThroughPlanet.cs" />
      <Compile Include="Assets\scripts\FauxGravityAttractor.cs" />
      <Compile Include="Assets\scripts\FauxGravityBody.cs" />
      <Compile Include="Assets\scripts\InventoryItem.cs" />
