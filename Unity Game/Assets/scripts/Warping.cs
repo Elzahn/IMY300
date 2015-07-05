@@ -57,6 +57,7 @@ public class Warping : MonoBehaviour {
 			PlayerAttributes playerAttributesScript = this.GetComponent<PlayerAttributes>();
 			int healthToLose = (int)(playerAttributesScript.currentHealth() * 0.05);
 			playerAttributesScript.loseHP(healthToLose);//loses 5% health when warping
+			print ("You lose " + healthToLose + " health");
 		}
 	}
 
@@ -155,6 +156,8 @@ public class Warping : MonoBehaviour {
 			GUI.enabled = true;
 
 			if(GUI.Button(new Rect(320, top+180,150,20), "Random warp point")) {
+				chooseDestination = false;
+				nextUsage = Time.time + delay;
 				generateRandomWarpPoint(Random.Range (1, 6));
 			}
 
