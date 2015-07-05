@@ -34,6 +34,12 @@ public class PlayerAttributes : MonoBehaviour {
 		/* Called Once per frame */
 		/** Health regenration etc. */
 	}
+
+	public int currentHealth()
+	{
+		return hp;
+	}
+
 	public float hitChance() {
 		float tmp = 0.6f;
 		foreach (Accessory a in accessories) {

@@ -5,6 +5,7 @@ public class FauxGravityBody : MonoBehaviour {
 
 	public FauxGravityAttractor attractor;
 	private Transform myTransform;
+
 	// Use this for initialization
 	void Start () {
 		var rigidbody = GetComponent<Rigidbody> ();
