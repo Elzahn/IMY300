@@ -7,6 +7,8 @@ public class Warping : MonoBehaviour {
 	private bool justWarped, waitingForMovement, chooseDestination, showDestinationChoice, paused;
 	public bool chooseDestinationUnlocked;
 	private Collider col;
+	private float nextUsage;
+	private float delay = 10;
 
 	// Use this for initialization
 	void Start () {
@@ -20,10 +22,17 @@ public class Warping : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(!paused && waitingForMovement && this.GetComponent<Rigidbody>().velocity.magnitude > 0)
-		{
-			justWarped = false;
-			waitingForMovement = false;
+		if (!paused) {
+			if (waitingForMovement && this.GetComponent<Rigidbody> ().velocity.magnitude > 0) {
+				justWarped = false;
+				waitingForMovement = false;
+			}
+
+			if (chooseDestination == false && Time.time >= nextUsage){
+				nextUsage = Time.time + delay;
+				chooseDestination = true;
+				print ("You can now choose your destination when warping again.");
+			}
 		}
 	}
 
@@ -86,6 +95,8 @@ public class Warping : MonoBehaviour {
 			}
 				
 			if(GUI.Button(new Rect(320, top+30,150,20), "Warp point 1")) {
+				chooseDestination = false;
+				nextUsage = Time.time + delay;
 				generateRandomWarpPoint(1);
 			}
 
@@ -96,6 +107,8 @@ public class Warping : MonoBehaviour {
 			}
 
 			if(GUI.Button(new Rect(320, top+60,150,20), "Warp point 2")) {
+				chooseDestination = false;
+				nextUsage = Time.time + delay;
 				generateRandomWarpPoint(2);
 			}
 
@@ -107,7 +120,9 @@ public class Warping : MonoBehaviour {
 			}
 
 			if(GUI.Button(new Rect(320, top+90,150,20), "Warp point 3")) {
+				chooseDestination = false;
 				generateRandomWarpPoint(3);
+				nextUsage = Time.time + delay;
 			}
 
 			
@@ -118,6 +133,8 @@ public class Warping : MonoBehaviour {
 			}
 
 			if(GUI.Button(new Rect(320, top+120,150,20), "Warp point 4")) {
+				chooseDestination = false;
+				nextUsage = Time.time + delay;
 				generateRandomWarpPoint(4);
 			}
 
@@ -129,7 +146,9 @@ public class Warping : MonoBehaviour {
 			}
 
 			if(GUI.Button(new Rect(320, top+150,150,20), "Warp point 5")) {
-					generateRandomWarpPoint(5);
+				chooseDestination = false;
+				nextUsage = Time.time + delay;
+				generateRandomWarpPoint(5);
 			}
 
 			
