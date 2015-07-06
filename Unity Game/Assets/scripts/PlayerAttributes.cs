@@ -5,6 +5,8 @@ public class PlayerAttributes : MonoBehaviour {
 
 	const int HP_BASE = 100;
 	const float HP_MULT = 1.8f;
+	const int STAM_BASE = 20;
+	const float STAM_MULT = 1.2f;
 	const int XP_BASE = 100;
 	const float XP_MULT = 2;
 	const int ATTACK_BASE = 6;
@@ -17,13 +19,21 @@ public class PlayerAttributes : MonoBehaviour {
 	private int xp = 0;
 	public LinkedList <InventoryItem> inventory = new LinkedList<InventoryItem>();
 	private int maxInventory = 15;
-
-	/**
+	public int speed {
+		get {
+			int tmp = 15;
+			foreach (Accessory a in accessories) {
+				tmp += a.speed;
+			}
+			return tmp;
+		}
+	}
+	/*
 	 * This can be reset/recalculated at start of level
 	 * */
-	private int hp;	
-	private int level;
-	private float stamina;
+	public int hp {get; private set;}	
+	public int level {get; private set;}
+	public float stamina {get; set;}
 	/**
 	 * This must be re-equiped at the start of the level
 	 * */
@@ -56,7 +66,6 @@ public class PlayerAttributes : MonoBehaviour {
 		return tmp;
 	}
 
-
 	public void setAttributes (int xp, LinkedList <InventoryItem> inventory, int inventoryMax){
 		this.xp = xp;
 		this.inventory = inventory;
@@ -64,6 +73,10 @@ public class PlayerAttributes : MonoBehaviour {
 		this.level = determineLevel ();
 		this.hp = maxHP();
 		this.stamina = maxStamina ();
+	}
+
+	public void setAttributes (){
+		setAttributes(0, new LinkedList<InventoryItem>(), 50);
 	}
 		
 	public string levelUp() {
@@ -188,7 +201,7 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 	
 	public int maxStamina() {
-		var tmp =  Mathf.RoundToInt(HP_BASE * Mathf.Pow(HP_MULT, level -1));	
+		var tmp =  Mathf.RoundToInt(STAM_BASE * Mathf.Pow(STAM_MULT, level -1));	
 		foreach (Accessory a in accessories) {
 			tmp += a.stamina;
 		}
