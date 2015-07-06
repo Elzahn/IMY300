@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FauxGravityBody : MonoBehaviour {
-
+public class WorldObjectsGravity : MonoBehaviour {
+	
 	public FauxGravityAttractor attractor;
 	private Transform myTransform;
 	private bool rotateMe = true;
@@ -10,8 +10,8 @@ public class FauxGravityBody : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		var rigidbody = GetComponent<Rigidbody> ();
-		rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 		rigidbody.useGravity = false;
+		GetComponent<Collider>().GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;
 		myTransform = transform;
 	}
 	

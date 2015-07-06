@@ -9,9 +9,12 @@ public class Warping : MonoBehaviour {
 	private Collider col;
 	private float nextUsage;
 	private float delay = 10;
-
+	private GameObject planet;
+	private float PlanetRadius;
 	// Use this for initialization
 	void Start () {
+		spawnTeleports ();
+		
 		justWarped = false;
 		waitingForMovement = false;
 		chooseDestinationUnlocked = false;	//unlocks at level 6
@@ -20,8 +23,53 @@ public class Warping : MonoBehaviour {
 		paused = false;
 	}
 	
+	//Removes any existing teleports and replaces them placing the new teleports at random positions on the sphere.
+	public void spawnTeleports ()
+	{
+		GameObject[] gameObjectsToDelete =  GameObject.FindGameObjectsWithTag ("WarpPoint");
+		
+		for (int i = 0; i < gameObjectsToDelete.Length; i++) {
+			Destroy (gameObjectsToDelete [i]);
+		}
+
+		planet = GameObject.Find("Planet");
+		PlanetRadius = planet.GetComponent<SphereCollider>().radius;
+
+		GameObject warpPoint1 = GameObject.CreatePrimitive (PrimitiveType.Cylinder);
+		warpPoint1.transform.position = Random.onUnitSphere * PlanetRadius;
+		warpPoint1.name = "WarpPoint1";
+		warpPoint1.transform.GetComponent<CapsuleCollider> ().isTrigger = true;
+		warpPoint1.tag = "WarpPoint";
+		
+		GameObject warpPoint2 = GameObject.CreatePrimitive (PrimitiveType.Cylinder);
+		warpPoint2.transform.position = Random.onUnitSphere * PlanetRadius;
+		warpPoint2.name = "WarpPoint2";
+		warpPoint2.transform.GetComponent<CapsuleCollider> ().isTrigger = true;
+		warpPoint2.tag = "WarpPoint";
+		
+		GameObject warpPoint3 = GameObject.CreatePrimitive (PrimitiveType.Cylinder);
+		warpPoint3.transform.position = Random.onUnitSphere * PlanetRadius;
+		warpPoint3.name = "WarpPoint3";
+		warpPoint3.transform.GetComponent<CapsuleCollider> ().isTrigger = true;
+		warpPoint3.tag = "WarpPoint";
+		
+		GameObject warpPoint4 = GameObject.CreatePrimitive (PrimitiveType.Cylinder);
+		warpPoint4.transform.position = Random.onUnitSphere * PlanetRadius;
+		warpPoint4.name = "WarpPoint4";
+		warpPoint4.transform.GetComponent<CapsuleCollider> ().isTrigger = true;
+		warpPoint4.tag = "WarpPoint";
+		
+		GameObject warpPoint5 = GameObject.CreatePrimitive (PrimitiveType.Cylinder);
+		warpPoint5.transform.position = Random.onUnitSphere * PlanetRadius;
+		warpPoint5.name = "WarpPoint5";
+		warpPoint5.transform.GetComponent<CapsuleCollider> ().isTrigger = true;
+		warpPoint5.tag = "WarpPoint";
+	}
+
 	// Update is called once per frame
 	void Update () {
+		if (Input.GetKeyDown (KeyCode.R)) {
+			spawnTeleports();}
 		if (!paused) {
 			if (waitingForMovement && this.GetComponent<Rigidbody> ().velocity.magnitude > 0) {
 				justWarped = false;
@@ -39,6 +87,11 @@ public class Warping : MonoBehaviour {
 	public bool getPaused()
 	{
 		return paused;
+	}
+
+	public void setPaused(bool value)
+	{
+		paused = value;
 	}
 
 	void generateRandomWarpPoint(int randomWarpPoint){
@@ -65,7 +118,7 @@ public class Warping : MonoBehaviour {
 		if (justWarped == false && target.gameObject.tag == "WarpPoint") {
 			col = target;
 			paused = true;	//Pause game
-
+			
 			if(chooseDestinationUnlocked && chooseDestination){
 				showDestinationChoice = true;
 			}
@@ -76,10 +129,6 @@ public class Warping : MonoBehaviour {
 		} else {
 			waitingForMovement = true;
 		}
-	}
-	void printMyNum(int n)
-	{
-		print (n);
 	}
 
 	void OnGUI()
@@ -113,7 +162,6 @@ public class Warping : MonoBehaviour {
 				generateRandomWarpPoint(2);
 			}
 
-			
 			GUI.enabled = true;
 			
 			if("WarpPoint3" == col.gameObject.name){
@@ -126,7 +174,6 @@ public class Warping : MonoBehaviour {
 				nextUsage = Time.time + delay;
 			}
 
-			
 			GUI.enabled = true;
 			
 			if("WarpPoint4" == col.gameObject.name){
@@ -139,7 +186,6 @@ public class Warping : MonoBehaviour {
 				generateRandomWarpPoint(4);
 			}
 
-			
 			GUI.enabled = true;
 			
 			if("WarpPoint5" == col.gameObject.name){
@@ -152,7 +198,6 @@ public class Warping : MonoBehaviour {
 				generateRandomWarpPoint(5);
 			}
 
-			
 			GUI.enabled = true;
 
 			if(GUI.Button(new Rect(320, top+180,150,20), "Random warp point")) {
