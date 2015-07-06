@@ -4,7 +4,7 @@ public abstract class Enemy : MonoBehaviour {
 	/**
 	 * Automatically called after level is set. Should initilze other attributes based on level;
 	 */
-	protected abstract void init();
+	public abstract void init();
 
 	void Start () {
 		/* Any other initlization */	
@@ -17,7 +17,7 @@ public abstract class Enemy : MonoBehaviour {
 
 
 	public int hp { get; protected set; }
-	public int level { get {return level;}  set {level = value; init(); } }
+	public int level { get; set; }
 	public int damage { get; protected set;}
 	public float hitChance { get; protected set;}
 	public float critChance { get; protected set;}

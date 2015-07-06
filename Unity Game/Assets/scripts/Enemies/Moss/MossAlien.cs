@@ -6,7 +6,7 @@ public class MossAlien : Enemy {
 	 * Should initilze other attributes dpendent on level;
 	 */
 
-	protected override void init() {
+	public override void init() {
 		const float HP_MULT = 1.6f;
 		const float CRIT_MULT = 1.1f;
 		const float HIT_MULT = 1.1f;
