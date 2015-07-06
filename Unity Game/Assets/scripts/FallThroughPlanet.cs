@@ -7,18 +7,18 @@ public class FallThroughPlanet : MonoBehaviour {
 	public bool fallThroughPlanetUnlocked;
 	private float nextUsage;
 	private float delay = 10;
-	private Warping warpingScript;
+	private PlayerController playerScript;
 
 	// Use this for initialization
 	void Start () {
 		canFallThroughPlanet = true; 
 		nextUsage = Time.time + delay;
 		fallThroughPlanetUnlocked = false; //will be changed to true after first mini boss when it is unlocked
-		warpingScript = this.GetComponent<Warping>();
+		playerScript = this.GetComponent<PlayerController>();
 	}
 	
 	void Update(){
-		if (warpingScript.getPaused() == false && fallThroughPlanetUnlocked == true) {
+		if (playerScript.getPaused() == false && fallThroughPlanetUnlocked == true) {
 			if (canFallThroughPlanet == true) {
 				if (Input.GetKeyDown (KeyCode.F)) {
 					canFallThroughPlanet = false;

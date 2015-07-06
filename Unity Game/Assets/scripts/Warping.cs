@@ -4,13 +4,15 @@ using System.Collections;
 public class Warping : MonoBehaviour {
 
 	private GameObject target;
-	private bool justWarped, waitingForMovement, chooseDestination, showDestinationChoice, paused;
+	private bool justWarped, waitingForMovement, chooseDestination, showDestinationChoice;
 	public bool chooseDestinationUnlocked;
 	private Collider col;
 	private float nextUsage;
 	private float delay = 10;
 	private GameObject planet;
 	private float PlanetRadius;
+	private PlayerController playerScript;
+
 	// Use this for initialization
 	void Start () {
 		spawnTeleports ();
@@ -20,7 +22,7 @@ public class Warping : MonoBehaviour {
 		chooseDestinationUnlocked = false;	//unlocks at level 6
 		chooseDestination = true;
 		showDestinationChoice = false;
-		paused = false;
+		playerScript = GetComponent<PlayerController> ();
 	}
 	
 	//Removes any existing teleports and replaces them placing the new teleports at random positions on the sphere.
@@ -68,9 +70,7 @@ public class Warping : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.R)) {
-			spawnTeleports();}
-		if (!paused) {
+		if (playerScript.getPaused() == false) {
 			if (waitingForMovement && this.GetComponent<Rigidbody> ().velocity.magnitude > 0) {
 				justWarped = false;
 				waitingForMovement = false;
@@ -84,18 +84,8 @@ public class Warping : MonoBehaviour {
 		}
 	}
 
-	public bool getPaused()
-	{
-		return paused;
-	}
-
-	public void setPaused(bool value)
-	{
-		paused = value;
-	}
-
 	void generateRandomWarpPoint(int randomWarpPoint){
-		paused = false;	//resume game
+		playerScript.setPaused (false);	//resume game
 		showDestinationChoice = false;	//closes menu
 
 		if("WarpPoint"+randomWarpPoint == col.gameObject.name){
@@ -117,7 +107,7 @@ public class Warping : MonoBehaviour {
 	void OnTriggerEnter(Collider target){
 		if (justWarped == false && target.gameObject.tag == "WarpPoint") {
 			col = target;
-			paused = true;	//Pause game
+			playerScript.setPaused(true);	//Pause game
 			
 			if(chooseDestinationUnlocked && chooseDestination){
 				showDestinationChoice = true;
@@ -208,7 +198,7 @@ public class Warping : MonoBehaviour {
 
 			if(GUI.Button(new Rect(320, top+210,150,20), "Cancel")) {
 				showDestinationChoice = false;
-				paused = false;
+				playerScript.setPaused(false);
 			}
 		}
 	}

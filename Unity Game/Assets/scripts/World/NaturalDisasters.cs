@@ -4,6 +4,7 @@ using System.Collections;
 public class NaturalDisasters : MonoBehaviour {
 	
 	private Warping warpingScript;
+	private PlayerController playerScript;
 	private float nextDisaster, delay = 60, shakeAmount, decreaseFactor, dizzyWearOfNext, dizzyDelay = 10;	
 	public float shake, spin;	//how long the shake/spin lasts
 	private Transform cameraTransform;
@@ -13,6 +14,7 @@ public class NaturalDisasters : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		warpingScript = GameObject.Find ("Player").GetComponent<Warping>();
+		playerScript = GameObject.Find ("Player").GetComponent<PlayerController>();
 		nextDisaster = Time.time + delay;
 		dizzyWearOfNext = Time.time + dizzyDelay;
 		cameraTransform = GameObject.Find ("Main Camera").transform;
@@ -39,13 +41,13 @@ public class NaturalDisasters : MonoBehaviour {
 			spin = 0f;
 			shake = 0f;	
 			cameraTransform.localPosition = originalCamPos;
-			warpingScript.setPaused (false);
+			playerScript.setPaused (false);
 			cameraTransform.localRotation = originalCamRotation;
 
 			//if 10secs gone setDizzy(false);
 		}
 
-		if (warpingScript.getPaused () == false) {
+		if (playerScript.getPaused () == false) {
 			if(GameObject.Find ("Player").GetComponent<PlayerAttributes>().getDizzy() == true && Time.time >= dizzyWearOfNext){
 				GameObject.Find ("Player").GetComponent<PlayerAttributes>().setDizzy(false);
 			}
@@ -57,7 +59,7 @@ public class NaturalDisasters : MonoBehaviour {
 				if(chance <= 20){
 					if(chance <= 10){
 						shake = 2f;
-						warpingScript.setPaused (true);
+						playerScript.setPaused (true);
 						warpingScript.spawnTeleports ();
 
 						GameObject[] gameObjects = GameObject.FindGameObjectsWithTag ("WorldObject");
@@ -108,7 +110,7 @@ public class NaturalDisasters : MonoBehaviour {
 							index++;
 						}
 						
-						warpingScript.setPaused (true);
+						playerScript.setPaused (true);
 						print ("Spinning around and around");
 					}
 				}

@@ -5,18 +5,16 @@ public class PlayerController : MonoBehaviour {
 
 	public float moveSpeed = 15;
 	public Vector3 moveDir;
-	private Warping warpingScript;
 	private PlayerAttributes playerAttributes;
-	private bool jumping = false;
+	private bool jumping = false, paused;
 
 	void Start(){
-		warpingScript = this.GetComponent<Warping> ();
 		playerAttributes = this.GetComponent<PlayerAttributes> ();
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (warpingScript.getPaused () == false) {
+		if (paused == false) {
 			if(playerAttributes.getDizzy() == true){
 				moveDir = new Vector3 (Input.GetAxisRaw ("Vertical"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Horizontal")).normalized;
 			} else {
@@ -32,7 +30,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		if (warpingScript.getPaused () == false) {
+		if (paused == false) {
 			var rigidbody = GetComponent<Rigidbody> ();
 			rigidbody.MovePosition (rigidbody.position + transform.TransformDirection (moveDir) * moveSpeed * Time.deltaTime);
 		}
@@ -40,5 +38,15 @@ public class PlayerController : MonoBehaviour {
 
 	public bool getJumping(){
 		return jumping;
+	}
+
+	public bool getPaused()
+	{
+		return paused;
+	}
+	
+	public void setPaused(bool value)
+	{
+		paused = value;
 	}
 }
