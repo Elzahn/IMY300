@@ -22,7 +22,7 @@ public class PlayerAttributes : MonoBehaviour {
 	 * This can be reset/recalculated at start of level
 	 * */
 	private int hp;	
-	private int level;
+	public int level {get; private set;}
 	private float stamina;
 	/**
 	 * This must be re-equiped at the start of the level
