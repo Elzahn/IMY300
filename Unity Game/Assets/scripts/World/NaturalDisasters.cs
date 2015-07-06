@@ -92,7 +92,6 @@ public class NaturalDisasters : MonoBehaviour {
 				
 						for(int i = 0; i < objectsToBeMoved.Length/2; i++){
 							moveDirection = Random.Range(1, 21);
-						print (index);
 							objectsToBeMoved[index].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
 							objectsToBeMoved[index].transform.position = new Vector3(moveDirection, objectsToBeMoved[index].transform.position.y, moveDirection);
 							index++;
