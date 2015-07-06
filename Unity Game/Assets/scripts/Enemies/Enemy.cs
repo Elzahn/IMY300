@@ -14,6 +14,18 @@ public abstract class Enemy : MonoBehaviour {
 		/* Called once per frame. AI comes Here */
 	}
 
+	void OnMouseDown() {
+		//this.hp = 0;
+
+		GameObject go = GameObject.Find("Player");
+		Vector3 PlayerPos = go.GetComponent<Rigidbody>().position;
+		Vector3 myPos = GetComponent<Rigidbody>().position;
+
+		if (Vector3.Distance(PlayerPos, myPos) < 6) {
+			go.GetComponent<PlayerAttributes>().attack(this);
+		}
+	}
+
 
 
 	public int hp { get; protected set; }
@@ -50,7 +62,8 @@ public abstract class Enemy : MonoBehaviour {
 			}
 			e.loseHP(tmpDamage);		
 		} 
-		
+
+		print(message);
 		return message;
 	}
 

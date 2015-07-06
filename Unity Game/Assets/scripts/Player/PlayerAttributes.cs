@@ -28,7 +28,7 @@ public class PlayerAttributes : MonoBehaviour {
 	 * This must be re-equiped at the start of the level
 	 * */
 	private LinkedList <Accessory> accessories = new LinkedList<Accessory>();
-	private Weapon weapon;
+	private Weapon weapon = null;
 
 	void Update() {
 		/* Called Once per frame */
@@ -160,13 +160,16 @@ public class PlayerAttributes : MonoBehaviour {
 				message = "Critical Hit! ";
 			}
 			bool dead = e.loseHP(tmpdamage);
+			if (weapon != null) {
 			stamina -= weapon.staminaLoss;
+			}
 			if (dead) {
 				xp += e.xpGain;
 				message += levelUp();
 			}
 		} 
-
+		
+		print(message);
 		return message;
 	}
 
@@ -211,7 +214,9 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	public int damage() {
-		int tmp = baseAttack () + weapon.damage;
+		int tmp = baseAttack ();
+		if (weapon != null)
+		tmp += weapon.damage;
 		foreach (Accessory a in accessories) {
 			tmp += a.damage;
 		}
