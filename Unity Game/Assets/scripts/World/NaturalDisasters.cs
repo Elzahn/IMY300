@@ -4,7 +4,7 @@ using System.Collections;
 public class NaturalDisasters : MonoBehaviour {
 	
 	private Warping warpingScript;
-	private float nextDisaster, delay = 6, shakeAmount, decreaseFactor, dizzyWearOfNext, dizzyDelay = 10;	
+	private float nextDisaster, delay = 60, shakeAmount, decreaseFactor, dizzyWearOfNext, dizzyDelay = 10;	
 	public float shake, spin;	//how long the shake/spin lasts
 	private Transform cameraTransform;
 	private Vector3 originalCamPos;
@@ -46,7 +46,7 @@ public class NaturalDisasters : MonoBehaviour {
 		}
 
 		if (warpingScript.getPaused () == false) {
-			if(Time.time >= dizzyWearOfNext){
+			if(GameObject.Find ("Player").GetComponent<PlayerAttributes>().getDizzy() == true && Time.time >= dizzyWearOfNext){
 				GameObject.Find ("Player").GetComponent<PlayerAttributes>().setDizzy(false);
 			}
 
@@ -54,7 +54,7 @@ public class NaturalDisasters : MonoBehaviour {
 				nextDisaster = Time.time + delay;
 				int chance = Random.Range(0,101);
 
-				//if(chance <= 20){
+				if(chance <= 20){
 					if(chance <= 10){
 						shake = 2f;
 						warpingScript.setPaused (true);
@@ -63,25 +63,56 @@ public class NaturalDisasters : MonoBehaviour {
 						GameObject[] gameObjects = GameObject.FindGameObjectsWithTag ("WorldObject");
 
 						for (int i = 0; i < gameObjects.Length; i++) {
-							if ((gameObjects [i].transform.localScale.y > gameObjects [i].transform.localScale.x) && (gameObjects [i].GetComponent<WorldObjectsGravity> ().getRotateMe () == true)) { //if it is taller than it is wide
-								gameObjects [i].GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
-								gameObjects [i].transform.Rotate (new Vector3 (gameObjects [i].transform.rotation.x + Random.Range(-90, 91), gameObjects [i].transform.rotation.y + Random.Range(-90, 91), gameObjects [i].transform.rotation.z + Random.Range(-90, 91)));	//fall over 	//fall over 
-								gameObjects [i].GetComponent<WorldObjectsGravity> ().setRotateMe ();
+							if ((gameObjects [i].transform.localScale.y > gameObjects [i].transform.localScale.x) && (gameObjects [i].GetComponent<FauxGravityBody> ().getRotateMe () == true)) { //if it is taller than it is wide
+								chance = Random.Range(0, 101);
+								if(chance <= 30){	//chance of falling over
+									gameObjects [i].GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
+									gameObjects [i].transform.Rotate (new Vector3 (gameObjects [i].transform.rotation.x + Random.Range(-90, 91), gameObjects [i].transform.rotation.y + Random.Range(-90, 91), gameObjects [i].transform.rotation.z + Random.Range(-90, 91)));	//fall over 	//fall over 
+									gameObjects [i].GetComponent<FauxGravityBody> ().setRotateMe ();
+								}
 							}
 						}
 
-						//check for collision when falling in collision file
+						//checking for collision when falling in collision file
 									
 						print ("Earth quake!");
 					} else {
 						spin = 2f;
-						GameObject.Find ("Player").GetComponent<PlayerAttributes>().setDizzy(true);
-						dizzyWearOfNext = Time.time + dizzyDelay;
+						if(GameObject.Find ("Player").GetComponent<PlayerController>().getJumping() == false){
+							GameObject.Find ("Player").GetComponent<PlayerAttributes>().setDizzy(true);
+							dizzyWearOfNext = Time.time + dizzyDelay;
+						}
+
+						GameObject[] objectsToBeMoved = GameObject.FindGameObjectsWithTag("WorldObject");	
+						GameObject[] enemiesToBeMoved = GameObject.FindGameObjectsWithTag("Enemy");	
+						
+						int startPoint = Random.Range(0, objectsToBeMoved.Length);
+						int index = startPoint;
+						int moveDirection;	
+				
+						for(int i = 0; i < objectsToBeMoved.Length/2; i++){
+							moveDirection = Random.Range(1, 21);
+						print (index);
+							objectsToBeMoved[index].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+							objectsToBeMoved[index].transform.position = new Vector3(moveDirection, objectsToBeMoved[index].transform.position.y, moveDirection);
+							index++;
+						}
+
+						startPoint = Random.Range(0, enemiesToBeMoved.Length);
+						index = startPoint;
+
+						for(int i = 0; i < enemiesToBeMoved.Length/2; i++){
+							moveDirection = Random.Range(1, 21);	
+							//Not sure if the freeze rotation is needed
+							//enemiesToBeMoved[index].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+							enemiesToBeMoved[index].transform.position = new Vector3(moveDirection, enemiesToBeMoved[index].transform.position.y, moveDirection);
+							index++;
+						}
+						
 						warpingScript.setPaused (true);
 						print ("Spinning around and around");
 					}
-				//}
-				//make delay 60
+				}
 			}
 		} else {
 			nextDisaster = Time.time + delay;	//just so that natural disasters can't occure while game is paused

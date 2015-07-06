@@ -39,6 +39,10 @@ public class PlayerAttributes : MonoBehaviour {
 		dizzy = value;
 	}
 
+	public bool getDizzy(){
+		return dizzy;
+	}
+
 	public int currentHealth()
 	{
 		return hp;
