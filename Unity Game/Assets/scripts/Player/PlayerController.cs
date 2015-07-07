@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
 
 	void Start(){
 		playerAttributes = this.GetComponent<PlayerAttributes> ();
+		paused = false;
 	}
 
 	// Update is called once per frame

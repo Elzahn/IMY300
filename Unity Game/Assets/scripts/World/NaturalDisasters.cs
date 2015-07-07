@@ -10,6 +10,7 @@ public class NaturalDisasters : MonoBehaviour {
 	private Transform cameraTransform;
 	private Vector3 originalCamPos;
 	private Quaternion originalCamRotation;
+	private bool spinningDone, earthquakeDone;	//set to ensure that game isn't resumed entire time
 
 	// Use this for initialization
 	void Start () {
@@ -24,10 +25,14 @@ public class NaturalDisasters : MonoBehaviour {
 		decreaseFactor = 1.0f;
 		shakeAmount = 0.7f;
 		originalCamRotation = cameraTransform.localRotation;
+		spinningDone = false;
+		earthquakeDone = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		GameObject.Find ("Directional Light").transform.Rotate (0, -0.001f, 0);	//Rotates light
 
 		if (shake > 0) {
 			cameraTransform.localPosition = originalCamPos + Random.insideUnitSphere * shakeAmount;
@@ -37,14 +42,12 @@ public class NaturalDisasters : MonoBehaviour {
 			cameraTransform.Rotate (5, 10, 5);
 			spin -= Time.deltaTime * decreaseFactor;
 			nextDisaster = Time.time + delay;
-		} else {
+		} else if((shake <= 0 && earthquakeDone == true) || (spin <= 0 && spinningDone == true)){
 			spin = 0f;
 			shake = 0f;	
 			cameraTransform.localPosition = originalCamPos;
 			playerScript.setPaused (false);
 			cameraTransform.localRotation = originalCamRotation;
-
-			//if 10secs gone setDizzy(false);
 		}
 
 		if (playerScript.getPaused () == false) {
@@ -74,7 +77,7 @@ public class NaturalDisasters : MonoBehaviour {
 								}
 							}
 						}
-
+						earthquakeDone = true;
 						//checking for collision when falling in collision file
 									
 						print ("Earth quake!");
@@ -111,6 +114,8 @@ public class NaturalDisasters : MonoBehaviour {
 						}
 						
 						playerScript.setPaused (true);
+
+						spinningDone = true;
 						print ("Spinning around and around");
 					}
 				}
