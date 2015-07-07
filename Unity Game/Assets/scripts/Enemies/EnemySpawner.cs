@@ -29,7 +29,11 @@ public class EnemySpawner : MonoBehaviour {
 	LinkedList<GameObject> enemies = new LinkedList <GameObject> ();
 
 	void Start () {
-		attributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
+		if (GameObject.Find ("Persist") != null) {
+			attributesScript = GameObject.Find ("Persist").GetComponent<PlayerAttributes> ();
+		} else {
+			attributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
+		}
 		playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
 		planet = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
 		playerLevel = GameObject.Find("Player").GetComponent<PlayerAttributes>().level;
@@ -108,7 +112,7 @@ public class EnemySpawner : MonoBehaviour {
 	void dropLoot(Enemy enemy, Vector3 position) {
 		//TODO Implement 
 		int chance = Random.Range (0, 101);
-		if (chance <= enemy.lootChance) {
+		if (chance >= enemy.lootChance) {
 			giveLoot = true;
 			playerScript.setPaused (true);
 			EnemyName = enemy.typeID;

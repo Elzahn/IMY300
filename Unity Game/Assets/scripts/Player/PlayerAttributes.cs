@@ -18,7 +18,8 @@ public class PlayerAttributes : MonoBehaviour {
 	public LinkedList <InventoryItem> storage = new LinkedList<InventoryItem> ();
 	private int maxInventory = 15;
 	private bool dizzy = false;
-	private int attackBase;
+	private int attackBase = 6;
+	private GameObject player;
 	/**
 	 * This can be reset/recalculated at start of level
 	 * */
@@ -79,8 +80,12 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	void Start(){
+		if (this.name == "Persist") {
+			DontDestroyOnLoad (this);
+		}
 		setAttributes (0, inventory, maxInventory);
 		attackBase = 6;
+		player = GameObject.Find ("Player");
 	}
 
 	public void setAttributes (int xp, LinkedList <InventoryItem> inventory, int inventoryMax){

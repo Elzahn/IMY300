@@ -22,11 +22,9 @@ public class SaveSpotTeleport : MonoBehaviour {
 		if (collider.name == "ExitPlane") {
 			playerScript.setPaused (true);	//Pause game
 			showExitConfirmation = true;
-		} else if (collider.name == "EntrancePlane" && canEnterSaveSpot) {
+		} else if (collider.name == "EntrancePlane"){// && canEnterSaveSpot) {
 			playerScript.setPaused (true);	//Pause game
 			showEntranceConfirmation = true;
-		} else if (collider.name == "Storage") {
-			print ("Storage");
 		}
 	}
 
