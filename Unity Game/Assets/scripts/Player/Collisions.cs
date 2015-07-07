@@ -11,9 +11,9 @@ public class Collisions : MonoBehaviour {
 
 	void OnTriggerEnter(Collider collider){	//Lose health only when an Earthquake hits
 		if (collider.tag == "WorldObject" && naturalDisastersScript.shake > 0) {
-			PlayerAttributes playerAttributesScript = this.GetComponent<PlayerAttributes>();
-			int healthToLose = (int)(playerAttributesScript.currentHealth() * 0.02);
-			playerAttributesScript.loseHP(healthToLose);//loses 5% health when warping
+			PlayerAttributes playerAttributesScript = this.GetComponent<PlayerAttributes> ();
+			int healthToLose = (int)(playerAttributesScript.currentHealth () * 0.02);
+			playerAttributesScript.loseHP (healthToLose);//loses 5% health when warping
 			print ("You lose " + healthToLose + " health");
 		}
 	}
