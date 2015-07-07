@@ -18,7 +18,6 @@ public class EnemySpawner : MonoBehaviour {
 	private PlayerController playerScript;
 	private Accessory accessoryScript;
 	private InventoryItem tempLoot;
-
 	// Use this for initialization
 	
 	const int ENEM_COUNT = 20;
@@ -35,7 +34,7 @@ public class EnemySpawner : MonoBehaviour {
 		planet = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
 		playerLevel = GameObject.Find("Player").GetComponent<PlayerAttributes>().level;
 		GameObject enemy;
-		
+
 		//Spawn Normal Enemies
 		for (int i=0; i<ENEM_COUNT -1; ++i) {
 			int index = Mathf.RoundToInt(Random.value * NORMAL_ENEMY_TYPES);
@@ -55,6 +54,7 @@ public class EnemySpawner : MonoBehaviour {
 				dropLoot(enemy, rigidbody.position);
 				enemies.Remove(go);
 				Destroy(go);
+				attributesScript.addXP(attributesScript.getLevel() * 20);
 			}
 			
 		}
@@ -108,7 +108,7 @@ public class EnemySpawner : MonoBehaviour {
 	void dropLoot(Enemy enemy, Vector3 position) {
 		//TODO Implement 
 		int chance = Random.Range (0, 101);
-		//if (chance <= enemy.lootChance) {
+		if (chance <= enemy.lootChance) {
 			giveLoot = true;
 			playerScript.setPaused (true);
 			EnemyName = enemy.typeID;
@@ -136,7 +136,7 @@ public class EnemySpawner : MonoBehaviour {
 					}
 				}
 			}
-		//}
+		}
 	}
 
 	void OnGUI() {

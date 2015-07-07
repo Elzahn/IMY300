@@ -7,7 +7,6 @@ public class PlayerAttributes : MonoBehaviour {
 	const float HP_MULT = 1.8f;
 	const int XP_BASE = 100;
 	const float XP_MULT = 2;
-	const int ATTACK_BASE = 6;
 	const float ATTACK_MULT = 1.2f;
 	const int CRIT_MULT = 2;
 
@@ -16,8 +15,10 @@ public class PlayerAttributes : MonoBehaviour {
 	 * */
 	private int xp = 0;
 	public LinkedList <InventoryItem> inventory = new LinkedList<InventoryItem>();
+	public LinkedList <InventoryItem> storage = new LinkedList<InventoryItem> ();
 	private int maxInventory = 15;
 	private bool dizzy = false;
+	private int attackBase;
 	/**
 	 * This can be reset/recalculated at start of level
 	 * */
@@ -27,11 +28,12 @@ public class PlayerAttributes : MonoBehaviour {
 	/**
 	 * This must be re-equiped at the start of the level
 	 * */
-	private LinkedList <Accessory> accessories = new LinkedList<Accessory>();
-	private Weapon weapon = null;
+	public LinkedList <Accessory> accessories = new LinkedList<Accessory>();
+	public Weapon weapon = null;
 
 	void Update() {
 		/* Called Once per frame */
+		levelUp ();
 		/** Health regenration etc. */
 	}
 
@@ -76,6 +78,11 @@ public class PlayerAttributes : MonoBehaviour {
 		return maxInventory;
 	}
 
+	void Start(){
+		setAttributes (0, inventory, maxInventory);
+		attackBase = 6;
+	}
+
 	public void setAttributes (int xp, LinkedList <InventoryItem> inventory, int inventoryMax){
 		this.xp = xp;
 		this.inventory = inventory;
@@ -87,11 +94,11 @@ public class PlayerAttributes : MonoBehaviour {
 		
 	public string levelUp() {
 		int nextTreshold = levelXP (level + 1);
-		if (xp > nextTreshold) {
+		if (xp >= nextTreshold) {
 			level++;
 			this.hp = maxHP();
 			this.stamina = maxStamina();
-		
+			attackBase += 1;
 			return "You  are now level " + level;
 		}
 		return "";
@@ -108,6 +115,7 @@ public class PlayerAttributes : MonoBehaviour {
 			throw new RulesException("Unknown Item");
 		}
 	}
+
 	/**
 	 * Return Error or Success Message
 	 * */
@@ -115,11 +123,15 @@ public class PlayerAttributes : MonoBehaviour {
 		if (weap == null)
 			throw new System.ArgumentNullException ("weapon");
 		//If level >= wepon min then Equip
-		if (weap.level <= level) {
-			this.weapon = weap;
-			return true;
+		if (weapon == null) {
+			if (weap.level <= level) {
+				this.weapon = weap;
+				return true;
+			}
+			throw new RulesException ("Weapon Level too high");
+		} else {
+			throw new RulesException ("Unequip weapon first first");
 		}
-		throw new RulesException("Weapon Level too high");
 	}
 
 	private bool equipAccessory(Accessory a) {
@@ -131,13 +143,21 @@ public class PlayerAttributes : MonoBehaviour {
 		throw new RulesException("Unequip another one first");
 	}
 
-	private bool unequipAccessory(Accessory a) {
+	public bool unequipAccessory(Accessory a) {
 		if (accessories.Contains (a)) {
 			accessories.Remove (a);
 			return true;
 		} else {
-				throw new RulesException("Accessory not equippoed");
+				throw new RulesException("Accessory not equipped");
 		}
+	}
+
+	public bool unequipWeapon(Weapon w){
+		if (weapon == w) {
+			weapon = null;
+			return true;
+		}
+		throw new RulesException ("Weapon not equipped");
 	}
 
 	public bool addToInventory(InventoryItem a) {
@@ -199,7 +219,12 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 	
 	public int determineLevel() {
-		return  Mathf.RoundToInt (Mathf.Log (xp * (XP_MULT - 1) / XP_BASE) / Mathf.Log (XP_BASE));
+		int tempLevel = Mathf.RoundToInt (Mathf.Log (xp * (XP_MULT - 1) / XP_BASE) / Mathf.Log (XP_BASE));
+
+		if (tempLevel == 0) {
+			return 1;
+		}
+		return tempLevel;//Mathf.RoundToInt (Mathf.Log (xp * (XP_MULT - 1) / XP_BASE) / Mathf.Log (XP_BASE));
 	}
 	
 	public int maxHP() {
@@ -229,7 +254,7 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 	
 	private int baseAttack() {
-			return  Mathf.RoundToInt(ATTACK_BASE * Mathf.Pow (ATTACK_MULT, level - 1));
+			return  Mathf.RoundToInt(attackBase * Mathf.Pow (ATTACK_MULT, level - 1));
 	}
 	
 	public int maxAccessories() {
@@ -254,5 +279,9 @@ public class PlayerAttributes : MonoBehaviour {
 
 	public float getStamina(){
 		return this.stamina;
+	}
+
+	public void addXP(int value){
+		this.xp += value;
 	}
 }

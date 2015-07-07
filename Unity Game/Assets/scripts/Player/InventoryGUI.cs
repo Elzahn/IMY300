@@ -45,7 +45,7 @@ public class InventoryGUI : MonoBehaviour {
 			int secondTop = top;
 			int height = 400;
 
-			GUI.Box (new Rect (left, top, 800, 800), "Character Review (Press I to close)\t"+attributesScript.inventory.Count+"/"+attributesScript.getMaxInventory());
+			GUI.Box (new Rect (left, top, 800, 800), "Character Review (Press I to close)");
 			GUI.Box (new Rect (left, top+40, 400, height), "Inventory \t"+attributesScript.inventory.Count+"/"+attributesScript.getMaxInventory());
 
 			if(attributesScript.inventory.Count == 0){
@@ -58,6 +58,7 @@ public class InventoryGUI : MonoBehaviour {
 						attributesScript.inventory.Remove(item);
 					}
 					if (GUI.Button(new Rect(left+270, top+80, 100, 30), "Equip")){
+						attributesScript.equipItem(item);
 						attributesScript.inventory.Remove(item);
 					}
 					top += 30;
@@ -71,14 +72,34 @@ public class InventoryGUI : MonoBehaviour {
 			GUI.Label(new Rect(secondLeft+430, secondTop+120, 150, 20), "Stamina: " + attributesScript.getStamina());
 			GUI.Label(new Rect(secondLeft+430, secondTop+140, 150, 20), "Level: " + attributesScript.getLevel());
 		
-			//set second top
+			secondTop += 100;
+			secondLeft += 400;
 
-			//display accessories
+			if(attributesScript.accessories.Count != 0){
+				foreach (Accessory item in attributesScript.accessories) {
+					GUI.Label(new Rect(secondLeft+30, secondTop+80, 300, 30), item.typeID);
+					if (GUI.Button(new Rect(secondLeft+270, secondTop+80, 100, 30), "Unequip")){
+						attributesScript.unequipAccessory(item);
+						attributesScript.addToInventory(item);
+					}
+					secondTop += 30;
+				}
+			} else {
+				GUI.Label(new Rect(secondLeft+30, secondTop+90, 300, 30), "No accessories equiped");
+				secondTop += 30;
+			}
 
-			//display weapons
-
-			//buttons drop / unequip
-
+			if(attributesScript.weapon == null){
+				GUI.Label(new Rect(secondLeft+30, secondTop+80, 300, 30), "No weapon equiped");
+				secondTop += 30;
+			}
+			else {
+				GUI.Label(new Rect(secondLeft+30, secondTop+80, 300, 30), attributesScript.weapon.typeID);
+				if (GUI.Button(new Rect(secondLeft+270, secondTop+80, 100, 30), "Unequip")){
+					attributesScript.addToInventory(attributesScript.weapon);
+					attributesScript.unequipWeapon(attributesScript.weapon);
+				}
+			}
 		}
 	}
 }
