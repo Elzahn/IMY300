@@ -1,4 +1,4 @@
 ﻿public class NullAccessory : Accessory {
 
-NullAccessory() : base("Nothing") {}
+public NullAccessory() : base("Nothing") {}
 }

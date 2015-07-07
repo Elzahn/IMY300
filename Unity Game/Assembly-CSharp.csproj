@@ -59,7 +59,7 @@
      <Compile Include="Assets\scripts\Gravity\FauxGravityBody.cs" />
      <Compile Include="Assets\scripts\InventoryItem.cs" />
      <Compile Include="Assets\scripts\Player\Collisions.cs" />
-     <Compile Include="Assets\scripts\Player\Inventory.cs" />
+     <Compile Include="Assets\scripts\Player\InventoryGUI.cs" />
      <Compile Include="Assets\scripts\Player\PlayerAttributes.cs" />
      <Compile Include="Assets\scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\scripts\RulesException.cs" />

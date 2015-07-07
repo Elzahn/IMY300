@@ -10,6 +10,15 @@ public class EnemySpawner : MonoBehaviour {
 	public GameObject enemy2;
 	public GameObject enemy3;
 	public GameObject enemy4;
+
+	private bool giveLoot = false;
+	private string EnemyName;
+	private int numLoot;
+	private PlayerAttributes attributesScript;
+	private PlayerController playerScript;
+	private Accessory accessoryScript;
+	private InventoryItem tempLoot;
+
 	// Use this for initialization
 	
 	const int ENEM_COUNT = 20;
@@ -21,6 +30,8 @@ public class EnemySpawner : MonoBehaviour {
 	LinkedList<GameObject> enemies = new LinkedList <GameObject> ();
 
 	void Start () {
+		attributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
+		playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
 		planet = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
 		playerLevel = GameObject.Find("Player").GetComponent<PlayerAttributes>().level;
 		GameObject enemy;
@@ -95,8 +106,53 @@ public class EnemySpawner : MonoBehaviour {
 	}
 
 	void dropLoot(Enemy enemy, Vector3 position) {
-		//TODO Implement
+		//TODO Implement 
+		int chance = Random.Range (0, 101);
+		//if (chance <= enemy.lootChance) {
+			giveLoot = true;
+			playerScript.setPaused (true);
+			EnemyName = enemy.typeID;
+
+			chance = Random.Range (0, 101);
+			if (chance <= 25) {
+				tempLoot = new NullAccessory (); 
+			} else {
+				chance = Random.Range (1, 4);	//choose between available weapons
+				switch (chance) {
+				case 1:
+					{
+						tempLoot = new ButterKnife (playerLevel);
+						break;
+					}
+				case 2:
+					{
+						tempLoot = new Longsword (playerLevel);
+						break;
+					}
+				case 3:
+					{
+						tempLoot = new Warhammer (playerLevel);
+						break;
+					}
+				}
+			}
+		//}
 	}
 
+	void OnGUI() {
+		if (giveLoot) {
+			GUI.Box (new Rect (200, 30, 400, 250), EnemyName);
+			GUI.Label(new Rect (230, 70, 300, 30), tempLoot.typeID);
+			if (GUI.Button(new Rect(470, 70, 100, 30), "Take it")){
+				attributesScript.addToInventory(tempLoot);
+				giveLoot = false;
+				playerScript.setPaused (false);
+			}
+			if (GUI.Button(new Rect(470, 230, 100, 30), "Close")){
+				giveLoot = false;
+				playerScript.setPaused (false);
+			}
+		}
+	}
 
 }

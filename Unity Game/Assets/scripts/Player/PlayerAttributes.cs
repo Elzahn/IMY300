@@ -71,6 +71,10 @@ public class PlayerAttributes : MonoBehaviour {
 		return tmp;
 	}
 
+	public int getMaxInventory()
+	{
+		return maxInventory;
+	}
 
 	public void setAttributes (int xp, LinkedList <InventoryItem> inventory, int inventoryMax){
 		this.xp = xp;
@@ -141,8 +145,9 @@ public class PlayerAttributes : MonoBehaviour {
 			
 			inventory.AddLast(a);
 			return true;
-		} 
-		throw new RulesException("Inventory Full");
+		}  else {
+			throw new RulesException("Inventory Full");
+		}
 	}
 
 	public string attack(Enemy e) {
@@ -235,6 +240,19 @@ public class PlayerAttributes : MonoBehaviour {
 		return hp <= 0;
 	}
 
-	
+	public int getHealth(){
+		return this.hp;
+	}
 
+	public int getXp(){
+		return this.xp;
+	}
+
+	public int getLevel(){
+		return this.level;
+	}
+
+	public float getStamina(){
+		return this.stamina;
+	}
 }

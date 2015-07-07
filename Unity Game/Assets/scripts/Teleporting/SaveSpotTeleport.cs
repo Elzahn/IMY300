@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SaveSpotTeleport : MonoBehaviour {
 
-	private bool showExitConfirmation, showEntranceConfirmation;
+	private bool showExitConfirmation, showEntranceConfirmation, canEnterSaveSpot;
 	private PlayerController playerScript;
 
 	// Use this for initialization
@@ -12,17 +12,17 @@ public class SaveSpotTeleport : MonoBehaviour {
 		showEntranceConfirmation = false;
 		playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
+	public void setEnterSaveSpot()
+	{
+		canEnterSaveSpot = true;
+	}
+	
 	void OnTriggerEnter(Collider collider){
 		if (collider.gameObject.name == "ExitPlane") {
 			playerScript.setPaused (true);	//Pause game
 			showExitConfirmation = true;
-		} else if (collider.gameObject.name == "EntrancePlane") {
+		} else if (collider.gameObject.name == "EntrancePlane" && canEnterSaveSpot) {
 			playerScript.setPaused (true);	//Pause game
 			showEntranceConfirmation = true;
 		}
@@ -56,6 +56,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 			
 			if (GUI.Button (new Rect (320, 90, 150, 20), "Go inside")) {
 				resume ();
+				canEnterSaveSpot = false;
 				Application.LoadLevel ("SaveSpot");
 			}
 			
