@@ -27,5 +27,8 @@ public class ApeAlien : Enemy {
 	
 	void Update () {
 		/* Called once per frame. AI comes Here */
+		
+		if(followThePlayer)
+			followPlayer ();
 	}	
 }

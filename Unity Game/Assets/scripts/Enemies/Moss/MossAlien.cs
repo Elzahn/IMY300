@@ -25,7 +25,8 @@ public class MossAlien : Enemy {
 		maxLoot = 1;
 	}
 	
-	void Update () {
+	/*void Update () {
 		/* Called once per frame. AI comes Here */
-	}	
+
+	//}	
 }

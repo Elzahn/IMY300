@@ -5,12 +5,14 @@ public class SaveSpotTeleport : MonoBehaviour {
 
 	private bool showExitConfirmation, showEntranceConfirmation, canEnterSaveSpot;
 	private PlayerController playerScript;
+	private PlayerAttributes attributesScript;
 
 	// Use this for initialization
 	void Start () {
 		showExitConfirmation = false;
 		showEntranceConfirmation = false;
 		playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
+		attributesScript = GameObject.Find ("Persist").GetComponent<PlayerAttributes> ();
 	}
 
 	public void setEnterSaveSpot()
@@ -56,6 +58,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 			
 			if (GUI.Button (new Rect (320, 90, 150, 20), "Go inside")) {
 				resume ();
+				attributesScript.restoreHealthToFull();
 				canEnterSaveSpot = false;
 				Application.LoadLevel ("SaveSpot");
 			}

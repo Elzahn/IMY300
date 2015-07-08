@@ -21,10 +21,10 @@ public class InventoryGUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.I)) {
+		if (Input.GetKeyDown (KeyCode.I) && showStorage == false) {
 			if(showInventory) {
 				closeInventory();
-			} else {
+			} else if(showStorage == false){
 				openInventory();
 			}
 		}
@@ -133,58 +133,43 @@ public class InventoryGUI : MonoBehaviour {
 			int height = 400;
 			
 			GUI.Box (new Rect (left, top, 800, 800), "Storage/Inventory Space (Press Esc to close)");
-			GUI.Box (new Rect (left, top + 40, 400, height), "Inventory \t" + attributesScript.inventory.Count + "/" + attributesScript.getMaxInventory ());
+			GUI.Box (new Rect (left, top + 40, 400, height), "Storage \t" + attributesScript.storage.Count + "/" + attributesScript.getMaxStorage ());
 			
-			/*if (attributesScript.inventory.Count == 0) {
-				GUI.Label (new Rect (left + 120, top + 100, 150, 20), "No items in inventory");
+			if (attributesScript.storage.Count == 0) {
+				GUI.Label (new Rect (left + 120, top + 100, 150, 20), "No items in storage");
 			} else {
-				foreach (InventoryItem item in attributesScript.inventory) {
+				foreach (InventoryItem item in attributesScript.storage) {
 					GUI.Label (new Rect (left + 30, top + 80, 300, 30), item.typeID);
 					if (GUI.Button (new Rect (left + 170, top + 80, 100, 30), "Drop it")) {
-						attributesScript.inventory.Remove (item);
+						attributesScript.storage.Remove (item);
 					}
-					if (GUI.Button (new Rect (left + 270, top + 80, 100, 30), "Equip")) {
-						attributesScript.equipItem (item);
-						attributesScript.inventory.Remove (item);
+					if (GUI.Button (new Rect (left + 270, top + 80, 100, 30), "Move to Inventory")) {
+						attributesScript.addToInventory(item);
+						attributesScript.storage.Remove (item);
 					}
 					top += 30;
 				}
 			}
-			
-			//show character attributes
-			GUI.Box (new Rect (secondLeft + 400, secondTop + 40, 400, height), "Character Attributes");
-			GUI.Label (new Rect (secondLeft + 430, secondTop + 80, 150, 20), "Xp: " + attributesScript.getXp ());
-			GUI.Label (new Rect (secondLeft + 430, secondTop + 100, 150, 20), "Hp: " + attributesScript.getHealth ());
-			GUI.Label (new Rect (secondLeft + 430, secondTop + 120, 150, 20), "Stamina: " + attributesScript.getStamina ());
-			GUI.Label (new Rect (secondLeft + 430, secondTop + 140, 150, 20), "Level: " + attributesScript.getLevel ());
-			
-			secondTop += 100;
+						
 			secondLeft += 400;
+
+			GUI.Box (new Rect (secondLeft, secondTop + 40, 400, height), "Inventory \t" + attributesScript.inventory.Count + "/" + attributesScript.getMaxInventory ());
 			
-			if (attributesScript.accessories.Count != 0) {
-				foreach (Accessory item in attributesScript.accessories) {
+			if (attributesScript.inventory.Count == 0) {
+				GUI.Label (new Rect (secondLeft + 120, secondTop + 100, 150, 20), "No items in inventory");
+			} else {
+				foreach (InventoryItem item in attributesScript.inventory) {
 					GUI.Label (new Rect (secondLeft + 30, secondTop + 80, 300, 30), item.typeID);
-					if (GUI.Button (new Rect (secondLeft + 270, secondTop + 80, 100, 30), "Unequip")) {
-						attributesScript.unequipAccessory (item);
-						attributesScript.addToInventory (item);
+					if (GUI.Button (new Rect (secondLeft + 170, secondTop + 80, 100, 30), "Drop it")) {
+						attributesScript.inventory.Remove (item);
+					}
+					if (GUI.Button (new Rect (secondLeft + 270, secondTop + 80, 100, 30), "Move To Storage")) {
+						attributesScript.addToStorage (item);
+						attributesScript.inventory.Remove (item);
 					}
 					secondTop += 30;
 				}
-			} else {
-				GUI.Label (new Rect (secondLeft + 30, secondTop + 90, 300, 30), "No accessories equiped");
-				secondTop += 30;
 			}
-			
-			if (attributesScript.weapon == null) {
-				GUI.Label (new Rect (secondLeft + 30, secondTop + 80, 300, 30), "No weapon equiped");
-				secondTop += 30;
-			} else {
-				GUI.Label (new Rect (secondLeft + 30, secondTop + 80, 300, 30), attributesScript.weapon.typeID);
-				if (GUI.Button (new Rect (secondLeft + 270, secondTop + 80, 100, 30), "Unequip")) {
-					attributesScript.addToInventory (attributesScript.weapon);
-					attributesScript.unequipWeapon (attributesScript.weapon);
-				}
-			}*/
 		}
 	}
 }

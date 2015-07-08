@@ -44,8 +44,8 @@ public class EnemySpawner : MonoBehaviour {
 			int index = Mathf.RoundToInt(Random.value * NORMAL_ENEMY_TYPES);
 			enemy = chooseEnemy(index);
 			addEnemy(enemy);
-			
 		}
+
 		//Spawn boss.
 		addEnemy(bossEnemy);	
 	}
@@ -58,6 +58,7 @@ public class EnemySpawner : MonoBehaviour {
 				dropLoot(enemy, rigidbody.position);
 				enemies.Remove(go);
 				Destroy(go);
+				//Added XP here
 				attributesScript.addXP(attributesScript.getLevel() * 20);
 			}
 			
@@ -118,6 +119,7 @@ public class EnemySpawner : MonoBehaviour {
 			EnemyName = enemy.typeID;
 
 			chance = Random.Range (0, 101);
+			print (chance);
 			if (chance <= 25) {
 				tempLoot = new NullAccessory (); 
 			} else {

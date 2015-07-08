@@ -6,16 +6,23 @@ public class PlayerController : MonoBehaviour {
 	public float moveSpeed = 15;
 	public Vector3 moveDir;
 	private PlayerAttributes playerAttributes;
-	private bool jumping = false, paused;
+	private bool jumping = false, paused, showDeath;
 
 	void Start(){
-		playerAttributes = this.GetComponent<PlayerAttributes> ();
+		playerAttributes = GameObject.Find ("Persist").GetComponent<PlayerAttributes> ();//this.GetComponent<PlayerAttributes> ();
 		paused = false;
+		showDeath = false;
 	}
 
 	// Update is called once per frame
 	void Update () {
 		if (paused == false) {
+			if(playerAttributes.isDead() == true)
+			{
+				showDeath = true;
+				paused = true;
+			}
+
 			if(playerAttributes.getDizzy() == true){
 				moveDir = new Vector3 (Input.GetAxisRaw ("Vertical"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Horizontal")).normalized;
 			} else {
@@ -49,5 +56,21 @@ public class PlayerController : MonoBehaviour {
 	public void setPaused(bool value)
 	{
 		paused = value;
+	}
+
+	void OnGUI(){
+		if (showDeath) {
+			GUI.Box (new Rect (300, 40, 200, 150), "You died! Restart the level?");
+			if (GUI.Button (new Rect (350, 90, 100, 30), "Restart level")) {
+				Application.LoadLevel (Application.loadedLevel);
+				paused = false;
+				showDeath = false;
+			}
+			if (GUI.Button (new Rect (350, 140, 100, 30), "Quit")) {
+				Application.Quit();
+				showDeath = false;
+				paused = false;
+			}
+		}
 	}
 }

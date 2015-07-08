@@ -10,6 +10,7 @@ public class PlayerAttributes : MonoBehaviour {
 	const float ATTACK_MULT = 1.2f;
 	const int CRIT_MULT = 2;
 
+	public static PlayerAttributes Instance;
 	/** 
 	 * We need to persist this between levels....
 	 * */
@@ -17,9 +18,10 @@ public class PlayerAttributes : MonoBehaviour {
 	public LinkedList <InventoryItem> inventory = new LinkedList<InventoryItem>();
 	public LinkedList <InventoryItem> storage = new LinkedList<InventoryItem> ();
 	private int maxInventory = 15;
+	private int maxStorage = 50;
 	private bool dizzy = false;
 	private int attackBase = 6;
-	private GameObject player;
+	private char gender = '?';
 	/**
 	 * This can be reset/recalculated at start of level
 	 * */
@@ -36,6 +38,14 @@ public class PlayerAttributes : MonoBehaviour {
 		/* Called Once per frame */
 		levelUp ();
 		/** Health regenration etc. */
+	}
+
+	public void setGender(char gender){
+		this.gender = gender;
+	}
+
+	public char getGender(){
+		return this.gender;
 	}
 
 	public void setDizzy(bool value){
@@ -79,22 +89,32 @@ public class PlayerAttributes : MonoBehaviour {
 		return maxInventory;
 	}
 
-	void Start(){
-		if (this.name == "Persist") {
-			DontDestroyOnLoad (this);
-		}
-		setAttributes (0, inventory, maxInventory);
-		attackBase = 6;
-		player = GameObject.Find ("Player");
+	public int getMaxStorage(){
+		return maxStorage;
 	}
 
-	public void setAttributes (int xp, LinkedList <InventoryItem> inventory, int inventoryMax){
+	void Start(){
+		if (this.name != "Player") {
+			if (Instance) {
+				DestroyImmediate (gameObject);
+			} else {
+				DontDestroyOnLoad (this);
+				Instance = this;
+			}
+		} 
+
+		setAttributes (0, inventory, maxInventory, maxStorage);
+		attackBase = 6;
+	}
+
+	public void setAttributes (int xp, LinkedList <InventoryItem> inventory, int inventoryMax, int storageMax){
 		this.xp = xp;
 		this.inventory = inventory;
 		this.maxInventory = inventoryMax;
 		this.level = determineLevel ();
 		this.hp = maxHP();
 		this.stamina = maxStamina ();
+		this.maxStorage = storageMax;
 	}
 		
 	public string levelUp() {
@@ -165,6 +185,15 @@ public class PlayerAttributes : MonoBehaviour {
 		throw new RulesException ("Weapon not equipped");
 	}
 
+	public bool addToStorage(InventoryItem item){
+		if (storage.Count < maxStorage) {
+			storage.AddLast (item);
+			return true;
+		} else {
+			throw new RulesException("Storage full");
+		}
+	}
+
 	public bool addToInventory(InventoryItem a) {
 		if (inventory.Count < maxInventory) {
 			
@@ -173,6 +202,11 @@ public class PlayerAttributes : MonoBehaviour {
 		}  else {
 			throw new RulesException("Inventory Full");
 		}
+	}
+
+	public void restoreHealthToFull()
+	{
+		this.hp = maxHP ();
 	}
 
 	public string attack(Enemy e) {
@@ -208,7 +242,7 @@ public class PlayerAttributes : MonoBehaviour {
 	 * */
 	public bool loseHP(int hp) {
 		this.hp -= hp;
-		return isDead();
+		return isDead ();
 	}
 
 	public int inventorySize() {

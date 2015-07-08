@@ -6,6 +6,8 @@ public class TranslucentAlien : Enemy {
 	 * Should initilze other attributes dpendent on level;
 	 */
 
+	private GameObject persist;
+
 	public override void init() {
 		const float HP_MULT = 1.6f;
 		const float CRIT_MULT = 1.14f;
@@ -23,9 +25,18 @@ public class TranslucentAlien : Enemy {
 		typeID = "TranslucentAlien";
 		lootChance = 0.85f;
 		maxLoot = 4;
+		persist = GameObject.Find("Persist");
 	}
 	
 	void Update () {
 		/* Called once per frame. AI comes Here */
+		
+		if(followThePlayer)
+			followPlayer ();
+
+		if (inRange) {
+			//print ("hi");
+			attack (persist.GetComponent<PlayerAttributes> ());
+		}
 	}	
 }

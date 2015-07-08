@@ -25,7 +25,8 @@ public class BossAlien : Enemy {
 		maxLoot = 5;
 	}
 	
-	void Update () {
+	/*void Update () {
 		/* Called once per frame. AI comes Here */
-	}	
+
+	//}	
 }

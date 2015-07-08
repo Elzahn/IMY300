@@ -5,6 +5,7 @@ public abstract class Enemy : MonoBehaviour {
 	 * Automatically called after level is set. Should initilze other attributes based on level;
 	 */
 	public abstract void init();
+	protected bool followThePlayer, inRange;
 
 	void Start () {
 		/* Any other initlization */	
@@ -12,21 +13,34 @@ public abstract class Enemy : MonoBehaviour {
 	
 	void Update () {
 		/* Called once per frame. AI comes Here */
+		if(followThePlayer)
+			followPlayer ();
+
+		GameObject player = GameObject.Find("Player");
+		GameObject persist = GameObject.Find ("Persist");
+		Vector3 PlayerPos = player.GetComponent<Rigidbody>().position;
+		Vector3 myPos = GetComponent<Rigidbody>().position;
+		
+		if (Vector3.Distance (PlayerPos, myPos) < 6) {
+			inRange = true;
+			//print ("there");
+		}
 	}
 
 	void OnMouseDown() {
 		//this.hp = 0;
 
-		GameObject go = GameObject.Find("Player");
-		Vector3 PlayerPos = go.GetComponent<Rigidbody>().position;
+		GameObject player = GameObject.Find("Player");
+		GameObject persist = GameObject.Find ("Persist");
+		Vector3 PlayerPos = player.GetComponent<Rigidbody>().position;
 		Vector3 myPos = GetComponent<Rigidbody>().position;
 
 		if (Vector3.Distance(PlayerPos, myPos) < 6) {
-			go.GetComponent<PlayerAttributes>().attack(this);
+			player.GetComponent<PlayerAttributes>().attack(this);
+			attack (persist.GetComponent<PlayerAttributes>());	//Attack Player
+			this.followThePlayer = true;
 		}
 	}
-
-
 
 	public int hp { get; protected set; }
 	public int level { get; set; }
@@ -47,18 +61,29 @@ public abstract class Enemy : MonoBehaviour {
 		return isDead();
 	}
 
+	public void followPlayer(){
+		GameObject player = GameObject.Find("Player");
+		Vector3 PlayerPos = player.GetComponent<Rigidbody>().position;
+		Vector3 myPos = GetComponent<Rigidbody>().position;
 
+		float distance = Vector3.Distance (PlayerPos, myPos);
+		Vector3 direction = PlayerPos - myPos;
+
+		if (distance < 6) {
+			this.transform.Translate(direction * 0.025f);
+		}
+	}
 
 	public string attack(PlayerAttributes e) {
 		float ran = Random.value;
-		string message = "Miss!";
+		string message = "Monster Miss!";
 		
 		if (ran <= hitChance){			
-			message = "Hit! ";
+			message = "Monster Hit!";
 			int tmpDamage = damage;
 			if (ran <= critChance) {
 				tmpDamage *= 2;
-				message = "Critical Hit! ";
+				message = "Monster Critical Hit! ";
 			}
 			e.loseHP(tmpDamage);		
 		} 
