@@ -25,8 +25,8 @@ public class ClayAlien : Enemy {
 		maxLoot = 3;
 	}
 	
-/*	void Update () {
+	/*void Update () {
 		/* Called once per frame. AI comes Here */
-
+		//walkAround ();
 	//}	
 }

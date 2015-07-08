@@ -33,11 +33,31 @@ public class PlayerAttributes : MonoBehaviour {
 	 * */
 	public LinkedList <Accessory> accessories = new LinkedList<Accessory>();
 	public Weapon weapon = null;
+	public float lastDamage;
+	private float nextRegeneration;
+	private float delayRegeneration = 6;
+	private PlayerController playerScript;
 
 	void Update() {
 		/* Called Once per frame */
-		levelUp ();
 		/** Health regenration etc. */
+		playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
+		if (playerScript.getPaused () == false) {
+			levelUp ();
+			
+			if (Time.time >= nextRegeneration) {
+				nextRegeneration = Time.time + delayRegeneration;
+				if (Time.time >= (lastDamage+3) && getHealth () < maxHP ()) {
+					hp += (int)(maxHP () * 0.01);
+				}
+				if (Time.time >= (lastDamage+3) && getStamina () < maxStamina ()) {
+					stamina += (int)(maxStamina () * 0.01);
+				}
+			}
+		} else {
+			nextRegeneration = Time.time + delayRegeneration;
+			//lastDamage += 1;
+		}
 	}
 
 	public void setGender(char gender){
@@ -102,9 +122,10 @@ public class PlayerAttributes : MonoBehaviour {
 				Instance = this;
 			}
 		} 
-
+		
 		setAttributes (0, inventory, maxInventory, maxStorage);
 		attackBase = 6;
+		nextRegeneration = Time.time + delayRegeneration;
 	}
 
 	public void setAttributes (int xp, LinkedList <InventoryItem> inventory, int inventoryMax, int storageMax){

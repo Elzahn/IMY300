@@ -31,21 +31,24 @@ public class TranslucentAlien : Enemy {
 	}
 	
 	void Update () {
-		/* Called once per frame. AI comes Here */
-	
-		GameObject player = GameObject.Find("Player");
-		GameObject persist = GameObject.Find ("Persist");
-		Vector3 PlayerPos = player.GetComponent<Rigidbody>().position;
-		Vector3 myPos = GetComponent<Rigidbody>().position;
+		PlayerController playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
+		if (playerScript.getPaused () == false) {
+			/* Called once per frame. AI comes Here */
+		
+			GameObject player = GameObject.Find ("Player");
+			GameObject persist = GameObject.Find ("Persist");
+			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
+			Vector3 myPos = GetComponent<Rigidbody> ().position;
 
-		if (Vector3.Distance (PlayerPos, myPos) < 8) {
-			suspision = true;
-			if (Vector3.Distance (PlayerPos, myPos) < 6) {
-				if (Time.time >= nextAttack) {
-					nextAttack = Time.time + delay;
-					attack (persist.GetComponent<PlayerAttributes> ());	//Attack Player
+			if (Vector3.Distance (PlayerPos, myPos) < 8) {
+				suspision = true;
+				if (Vector3.Distance (PlayerPos, myPos) < 6) {
+					if (Time.time >= nextAttack) {
+						nextAttack = Time.time + delay;
+						attack (persist.GetComponent<PlayerAttributes> ());	//Attack Player
+					}
+					followPlayer ();
 				}
-				followPlayer ();
 			}
 		}
 	}	

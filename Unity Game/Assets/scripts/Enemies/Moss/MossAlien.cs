@@ -27,6 +27,6 @@ public class MossAlien : Enemy {
 	
 	/*void Update () {
 		/* Called once per frame. AI comes Here */
-
-	//}	
+		//walkAround ();
+	//}	*/
 }

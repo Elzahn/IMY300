@@ -5,24 +5,45 @@ public abstract class Enemy : MonoBehaviour {
 	 * Automatically called after level is set. Should initilze other attributes based on level;
 	 */
 	public abstract void init();
-	protected bool suspision;
+	protected bool suspision, attackPlayer;
+	private float nextAttack, delay, nextMAttack, mDelay = 0.5f;
+	protected bool notCollided;
 
 	void Start () {
 		/* Any other initlization */
 		suspision = false;
+		attackPlayer = false;
+		nextAttack = Time.time + delay;
+		nextMAttack = Time.time + mDelay;
+		notCollided = false;
+
+		PlayerAttributes persist = GameObject.Find ("Persist").GetComponent<PlayerAttributes>();
+		delay = (1.5f - persist.getStamina () / persist.maxStamina ());
 	}
 	
 	void Update () {
-		/* Called once per frame. AI comes Here */
-		GameObject player = GameObject.Find("Player");
-		GameObject persist = GameObject.Find ("Persist");
-		Vector3 PlayerPos = player.GetComponent<Rigidbody>().position;
-		Vector3 myPos = GetComponent<Rigidbody>().position;
+		PlayerController playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
+		if (playerScript.getPaused () == false) {
+			/* Called once per frame. AI comes Here */
+			GameObject player = GameObject.Find ("Player");
+			GameObject persist = GameObject.Find ("Persist");
+			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
+			Vector3 myPos = GetComponent<Rigidbody> ().position;
 
-		if (Vector3.Distance (PlayerPos, myPos) < 8) {
-			this.suspision = true;
-			if (Vector3.Distance (PlayerPos, myPos) < 6) {
-				followPlayer ();
+			if (Vector3.Distance (PlayerPos, myPos) < 8) {
+				this.suspision = true;
+				if (Vector3.Distance (PlayerPos, myPos) < 6) {
+					followPlayer ();
+				}
+			} else{
+				attackPlayer = false;
+			}
+
+			if (attackPlayer) {
+				if (Time.time >= nextMAttack) {
+					nextMAttack = Time.time + mDelay;
+					attack (persist.GetComponent<PlayerAttributes> ());
+				}
 			}
 		}
 	}
@@ -34,10 +55,13 @@ public abstract class Enemy : MonoBehaviour {
 		GameObject persist = GameObject.Find ("Persist");
 		Vector3 PlayerPos = player.GetComponent<Rigidbody>().position;
 		Vector3 myPos = GetComponent<Rigidbody>().position;
-
-		if (Vector3.Distance(PlayerPos, myPos) < 6) {
-			player.GetComponent<PlayerAttributes>().attack(this);
-			attack (persist.GetComponent<PlayerAttributes>());	//Attack Player
+		if (Time.time >= nextAttack) {
+			nextAttack = Time.time + delay;
+			if (Vector3.Distance (PlayerPos, myPos) < 6) {
+				player.GetComponent<PlayerAttributes> ().attack (this);
+				//attack (persist.GetComponent<PlayerAttributes> ());	//Attack Player
+				attackPlayer = true;
+			}
 		}
 	}
 
@@ -60,6 +84,13 @@ public abstract class Enemy : MonoBehaviour {
 		return isDead();
 	}
 
+	public void walkAround(){
+		Vector3 myPos = GetComponent<Rigidbody>().position;
+		Vector3 tempPos = new Vector3 (Random.value*2, Random.value, Random.value*3);
+		Vector3 direction = tempPos - myPos;
+		this.transform.Translate(tempPos * 0.025f);
+	}
+
 	public void followPlayer(){
 		GameObject player = GameObject.Find("Player");
 		Vector3 PlayerPos = player.GetComponent<Rigidbody>().position;
@@ -74,6 +105,8 @@ public abstract class Enemy : MonoBehaviour {
 	}
 
 	public string attack(PlayerAttributes e) {
+		e.lastDamage = Time.time;
+
 		float ran = Random.value;
 		string message = "Monster Miss!";
 		
@@ -90,5 +123,4 @@ public abstract class Enemy : MonoBehaviour {
 		print(message);
 		return message;
 	}
-
 }
