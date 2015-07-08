@@ -230,7 +230,12 @@ public class PlayerAttributes : MonoBehaviour {
 		this.hp = maxHP ();
 	}
 
+	public void restoreStaminaToFull(){
+		this.stamina = maxStamina ();
+	}
+
 	public string attack(Enemy e) {
+		e.lastDamage = Time.time;
 		float ran = Random.value;
 		float hc = hitChance();
 		string message = "Miss!";
@@ -246,7 +251,9 @@ public class PlayerAttributes : MonoBehaviour {
 			}
 			bool dead = e.loseHP(tmpdamage);
 			if (weapon != null) {
-			stamina -= weapon.staminaLoss;
+				print (this.stamina);
+				this.stamina -= weapon.staminaLoss;
+				print (this.stamina);
 			}
 			if (dead) {
 				xp += e.xpGain;
@@ -306,7 +313,7 @@ public class PlayerAttributes : MonoBehaviour {
 	public int damage() {
 		int tmp = baseAttack ();
 		if (weapon != null)
-		tmp += weapon.damage;
+			tmp += weapon.damage;
 		foreach (Accessory a in accessories) {
 			tmp += a.damage;
 		}

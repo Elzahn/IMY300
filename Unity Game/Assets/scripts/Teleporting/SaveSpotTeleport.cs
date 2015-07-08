@@ -59,6 +59,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 			if (GUI.Button (new Rect (320, 90, 150, 20), "Go inside")) {
 				resume ();
 				attributesScript.restoreHealthToFull();
+				attributesScript.restoreStaminaToFull();
 				canEnterSaveSpot = false;
 				Application.LoadLevel ("SaveSpot");
 			}

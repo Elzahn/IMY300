@@ -6,7 +6,9 @@ public class ApeAlien : Enemy {
 	 * Should initilze other attributes dpendent on level;
 	 */
 	
-	private float nextAttack, delay = 3;
+	private float nextApeAttack, apeDelay = 3;
+	private float nextARegeneration;
+	private float delayARegeneration = 6;
 
 	public override void init() {
 		const float HP_MULT = 1.6f;
@@ -25,7 +27,8 @@ public class ApeAlien : Enemy {
 		typeID = "ApeAlien";
 		lootChance = 0.75f;
 		maxLoot = 2;
-		nextAttack = Time.time + delay;
+		nextApeAttack = Time.time + apeDelay;
+		nextARegeneration = Time.time + delayARegeneration;
 	}
 	
 	void Update () {
@@ -42,13 +45,23 @@ public class ApeAlien : Enemy {
 			if (Vector3.Distance (PlayerPos, myPos) < 8) {
 				suspision = true;
 				if (Vector3.Distance (PlayerPos, myPos) < 6) {
-					if (Time.time >= nextAttack) {
-						nextAttack = Time.time + delay;
+					if (Time.time >= nextApeAttack) {
+						nextApeAttack = Time.time + apeDelay;
 						attack (persist.GetComponent<PlayerAttributes> ());	//Attack Player
 					}
 					followPlayer ();
 				}
 			}
+
+			if (Time.time >= nextARegeneration) {
+				nextARegeneration = Time.time + delayARegeneration;
+				if (Time.time >= (lastDamage+3) && getHealth () < getMaxHp ()) {
+					hp += (int)(getMaxHp () * 0.01);
+				}
+			}
+		}else {
+			nextARegeneration = Time.time + delayARegeneration;
+			//lastDamage += 1;
 		}
 	}	
 }

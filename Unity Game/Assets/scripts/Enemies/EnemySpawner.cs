@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class EnemySpawner : MonoBehaviour {
 
@@ -54,7 +55,7 @@ public class EnemySpawner : MonoBehaviour {
 	}
 
 	void Update () {
-		foreach (GameObject go in enemies) {			
+		foreach (GameObject go in enemies.ToList()) {			
 			Enemy enemy = go.GetComponent<Enemy>();			
 			Rigidbody rigidbody = go.GetComponent<Rigidbody> ();
 			if (enemy.isDead()) {
@@ -170,8 +171,7 @@ public class EnemySpawner : MonoBehaviour {
 
 			GUI.Box (new Rect (left, top, 400, 250), EnemyName);
 
-			foreach(InventoryItem item in tempLoot)
-			{
+			foreach(InventoryItem item in tempLoot.ToList()){
 				GUI.Label(new Rect (left+30, top+40, 300, 30), item.typeID);
 				if (GUI.Button(new Rect(left+270, top+40, 100, 30), "Take it")){
 					attributesScript.addToInventory(item);
@@ -187,6 +187,9 @@ public class EnemySpawner : MonoBehaviour {
 			if (GUI.Button(new Rect(left+270, 230, 100, 30), "Close")){
 				giveLoot = false;
 				playerScript.setPaused (false);
+				foreach(InventoryItem item in tempLoot.ToList()){
+					tempLoot.RemoveFirst();
+				}
 			}
 		}
 	}

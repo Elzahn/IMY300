@@ -8,6 +8,9 @@ public abstract class Enemy : MonoBehaviour {
 	protected bool suspision, attackPlayer;
 	private float nextAttack, delay, nextMAttack, mDelay = 0.5f;
 	protected bool notCollided;
+	public float lastDamage;
+	protected float nextRegeneration;
+	protected float delayRegeneration = 6;
 
 	void Start () {
 		/* Any other initlization */
@@ -19,6 +22,7 @@ public abstract class Enemy : MonoBehaviour {
 
 		PlayerAttributes persist = GameObject.Find ("Persist").GetComponent<PlayerAttributes>();
 		delay = (1.5f - persist.getStamina () / persist.maxStamina ());
+		nextRegeneration = Time.time + delayRegeneration;
 	}
 	
 	void Update () {
@@ -45,6 +49,16 @@ public abstract class Enemy : MonoBehaviour {
 					attack (persist.GetComponent<PlayerAttributes> ());
 				}
 			}
+
+			if (Time.time >= nextRegeneration) {
+				nextRegeneration = Time.time + delayRegeneration;
+				if (Time.time >= (lastDamage+3) && getHealth () < getMaxHp ()) {
+					hp += (int)(getMaxHp () * 0.01);
+				}
+			}
+		} else {
+			nextRegeneration = Time.time + delayRegeneration;
+			//lastDamage += 1;
 		}
 	}
 
@@ -58,13 +72,14 @@ public abstract class Enemy : MonoBehaviour {
 		if (Time.time >= nextAttack) {
 			nextAttack = Time.time + delay;
 			if (Vector3.Distance (PlayerPos, myPos) < 6) {
-				player.GetComponent<PlayerAttributes> ().attack (this);
+				persist.GetComponent<PlayerAttributes> ().attack (this);
 				//attack (persist.GetComponent<PlayerAttributes> ());	//Attack Player
 				attackPlayer = true;
 			}
 		}
 	}
 
+	public int maxHp{ get; protected set; }
 	public int hp { get; protected set; }
 	public int level { get; set; }
 	public int damage { get; protected set;}
@@ -122,5 +137,13 @@ public abstract class Enemy : MonoBehaviour {
 
 		print(message);
 		return message;
+	}
+
+	public int getMaxHp(){
+		return this.maxHp;
+	}
+
+	public int getHealth(){
+		return this.hp;
 	}
 }

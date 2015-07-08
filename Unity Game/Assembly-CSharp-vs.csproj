@@ -63,6 +63,7 @@
      <Compile Include="Assets\scripts\Player\PlayerAttributes.cs" />
      <Compile Include="Assets\scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\scripts\RulesException.cs" />
+     <Compile Include="Assets\scripts\SpawnHealthPack.cs" />
      <Compile Include="Assets\scripts\StartGame.cs" />
      <Compile Include="Assets\scripts\Teleporting\FallThroughPlanet.cs" />
      <Compile Include="Assets\scripts\Teleporting\SaveSpotTeleport.cs" />

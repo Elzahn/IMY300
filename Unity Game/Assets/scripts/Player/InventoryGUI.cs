@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class InventoryGUI : MonoBehaviour {
 
@@ -78,7 +79,7 @@ public class InventoryGUI : MonoBehaviour {
 			if (attributesScript.inventory.Count == 0) {
 				GUI.Label (new Rect (left + 120, top + 100, 150, 20), "No items in inventory");
 			} else {
-				foreach (InventoryItem item in attributesScript.inventory) {
+				foreach (InventoryItem item in attributesScript.inventory.ToList()) {
 					GUI.Label (new Rect (left + 30, top + 80, 300, 30), item.typeID);
 					if (GUI.Button (new Rect (left + 170, top + 80, 100, 30), "Drop it")) {
 						attributesScript.inventory.Remove (item);
@@ -102,7 +103,7 @@ public class InventoryGUI : MonoBehaviour {
 			secondLeft += 400;
 
 			if (attributesScript.accessories.Count != 0) {
-				foreach (Accessory item in attributesScript.accessories) {
+				foreach (Accessory item in attributesScript.accessories.ToList()) {
 					GUI.Label (new Rect (secondLeft + 30, secondTop + 80, 300, 30), item.typeID);
 					if (GUI.Button (new Rect (secondLeft + 270, secondTop + 80, 100, 30), "Unequip")) {
 						attributesScript.unequipAccessory (item);
@@ -138,7 +139,7 @@ public class InventoryGUI : MonoBehaviour {
 			if (attributesScript.storage.Count == 0) {
 				GUI.Label (new Rect (left + 120, top + 100, 150, 20), "No items in storage");
 			} else {
-				foreach (InventoryItem item in attributesScript.storage) {
+				foreach (InventoryItem item in attributesScript.storage.ToList()) {
 					GUI.Label (new Rect (left + 30, top + 80, 300, 30), item.typeID);
 					if (GUI.Button (new Rect (left + 170, top + 80, 100, 30), "Drop it")) {
 						attributesScript.storage.Remove (item);
@@ -158,7 +159,7 @@ public class InventoryGUI : MonoBehaviour {
 			if (attributesScript.inventory.Count == 0) {
 				GUI.Label (new Rect (secondLeft + 120, secondTop + 100, 150, 20), "No items in inventory");
 			} else {
-				foreach (InventoryItem item in attributesScript.inventory) {
+				foreach (InventoryItem item in attributesScript.inventory.ToList()) {
 					GUI.Label (new Rect (secondLeft + 30, secondTop + 80, 300, 30), item.typeID);
 					if (GUI.Button (new Rect (secondLeft + 170, secondTop + 80, 100, 30), "Drop it")) {
 						attributesScript.inventory.Remove (item);
