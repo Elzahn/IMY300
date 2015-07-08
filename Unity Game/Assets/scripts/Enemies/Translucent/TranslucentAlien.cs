@@ -7,6 +7,7 @@ public class TranslucentAlien : Enemy {
 	 */
 
 	private GameObject persist;
+	private float nextAttack, delay = 3;
 
 	public override void init() {
 		const float HP_MULT = 1.6f;
@@ -26,17 +27,26 @@ public class TranslucentAlien : Enemy {
 		lootChance = 0.85f;
 		maxLoot = 4;
 		persist = GameObject.Find("Persist");
+		nextAttack = Time.time + delay;
 	}
 	
 	void Update () {
 		/* Called once per frame. AI comes Here */
-		
-		if(followThePlayer)
-			followPlayer ();
+	
+		GameObject player = GameObject.Find("Player");
+		GameObject persist = GameObject.Find ("Persist");
+		Vector3 PlayerPos = player.GetComponent<Rigidbody>().position;
+		Vector3 myPos = GetComponent<Rigidbody>().position;
 
-		if (inRange) {
-			//print ("hi");
-			attack (persist.GetComponent<PlayerAttributes> ());
+		if (Vector3.Distance (PlayerPos, myPos) < 8) {
+			suspision = true;
+			if (Vector3.Distance (PlayerPos, myPos) < 6) {
+				if (Time.time >= nextAttack) {
+					nextAttack = Time.time + delay;
+					attack (persist.GetComponent<PlayerAttributes> ());	//Attack Player
+				}
+				followPlayer ();
+			}
 		}
 	}	
 }

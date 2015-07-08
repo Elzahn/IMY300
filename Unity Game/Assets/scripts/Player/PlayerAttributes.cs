@@ -21,7 +21,7 @@ public class PlayerAttributes : MonoBehaviour {
 	private int maxStorage = 50;
 	private bool dizzy = false;
 	private int attackBase = 6;
-	private char gender = '?';
+	private char gender = 'f';//'?';
 	/**
 	 * This can be reset/recalculated at start of level
 	 * */

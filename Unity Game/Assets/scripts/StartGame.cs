@@ -29,8 +29,8 @@ public class StartGame : MonoBehaviour {
 				playerScript.setPaused (false);
 				attributesScript.setGender (tempGenderChoice);
 			}
-		}/* else {
+		} else {
 			Application.LoadLevel ("Scene");
-		}*/
+		}
 	}
 }

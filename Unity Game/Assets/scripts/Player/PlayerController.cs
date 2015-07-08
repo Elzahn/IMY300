@@ -62,9 +62,10 @@ public class PlayerController : MonoBehaviour {
 		if (showDeath) {
 			GUI.Box (new Rect (300, 40, 200, 150), "You died! Restart the level?");
 			if (GUI.Button (new Rect (350, 90, 100, 30), "Restart level")) {
-				Application.LoadLevel (Application.loadedLevel);
 				paused = false;
 				showDeath = false;
+				playerAttributes.restoreHealthToFull();
+				Application.LoadLevel (Application.loadedLevel);
 			}
 			if (GUI.Button (new Rect (350, 140, 100, 30), "Quit")) {
 				Application.Quit();

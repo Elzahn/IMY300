@@ -5,6 +5,8 @@ public class ApeAlien : Enemy {
 	 * Automatically called after level is set. 
 	 * Should initilze other attributes dpendent on level;
 	 */
+	
+	private float nextAttack, delay = 3;
 
 	public override void init() {
 		const float HP_MULT = 1.6f;
@@ -23,12 +25,26 @@ public class ApeAlien : Enemy {
 		typeID = "ApeAlien";
 		lootChance = 0.75f;
 		maxLoot = 2;
+		nextAttack = Time.time + delay;
 	}
 	
 	void Update () {
 		/* Called once per frame. AI comes Here */
 		
-		if(followThePlayer)
-			followPlayer ();
+		GameObject player = GameObject.Find("Player");
+		GameObject persist = GameObject.Find ("Persist");
+		Vector3 PlayerPos = player.GetComponent<Rigidbody>().position;
+		Vector3 myPos = GetComponent<Rigidbody>().position;
+		
+		if (Vector3.Distance (PlayerPos, myPos) < 8) {
+			suspision = true;
+			if (Vector3.Distance (PlayerPos, myPos) < 6) {
+				if (Time.time >= nextAttack) {
+					nextAttack = Time.time + delay;
+					attack (persist.GetComponent<PlayerAttributes> ());	//Attack Player
+				}
+				followPlayer ();
+			}
+		}
 	}	
 }

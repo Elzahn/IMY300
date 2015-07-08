@@ -5,25 +5,25 @@ public abstract class Enemy : MonoBehaviour {
 	 * Automatically called after level is set. Should initilze other attributes based on level;
 	 */
 	public abstract void init();
-	protected bool followThePlayer, inRange;
+	protected bool suspision;
 
 	void Start () {
-		/* Any other initlization */	
+		/* Any other initlization */
+		suspision = false;
 	}
 	
 	void Update () {
 		/* Called once per frame. AI comes Here */
-		if(followThePlayer)
-			followPlayer ();
-
 		GameObject player = GameObject.Find("Player");
 		GameObject persist = GameObject.Find ("Persist");
 		Vector3 PlayerPos = player.GetComponent<Rigidbody>().position;
 		Vector3 myPos = GetComponent<Rigidbody>().position;
-		
-		if (Vector3.Distance (PlayerPos, myPos) < 6) {
-			inRange = true;
-			//print ("there");
+
+		if (Vector3.Distance (PlayerPos, myPos) < 8) {
+			this.suspision = true;
+			if (Vector3.Distance (PlayerPos, myPos) < 6) {
+				followPlayer ();
+			}
 		}
 	}
 
@@ -38,7 +38,6 @@ public abstract class Enemy : MonoBehaviour {
 		if (Vector3.Distance(PlayerPos, myPos) < 6) {
 			player.GetComponent<PlayerAttributes>().attack(this);
 			attack (persist.GetComponent<PlayerAttributes>());	//Attack Player
-			this.followThePlayer = true;
 		}
 	}
 
