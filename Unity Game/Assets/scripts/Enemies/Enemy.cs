@@ -123,14 +123,14 @@ public abstract class Enemy : MonoBehaviour {
 		e.lastDamage = Time.time;
 
 		float ran = Random.value;
-		string message = "Monster Miss!";
+		string message = "Monster Miss! "+e.getHealth()+"/"+e.maxHP();
 		
 		if (ran <= hitChance){			
-			message = "Monster Hit!";
+			message = "Monster Hit! "+e.getHealth()+"/"+e.maxHP();
 			int tmpDamage = damage;
 			if (ran <= critChance) {
 				tmpDamage *= 2;
-				message = "Monster Critical Hit! ";
+				message = "Monster Critical Hit! "+e.getHealth()+"/"+e.maxHP();
 			}
 			e.loseHP(tmpDamage);		
 		} 

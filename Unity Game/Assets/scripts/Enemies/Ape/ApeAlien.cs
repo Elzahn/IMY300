@@ -17,6 +17,7 @@ public class ApeAlien : Enemy {
 		const float DAMAGE_MULT = 1.2f;
 
 		hp = Mathf.RoundToInt(70 * Mathf.Pow (HP_MULT, level-1));
+		maxHp = hp;
 		hitChance = 0.16f * Mathf.Pow (HIT_MULT, level-1);
 		critChance = 0.012f * Mathf.Pow (CRIT_MULT, level-1);
 		damage = Mathf.RoundToInt(10 * Mathf.Pow (DAMAGE_MULT,level-1));

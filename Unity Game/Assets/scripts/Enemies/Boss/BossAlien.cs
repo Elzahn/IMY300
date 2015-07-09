@@ -13,6 +13,7 @@ public class BossAlien : Enemy {
 		const float DAMAGE_MULT = 1.2f;
 
 		hp = Mathf.RoundToInt(250 * Mathf.Pow (HP_MULT, level-1));
+		maxHp = hp;
 		hitChance = 0.28f * Mathf.Pow (HIT_MULT, level-1);
 		critChance = 0.02f * Mathf.Pow (CRIT_MULT, level-1);
 		damage = Mathf.RoundToInt(20 * Mathf.Pow (DAMAGE_MULT,level-1));

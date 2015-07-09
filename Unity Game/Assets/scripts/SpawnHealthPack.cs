@@ -10,7 +10,7 @@ public class SpawnHealthPack : MonoBehaviour {
 
 	public void spawnHealthPacks ()
 	{
-		GameObject[] gameObjectsToDelete =  GameObject.FindGameObjectsWithTag ("HealthPack");
+		/*GameObject[] gameObjectsToDelete =  GameObject.FindGameObjectsWithTag ("HealthPack");
 		
 		for (int i = 0; i < gameObjectsToDelete.Length; i++) {
 			Destroy (gameObjectsToDelete [i]);
@@ -29,6 +29,6 @@ public class SpawnHealthPack : MonoBehaviour {
 				tempHealthPack.tag = "HealthPack4";
 			}
 			tempHealthPack.transform.GetComponent<BoxCollider> ().isTrigger = true;
-		}
+		}*/
 	}
 }

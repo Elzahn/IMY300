@@ -13,6 +13,7 @@ public class MossAlien : Enemy {
 		const float DAMAGE_MULT = 1.2f;
 
 		hp = Mathf.RoundToInt(50 * Mathf.Pow (HP_MULT, level-1));
+		maxHp = hp;
 		critChance = 0.01f * Mathf.Pow (CRIT_MULT, level-1);
 		hitChance = 0.15f * Mathf.Pow (HIT_MULT, level-1);
 		damage = Mathf.RoundToInt(8 * Mathf.Pow (DAMAGE_MULT,level-1));

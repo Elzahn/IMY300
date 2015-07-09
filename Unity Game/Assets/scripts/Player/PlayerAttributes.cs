@@ -238,16 +238,16 @@ public class PlayerAttributes : MonoBehaviour {
 		e.lastDamage = Time.time;
 		float ran = Random.value;
 		float hc = hitChance();
-		string message = "Miss!";
+		string message = "Miss! "+e.getHealth()+"/"+e.getMaxHp();
 
 		if (ran <= hc){			
-			message = "Hit! ";
+			message = "Hit! "+e.getHealth()+"/"+e.getMaxHp();
 			float cc = critChance ();
 			int tmpdamage = damage ();
 
 			if (ran <= cc) {
 				tmpdamage *= CRIT_MULT;
-				message = "Critical Hit! ";
+				message = "Critical Hit! "+e.getHealth()+"/"+e.getMaxHp();
 			}
 			bool dead = e.loseHP(tmpdamage);
 			if (weapon != null) {
