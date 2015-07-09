@@ -37,8 +37,8 @@ public class InventoryGUI : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter(Collider collider){
-		if (collider.name == "Storage") {
+	void OnCollisionEnter (Collision col){
+		if (col.collider.name == "Storage") {
 			openStorage();
 		}
 	}

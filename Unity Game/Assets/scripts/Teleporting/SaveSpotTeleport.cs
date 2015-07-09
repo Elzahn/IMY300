@@ -20,11 +20,11 @@ public class SaveSpotTeleport : MonoBehaviour {
 		canEnterSaveSpot = true;
 	}
 	
-	void OnTriggerEnter(Collider collider){
-		if (collider.name == "ExitPlane") {
+	void OnCollisionEnter (Collision col){
+		if (col.collider.name == "ExitPlane") {
 			playerScript.setPaused (true);	//Pause game
 			showExitConfirmation = true;
-		} else if (collider.name == "EntrancePlane"){// && canEnterSaveSpot) {
+		} else if (col.collider.name == "EntrancePlane"){// && canEnterSaveSpot) {
 			playerScript.setPaused (true);	//Pause game
 			showEntranceConfirmation = true;
 		}

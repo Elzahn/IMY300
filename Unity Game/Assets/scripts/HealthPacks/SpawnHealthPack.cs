@@ -34,7 +34,7 @@ public class SpawnHealthPack : MonoBehaviour {
 			} else {
 				tempHealthPack.tag = "LargeHealthPack";
 			}
-			tempHealthPack.transform.GetComponent<BoxCollider> ().isTrigger = true;
+			//tempHealthPack.transform.GetComponent<BoxCollider> ().isTrigger = true;
 		}
 	}
 }

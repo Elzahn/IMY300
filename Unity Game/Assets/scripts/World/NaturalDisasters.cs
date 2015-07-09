@@ -51,8 +51,8 @@ public class NaturalDisasters : MonoBehaviour {
 		}
 
 		if (playerScript.getPaused () == false) {
-			if(GameObject.Find ("Player").GetComponent<PlayerAttributes>().getDizzy() == true && Time.time >= dizzyWearOfNext){
-				GameObject.Find ("Player").GetComponent<PlayerAttributes>().setDizzy(false);
+			if(GameObject.Find ("Persist").GetComponent<PlayerAttributes>().getDizzy() == true && Time.time >= dizzyWearOfNext){
+				GameObject.Find ("Persist").GetComponent<PlayerAttributes>().setDizzy(false);
 			}
 
 			if (Time.time >= nextDisaster) {

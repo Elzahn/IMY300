@@ -62,8 +62,6 @@ public class EnemySpawner : MonoBehaviour {
 				dropLoot(enemy, rigidbody.position);
 				enemies.Remove(go);
 				Destroy(go);
-				//Added XP here
-				attributesScript.addXP(attributesScript.getLevel() * 20);
 			}
 			
 		}
@@ -118,7 +116,7 @@ public class EnemySpawner : MonoBehaviour {
 	}
 
 	void dropLoot(Enemy enemy, Vector3 position) {
-		//TODO Implement 
+		//TODO Implement visuals at location
 		for (int i = 0; i < enemy.maxLoot; i++) {
 			int chance = Random.Range (0, 101);
 			if (chance >= enemy.lootChance) {

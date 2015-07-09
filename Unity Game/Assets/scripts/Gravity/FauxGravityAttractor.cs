@@ -18,9 +18,9 @@ public class FauxGravityAttractor : MonoBehaviour {
 	}
 
 	//Ensure each object touches sphere if it has the mesh attached.
-	void OnTriggerEnter(Collider collider){
-		if (collider.tag == "WorldObject") {
-			collider.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
+	void OnCollisionEnter (Collision col){
+		if (col.collider.tag == "WorldObject") {
+			col.collider.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
 		}
 	}
 }

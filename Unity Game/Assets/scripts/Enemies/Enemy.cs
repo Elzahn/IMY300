@@ -11,6 +11,7 @@ public abstract class Enemy : MonoBehaviour {
 	public float lastDamage;
 	protected float nextRegeneration;
 	protected float delayRegeneration = 6;
+	protected bool onPlayer;
 
 	void Start () {
 		/* Any other initlization */
@@ -19,6 +20,7 @@ public abstract class Enemy : MonoBehaviour {
 		nextAttack = Time.time + delay;
 		nextMAttack = Time.time + mDelay;
 		notCollided = false;
+		onPlayer = false;
 
 		PlayerAttributes persist = GameObject.Find ("Persist").GetComponent<PlayerAttributes>();
 		delay = (1.5f - persist.getStamina () / persist.maxStamina ());
@@ -62,6 +64,12 @@ public abstract class Enemy : MonoBehaviour {
 		}
 	}
 
+	void OnCollisionEnter (Collision col){
+		if (col.collider.name == "Player") {
+			onPlayer = true;
+		}
+	}
+
 	void OnMouseDown() {
 		//this.hp = 0;
 
@@ -87,7 +95,7 @@ public abstract class Enemy : MonoBehaviour {
 	public float critChance { get; protected set;}
 	public float lootChance { get; protected set;}
 	public int maxLoot {get; protected set;}
-	public int xpGain { get; protected set;}
+	//public int xpGain { get; protected set;}
 	public string typeID {get; protected set;}
 
 	public bool isDead() {
@@ -114,8 +122,10 @@ public abstract class Enemy : MonoBehaviour {
 		float distance = Vector3.Distance (PlayerPos, myPos);
 		Vector3 direction = PlayerPos - myPos;
 
-		if (distance < 6) {
-			this.transform.Translate(direction * 0.025f);
+		if (distance < 6 && onPlayer == false) {
+			this.transform.Translate (direction * 0.025f);
+		} else if(distance >= 1.5f){
+			onPlayer = false;
 		}
 	}
 
