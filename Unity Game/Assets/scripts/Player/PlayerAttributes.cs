@@ -21,7 +21,7 @@ public class PlayerAttributes : MonoBehaviour {
 	private int maxStorage = 50;
 	private bool dizzy = false;
 	private int attackBase = 6;
-	private char gender = '?';
+	private char gender = 'f';//'?';
 	/**
 	 * This can be reset/recalculated at start of level
 	 * */
@@ -57,7 +57,10 @@ public class PlayerAttributes : MonoBehaviour {
 		/** Health regenration etc. */
 		playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
 		if (playerScript.getPaused () == false) {
-			levelUp ();
+			string tempMessage = levelUp ();
+			if(tempMessage != ""){
+				print(tempMessage);
+			}
 			
 			if (Time.time >= nextRegeneration) {
 				nextRegeneration = Time.time + delayRegeneration;
@@ -162,16 +165,20 @@ public class PlayerAttributes : MonoBehaviour {
 
 	public int getExpectedXP()
 	{
-		return levelXP (level + 1);
+		return levelXP (level);
+	}
+
+	public void LevelMeUp(){	//just for testing
+		this.xp = getExpectedXP ();
 	}
 
 	public string levelUp() {
-		int nextTreshold = levelXP (level + 1);
-		if (xp >= nextTreshold) {
-			level++;
+		int nextTreshold = levelXP (level);
+		if (this.xp >= nextTreshold) {
+			this.level++;
 			this.hp = maxHP();
 			this.stamina = maxStamina();
-			attackBase += 1;
+			this.attackBase += 1;
 			return "You  are now level " + level;
 		}
 		return "";
@@ -259,6 +266,13 @@ public class PlayerAttributes : MonoBehaviour {
 
 	public void restoreStaminaToFull(){
 		this.stamina = maxStamina ();
+	}
+
+	public void resetXP(){
+		if (level >= 2) {
+			this.xp = levelXP (level - 1);
+		} else 
+			this.xp = 0;
 	}
 
 	public string attack(Enemy e) {

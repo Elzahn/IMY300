@@ -34,6 +34,25 @@ public class PlayerController : MonoBehaviour {
 			} else if(Input.GetAxisRaw("Jump") == 0){
 					jumping = false;
 				}
+
+			if(Input.GetKeyDown(KeyCode.F1)){
+				this.GetComponent<Warping>().chooseDestinationUnlocked = true;
+				print ("Warp point destination choice unlocked.");
+			}
+
+			if(Input.GetKeyDown(KeyCode.F2)){
+				this.GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked = true;
+				print ("Fall through plannet unlocked.");
+			}
+
+			if(Input.GetKeyDown(KeyCode.F3)){
+				this.GetComponent<SaveSpotTeleport>().setEnterSaveSpot();
+				print ("You killed the boss!");
+			}
+
+			if(Input.GetKeyDown(KeyCode.F4)){
+				GameObject.Find("Persist").GetComponent<PlayerAttributes>().LevelMeUp();
+			}
 		}
 	}
 
@@ -65,6 +84,9 @@ public class PlayerController : MonoBehaviour {
 				paused = false;
 				showDeath = false;
 				playerAttributes.restoreHealthToFull();
+				playerAttributes.restoreStaminaToFull();
+				playerAttributes.resetXP();
+
 				Application.LoadLevel (Application.loadedLevel);
 			}
 			if (GUI.Button (new Rect (350, 140, 100, 30), "Quit")) {
