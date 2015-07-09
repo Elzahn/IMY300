@@ -8,7 +8,7 @@ public abstract class Accessory : InventoryItem {
 
 	public int hitChance  { get; protected set; }
 
-	public int critChance { get; protected set; }
+	public float critChance { get; protected set; }
 
 	public int inventory {get; protected set; }
 

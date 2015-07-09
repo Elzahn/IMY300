@@ -84,9 +84,17 @@ public class InventoryGUI : MonoBehaviour {
 					if (GUI.Button (new Rect (left + 170, top + 80, 100, 30), "Drop it")) {
 						attributesScript.inventory.Remove (item);
 					}
-					if (GUI.Button (new Rect (left + 270, top + 80, 100, 30), "Equip")) {
-						attributesScript.equipItem (item);
-						attributesScript.inventory.Remove (item);
+
+					if(item.typeID != "Medium Health Pack" && item.typeID != "Large Health Pack"){
+						if (GUI.Button (new Rect (left + 270, top + 80, 100, 30), "Equip")) {
+							attributesScript.equipItem (item);
+							attributesScript.inventory.Remove (item);
+						}
+					} else {
+						if (GUI.Button (new Rect (left + 270, top + 80, 100, 30), "Use")) {
+							attributesScript.useHealthPack (item);
+							attributesScript.inventory.Remove (item);
+						}
 					}
 					top += 30;
 				}
@@ -94,9 +102,9 @@ public class InventoryGUI : MonoBehaviour {
 
 			//show character attributes
 			GUI.Box (new Rect (secondLeft + 400, secondTop + 40, 400, height), "Character Attributes");
-			GUI.Label (new Rect (secondLeft + 430, secondTop + 80, 150, 20), "Xp: " + attributesScript.getXp ());
-			GUI.Label (new Rect (secondLeft + 430, secondTop + 100, 150, 20), "Hp: " + attributesScript.getHealth ());
-			GUI.Label (new Rect (secondLeft + 430, secondTop + 120, 150, 20), "Stamina: " + attributesScript.getStamina ());
+			GUI.Label (new Rect (secondLeft + 430, secondTop + 80, 150, 20), "Xp: " + attributesScript.getXp () + "/" + attributesScript.getExpectedXP ());
+			GUI.Label (new Rect (secondLeft + 430, secondTop + 100, 150, 20), "Hp: " + attributesScript.getHealth () + "/" + attributesScript.maxHP());
+			GUI.Label (new Rect (secondLeft + 430, secondTop + 120, 150, 20), "Stamina: " + attributesScript.getStamina () + "/" + attributesScript.maxStamina());
 			GUI.Label (new Rect (secondLeft + 430, secondTop + 140, 150, 20), "Level: " + attributesScript.getLevel ());
 		
 			secondTop += 100;

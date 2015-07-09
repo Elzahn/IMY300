@@ -21,7 +21,7 @@ public class PlayerAttributes : MonoBehaviour {
 	private int maxStorage = 50;
 	private bool dizzy = false;
 	private int attackBase = 6;
-	private char gender = 'f';//'?';
+	private char gender = '?';
 	/**
 	 * This can be reset/recalculated at start of level
 	 * */
@@ -37,6 +37,20 @@ public class PlayerAttributes : MonoBehaviour {
 	private float nextRegeneration;
 	private float delayRegeneration = 6;
 	private PlayerController playerScript;
+
+	public void addHealth(int val){
+		this.hp += val;
+		if (this.hp > this.maxHP ()) {
+			this.restoreHealthToFull();
+		}
+	}
+
+	public void useHealthPack(InventoryItem item){
+		HealthPack tempItem = (HealthPack)item;
+		int healthRegen = (int)(maxHP() * tempItem.healthValue);
+		addHealth(healthRegen);
+		print ("adding " + healthRegen);
+	}
 
 	void Update() {
 		/* Called Once per frame */
@@ -106,11 +120,19 @@ public class PlayerAttributes : MonoBehaviour {
 
 	public int getMaxInventory()
 	{
-		return maxInventory;
+		int tmp = maxInventory;
+		foreach (Accessory a in accessories) {
+			tmp += a.inventory;
+		}
+		return tmp;
 	}
 
 	public int getMaxStorage(){
-		return maxStorage;
+		int tmp = maxStorage;
+		/*foreach (Accessory a in accessories) {
+			tmp += a.storage;
+		}*/
+		return tmp;
 	}
 
 	void Start(){
@@ -137,7 +159,12 @@ public class PlayerAttributes : MonoBehaviour {
 		this.stamina = maxStamina ();
 		this.maxStorage = storageMax;
 	}
-		
+
+	public int getExpectedXP()
+	{
+		return levelXP (level + 1);
+	}
+
 	public string levelUp() {
 		int nextTreshold = levelXP (level + 1);
 		if (xp >= nextTreshold) {

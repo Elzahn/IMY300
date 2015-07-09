@@ -10,12 +10,18 @@ public class SpawnHealthPack : MonoBehaviour {
 
 	public void spawnHealthPacks ()
 	{
-		/*GameObject[] gameObjectsToDelete =  GameObject.FindGameObjectsWithTag ("HealthPack");
+		GameObject[] gameObjectsToDelete =  GameObject.FindGameObjectsWithTag ("MediumHealthPack");
 		
 		for (int i = 0; i < gameObjectsToDelete.Length; i++) {
 			Destroy (gameObjectsToDelete [i]);
 		}
+
+		gameObjectsToDelete =  GameObject.FindGameObjectsWithTag ("LargeHealthPack");
 		
+		for (int i = 0; i < gameObjectsToDelete.Length; i++) {
+			Destroy (gameObjectsToDelete [i]);
+		}
+
 		GameObject planet = GameObject.Find("Planet");
 		float PlanetRadius = planet.GetComponent<SphereCollider>().radius;
 
@@ -23,12 +29,12 @@ public class SpawnHealthPack : MonoBehaviour {
 			GameObject tempHealthPack = GameObject.CreatePrimitive (PrimitiveType.Cube);
 			tempHealthPack.transform.position = Random.onUnitSphere * PlanetRadius;
 			tempHealthPack.name = "HealthPack"+i;
-			if(Random.Range(0,1) == 0){
-				tempHealthPack.tag = "HealthPack2";
+			if(Random.Range(0,2) == 0){
+				tempHealthPack.tag  = "MediumHealthPack";
 			} else {
-				tempHealthPack.tag = "HealthPack4";
+				tempHealthPack.tag = "LargeHealthPack";
 			}
 			tempHealthPack.transform.GetComponent<BoxCollider> ().isTrigger = true;
-		}*/
+		}
 	}
 }

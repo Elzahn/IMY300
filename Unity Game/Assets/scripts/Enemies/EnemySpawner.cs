@@ -129,7 +129,83 @@ public class EnemySpawner : MonoBehaviour {
 				chance = Random.Range (0, 101);
 
 				if (chance <= 25) {
-					tempItem = new NullAccessory ();
+					int commonItem = Random.Range(1, 8);
+					int uncommonItem = Random.Range(1, 10);
+					int rareItem = Random.Range(1, 7);
+					switch(playerLevel){
+					case 1:
+					case 2: {
+						chance = Random.Range (1, 101);
+						if(chance <= 10){
+							tempItem = new UncommonAccessory(uncommonItem);
+						} else{
+							int accessoryItem = Random.Range(1, 7);
+							tempItem = new CommonAccessory(commonItem);
+						}
+						break;
+					}
+					case 3:
+					case 4:{
+						chance = Random.Range (1, 101);
+						if(chance <= 5){
+							tempItem = new RareAccessory(rareItem);
+						} else if(chance <= 20){
+							tempItem = new UncommonAccessory(uncommonItem);
+						} else{
+							tempItem = new CommonAccessory(commonItem);
+						}
+						break;
+					}
+					case 5:
+					case 6:{
+						int accessoryItem = Random.Range(1, 9);
+						chance = Random.Range (1, 101);
+						if(chance <= 10){
+							tempItem = new RareAccessory(rareItem);
+						} else if(chance <= 30){
+							tempItem = new UncommonAccessory(uncommonItem);
+						} else{
+							tempItem = new CommonAccessory(commonItem);
+						}
+						break;
+					}
+					case 7:
+					case 8:{
+						chance = Random.Range (1, 101);
+						if(chance <= 15){
+							tempItem = new RareAccessory(rareItem);
+						} else if(chance <= 40){
+							tempItem = new UncommonAccessory(uncommonItem);
+						} else{
+							tempItem = new CommonAccessory(commonItem);
+						}
+						break;
+					}
+					case 9:
+					case 10:{
+						chance = Random.Range (1, 101);
+						if(chance <= 20){
+							tempItem = new RareAccessory(rareItem);
+						} else if(chance <= 30){
+							tempItem = new CommonAccessory(commonItem);
+						} else{
+							tempItem = new UncommonAccessory(uncommonItem);
+						}
+						break;
+					}
+					case 11:
+					case 12:{
+						chance = Random.Range (1, 101);
+						if(chance <= 15){
+							tempItem = new CommonAccessory(commonItem);
+						} else if(chance <= 25){
+							tempItem = new RareAccessory(rareItem);
+						} else{
+							tempItem = new UncommonAccessory(uncommonItem);
+						}
+						break;
+					}
+					}
 					tempLoot.AddLast(tempItem); 
 				} else {
 					chance = Random.Range (1, 4);	//choose between available weapons
