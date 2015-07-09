@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
 	public Vector3 moveDir;
 	private PlayerAttributes playerAttributes;
 	private bool jumping = false, paused, showDeath;
+	public bool run = false;
 
 	void Start(){
 		playerAttributes = GameObject.Find ("Persist").GetComponent<PlayerAttributes> ();//this.GetComponent<PlayerAttributes> ();
@@ -17,10 +18,30 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (paused == false) {
+
 			if(playerAttributes.isDead() == true)
 			{
 				showDeath = true;
 				paused = true;
+			}
+			
+			if(Input.GetKeyDown(KeyCode.LeftShift))	{   
+				moveSpeed *= 2;
+				run = true;
+			} else if(Input.GetKeyUp(KeyCode.LeftShift)){
+				moveSpeed /= 2;
+				run = false;
+			}
+
+			if(run){
+				playerAttributes.drainStamina();
+			}
+
+			if(playerAttributes.getStamina() <= 0) {
+				if(playerAttributes.getStamina() < 0)
+					playerAttributes.setStaminaToZero();
+				run = false; 
+				moveSpeed = 15; 
 			}
 
 			if(playerAttributes.getDizzy() == true){

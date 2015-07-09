@@ -21,7 +21,7 @@ public class PlayerAttributes : MonoBehaviour {
 	private int maxStorage = 50;
 	private bool dizzy = false;
 	private int attackBase = 6;
-	private char gender = 'f';//'?';
+	private char gender = '?';
 	/**
 	 * This can be reset/recalculated at start of level
 	 * */
@@ -43,6 +43,14 @@ public class PlayerAttributes : MonoBehaviour {
 		if (this.hp > this.maxHP ()) {
 			this.restoreHealthToFull();
 		}
+	}
+
+	public void setStaminaToZero(){
+		this.stamina = 0;
+	}
+
+	public void drainStamina(){
+		this.stamina -= 0.001f;
 	}
 
 	public void useHealthPack(InventoryItem item){
@@ -148,12 +156,11 @@ public class PlayerAttributes : MonoBehaviour {
 			}
 		} 
 		
-		setAttributes (0, inventory, maxInventory, maxStorage);
-		attackBase = 6;
+		setAttributes (0, inventory, maxInventory, maxStorage, 6);
 		nextRegeneration = Time.time + delayRegeneration;
 	}
 
-	public void setAttributes (int xp, LinkedList <InventoryItem> inventory, int inventoryMax, int storageMax){
+	public void setAttributes (int xp, LinkedList <InventoryItem> inventory, int inventoryMax, int storageMax, int attackBase){
 		this.xp = xp;
 		this.inventory = inventory;
 		this.maxInventory = inventoryMax;
@@ -161,6 +168,7 @@ public class PlayerAttributes : MonoBehaviour {
 		this.hp = maxHP();
 		this.stamina = maxStamina ();
 		this.maxStorage = storageMax;
+		this.attackBase = attackBase;
 	}
 
 	public int getExpectedXP()
@@ -216,8 +224,10 @@ public class PlayerAttributes : MonoBehaviour {
 
 	private bool equipAccessory(Accessory a) {
 		if (accessories.Count < maxAccessories()) {
-
 			accessories.AddLast(a);
+			if(a.speed != 0){
+				GameObject.Find("Player").GetComponent<PlayerController>().moveSpeed += a.speed;
+			}
 			return true;
 		} 
 		throw new RulesException("Unequip another one first");
@@ -226,6 +236,9 @@ public class PlayerAttributes : MonoBehaviour {
 	public bool unequipAccessory(Accessory a) {
 		if (accessories.Contains (a)) {
 			accessories.Remove (a);
+			if(a.speed != 0){
+				GameObject.Find("Player").GetComponent<PlayerController>().moveSpeed -= a.speed;
+			}
 			return true;
 		} else {
 				throw new RulesException("Accessory not equipped");
@@ -297,7 +310,9 @@ public class PlayerAttributes : MonoBehaviour {
 				print (this.stamina);
 			}
 			if (dead) {
-				xp += e.xpGain;
+				//xp += e.xpGain;
+				//Added XP here
+				addXP(getLevel() * 20);
 				message += levelUp();
 			}
 		} 
@@ -348,11 +363,16 @@ public class PlayerAttributes : MonoBehaviour {
 		foreach (Accessory a in accessories) {
 			tmp += a.stamina;
 		}
+		if (this.gender == 'f')
+			tmp += 20;
 		return tmp;
 	}
 
 	public int damage() {
 		int tmp = baseAttack ();
+		if (this.gender == 'm') {
+			tmp += 12;
+		}
 		if (weapon != null)
 			tmp += weapon.damage;
 		foreach (Accessory a in accessories) {
