@@ -8,11 +8,13 @@ public class PlayerController : MonoBehaviour {
 	private PlayerAttributes playerAttributes;
 	private bool jumping = false, paused, showDeath;
 	public bool run = false;
+	public Quaternion camRot;
 
 	void Start(){
 		playerAttributes = GameObject.Find ("Persist").GetComponent<PlayerAttributes> ();//this.GetComponent<PlayerAttributes> ();
 		paused = false;
 		showDeath = false;
+		camRot = GameObject.Find ("Main Camera").transform.rotation;
 	}
 
 	// Update is called once per frame
@@ -73,6 +75,10 @@ public class PlayerController : MonoBehaviour {
 
 			if(Input.GetKeyDown(KeyCode.F4)){
 				GameObject.Find("Persist").GetComponent<PlayerAttributes>().LevelMeUp();
+			}
+
+			if(Input.GetKeyDown(KeyCode.R)){
+				GameObject.Find("Main Camera").GetComponent<SmoothMouseLook>().resetRotation();
 			}
 		}
 	}
