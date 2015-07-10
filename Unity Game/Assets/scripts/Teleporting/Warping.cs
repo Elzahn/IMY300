@@ -41,7 +41,7 @@ public class Warping : MonoBehaviour {
 			GameObject warpPoint1 = GameObject.CreatePrimitive (PrimitiveType.Cylinder);
 			warpPoint1.transform.position = Random.onUnitSphere * PlanetRadius;
 			warpPoint1.name = "WarpPoint"+i;
-			//warpPoint1.transform.GetComponent<CapsuleCollider> ().isTrigger = true;
+			warpPoint1.transform.GetComponent<CapsuleCollider> ().isTrigger = true;
 			warpPoint1.tag = "WarpPoint";
 		}
 	}
@@ -81,9 +81,9 @@ public class Warping : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionEnter (Collision target){
-		if (justWarped == false && target.collider.tag == "WarpPoint") {
-			col = target.collider;
+	void OnTriggerEnter (Collider target){
+		if (justWarped == false && target.tag == "WarpPoint") {
+			col = target;
 			playerScript.setPaused(true);	//Pause game
 			
 			if(chooseDestinationUnlocked && chooseDestination){

@@ -37,8 +37,4 @@ public class Collisions : MonoBehaviour {
 			}
 		}
 	}
-
-	void OnTriggerEnter(Collider collider){
-
-	}
 }

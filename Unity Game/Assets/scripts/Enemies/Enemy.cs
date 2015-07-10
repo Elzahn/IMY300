@@ -5,22 +5,23 @@ public abstract class Enemy : MonoBehaviour {
 	 * Automatically called after level is set. Should initilze other attributes based on level;
 	 */
 	public abstract void init();
-	protected bool suspision, attackPlayer;
-	private float nextAttack, delay, nextMAttack, mDelay = 0.5f;
+	protected bool attackPlayer;
+	protected float nextAttack, delay, nextMAttack, mDelay = 0.5f;
 	protected bool notCollided;
 	public float lastDamage;
 	protected float nextRegeneration;
 	protected float delayRegeneration = 6;
 	protected bool onPlayer;
+	protected int suspicion;
 
 	void Start () {
 		/* Any other initlization */
-		suspision = false;
 		attackPlayer = false;
 		nextAttack = Time.time + delay;
 		nextMAttack = Time.time + mDelay;
 		notCollided = false;
 		onPlayer = false;
+		suspicion = 0;
 
 		PlayerAttributes persist = GameObject.Find ("Persist").GetComponent<PlayerAttributes>();
 		delay = (1.5f - persist.getStamina () / persist.maxStamina ());
@@ -36,8 +37,22 @@ public abstract class Enemy : MonoBehaviour {
 			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
 			Vector3 myPos = GetComponent<Rigidbody> ().position;
 
-			if (Vector3.Distance (PlayerPos, myPos) < 8) {
-				this.suspision = true;
+			if (Vector3.Distance (PlayerPos, myPos) < 12) {
+
+				if(GameObject.Find("Player").GetComponent<PlayerController>().moving){
+					if(suspicion < 10){
+						suspicion++;
+					} else {
+						followPlayer();
+					}
+
+				} else {
+					if(suspicion > 0)
+					{
+						suspicion--;
+					}
+				}
+
 				if (Vector3.Distance (PlayerPos, myPos) < 6) {
 					followPlayer ();
 				}
@@ -137,7 +152,7 @@ public abstract class Enemy : MonoBehaviour {
 		float distance = Vector3.Distance (PlayerPos, myPos);
 		Vector3 direction = PlayerPos - myPos;
 
-		if (distance < 6 && onPlayer == false) {
+		if (onPlayer == false) {//distance < 10 && 
 			this.transform.Translate (direction * 0.025f);
 		} else if(distance >= 1.5f){
 			onPlayer = false;

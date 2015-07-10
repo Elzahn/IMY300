@@ -8,16 +8,27 @@ public class PlayerController : MonoBehaviour {
 	private PlayerAttributes playerAttributes;
 	private bool jumping = false, paused, showDeath, showPaused;
 	public bool run = false;
+	private Vector3 lastPosition;
+	public bool moving;
 
 	void Start(){
 		playerAttributes = GameObject.Find ("Persist").GetComponent<PlayerAttributes> ();//this.GetComponent<PlayerAttributes> ();
 		paused = false;
 		showDeath = false;
 		showPaused = false;
+		moving = false;
+		lastPosition = this.transform.position;
 	}
 
 	// Update is called once per frame
 	void Update () {
+		if (this.transform.position != lastPosition) {
+			lastPosition = this.transform.position;
+			moving = true;
+		} else {
+			moving = false;
+		}
+
 		if (paused == false) {
 
 			if(playerAttributes.isDead() == true)

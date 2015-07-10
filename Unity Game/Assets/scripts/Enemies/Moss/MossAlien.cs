@@ -36,12 +36,58 @@ public class MossAlien : Enemy {
 		/* Called once per frame. AI comes Here */
 		PlayerController playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
 		if (playerScript.getPaused () == false) {
+			/* Called once per frame. AI comes Here */
+			GameObject player = GameObject.Find ("Player");
+			GameObject persist = GameObject.Find ("Persist");
+			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
+			Vector3 myPos = GetComponent<Rigidbody> ().position;
+			
+			if (Vector3.Distance (PlayerPos, myPos) < 12) {
+				
+				if(GameObject.Find("Player").GetComponent<PlayerController>().moving){
+					if(suspicion < 10){
+						suspicion++;
+					} else {
+						followPlayer();
+					}
+					
+				} else {
+					if(suspicion > 0)
+					{
+						suspicion--;
+					}
+				}
+
+				if (Vector3.Distance (PlayerPos, myPos) < 6) {
+					followPlayer ();
+				}
+			} else{
+				attackPlayer = false;
+			}
+			
+			if (attackPlayer) {
+				if (Time.time >= nextMAttack) {
+					nextMAttack = Time.time + mDelay;
+					attack (persist.GetComponent<PlayerAttributes> ());
+				}
+			}
+			
+			if (Time.time >= nextRegeneration) {
+				nextRegeneration = Time.time + delayRegeneration;
+				if (Time.time >= (lastDamage+3) && getHealth () < getMaxHp ()) {
+					hp += (int)(getMaxHp () * 0.01);
+				}
+			}
+
 			if (Time.time >= changeDir) {
 				changeDir += delayedChange;
 				dir = Random.Range (1, 5);
 			}
-
+			
 			walkAround (0.5f, dir);
+		} else {
+			nextRegeneration = Time.time + delayRegeneration;
+			//lastDamage += 1;
 		}
 	}	
 }

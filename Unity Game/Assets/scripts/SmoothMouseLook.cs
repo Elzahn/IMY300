@@ -28,7 +28,6 @@ public class SmoothMouseLook : MonoBehaviour {
 	public float frameCounter = 20;
 	
 	Quaternion originalRotation;
-	Quaternion lastRotation;
 
 	Vector3 originalPosition;
 
@@ -103,7 +102,6 @@ public class SmoothMouseLook : MonoBehaviour {
 		if (GetComponent<Rigidbody>())
 			GetComponent<Rigidbody>().freezeRotation = true;
 		originalRotation = transform.localRotation;
-		lastRotation = originalRotation;
 		originalPosition = transform.localPosition;
 	}
 	

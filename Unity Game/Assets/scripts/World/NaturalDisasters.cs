@@ -32,7 +32,7 @@ public class NaturalDisasters : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		GameObject.Find ("Directional Light").transform.Rotate (0, -0.001f, 0);	//Rotates light
+		GameObject.Find ("Directional Light").transform.Rotate (0, -0.01f, 0);	//Rotates light
 
 		if (shake > 0) {
 			cameraTransform.localPosition = originalCamPos + Random.insideUnitSphere * shakeAmount;

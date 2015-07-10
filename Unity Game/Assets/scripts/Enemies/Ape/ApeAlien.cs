@@ -43,8 +43,22 @@ public class ApeAlien : Enemy {
 			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
 			Vector3 myPos = GetComponent<Rigidbody> ().position;
 			
-			if (Vector3.Distance (PlayerPos, myPos) < 8) {
-				suspision = true;
+			if (Vector3.Distance (PlayerPos, myPos) < 12) {
+				
+				if(GameObject.Find("Player").GetComponent<PlayerController>().moving){
+					if(suspicion < 10){
+						suspicion++;
+					} else {
+						followPlayer();
+					}
+					
+				} else {
+					if(suspicion > 0)
+					{
+						suspicion--;
+					}
+				}
+
 				if (Vector3.Distance (PlayerPos, myPos) < 6) {
 					if (Time.time >= nextApeAttack) {
 						nextApeAttack = Time.time + apeDelay;
