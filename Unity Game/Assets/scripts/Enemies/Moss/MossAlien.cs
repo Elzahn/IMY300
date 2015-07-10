@@ -24,10 +24,24 @@ public class MossAlien : Enemy {
 		typeID = "MossAlien";
 		lootChance = 0.7f;
 		maxLoot = 1;
+		changeDir = Time.time + delayedChange;
+		dir = Random.Range (1, 5);
 	}
-	
-	/*void Update () {
+
+	private float changeDir;
+	private float delayedChange = 5;
+	private int dir;
+
+	void Update () {
 		/* Called once per frame. AI comes Here */
-		//walkAround ();
-	//}	*/
+		PlayerController playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
+		if (playerScript.getPaused () == false) {
+			if (Time.time >= changeDir) {
+				changeDir += delayedChange;
+				dir = Random.Range (1, 5);
+			}
+
+			walkAround (0.5f, dir);
+		}
+	}	
 }

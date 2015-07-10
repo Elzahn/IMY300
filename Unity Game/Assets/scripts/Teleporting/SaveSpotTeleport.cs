@@ -3,7 +3,8 @@ using System.Collections;
 
 public class SaveSpotTeleport : MonoBehaviour {
 
-	private bool showExitConfirmation, showEntranceConfirmation, canEnterSaveSpot;
+	private bool showExitConfirmation, showEntranceConfirmation;
+	public static bool canEnterSaveSpot = false;
 	private PlayerController playerScript;
 	private PlayerAttributes attributesScript;
 
@@ -24,7 +25,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 		if (col.collider.name == "ExitPlane") {
 			playerScript.setPaused (true);	//Pause game
 			showExitConfirmation = true;
-		} else if (col.collider.name == "EntrancePlane"){// && canEnterSaveSpot) {
+		} else if (col.collider.name == "EntrancePlane" && canEnterSaveSpot) {
 			playerScript.setPaused (true);	//Pause game
 			showEntranceConfirmation = true;
 		}

@@ -6,7 +6,7 @@ public class TranslucentAlien : Enemy {
 	 * Should initilze other attributes dpendent on level;
 	 */
 
-	private GameObject persist;
+
 	private float nextTransAttack, transDelay = 3;
 	private float nextTRegeneration;
 	private float delayTRegeneration = 6;
@@ -29,7 +29,6 @@ public class TranslucentAlien : Enemy {
 		typeID = "TranslucentAlien";
 		lootChance = 0.85f;
 		maxLoot = 4;
-		persist = GameObject.Find("Persist");
 		nextTransAttack = Time.time + transDelay;
 		nextTRegeneration = Time.time + delayTRegeneration;
 	}

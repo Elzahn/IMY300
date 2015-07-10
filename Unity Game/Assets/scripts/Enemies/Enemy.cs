@@ -107,11 +107,26 @@ public abstract class Enemy : MonoBehaviour {
 		return isDead();
 	}
 
-	public void walkAround(){
-		Vector3 myPos = GetComponent<Rigidbody>().position;
+	public void walkAround(float moveSpeed, int goTo){
+	/*	Vector3 myPos = GetComponent<Rigidbody>().position;
 		Vector3 tempPos = new Vector3 (Random.value*2, Random.value, Random.value*3);
 		Vector3 direction = tempPos - myPos;
-		this.transform.Translate(tempPos * 0.025f);
+		this.transform.Translate(tempPos * 0.025f);*/
+
+		Vector3 moveDir;
+		Rigidbody rigidbody = GetComponent<Rigidbody> ();
+		//int goTo = Random.Range (1, 5);
+		if (goTo == 1) {
+			moveDir = (transform.forward).normalized;
+		} else if (goTo == 1) {
+			moveDir = (-transform.forward).normalized;
+		} else if (goTo == 2) {
+			moveDir = (transform.right).normalized;
+		} else {
+			moveDir = (-transform.right).normalized;
+		}
+
+		rigidbody.MovePosition (rigidbody.position + transform.TransformDirection (moveDir) * moveSpeed * Time.deltaTime);
 	}
 
 	public void followPlayer(){

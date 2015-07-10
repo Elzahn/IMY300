@@ -6,15 +6,14 @@ public class PlayerController : MonoBehaviour {
 	public float moveSpeed = 15;
 	public Vector3 moveDir;
 	private PlayerAttributes playerAttributes;
-	private bool jumping = false, paused, showDeath;
+	private bool jumping = false, paused, showDeath, showPaused;
 	public bool run = false;
-	public Quaternion camRot;
 
 	void Start(){
 		playerAttributes = GameObject.Find ("Persist").GetComponent<PlayerAttributes> ();//this.GetComponent<PlayerAttributes> ();
 		paused = false;
 		showDeath = false;
-		camRot = GameObject.Find ("Main Camera").transform.rotation;
+		showPaused = false;
 	}
 
 	// Update is called once per frame
@@ -58,13 +57,18 @@ public class PlayerController : MonoBehaviour {
 					jumping = false;
 				}
 
+			if(Input.GetKeyDown(KeyCode.P)){
+				showPaused = true;
+				setPaused(true);
+			}
+
 			if(Input.GetKeyDown(KeyCode.F1)){
 				this.GetComponent<Warping>().chooseDestinationUnlocked = true;
 				print ("Warp point destination choice unlocked.");
 			}
 
 			if(Input.GetKeyDown(KeyCode.F2)){
-				this.GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked = true;
+				FallThroughPlanet.fallThroughPlanetUnlocked = true;
 				print ("Fall through plannet unlocked.");
 			}
 
@@ -80,6 +84,9 @@ public class PlayerController : MonoBehaviour {
 			if(Input.GetKeyDown(KeyCode.R)){
 				GameObject.Find("Main Camera").GetComponent<SmoothMouseLook>().resetRotation();
 			}
+		} else if (Input.GetKeyDown (KeyCode.P)) {
+			paused = false;
+			showPaused = false;
 		}
 	}
 
@@ -110,17 +117,19 @@ public class PlayerController : MonoBehaviour {
 			if (GUI.Button (new Rect (350, 90, 100, 30), "Restart level")) {
 				paused = false;
 				showDeath = false;
-				playerAttributes.restoreHealthToFull();
-				playerAttributes.restoreStaminaToFull();
-				playerAttributes.resetXP();
+				playerAttributes.restoreHealthToFull ();
+				playerAttributes.restoreStaminaToFull ();
+				playerAttributes.resetXP ();
 
 				Application.LoadLevel (Application.loadedLevel);
 			}
 			if (GUI.Button (new Rect (350, 140, 100, 30), "Quit")) {
-				Application.Quit();
+				Application.Quit ();
 				showDeath = false;
 				paused = false;
 			}
+		} else if (showPaused) {
+			GUI.Box (new Rect (300, 40, 200, 50), "Paused \n(Press P to unpause)");
 		}
 	}
 }

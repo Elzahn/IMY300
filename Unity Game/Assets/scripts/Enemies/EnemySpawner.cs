@@ -59,6 +59,11 @@ public class EnemySpawner : MonoBehaviour {
 			Enemy enemy = go.GetComponent<Enemy>();			
 			Rigidbody rigidbody = go.GetComponent<Rigidbody> ();
 			if (enemy.isDead()) {
+				if(enemy.name == "BossPrefab(Clone)")
+				{
+					FallThroughPlanet.fallThroughPlanetUnlocked = true;
+					SaveSpotTeleport.canEnterSaveSpot = true;
+				}
 				dropLoot(enemy, rigidbody.position);
 				enemies.Remove(go);
 				Destroy(go);
@@ -137,7 +142,6 @@ public class EnemySpawner : MonoBehaviour {
 						if(chance <= 10){
 							tempItem = new UncommonAccessory(uncommonItem);
 						} else{
-							int accessoryItem = Random.Range(1, 7);
 							tempItem = new CommonAccessory(commonItem);
 						}
 						break;
@@ -156,7 +160,6 @@ public class EnemySpawner : MonoBehaviour {
 					}
 					case 5:
 					case 6:{
-						int accessoryItem = Random.Range(1, 9);
 						chance = Random.Range (1, 101);
 						if(chance <= 10){
 							tempItem = new RareAccessory(rareItem);
@@ -261,9 +264,7 @@ public class EnemySpawner : MonoBehaviour {
 			if (GUI.Button(new Rect(left+270, 230, 100, 30), "Close")){
 				giveLoot = false;
 				playerScript.setPaused (false);
-				foreach(InventoryItem item in tempLoot.ToList()){
-					tempLoot.RemoveFirst();
-				}
+				tempLoot.Clear();
 			}
 		}
 	}

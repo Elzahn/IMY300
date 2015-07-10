@@ -19,15 +19,29 @@ public class ClayAlien : Enemy {
 		damage = Mathf.RoundToInt(13 * Mathf.Pow (DAMAGE_MULT,level-1));
 	}
 
+	private float changeDir;
+	private float delayedChange = 5;
+	private int dir;
+
 	void Start () {
 		/* Any other initlization */
 		typeID = "ClayAlien";
 		lootChance = 0.80f;
 		maxLoot = 3;
+		changeDir = Time.time + delayedChange;
+		dir = Random.Range (1, 5);
 	}
 	
-	/*void Update () {
+	void Update () {
 		/* Called once per frame. AI comes Here */
-		//walkAround ();
-	//}	
+		PlayerController playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
+		if (playerScript.getPaused () == false) {
+			if (Time.time >= changeDir) {
+				changeDir += delayedChange;
+				dir = Random.Range (1, 5);
+			}
+		
+			walkAround (1.1f, dir);
+		}
+	}	
 }

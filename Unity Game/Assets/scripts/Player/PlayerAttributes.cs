@@ -65,11 +65,16 @@ public class PlayerAttributes : MonoBehaviour {
 		/** Health regenration etc. */
 		playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
 		if (playerScript.getPaused () == false) {
+
 			string tempMessage = levelUp ();
 			if(tempMessage != ""){
 				print(tempMessage);
 			}
-			
+
+			if(level == 6 && GameObject.Find("Player").GetComponent<Warping>() != null){
+				GameObject.Find ("Player").GetComponent<Warping>().chooseDestinationUnlocked = true;
+			}
+
 			if (Time.time >= nextRegeneration) {
 				nextRegeneration = Time.time + delayRegeneration;
 				if (Time.time >= (lastDamage+3) && getHealth () < maxHP ()) {

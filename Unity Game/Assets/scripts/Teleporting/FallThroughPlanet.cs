@@ -4,7 +4,7 @@ using System.Collections;
 public class FallThroughPlanet : MonoBehaviour {
 
 	private bool canFallThroughPlanet;
-	public bool fallThroughPlanetUnlocked;
+	public static bool fallThroughPlanetUnlocked;
 	private float nextUsage;
 	private float delay = 10;
 	private PlayerController playerScript;
