@@ -50,7 +50,7 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	public void drainStamina(){
-		this.stamina -= 0.5f;
+		this.stamina -= 1;//0.5f;
 	}
 
 	public void useHealthPack(InventoryItem item){
@@ -64,6 +64,7 @@ public class PlayerAttributes : MonoBehaviour {
 		/* Called Once per frame */
 		/** Health regenration etc. */
 		playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
+
 		if (playerScript.getPaused () == false) {
 
 			string tempMessage = levelUp ();
@@ -155,8 +156,12 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	void Start(){
-		DontDestroyOnLoad (this);
-		Instance = this;
+		if (Instance) {
+			DestroyImmediate(gameObject);
+		} else {
+			DontDestroyOnLoad (gameObject);
+			Instance = this;
+		}
 
 		setAttributes (0, inventory, maxInventory, maxStorage, 6);
 		nextRegeneration = Time.time + delayRegeneration;
@@ -294,16 +299,16 @@ public class PlayerAttributes : MonoBehaviour {
 		e.lastDamage = Time.time;
 		float ran = Random.value;
 		float hc = hitChance();
-		string message = "Miss! "+e.getHealth()+"/"+e.getMaxHp();
+		string message = "Miss! ";
 
 		if (ran <= hc){			
-			message = "Hit! "+e.getHealth()+"/"+e.getMaxHp();
+			message = "Hit! ";
 			float cc = critChance ();
 			int tmpdamage = damage ();
 
 			if (ran <= cc) {
 				tmpdamage *= CRIT_MULT;
-				message = "Critical Hit! "+e.getHealth()+"/"+e.getMaxHp();
+				message = "Critical Hit! ";
 			}
 			bool dead = e.loseHP(tmpdamage);
 			if (weapon != null) {
@@ -315,11 +320,16 @@ public class PlayerAttributes : MonoBehaviour {
 				//xp += e.xpGain;
 				//Added XP here
 				addXP(getLevel() * 20);
-				message += levelUp();
+				//message += levelUp();
+				message += " Monster died!";
+			} else {
+				//add Stats to message
+				message += e.getHealth()+"/"+e.getMaxHp();
 			}
 		} 
 		
 		print(message);
+		PlayerLog.addStat (message);
 		return message;
 	}
 

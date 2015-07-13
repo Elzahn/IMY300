@@ -54,11 +54,12 @@ public class SaveSpotTeleport : MonoBehaviour {
 			
 			if (GUI.Button (new Rect (left + boxWidth/2 - buttonWidth/2, top + boxHeight/2 - itemHeight, buttonWidth, itemHeight), "Go outside")) {
 				resume ();
-				GameObject.Find("Player").transform.position = new Vector3(0.63f, 21.9f, 1.68f);
-				GameObject.Find("Player").transform.rotation = new Quaternion(4.336792f, -0.0001220703f, 0.3787689f, 1);
+				this.transform.position = new Vector3(0.63f, 21.9f, 1.68f);
+				this.transform.rotation = new Quaternion(4.336792f, -0.0001220703f, 0.3787689f, 1);
 				sound.playWorldSound(3);
 				if(playerScript.run){
 					playerScript.moveSpeed = 10;
+					playerScript.run = false;
 				}
 				Application.LoadLevel ("Scene");
 			}
@@ -79,18 +80,22 @@ public class SaveSpotTeleport : MonoBehaviour {
 
 			GUI.Box (new Rect (left, top, boxWidth, boxHeight), "All done exploring? Remember once you have entered \ncoming back starts the next level.");
 			
-			if (GUI.Button (new Rect (left+20, top+30, buttonWidth, itemHeight), "Go inside")) {
+			if (GUI.Button (new Rect (left + boxWidth/2 - buttonWidth/2, top + boxHeight/2 - itemHeight, buttonWidth, itemHeight), "Go inside")) {
 				resume ();
 				attributesScript.restoreHealthToFull();
 				attributesScript.restoreStaminaToFull();
 				canEnterSaveSpot = false;
-				GameObject.Find("Player").transform.position = new Vector3(-144.77f, 38.88f, -0.45f);
-				GameObject.Find("Player").transform.rotation = new Quaternion(4.336792f, 96.90845f, 0.3787689f, 1);
-				//GameObject.Find("Main Camera").transform.rotation = new Quaternion(4.336792f, 96.90845f, 0.3787689f, 1);
+
+				sound.playWorldSound(3);
+				if(playerScript.run){
+					playerScript.moveSpeed = 10;
+					playerScript.run = false;
+				}
 				Application.LoadLevel ("SaveSpot");
 			}
 			
-			if (GUI.Button (new Rect (left+20, top+60, buttonWidth, itemHeight), "Stay here")) {
+			if (GUI.Button (new Rect (left + boxWidth/2 - buttonWidth/2, top + boxHeight/2 + itemHeight/2, buttonWidth, itemHeight), "Stay here")) {
+				sound.playWorldSound(2);
 				resume ();
 			}
 		}

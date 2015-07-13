@@ -160,19 +160,21 @@ public abstract class Enemy : MonoBehaviour {
 		e.lastDamage = Time.time;
 
 		float ran = Random.value;
-		string message = "Monster Miss! "+e.getHealth()+"/"+e.maxHP();
+		string message = "Monster Miss! ";
 		
 		if (ran <= hitChance){			
-			message = "Monster Hit! "+e.getHealth()+"/"+e.maxHP();
+			message = "Monster Hit! ";
 			int tmpDamage = damage;
 			if (ran <= critChance) {
 				tmpDamage *= 2;
-				message = "Monster Critical Hit! "+e.getHealth()+"/"+e.maxHP();
+				message = "Monster Critical Hit! ";
 			}
-			e.loseHP(tmpDamage);		
+			e.loseHP(tmpDamage);
 		} 
 
+		message += e.getHealth()+"/"+e.maxHP();
 		print(message);
+		PlayerLog.addStat (message);
 		return message;
 	}
 
@@ -183,4 +185,6 @@ public abstract class Enemy : MonoBehaviour {
 	public int getHealth(){
 		return this.hp;
 	}
+
+
 }

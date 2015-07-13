@@ -109,6 +109,7 @@ public class EnemySpawner : MonoBehaviour {
 
 		Mesh mesh = go.GetComponent<MeshFilter>().mesh;
 		//TODO Position correctly
+		print ("code no collisions");
 		
 		Vector3 position = Random.onUnitSphere * (20 + mesh.bounds.size.y/2);
 
@@ -118,6 +119,7 @@ public class EnemySpawner : MonoBehaviour {
 
 	void dropLoot(Enemy enemy, Vector3 position) {
 		//TODO Implement visuals at location
+		print ("code me visually");
 		for (int i = 0; i < enemy.maxLoot; i++) {
 			int chance = Random.Range (0, 101);
 			if (chance >= enemy.lootChance) {

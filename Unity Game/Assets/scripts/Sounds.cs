@@ -25,7 +25,7 @@ public class Sounds : MonoBehaviour {
 		default:
 		{
 			characterAudio.Stop ();
-			if(worldClip != 0 && worldClip != 1 && worldClip != 7){
+			if(worldClip != 0 && worldClip != 1 && worldClip != 5 && worldClip != 7 && worldClip != 8 && worldClip != 9 && worldClip != 10 && worldClip != 11){
 				worldAudio.Stop ();
 			}
 			break;
@@ -45,29 +45,15 @@ public class Sounds : MonoBehaviour {
 	}
 
 	public void playCharacterSound(int clipAt){
-		characterAudio.loop = true;
+		characterClip = clipAt;
+
+		if (characterClip >= 0 && characterClip <= 3) {
+			characterAudio.loop = true;
+		} else {
+			characterAudio.loop = false;
+		}
+
 		characterAudio.clip = characterClips [clipAt];
 		characterAudio.Play ();
-	}
-
-	public void playSound(string array, int clipAtIndex){
-		if (array == "character") {
-		//	characterClip = clipAtIndex;
-		//	myAudio.clip = audioClips [clipAtIndex];
-			//	if (!myAudio.isPlaying) {
-			//if (characterClip == 3 || characterClip == 4 || characterClip == 6 || characterClip == 7) {//walking or running
-			GameObject.Find ("Audio Source").GetComponent<AudioSource> ().loop = true;
-			/*	} else {
-				GameObject.Find ("Audio Source").GetComponent<AudioSource> ().loop = false;
-			}*/
-		//	myAudio.Play ();
-			/*} else if(clip != 6 || clip != 7 || clip != 3 || clip != 4){
-			playSound(clipAtIndex);
-		}*/
-		} else {
-			GameObject.Find ("Audio Source").GetComponent<AudioSource> ().loop = false;
-
-		//	myAudio.Play ();
-		}
 	}
 }

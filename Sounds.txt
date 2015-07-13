@@ -3,10 +3,15 @@ WorldClips
 1 - Inventory 
 2 - Click
 3 - SaveSpot Door
-4 - Male hurt
-5 - Female hurt
-6 - HealthPack collection
-7 - Using HealthPack
+4 - HealthPack collection
+5 - Using HealthPack
+6 - Warping/FallThroughPlanet
+7 - Move items between inventory and storage
+8 - Drop item
+9 - Equip/Unequip Sword
+10 - Equip/Unequip Hammer
+11 - Equip/Unequip Accessory
+
 
 CharcterClips
 0 - Walking on Planet
@@ -14,3 +19,5 @@ CharcterClips
 2 - Walking in Room 
 3 - Running in Room
 4 - Jump
+5 - Male hurt
+6 - Female hurt

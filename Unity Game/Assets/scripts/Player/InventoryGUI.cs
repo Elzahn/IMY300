@@ -100,18 +100,27 @@ public class InventoryGUI : MonoBehaviour {
 					GUI.Label (new Rect (left + 30, top + 80, width-(buttonWidth*2), itemHeight), item.typeID);
 					if (GUI.Button (new Rect (left + width-(buttonWidth*2), top + 80, buttonWidth, itemHeight), "Drop it")) {
 						attributesScript.inventory.Remove (item);
+						this.GetComponent<Sounds>().playWorldSound(8);
 					}
 
 					if(item.typeID != "Medium Health Pack" && item.typeID != "Large Health Pack"){
 						if (GUI.Button (new Rect (left + width-(buttonWidth), top + 80, buttonWidth, itemHeight), "Equip")) {
 							attributesScript.equipItem (item);
 							attributesScript.inventory.Remove (item);
+							print (item.typeID);
+							if(item.typeID == "Rare Accessory" || item.typeID == "Common Accessory" || item.typeID == "Uncommon Accessory"){
+								this.GetComponent<Sounds>().playWorldSound(11);
+							} else if(item.typeID == "Warhammer"){
+								this.GetComponent<Sounds>().playWorldSound(10);
+							} else if(item.typeID != "Warhammer"){
+								this.GetComponent<Sounds>().playWorldSound(9);
+							}
 						}
 					} else {
 						if (GUI.Button (new Rect (left + width-(buttonWidth), top + 80, buttonWidth, itemHeight), "Use")) {
 							attributesScript.useHealthPack (item);
 							attributesScript.inventory.Remove (item);
-							this.GetComponent<Sounds>().playWorldSound(7);
+							this.GetComponent<Sounds>().playWorldSound(5);
 						}
 					}
 					top += itemHeight;
@@ -133,6 +142,7 @@ public class InventoryGUI : MonoBehaviour {
 					if (GUI.Button (new Rect (secondLeft + width - buttonWidth, secondTop + 80, buttonWidth, itemHeight), "Unequip")) {
 						attributesScript.unequipAccessory (item);
 						attributesScript.addToInventory (item);
+						this.GetComponent<Sounds>().playWorldSound(11);
 					}
 					secondTop += itemHeight;
 				}
@@ -148,6 +158,11 @@ public class InventoryGUI : MonoBehaviour {
 				GUI.Label (new Rect (secondLeft + 30, secondTop + 80, 300, 30), attributesScript.weapon.typeID);
 				if (GUI.Button (new Rect (secondLeft + width - buttonWidth, secondTop + 80, buttonWidth, itemHeight), "Unequip")) {
 					attributesScript.addToInventory (attributesScript.weapon);
+					if(attributesScript.weapon.typeID != "Warhammer"){
+						this.GetComponent<Sounds>().playWorldSound(9);
+					} else {	
+						this.GetComponent<Sounds>().playWorldSound(10);
+					}
 					attributesScript.unequipWeapon (attributesScript.weapon);
 				}
 			}
@@ -159,7 +174,7 @@ public class InventoryGUI : MonoBehaviour {
 			int top = Screen.height/2 - boxHeight/2;//10;
 			int secondLeft = left + width;//Screen.width/2 - left;// - boxWidth/3;
 			int secondTop = top;
-			int buttonWidth = 100;
+			int buttonWidth = 120;
 			int itemHeight = 30;
 			
 			GUI.Box (new Rect (left, top, boxWidth, boxHeight), "Storage/Inventory Space (Press Esc to close)");
@@ -169,13 +184,15 @@ public class InventoryGUI : MonoBehaviour {
 				GUI.Label (new Rect (left + width/4, top + 100, width, itemHeight), "No items in storage");
 			} else {
 				foreach (InventoryItem item in attributesScript.storage.ToList()) {
-					GUI.Label (new Rect (left + 30, top + 80, width-buttonWidth, itemHeight), item.typeID);
-					if (GUI.Button (new Rect (left + 170, top + 80, buttonWidth, itemHeight), "Drop it")) {
+					GUI.Label (new Rect (left + 30, top + 80, width-buttonWidth*2, itemHeight), item.typeID);
+					if (GUI.Button (new Rect (left + width-buttonWidth*2, top + 80, buttonWidth, itemHeight), "Drop it")) {
 						attributesScript.storage.Remove (item);
+						this.GetComponent<Sounds>().playWorldSound(8);
 					}
-					if (GUI.Button (new Rect (left + 270, top + 80, buttonWidth, itemHeight), "Move to Inventory")) {
+					if (GUI.Button (new Rect (left + width-buttonWidth, top + 80, buttonWidth, itemHeight), "Move to Inventory")) {
 						attributesScript.addToInventory(item);
 						attributesScript.storage.Remove (item);
+						this.GetComponent<Sounds>().playWorldSound(7);
 					}
 					top += itemHeight;
 				}
@@ -188,12 +205,14 @@ public class InventoryGUI : MonoBehaviour {
 			} else {
 				foreach (InventoryItem item in attributesScript.inventory.ToList()) {
 					GUI.Label (new Rect (secondLeft + 30, secondTop + 80, width-buttonWidth, itemHeight), item.typeID);
-					if (GUI.Button (new Rect (secondLeft + 170, secondTop + 80, buttonWidth, itemHeight), "Drop it")) {
+					if (GUI.Button (new Rect (secondLeft + width-buttonWidth*2, secondTop + 80, buttonWidth, itemHeight), "Drop it")) {
 						attributesScript.inventory.Remove (item);
+						this.GetComponent<Sounds>().playWorldSound(8);
 					}
-					if (GUI.Button (new Rect (secondLeft + 270, secondTop + 80, buttonWidth, itemHeight), "Move To Storage")) {
+					if (GUI.Button (new Rect (secondLeft + width-buttonWidth, secondTop + 80, buttonWidth, itemHeight), "Move To Storage")) {
 						attributesScript.addToStorage (item);
 						attributesScript.inventory.Remove (item);
+						this.GetComponent<Sounds>().playWorldSound(7);
 					}
 					secondTop += itemHeight;
 				}

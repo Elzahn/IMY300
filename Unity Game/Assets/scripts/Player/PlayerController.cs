@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			if (Input.GetKeyDown (KeyCode.F4)) {
-				GameObject.Find ("Persist").GetComponent<PlayerAttributes> ().LevelMeUp ();
+				GameObject.Find ("Player").GetComponent<PlayerAttributes> ().LevelMeUp ();
 			}
 
 			if (Input.GetKeyDown (KeyCode.R)) {
@@ -164,13 +164,14 @@ public class PlayerController : MonoBehaviour {
 				playerAttributes.restoreHealthToFull ();
 				playerAttributes.restoreStaminaToFull ();
 				playerAttributes.resetXP ();
-
+				GameObject.Find("Player").transform.position = new Vector3(0.63f, 21.9f, 1.68f);
+				GameObject.Find("Player").transform.rotation = new Quaternion(4.336792f, -0.0001220703f, 0.3787689f, 1);
+				this.GetComponent<Sounds>().playWorldSound(2);
 				Application.LoadLevel (Application.loadedLevel);
 			}
 			if (GUI.Button (new Rect (350, 140, 100, 30), "Quit")) {
+				this.GetComponent<Sounds>().playWorldSound(2);
 				Application.Quit ();
-				showDeath = false;
-				paused = false;
 			}
 		} else if (showPaused) {
 			GUI.Box (new Rect (300, 40, 200, 50), "Paused \n(Press P to unpause)");

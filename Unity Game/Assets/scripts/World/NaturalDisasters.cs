@@ -63,7 +63,7 @@ public class NaturalDisasters : MonoBehaviour {
 					if(chance <= 10){
 						shake = 2f;
 						playerScript.setPaused (true);
-						warpingScript.spawnTeleports ();
+						SpawnWarpPoints.spawnTeleports ();
 
 						GameObject[] gameObjects = GameObject.FindGameObjectsWithTag ("WorldObject");
 

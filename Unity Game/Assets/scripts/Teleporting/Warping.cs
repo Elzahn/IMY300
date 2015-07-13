@@ -15,43 +15,18 @@ public class Warping : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		spawnTeleports ();
-		
 		justWarped = false;
 		waitingForMovement = false;
 		chooseDestinationUnlocked = false;	//unlocks at level 6
 		chooseDestination = true;
 		showDestinationChoice = false;
-		playerScript = GetComponent<PlayerController> ();
-	}
-	
-	//Removes any existing teleports and replaces them placing the new teleports at random positions on the sphere.
-	public void spawnTeleports ()
-	{
-		GameObject[] gameObjectsToDelete =  GameObject.FindGameObjectsWithTag ("WarpPoint");
-		
-		for (int i = 0; i < gameObjectsToDelete.Length; i++) {
-			Destroy (gameObjectsToDelete [i]);
-		}
-		
-		planet = GameObject.Find("Planet");
-		if (planet != null) {
-			PlanetRadius = planet.GetComponent<SphereCollider> ().radius;
-		}
-
-		for (int i = 1; i < 6; i++) {
-			GameObject warpPoint1 = GameObject.CreatePrimitive (PrimitiveType.Cylinder);
-			warpPoint1.transform.position = Random.onUnitSphere * PlanetRadius;
-			warpPoint1.name = "WarpPoint"+i;
-			warpPoint1.transform.GetComponent<CapsuleCollider> ().isTrigger = true;
-			warpPoint1.tag = "WarpPoint";
-		}
+		playerScript = GameObject.Find("Player").GetComponent<PlayerController> ();
 	}
 
 	// Update is called once per frame
 	void Update () {
 		if (playerScript.getPaused() == false) {
-			if (waitingForMovement && this.GetComponent<Rigidbody> ().velocity.magnitude > 0) {
+			if (waitingForMovement && GameObject.Find("Player").GetComponent<Rigidbody> ().velocity.magnitude > 0) {
 				justWarped = false;
 				waitingForMovement = false;
 			}
@@ -72,11 +47,12 @@ public class Warping : MonoBehaviour {
 			generateRandomWarpPoint(Random.Range(1,6));
 		}
 		else{
+			GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(6);
 			justWarped = true;
 			GameObject newLocationWarpPoint = GameObject.Find("WarpPoint"+randomWarpPoint);
 			Vector3 newLocation = newLocationWarpPoint.transform.position;
-			this.transform.position = new Vector3(newLocation.x+1,newLocation.y,newLocation.z+1);	//new Vector3 (newLocation.x, newLocation.y, newLocation.z);
-			PlayerAttributes playerAttributesScript = GameObject.Find ("Persist").GetComponent<PlayerAttributes>();
+			GameObject.Find("Player").transform.position = new Vector3(newLocation.x+1,newLocation.y,newLocation.z+1);	//new Vector3 (newLocation.x, newLocation.y, newLocation.z);
+			PlayerAttributes playerAttributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes>();
 			int healthToLose = (int)(playerAttributesScript.currentHealth() * 0.05);
 			playerAttributesScript.loseHP(healthToLose);//loses 5% health when warping
 			print ("You lose " + healthToLose + " health");
@@ -177,6 +153,7 @@ public class Warping : MonoBehaviour {
 			if(GUI.Button(new Rect(320, top+210,150,20), "Cancel")) {
 				showDestinationChoice = false;
 				playerScript.setPaused(false);
+				GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(2);
 			}
 		}
 	}

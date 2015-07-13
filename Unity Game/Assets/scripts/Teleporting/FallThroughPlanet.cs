@@ -25,6 +25,7 @@ public class FallThroughPlanet : MonoBehaviour {
 				
 					var pos = transform.position;
 					transform.position = new Vector3 (-pos.x, -pos.y, -pos.z);
+					this.GetComponent<Sounds>().playWorldSound(6);
 					print ("Cooldown of 10 seconds"); 	//show that waiting
 				} 
 			}
