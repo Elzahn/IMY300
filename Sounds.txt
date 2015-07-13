@@ -1,0 +1,16 @@
+WorldClips
+0 - Storage creak
+1 - Inventory 
+2 - Click
+3 - SaveSpot Door
+4 - Male hurt
+5 - Female hurt
+6 - HealthPack collection
+7 - Using HealthPack
+
+CharcterClips
+0 - Walking on Planet
+1 - Running on Planet
+2 - Walking in Room 
+3 - Running in Room
+4 - Jump

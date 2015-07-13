@@ -2,8 +2,6 @@ Set Mesh Colliders as convex.
 Dont set IsKinnectic else can't be attracted.
 Tag WorlObjects with the worldobject tag.
 
-Die Persist Object is die object wat al die player se attributes veilig hou tussen scene changes ander gaan dit verlore. 
-
 Camera Movement:
 Right click rotate camera
 Scroll weel in hou beweeg camera
@@ -16,7 +14,7 @@ F2 - Unlocks fallThroughPlanet
 F3 - Unlocks saveSpotTeleportation
 F4 - Level Up
 
-Run - Left shitf
+Run - Left shift
 Inventory - I to open and close
 P - Pause
 WASD - Movement
