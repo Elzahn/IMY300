@@ -39,7 +39,6 @@ public class TranslucentAlien : Enemy {
 			/* Called once per frame. AI comes Here */
 		
 			GameObject player = GameObject.Find ("Player");
-			GameObject persist = GameObject.Find ("Persist");
 			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
 			Vector3 myPos = GetComponent<Rigidbody> ().position;
 
@@ -62,7 +61,7 @@ public class TranslucentAlien : Enemy {
 				if (Vector3.Distance (PlayerPos, myPos) < 6) {
 					if (Time.time >= nextTransAttack) {
 						nextTransAttack = Time.time + transDelay;
-						attack (persist.GetComponent<PlayerAttributes> ());	//Attack Player
+						attack (player.GetComponent<PlayerAttributes> ());	//Attack Player
 					}
 					followPlayer ();
 				}

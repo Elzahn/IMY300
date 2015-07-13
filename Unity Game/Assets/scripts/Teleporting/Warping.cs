@@ -33,9 +33,11 @@ public class Warping : MonoBehaviour {
 		for (int i = 0; i < gameObjectsToDelete.Length; i++) {
 			Destroy (gameObjectsToDelete [i]);
 		}
-
+		
 		planet = GameObject.Find("Planet");
-		PlanetRadius = planet.GetComponent<SphereCollider>().radius;
+		if (planet != null) {
+			PlanetRadius = planet.GetComponent<SphereCollider> ().radius;
+		}
 
 		for (int i = 1; i < 6; i++) {
 			GameObject warpPoint1 = GameObject.CreatePrimitive (PrimitiveType.Cylinder);

@@ -4,7 +4,9 @@ using System.Collections.Generic;
 
 [AddComponentMenu("Camera-Control/Smooth Mouse Look")]
 public class SmoothMouseLook : MonoBehaviour {
-	
+
+	private PlayerController playerScript;
+
 	public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
 	public RotationAxes axes = RotationAxes.MouseXAndY;
 	public float sensitivityX = 15F;
@@ -45,54 +47,56 @@ public class SmoothMouseLook : MonoBehaviour {
 
 	void Update ()
 	{
-		 if (Input.GetMouseButton (1)) {		//right
+		if (playerScript.getPaused() == false) {
+			if (Input.GetMouseButton (1)) {		//right
 
-			rotAverageY = 0f;
-			rotAverageX = 0f;
+				rotAverageY = 0f;
+				rotAverageX = 0f;
 			
-			rotationY += Input.GetAxis ("Mouse Y") * sensitivityY;
-			rotationX += Input.GetAxis ("Mouse X") * sensitivityX;
+				rotationY += Input.GetAxis ("Mouse Y") * sensitivityY;
+				rotationX += Input.GetAxis ("Mouse X") * sensitivityX;
 			
-			rotArrayY.Add (rotationY);
-			rotArrayX.Add (rotationX);
+				rotArrayY.Add (rotationY);
+				rotArrayX.Add (rotationX);
 			
-			if (rotArrayY.Count >= frameCounter) {
-				rotArrayY.RemoveAt (0);
-			}
-			if (rotArrayX.Count >= frameCounter) {
-				rotArrayX.RemoveAt (0);
-			}
+				if (rotArrayY.Count >= frameCounter) {
+					rotArrayY.RemoveAt (0);
+				}
+				if (rotArrayX.Count >= frameCounter) {
+					rotArrayX.RemoveAt (0);
+				}
 			
-			for (int j = 0; j < rotArrayY.Count; j++) {
-				rotAverageY += rotArrayY [j];
-			}
-			for (int i = 0; i < rotArrayX.Count; i++) {
-				rotAverageX += rotArrayX [i];
-			}
+				for (int j = 0; j < rotArrayY.Count; j++) {
+					rotAverageY += rotArrayY [j];
+				}
+				for (int i = 0; i < rotArrayX.Count; i++) {
+					rotAverageX += rotArrayX [i];
+				}
 			
-			rotAverageY /= rotArrayY.Count;
-			rotAverageX /= rotArrayX.Count;
+				rotAverageY /= rotArrayY.Count;
+				rotAverageX /= rotArrayX.Count;
 
-			rotAverageY = ClampAngle (rotAverageY, minimumY, maximumY);
-			rotAverageX = ClampAngle (rotAverageX, minimumX, maximumX);
+				rotAverageY = ClampAngle (rotAverageY, minimumY, maximumY);
+				rotAverageX = ClampAngle (rotAverageX, minimumX, maximumX);
 			
-			Quaternion yQuaternion = Quaternion.AngleAxis (rotAverageY, Vector3.left);
-			Quaternion xQuaternion = Quaternion.AngleAxis (rotAverageX, Vector3.up);
+				Quaternion yQuaternion = Quaternion.AngleAxis (rotAverageY, Vector3.left);
+				Quaternion xQuaternion = Quaternion.AngleAxis (rotAverageX, Vector3.up);
 
-			transform.localRotation = originalRotation * xQuaternion * yQuaternion;
-		} 		
+				transform.localRotation = originalRotation * xQuaternion * yQuaternion;
+			} 		
 
-		//Zoom
-		transform.Translate (Vector3.forward * Input.GetAxis ("Mouse ScrollWheel"));
+			//Zoom
+			transform.Translate (Vector3.forward * Input.GetAxis ("Mouse ScrollWheel"));
 	
-		//Move
-		if (Input.GetMouseButton (2)) {		//middle
-			if(Input.GetAxis("Mouse X") != 0){
-				transform.Translate(Vector3.right * Input.GetAxis("Mouse X"));
-			}
+			//Move
+			if (Input.GetMouseButton (2)) {		//middle
+				if (Input.GetAxis ("Mouse X") != 0) {
+					transform.Translate (Vector3.right * Input.GetAxis ("Mouse X"));
+				}
 
-			if(Input.GetAxis("Mouse Y") != 0){
-				transform.Translate(Vector3.up * Input.GetAxis("Mouse Y"));
+				if (Input.GetAxis ("Mouse Y") != 0) {
+					transform.Translate (Vector3.up * Input.GetAxis ("Mouse Y"));
+				}
 			}
 		}
 	}
@@ -103,6 +107,8 @@ public class SmoothMouseLook : MonoBehaviour {
 			GetComponent<Rigidbody>().freezeRotation = true;
 		originalRotation = transform.localRotation;
 		originalPosition = transform.localPosition;
+
+		playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
 	}
 	
 	public static float ClampAngle (float angle, float min, float max)

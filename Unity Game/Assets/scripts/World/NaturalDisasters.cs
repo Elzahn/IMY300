@@ -6,7 +6,7 @@ public class NaturalDisasters : MonoBehaviour {
 	private Warping warpingScript;
 	private PlayerController playerScript;
 	private float nextDisaster, delay = 60, shakeAmount, decreaseFactor, dizzyWearOfNext, dizzyDelay = 10;	
-	public float shake, spin;	//how long the shake/spin lasts
+	public static float shake, spin;	//how long the shake/spin lasts
 	private Transform cameraTransform;
 	private Vector3 originalCamPos;
 	private Quaternion originalCamRotation;
@@ -51,8 +51,8 @@ public class NaturalDisasters : MonoBehaviour {
 		}
 
 		if (playerScript.getPaused () == false) {
-			if(GameObject.Find ("Persist").GetComponent<PlayerAttributes>().getDizzy() == true && Time.time >= dizzyWearOfNext){
-				GameObject.Find ("Persist").GetComponent<PlayerAttributes>().setDizzy(false);
+			if(GameObject.Find ("Player").GetComponent<PlayerAttributes>().getDizzy() == true && Time.time >= dizzyWearOfNext){
+				GameObject.Find ("Player").GetComponent<PlayerAttributes>().setDizzy(false);
 			}
 
 			if (Time.time >= nextDisaster) {

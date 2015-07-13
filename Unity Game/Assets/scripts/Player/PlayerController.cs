@@ -3,101 +3,131 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-	public float moveSpeed = 15;
-	public Vector3 moveDir;
+	public float moveSpeed = 10f;
+	private Vector3 moveDir;
 	private PlayerAttributes playerAttributes;
-	private bool jumping = false, paused, showDeath, showPaused;
-	public bool run = false;
-	private Vector3 lastPosition;
-	public bool moving;
+	private bool jumping = false, paused, showDeath, showPaused, soundPlays = false;
+	public bool run = false, moving;
+	private Sounds sound;
+	private float check;
+
+	public void setJumping(){
+		jumping = false;
+	}
 
 	void Start(){
-		playerAttributes = GameObject.Find ("Persist").GetComponent<PlayerAttributes> ();//this.GetComponent<PlayerAttributes> ();
+		playerAttributes = this.GetComponent<PlayerAttributes> ();
 		paused = false;
 		showDeath = false;
 		showPaused = false;
 		moving = false;
-		lastPosition = this.transform.position;
+		sound = this.GetComponent<Sounds> ();
+		check = Time.time;
 	}
-
+ 
 	// Update is called once per frame
 	void Update () {
-		if (this.transform.position != lastPosition) {
-			lastPosition = this.transform.position;
-			moving = true;
-		} else {
-			moving = false;
-		}
-
 		if (paused == false) {
 
-			if(playerAttributes.isDead() == true)
-			{
+			if (playerAttributes.isDead () == true) {
 				showDeath = true;
 				paused = true;
 			}
-			
-			if(Input.GetKeyDown(KeyCode.LeftShift))	{   
-				moveSpeed *= 2;
+
+			if(Sounds.characterAudio.isPlaying == false)
+			{
+				soundPlays = false;
+			}
+
+			if (Input.GetKeyDown (KeyCode.LeftShift)) {   
+				moveSpeed = 20;
 				run = true;
-			} else if(Input.GetKeyUp(KeyCode.LeftShift)){
-				moveSpeed /= 2;
+				soundPlays = false;
+			} else if (Input.GetKeyUp (KeyCode.LeftShift)) {
+				moveSpeed = 10;
 				run = false;
+				soundPlays = false;
 			}
 
-			if(run){
-				playerAttributes.drainStamina();
-			}
-
-			if(playerAttributes.getStamina() <= 0) {
-				if(playerAttributes.getStamina() < 0)
-					playerAttributes.setStaminaToZero();
+			if (playerAttributes.getStamina () <= 0) {
+				if (playerAttributes.getStamina () < 0)
+					playerAttributes.setStaminaToZero ();
 				run = false; 
-				moveSpeed = 15; 
+				moveSpeed = 10; 
 			}
 
-			if(playerAttributes.getDizzy() == true){
+			if (playerAttributes.getDizzy () == true) {
 				moveDir = new Vector3 (Input.GetAxisRaw ("Vertical"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Horizontal")).normalized;
 			} else {
 				moveDir = new Vector3 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Vertical")).normalized;
 			}
 
-			if(Input.GetAxisRaw("Jump") == 1){
+			if (Input.GetAxisRaw ("Jump") == 1) {
 				jumping = true;
-			} else if(Input.GetAxisRaw("Jump") == 0){
-					jumping = false;
-				}
+			}/* else if (Input.GetAxisRaw ("Jump") == 0) {
+				jumping = false;
+			}*/
 
-			if(Input.GetKeyDown(KeyCode.P)){
+			if (Input.GetKeyDown (KeyCode.P)) {
 				showPaused = true;
-				setPaused(true);
+				setPaused (true);
 			}
 
-			if(Input.GetKeyDown(KeyCode.F1)){
-				this.GetComponent<Warping>().chooseDestinationUnlocked = true;
+			if (Input.GetKeyDown (KeyCode.F1)) {
+				this.GetComponent<Warping> ().chooseDestinationUnlocked = true;
 				print ("Warp point destination choice unlocked.");
 			}
 
-			if(Input.GetKeyDown(KeyCode.F2)){
+			if (Input.GetKeyDown (KeyCode.F2)) {
 				FallThroughPlanet.fallThroughPlanetUnlocked = true;
 				print ("Fall through plannet unlocked.");
 			}
 
-			if(Input.GetKeyDown(KeyCode.F3)){
-				this.GetComponent<SaveSpotTeleport>().setEnterSaveSpot();
+			if (Input.GetKeyDown (KeyCode.F3)) {
+				this.GetComponent<SaveSpotTeleport> ().setEnterSaveSpot ();
 				print ("You killed the boss!");
 			}
 
-			if(Input.GetKeyDown(KeyCode.F4)){
-				GameObject.Find("Persist").GetComponent<PlayerAttributes>().LevelMeUp();
+			if (Input.GetKeyDown (KeyCode.F4)) {
+				GameObject.Find ("Persist").GetComponent<PlayerAttributes> ().LevelMeUp ();
 			}
 
-			if(Input.GetKeyDown(KeyCode.R)){
-				GameObject.Find("Main Camera").GetComponent<SmoothMouseLook>().resetRotation();
+			if (Input.GetKeyDown (KeyCode.R)) {
+				GameObject.Find ("Main Camera").GetComponent<SmoothMouseLook> ().resetRotation ();
 			}
-		} else if (Input.GetKeyDown (KeyCode.P)) {
-			paused = false;
-			showPaused = false;
+
+			if ((Input.GetAxis ("Vertical") != 0 || Input.GetAxis ("Horizontal") != 0) && soundPlays == false) {
+				soundPlays = true;
+				moving = true;
+				if(run){
+					playerAttributes.drainStamina ();
+					if(Application.loadedLevelName == "SaveSpot"){
+						sound.playCharacterSound (3);
+					} else {
+						sound.playCharacterSound (1);
+					}
+				} else if(run == false){
+					if(Application.loadedLevelName == "SaveSpot"){
+						sound.playCharacterSound (1);
+					} else {
+						sound.playCharacterSound (0);
+					}
+				}
+			} else {
+				if (Time.time >= check) {	
+					if (Input.GetAxis ("Vertical") == 0 && Input.GetAxis ("Horizontal") == 0) {
+						moving = false;
+						soundPlays = false;
+						sound.stopSound ("character");
+					}
+					check += 0.25f;
+				}
+			}
+		} else {
+			if (Input.GetKeyDown (KeyCode.P)) {
+				paused = false;
+				showPaused = false;
+			}
 		}
 	}
 
@@ -114,6 +144,9 @@ public class PlayerController : MonoBehaviour {
 
 	public bool getPaused()
 	{
+		if (paused) {
+			this.GetComponent<Sounds>().stopSound("all");
+		}
 		return paused;
 	}
 	

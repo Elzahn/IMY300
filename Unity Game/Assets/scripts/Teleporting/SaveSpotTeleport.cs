@@ -7,13 +7,15 @@ public class SaveSpotTeleport : MonoBehaviour {
 	public static bool canEnterSaveSpot = false;
 	private PlayerController playerScript;
 	private PlayerAttributes attributesScript;
+	private Sounds sound;
 
 	// Use this for initialization
 	void Start () {
 		showExitConfirmation = false;
 		showEntranceConfirmation = false;
 		playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
-		attributesScript = GameObject.Find ("Persist").GetComponent<PlayerAttributes> ();
+		attributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
+		sound = GameObject.Find ("Player").GetComponent<Sounds> ();
 	}
 
 	public void setEnterSaveSpot()
@@ -42,30 +44,53 @@ public class SaveSpotTeleport : MonoBehaviour {
 		if (showExitConfirmation) {
 			
 			//x, y top, length, height
-			GUI.Box (new Rect (200, 30, 400, 250), "All set to go outside? Remember you can only \ncome back once the level has been cleared.");
+			int boxWidth = 400;
+			int boxHeight = 250;
+			int left = (int)Screen.width/2 - boxWidth/2;//200;
+			int top = (int)Screen.height/2 - boxHeight/2;//30;
+			int itemHeight = 30;//20;
+			int buttonWidth = 150;
+			GUI.Box (new Rect (left, top, boxWidth, boxHeight), "All set to go outside? Remember you can only \ncome back once the level has been cleared.");
 			
-			if (GUI.Button (new Rect (320, 90, 150, 20), "Go outside")) {
+			if (GUI.Button (new Rect (left + boxWidth/2 - buttonWidth/2, top + boxHeight/2 - itemHeight, buttonWidth, itemHeight), "Go outside")) {
 				resume ();
+				GameObject.Find("Player").transform.position = new Vector3(0.63f, 21.9f, 1.68f);
+				GameObject.Find("Player").transform.rotation = new Quaternion(4.336792f, -0.0001220703f, 0.3787689f, 1);
+				sound.playWorldSound(3);
+				if(playerScript.run){
+					playerScript.moveSpeed = 10;
+				}
 				Application.LoadLevel ("Scene");
 			}
 
-			if (GUI.Button (new Rect (320, 120, 150, 20), "Stay here")) {
+			if (GUI.Button (new Rect (left + boxWidth/2 - buttonWidth/2, top + boxHeight/2 + itemHeight/2, buttonWidth, itemHeight), "Stay here")) {
+				sound.playWorldSound(2);
 				resume ();
 			}
 		} else if (showEntranceConfirmation) {
 
 			//x, y top, length, height
-			GUI.Box (new Rect (200, 30, 400, 250), "All done exploring? Remember once you have entered \ncoming back starts the next level.");
+			int boxWidth = 400;
+			int boxHeight = 250;
+			int left = (int)Screen.width/2 - boxWidth/2;//200;
+			int top = (int)Screen.height/2 - boxHeight/2;//30;
+			int itemHeight = 30;//20;
+			int buttonWidth = 150;
+
+			GUI.Box (new Rect (left, top, boxWidth, boxHeight), "All done exploring? Remember once you have entered \ncoming back starts the next level.");
 			
-			if (GUI.Button (new Rect (320, 90, 150, 20), "Go inside")) {
+			if (GUI.Button (new Rect (left+20, top+30, buttonWidth, itemHeight), "Go inside")) {
 				resume ();
 				attributesScript.restoreHealthToFull();
 				attributesScript.restoreStaminaToFull();
 				canEnterSaveSpot = false;
+				GameObject.Find("Player").transform.position = new Vector3(-144.77f, 38.88f, -0.45f);
+				GameObject.Find("Player").transform.rotation = new Quaternion(4.336792f, 96.90845f, 0.3787689f, 1);
+				//GameObject.Find("Main Camera").transform.rotation = new Quaternion(4.336792f, 96.90845f, 0.3787689f, 1);
 				Application.LoadLevel ("SaveSpot");
 			}
 			
-			if (GUI.Button (new Rect (320, 120, 150, 20), "Stay here")) {
+			if (GUI.Button (new Rect (left+20, top+60, buttonWidth, itemHeight), "Stay here")) {
 				resume ();
 			}
 		}

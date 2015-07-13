@@ -38,7 +38,6 @@ public class MossAlien : Enemy {
 		if (playerScript.getPaused () == false) {
 			/* Called once per frame. AI comes Here */
 			GameObject player = GameObject.Find ("Player");
-			GameObject persist = GameObject.Find ("Persist");
 			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
 			Vector3 myPos = GetComponent<Rigidbody> ().position;
 			
@@ -68,7 +67,7 @@ public class MossAlien : Enemy {
 			if (attackPlayer) {
 				if (Time.time >= nextMAttack) {
 					nextMAttack = Time.time + mDelay;
-					attack (persist.GetComponent<PlayerAttributes> ());
+					attack (player.GetComponent<PlayerAttributes> ());
 				}
 			}
 			

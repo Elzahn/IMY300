@@ -50,7 +50,7 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	public void drainStamina(){
-		this.stamina -= 0.001f;
+		this.stamina -= 0.5f;
 	}
 
 	public void useHealthPack(InventoryItem item){
@@ -91,6 +91,9 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	public void setGender(char gender){
+		if (gender == 'f') {
+			stamina += 20;
+		}
 		this.gender = gender;
 	}
 
@@ -152,15 +155,9 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	void Start(){
-		if (this.name != "Player") {
-			if (Instance) {
-				DestroyImmediate (gameObject);
-			} else {
-				DontDestroyOnLoad (this);
-				Instance = this;
-			}
-		} 
-		
+		DontDestroyOnLoad (this);
+		Instance = this;
+
 		setAttributes (0, inventory, maxInventory, maxStorage, 6);
 		nextRegeneration = Time.time + delayRegeneration;
 	}
@@ -168,12 +165,12 @@ public class PlayerAttributes : MonoBehaviour {
 	public void setAttributes (int xp, LinkedList <InventoryItem> inventory, int inventoryMax, int storageMax, int attackBase){
 		this.xp = xp;
 		this.inventory = inventory;
-		this.maxInventory = inventoryMax;
-		this.level = determineLevel ();
-		this.hp = maxHP();
-		this.stamina = maxStamina ();
-		this.maxStorage = storageMax;
 		this.attackBase = attackBase;
+		level = determineLevel ();
+		hp = maxHP();
+		stamina = maxStamina ();
+		maxStorage = storageMax;
+		maxInventory = inventoryMax;
 	}
 
 	public int getExpectedXP()
@@ -187,11 +184,11 @@ public class PlayerAttributes : MonoBehaviour {
 
 	public string levelUp() {
 		int nextTreshold = levelXP (level);
-		if (this.xp >= nextTreshold) {
-			this.level++;
-			this.hp = maxHP();
-			this.stamina = maxStamina();
-			this.attackBase += 1;
+		if (xp >= nextTreshold) {
+			level++;
+			hp = maxHP();
+			stamina = maxStamina();
+			attackBase += 1;
 			return "You  are now level " + level;
 		}
 		return "";
@@ -217,8 +214,8 @@ public class PlayerAttributes : MonoBehaviour {
 			throw new System.ArgumentNullException ("weapon");
 		//If level >= wepon min then Equip
 		if (weapon == null) {
-			if (weap.level <= level) {
-				this.weapon = weap;
+			if (weap.level <= this.level) {
+				weapon = weap;
 				return true;
 			}
 			throw new RulesException ("Weapon Level too high");
@@ -279,18 +276,18 @@ public class PlayerAttributes : MonoBehaviour {
 
 	public void restoreHealthToFull()
 	{
-		this.hp = maxHP ();
+		hp = maxHP ();
 	}
 
 	public void restoreStaminaToFull(){
-		this.stamina = maxStamina ();
+		stamina = maxStamina ();
 	}
 
 	public void resetXP(){
 		if (level >= 2) {
-			this.xp = levelXP (level - 1);
+			xp = levelXP (level - 1);
 		} else 
-			this.xp = 0;
+			xp = 0;
 	}
 
 	public string attack(Enemy e) {
@@ -311,7 +308,7 @@ public class PlayerAttributes : MonoBehaviour {
 			bool dead = e.loseHP(tmpdamage);
 			if (weapon != null) {
 				print (this.stamina);
-				this.stamina -= weapon.staminaLoss;
+				stamina -= weapon.staminaLoss;
 				print (this.stamina);
 			}
 			if (dead) {
@@ -349,7 +346,7 @@ public class PlayerAttributes : MonoBehaviour {
 	public int determineLevel() {
 		int tempLevel = Mathf.RoundToInt (Mathf.Log (xp * (XP_MULT - 1) / XP_BASE) / Mathf.Log (XP_BASE));
 
-		if (tempLevel == 0) {
+		if (tempLevel <= 0) {
 			return 1;
 		}
 		return tempLevel;//Mathf.RoundToInt (Mathf.Log (xp * (XP_MULT - 1) / XP_BASE) / Mathf.Log (XP_BASE));
@@ -368,14 +365,14 @@ public class PlayerAttributes : MonoBehaviour {
 		foreach (Accessory a in accessories) {
 			tmp += a.stamina;
 		}
-		if (this.gender == 'f')
+		if (gender == 'f')
 			tmp += 20;
 		return tmp;
 	}
 
 	public int damage() {
 		int tmp = baseAttack ();
-		if (this.gender == 'm') {
+		if (gender == 'm') {
 			tmp += 12;
 		}
 		if (weapon != null)
@@ -399,22 +396,22 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	public int getHealth(){
-		return this.hp;
+		return hp;
 	}
 
 	public int getXp(){
-		return this.xp;
+		return xp;
 	}
 
 	public int getLevel(){
-		return this.level;
+		return level;
 	}
 
 	public float getStamina(){
-		return this.stamina;
+		return stamina;
 	}
 
 	public void addXP(int value){
-		this.xp += value;
+		xp += value;
 	}
 }

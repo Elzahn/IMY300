@@ -17,7 +17,13 @@ public class FauxGravityBody : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		attractor.attract(myTransform);
+		if (Application.loadedLevelName != "SaveSpot") {
+			attractor = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
+			this.GetComponent<Rigidbody>().useGravity = false;
+			attractor.attract (myTransform);
+		} else {
+			this.GetComponent<Rigidbody>().useGravity = true;
+		}
 	}
 
 	public void setRotateMe(){

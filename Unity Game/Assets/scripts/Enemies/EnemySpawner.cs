@@ -32,12 +32,8 @@ public class EnemySpawner : MonoBehaviour {
 
 	void Start () {
 		tempLoot = new LinkedList<InventoryItem> ();;
+		attributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
 
-		if (GameObject.Find ("Persist") != null) {
-			attributesScript = GameObject.Find ("Persist").GetComponent<PlayerAttributes> ();
-		} else {
-			attributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
-		}
 		playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
 		planet = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
 		playerLevel = GameObject.Find("Player").GetComponent<PlayerAttributes>().level;

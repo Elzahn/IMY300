@@ -22,9 +22,8 @@ public abstract class Enemy : MonoBehaviour {
 		notCollided = false;
 		onPlayer = false;
 		suspicion = 0;
-
-		PlayerAttributes persist = GameObject.Find ("Persist").GetComponent<PlayerAttributes>();
-		delay = (1.5f - persist.getStamina () / persist.maxStamina ());
+		PlayerAttributes player = GameObject.Find ("Player").GetComponent<PlayerAttributes>();
+		delay = (1.5f - player.getStamina () / player.maxStamina ());
 		nextRegeneration = Time.time + delayRegeneration;
 	}
 	
@@ -33,7 +32,6 @@ public abstract class Enemy : MonoBehaviour {
 		if (playerScript.getPaused () == false) {
 			/* Called once per frame. AI comes Here */
 			GameObject player = GameObject.Find ("Player");
-			GameObject persist = GameObject.Find ("Persist");
 			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
 			Vector3 myPos = GetComponent<Rigidbody> ().position;
 
@@ -63,7 +61,7 @@ public abstract class Enemy : MonoBehaviour {
 			if (attackPlayer) {
 				if (Time.time >= nextMAttack) {
 					nextMAttack = Time.time + mDelay;
-					attack (persist.GetComponent<PlayerAttributes> ());
+					attack (player.GetComponent<PlayerAttributes> ());
 				}
 			}
 
@@ -89,14 +87,13 @@ public abstract class Enemy : MonoBehaviour {
 		//this.hp = 0;
 
 		GameObject player = GameObject.Find("Player");
-		GameObject persist = GameObject.Find ("Persist");
 		Vector3 PlayerPos = player.GetComponent<Rigidbody>().position;
 		Vector3 myPos = GetComponent<Rigidbody>().position;
 		if (Time.time >= nextAttack) {
 			nextAttack = Time.time + delay;
 			if (Vector3.Distance (PlayerPos, myPos) < 6) {
-				persist.GetComponent<PlayerAttributes> ().attack (this);
-				//attack (persist.GetComponent<PlayerAttributes> ());	//Attack Player
+				player.GetComponent<PlayerAttributes> ().attack (this);
+				//attack (player.GetComponent<PlayerAttributes> ());	//Attack Player
 				attackPlayer = true;
 			}
 		}
