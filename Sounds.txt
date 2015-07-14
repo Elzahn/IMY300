@@ -1,23 +1,50 @@
-WorldClips
-0 - Storage creak
-1 - Inventory 
-2 - Click
-3 - SaveSpot Door
-4 - HealthPack collection
-5 - Using HealthPack
-6 - Warping/FallThroughPlanet
-7 - Move items between inventory and storage
-8 - Drop item
-9 - Equip/Unequip Sword
-10 - Equip/Unequip Hammer
-11 - Equip/Unequip Accessory
-
+WorldClips											File Names
+0 - Storage creak									- Creak Wood
+1 - Inventory 										- Fabric Movement
+2 - Click											- UI Click
+3 - SaveSpot Door									- Gate Close
+4 - HealthPack collection							- Magic Spell A
+5 - Using HealthPack								- Magic Spell M
+6 - Warping/FallThroughPlanet						- Time Warp Stop
+7 - Move items between inventory and Storage        - Thud Sublte
+8 - Drop items                                      - Thud Smooth
+9 - Equip/Unequip Sword 							- Sword Swing Hit Metal Armor (Stereo)
+10 - Equip/Unequip Hammer							- Hammer Hit Metal
+11 - Equip/Unequip Accessory						- Foley Ring
+12 - Spinning wind 									- Whoosh Wide
+13 - Earthquake										- Thruster Deep
 
 CharcterClips
-0 - Walking on Planet
-1 - Running on Planet
-2 - Walking in Room 
-3 - Running in Room
-4 - Jump
-5 - Male hurt
-6 - Female hurt
+0 - Walking on Planet 								- Footsteps Walk Gravel
+1 - Running on Planet 								- Footsteps Run Gravel
+2 - Walking in Room 								- Footsteps Walk Asphalt
+3 - Running in Room									- Footsteps Run Asphalt
+4 - Jump											- Impact Stone Deep
+5 - Male Hurt										- Grunt Male Hurt
+6 - Female Hurt 									- Voice Female Ouch 1
+7 - Sword swing Hit 								- Sword Swing Hit Solid Metal
+8 - Sword swing Critical 							- Sword Swing Hit Solid Metal Bright
+9 - Miss											- Whoosh Miss
+10 - Hammer Hit 									- Hammer Hit Metal
+11 - Hammer Critical 								- Hammer Hit Body
+12 - No weapon Hit									- Impact Generic 09
+13 - No weapon Critical								- Impact Generic 11
+
+MonsterClips
+0 - Walking around									- Monster Growl Deep 03 Long
+1 - Folloing player									- Monster Grwol Deep 02 Long
+2 - Critical player									- Gore Blade Chop
+3 - Hit player										- Sword Swing Stab Body Gore
+4 - Miss											- Whoosh Miss
+
+DeathClips
+0 - Dead Monster 									- Monster Hurt
+1 - Dead Character									- Music Effect
+
+AlarmClips
+0 - NaturalDisaster warning      					- Alarm Distorted
+1 - Low health warning      						- Alarm Intense
+
+AmbiendeClips
+0 - Planet 											- Ambience Nature
+1 - Room											- Ambience Underwater

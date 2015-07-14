@@ -22,6 +22,9 @@ public class PlayerAttributes : MonoBehaviour {
 	private bool dizzy = false;
 	private int attackBase = 6;
 	private char gender = '?';
+	private Sounds sound;
+	private LinkedList<InventoryItem> tempInventory = new LinkedList<InventoryItem>();
+	private LinkedList<InventoryItem> tempStorage = new LinkedList<InventoryItem>();
 	/**
 	 * This can be reset/recalculated at start of level
 	 * */
@@ -37,6 +40,7 @@ public class PlayerAttributes : MonoBehaviour {
 	private float nextRegeneration;
 	private float delayRegeneration = 6;
 	private PlayerController playerScript;
+	public static bool giveAlarm;
 
 	public void addHealth(int val){
 		this.hp += val;
@@ -67,8 +71,15 @@ public class PlayerAttributes : MonoBehaviour {
 
 		if (playerScript.getPaused () == false) {
 
+			if(this.getHealth() <= 50 && giveAlarm){//(this.maxHP()/4)){
+				GameObject.Find("Player").GetComponent<Sounds>().playAlarmSound(1);
+			} else {
+				GameObject.Find ("Player").GetComponent<Sounds>().stopAlarmSound(1);
+			}
+
 			string tempMessage = levelUp ();
 			if(tempMessage != ""){
+				PlayerLog.addStat(tempMessage);
 				print(tempMessage);
 			}
 
@@ -80,10 +91,12 @@ public class PlayerAttributes : MonoBehaviour {
 				nextRegeneration = Time.time + delayRegeneration;
 				if (Time.time >= (lastDamage+3) && getHealth () < maxHP ()) {
 					hp += (int)(maxHP () * 0.01);
+					giveAlarm = false;
 				}
 				if (Time.time >= (lastDamage+3) && getStamina () < maxStamina ()) {
 					stamina += (int)(maxStamina () * 0.01);
 				}
+
 			}
 		} else {
 			nextRegeneration = Time.time + delayRegeneration;
@@ -163,6 +176,8 @@ public class PlayerAttributes : MonoBehaviour {
 			Instance = this;
 		}
 
+		giveAlarm = true;
+		sound = GameObject.Find("Player").GetComponent<Sounds>();
 		setAttributes (0, inventory, maxInventory, maxStorage, 6);
 		nextRegeneration = Time.time + delayRegeneration;
 	}
@@ -176,6 +191,8 @@ public class PlayerAttributes : MonoBehaviour {
 		stamina = maxStamina ();
 		maxStorage = storageMax;
 		maxInventory = inventoryMax;
+		tempInventory = inventory;
+		tempStorage = storage;
 	}
 
 	public int getExpectedXP()
@@ -295,22 +312,48 @@ public class PlayerAttributes : MonoBehaviour {
 			xp = 0;
 	}
 
+	public void resetInventoryAndStorage(){
+		inventory = tempInventory;
+		storage = tempStorage;
+	}
+
 	public string attack(Enemy e) {
+		string name = e.typeID;
 		e.lastDamage = Time.time;
 		float ran = Random.value;
 		float hc = hitChance();
 		string message = "Miss! ";
 
-		if (ran <= hc){			
+		if (ran <= hc) {			
 			message = "Hit! ";
+			if (weapon != null){
+				if (weapon.typeID == "Warhammer") {
+					sound.playCharacterSound (10);
+				} else {
+					sound.playCharacterSound (7);
+				}
+			} else {
+				sound.playCharacterSound (12);
+			}
 			float cc = critChance ();
 			int tmpdamage = damage ();
 
 			if (ran <= cc) {
 				tmpdamage *= CRIT_MULT;
 				message = "Critical Hit! ";
+				if (weapon != null){
+					if (weapon.typeID == "Warhammer") {
+						sound.playCharacterSound (11);
+					} else {
+						sound.playCharacterSound (8);
+					}
+				} else {
+					sound.playCharacterSound (13);
+				}
 			}
+
 			bool dead = e.loseHP(tmpdamage);
+
 			if (weapon != null) {
 				print (this.stamina);
 				stamina -= weapon.staminaLoss;
@@ -327,7 +370,10 @@ public class PlayerAttributes : MonoBehaviour {
 				message += e.getHealth()+"/"+e.getMaxHp();
 			}
 		} 
-		
+		if (message == "Miss! ") {
+			sound.playCharacterSound(9);
+			message += e.getHealth () + "/" + e.getMaxHp ();
+		}
 		print(message);
 		PlayerLog.addStat (message);
 		return message;

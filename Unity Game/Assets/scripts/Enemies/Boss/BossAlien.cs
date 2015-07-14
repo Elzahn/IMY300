@@ -5,6 +5,8 @@ public class BossAlien : Enemy {
 	 * Automatically called after level is set. 
 	 * Should initilze other attributes dpendent on level;
 	 */
+	
+	public AudioSource monsterAudio;
 
 	public override void init() {
 		const float HP_MULT = 1.6f;
@@ -21,6 +23,8 @@ public class BossAlien : Enemy {
 
 	void Start () {
 		/* Any other initlization */
+		monsterAudio = gameObject.AddComponent<AudioSource>();
+
 		typeID = "BossAlien";
 		lootChance = 0.100f;
 		maxLoot = 5;

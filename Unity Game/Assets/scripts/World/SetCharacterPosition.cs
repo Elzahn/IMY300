@@ -13,6 +13,7 @@ public class SetCharacterPosition : MonoBehaviour {
 		}
 	
 		GameObject.Find("Player").transform.position = new Vector3(-142.91f, 36.11f, -0.45f);
+		GameObject.Find ("Player").GetComponent<Sounds> ().playAmbienceSound (1);
 	}
 	
 	// Update is called once per frame

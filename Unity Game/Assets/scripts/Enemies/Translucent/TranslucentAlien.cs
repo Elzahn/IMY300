@@ -5,7 +5,7 @@ public class TranslucentAlien : Enemy {
 	 * Automatically called after level is set. 
 	 * Should initilze other attributes dpendent on level;
 	 */
-
+	public AudioSource monsterAudio;
 
 	private float nextTransAttack, transDelay = 3;
 	private float nextTRegeneration;
@@ -26,6 +26,8 @@ public class TranslucentAlien : Enemy {
 
 	void Start () {
 		/* Any other initlization */
+		monsterAudio = gameObject.AddComponent<AudioSource>();
+
 		typeID = "TranslucentAlien";
 		lootChance = 0.85f;
 		maxLoot = 4;

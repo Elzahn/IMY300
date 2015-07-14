@@ -13,10 +13,13 @@ public class Collisions : MonoBehaviour {
 
 	void OnCollisionEnter (Collision col){	//Lose health only when an Earthquake hits
 		playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
-		if (col.collider.tag == "WorldObject" && NaturalDisasters.shake > 0) {
+		if (col.collider.tag == "Loot") {
+			print (col.collider.name);
+		} else if (col.collider.tag == "WorldObject" && NaturalDisasters.shake > 0) {
 			int healthToLose = (int)(playerAttributesScript.currentHealth () * 0.02);
 			playerAttributesScript.loseHP (healthToLose);//loses 2% health when hit
 			print ("You lose " + healthToLose + " health");
+			PlayerLog.addStat("You lose " + healthToLose + " health");
 		} else if (col.collider.tag == "MediumHealthPack") {
 			if (playerAttributesScript.inventory.Count < playerAttributesScript.getMaxInventory ()) {
 				playerAttributesScript.addToInventory (new MediumHealthPack ());
@@ -33,6 +36,7 @@ public class Collisions : MonoBehaviour {
 			int healthToLose = (int)(playerAttributesScript.currentHealth () * 0.02);
 			playerAttributesScript.loseHP (healthToLose);//loses 2% health when running into something
 			print ("You lose " + healthToLose + " health by running into something");
+			PlayerLog.addStat("You lose " + healthToLose + " health by running into something");
 			if (playerAttributesScript.getGender () == 'f') {
 				this.GetComponent<Sounds> ().playCharacterSound (6);
 			} else {

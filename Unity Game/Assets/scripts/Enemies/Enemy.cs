@@ -6,16 +6,20 @@ public abstract class Enemy : MonoBehaviour {
 	 */
 	public abstract void init();
 	protected bool attackPlayer;
-	protected float nextAttack, delay, nextMAttack, mDelay = 0.5f;
+	protected float nextAttack, delay, nextMAttack, mDelay = 1f;//0.5f;
 	protected bool notCollided;
 	public float lastDamage;
 	protected float nextRegeneration;
 	protected float delayRegeneration = 6;
 	protected bool onPlayer;
 	protected int suspicion;
+	protected int SUSPICION_ALERT = 5;
+	private Sounds sound;
 
 	void Start () {
 		/* Any other initlization */
+
+		sound = GameObject.Find("Player").GetComponent<Sounds> ();
 		attackPlayer = false;
 		nextAttack = Time.time + delay;
 		nextMAttack = Time.time + mDelay;
@@ -23,7 +27,7 @@ public abstract class Enemy : MonoBehaviour {
 		onPlayer = false;
 		suspicion = 0;
 		PlayerAttributes player = GameObject.Find ("Player").GetComponent<PlayerAttributes>();
-		delay = (1.5f - player.getStamina () / player.maxStamina ());
+		delay = 5 * (1.5f - player.getStamina () / player.maxStamina ());
 		nextRegeneration = Time.time + delayRegeneration;
 	}
 	
@@ -38,7 +42,7 @@ public abstract class Enemy : MonoBehaviour {
 			if (Vector3.Distance (PlayerPos, myPos) < 12) {
 
 				if(GameObject.Find("Player").GetComponent<PlayerController>().moving){
-					if(suspicion < 10){
+					if(suspicion < SUSPICION_ALERT){
 						suspicion++;
 					} else {
 						followPlayer();
@@ -53,6 +57,8 @@ public abstract class Enemy : MonoBehaviour {
 
 				if (Vector3.Distance (PlayerPos, myPos) < 6) {
 					followPlayer ();
+				} else {
+					GameObject.Find("Player").GetComponent<Sounds>().stopMonsterSound(this);
 				}
 			} else{
 				attackPlayer = false;
@@ -85,16 +91,18 @@ public abstract class Enemy : MonoBehaviour {
 
 	void OnMouseDown() {
 		//this.hp = 0;
+		GameObject player = GameObject.Find ("Player");
 
-		GameObject player = GameObject.Find("Player");
-		Vector3 PlayerPos = player.GetComponent<Rigidbody>().position;
-		Vector3 myPos = GetComponent<Rigidbody>().position;
-		if (Time.time >= nextAttack) {
-			nextAttack = Time.time + delay;
-			if (Vector3.Distance (PlayerPos, myPos) < 6) {
-				player.GetComponent<PlayerAttributes> ().attack (this);
-				//attack (player.GetComponent<PlayerAttributes> ());	//Attack Player
-				attackPlayer = true;
+		if (player.GetComponent<PlayerController> ().getPaused () == false) {
+			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
+			Vector3 myPos = GetComponent<Rigidbody> ().position;
+			if (Time.time >= nextAttack) {
+				nextAttack = Time.time + delay;
+				if (Vector3.Distance (PlayerPos, myPos) < 6) {
+					player.GetComponent<PlayerAttributes> ().attack (this);
+					//attack (player.GetComponent<PlayerAttributes> ());	//Attack Player
+					attackPlayer = true;
+				}
 			}
 		}
 	}
@@ -120,25 +128,33 @@ public abstract class Enemy : MonoBehaviour {
 	}
 
 	public void walkAround(float moveSpeed, int goTo){
-	/*	Vector3 myPos = GetComponent<Rigidbody>().position;
+		/*	Vector3 myPos = GetComponent<Rigidbody>().position;
 		Vector3 tempPos = new Vector3 (Random.value*2, Random.value, Random.value*3);
 		Vector3 direction = tempPos - myPos;
 		this.transform.Translate(tempPos * 0.025f);*/
 
-		Vector3 moveDir;
-		Rigidbody rigidbody = GetComponent<Rigidbody> ();
-		//int goTo = Random.Range (1, 5);
-		if (goTo == 1) {
-			moveDir = (transform.forward).normalized;
-		} else if (goTo == 1) {
-			moveDir = (-transform.forward).normalized;
-		} else if (goTo == 2) {
-			moveDir = (transform.right).normalized;
-		} else {
-			moveDir = (-transform.right).normalized;
-		}
+		Vector3 PlayerPos = GameObject.Find ("Player").GetComponent<Rigidbody> ().position;
+		Vector3 myPos = GetComponent<Rigidbody> ().position;
+		
+		float distance = Vector3.Distance (PlayerPos, myPos);
+		Vector3 direction = PlayerPos - myPos;
+		if (distance > 6 && suspicion < SUSPICION_ALERT) {
+			GameObject.Find("Player").GetComponent<Sounds>().playMonsterSound (0, this);
+			Vector3 moveDir;
+			Rigidbody rigidbody = GetComponent<Rigidbody> ();
+			//int goTo = Random.Range (1, 5);
+			if (goTo == 1) {
+				moveDir = (transform.forward).normalized;
+			} else if (goTo == 1) {
+				moveDir = (-transform.forward).normalized;
+			} else if (goTo == 2) {
+				moveDir = (transform.right).normalized;
+			} else {
+				moveDir = (-transform.right).normalized;
+			}
 
-		rigidbody.MovePosition (rigidbody.position + transform.TransformDirection (moveDir) * moveSpeed * Time.deltaTime);
+			rigidbody.MovePosition (rigidbody.position + transform.TransformDirection (moveDir) * moveSpeed * Time.deltaTime);
+		}
 	}
 
 	public void followPlayer(){
@@ -148,31 +164,45 @@ public abstract class Enemy : MonoBehaviour {
 
 		float distance = Vector3.Distance (PlayerPos, myPos);
 		Vector3 direction = PlayerPos - myPos;
-
-		if (onPlayer == false) {//distance < 10 && 
-			this.transform.Translate (direction * 0.025f);
-		} else if(distance >= 1.5f){
-			onPlayer = false;
+		if (distance < 6 || suspicion >= 10) {
+			//player.GetComponent<Sounds>().playMonsterSound (1, this);
+			if (onPlayer == false) {//distance < 10 && 
+				this.GetComponent<Rigidbody> ().MovePosition (this.GetComponent<Rigidbody> ().position + direction * 0.25f * Time.deltaTime);
+				//this.transform.Translate (direction * 0.025f);
+			} else if (distance >= 1.5f) {
+				onPlayer = false;
+			}
 		}
 	}
 
 	public string attack(PlayerAttributes e) {
 		e.lastDamage = Time.time;
+		PlayerAttributes.giveAlarm = true;
 
 		float ran = Random.value;
 		string message = "Monster Miss! ";
 		
 		if (ran <= hitChance){			
 			message = "Monster Hit! ";
+			GameObject.Find("Player").GetComponent<Sounds>().playMonsterSound(3, this);
 			int tmpDamage = damage;
 			if (ran <= critChance) {
 				tmpDamage *= 2;
 				message = "Monster Critical Hit! ";
+				GameObject.Find("Player").GetComponent<Sounds>().playMonsterSound(2, this);
 			}
 			e.loseHP(tmpDamage);
-		} 
 
-		message += e.getHealth()+"/"+e.maxHP();
+			if(message == "Monster Miss! "){
+				GameObject.Find("Player").GetComponent<Sounds>().playMonsterSound(4, this);
+			}
+		} 
+		if (GameObject.Find ("Player").GetComponent<PlayerAttributes> ().isDead ()) {
+			GameObject.Find("Player").GetComponent<Sounds>().playDeathSound(1);
+			message += "You died.";
+		} else {
+			message += e.getHealth () + "/" + e.maxHP ();
+		}
 		print(message);
 		PlayerLog.addStat (message);
 		return message;

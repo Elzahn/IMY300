@@ -35,6 +35,7 @@ public class Warping : MonoBehaviour {
 				nextUsage = Time.time + delay;
 				chooseDestination = true;
 				print ("You can now choose your destination when warping again.");
+				PlayerLog.addStat("You can now choose your destination when warping again.");
 			}
 		}
 	}
@@ -56,6 +57,7 @@ public class Warping : MonoBehaviour {
 			int healthToLose = (int)(playerAttributesScript.currentHealth() * 0.05);
 			playerAttributesScript.loseHP(healthToLose);//loses 5% health when warping
 			print ("You lose " + healthToLose + " health");
+			PlayerLog.addStat("You lose " + healthToLose + " health");
 		}
 	}
 

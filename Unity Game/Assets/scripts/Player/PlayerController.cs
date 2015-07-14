@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-	public float moveSpeed = 10f;
+	public float moveSpeed = 5f;
 	private Vector3 moveDir;
 	private PlayerAttributes playerAttributes;
 	private bool jumping = false, paused, showDeath, showPaused, soundPlays = false;
@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour {
 
 			if (playerAttributes.isDead () == true) {
 				showDeath = true;
+				GameObject.Find("Player").GetComponent<Sounds>().stopAlarmSound(1);
 				paused = true;
 			}
 
@@ -40,11 +41,11 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			if (Input.GetKeyDown (KeyCode.LeftShift)) {   
-				moveSpeed = 20;
+				moveSpeed = 10;
 				run = true;
 				soundPlays = false;
 			} else if (Input.GetKeyUp (KeyCode.LeftShift)) {
-				moveSpeed = 10;
+				moveSpeed = 5;
 				run = false;
 				soundPlays = false;
 			}
@@ -53,7 +54,7 @@ public class PlayerController : MonoBehaviour {
 				if (playerAttributes.getStamina () < 0)
 					playerAttributes.setStaminaToZero ();
 				run = false; 
-				moveSpeed = 10; 
+				moveSpeed = 5; 
 			}
 
 			if (playerAttributes.getDizzy () == true) {
@@ -157,8 +158,15 @@ public class PlayerController : MonoBehaviour {
 
 	void OnGUI(){
 		if (showDeath) {
-			GUI.Box (new Rect (300, 40, 200, 150), "You died! Restart the level?");
-			if (GUI.Button (new Rect (350, 90, 100, 30), "Restart level")) {
+			int boxHeigh = 150;
+			int boxWidth = 200;
+			int top = Screen.height / 2 - boxHeigh / 2;
+			int left = Screen.width / 2 - boxWidth / 2;
+			int buttonWidth = 100;
+			int itemHeight = 30;
+
+			GUI.Box (new Rect (left, top, boxWidth, boxHeigh), "You died! Restart the level?");
+			if (GUI.Button (new Rect (left+30, top+30, buttonWidth, itemHeight), "Restart level")) {
 				paused = false;
 				showDeath = false;
 				playerAttributes.restoreHealthToFull ();
@@ -166,15 +174,23 @@ public class PlayerController : MonoBehaviour {
 				playerAttributes.resetXP ();
 				GameObject.Find("Player").transform.position = new Vector3(0.63f, 21.9f, 1.68f);
 				GameObject.Find("Player").transform.rotation = new Quaternion(4.336792f, -0.0001220703f, 0.3787689f, 1);
+				this.GetComponent<Sounds>().stopSound("alarm");
 				this.GetComponent<Sounds>().playWorldSound(2);
+				playerAttributes.resetInventoryAndStorage();
+				PlayerLog.queue.Clear();
+				PlayerLog.stats = "";
 				Application.LoadLevel (Application.loadedLevel);
 			}
-			if (GUI.Button (new Rect (350, 140, 100, 30), "Quit")) {
+			if (GUI.Button (new Rect (left+30, top+90, buttonWidth, itemHeight), "Quit")) {
 				this.GetComponent<Sounds>().playWorldSound(2);
 				Application.Quit ();
 			}
 		} else if (showPaused) {
-			GUI.Box (new Rect (300, 40, 200, 50), "Paused \n(Press P to unpause)");
+			int boxHeigh = 50;
+			int boxWidth = 200;
+			int top = Screen.height / 2 - boxHeigh / 2;
+			int left = Screen.width / 2 - boxWidth / 2;
+			GUI.Box (new Rect (left, top, boxWidth, boxHeigh), "Paused \n(Press P to unpause)");
 		}
 	}
 }

@@ -5,6 +5,7 @@ public class MossAlien : Enemy {
 	 * Automatically called after level is set. 
 	 * Should initilze other attributes dpendent on level;
 	 */
+	public AudioSource monsterAudio;
 
 	public override void init() {
 		const float HP_MULT = 1.6f;
@@ -21,6 +22,8 @@ public class MossAlien : Enemy {
 
 	void Start () {
 		/* Any other initlization */
+		monsterAudio = gameObject.AddComponent<AudioSource>();
+
 		typeID = "MossAlien";
 		lootChance = 0.7f;
 		maxLoot = 1;
@@ -82,7 +85,7 @@ public class MossAlien : Enemy {
 				changeDir += delayedChange;
 				dir = Random.Range (1, 5);
 			}
-			
+
 			walkAround (0.5f, dir);
 		} else {
 			nextRegeneration = Time.time + delayRegeneration;

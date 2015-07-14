@@ -6,6 +6,8 @@ public class ApeAlien : Enemy {
 	 * Should initilze other attributes dpendent on level;
 	 */
 	
+	public AudioSource monsterAudio;
+
 	private float nextApeAttack, apeDelay = 3;
 	private float nextARegeneration;
 	private float delayARegeneration = 6;
@@ -25,6 +27,8 @@ public class ApeAlien : Enemy {
 
 	void Start () {
 		/* Any other initlization */
+		monsterAudio = gameObject.AddComponent<AudioSource>();
+
 		typeID = "ApeAlien";
 		lootChance = 0.75f;
 		maxLoot = 2;

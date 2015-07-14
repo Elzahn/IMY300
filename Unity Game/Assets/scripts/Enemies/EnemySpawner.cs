@@ -12,6 +12,7 @@ public class EnemySpawner : MonoBehaviour {
 	public GameObject enemy3;
 	public GameObject enemy4;
 
+	public LinkedList<LinkedList<InventoryItem>> deadLoot;
 	private bool giveLoot = false;
 	private string EnemyName;
 	private int numLoot;
@@ -31,7 +32,8 @@ public class EnemySpawner : MonoBehaviour {
 	LinkedList<GameObject> enemies = new LinkedList <GameObject> ();
 
 	void Start () {
-		tempLoot = new LinkedList<InventoryItem> ();;
+		deadLoot = new LinkedList<LinkedList<InventoryItem>>();
+		tempLoot = new LinkedList<InventoryItem> ();
 		attributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
 
 		playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
@@ -55,7 +57,7 @@ public class EnemySpawner : MonoBehaviour {
 			Enemy enemy = go.GetComponent<Enemy>();			
 			Rigidbody rigidbody = go.GetComponent<Rigidbody> ();
 			if (enemy.isDead()) {
-				if(enemy.name == "BossPrefab(Clone)")
+				if(enemy.typeID == "BossAlien")
 				{
 					FallThroughPlanet.fallThroughPlanetUnlocked = true;
 					SaveSpotTeleport.canEnterSaveSpot = true;
@@ -99,14 +101,18 @@ public class EnemySpawner : MonoBehaviour {
 		GameObject go = Instantiate(enemy);
 		go.GetComponent<FauxGravityBody>().attractor = planet;
 		go.tag = "Monster";
-
+		
 		//go.transform.localScale = new Vector3(2, 3, 2);	actual scale of the monsters
 
 		Enemy enemyComponent = go.GetComponent<Enemy>();
 		enemyComponent.level = chooseLevel();
 		enemyComponent.init();
+		if (enemyComponent.typeID == "ClayAlien" || enemyComponent.typeID == "MossAlien") {
+			go.AddComponent<AudioSource>();
+			go.GetComponent<AudioSource>().name = "Monster Audio";
+		}
 		enemies.AddLast(go);
-
+		
 		Mesh mesh = go.GetComponent<MeshFilter>().mesh;
 		//TODO Position correctly
 		print ("code no collisions");
@@ -119,7 +125,8 @@ public class EnemySpawner : MonoBehaviour {
 
 	void dropLoot(Enemy enemy, Vector3 position) {
 		//TODO Implement visuals at location
-		print ("code me visually");
+
+		GameObject.Find("Player").GetComponent<Sounds>().playDeathSound(0);
 		for (int i = 0; i < enemy.maxLoot; i++) {
 			int chance = Random.Range (0, 101);
 			if (chance >= enemy.lootChance) {
@@ -236,35 +243,46 @@ public class EnemySpawner : MonoBehaviour {
 				}
 			}
 		}
+
+		/*GameObject deadEnemy = GameObject.CreatePrimitive (PrimitiveType.Sphere);
+		deadEnemy.transform.position = position;
+		deadEnemy.tag = "Loot";
+		deadEnemy.name = "Dead " + enemy.typeID;*/
 	}
 
 	void OnGUI() {
 		if (giveLoot) {
 
-			int top = 30;
-			int left = 200;
+			int boxHeight = 250;
+			int boxWidth = 400;
+			int top = Screen.height/2-boxHeight/2;//30;
+			int left = Screen.width/2-boxWidth/2;//200;
+			int itemHeight = 30;
+			int buttonWidth = 100;
+			int closeTop = top;
 
-			GUI.Box (new Rect (left, top, 400, 250), EnemyName);
+			GUI.Box (new Rect (left, top, boxWidth, boxHeight), EnemyName);
 
-			foreach(InventoryItem item in tempLoot.ToList()){
-				GUI.Label(new Rect (left+30, top+40, 300, 30), item.typeID);
-				if (GUI.Button(new Rect(left+270, top+40, 100, 30), "Take it")){
-					attributesScript.addToInventory(item);
-					tempLoot.Remove(item);
-					if(tempLoot.Count == 0)
-					{
+			foreach (InventoryItem item in tempLoot.ToList()) {
+				GUI.Label (new Rect (left + 30, top + 40, boxWidth-buttonWidth, itemHeight), item.typeID);
+				if (GUI.Button (new Rect (left + 270, top + 40, buttonWidth, itemHeight), "Take it")) {
+					attributesScript.addToInventory (item);
+					tempLoot.Remove (item);
+					GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(2);
+					if (tempLoot.Count == 0) {
 						giveLoot = false;
 						playerScript.setPaused (false);
 					}
 				}
 				top += 30;
 			}
-			if (GUI.Button(new Rect(left+270, 230, 100, 30), "Close")){
+			if (GUI.Button (new Rect (left + 270, closeTop + (boxHeight - itemHeight), buttonWidth, itemHeight), "Close")) {
 				giveLoot = false;
 				playerScript.setPaused (false);
-				tempLoot.Clear();
+				deadLoot.AddLast (tempLoot);
+				GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(2);
+				tempLoot.Clear ();
 			}
 		}
 	}
-
 }

@@ -4,10 +4,11 @@ using System.Collections.Generic;
 
 public class PlayerLog : MonoBehaviour {
 
-	public static int maxLines = 26;
-	private static Queue<string> queue = new Queue<string>();
-	private static string stats = "";
-	
+	public static int maxLines = 25;
+	public static Queue<string> queue = new Queue<string>();
+	public static string stats = "";
+	public static bool showLog = true;
+
 	public static void addStat(string message) {
 		if (queue.Count >= maxLines)
 			queue.Dequeue();
@@ -20,11 +21,13 @@ public class PlayerLog : MonoBehaviour {
 	}
 
 	public void OnGUI(){
-		int boxWidth = 200;
-		int boxHeight = 400;
-		int left = 20;
-		int top = 20;
+		if (showLog) {
+			int boxWidth = 300;
+			int boxHeight = 400;
+			int left = 20;
+			int top = 20;
 
-		GUI.Label(new Rect(left , top, boxWidth, boxHeight), stats, GUI.skin.textArea);
+			GUI.Label (new Rect (left, top, boxWidth, boxHeight), stats, GUI.skin.textArea);
+		}
 	}
 }

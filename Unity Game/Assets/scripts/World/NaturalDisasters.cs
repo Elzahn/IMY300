@@ -27,12 +27,11 @@ public class NaturalDisasters : MonoBehaviour {
 		originalCamRotation = cameraTransform.localRotation;
 		spinningDone = false;
 		earthquakeDone = false;
+		GameObject.Find ("Player").GetComponent<Sounds> ().playAmbienceSound (0);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-		GameObject.Find ("Directional Light").transform.Rotate (0, -0.01f, 0);	//Rotates light
 
 		if (shake > 0) {
 			cameraTransform.localPosition = originalCamPos + Random.insideUnitSphere * shakeAmount;
@@ -43,6 +42,7 @@ public class NaturalDisasters : MonoBehaviour {
 			spin -= Time.deltaTime * decreaseFactor;
 			nextDisaster = Time.time + delay;
 		} else if((shake <= 0 && earthquakeDone == true) || (spin <= 0 && spinningDone == true)){
+			GameObject.Find("Player").GetComponent<Sounds>().stopSound("world");
 			spin = 0f;
 			shake = 0f;	
 			cameraTransform.localPosition = originalCamPos;
@@ -51,8 +51,17 @@ public class NaturalDisasters : MonoBehaviour {
 		}
 
 		if (playerScript.getPaused () == false) {
+			GameObject.Find ("Directional Light").transform.Rotate (0, -0.01f, 0);	//Rotates light
+
 			if(GameObject.Find ("Player").GetComponent<PlayerAttributes>().getDizzy() == true && Time.time >= dizzyWearOfNext){
 				GameObject.Find ("Player").GetComponent<PlayerAttributes>().setDizzy(false);
+			}
+
+			if(Time.time >= nextDisaster - 10){
+				GameObject.Find("Player").GetComponent<Sounds>().playAlarmSound(0);
+			}
+			if(Time.time >= nextDisaster - 5){
+				GameObject.Find("Player").GetComponent<Sounds>().stopAlarmSound(0);
 			}
 
 			if (Time.time >= nextDisaster) {
@@ -61,6 +70,7 @@ public class NaturalDisasters : MonoBehaviour {
 
 				if(chance <= 20){
 					if(chance <= 10){
+						GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(13);
 						shake = 2f;
 						playerScript.setPaused (true);
 						SpawnWarpPoints.spawnTeleports ();
@@ -82,14 +92,15 @@ public class NaturalDisasters : MonoBehaviour {
 									
 						print ("Earth quake!");
 					} else {
-						spin = 2f;
+					GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(12);
+					spin = 2f;
 						if(GameObject.Find ("Player").GetComponent<PlayerController>().getJumping() == false){
 							GameObject.Find ("Player").GetComponent<PlayerAttributes>().setDizzy(true);
 							dizzyWearOfNext = Time.time + dizzyDelay;
 						}
 
 						GameObject[] objectsToBeMoved = GameObject.FindGameObjectsWithTag("WorldObject");	
-						GameObject[] enemiesToBeMoved = GameObject.FindGameObjectsWithTag("Enemy");	
+						GameObject[] enemiesToBeMoved = GameObject.FindGameObjectsWithTag("Monster");	
 						
 						int startPoint = Random.Range(0, objectsToBeMoved.Length);
 						int index = startPoint;
@@ -102,7 +113,7 @@ public class NaturalDisasters : MonoBehaviour {
 							index++;
 						}
 
-						startPoint = Random.Range(0, enemiesToBeMoved.Length);
+						startPoint = Random.Range(0, enemiesToBeMoved.Length/2);
 						index = startPoint;
 
 						for(int i = 0; i < enemiesToBeMoved.Length/2; i++){

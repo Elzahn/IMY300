@@ -65,12 +65,14 @@ public class InventoryGUI : MonoBehaviour {
 
 	public void openInventory(){
 		showInventory = true;
+		PlayerLog.showLog = false;
 		this.GetComponent<Sounds>().playWorldSound (1);
 		playerScript.setPaused (true);	//Pause game
 	}
 
 	public void closeInventory(){
 		showInventory = false;
+		PlayerLog.showLog = true;
 		this.GetComponent<Sounds>().playWorldSound (1);
 		playerScript.setPaused (false);	//Resume game
 	}
@@ -78,7 +80,6 @@ public class InventoryGUI : MonoBehaviour {
 	void OnGUI()
 	{
 		if (showInventory) {
-
 			int boxWidth = Screen.width;//800;
 			int boxHeight = Screen.height;//800;
 			int width = boxWidth/2;

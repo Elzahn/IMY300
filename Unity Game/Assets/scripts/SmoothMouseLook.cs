@@ -19,13 +19,13 @@ public class SmoothMouseLook : MonoBehaviour {
 	public float maximumY = 60F;
 	
 	float rotationX = 0F;
-	float rotationY = 0F;
+	//float rotationY = 0F;
 	
 	private List<float> rotArrayX = new List<float>();
 	float rotAverageX = 0F;	
 	
 	private List<float> rotArrayY = new List<float>();
-	float rotAverageY = 0F;
+	//float rotAverageY = 0F;
 	
 	public float frameCounter = 20;
 	
@@ -35,11 +35,11 @@ public class SmoothMouseLook : MonoBehaviour {
 
 	public void resetRotation(){
 		//resets rotation
-		transform.localRotation = originalRotation;
+		/*transform.localRotation = originalRotation;
 		rotationY = 0f;
 		rotationX = 0f;
 		rotArrayX.Clear ();
-		rotArrayY.Clear ();
+		rotArrayY.Clear ();*/
 
 		//resets zooming
 		transform.localPosition = originalPosition;
@@ -50,39 +50,40 @@ public class SmoothMouseLook : MonoBehaviour {
 		if (playerScript.getPaused() == false) {
 			if (Input.GetMouseButton (1)) {		//right
 
-				rotAverageY = 0f;
+			//	rotAverageY = 0f;
 				rotAverageX = 0f;
 			
-				rotationY += Input.GetAxis ("Mouse Y") * sensitivityY;
+				//rotationY += Input.GetAxis ("Mouse Y") * sensitivityY;
 				rotationX += Input.GetAxis ("Mouse X") * sensitivityX;
 			
-				rotArrayY.Add (rotationY);
+				//rotArrayY.Add (rotationY);
 				rotArrayX.Add (rotationX);
 			
-				if (rotArrayY.Count >= frameCounter) {
+			/*	if (rotArrayY.Count >= frameCounter) {
 					rotArrayY.RemoveAt (0);
-				}
+				}*/
 				if (rotArrayX.Count >= frameCounter) {
 					rotArrayX.RemoveAt (0);
 				}
 			
-				for (int j = 0; j < rotArrayY.Count; j++) {
+		/*		for (int j = 0; j < rotArrayY.Count; j++) {
 					rotAverageY += rotArrayY [j];
-				}
+				}*/
 				for (int i = 0; i < rotArrayX.Count; i++) {
 					rotAverageX += rotArrayX [i];
 				}
 			
-				rotAverageY /= rotArrayY.Count;
+			//	rotAverageY /= rotArrayY.Count;
 				rotAverageX /= rotArrayX.Count;
 
-				rotAverageY = ClampAngle (rotAverageY, minimumY, maximumY);
+				//rotAverageY = ClampAngle (rotAverageY, minimumY, maximumY);
 				rotAverageX = ClampAngle (rotAverageX, minimumX, maximumX);
 			
-				Quaternion yQuaternion = Quaternion.AngleAxis (rotAverageY, Vector3.left);
+				//Quaternion yQuaternion = Quaternion.AngleAxis (rotAverageY, Vector3.left);
 				Quaternion xQuaternion = Quaternion.AngleAxis (rotAverageX, Vector3.up);
 
-				transform.localRotation = originalRotation * xQuaternion * yQuaternion;
+				GameObject.Find("Player").transform.rotation = originalRotation * xQuaternion;// * yQuaternion;
+				//transform.localRotation = originalRotation * yQuaternion;
 			} 		
 
 			//Zoom
@@ -103,10 +104,10 @@ public class SmoothMouseLook : MonoBehaviour {
 	
 	void Start ()
 	{			
-		if (GetComponent<Rigidbody>())
-			GetComponent<Rigidbody>().freezeRotation = true;
-		originalRotation = transform.localRotation;
-		originalPosition = transform.localPosition;
+		/*if (GetComponent<Rigidbody>())
+			GetComponent<Rigidbody>().freezeRotation = true;*/
+		originalRotation = GameObject.Find("Player").transform.rotation;
+		//originalPosition = transform.localPosition;
 
 		playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
 	}
