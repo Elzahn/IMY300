@@ -107,10 +107,6 @@ public class EnemySpawner : MonoBehaviour {
 		Enemy enemyComponent = go.GetComponent<Enemy>();
 		enemyComponent.level = chooseLevel();
 		enemyComponent.init();
-		if (enemyComponent.typeID == "ClayAlien" || enemyComponent.typeID == "MossAlien") {
-			go.AddComponent<AudioSource>();
-			go.GetComponent<AudioSource>().name = "Monster Audio";
-		}
 		enemies.AddLast(go);
 		
 		Mesh mesh = go.GetComponent<MeshFilter>().mesh;

@@ -191,8 +191,13 @@ public class PlayerAttributes : MonoBehaviour {
 		stamina = maxStamina ();
 		maxStorage = storageMax;
 		maxInventory = inventoryMax;
-		tempInventory = inventory;
-		tempStorage = storage;
+		foreach (InventoryItem item in inventory) {
+			tempInventory.AddLast (item);
+		}
+		print (inventory.Count);
+		foreach (InventoryItem item in storage) {
+			tempStorage.AddLast(item);
+		}
 	}
 
 	public int getExpectedXP()
@@ -312,9 +317,28 @@ public class PlayerAttributes : MonoBehaviour {
 			xp = 0;
 	}
 
+	public void saveInventoryAndStorage(){
+		tempInventory.Clear ();
+		foreach (InventoryItem item in inventory) {
+			tempInventory.AddLast (item);
+		}
+		
+		tempStorage.Clear ();
+		foreach (InventoryItem item in storage) {
+			tempStorage.AddLast(item);
+		}
+	}
+
 	public void resetInventoryAndStorage(){
-		inventory = tempInventory;
-		storage = tempStorage;
+		inventory.Clear ();
+		foreach (InventoryItem item in tempInventory) {
+			inventory.AddLast (item);
+		}
+
+		storage.Clear ();
+		foreach (InventoryItem item in tempStorage) {
+			storage.AddLast(item);
+		}
 	}
 
 	public string attack(Enemy e) {

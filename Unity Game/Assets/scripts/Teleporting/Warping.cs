@@ -61,9 +61,9 @@ public class Warping : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter (Collider target){
-		if (justWarped == false && target.tag == "WarpPoint") {
-			col = target;
+	void OnCollisionEnter (Collision target){
+		if (justWarped == false && target.collider.tag == "WarpPoint") {
+			col = target.collider;
 			playerScript.setPaused(true);	//Pause game
 			
 			if(chooseDestinationUnlocked && chooseDestination){

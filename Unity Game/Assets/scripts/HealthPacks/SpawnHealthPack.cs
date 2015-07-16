@@ -24,6 +24,7 @@ public class SpawnHealthPack : MonoBehaviour {
 
 		GameObject planet = GameObject.Find("Planet");
 		float PlanetRadius = planet.GetComponent<SphereCollider>().radius;
+		Mesh mesh = GameObject.Find("Planet").GetComponent<MeshFilter>().mesh;
 
 		for (int i = 1; i <= 10; i++) {
 			GameObject tempHealthPack = GameObject.CreatePrimitive (PrimitiveType.Cube);
@@ -34,6 +35,12 @@ public class SpawnHealthPack : MonoBehaviour {
 			} else {
 				tempHealthPack.tag = "LargeHealthPack";
 			}
+
+			tempHealthPack.AddComponent<Rigidbody>();
+			tempHealthPack.GetComponent<Rigidbody>().position = Random.onUnitSphere * (mesh.bounds.size.y/2);//Random.onUnitSphere * PlanetRadius;
+			tempHealthPack.AddComponent<FauxGravityBody>();
+			tempHealthPack.GetComponent<FauxGravityBody>().attractor = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
+
 			//tempHealthPack.transform.GetComponent<BoxCollider> ().isTrigger = true;
 		}
 	}

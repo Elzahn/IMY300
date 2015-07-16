@@ -61,6 +61,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 					playerScript.moveSpeed = 10;
 					playerScript.run = false;
 				}
+				attributesScript.saveInventoryAndStorage();
 				Application.LoadLevel ("Scene");
 			}
 
