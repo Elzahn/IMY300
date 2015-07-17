@@ -24,7 +24,15 @@ public class SpawnWarpPoints : MonoBehaviour {
 			//warpPoint1.transform.position = Random.onUnitSphere * PlanetRadius;//(mesh.bounds.size.y/2);//
 			warpPoint1.name = "WarpPoint" + i;
 			warpPoint1.AddComponent<Rigidbody>();
-			warpPoint1.GetComponent<Rigidbody>().position = Random.onUnitSphere * (mesh.bounds.size.y/2);//Random.onUnitSphere * PlanetRadius;
+
+			Vector3 position = Random.onUnitSphere * (mesh.bounds.size.y/2);
+			
+			if(Physics.CheckSphere (position, 20)){
+				Rigidbody rigid = warpPoint1.GetComponent<Rigidbody> () ;
+				rigid.position = position;
+			} 
+
+			//warpPoint1.GetComponent<Rigidbody>().position = position;//Random.onUnitSphere * (mesh.bounds.size.y/2);//Random.onUnitSphere * PlanetRadius;
 			warpPoint1.AddComponent<FauxGravityBody>();
 			warpPoint1.GetComponent<FauxGravityBody>().attractor = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
 			//warpPoint1.transform.GetComponent<CapsuleCollider> ().isTrigger = true;

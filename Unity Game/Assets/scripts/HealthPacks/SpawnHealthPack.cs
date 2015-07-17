@@ -37,7 +37,14 @@ public class SpawnHealthPack : MonoBehaviour {
 			}
 
 			tempHealthPack.AddComponent<Rigidbody>();
-			tempHealthPack.GetComponent<Rigidbody>().position = Random.onUnitSphere * (mesh.bounds.size.y/2);//Random.onUnitSphere * PlanetRadius;
+			Vector3 position = Random.onUnitSphere * (mesh.bounds.size.y/2);
+
+			if(Physics.CheckSphere (position, 20)){
+				Rigidbody rigid = tempHealthPack.GetComponent<Rigidbody> () ;
+				rigid.position = position;
+			} 
+
+			//tempHealthPack.GetComponent<Rigidbody>().position = position;//Random.onUnitSphere * PlanetRadius;
 			tempHealthPack.AddComponent<FauxGravityBody>();
 			tempHealthPack.GetComponent<FauxGravityBody>().attractor = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
 

@@ -22,8 +22,8 @@ public class EnemySpawner : MonoBehaviour {
 	private LinkedList<InventoryItem> tempLoot;
 	private InventoryItem tempItem;
 	// Use this for initialization
-	
-	const int ENEM_COUNT = 20;
+
+	const int ENEM_COUNT = 20;//20;
 	const int NORMAL_ENEMY_TYPES = 4;
 
 	FauxGravityAttractor planet;
@@ -54,7 +54,22 @@ public class EnemySpawner : MonoBehaviour {
 
 	void Update () {
 		foreach (GameObject go in enemies.ToList()) {			
-			Enemy enemy = go.GetComponent<Enemy>();			
+			Enemy enemy = go.GetComponent<Enemy>();	
+
+			/*if(enemy.notYetSet)
+			{
+				Mesh mesh = go.GetComponent<MeshFilter>().mesh;
+				
+				Vector3 position = Random.onUnitSphere * (mesh.bounds.size.y/2);
+				if(Physics.CheckSphere (position, 20)){
+					//position = Random.onUnitSphere * (20 + mesh.bounds.size.y/2);
+					enemy.notYetSet = false;
+					Rigidbody rigid = go.GetComponent<Rigidbody> () ;
+					rigid.position = position;
+					print (enemy + " " +enemy.notYetSet + " is false");
+				}
+			}*/
+
 			Rigidbody rigidbody = go.GetComponent<Rigidbody> ();
 			if (enemy.isDead()) {
 				if(enemy.typeID == "BossAlien")
@@ -66,7 +81,6 @@ public class EnemySpawner : MonoBehaviour {
 				enemies.Remove(go);
 				Destroy(go);
 			}
-			
 		}
 	}
 
@@ -97,28 +111,30 @@ public class EnemySpawner : MonoBehaviour {
 			return playerLevel + 2;
 	}
 
-	void addEnemy(GameObject enemy) {		
+	void addEnemy(GameObject enemy) {	
+
 		GameObject go = Instantiate(enemy);
 		go.GetComponent<FauxGravityBody>().attractor = planet;
 		go.tag = "Monster";
-		
+
 		//go.transform.localScale = new Vector3(2, 3, 2);	actual scale of the monsters
 
 		Enemy enemyComponent = go.GetComponent<Enemy>();
 		enemyComponent.level = chooseLevel();
 		enemyComponent.init();
+		enemyComponent.notYetSet = true;
 		enemies.AddLast(go);
-		
-		Mesh mesh = go.GetComponent<MeshFilter>().mesh;
+
 		//TODO Position correctly
-		print ("code no collisions");
-		
-		Vector3 position = Random.onUnitSphere * (20 + mesh.bounds.size.y/2);
-
-		Rigidbody rigid = go.GetComponent<Rigidbody> () ;
-		rigid.position = position;
+		Mesh mesh = GameObject.Find ("Planet").GetComponent<MeshFilter>().mesh;
+			
+		Vector3 position = Random.onUnitSphere * (mesh.bounds.size.y/2);
+		if(Physics.CheckSphere (position, 20)){
+			Rigidbody rigid = go.GetComponent<Rigidbody> () ;
+			rigid.position = position;
+		} 
 	}
-
+	
 	void dropLoot(Enemy enemy, Vector3 position) {
 		//TODO Implement visuals at location
 

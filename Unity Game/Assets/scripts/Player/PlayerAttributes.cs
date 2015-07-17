@@ -194,7 +194,7 @@ public class PlayerAttributes : MonoBehaviour {
 		foreach (InventoryItem item in inventory) {
 			tempInventory.AddLast (item);
 		}
-		print (inventory.Count);
+
 		foreach (InventoryItem item in storage) {
 			tempStorage.AddLast(item);
 		}

@@ -108,7 +108,6 @@ public class InventoryGUI : MonoBehaviour {
 						if (GUI.Button (new Rect (left + width-(buttonWidth), top + 80, buttonWidth, itemHeight), "Equip")) {
 							attributesScript.equipItem (item);
 							attributesScript.inventory.Remove (item);
-							print (item.typeID);
 							if(item.typeID == "Rare Accessory" || item.typeID == "Common Accessory" || item.typeID == "Uncommon Accessory"){
 								this.GetComponent<Sounds>().playWorldSound(11);
 							} else if(item.typeID == "Warhammer"){

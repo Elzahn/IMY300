@@ -42,7 +42,7 @@ public class SmoothMouseLook : MonoBehaviour {
 		rotArrayY.Clear ();*/
 
 		//resets zooming
-		transform.localPosition = originalPosition;
+		GameObject.Find("Player").transform.localPosition = originalPosition;
 	}
 
 	void Update ()
