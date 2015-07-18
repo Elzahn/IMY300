@@ -80,7 +80,7 @@ public class SmoothMouseLook : MonoBehaviour {
 				rotAverageX = ClampAngle (rotAverageX, minimumX, maximumX);
 			
 				//Quaternion yQuaternion = Quaternion.AngleAxis (rotAverageY, Vector3.left);
-				Quaternion xQuaternion = Quaternion.AngleAxis (rotAverageX, Vector3.up);
+				Quaternion xQuaternion = Quaternion.AngleAxis (rotAverageX, Vector3.up);//GameObject.Find("Player").GetComponent<Transform>().up);
 
 				GameObject.Find("Player").transform.rotation = originalRotation * xQuaternion;// * yQuaternion;
 				//transform.localRotation = originalRotation * yQuaternion;

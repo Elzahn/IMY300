@@ -5,7 +5,7 @@ public class NaturalDisasters : MonoBehaviour {
 	
 	private Warping warpingScript;
 	private PlayerController playerScript;
-	private float nextDisaster, delay = 60, shakeAmount, decreaseFactor, dizzyWearOfNext, dizzyDelay = 10;	
+	private float nextDisaster, delay = 6, shakeAmount, decreaseFactor, dizzyWearOfNext, dizzyDelay = 10;	
 	public static float shake, spin;	//how long the shake/spin lasts
 	private Transform cameraTransform;
 	private Vector3 originalCamPos;
@@ -78,12 +78,14 @@ public class NaturalDisasters : MonoBehaviour {
 						GameObject[] gameObjects = GameObject.FindGameObjectsWithTag ("WorldObject");
 
 						for (int i = 0; i < gameObjects.Length; i++) {
-							if ((gameObjects [i].transform.localScale.y > gameObjects [i].transform.localScale.x) && (gameObjects [i].GetComponent<FauxGravityBody> ().getRotateMe () == true)) { //if it is taller than it is wide
+						if ((gameObjects[i].name != "Sphere001" && gameObjects[i].name != "Cylinder001") && (gameObjects [i].transform.localScale.y > gameObjects [i].transform.localScale.x) && (gameObjects [i].GetComponent<FauxGravityBody> ().getRotateMe () == true)) { //if it is taller than it is wide
 								chance = Random.Range(0, 101);
 								if(chance <= 30){	//chance of falling over
-									gameObjects [i].GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
-									gameObjects [i].transform.Rotate (new Vector3 (gameObjects [i].transform.rotation.x + Random.Range(-90, 91), gameObjects [i].transform.rotation.y + Random.Range(-90, 91), gameObjects [i].transform.rotation.z + Random.Range(-90, 91)));	//fall over 	//fall over 
 									gameObjects [i].GetComponent<FauxGravityBody> ().setRotateMe ();
+									gameObjects [i].GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
+									gameObjects [i].transform.Rotate (new Vector3 (gameObjects [i].transform.rotation.x + Random.Range(-90, 91), gameObjects [i].transform.rotation.y + Random.Range(-90, 91), gameObjects [i].transform.rotation.z + Random.Range(-90, 91)));	//fall over 
+									
+									//gameObjects [i].GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
 								}
 							}
 						}

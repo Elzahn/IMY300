@@ -12,7 +12,6 @@ public class EnemySpawner : MonoBehaviour {
 	public GameObject enemy3;
 	public GameObject enemy4;
 
-	public LinkedList<LinkedList<InventoryItem>> deadLoot;
 	private bool giveLoot = false;
 	private string EnemyName;
 	private int numLoot;
@@ -23,7 +22,7 @@ public class EnemySpawner : MonoBehaviour {
 	private InventoryItem tempItem;
 	// Use this for initialization
 
-	const int ENEM_COUNT = 20;//20;
+	const int ENEM_COUNT = 20;
 	const int NORMAL_ENEMY_TYPES = 4;
 
 	FauxGravityAttractor planet;
@@ -32,7 +31,6 @@ public class EnemySpawner : MonoBehaviour {
 	LinkedList<GameObject> enemies = new LinkedList <GameObject> ();
 
 	void Start () {
-		deadLoot = new LinkedList<LinkedList<InventoryItem>>();
 		tempLoot = new LinkedList<InventoryItem> ();
 		attributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
 
@@ -55,20 +53,6 @@ public class EnemySpawner : MonoBehaviour {
 	void Update () {
 		foreach (GameObject go in enemies.ToList()) {			
 			Enemy enemy = go.GetComponent<Enemy>();	
-
-			/*if(enemy.notYetSet)
-			{
-				Mesh mesh = go.GetComponent<MeshFilter>().mesh;
-				
-				Vector3 position = Random.onUnitSphere * (mesh.bounds.size.y/2);
-				if(Physics.CheckSphere (position, 20)){
-					//position = Random.onUnitSphere * (20 + mesh.bounds.size.y/2);
-					enemy.notYetSet = false;
-					Rigidbody rigid = go.GetComponent<Rigidbody> () ;
-					rigid.position = position;
-					print (enemy + " " +enemy.notYetSet + " is false");
-				}
-			}*/
 
 			Rigidbody rigidbody = go.GetComponent<Rigidbody> ();
 			if (enemy.isDead()) {
@@ -291,7 +275,6 @@ public class EnemySpawner : MonoBehaviour {
 			if (GUI.Button (new Rect (left + 270, closeTop + (boxHeight - itemHeight), buttonWidth, itemHeight), "Close")) {
 				giveLoot = false;
 				playerScript.setPaused (false);
-				deadLoot.AddLast (tempLoot);
 				GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(2);
 				tempLoot.Clear ();
 			}
