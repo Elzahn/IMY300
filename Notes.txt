@@ -17,6 +17,8 @@ F4 - Level Up
 Run - Left shift
 Inventory - I to open and close
 P - Pause
+Tab - Quit menu
++ - Capture screenshot (Only works in editor at the moment else shows black screenshot)
 WASD - Movement
 Storage is die block aan die linker kant in die save spot loop net in dit vas. Escape maak storage toe.
 
