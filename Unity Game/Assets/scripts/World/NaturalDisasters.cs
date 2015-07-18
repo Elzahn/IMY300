@@ -5,7 +5,7 @@ public class NaturalDisasters : MonoBehaviour {
 	
 	private Warping warpingScript;
 	private PlayerController playerScript;
-	private float nextDisaster, delay = 6, shakeAmount, decreaseFactor, dizzyWearOfNext, dizzyDelay = 10;	
+	private float nextDisaster, delay = 60, shakeAmount, decreaseFactor, dizzyWearOfNext, dizzyDelay = 10;	
 	public static float shake, spin;	//how long the shake/spin lasts
 	private Transform cameraTransform;
 	private Vector3 originalCamPos;

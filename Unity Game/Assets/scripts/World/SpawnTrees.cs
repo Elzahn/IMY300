@@ -13,7 +13,7 @@ public class SpawnTrees : MonoBehaviour {
 	private PlayerController playerScript;
 	// Use this for initialization
 	
-	const int TREE_COUNT = 90;
+	const int TREE_COUNT = 70;
 	const int NORMAL_TREE_TYPES = 3;
 	
 	FauxGravityAttractor planet;
