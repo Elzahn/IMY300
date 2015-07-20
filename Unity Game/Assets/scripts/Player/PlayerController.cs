@@ -140,7 +140,6 @@ public class PlayerController : MonoBehaviour {
 					float tur = Input.GetAxisRaw("Horizontal");
 					this.GetComponent<Animator>().SetFloat("Turning", tur);
 					transform.RotateAround(transform.localPosition, transform.up, Time.deltaTime * -10f);
-
 				} else if(Input.GetAxisRaw("Horizontal") > 0){
 					transform.RotateAround(transform.localPosition, transform.up, Time.deltaTime * 10f);
 					this.GetComponent<Animator>().SetFloat("Turning", Input.GetAxisRaw("Horizontal"));
