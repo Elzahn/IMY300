@@ -120,13 +120,16 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			if(Input.GetAxisRaw("Horizontal") < 0){
-				//rotating = true;
-				GameObject.Find("Player").transform.RotateAround(transform.localPosition, transform.up, Time.deltaTime * -90f);
+				float tur = Input.GetAxisRaw("Horizontal");
+				this.GetComponent<Animator>().SetFloat("Turning", tur);
+				transform.RotateAround(transform.localPosition, transform.up, Time.deltaTime * -90f);
+
 			} else if(Input.GetAxisRaw("Horizontal") > 0){
-				//rotating = true;
-				GameObject.Find("Player").transform.RotateAround(transform.localPosition, transform.up, Time.deltaTime * 90f);
+				transform.RotateAround(transform.localPosition, transform.up, Time.deltaTime * 90f);
+				this.GetComponent<Animator>().SetFloat("Turning", Input.GetAxisRaw("Horizontal"));
 			} else {
-				rotating = false;
+				float tur = Input.GetAxisRaw("Horizontal");
+				this.GetComponent<Animator>().SetFloat("Turning", tur);
 			}
 
 			/*if(Input.GetKeyDown(KeyCode.A)){
@@ -175,7 +178,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		if (paused == false && rotating == false) {
+		if (paused == false) {
 			var rigidbody = GetComponent<Rigidbody> ();
 			rigidbody.MovePosition (rigidbody.position + transform.TransformDirection (moveDir) * moveSpeed * Time.deltaTime);
 		}
