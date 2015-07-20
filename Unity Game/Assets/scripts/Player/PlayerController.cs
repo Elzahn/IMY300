@@ -89,9 +89,7 @@ public class PlayerController : MonoBehaviour {
 
 			if (Input.GetAxisRaw ("Jump") == 1) {
 				jumping = true;
-			}/* else if (Input.GetAxisRaw ("Jump") == 0) {
-				jumping = false;
-			}*/
+			}
 
 			if (Input.GetKeyDown (KeyCode.P)) {
 				showPaused = true;
@@ -119,6 +117,10 @@ public class PlayerController : MonoBehaviour {
 
 			if (Input.GetKeyDown (KeyCode.R)) {
 				GameObject.Find ("Main Camera").GetComponent<SmoothMouseLook> ().resetRotation ();
+			}
+
+			if(Input.GetAxis("Vertical") < 0){
+				//print ("Backwards");
 			}
 
 			if ((Input.GetAxis ("Vertical") != 0 || Input.GetAxis ("Horizontal") != 0) && soundPlays == false) {
