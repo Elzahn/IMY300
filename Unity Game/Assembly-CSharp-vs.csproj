@@ -65,6 +65,7 @@
      <Compile Include="Assets\scripts\HealthPacks\MediumHealthPack.cs" />
      <Compile Include="Assets\scripts\HealthPacks\SpawnHealthPack.cs" />
      <Compile Include="Assets\scripts\InventoryItem.cs" />
+     <Compile Include="Assets\scripts\Loot.cs" />
      <Compile Include="Assets\scripts\Player\Collisions.cs" />
      <Compile Include="Assets\scripts\Player\InventoryGUI.cs" />
      <Compile Include="Assets\scripts\Player\PlayerAttributes.cs" />
@@ -86,7 +87,6 @@
      <Compile Include="Assets\scripts\World\SetCharacterPosition.cs" />
      <Compile Include="Assets\scripts\World\SpawnTrees.cs" />
      <Compile Include="Assets\scripts\World\StopMovement.cs" />
-     <Compile Include="Assets\test.cs" />
      <None Include="Assets\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
  <Reference Include="UnityEngine.UI">

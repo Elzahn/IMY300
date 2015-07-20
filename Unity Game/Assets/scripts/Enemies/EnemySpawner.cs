@@ -12,6 +12,8 @@ public class EnemySpawner : MonoBehaviour {
 	public GameObject enemy3;
 	public GameObject enemy4;
 
+	public GameObject loot;
+
 	private bool giveLoot = false;
 	private string EnemyName;
 	private int numLoot;
@@ -240,10 +242,12 @@ public class EnemySpawner : MonoBehaviour {
 			}
 		}
 
-		/*GameObject deadEnemy = GameObject.CreatePrimitive (PrimitiveType.Sphere);
+		GameObject deadEnemy = Instantiate(loot);
 		deadEnemy.transform.position = position;
 		deadEnemy.tag = "Loot";
-		deadEnemy.name = "Dead " + enemy.typeID;*/
+		deadEnemy.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+		Loot lootComponent = deadEnemy.GetComponent<Loot> ();
+		lootComponent.storeLoot (tempLoot, "Dead " + enemy.typeID);
 	}
 
 	void OnGUI() {
