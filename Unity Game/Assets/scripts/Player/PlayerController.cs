@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour {
 		sound = this.GetComponent<Sounds> ();
 		check = Time.time;
 	}
- 
+	private bool rotating = false;
 	// Update is called once per frame
 	void Update () {
 
@@ -82,9 +82,9 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			if (playerAttributes.getDizzy () == true) {
-				moveDir = new Vector3 (Input.GetAxisRaw ("Vertical"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Horizontal")).normalized;
+				moveDir = new Vector3 (Input.GetAxisRaw ("Vertical"), Input.GetAxisRaw ("Jump"), 0).normalized;
 			} else {
-				moveDir = new Vector3 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Vertical")).normalized;
+				moveDir = new Vector3 (0, Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Vertical")).normalized;
 			}
 
 			if (Input.GetAxisRaw ("Jump") == 1) {
@@ -119,9 +119,25 @@ public class PlayerController : MonoBehaviour {
 				GameObject.Find ("Main Camera").GetComponent<SmoothMouseLook> ().resetRotation ();
 			}
 
-			if(Input.GetAxis("Vertical") < 0){
-				//print ("Backwards");
+			if(Input.GetAxisRaw("Horizontal") < 0){
+				//rotating = true;
+				GameObject.Find("Player").transform.RotateAround(transform.localPosition, transform.up, Time.deltaTime * -90f);
+			} else if(Input.GetAxisRaw("Horizontal") > 0){
+				//rotating = true;
+				GameObject.Find("Player").transform.RotateAround(transform.localPosition, transform.up, Time.deltaTime * 90f);
+			} else {
+				rotating = false;
 			}
+
+			/*if(Input.GetKeyDown(KeyCode.A)){
+				Vector3 tempPos = GameObject.Find("Player").transform.position;
+				GameObject.Find("Player").transform.Rotate(new Vector3(0, 90, 0));
+				GameObject.Find("Player").transform.position = tempPos;
+			} else if(Input.GetAxis("Horizontal") > 0){
+				/*Transform player = GameObject.Find("Player").transform;
+				player.localRotation = new Quaternion(player.localRotation.x, player.localRotation.y + 90, player.localRotation.z, 1);
+				transform.eulerAngles = Vector3.Lerp(transform.rotation, newRot, turningSpeed * Time.deltaTime);*/
+			//}*/
 
 			if ((Input.GetAxis ("Vertical") != 0 || Input.GetAxis ("Horizontal") != 0) && soundPlays == false) {
 				soundPlays = true;
@@ -159,7 +175,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		if (paused == false) {
+		if (paused == false && rotating == false) {
 			var rigidbody = GetComponent<Rigidbody> ();
 			rigidbody.MovePosition (rigidbody.position + transform.TransformDirection (moveDir) * moveSpeed * Time.deltaTime);
 		}
