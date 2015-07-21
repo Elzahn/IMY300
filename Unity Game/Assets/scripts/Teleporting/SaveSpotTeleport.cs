@@ -54,8 +54,9 @@ public class SaveSpotTeleport : MonoBehaviour {
 			print (this.transform.position + " " + this.transform.rotation);
 			if (GUI.Button (new Rect (left + boxWidth/2 - buttonWidth/2, top + boxHeight/2 - itemHeight, buttonWidth, itemHeight), "Go outside")) {
 				resume ();
-				this.transform.position = new Vector3(0.63f, 20.65f, 1.68f);
-				this.transform.rotation = new Quaternion(4.336792f, -0.0001220703f, 0.3787689f, 1);
+				//this.transform.position = new Vector3(0.63f, 20.65f, 1.68f);
+			//	this.transform.rotation = new Quaternion(4.336792f, -0.0001220703f, 0.3787689f, 1);
+				this.GetComponent<Rigidbody>().mass = 0.8f;
 				sound.playWorldSound(3);
 				if(playerScript.run){
 					playerScript.moveSpeed = 10;
@@ -86,9 +87,9 @@ public class SaveSpotTeleport : MonoBehaviour {
 				attributesScript.restoreHealthToFull();
 				attributesScript.restoreStaminaToFull();
 				canEnterSaveSpot = false;
-
+				this.GetComponent<Rigidbody>().mass = 100;
 				//this.transform.position = new Vector3(-132.81f, 35.4f, 2.79f);
-				this.transform.rotation = new Quaternion(0, 0.7f, 0, 0.7f);
+				this.transform.rotation = new Quaternion(0, 0.7f, 0, -0.7f);
 
 				sound.playWorldSound(3);
 				if(playerScript.run){
