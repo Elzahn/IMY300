@@ -77,8 +77,7 @@ public class InventoryGUI : MonoBehaviour {
 		playerScript.setPaused (false);	//Resume game
 	}
 
-	void OnGUI()
-	{
+	void OnGUI(){
 		if (showInventory) {
 			int boxWidth = Screen.width;//800;
 			int boxHeight = Screen.height;//800;

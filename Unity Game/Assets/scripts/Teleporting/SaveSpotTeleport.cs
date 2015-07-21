@@ -54,7 +54,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 			
 			if (GUI.Button (new Rect (left + boxWidth/2 - buttonWidth/2, top + boxHeight/2 - itemHeight, buttonWidth, itemHeight), "Go outside")) {
 				resume ();
-				this.transform.position = new Vector3(0.63f, 21.9f, 1.68f);
+				this.transform.position = new Vector3(0.63f, 20.65f, 1.68f);
 				this.transform.rotation = new Quaternion(4.336792f, -0.0001220703f, 0.3787689f, 1);
 				sound.playWorldSound(3);
 				if(playerScript.run){
