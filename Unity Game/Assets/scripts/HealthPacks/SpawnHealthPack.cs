@@ -37,7 +37,7 @@ public class SpawnHealthPack : MonoBehaviour {
 			}
 
 			tempHealthPack.AddComponent<Rigidbody>();
-			Vector3 position = Random.onUnitSphere * ((mesh.bounds.size.y/4)+10);
+			Vector3 position = Random.onUnitSphere * ((mesh.bounds.size.y/4) +10);
 
 			if(Physics.CheckSphere (position, 20)){
 				Rigidbody rigid = tempHealthPack.GetComponent<Rigidbody> () ;
