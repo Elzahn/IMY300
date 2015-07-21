@@ -22,13 +22,13 @@ public class Collisions : MonoBehaviour {
 		} else if (col.collider.tag == "MediumHealthPack") {
 			if (playerAttributesScript.inventory.Count < playerAttributesScript.getMaxInventory ()) {
 				playerAttributesScript.addToInventory (new MediumHealthPack ());
-				Destroy (GameObject.Find (col.collider.name));
+				Destroy (GameObject.Find (col.collider.transform.parent.name));
 				this.GetComponent<Sounds> ().playWorldSound (4);
 			}
 		} else if (col.collider.tag == "LargeHealthPack") {
 			if (playerAttributesScript.inventory.Count < playerAttributesScript.getMaxInventory ()) {
 				playerAttributesScript.addToInventory (new LargeHealthPack ());
-				Destroy (GameObject.Find (col.collider.name));
+				Destroy (GameObject.Find (col.collider.transform.parent.name));
 				this.GetComponent<Sounds> ().playWorldSound (4);
 			}
 		} else if (playerScript.run && col.collider.name != "Storage" && col.collider.name != "ExitPlane" && col.collider.name != "EntrancePlane" && col.collider.name != "Platform" && col.collider.name != "Planet" && col.collider.tag != "Monster") {

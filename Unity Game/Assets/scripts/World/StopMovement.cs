@@ -5,7 +5,7 @@ public class StopMovement : MonoBehaviour {
 
 	void OnCollisionEnter (Collision col){
 		if (col.collider.tag == "WarpPoint") {
-			col.collider.GetComponent<Rigidbody>().isKinematic = true;
+			col.collider.transform.parent.gameObject.GetComponent<Rigidbody>().isKinematic = true;
 		}
 	}
 }
