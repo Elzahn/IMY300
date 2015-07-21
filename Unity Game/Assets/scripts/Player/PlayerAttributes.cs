@@ -342,7 +342,7 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	public string attack(Enemy e) {
-		string name = e.typeID;
+		//string name = e.typeID;
 		e.lastDamage = Time.time;
 		float ran = Random.value;
 		float hc = hitChance();

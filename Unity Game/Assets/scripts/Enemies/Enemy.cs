@@ -14,13 +14,13 @@ public abstract class Enemy : MonoBehaviour {
 	protected bool onPlayer;
 	protected int suspicion;
 	protected int SUSPICION_ALERT = 5;
-	private Sounds sound;
+	//private Sounds sound;
 	public bool notYetSet;
 
 	void Start () {
 		/* Any other initlization */
 		notYetSet = true;
-		sound = GameObject.Find("Player").GetComponent<Sounds> ();
+//		sound = GameObject.Find("Player").GetComponent<Sounds> ();
 		attackPlayer = false;
 		nextAttack = Time.time + delay;
 		nextMAttack = Time.time + mDelay;
@@ -138,7 +138,7 @@ public abstract class Enemy : MonoBehaviour {
 		Vector3 myPos = GetComponent<Rigidbody> ().position;
 		
 		float distance = Vector3.Distance (PlayerPos, myPos);
-		Vector3 direction = PlayerPos - myPos;
+		//Vector3 direction = PlayerPos - myPos;
 		if (distance > 6 && suspicion < SUSPICION_ALERT) {
 			GameObject.Find("Player").GetComponent<Sounds>().playMonsterSound (0, this);
 			Vector3 moveDir;

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class NaturalDisasters : MonoBehaviour {
 	
-	private Warping warpingScript;
+//	private Warping warpingScript;
 	private PlayerController playerScript;
 	private float nextDisaster, delay = 60, shakeAmount, decreaseFactor, dizzyWearOfNext, dizzyDelay = 10;	
 	public static float shake, spin;	//how long the shake/spin lasts
@@ -14,7 +14,7 @@ public class NaturalDisasters : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		warpingScript = GameObject.Find ("Player").GetComponent<Warping>();
+		//warpingScript = GameObject.Find ("Player").GetComponent<Warping>();
 		playerScript = GameObject.Find ("Player").GetComponent<PlayerController>();
 		nextDisaster = Time.time + delay;
 		dizzyWearOfNext = Time.time + dizzyDelay;

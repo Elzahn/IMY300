@@ -10,7 +10,7 @@ public class Sounds : MonoBehaviour {
 	public AudioClip[] deathClips;
 	public AudioClip[] alarmClips;
 	public static AudioSource worldAudio, characterAudio, ambienceAudio, monsterAudio, deathAudio, alarmAudio;
-	private int worldClip, characterClip, ambienceClip, monsterClip, deathClip, alarmClip;
+	private int worldClip, characterClip, ambienceClip, monsterClip, alarmClip;//, deathClip;
 	private bool done = false;
 
 	void Start(){

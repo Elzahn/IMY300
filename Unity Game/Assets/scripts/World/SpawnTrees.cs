@@ -9,8 +9,8 @@ public class SpawnTrees : MonoBehaviour {
 	public GameObject tree2;
 	public GameObject tree3;
 
-	private PlayerAttributes attributesScript;
-	private PlayerController playerScript;
+//	private PlayerAttributes attributesScript;
+//	private PlayerController playerScript;
 	// Use this for initialization
 	
 	const int TREE_COUNT = 70;
@@ -21,9 +21,9 @@ public class SpawnTrees : MonoBehaviour {
 	LinkedList<GameObject> trees = new LinkedList <GameObject> ();
 	
 	void Start () {
-		attributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
+	//	attributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
 		
-		playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
+	//	playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
 		planet = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
 		GameObject tree;
 		

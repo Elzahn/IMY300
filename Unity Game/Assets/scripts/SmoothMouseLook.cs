@@ -24,7 +24,7 @@ public class SmoothMouseLook : MonoBehaviour {
 	private List<float> rotArrayX = new List<float>();
 	float rotAverageX = 0F;	
 	
-	private List<float> rotArrayY = new List<float>();
+//	private List<float> rotArrayY = new List<float>();
 	//float rotAverageY = 0F;
 	
 	public float frameCounter = 20;
@@ -48,6 +48,23 @@ public class SmoothMouseLook : MonoBehaviour {
 	void Update ()
 	{
 		if (playerScript.getPaused() == false) {
+
+		/*	//Rotate player
+			if(Input.GetMouseButton (1)){
+				print ("here");
+				if(Input.GetAxisRaw("Horizontal") < 0){
+					float tur = Input.GetAxisRaw("Horizontal");
+					GameObject.Find("Player").GetComponent<Animator>().SetFloat("Turning", tur);
+					transform.RotateAround(transform.localPosition, transform.up, Time.deltaTime * -10f);
+				} else if(Input.GetAxisRaw("Horizontal") > 0){
+					transform.RotateAround(transform.localPosition, transform.up, Time.deltaTime * 10f);
+					GameObject.Find("Player").GetComponent<Animator>().SetFloat("Turning", Input.GetAxisRaw("Horizontal"));
+				} else {
+					float tur = Input.GetAxisRaw("Horizontal");
+					GameObject.Find("Player").GetComponent<Animator>().SetFloat("Turning", tur);
+				}
+			}*/
+
 			if (Input.GetMouseButton (1)) {		//right
 
 			//	rotAverageY = 0f;
@@ -58,17 +75,11 @@ public class SmoothMouseLook : MonoBehaviour {
 			
 				//rotArrayY.Add (rotationY);
 				rotArrayX.Add (rotationX);
-			
-			/*	if (rotArrayY.Count >= frameCounter) {
-					rotArrayY.RemoveAt (0);
-				}*/
+
 				if (rotArrayX.Count >= frameCounter) {
 					rotArrayX.RemoveAt (0);
 				}
-			
-		/*		for (int j = 0; j < rotArrayY.Count; j++) {
-					rotAverageY += rotArrayY [j];
-				}*/
+
 				for (int i = 0; i < rotArrayX.Count; i++) {
 					rotAverageX += rotArrayX [i];
 				}

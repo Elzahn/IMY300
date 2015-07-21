@@ -58,7 +58,6 @@ public class PlayerController : MonoBehaviour {
 		}
 		if (paused == true) {
 			this.GetComponent<Animator> ().speed = 0;
-
 		}
 
 		if (paused == false) {
@@ -135,38 +134,9 @@ public class PlayerController : MonoBehaviour {
 				GameObject.Find ("Main Camera").GetComponent<SmoothMouseLook> ().resetRotation ();
 			}
 
-			if(Input.GetAxisRaw("Vertical") == 0){
-				if(Input.GetAxisRaw("Horizontal") < 0){
-					float tur = Input.GetAxisRaw("Horizontal");
-					this.GetComponent<Animator>().SetFloat("Turning", tur);
-					transform.RotateAround(transform.localPosition, transform.up, Time.deltaTime * -10f);
-				} else if(Input.GetAxisRaw("Horizontal") > 0){
-					transform.RotateAround(transform.localPosition, transform.up, Time.deltaTime * 10f);
-					this.GetComponent<Animator>().SetFloat("Turning", Input.GetAxisRaw("Horizontal"));
-				} else {
-					float tur = Input.GetAxisRaw("Horizontal");
-					this.GetComponent<Animator>().SetFloat("Turning", tur);
-				}
-			}
-
-			//|| Input.GetAxis ("Horizontal") != 0
 			if ((Input.GetAxis ("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) && soundPlays == false) {
 				soundPlays = true;
 				moving = true;
-				if (Input.GetAxis ("Vertical") != 0 && Input.GetAxisRaw("Horizontal") < 0){
-					this.GetComponent<Animator>().SetBool("MovingLeft", moving);
-					print ("movingLeft");
-					this.GetComponent<Animator>().SetBool("MovingRight", false);
-					this.GetComponent<Animator>().SetBool("MovingStraight", false);
-				} else if (Input.GetAxis ("Vertical") != 0 && Input.GetAxisRaw("Horizontal") > 0){
-					this.GetComponent<Animator>().SetBool("MovingRight", moving);
-					this.GetComponent<Animator>().SetBool("MovingStraight", false);
-					this.GetComponent<Animator>().SetBool("MovingLeft", false);
-				} else {
-					this.GetComponent<Animator>().SetBool("MovingStraight", moving);
-					this.GetComponent<Animator>().SetBool("MovingRight", false);
-					this.GetComponent<Animator>().SetBool("MovingLeft", false);
-				}
 
 				if(run){
 					playerAttributes.drainStamina ();
@@ -183,6 +153,22 @@ public class PlayerController : MonoBehaviour {
 					}
 				}
 			} else {
+				if ((Input.GetAxis ("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0)) {
+					if (Input.GetAxis ("Vertical") != 0 && Input.GetAxisRaw("Horizontal") < 0){
+						this.GetComponent<Animator>().SetBool("MovingLeft", moving);
+						this.GetComponent<Animator>().SetBool("MovingRight", false);
+						this.GetComponent<Animator>().SetBool("MovingStraight", false);
+					} else if (Input.GetAxis ("Vertical") != 0 && Input.GetAxisRaw("Horizontal") > 0){
+						this.GetComponent<Animator>().SetBool("MovingRight", moving);
+						this.GetComponent<Animator>().SetBool("MovingStraight", false);
+						this.GetComponent<Animator>().SetBool("MovingLeft", false);
+					} else {
+						this.GetComponent<Animator>().SetBool("MovingStraight", moving);
+						this.GetComponent<Animator>().SetBool("MovingRight", false);
+						this.GetComponent<Animator>().SetBool("MovingLeft", false);
+					}
+				}
+
 				if (Time.time >= check) {	
 					if (Input.GetAxis ("Vertical") == 0 && Input.GetAxis ("Horizontal") == 0) {
 						moving = false;
