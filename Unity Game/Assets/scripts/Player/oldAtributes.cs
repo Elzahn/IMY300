@@ -30,24 +30,10 @@ public class oldAtributes : MonoBehaviour {
 	}
 	
 	
-	/**
-	 * Self Explanatory
-	* Return Error or Success Message
-	* */
-	private bool equipWeapon(Weapon weap) {
-		if (weap == null)
-			throw new System.ArgumentNullException ("weapon");
-		//If level >= wepon min then Equip
-		if (weap.level <= level) {
-			this.weapon = weap;
-			return true;
-		}
-		throw new RulesException("Weapon Level too high");
-	}
+	
 	
 	private bool equipAccessory(Accessory a) {
-		if (accessories.Count < maxAccessories()) {
-			
+		if (accessories.Count < maxAccessories()) {			
 			accessories.AddLast(a);
 			return true;
 		} 

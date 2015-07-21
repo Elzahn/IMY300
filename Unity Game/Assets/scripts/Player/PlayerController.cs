@@ -91,8 +91,8 @@ public class PlayerController : MonoBehaviour {
 				soundPlays = false;
 			}
 
-			if (playerAttributes.getStamina () <= 0) {
-				if (playerAttributes.getStamina () < 0)
+			if (playerAttributes.stamina <= 0) {
+				if (playerAttributes.stamina < 0)
 					playerAttributes.setStaminaToZero ();
 				run = false; 
 				moveSpeed = 5; 

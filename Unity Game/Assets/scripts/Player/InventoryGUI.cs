@@ -128,7 +128,7 @@ public class InventoryGUI : MonoBehaviour {
 
 			//show character attributes
 			GUI.Box (new Rect (secondLeft, secondTop + 40, width, boxHeight), "Character Attributes");
-			GUI.Label (new Rect (secondLeft + 30, secondTop + 80, specWidth, itemHeight), "Xp: " + attributesScript.xp () + "/" + attributesScript.getExpectedXP ());
+			GUI.Label (new Rect (secondLeft + 30, secondTop + 80, specWidth, itemHeight), "Xp: " + attributesScript.xp + "/" + attributesScript.getExpectedXP ());
 			GUI.Label (new Rect (secondLeft + 30, secondTop + 100, specWidth, itemHeight), "Hp: " + attributesScript.hp + "/" + attributesScript.maxHP());
 			GUI.Label (new Rect (secondLeft + 30, secondTop + 120, specWidth, itemHeight), "Stamina: " + attributesScript.stamina + "/" + attributesScript.maxStamina());
 			GUI.Label (new Rect (secondLeft + 30, secondTop + 140, specWidth, itemHeight), "Level: " + attributesScript.level);
@@ -162,7 +162,7 @@ public class InventoryGUI : MonoBehaviour {
 					} else {	
 						this.GetComponent<Sounds>().playWorldSound(10);
 					}
-					attributesScript.unequipWeapon (attributesScript.weapon);
+					attributesScript.unequipWeapon ();
 				}
 			}
 		} else if (showStorage) {
