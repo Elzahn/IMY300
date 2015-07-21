@@ -255,23 +255,27 @@ public class PlayerAttributes : MonoBehaviour {
 		}
 	}
 
+	public bool unequipWeapon(){
+		if (weapon != null) 
+			inventory.AddLast(weapon);
+		weapon = null;
+	}
 	/**
+	 * Self Explanatory
 	 * Return Error or Success Message
 	 * */
 	private bool equipWeapon(Weapon weap) {
 		if (weap == null)
 			throw new System.ArgumentNullException ("weapon");
-		//If level >= wepon min then Equip
-		if (weapon == null) {
-			if (weap.level <= this.level) {
-				weapon = weap;
-				return true;
-			}
-			throw new RulesException ("Weapon Level too high");
-		} else {
-			throw new RulesException ("Unequip weapon first first");
+		unequipWeapon();
+
+		if (weap.level <= level) {
+			this.weapon = weap;
+			return true;
 		}
+		throw new RulesException("Weapon Level too high");
 	}
+
 
 	private bool equipAccessory(Accessory a) {
 		if (accessories.Count < maxAccessories()) {
@@ -296,13 +300,7 @@ public class PlayerAttributes : MonoBehaviour {
 		}
 	}
 
-	public bool unequipWeapon(Weapon w){
-		if (weapon == w) {
-			weapon = null;
-			return true;
-		}
-		throw new RulesException ("Weapon not equipped");
-	}
+
 
 	public bool addToStorage(InventoryItem item){
 		if (storage.Count < maxStorage) {

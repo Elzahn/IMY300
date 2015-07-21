@@ -3,33 +3,6 @@ using System.Collections.Generic;
 
 public class oldAtributes : MonoBehaviour {
 {
-			
-	const int HP_BASE = 100;
-	const float HP_MULT = 1.8f;
-	const int STAM_BASE = 20;
-	const float STAM_MULT = 1.2f;
-	const int XP_BASE = 100;
-	const float XP_MULT = 2;
-	const int ATTACK_BASE = 6;
-	const float ATTACK_MULT = 1.2f;
-	const int CRIT_MULT = 2;
-
-	
-		
-	public LinkedList <InventoryItem> inventory = new LinkedList<InventoryItem>();
-
-	private int xp = 0;
-	private int maxInventory = 15;
-	public int speed {
-		get {
-			int tmp = 15;
-			foreach (Accessory a in accessories) {
-				tmp += a.speed;
-			}
-			return tmp;
-		}
-	}
-	
 	public int hp {get; private set;}	
 	public int level {get; private set;}
 	public float stamina {get; set;}
@@ -56,45 +29,11 @@ public class oldAtributes : MonoBehaviour {
 		return tmp;
 	}
 	
-	public void setAttributes (int xp, LinkedList <InventoryItem> inventory, int inventoryMax){
-		this.xp = xp;
-		this.inventory = inventory;
-		this.maxInventory = inventoryMax;
-		this.level = determineLevel ();
-		this.hp = maxHP();
-		this.stamina = maxStamina ();
-	}
 	
-	public void setAttributes (){
-		setAttributes(0, new LinkedList<InventoryItem>(), 50);
-	}
-	
-	public string levelUp() {
-		int nextTreshold = levelXP (level + 1);
-		if (xp > nextTreshold) {
-			level++;
-			this.hp = maxHP();
-			this.stamina = maxStamina();
-			
-			return "You  are now level " + level;
-		}
-		return "";
-	}
-	
-	
-	public bool equipItem(InventoryItem item) {
-		switch (item.type) {
-		case 0:
-			return equipAccessory((Accessory) item);
-		case 1:
-			return equipWeapon((Weapon) item);
-		default:
-			throw new RulesException("Unknown Item");
-		}
-	}
 	/**
-* Return Error or Success Message
-* */
+	 * Self Explanatory
+	* Return Error or Success Message
+	* */
 	private bool equipWeapon(Weapon weap) {
 		if (weap == null)
 			throw new System.ArgumentNullException ("weapon");
