@@ -51,7 +51,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 			int itemHeight = 30;//20;
 			int buttonWidth = 150;
 			GUI.Box (new Rect (left, top, boxWidth, boxHeight), "All set to go outside? Remember you can only \ncome back once the level has been cleared.");
-			
+			print (this.transform.position + " " + this.transform.rotation);
 			if (GUI.Button (new Rect (left + boxWidth/2 - buttonWidth/2, top + boxHeight/2 - itemHeight, buttonWidth, itemHeight), "Go outside")) {
 				resume ();
 				this.transform.position = new Vector3(0.63f, 20.65f, 1.68f);
@@ -86,6 +86,9 @@ public class SaveSpotTeleport : MonoBehaviour {
 				attributesScript.restoreHealthToFull();
 				attributesScript.restoreStaminaToFull();
 				canEnterSaveSpot = false;
+
+				//this.transform.position = new Vector3(-132.81f, 35.4f, 2.79f);
+				this.transform.rotation = new Quaternion(0, 0.7f, 0, 0.7f);
 
 				sound.playWorldSound(3);
 				if(playerScript.run){
