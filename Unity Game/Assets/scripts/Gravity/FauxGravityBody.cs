@@ -5,7 +5,7 @@ public class FauxGravityBody : MonoBehaviour {
 
 	public FauxGravityAttractor attractor;
 	private Transform myTransform;
-	private bool rotateMe = true;
+	public bool rotateMe = true;
 
 	// Use this for initialization
 	void Start () {

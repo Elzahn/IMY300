@@ -114,7 +114,7 @@ public class EnemySpawner : MonoBehaviour {
 		//TODO Position correctly
 		Mesh mesh = GameObject.Find ("Planet").GetComponent<MeshFilter>().mesh;
 			
-		Vector3 position = Random.onUnitSphere * ((mesh.bounds.size.y/4)+10);
+		Vector3 position = Random.onUnitSphere * (mesh.bounds.size.y/2);
 		if(Physics.CheckSphere (position, 20)){
 			Rigidbody rigid = go.GetComponent<Rigidbody> () ;
 			rigid.position = position;
