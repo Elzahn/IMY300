@@ -73,7 +73,7 @@ public class SpawnTrees : MonoBehaviour {
 		Mesh mesh = GameObject.Find ("Planet").GetComponent<MeshFilter> ().mesh;
 		//go.transform.position = Random.insideUnitSphere * ((mesh.bounds.size.y/4));//bounds.size.y/8); 
 
-			go.transform.GetComponent<Rigidbody> ().position = Random.insideUnitSphere * ((mesh.bounds.size.y / 4)+5);//bounds.size.y/8); 
+		go.transform.GetComponent<Rigidbody> ().position = Random.insideUnitSphere * ((mesh.bounds.size.y / 4)+5);//bounds.size.y/8); 
 
 		trees.AddLast(go);
 		

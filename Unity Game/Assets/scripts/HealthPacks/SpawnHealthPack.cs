@@ -3,6 +3,9 @@ using System.Collections;
 
 public class SpawnHealthPack : MonoBehaviour {
 
+	public GameObject medHealth;
+	public GameObject largeHealth;
+
 	// Use this for initialization
 	void Start () {
 		spawnHealthPacks ();
@@ -27,14 +30,30 @@ public class SpawnHealthPack : MonoBehaviour {
 		Mesh mesh = GameObject.Find("Planet").GetComponent<MeshFilter>().mesh;
 
 		for (int i = 1; i <= 10; i++) {
-			GameObject tempHealthPack = GameObject.CreatePrimitive (PrimitiveType.Cube);
-			tempHealthPack.transform.position = Random.onUnitSphere * PlanetRadius;
-			tempHealthPack.name = "HealthPack"+i;
+
+			GameObject tempHealthPack;
+
 			if(Random.Range(0,2) == 0){
+				tempHealthPack = Instantiate(medHealth);
 				tempHealthPack.tag  = "MediumHealthPack";
 			} else {
+				tempHealthPack = Instantiate(largeHealth);
 				tempHealthPack.tag = "LargeHealthPack";
 			}
+
+			GameObject child = tempHealthPack.transform.FindChild ("Box012").gameObject;
+
+			if(tempHealthPack.tag == "MediumHealthPack"){
+				child.tag = "MediumHealthPack";
+			} else {
+				child.tag = "LargeHealthPack";
+			}
+
+			child.AddComponent<MeshCollider> ();
+			child.GetComponent<MeshCollider> ().convex = true;
+
+			tempHealthPack.transform.position = Random.onUnitSphere * PlanetRadius;
+			tempHealthPack.name = "HealthPack"+i;
 
 			tempHealthPack.AddComponent<Rigidbody>();
 			Vector3 position = Random.onUnitSphere * ((mesh.bounds.size.y/4) +10);

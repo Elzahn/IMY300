@@ -73,7 +73,7 @@ public class NaturalDisasters : MonoBehaviour {
 						GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(13);
 						shake = 2f;
 						playerScript.setPaused (true);
-						SpawnWarpPoints.spawnTeleports ();
+						SpawnWarpPoints.spawnNewTeleports ();
 
 						GameObject[] gameObjects = GameObject.FindGameObjectsWithTag ("WorldObject");
 
