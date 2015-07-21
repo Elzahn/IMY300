@@ -5,37 +5,48 @@ public class PlayerAttributes : MonoBehaviour {
 
 	const int HP_BASE = 100;
 	const float HP_MULT = 1.8f;
+	const int STAM_BASE = 20;
+	const float STAM_MULT = 1.2f;
 	const int XP_BASE = 100;
 	const float XP_MULT = 2;
-	const float ATTACK_MULT = 1.2f;
+	const float ATTACK_MULT = 1.2f;	
+	const int ATTACK_BASE = 6;
 	const int CRIT_MULT = 2;
-
+	
+	const int SPEED_BASE = 5;
+	
 	public static PlayerAttributes Instance;
-	/** 
-	 * We need to persist this between levels....
-	 * */
-	private int xp = 0;
+
+
+	private char gender = '?';
+	private Sounds sound;
+	
 	public LinkedList <InventoryItem> inventory = new LinkedList<InventoryItem>();
 	public LinkedList <InventoryItem> storage = new LinkedList<InventoryItem> ();
+	private LinkedList <InventoryItem> inventory_LevelStart = new LinkedList<InventoryItem>();
+	private LinkedList <InventoryItem> storage_LevelStart = new LinkedList<InventoryItem>();
+	public LinkedList <Accessory> accessories = new LinkedList<Accessory>();
+	public Weapon weapon = null;
+
+
+	public int hp {get; private set;}	
+	public int level {get; private set;}
+	public float stamina {get; set;}
+	public int xp {get; private set;};
 	private int maxInventory = 15;
 	private int maxStorage = 50;
 	private bool dizzy = false;
-	private int attackBase = 6;
-	private char gender = '?';
-	private Sounds sound;
-	private LinkedList<InventoryItem> tempInventory = new LinkedList<InventoryItem>();
-	private LinkedList<InventoryItem> tempStorage = new LinkedList<InventoryItem>();
-	/**
-	 * This can be reset/recalculated at start of level
-	 * */
-	private int hp;	
-	public int level {get; private set;}
-	private float stamina;
-	/**
-	 * This must be re-equiped at the start of the level
-	 * */
-	public LinkedList <Accessory> accessories = new LinkedList<Accessory>();
-	public Weapon weapon = null;
+	public int speed {
+		get {
+			int tmp = SPEED_BASE;
+			foreach (Accessory a in accessories) {
+				tmp += a.speed;
+			}
+			return tmp;
+		}
+	}
+
+
 	public float lastDamage;
 	private float nextRegeneration;
 	private float delayRegeneration = 6;
@@ -93,7 +104,7 @@ public class PlayerAttributes : MonoBehaviour {
 					hp += (int)(maxHP () * 0.01);
 					giveAlarm = false;
 				}
-				if (Time.time >= (lastDamage+3) && getStamina () < maxStamina ()) {
+				if (Time.time >= (lastDamage+3) && stamina < maxStamina ()) {
 					stamina += (int)(maxStamina () * 0.01);
 				}
 
@@ -182,31 +193,43 @@ public class PlayerAttributes : MonoBehaviour {
 		nextRegeneration = Time.time + delayRegeneration;
 	}
 
-	public void setAttributes (int xp, LinkedList <InventoryItem> inventory, int inventoryMax, int storageMax, int attackBase){
+	public void setAttributes (int xp, LinkedList <InventoryItem> inventory, int inventoryMax, int storageMax){
 		this.xp = xp;
 		this.inventory = inventory;
-		this.attackBase = attackBase;
 		level = determineLevel ();
 		hp = maxHP();
 		stamina = maxStamina ();
 		maxStorage = storageMax;
 		maxInventory = inventoryMax;
+		/**
+		 * Storage and inventory at start of level
+		 */ 
 		foreach (InventoryItem item in inventory) {
-			tempInventory.AddLast (item);
+			inventory_LevelStart.AddLast (item);
 		}
 
 		foreach (InventoryItem item in storage) {
-			tempStorage.AddLast(item);
+			storage_LevelStart.AddLast(item);
 		}
 	}
 
-	public int getExpectedXP()
-	{
-		return levelXP (level);
+	public string levelUp() {
+		int nextTreshold = levelXP (level + 1);
+		if (xp > nextTreshold) {
+			level++;
+			this.hp = maxHP();
+			this.stamina = maxStamina();
+			
+			return "You  are now level " + level;
+		}
+		return "";
 	}
 
-	public void LevelMeUp(){	//just for testing
-		this.xp = getExpectedXP ();
+	/**
+	 * Cheat
+	 */
+	public void LevelMeUp(){
+		this.xp = levelXP (level);
 	}
 
 	public string levelUp() {
@@ -215,7 +238,6 @@ public class PlayerAttributes : MonoBehaviour {
 			level++;
 			hp = maxHP();
 			stamina = maxStamina();
-			attackBase += 1;
 			return "You  are now level " + level;
 		}
 		return "";
@@ -318,25 +340,25 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	public void saveInventoryAndStorage(){
-		tempInventory.Clear ();
+		inventory_LevelStart.Clear ();
 		foreach (InventoryItem item in inventory) {
-			tempInventory.AddLast (item);
+			inventory_LevelStart.AddLast (item);
 		}
 		
-		tempStorage.Clear ();
+		storage_LevelStart.Clear ();
 		foreach (InventoryItem item in storage) {
-			tempStorage.AddLast(item);
+			storage_LevelStart.AddLast(item);
 		}
 	}
 
 	public void resetInventoryAndStorage(){
 		inventory.Clear ();
-		foreach (InventoryItem item in tempInventory) {
+		foreach (InventoryItem item in inventory_LevelStart) {
 			inventory.AddLast (item);
 		}
 
 		storage.Clear ();
-		foreach (InventoryItem item in tempStorage) {
+		foreach (InventoryItem item in storage_LevelStart) {
 			storage.AddLast(item);
 		}
 	}
@@ -464,7 +486,7 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 	
 	private int baseAttack() {
-			return  Mathf.RoundToInt(attackBase * Mathf.Pow (ATTACK_MULT, level - 1));
+			return  Mathf.RoundToInt((ATTACK_BASE + level -1) * Mathf.Pow (ATTACK_MULT, level - 1));
 	}
 	
 	public int maxAccessories() {
@@ -493,5 +515,14 @@ public class PlayerAttributes : MonoBehaviour {
 
 	public void addXP(int value){
 		xp += value;
+	}
+
+	public void setAttributes (int xp, LinkedList <InventoryItem> inventory, int inventoryMax){
+		this.xp = xp;
+		this.inventory = inventory;
+		this.maxInventory = inventoryMax;
+		this.level = determineLevel ();
+		this.hp = maxHP();
+		this.stamina = maxStamina ();
 	}
 }

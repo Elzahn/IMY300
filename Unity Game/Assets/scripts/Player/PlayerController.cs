@@ -3,10 +3,13 @@ using System.Collections;
 using System.IO;
 
 public class PlayerController : MonoBehaviour {
-
-	public float moveSpeed = 5f;
-	private Vector3 moveDir;
+	
 	private PlayerAttributes playerAttributes;
+
+	public const float RUN_MULT = 2f;
+
+	public float moveSpeed;
+	private Vector3 moveDir;
 	private bool jumping = false, paused, showDeath, showPaused, soundPlays = false;
 	public bool run = false, moving, showQuit = false;
 	private Sounds sound;
