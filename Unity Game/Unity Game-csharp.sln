@@ -29,10 +29,14 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+<<<<<<< HEAD
 																																																																																											GlobalSection(MonoDevelopProperties) = preSolution
 =======
 																																																																																								GlobalSection(MonoDevelopProperties) = preSolution
 >>>>>>> origin/Elzahn
+=======
+																																																																																										GlobalSection(MonoDevelopProperties) = preSolution
+>>>>>>> Moved some stuff around
 =======
 																																																																													GlobalSection(MonoDevelopProperties) = preSolution
 >>>>>>> origin/Tania-Panja

@@ -33,6 +33,7 @@ public class EnemySpawner : MonoBehaviour {
 	LinkedList<GameObject> enemies = new LinkedList <GameObject> ();
 
 	void Start () {
+		clearLoot ();
 		tempLoot = new LinkedList<InventoryItem> ();
 		attributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
 
@@ -102,8 +103,6 @@ public class EnemySpawner : MonoBehaviour {
 		GameObject go = Instantiate(enemy);
 		go.GetComponent<FauxGravityBody>().attractor = planet;
 		go.tag = "Monster";
-
-		//go.transform.localScale = new Vector3(2, 3, 2);	actual scale of the monsters
 
 		Enemy enemyComponent = go.GetComponent<Enemy>();
 		enemyComponent.level = chooseLevel();
@@ -283,5 +282,9 @@ public class EnemySpawner : MonoBehaviour {
 				tempLoot.Clear ();
 			}
 		}
+	}
+
+	public void clearLoot(){
+
 	}
 }
