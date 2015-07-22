@@ -76,6 +76,7 @@ public class InventoryGUI : MonoBehaviour {
 	}
 
 	public void openInventory(){
+		hasCollided = false;
 		showInventory = true;
 		PlayerLog.showLog = false;
 		this.GetComponent<Sounds>().playWorldSound (1);
@@ -92,7 +93,8 @@ public class InventoryGUI : MonoBehaviour {
 	void OnGUI(){
 		if (hasCollided == true){    
 			GUI.Box(new Rect(140,Screen.height-50,Screen.width-300,120),("Press E to interact"));
-		} else if (showInventory) {
+		}
+		if (showInventory) {
 			int boxWidth = Screen.width;//800;
 			int boxHeight = Screen.height;//800;
 			int width = boxWidth/2;
