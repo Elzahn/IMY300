@@ -43,13 +43,13 @@ public class Collisions : MonoBehaviour {
 			playerAttributesScript.loseHP (healthToLose);//loses 2% health when hit
 			PlayerLog.addStat ("You lose " + healthToLose + " health");
 		} else if (col.collider.tag == "MediumHealthPack") {
-			if (playerAttributesScript.inventory.Count < playerAttributesScript.getMaxInventory ()) {
+			if (playerAttributesScript.inventory.Count < playerAttributesScript.inventorySize) {
 				playerAttributesScript.addToInventory (new MediumHealthPack ());
 				Destroy (GameObject.Find (col.collider.transform.parent.name));
 				this.GetComponent<Sounds> ().playWorldSound (4);
 			}
 		} else if (col.collider.tag == "LargeHealthPack") {
-			if (playerAttributesScript.inventory.Count < playerAttributesScript.getMaxInventory ()) {
+			if (playerAttributesScript.inventory.Count < playerAttributesScript.inventorySize) {
 				playerAttributesScript.addToInventory (new LargeHealthPack ());
 				Destroy (GameObject.Find (col.collider.transform.parent.name));
 				this.GetComponent<Sounds> ().playWorldSound (4);

@@ -138,7 +138,7 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			if (Input.GetKeyDown (KeyCode.F4)) {
-				GameObject.Find ("Player").GetComponent<PlayerAttributes> ().LevelMeUp ();
+				GameObject.Find ("Player").GetComponent<PlayerAttributes> ().levelMeUp ();
 			}
 
 		/*	if (Input.GetKeyDown (KeyCode.R)) {
@@ -201,7 +201,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		if (paused == false) {
+		if (!paused) {
 			var rigidbody = GetComponent<Rigidbody> ();
 			rigidbody.MovePosition (rigidbody.position + transform.TransformDirection (moveDir) * moveSpeed * Time.deltaTime);
 		}

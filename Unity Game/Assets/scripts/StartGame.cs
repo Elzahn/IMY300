@@ -14,7 +14,7 @@ public class StartGame : MonoBehaviour {
 
 	void OnGUI()
 	{
-		if (attributesScript.getGender () == '?') {
+		if (attributesScript.gender == '?') {
 			playerScript.setPaused (true);
 
 			int boxWidth = 250;
