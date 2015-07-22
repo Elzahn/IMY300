@@ -285,6 +285,10 @@ public class EnemySpawner : MonoBehaviour {
 	}
 
 	public void clearLoot(){
-
+		GameObject[] gameObjectsToDelete =  GameObject.FindGameObjectsWithTag ("Loot");
+		
+		for (int i = 0; i < gameObjectsToDelete.Length; i++) {
+			Destroy (gameObjectsToDelete [i]);
+		}
 	}
 }
