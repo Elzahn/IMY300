@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour {
 		if (paused == false) {
 			playAnimation();
 
-			if(Input.GetKeyDown(KeyCode.Tab)){
+			if(Input.GetKeyDown(KeyCode.Escape)){
 				showQuit = true;
 			}
 
@@ -133,9 +133,9 @@ public class PlayerController : MonoBehaviour {
 				GameObject.Find ("Player").GetComponent<PlayerAttributes> ().LevelMeUp ();
 			}
 
-			if (Input.GetKeyDown (KeyCode.R)) {
+		/*	if (Input.GetKeyDown (KeyCode.R)) {
 				GameObject.Find ("Main Camera").GetComponent<SmoothMouseLook> ().resetRotation ();
-			}
+			}*/
 
 			if ((Input.GetAxis ("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) && soundPlays == false) {
 				soundPlays = true;

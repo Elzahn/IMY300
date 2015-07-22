@@ -5,8 +5,8 @@ using System.Linq;
 
 public class Loot : MonoBehaviour {
 
-	public LinkedList<InventoryItem> myLoot = new LinkedList<InventoryItem>();
-	public string myName;
+	private LinkedList<InventoryItem> myLoot = new LinkedList<InventoryItem>();
+	public string myName { get; private set; }
 	public bool showLoot { get; private set; }
 	private PlayerAttributes attributesScript;
 	private PlayerController playerScript;
@@ -49,6 +49,7 @@ public class Loot : MonoBehaviour {
 					if (myLoot.Count == 0) {
 						showLoot = false;
 						Destroy(this.gameObject);
+						GameObject.Find("Player").GetComponent<Collisions>().setLootConf();
 						playerScript.setPaused (false);
 					}
 				}

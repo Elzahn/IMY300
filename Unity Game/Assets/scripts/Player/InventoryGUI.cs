@@ -7,6 +7,7 @@ public class InventoryGUI : MonoBehaviour {
 	private static bool showInventory, showStorage;
 	private PlayerController playerScript;
 	private PlayerAttributes attributesScript;
+	private bool hasCollided = false;
 
 	public static bool getStorage(){
 		return showStorage;
@@ -26,12 +27,17 @@ public class InventoryGUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!playerScript.getPaused ()) {
-			if (Input.GetKeyDown (KeyCode.I) && !showStorage) {
+		if (playerScript.getPaused () == false) {
+
+			if(hasCollided && Input.GetKeyDown(KeyCode.E)){
+				openStorage();
+			}
+
+			if (Input.GetKeyDown (KeyCode.I) && showStorage == false) {
 				openInventory ();
 			}
 		} else {
-			if (Input.GetKeyDown (KeyCode.Escape)) {
+			if (Input.GetKeyDown (KeyCode.E)) {
 				if (showStorage) {
 					closeStorage ();
 				}
@@ -45,19 +51,25 @@ public class InventoryGUI : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionEnter (Collision col){
-		if (col.collider.name == "Storage") {
-			openStorage();
+	void OnTriggerEnter(Collider col){
+		if (col.name == "Storage") {
+			hasCollided = true;
 		}
 	}
 
+	void OnTriggerExit(Collider col){
+		hasCollided = false;
+	}
+
 	public void closeStorage(){
+		hasCollided = true;
 		showStorage = false;
 		this.GetComponent<Sounds>().playWorldSound (0);
 		playerScript.setPaused (false);	//Resume game
 	}
 
 	public void openStorage(){
+		hasCollided = false;
 		showStorage = true;
 		this.GetComponent<Sounds> ().playWorldSound (0);
 		playerScript.setPaused (true);	//Pause game
@@ -77,8 +89,11 @@ public class InventoryGUI : MonoBehaviour {
 		playerScript.setPaused (false);	//Resume game
 	}
 
-	void OnGUI()
-	{
+	void OnGUI(){
+		if (hasCollided == true){    
+			GUI.Box(new Rect(140,Screen.height-50,Screen.width-300,120),("Press E to interact"));
+		}
+
 		if (showInventory) {
 			int boxWidth = Screen.width;//800;
 			int boxHeight = Screen.height;//800;
@@ -129,10 +144,10 @@ public class InventoryGUI : MonoBehaviour {
 
 			//show character attributes
 			GUI.Box (new Rect (secondLeft, secondTop + 40, width, boxHeight), "Character Attributes");
-			GUI.Label (new Rect (secondLeft + 30, secondTop + 80, specWidth, itemHeight), "Xp: " + attributesScript.xp + "/" + attributesScript.getExpectedXP ());
-			GUI.Label (new Rect (secondLeft + 30, secondTop + 100, specWidth, itemHeight), "Hp: " + attributesScript.hp + "/" + attributesScript.maxHP());
-			GUI.Label (new Rect (secondLeft + 30, secondTop + 120, specWidth, itemHeight), "Stamina: " + attributesScript.stamina + "/" + attributesScript.maxStamina());
-			GUI.Label (new Rect (secondLeft + 30, secondTop + 140, specWidth, itemHeight), "Level: " + attributesScript.level);
+			GUI.Label (new Rect (secondLeft + 30, secondTop + 80, specWidth, itemHeight), "Xp: " + attributesScript.getXp () + "/" + attributesScript.getExpectedXP ());
+			GUI.Label (new Rect (secondLeft + 30, secondTop + 100, specWidth, itemHeight), "Hp: " + attributesScript.getHealth () + "/" + attributesScript.maxHP());
+			GUI.Label (new Rect (secondLeft + 30, secondTop + 120, specWidth, itemHeight), "Stamina: " + attributesScript.getStamina () + "/" + attributesScript.maxStamina());
+			GUI.Label (new Rect (secondLeft + 30, secondTop + 140, specWidth, itemHeight), "Level: " + attributesScript.getLevel ());
 		
 			secondTop += 100;
 
@@ -163,7 +178,7 @@ public class InventoryGUI : MonoBehaviour {
 					} else {	
 						this.GetComponent<Sounds>().playWorldSound(10);
 					}
-					attributesScript.unequipWeapon ();
+					attributesScript.unequipWeapon (attributesScript.weapon);
 				}
 			}
 		} else if (showStorage) {
@@ -177,7 +192,7 @@ public class InventoryGUI : MonoBehaviour {
 			int buttonWidth = 120;
 			int itemHeight = 30;
 			
-			GUI.Box (new Rect (left, top, boxWidth, boxHeight), "Storage/Inventory Space (Press Esc to close)");
+			GUI.Box (new Rect (left, top, boxWidth, boxHeight), "Storage/Inventory Space (Press E to close)");
 			GUI.Box (new Rect (left, top + 40, width, boxHeight), "Storage \t" + attributesScript.storage.Count + "/" + attributesScript.getMaxStorage ());
 			
 			if (attributesScript.storage.Count == 0) {
