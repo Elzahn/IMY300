@@ -66,6 +66,14 @@ public class PlayerController : MonoBehaviour {
 		if (paused == false) {
 			playAnimation();
 
+			if(Input.GetKeyDown(KeyCode.F5)){
+				NaturalDisasters.spin = 2f;
+			}
+
+			if(Input.GetKeyDown(KeyCode.F6)){
+				NaturalDisasters.shake = 2f;
+			}
+
 			if(Input.GetKeyDown(KeyCode.Escape)){
 				showQuit = true;
 			}
