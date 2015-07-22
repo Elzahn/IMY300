@@ -55,7 +55,7 @@ public class Collisions : MonoBehaviour {
 				this.GetComponent<Sounds> ().playWorldSound (4);
 			}
 		} else  //Lose health if you run into something that you can't interact with, walk/run on and isn't a monster
-		if (playerScript.run && col.collider.name != "Storage" && col.collider.name != "ExitPlane" && col.collider.name != "EntrancePlane" && col.collider.name != "Platform" && col.collider.name != "Planet" && col.collider.tag != "Monster") {
+		if (playerScript.run && col.collider.name != "Storage" && col.collider.name != "ExitPlane" && col.collider.name != "EntrancePlane" && col.collider.name != "Platform" && col.collider.name != "Planet" && col.collider.tag != "Monster" && col.collider.tag != "WarpPoint") {
 			int healthToLose = (int)(playerAttributesScript.hp * 0.02);
 			playerAttributesScript.loseHP (healthToLose);//loses 2% health when running into something
 			PlayerLog.addStat ("You lose " + healthToLose + " health by running into something");
