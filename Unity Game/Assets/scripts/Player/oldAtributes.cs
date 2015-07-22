@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class oldAtributes : MonoBehaviour {
-{
 	public int hp {get; private set;}	
 	public int level {get; private set;}
 	public float stamina {get; set;}

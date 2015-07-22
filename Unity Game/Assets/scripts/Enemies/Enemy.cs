@@ -28,7 +28,7 @@ public abstract class Enemy : MonoBehaviour {
 		onPlayer = false;
 		suspicion = 0;
 		PlayerAttributes player = GameObject.Find ("Player").GetComponent<PlayerAttributes>();
-		delay = 5 * (1.5f - player.getStamina () / player.maxStamina ());
+		delay = 5 * (1.5f - player.stamina / player.maxStamina ());
 		nextRegeneration = Time.time + delayRegeneration;
 	}
 	
@@ -176,8 +176,8 @@ public abstract class Enemy : MonoBehaviour {
 		}
 	}
 
-	public string attack(PlayerAttributes e) {
-		e.lastDamage = Time.time;
+	public string attack(PlayerAttributes player) {
+		player.lastDamage = Time.time;
 		PlayerAttributes.giveAlarm = true;
 
 		float ran = Random.value;
@@ -192,7 +192,7 @@ public abstract class Enemy : MonoBehaviour {
 				message = "Monster Critical Hit! ";
 				GameObject.Find("Player").GetComponent<Sounds>().playMonsterSound(2, this);
 			}
-			e.loseHP(tmpDamage);
+			player.loseHP(tmpDamage);
 
 			if(message == "Monster Miss! "){
 				GameObject.Find("Player").GetComponent<Sounds>().playMonsterSound(4, this);
@@ -202,9 +202,9 @@ public abstract class Enemy : MonoBehaviour {
 			GameObject.Find("Player").GetComponent<Sounds>().playDeathSound(1);
 			message += "You died.";
 		} else {
-			message += e.getHealth () + "/" + e.maxHP ();
+			message += player.hp + "/" + player.maxHP ();
 		}
-		print(message);
+		//print(message);
 		PlayerLog.addStat (message);
 		return message;
 	}

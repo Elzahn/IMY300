@@ -93,12 +93,12 @@ public class PlayerController : MonoBehaviour {
 
 			if (playerAttributes.stamina <= 0) {
 				if (playerAttributes.stamina < 0)
-					playerAttributes.setStaminaToZero ();
+					playerAttributes.stamina = 0;
 				run = false; 
 				moveSpeed = 5; 
 			}
 
-			if (playerAttributes.getDizzy () == true) {
+			if (playerAttributes.dizzy == true) {
 				moveDir = new Vector3 (Input.GetAxisRaw ("Vertical"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Horizontal")).normalized;
 			} else {
 				moveDir = new Vector3 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Vertical")).normalized;

@@ -14,12 +14,31 @@ public class PlayerAttributes : MonoBehaviour {
 	const int CRIT_MULT = 2;
 	
 	const int SPEED_BASE = 5;
-	
-	public static PlayerAttributes Instance;
+	const int FEMALE_EXTRA_STAMINA = 20;
+	const int MALE_EXTRA_DAMAGE = 12;
 
+	const float HIT_CHANCE_BASE = 0.6f;
+	const float DIZZY_HC_REDUCE = 0.3f;
 
-	private char gender = '?';
+	const float RUN_STAMINA_DRAIN = 1;
+	const float REGEN_HP = 0.1f;
+	const float REGEN_STAMINA = 0.1f;
+	const float REGEN_ATTACK_DELAY = 3;	
+	const float REGEN_INTERVAL = 6;
+
+	const int WARP_UNLOCK_LEVEL = 6;
+	const int XP_GAIN_PER_MONSTER_LEVEL = 20;
+
+	//TODO: Ons kan hierdie const maak?
+	private int maxInventory = 15;
+	private int maxStorage = 50;
+
 	private Sounds sound;
+
+	/**
+	 * Singelton
+	 */
+	public static PlayerAttributes instance;
 	
 	public LinkedList <InventoryItem> inventory = new LinkedList<InventoryItem>();
 	public LinkedList <InventoryItem> storage = new LinkedList<InventoryItem> ();
@@ -28,14 +47,27 @@ public class PlayerAttributes : MonoBehaviour {
 	public LinkedList <Accessory> accessories = new LinkedList<Accessory>();
 	public Weapon weapon = null;
 
+	/**
+	 * Die volgende kan gewoon geaacess word soos public varaibles
+	 */ 
 
 	public int hp {get; private set;}	
 	public int level {get; private set;}
 	public float stamina {get; set;}
-	public int xp {get; private set;};
-	private int maxInventory = 15;
-	private int maxStorage = 50;
-	private bool dizzy = false;
+	public int xp {get; private set;}
+	public bool dizzy {get; set;}
+	
+	public char gender {get {
+			return gender;
+		}
+
+		set {
+			if (value == 'f') {
+				stamina += FEMALE_EXTRA_STAMINA;
+			}
+			this.gender = value;
+		}}
+
 	public int speed {
 		get {
 			int tmp = SPEED_BASE;
@@ -46,12 +78,137 @@ public class PlayerAttributes : MonoBehaviour {
 		}
 	}
 
+	public int damage { get {
+			int tmp = baseDamage ();
+			if (gender == 'm') {
+				tmp += MALE_EXTRA_DAMAGE;
+			}
+			if (weapon != null)
+				tmp += weapon.damage;
+			foreach (Accessory a in accessories) {
+				tmp += a.damage;
+			}
+			return tmp;
+		}
+	}
 
-	public float lastDamage;
+	public int inventorySize {get {
+			int tmp = maxInventory;
+			foreach (Accessory a in accessories) {
+				tmp += a.inventory;
+			}
+			return tmp;
+		}
+	}
+	/**
+	 * last time damage taken
+	 */ 
+	public float lastDamage {get; set;}
 	private float nextRegeneration;
-	private float delayRegeneration = 6;
 	private PlayerController playerScript;
 	public static bool giveAlarm;
+
+	/**
+	 *  Functions
+	 * */
+	void Start () {
+		if (instance) {
+			DestroyImmediate(gameObject);
+			return;
+		} else {
+			DontDestroyOnLoad (gameObject);
+			instance = this;
+		}
+				
+		gender = '?';
+		giveAlarm = true;
+		dizzy = false;
+
+		sound = GameObject.Find("Player").GetComponent<Sounds>();
+		setInitialXp(0);
+		nextRegeneration = Time.time + REGEN_INTERVAL;
+		lastDamage = 0;
+	}
+
+	void Update() {
+		/* Called Once per frame */
+		/** Health regenration etc. */
+		playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
+		
+		if (!playerScript.getPaused ()) {
+			
+			if (this.hp <= 50 && giveAlarm) {//(this.maxHP()/4)){
+				GameObject.Find ("Player").GetComponent<Sounds> ().playAlarmSound (1);
+			} else {
+				GameObject.Find ("Player").GetComponent<Sounds> ().stopAlarmSound (1);
+			}
+			
+			string tempMessage = levelUp ();
+			if (tempMessage != "") {
+				PlayerLog.addStat (tempMessage);
+			//	print (tempMessage);
+			}
+
+			Warping warp = this.gameObject.GetComponent<Warping> ();
+			if (level == WARP_UNLOCK_LEVEL && warp != null) {
+				warp.chooseDestinationUnlocked = true;
+			}
+			
+			if (Time.time >= nextRegeneration) {
+				nextRegeneration = Time.time + REGEN_INTERVAL;
+				if (Time.time >= (lastDamage + REGEN_ATTACK_DELAY)) {
+					if (hp < maxHP ()) {
+						hp += (int)(maxHP () * REGEN_HP);
+						giveAlarm = false;
+					}
+
+					if (stamina < maxStamina ()) {
+						stamina += (int)(maxStamina () * REGEN_STAMINA);
+					}
+				}
+				
+			}
+		} else {
+			nextRegeneration = Time.time + REGEN_INTERVAL;
+			//lastDamage += 1;
+		}
+	}
+
+	public void setInitialXp(int xp) {
+		this.xp = xp;		
+		level = determineLevel ();
+		hp = maxHP();
+		stamina = maxStamina ();
+	}
+
+	public void setAttributes (int xp, LinkedList <InventoryItem> inventory, int inventoryMax, LinkedList <InventoryItem> storage, int storageMax){
+
+		setInitialXp(xp);
+		maxStorage = storageMax;
+		maxInventory = inventoryMax;
+		/**
+		 * Storage and inventory at start of level
+		 */ 
+		this.inventory = inventory;
+		foreach (InventoryItem item in inventory) {
+			inventory_LevelStart.AddLast (item);
+		}
+		
+		foreach (InventoryItem item in storage) {
+			storage_LevelStart.AddLast(item);
+		}
+	}
+	
+	public void setAttributes (int xp, LinkedList <InventoryItem> inventory, int inventoryMax){
+		this.xp = xp;
+		this.inventory = inventory;
+		this.maxInventory = inventoryMax;
+		this.level = determineLevel ();
+		this.hp = maxHP();
+		this.stamina = maxStamina ();
+	}
+
+
 
 	public void addHealth(int val){
 		this.hp += val;
@@ -60,98 +217,31 @@ public class PlayerAttributes : MonoBehaviour {
 		}
 	}
 
-	public void setStaminaToZero(){
-		this.stamina = 0;
-	}
-
 	public void drainStamina(){
-		this.stamina -= 1;//0.5f;
+		this.stamina -= RUN_STAMINA_DRAIN;//0.5f;
 	}
 
 	public void useHealthPack(InventoryItem item){
 		HealthPack tempItem = (HealthPack)item;
 		int healthRegen = (int)(maxHP() * tempItem.healthValue);
 		addHealth(healthRegen);
-		print ("adding " + healthRegen);
-	}
+	//	print ("adding " + healthRegen);
+	}	
 
-	void Update() {
-		/* Called Once per frame */
-		/** Health regenration etc. */
-		playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
-
-		if (playerScript.getPaused () == false) {
-
-			if(this.getHealth() <= 50 && giveAlarm){//(this.maxHP()/4)){
-				GameObject.Find("Player").GetComponent<Sounds>().playAlarmSound(1);
-			} else {
-				GameObject.Find ("Player").GetComponent<Sounds>().stopAlarmSound(1);
-			}
-
-			string tempMessage = levelUp ();
-			if(tempMessage != ""){
-				PlayerLog.addStat(tempMessage);
-				print(tempMessage);
-			}
-
-			if(level == 6 && GameObject.Find("Player").GetComponent<Warping>() != null){
-				GameObject.Find ("Player").GetComponent<Warping>().chooseDestinationUnlocked = true;
-			}
-
-			if (Time.time >= nextRegeneration) {
-				nextRegeneration = Time.time + delayRegeneration;
-				if (Time.time >= (lastDamage+3) && getHealth () < maxHP ()) {
-					hp += (int)(maxHP () * 0.01);
-					giveAlarm = false;
-				}
-				if (Time.time >= (lastDamage+3) && stamina < maxStamina ()) {
-					stamina += (int)(maxStamina () * 0.01);
-				}
-
-			}
-		} else {
-			nextRegeneration = Time.time + delayRegeneration;
-			//lastDamage += 1;
-		}
-	}
-
-	public void setGender(char gender){
-		if (gender == 'f') {
-			stamina += 20;
-		}
-		this.gender = gender;
-	}
-
-	public char getGender(){
-		return this.gender;
-	}
-
-	public void setDizzy(bool value){
-		dizzy = value;
-	}
-
-	public bool getDizzy(){
-		return dizzy;
-	}
-
-	public int currentHealth()
-	{
-		return hp;
-	}
-
-	public float hitChance() {
-		float tmp = 0.6f;
+	public float hitChance { get {
+		float tmp = HIT_CHANCE_BASE;
 
 		foreach (Accessory a in accessories) {
 			tmp += a.hitChance;
 		}
-
+		
 		//if dizzy lose some hitChance
 		if (dizzy) {
-			tmp -= 0.3f;
+			tmp -= DIZZY_HC_REDUCE;
 		}
 
 		return tmp;
+		}
 	}
 
 	public float critChance() {
@@ -172,49 +262,12 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	public int getMaxStorage(){
-		int tmp = maxStorage;
-		/*foreach (Accessory a in accessories) {
-			tmp += a.storage;
-		}*/
-		return tmp;
+		return maxStorage;
 	}
-
-	void Start(){
-		if (Instance) {
-			DestroyImmediate(gameObject);
-		} else {
-			DontDestroyOnLoad (gameObject);
-			Instance = this;
-		}
-
-		giveAlarm = true;
-		sound = GameObject.Find("Player").GetComponent<Sounds>();
-		setAttributes (0, inventory, maxInventory, maxStorage, 6);
-		nextRegeneration = Time.time + delayRegeneration;
-	}
-
-	public void setAttributes (int xp, LinkedList <InventoryItem> inventory, int inventoryMax, int storageMax){
-		this.xp = xp;
-		this.inventory = inventory;
-		level = determineLevel ();
-		hp = maxHP();
-		stamina = maxStamina ();
-		maxStorage = storageMax;
-		maxInventory = inventoryMax;
-		/**
-		 * Storage and inventory at start of level
-		 */ 
-		foreach (InventoryItem item in inventory) {
-			inventory_LevelStart.AddLast (item);
-		}
-
-		foreach (InventoryItem item in storage) {
-			storage_LevelStart.AddLast(item);
-		}
-	}
+		
 
 	public string levelUp() {
-		int nextTreshold = levelXP (level + 1);
+		int nextTreshold = getExpctedXP();
 		if (xp > nextTreshold) {
 			level++;
 			this.hp = maxHP();
@@ -228,21 +281,10 @@ public class PlayerAttributes : MonoBehaviour {
 	/**
 	 * Cheat
 	 */
-	public void LevelMeUp(){
+	public void levelMeUp(){
 		this.xp = levelXP (level);
+		levelUp();
 	}
-
-	public string levelUp() {
-		int nextTreshold = levelXP (level);
-		if (xp >= nextTreshold) {
-			level++;
-			hp = maxHP();
-			stamina = maxStamina();
-			return "You  are now level " + level;
-		}
-		return "";
-	}
-
 
 	public bool equipItem(InventoryItem item) {
 		switch (item.type) {
@@ -291,13 +333,10 @@ public class PlayerAttributes : MonoBehaviour {
 	public bool unequipAccessory(Accessory a) {
 		if (accessories.Contains (a)) {
 			accessories.Remove (a);
-			if(a.speed != 0){
-				GameObject.Find("Player").GetComponent<PlayerController>().moveSpeed -= a.speed;
-			}
+			inventory.AddLast (a);
 			return true;
-		} else {
-				throw new RulesException("Accessory not equipped");
 		}
+		throw new RulesException ("Accessory not equipped");
 	}
 
 
@@ -306,9 +345,8 @@ public class PlayerAttributes : MonoBehaviour {
 		if (storage.Count < maxStorage) {
 			storage.AddLast (item);
 			return true;
-		} else {
-			throw new RulesException("Storage full");
-		}
+		} else
+			throw new RulesException ("Storage full");
 	}
 
 	public bool addToInventory(InventoryItem a) {
@@ -365,26 +403,21 @@ public class PlayerAttributes : MonoBehaviour {
 		//string name = e.typeID;
 		e.lastDamage = Time.time;
 		float ran = Random.value;
-		float hc = hitChance();
+		float hc = hitChance;
 		string message = "Miss! ";
 
 		if (ran <= hc) {			
 			message = "Hit! ";
-			if (weapon != null){
-				if (weapon.typeID == "Warhammer") {
-					sound.playCharacterSound (10);
-				} else {
-					sound.playCharacterSound (7);
-				}
-			} else {
-				sound.playCharacterSound (12);
-			}
+		
 			float cc = critChance ();
-			int tmpdamage = damage ();
+			int tmpdamage = damage;
 
+			/*Critical Hit */
 			if (ran <= cc) {
+
 				tmpdamage *= CRIT_MULT;
 				message = "Critical Hit! ";
+
 				if (weapon != null){
 					if (weapon.typeID == "Warhammer") {
 						sound.playCharacterSound (11);
@@ -394,21 +427,30 @@ public class PlayerAttributes : MonoBehaviour {
 				} else {
 					sound.playCharacterSound (13);
 				}
+
+			} else {
+				/* Non-crit SOunds */
+				if (weapon != null){
+					if (weapon.typeID == "Warhammer") {
+						sound.playCharacterSound (10);
+					} else {
+						sound.playCharacterSound (7);
+					}
+				} else {
+					sound.playCharacterSound (12);
+				}
 			}
 
 			bool dead = e.loseHP(tmpdamage);
 
 			if (weapon != null) {
-				print (this.stamina);
+				//print (this.stamina);
 				stamina -= weapon.staminaLoss;
-				print (this.stamina);
+				//print (this.stamina);
 			}
-			if (dead) {
-				//xp += e.xpGain;
-				//Added XP here
-				addXP(getLevel() * 20);
-				//message += levelUp();
-				message += " Monster died!";
+			if (dead) {					
+				message += " Monster died!\n";
+				message += addXP(e.level * XP_GAIN_PER_MONSTER_LEVEL);
 			} else {
 				//add Stats to message
 				message += e.getHealth()+"/"+e.getMaxHp();
@@ -426,30 +468,28 @@ public class PlayerAttributes : MonoBehaviour {
 	/**
 	 * Returns true if dead
 	 * */
-	public bool loseHP(int hp) {
-		this.hp -= hp;
+	public bool loseHP(int loss) {
+		this.hp -= loss;
 		return isDead ();
 	}
 
-	public int inventorySize() {
-		int tmp = maxInventory;
-		foreach (Accessory a in accessories) {
-			tmp += a.inventory;
-		}
-		return tmp;
+	/**
+	 * Returns the XP needed to get to level n
+	 */ 
+	public int levelXP(int n) {
+		return (int) (XP_BASE * Mathf.Pow (XP_MULT, n - 1) / (XP_MULT - 1)) - XP_BASE;
 	}
 
-	public static int levelXP(int level) {
-		return Mathf.RoundToInt(XP_BASE * Mathf.Pow (XP_MULT, level - 1) / (XP_MULT - 1));
+	public int getExpctedXP() {
+		return levelXP(level+1);
 	}
-	
+
+	/**
+	 * Det
 	public int determineLevel() {
-		int tempLevel = Mathf.RoundToInt (Mathf.Log (xp * (XP_MULT - 1) / XP_BASE) / Mathf.Log (XP_BASE));
+		if (xp == 0) return 1;
 
-		if (tempLevel <= 0) {
-			return 1;
-		}
-		return tempLevel;//Mathf.RoundToInt (Mathf.Log (xp * (XP_MULT - 1) / XP_BASE) / Mathf.Log (XP_BASE));
+		return Mathf.RoundToInt(Mathf.Log (xp * (XP_MULT - 1) / XP_BASE) / Mathf.Log (XP_BASE))+1.5;
 	}
 	
 	public int maxHP() {
@@ -466,25 +506,12 @@ public class PlayerAttributes : MonoBehaviour {
 			tmp += a.stamina;
 		}
 		if (gender == 'f')
-			tmp += 20;
+			tmp += FEMALE_EXTRA_STAMINA;
 		return tmp;
 	}
 
-	public int damage() {
-		int tmp = baseAttack ();
-		if (gender == 'm') {
-			tmp += 12;
-		}
-		if (weapon != null)
-			tmp += weapon.damage;
-		foreach (Accessory a in accessories) {
-			tmp += a.damage;
-		}
-		return tmp;
-	}
-	
-	private int baseAttack() {
-			return  Mathf.RoundToInt((ATTACK_BASE + level -1) * Mathf.Pow (ATTACK_MULT, level - 1));
+	private int baseDamage() {
+		return  Mathf.RoundToInt((ATTACK_BASE + level -1) * Mathf.Pow (ATTACK_MULT, level - 1));
 	}
 	
 	public int maxAccessories() {
@@ -495,32 +522,8 @@ public class PlayerAttributes : MonoBehaviour {
 		return hp <= 0;
 	}
 
-	public int getHealth(){
-		return hp;
-	}
-
-	public int getXp(){
-		return xp;
-	}
-
-	public int getLevel(){
-		return level;
-	}
-
-	public float getStamina(){
-		return stamina;
-	}
-
-	public void addXP(int value){
+	public string addXP(int value){
 		xp += value;
-	}
-
-	public void setAttributes (int xp, LinkedList <InventoryItem> inventory, int inventoryMax){
-		this.xp = xp;
-		this.inventory = inventory;
-		this.maxInventory = inventoryMax;
-		this.level = determineLevel ();
-		this.hp = maxHP();
-		this.stamina = maxStamina ();
+		return levelUp();
 	}
 }
