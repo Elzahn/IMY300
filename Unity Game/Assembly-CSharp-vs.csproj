@@ -68,7 +68,6 @@
      <Compile Include="Assets\scripts\Loot.cs" />
      <Compile Include="Assets\scripts\Player\Collisions.cs" />
      <Compile Include="Assets\scripts\Player\InventoryGUI.cs" />
-     <Compile Include="Assets\scripts\Player\OldCOntroller.cs" />
      <Compile Include="Assets\scripts\Player\PlayerAttributes.cs" />
      <Compile Include="Assets\scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\scripts\RulesException.cs" />

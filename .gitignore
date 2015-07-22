@@ -74,5 +74,9 @@ obj/
 
 ehthumbs.db
 Thumbs.db
+
 *.meta
 !*.cs.meta
+
+*_data/
+*.exe
