@@ -3,13 +3,10 @@ using System.Collections;
 using System.IO;
 
 public class PlayerController : MonoBehaviour {
-	
-	private PlayerAttributes playerAttributes;
 
-	public const float RUN_MULT = 2f;
-
-	public float moveSpeed;
+	public float moveSpeed = 5f;
 	private Vector3 moveDir;
+	private PlayerAttributes playerAttributes;
 	private bool jumping = false, paused, showDeath, showPaused, soundPlays = false;
 	public bool run = false, moving, showQuit = false;
 	private Sounds sound;
@@ -99,14 +96,14 @@ public class PlayerController : MonoBehaviour {
 				soundPlays = false;
 			}
 
-			if (playerAttributes.stamina <= 0) {
-				if (playerAttributes.stamina < 0)
-					playerAttributes.stamina = 0;
+			if (playerAttributes.getStamina () <= 0) {
+				if (playerAttributes.getStamina () < 0)
+					playerAttributes.setStaminaToZero ();
 				run = false; 
 				moveSpeed = 5; 
 			}
 
-			if (playerAttributes.dizzy == true) {
+			if (playerAttributes.getDizzy () == true) {
 				moveDir = new Vector3 (Input.GetAxisRaw ("Vertical"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Horizontal")).normalized;
 			} else {
 				moveDir = new Vector3 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Vertical")).normalized;
@@ -138,7 +135,7 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			if (Input.GetKeyDown (KeyCode.F4)) {
-				GameObject.Find ("Player").GetComponent<PlayerAttributes> ().levelMeUp ();
+				GameObject.Find ("Player").GetComponent<PlayerAttributes> ().LevelMeUp ();
 			}
 
 		/*	if (Input.GetKeyDown (KeyCode.R)) {
@@ -201,7 +198,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		if (!paused) {
+		if (paused == false) {
 			var rigidbody = GetComponent<Rigidbody> ();
 			rigidbody.MovePosition (rigidbody.position + transform.TransformDirection (moveDir) * moveSpeed * Time.deltaTime);
 		}

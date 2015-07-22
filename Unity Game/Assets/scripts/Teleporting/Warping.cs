@@ -54,7 +54,7 @@ public class Warping : MonoBehaviour {
 			Vector3 newLocation = newLocationWarpPoint.transform.position;
 			GameObject.Find("Player").transform.position = new Vector3(newLocation.x+1,newLocation.y,newLocation.z+1);	//new Vector3 (newLocation.x, newLocation.y, newLocation.z);
 			PlayerAttributes playerAttributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes>();
-			int healthToLose = (int)(playerAttributesScript.hp * 0.05);
+			int healthToLose = (int)(playerAttributesScript.currentHealth() * 0.05);
 			playerAttributesScript.loseHP(healthToLose);//loses 5% health when warping
 			print ("You lose " + healthToLose + " health");
 			PlayerLog.addStat("You lose " + healthToLose + " health");

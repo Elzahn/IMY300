@@ -36,42 +36,30 @@ public class Collisions : MonoBehaviour {
 
 	void OnCollisionEnter (Collision col){	
 		playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
-<<<<<<< HEAD
 
 		//Lose health only when an Earthquake hits
 		if (col.collider.tag == "WorldObject" && NaturalDisasters.shake > 0) {
 			int healthToLose = (int)(playerAttributesScript.currentHealth () * 0.02);
-=======
-		if (col.collider.tag == "Loot") {
-			col.collider.gameObject.GetComponent<Loot>().showMyLoot();
-		} else if (col.collider.tag == "WorldObject" && NaturalDisasters.shake > 0) {
-			int healthToLose = (int)(playerAttributesScript.hp * 0.02);
->>>>>>> origin/master
 			playerAttributesScript.loseHP (healthToLose);//loses 2% health when hit
 			PlayerLog.addStat ("You lose " + healthToLose + " health");
 		} else if (col.collider.tag == "MediumHealthPack") {
-			if (playerAttributesScript.inventory.Count < playerAttributesScript.inventorySize) {
+			if (playerAttributesScript.inventory.Count < playerAttributesScript.getMaxInventory ()) {
 				playerAttributesScript.addToInventory (new MediumHealthPack ());
 				Destroy (GameObject.Find (col.collider.transform.parent.name));
 				this.GetComponent<Sounds> ().playWorldSound (4);
 			}
 		} else if (col.collider.tag == "LargeHealthPack") {
-			if (playerAttributesScript.inventory.Count < playerAttributesScript.inventorySize) {
+			if (playerAttributesScript.inventory.Count < playerAttributesScript.getMaxInventory ()) {
 				playerAttributesScript.addToInventory (new LargeHealthPack ());
 				Destroy (GameObject.Find (col.collider.transform.parent.name));
 				this.GetComponent<Sounds> ().playWorldSound (4);
 			}
-<<<<<<< HEAD
 		} else //Lose health if you run into something that you can't interact with, walk/run on and isn't a monster
 		if (playerScript.run && col.collider.name != "Storage" && col.collider.name != "ExitPlane" && col.collider.name != "EntrancePlane" && col.collider.name != "Platform" && col.collider.name != "Planet" && col.collider.tag != "Monster") {
 			int healthToLose = (int)(playerAttributesScript.currentHealth () * 0.02);
-=======
-		} else if (playerScript.run && col.collider.name != "Storage" && col.collider.name != "ExitPlane" && col.collider.name != "EntrancePlane" && col.collider.name != "Platform" && col.collider.name != "Planet" && col.collider.tag != "Monster") {
-			int healthToLose = (int)(playerAttributesScript.hp * 0.02);
->>>>>>> origin/master
 			playerAttributesScript.loseHP (healthToLose);//loses 2% health when running into something
 			PlayerLog.addStat ("You lose " + healthToLose + " health by running into something");
-			if (playerAttributesScript.gender == 'f') {
+			if (playerAttributesScript.getGender () == 'f') {
 				this.GetComponent<Sounds> ().playCharacterSound (6);
 			} else {
 				this.GetComponent<Sounds> ().playCharacterSound (5);

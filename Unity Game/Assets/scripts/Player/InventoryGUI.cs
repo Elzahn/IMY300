@@ -27,7 +27,6 @@ public class InventoryGUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-<<<<<<< HEAD
 		if (playerScript.getPaused () == false) {
 
 			if(hasCollided && Input.GetKeyDown(KeyCode.E)){
@@ -35,10 +34,6 @@ public class InventoryGUI : MonoBehaviour {
 			}
 
 			if (Input.GetKeyDown (KeyCode.I) && showStorage == false) {
-=======
-		if (!playerScript.getPaused ()) {
-			if (Input.GetKeyDown (KeyCode.I) && !showStorage) {
->>>>>>> origin/master
 				openInventory ();
 			}
 		} else {
@@ -112,7 +107,7 @@ public class InventoryGUI : MonoBehaviour {
 			int specWidth = 150;
 
 			GUI.Box (new Rect (left, top, boxWidth, boxHeight), "Character Review (Press I to close)");
-			GUI.Box (new Rect (left, top + 40, width, boxHeight), "Inventory \t" + attributesScript.inventory.Count + "/" + attributesScript.inventorySize);
+			GUI.Box (new Rect (left, top + 40, width, boxHeight), "Inventory \t" + attributesScript.inventory.Count + "/" + attributesScript.getMaxInventory ());
 
 			if (attributesScript.inventory.Count == 0) {
 				GUI.Label (new Rect (left + width/4, top + 100, width, itemHeight), "No items in inventory");
@@ -149,10 +144,10 @@ public class InventoryGUI : MonoBehaviour {
 
 			//show character attributes
 			GUI.Box (new Rect (secondLeft, secondTop + 40, width, boxHeight), "Character Attributes");
-			GUI.Label (new Rect (secondLeft + 30, secondTop + 80, specWidth, itemHeight), "Xp: " + attributesScript.xp + "/" + attributesScript.getExpectedXP ());
-			GUI.Label (new Rect (secondLeft + 30, secondTop + 100, specWidth, itemHeight), "Hp: " + attributesScript.hp + "/" + attributesScript.maxHP());
-			GUI.Label (new Rect (secondLeft + 30, secondTop + 120, specWidth, itemHeight), "Stamina: " + attributesScript.stamina + "/" + attributesScript.maxStamina());
-			GUI.Label (new Rect (secondLeft + 30, secondTop + 140, specWidth, itemHeight), "Level: " + attributesScript.level);
+			GUI.Label (new Rect (secondLeft + 30, secondTop + 80, specWidth, itemHeight), "Xp: " + attributesScript.getXp () + "/" + attributesScript.getExpectedXP ());
+			GUI.Label (new Rect (secondLeft + 30, secondTop + 100, specWidth, itemHeight), "Hp: " + attributesScript.getHealth () + "/" + attributesScript.maxHP());
+			GUI.Label (new Rect (secondLeft + 30, secondTop + 120, specWidth, itemHeight), "Stamina: " + attributesScript.getStamina () + "/" + attributesScript.maxStamina());
+			GUI.Label (new Rect (secondLeft + 30, secondTop + 140, specWidth, itemHeight), "Level: " + attributesScript.getLevel ());
 		
 			secondTop += 100;
 
@@ -183,7 +178,7 @@ public class InventoryGUI : MonoBehaviour {
 					} else {	
 						this.GetComponent<Sounds>().playWorldSound(10);
 					}
-					attributesScript.unequipWeapon ();
+					attributesScript.unequipWeapon (attributesScript.weapon);
 				}
 			}
 		} else if (showStorage) {
@@ -197,13 +192,8 @@ public class InventoryGUI : MonoBehaviour {
 			int buttonWidth = 120;
 			int itemHeight = 30;
 			
-<<<<<<< HEAD
 			GUI.Box (new Rect (left, top, boxWidth, boxHeight), "Storage/Inventory Space (Press E to close)");
 			GUI.Box (new Rect (left, top + 40, width, boxHeight), "Storage \t" + attributesScript.storage.Count + "/" + attributesScript.getMaxStorage ());
-=======
-			GUI.Box (new Rect (left, top, boxWidth, boxHeight), "Storage/Inventory Space (Press Esc to close)");
-			GUI.Box (new Rect (left, top + 40, width, boxHeight), "Storage \t" + attributesScript.storage.Count + "/" + attributesScript.maxStorage);
->>>>>>> origin/master
 			
 			if (attributesScript.storage.Count == 0) {
 				GUI.Label (new Rect (left + width/4, top + 100, width, itemHeight), "No items in storage");
@@ -223,7 +213,7 @@ public class InventoryGUI : MonoBehaviour {
 				}
 			}
 
-			GUI.Box (new Rect (secondLeft, secondTop + 40, width, boxHeight), "Inventory \t" + attributesScript.inventory.Count + "/" + attributesScript.inventorySize);
+			GUI.Box (new Rect (secondLeft, secondTop + 40, width, boxHeight), "Inventory \t" + attributesScript.inventory.Count + "/" + attributesScript.getMaxInventory ());
 			
 			if (attributesScript.inventory.Count == 0) {
 				GUI.Label (new Rect (secondLeft + width/4, secondTop + 100, width-buttonWidth, itemHeight), "No items in inventory");

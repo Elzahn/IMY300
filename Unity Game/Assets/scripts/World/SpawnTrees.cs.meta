@@ -1,14 +1,10 @@
 fileFormatVersion: 2
 guid: 6aba4ae91a39e4942a768ca0b475410e
-timeCreated: 1437595873
+timeCreated: 1437142042
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences:
-  - tree1: {fileID: 100004, guid: fc50976ab9350624abe24ea96316d82b, type: 3}
-  - tree2: {fileID: 100006, guid: 0cbcdd1d436cf724ea35b665aef5cb70, type: 3}
-  - tree3: {fileID: 100008, guid: d7484ed94d1d75b4fa058826979bbfde, type: 3}
-  - shrub: {fileID: 100006, guid: f50fa63e541a16145ba7426ede74774c, type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
