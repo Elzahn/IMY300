@@ -161,8 +161,8 @@ public class PlayerAttributes : MonoBehaviour {
 		this.nextRegeneration = Time.time + REGEN_INTERVAL;
 		this.lastDamage = 0;
 		
-		this.soundComponent = this.gameObject.GetComponent<Sounds>();
-		this.controllerComponent = this.gameObject.GetComponent<PlayerController> ();
+		this.soundComponent = GameObject.Find("Player").gameObject.GetComponent<Sounds>(); //must be GameObject.Find("Player") else it tries to acces what has been destroyed
+		this.controllerComponent = GameObject.Find("Player").gameObject.GetComponent<PlayerController> (); //must be GameObject.Find("Player") else it tries to acces what has been destroyed
 	}
 
 	void Update() {
