@@ -3,10 +3,13 @@ using System.Collections;
 using System.IO;
 
 public class PlayerController : MonoBehaviour {
-
-	public float moveSpeed = 5f;
-	private Vector3 moveDir;
+	
 	private PlayerAttributes playerAttributes;
+
+	public const float RUN_MULT = 2f;
+
+	public float moveSpeed;
+	private Vector3 moveDir;
 	private bool jumping = false, paused, showDeath, showPaused, soundPlays = false;
 	public bool run = false, moving, showQuit = false;
 	private Sounds sound;
@@ -66,11 +69,11 @@ public class PlayerController : MonoBehaviour {
 			if(Input.GetKeyDown(KeyCode.F5)){
 				NaturalDisasters.spin = 2f;
 			}
-
+			
 			if(Input.GetKeyDown(KeyCode.F6)){
 				NaturalDisasters.shake = 2f;
 			}
-
+			
 			if(Input.GetKeyDown(KeyCode.Escape)){
 				showQuit = true;
 			}
@@ -96,14 +99,14 @@ public class PlayerController : MonoBehaviour {
 				soundPlays = false;
 			}
 
-			if (playerAttributes.getStamina () <= 0) {
-				if (playerAttributes.getStamina () < 0)
-					playerAttributes.setStaminaToZero ();
+			if (playerAttributes.stamina <= 0) {
+				if (playerAttributes.stamina < 0)
+					playerAttributes.stamina = 0;
 				run = false; 
 				moveSpeed = 5; 
 			}
 
-			if (playerAttributes.getDizzy () == true) {
+			if (playerAttributes.dizzy == true) {
 				moveDir = new Vector3 (Input.GetAxisRaw ("Vertical"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Horizontal")).normalized;
 			} else {
 				moveDir = new Vector3 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Vertical")).normalized;
@@ -135,12 +138,12 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			if (Input.GetKeyDown (KeyCode.F4)) {
-				GameObject.Find ("Player").GetComponent<PlayerAttributes> ().LevelMeUp ();
+				GameObject.Find ("Player").GetComponent<PlayerAttributes> ().levelMeUp ();
 			}
 
-		/*	if (Input.GetKeyDown (KeyCode.R)) {
+			if (Input.GetKeyDown (KeyCode.R)) {
 				GameObject.Find ("Main Camera").GetComponent<SmoothMouseLook> ().resetRotation ();
-			}*/
+			}
 
 			if ((Input.GetAxis ("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) && soundPlays == false) {
 				soundPlays = true;
@@ -198,7 +201,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		if (paused == false) {
+		if (!paused) {
 			var rigidbody = GetComponent<Rigidbody> ();
 			rigidbody.MovePosition (rigidbody.position + transform.TransformDirection (moveDir) * moveSpeed * Time.deltaTime);
 		}
