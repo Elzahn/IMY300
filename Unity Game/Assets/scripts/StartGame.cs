@@ -25,13 +25,13 @@ public class StartGame : MonoBehaviour {
 			GUI.Box (new Rect (left, top, boxWidth, boxHeight), "Choose your character");
 			if (GUI.Button (new Rect (left+80, top+50, 100, 30), "Male")) {
 				print ("You chose a male");
-				attributesScript.gender ='m';
+				attributesScript.setGender('m');
 				this.GetComponent<Sounds>().playWorldSound (2);
 				playerScript.setPaused (false);
 			}
 			if (GUI.Button (new Rect (left+80, top+90, 100, 30), "Female")) {
 				print ("You chose a female");
-				attributesScript.gender = 'f';
+				attributesScript.setGender('f');
 				this.GetComponent<Sounds>().playWorldSound (2);
 				playerScript.setPaused (false);
 			}

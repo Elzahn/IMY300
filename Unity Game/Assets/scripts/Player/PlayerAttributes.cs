@@ -34,6 +34,7 @@ public class PlayerAttributes : MonoBehaviour {
 	public int maxStorage = 50;
 
 	private Sounds soundComponent;
+	private PlayerController controllerComponent;
 
 	/**
 	 * Singleton
@@ -56,17 +57,13 @@ public class PlayerAttributes : MonoBehaviour {
 	public int xp {get; private set;}
 	public bool dizzy {get; set;}
 	
-	public char gender {
-		get {
-			return gender;
+	public char gender {get ; private set ;}
+		
+	public void setGender(char value) {
+		if (value == 'f') {
+			stamina += FEMALE_EXTRA_STAMINA;
 		}
-
-		set {
-			if (value == 'f') {
-				stamina += FEMALE_EXTRA_STAMINA;
-			}
-			this.gender = value;
-		}
+		gender = value;
 	}
 
 	public int speed {
@@ -141,7 +138,6 @@ public class PlayerAttributes : MonoBehaviour {
 	public float lastDamage {get; set;} //Last time damage taken
 	private float nextRegeneration;
 	public static bool giveAlarm;
-	private PlayerController controllerComponent;
 
 
 	/**************************************************** Monobehaviour functions *********************************************
@@ -165,8 +161,8 @@ public class PlayerAttributes : MonoBehaviour {
 		this.nextRegeneration = Time.time + REGEN_INTERVAL;
 		this.lastDamage = 0;
 		
-		this.soundComponent = GetComponent<Sounds>();
-		this.controllerComponent = GetComponent<PlayerController> ();
+		this.soundComponent = this.gameObject.GetComponent<Sounds>();
+		this.controllerComponent = this.gameObject.GetComponent<PlayerController> ();
 	}
 
 	void Update() {
