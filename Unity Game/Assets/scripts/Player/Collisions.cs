@@ -46,9 +46,6 @@ public class Collisions : MonoBehaviour {
 			col.collider.gameObject.GetComponent<Loot>().showMyLoot();
 		} else if (col.collider.tag == "WorldObject" && NaturalDisasters.shake > 0) {
 			int healthToLose = (int)(playerAttributesScript.hp * 0.02);
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
 >>>>>>> origin/master
 			playerAttributesScript.loseHP (healthToLose);//loses 2% health when hit
 			PlayerLog.addStat ("You lose " + healthToLose + " health");
@@ -65,14 +62,9 @@ public class Collisions : MonoBehaviour {
 				this.GetComponent<Sounds> ().playWorldSound (4);
 			}
 <<<<<<< HEAD
-<<<<<<< HEAD
 		} else //Lose health if you run into something that you can't interact with, walk/run on and isn't a monster
 		if (playerScript.run && col.collider.name != "Storage" && col.collider.name != "ExitPlane" && col.collider.name != "EntrancePlane" && col.collider.name != "Platform" && col.collider.name != "Planet" && col.collider.tag != "Monster") {
 			int healthToLose = (int)(playerAttributesScript.currentHealth () * 0.02);
-=======
-		} else if (playerScript.run && col.collider.name != "Storage" && col.collider.name != "ExitPlane" && col.collider.name != "EntrancePlane" && col.collider.name != "Platform" && col.collider.name != "Planet" && col.collider.tag != "Monster") {
-			int healthToLose = (int)(playerAttributesScript.hp * 0.02);
->>>>>>> origin/master
 =======
 		} else if (playerScript.run && col.collider.name != "Storage" && col.collider.name != "ExitPlane" && col.collider.name != "EntrancePlane" && col.collider.name != "Platform" && col.collider.name != "Planet" && col.collider.tag != "Monster") {
 			int healthToLose = (int)(playerAttributesScript.hp * 0.02);

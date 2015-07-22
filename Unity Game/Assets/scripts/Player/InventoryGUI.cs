@@ -28,7 +28,6 @@ public class InventoryGUI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 <<<<<<< HEAD
-<<<<<<< HEAD
 		if (playerScript.getPaused () == false) {
 
 			if(hasCollided && Input.GetKeyDown(KeyCode.E)){
@@ -36,10 +35,6 @@ public class InventoryGUI : MonoBehaviour {
 			}
 
 			if (Input.GetKeyDown (KeyCode.I) && showStorage == false) {
-=======
-		if (!playerScript.getPaused ()) {
-			if (Input.GetKeyDown (KeyCode.I) && !showStorage) {
->>>>>>> origin/master
 =======
 		if (!playerScript.getPaused ()) {
 			if (Input.GetKeyDown (KeyCode.I) && !showStorage) {
@@ -203,13 +198,8 @@ public class InventoryGUI : MonoBehaviour {
 			int itemHeight = 30;
 			
 <<<<<<< HEAD
-<<<<<<< HEAD
 			GUI.Box (new Rect (left, top, boxWidth, boxHeight), "Storage/Inventory Space (Press E to close)");
 			GUI.Box (new Rect (left, top + 40, width, boxHeight), "Storage \t" + attributesScript.storage.Count + "/" + attributesScript.getMaxStorage ());
-=======
-			GUI.Box (new Rect (left, top, boxWidth, boxHeight), "Storage/Inventory Space (Press Esc to close)");
-			GUI.Box (new Rect (left, top + 40, width, boxHeight), "Storage \t" + attributesScript.storage.Count + "/" + attributesScript.maxStorage);
->>>>>>> origin/master
 =======
 			GUI.Box (new Rect (left, top, boxWidth, boxHeight), "Storage/Inventory Space (Press Esc to close)");
 			GUI.Box (new Rect (left, top + 40, width, boxHeight), "Storage \t" + attributesScript.storage.Count + "/" + attributesScript.maxStorage);
