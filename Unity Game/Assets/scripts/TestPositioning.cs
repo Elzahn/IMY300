@@ -6,6 +6,9 @@ using System.Linq;
 public class TestPositioning : MonoBehaviour {
 		
 		public GameObject tree1;
+		public GameObject tree2;
+		public GameObject tree3;
+		public GameObject tree4;
 		
 		const int TREE_COUNT = 100;
 		
@@ -19,15 +22,22 @@ public class TestPositioning : MonoBehaviour {
 			
 			//Spawn Trees
 			for (int i=0; i < TREE_COUNT; ++i) {
-				tree = chooseTree(0);
+			int index = Random.Range(0, 4);
+				tree = chooseTree(index);
 				addTree(tree);
 			}	  
 		}
 
 		GameObject chooseTree(int i) {
 			switch(i) {
-			default : 
+			case 0 : 
 				return tree1;
+		case 1:
+			return tree2;
+		case 2: 
+			return tree3;
+		default:
+			return tree4;
 			}
 		}
 
@@ -39,8 +49,8 @@ public class TestPositioning : MonoBehaviour {
 		while (tries > 0) {
 			tries--;
 			position = Random.onUnitSphere * ((GameObject.Find("Planet").transform.lossyScale.x/2));
-			print(position + " " + mesh.bounds.size.y);
-			Collider[] collidedItems = Physics.OverlapSphere(position, 0.05f);
+
+			Collider[] collidedItems = Physics.OverlapSphere(position, 1f);
 			List<Collider> tempList = new List<Collider>();
 
 			foreach(Collider col in collidedItems){
@@ -66,11 +76,20 @@ public class TestPositioning : MonoBehaviour {
 		GameObject go = Instantiate(tree);
 		/*go.AddComponent<FauxGravityBody>();
 		go.AddComponent<Rigidbody> ();*/
-		go.transform.localScale = new Vector3 (0.025f, 0.025f, 0.025f);	//size influences attraction to planet too small floates
+
 		//go.AddComponent<myTree> ();
 
-		GameObject child = go.transform.FindChild ("Cylinder001").gameObject;
-
+		GameObject child;
+		if (tree == tree1 || tree == tree3) {
+			child = go.transform.FindChild ("Cylinder001").gameObject;
+			go.transform.localScale = new Vector3 (0.025f, 0.025f, 0.025f);	//size influences attraction to planet too small floates
+		} else if (tree == tree2) {
+			child = go.transform.FindChild ("Sphere001").gameObject;
+			go.transform.localScale = new Vector3 (0.025f, 0.025f, 0.025f);	//size influences attraction to planet too small floates
+		} else {
+			child = go.transform.FindChild ("Box012").gameObject;
+			go.transform.localScale = new Vector3 (0.25f, 0.25f, 0.25f);	//size influences attraction to planet too small floates
+		}
 		/*child.tag = "WorldObject";
 		child.AddComponent<MeshCollider> ();
 		child.GetComponent<MeshCollider> ().convex = true;
