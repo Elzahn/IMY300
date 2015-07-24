@@ -1,9 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class SpawnWarpPoints : MonoBehaviour {
 
 	public GameObject warpPoint;
+
+	const int TOTAL_WARPS = 5;
+
+	LinkedList<GameObject> warpPoints = new LinkedList <GameObject> ();
 
 	void Start(){
 		spawnTeleports ();
@@ -11,6 +17,47 @@ public class SpawnWarpPoints : MonoBehaviour {
 
 	public static void spawnNewTeleports(){
 		GameObject.Find("Planet").GetComponent<SpawnWarpPoints>().spawnTeleports();
+	}
+
+	void Update(){
+		bool done = true;
+		foreach (GameObject warpPoint in warpPoints) {
+			if(done == true && warpPoint.GetComponent<Rigidbody>().constraints == RigidbodyConstraints.FreezeAll){
+				done = true;
+			} else {
+				done = false;
+			}
+		}
+		if (done ) {
+			print ("WarpPoints created");
+		}
+	}
+
+	public void position(GameObject go){
+		GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().checkMyPosition = false;
+		Vector3 position;
+		bool created = false;
+		
+		while (!created) {
+			
+			position = Random.onUnitSphere * (GameObject.Find("Planet").GetComponent<SphereCollider>().radius * GameObject.Find("Planet").transform.lossyScale.x);
+			
+			Collider[] collidedItems = Physics.OverlapSphere(position, 1.5f);
+			List<Collider> tempList = new List<Collider>();
+			
+			foreach(Collider col in collidedItems){
+				if(col.name != "Planet" && col.transform != go.transform){
+					tempList.Add(col);
+				}
+			}
+			
+			if(tempList.Count() == 0){
+				go.transform.parent.gameObject.transform.GetComponent<Rigidbody> ().position = position;
+				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().timeToCheckMyPosition = Time.time;
+				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().checkMyPosition = true;
+				return;
+			}
+		}
 	}
 
 	//Removes any existing teleports and replaces them placing the new teleports at random positions on the sphere.
@@ -22,33 +69,17 @@ public class SpawnWarpPoints : MonoBehaviour {
 			Destroy (gameObjectsToDelete [i]);
 		}
 
-		Mesh mesh = GameObject.Find("Planet").GetComponent<MeshFilter>().mesh;
-		//float PlanetRadius = GameObject.Find("Planet").GetComponent<SphereCollider> ().radius;
+		for (int i = 0; i < TOTAL_WARPS; i++) {
 
-		for (int i = 1; i < 6; i++) {
-			GameObject warpPoint1 = Instantiate(warpPoint);
-			//warpPoint1.transform.position = Random.onUnitSphere * PlanetRadius;//(mesh.bounds.size.y/2);//
-			warpPoint1.name = "WarpPoint" + i;
-			warpPoint1.AddComponent<Rigidbody>();
+			GameObject tempWarpPoint = Instantiate(warpPoint);
 
-			Vector3 position = Random.onUnitSphere * ((mesh.bounds.size.y/4)+15);
-			
-			if(Physics.CheckSphere (position, 20)){
-				Rigidbody rigid = warpPoint1.GetComponent<Rigidbody> () ;
-				rigid.position = position;
-			} 
+			GameObject child = tempWarpPoint.transform.FindChild ("Box012").gameObject;
 
-			GameObject child = warpPoint1.transform.FindChild ("Box012").gameObject;
-			child.tag = "WarpPoint";
-			child.AddComponent<MeshCollider> ();
-			child.GetComponent<MeshCollider> ().convex = true;
+			position(child);
 
-			//warpPoint1.GetComponent<Rigidbody>().position = position;//Random.onUnitSphere * (mesh.bounds.size.y/2);//Random.onUnitSphere * PlanetRadius;
-			warpPoint1.AddComponent<FauxGravityBody>();
-			warpPoint1.GetComponent<FauxGravityBody>().attractor = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
-			//warpPoint1.transform.GetComponent<CapsuleCollider> ().isTrigger = true;
-			warpPoint1.tag = "WarpPoint";
-		//	warpPoint1.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+			tempWarpPoint.GetComponent<FauxGravityBody>().attractor = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
+
+			warpPoints.AddLast(tempWarpPoint);
 		}
 	}
 

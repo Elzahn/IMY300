@@ -33,6 +33,8 @@ public class FauxGravityAttractor : MonoBehaviour {
 			col.collider.GetComponent<PositionMe> ().touching = false;
 		} else if (col.collider.tag == "MediumHealthPack" || col.collider.tag == "LargeHealthPack") {
 			col.collider.transform.parent.gameObject.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;
+		} else if (col.collider.tag == "WarpPoint") {//seperate since warppoint hierarchy might change with remodel
+			col.collider.transform.parent.gameObject.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;
 		}
 	}
 
@@ -40,7 +42,7 @@ public class FauxGravityAttractor : MonoBehaviour {
 	void OnCollisionEnter (Collision col){
 		if (col.collider.tag == "WorldObject") {
 			GameObject temp;
-			if(col.collider.name == "Sphere001" || col.collider.name == "Cylinder001" || col.collider.name == "Box012"){
+			if (col.collider.name == "Sphere001" || col.collider.name == "Cylinder001" || col.collider.name == "Box012") {
 				temp = col.collider.transform.parent.gameObject;
 			} else {
 				temp = col.collider.gameObject;
@@ -48,8 +50,10 @@ public class FauxGravityAttractor : MonoBehaviour {
 
 			temp.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
 		} else if (col.collider.tag == "Monster") {
-			col.collider.GetComponent<PositionMe>().touching = true;
+			col.collider.GetComponent<PositionMe> ().touching = true;
 		} else if (col.collider.tag == "MediumHealthPack" || col.collider.tag == "LargeHealthPack") {
+			col.collider.transform.parent.gameObject.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
+		} else if (col.collider.tag == "WarpPoint") {	//seperate since warppoint hierarchy might change with remodel
 			col.collider.transform.parent.gameObject.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
 		}
 	}

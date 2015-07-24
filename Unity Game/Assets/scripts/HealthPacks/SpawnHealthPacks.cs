@@ -8,6 +8,8 @@ public class SpawnHealthPacks : MonoBehaviour {
 	public GameObject medHealth;
 	public GameObject largeHealth;
 
+	const int TOTAL_HEALTH = 10;
+
 	LinkedList<GameObject> healthPacks = new LinkedList <GameObject> ();
 
 	// Use this for initialization
@@ -75,7 +77,7 @@ public class SpawnHealthPacks : MonoBehaviour {
 		float PlanetRadius = planet.GetComponent<SphereCollider>().radius;
 		Mesh mesh = GameObject.Find("Planet").GetComponent<MeshFilter>().mesh;
 
-		for (int i = 1; i <= 10; i++) {
+		for (int i = 0; i < TOTAL_HEALTH; i++) {
 
 			GameObject tempHealthPack;
 

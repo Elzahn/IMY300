@@ -27,19 +27,33 @@ public class PositionMe : MonoBehaviour {
 				timeToCheckMyPosition = Time.time;
 				GameObject.Find ("Planet").GetComponent<EnemySpawner> ().position (this.gameObject);
 			}
-		} else if (this.tag == "MedHealth" || this.tag == "LargeHealth") {
+		} else if (this.tag == "MediumHealthPack" || this.tag == "LargeHealthPack") {
 			if (col.name == "EntrancePlane" && checkMyPosition == true) {
 				timeToCheckMyPosition = Time.time;
 
-				//Finds chid with the MedHealth or LargeHealth tag
+				//Finds chid with the MediumHealthPack or LargeHealthPack tag
 				GameObject child = null;
 				foreach (Transform t in transform) {
-					if (t.gameObject.tag == "MedHealth" || t.gameObject.tag == "LargeHealth") {
+					if (t.gameObject.tag == "MediumHealthPack" || t.gameObject.tag == "LargeHealthPack") {
 						child = t.gameObject;
 						break;
 					}
 				}
 				GameObject.Find ("Planet").GetComponent<SpawnHealthPacks> ().position (child);
+			}
+		} else if (this.tag == "WarpPoint") {
+			if (col.name == "EntrancePlane" && checkMyPosition == true) {
+				timeToCheckMyPosition = Time.time;
+				
+				//Finds chid with the WarpPoint tag
+				GameObject child = null;
+				foreach (Transform t in transform) {
+					if (t.gameObject.tag == "WarpPoint") {
+						child = t.gameObject;
+						break;
+					}
+				}
+				GameObject.Find ("Planet").GetComponent<SpawnWarpPoints> ().position (child);
 			}
 		}
 	}
@@ -71,20 +85,36 @@ public class PositionMe : MonoBehaviour {
 				GameObject.Find ("Planet").GetComponent<EnemySpawner> ().position (this.gameObject);
 			} 
 		} //Repositions healthpacks that aren't touching the planet after 2 seconds
-		else if (this.tag == "MedHealth" || this.tag == "LargeHealth") {
+		else if (this.tag == "MediumHealthPack" || this.tag == "LargeHealthPack") {
 			if (Time.time >= timeToCheckMyPosition + 2f && checkMyPosition == true && this.GetComponent<Rigidbody> ().constraints != RigidbodyConstraints.FreezeAll) {
 				
 				timeToCheckMyPosition = Time.time;
 				
 				GameObject child = null;
 				foreach (Transform t in transform) {
-					if (t.gameObject.tag == "MedHealth" || t.gameObject.tag == "LargeHealth") {
+					if (t.gameObject.tag == "MediumHealthPack" || t.gameObject.tag == "LargeHealthPack") {
 						child = t.gameObject;
 						break;
 					}
 				}
 				
 				GameObject.Find ("Planet").GetComponent<SpawnHealthPacks> ().position (child);
+			}
+		} //Repositions warpPoints that aren't touching the planet after 2 seconds
+		else if (this.tag == "WarpPoint") {	
+			if (Time.time >= timeToCheckMyPosition + 2f && checkMyPosition == true && this.GetComponent<Rigidbody> ().constraints != RigidbodyConstraints.FreezeAll) {
+				
+				timeToCheckMyPosition = Time.time;
+				
+				GameObject child = null;
+				foreach (Transform t in transform) {
+					if (t.gameObject.tag == "WarpPoint") {
+						child = t.gameObject;
+						break;
+					}
+				}
+				
+				GameObject.Find ("Planet").GetComponent<SpawnWarpPoints> ().position (child);
 			}
 		}
 	}
