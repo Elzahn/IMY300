@@ -78,7 +78,7 @@ public class EnemySpawner : MonoBehaviour {
 			}
 		}
 		if (done) {
-			print ("Enemies have landed");
+			print ("Enemies landed");
 		}
 	}
 
@@ -90,10 +90,8 @@ public class EnemySpawner : MonoBehaviour {
 				return enemy2;
 			case 2 : 
 				return enemy3;
-			default : //case 3 : 
+			default : 
 				return enemy4;
-			/*default : 
-				return bossEnemy;*/
 		}
 	}
 
@@ -147,19 +145,10 @@ public class EnemySpawner : MonoBehaviour {
 		enemyComponent.init();
 		enemies.AddLast(go);
 
-		//TODO Position correctly
-		//Mesh mesh = GameObject.Find ("Planet").GetComponent<MeshFilter>().mesh;
-			
-	/*	Vector3 position = Random.onUnitSphere * ((mesh.bounds.size.y/4)+10);
-		if(Physics.CheckSphere (position, 20)){
-			Rigidbody rigid = go.GetComponent<Rigidbody> () ;
-			rigid.position = position;
-		} */
 		position (go);
 	}
 	
 	void dropLoot(Enemy enemy, Vector3 position) {
-		//TODO Implement visuals at location
 
 		GameObject.Find("Player").GetComponent<Sounds>().playDeathSound(0);
 		for (int i = 0; i < enemy.maxLoot; i++) {
@@ -292,8 +281,8 @@ public class EnemySpawner : MonoBehaviour {
 
 			int boxHeight = 250;
 			int boxWidth = 400;
-			int top = Screen.height/2-boxHeight/2;//30;
-			int left = Screen.width/2-boxWidth/2;//200;
+			int top = Screen.height/2-boxHeight/2;
+			int left = Screen.width/2-boxWidth/2;
 			int itemHeight = 30;
 			int buttonWidth = 100;
 			int closeTop = top;

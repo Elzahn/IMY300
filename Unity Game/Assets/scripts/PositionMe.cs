@@ -23,8 +23,24 @@ public class PositionMe : MonoBehaviour {
 				GameObject.Find ("Planet").GetComponent<SpawnTrees> ().position (child);
 			}
 		} else if (this.tag == "Monster") {
-			timeToCheckMyPosition = Time.time;
-			GameObject.Find ("Planet").GetComponent<EnemySpawner> ().position (this.gameObject);
+			if (col.name == "EntrancePlane" && checkMyPosition == true) {
+				timeToCheckMyPosition = Time.time;
+				GameObject.Find ("Planet").GetComponent<EnemySpawner> ().position (this.gameObject);
+			}
+		} else if (this.tag == "MedHealth" || this.tag == "LargeHealth") {
+			if (col.name == "EntrancePlane" && checkMyPosition == true) {
+				timeToCheckMyPosition = Time.time;
+
+				//Finds chid with the MedHealth or LargeHealth tag
+				GameObject child = null;
+				foreach (Transform t in transform) {
+					if (t.gameObject.tag == "MedHealth" || t.gameObject.tag == "LargeHealth") {
+						child = t.gameObject;
+						break;
+					}
+				}
+				GameObject.Find ("Planet").GetComponent<SpawnHealthPacks> ().position (child);
+			}
 		}
 	}
 
@@ -46,13 +62,30 @@ public class PositionMe : MonoBehaviour {
 
 				GameObject.Find ("Planet").GetComponent<SpawnTrees> ().position (child);
 			}
-		} else if (this.tag == "Monster") {
+		}//Repositions monsters that aren't touching the planet after 2 seconds
+		else if (this.tag == "Monster") {
 			if ((Time.time >= timeToCheckMyPosition + 2f && checkMyPosition == true && touching == false) || (checkMyPosition == false && touching == false)) {
 				
 				timeToCheckMyPosition = Time.time;
 				
 				GameObject.Find ("Planet").GetComponent<EnemySpawner> ().position (this.gameObject);
 			} 
+		} //Repositions healthpacks that aren't touching the planet after 2 seconds
+		else if (this.tag == "MedHealth" || this.tag == "LargeHealth") {
+			if (Time.time >= timeToCheckMyPosition + 2f && checkMyPosition == true && this.GetComponent<Rigidbody> ().constraints != RigidbodyConstraints.FreezeAll) {
+				
+				timeToCheckMyPosition = Time.time;
+				
+				GameObject child = null;
+				foreach (Transform t in transform) {
+					if (t.gameObject.tag == "MedHealth" || t.gameObject.tag == "LargeHealth") {
+						child = t.gameObject;
+						break;
+					}
+				}
+				
+				GameObject.Find ("Planet").GetComponent<SpawnHealthPacks> ().position (child);
+			}
 		}
 	}
 }

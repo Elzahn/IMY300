@@ -30,7 +30,9 @@ public class FauxGravityAttractor : MonoBehaviour {
 
 			temp.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;
 		} else if (col.collider.tag == "Monster") {
-			col.collider.GetComponent<PositionMe>().touching = false;
+			col.collider.GetComponent<PositionMe> ().touching = false;
+		} else if (col.collider.tag == "MediumHealthPack" || col.collider.tag == "LargeHealthPack") {
+			col.collider.transform.parent.gameObject.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;
 		}
 	}
 
@@ -47,6 +49,8 @@ public class FauxGravityAttractor : MonoBehaviour {
 			temp.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
 		} else if (col.collider.tag == "Monster") {
 			col.collider.GetComponent<PositionMe>().touching = true;
+		} else if (col.collider.tag == "MediumHealthPack" || col.collider.tag == "LargeHealthPack") {
+			col.collider.transform.parent.gameObject.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
 		}
 	}
 }

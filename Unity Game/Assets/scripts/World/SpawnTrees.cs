@@ -39,7 +39,7 @@ public class SpawnTrees : MonoBehaviour {
 			}
 		}
 		if (done ) {
-			print ("Tree are planted");
+			print ("Trees planted");
 		}
 	}
 
