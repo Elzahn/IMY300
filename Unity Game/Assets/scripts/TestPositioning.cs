@@ -57,7 +57,7 @@ public class TestPositioning : MonoBehaviour {
 		}
 
 	public void position(GameObject go){
-		GameObject.Find(go.transform.parent.gameObject.name).GetComponent<myTree>().checkMyPosition = false;
+		GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().checkMyPosition = false;
 		Vector3 position;
 		bool planted = false;
 
@@ -77,8 +77,8 @@ public class TestPositioning : MonoBehaviour {
 			if(tempList.Count() == 0){
 				planted = true;
 				go.transform.parent.gameObject.transform.GetComponent<Rigidbody> ().position = position;
-				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<myTree>().timeToCheckTreePosition = Time.time;
-				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<myTree>().checkMyPosition = true;
+				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().timeToCheckTreePosition = Time.time;
+				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().checkMyPosition = true;
 				return;
 			}
 		}

@@ -11,12 +11,27 @@ public class SpawnTrees : MonoBehaviour {
 
 	public GameObject shrub;
 
-	const int TREE_COUNT = 30;
+	const int TREE_COUNT = 300;
 	
 	FauxGravityAttractor planet;
 	
 	LinkedList<GameObject> trees = new LinkedList <GameObject> ();
-	
+
+	//just to see when all trees have been placed
+	void Update(){
+		bool done = true;
+		foreach (GameObject tree in trees) {
+			if(done == true && tree.GetComponent<Rigidbody>().constraints == RigidbodyConstraints.FreezeAll){
+				done = true;
+			} else {
+				done = false;
+			}
+		}
+		if (done ) {
+			print ("done");
+		}
+	}
+
 	void Start () {
 		planet = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
 		GameObject tree;
@@ -41,41 +56,51 @@ public class SpawnTrees : MonoBehaviour {
 			return shrub;
 		}
 	}
-	
-	void addTree(GameObject tree) {	
 
-		GameObject go = Instantiate(tree);
-		go.AddComponent<FauxGravityBody>();
-		go.AddComponent<Rigidbody> ();
-
-		if (tree != shrub) {
-			go.transform.localScale = new Vector3(0.025f, 0.027f, 0.025f);
-		}
-
-		GameObject child;
-		if (tree == tree2) {
-			child = go.transform.FindChild ("Sphere001").gameObject;
-		} else if (tree == tree3 || tree == tree1) {
-			child = go.transform.FindChild ("Cylinder001").gameObject;
-		} else {
-			child = go.transform.FindChild ("Box012").gameObject;
-		}
-
-		child.tag = "WorldObject";
-		child.AddComponent<MeshCollider> ();
-		child.GetComponent<MeshCollider> ().convex = true;
-
-
-		go.GetComponent<FauxGravityBody>().attractor = planet;
-		go.tag = "WorldObject";
-
-		//TODO Position correctly
-		Mesh mesh = GameObject.Find ("Planet").GetComponent<MeshFilter> ().mesh;
-		//go.transform.position = Random.insideUnitSphere * ((mesh.bounds.size.y/4));//bounds.size.y/8); 
-
-		go.transform.GetComponent<Rigidbody> ().position = Random.insideUnitSphere * ((mesh.bounds.size.y / 4)+5);//bounds.size.y/8); 
-
-		trees.AddLast(go);
+	public void position(GameObject go){
+		GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().checkMyPosition = false;
+		Vector3 position;
+		bool planted = false;
 		
+		while (!planted) {
+			
+			position = Random.onUnitSphere * (GameObject.Find("Planet").GetComponent<SphereCollider>().radius * GameObject.Find("Planet").transform.lossyScale.x);
+			
+			Collider[] collidedItems = Physics.OverlapSphere(position, 1.5f);
+			List<Collider> tempList = new List<Collider>();
+			
+			foreach(Collider col in collidedItems){
+				if(col.name != "Planet" && col.transform != go.transform){
+					tempList.Add(col);
+				}
+			}
+			
+			if(tempList.Count() == 0){
+				planted = true;
+				go.transform.parent.gameObject.transform.GetComponent<Rigidbody> ().position = position;
+				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().timeToCheckTreePosition = Time.time;
+				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().checkMyPosition = true;
+				return;
+			}
+		}
+	}
+
+	void addTree(GameObject tree) {	
+		
+		GameObject go = Instantiate(tree);
+		
+		//Finds chid with the worldObject tag
+		GameObject child = null;
+		foreach(Transform t in go.transform)
+		{
+			if(t.gameObject.tag == "WorldObject"){
+				child = t.gameObject;
+				break;
+			}
+		}
+		go.GetComponent<FauxGravityBody>().attractor = planet;
+		
+		position (child);
+		trees.AddLast(go);
 	}
 }
