@@ -69,6 +69,17 @@ public class EnemySpawner : MonoBehaviour {
 				Destroy(go);
 			}
 		}
+		bool done = true;
+		foreach (GameObject enemy in enemies) {
+			if(done == true && enemy.GetComponent<PositionMe>().touching == true){
+				done = true;
+			} else {
+				done = false;
+			}
+		}
+		if (done) {
+			print ("Enemies have landed");
+		}
 	}
 
 	GameObject chooseEnemy(int i) {
@@ -98,6 +109,33 @@ public class EnemySpawner : MonoBehaviour {
 			return playerLevel + 2;
 	}
 
+	public void position(GameObject go){
+		go.GetComponent<PositionMe>().checkMyPosition = false;
+		Vector3 position;
+		bool landed = false;
+		
+		while (!landed) {
+			
+			position = Random.onUnitSphere * (GameObject.Find("Planet").GetComponent<SphereCollider>().radius * GameObject.Find("Planet").transform.lossyScale.x);
+			
+			Collider[] collidedItems = Physics.OverlapSphere(position, 1.5f);//can try with 20
+			List<Collider> tempList = new List<Collider>();
+			
+			foreach(Collider col in collidedItems){
+				if(col.name != "Planet" && col.transform != go.transform){
+					tempList.Add(col);
+				}
+			}
+
+			if(tempList.Count() == 0){
+				go.GetComponent<Rigidbody> ().position = position;
+				GameObject.Find(go.name).GetComponent<PositionMe>().timeToCheckMyPosition = Time.time;
+				GameObject.Find(go.name).GetComponent<PositionMe>().checkMyPosition = true;
+				return;
+			}
+		}
+	}
+
 	void addEnemy(GameObject enemy) {	
 
 		GameObject go = Instantiate(enemy);
@@ -107,17 +145,17 @@ public class EnemySpawner : MonoBehaviour {
 		Enemy enemyComponent = go.GetComponent<Enemy>();
 		enemyComponent.level = chooseLevel();
 		enemyComponent.init();
-		enemyComponent.notYetSet = true;
 		enemies.AddLast(go);
 
 		//TODO Position correctly
-		Mesh mesh = GameObject.Find ("Planet").GetComponent<MeshFilter>().mesh;
+		//Mesh mesh = GameObject.Find ("Planet").GetComponent<MeshFilter>().mesh;
 			
-		Vector3 position = Random.onUnitSphere * ((mesh.bounds.size.y/4)+10);
+	/*	Vector3 position = Random.onUnitSphere * ((mesh.bounds.size.y/4)+10);
 		if(Physics.CheckSphere (position, 20)){
 			Rigidbody rigid = go.GetComponent<Rigidbody> () ;
 			rigid.position = position;
-		} 
+		} */
+		position (go);
 	}
 	
 	void dropLoot(Enemy enemy, Vector3 position) {

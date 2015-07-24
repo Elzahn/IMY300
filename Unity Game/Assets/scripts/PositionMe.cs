@@ -3,8 +3,9 @@ using System.Collections;
 
 public class PositionMe : MonoBehaviour {
 
-	public float timeToCheckTreePosition;	//gives two seconds for trees to be attracted to the planet
+	public float timeToCheckMyPosition;	//gives two seconds for trees to be attracted to the planet
 	public bool checkMyPosition = true;	//variable set to tell when tree's position has been set
+	public bool touching = false; //is the monster touching the sphere
 
 	//Keeps Trees out of the start position
 	void OnTriggerEnter(Collider col){
@@ -20,7 +21,7 @@ public class PositionMe : MonoBehaviour {
 					break;
 				}
 			}
-			timeToCheckTreePosition = Time.time;
+			timeToCheckMyPosition = Time.time;
 			planet.position(child);
 		}
 	}
@@ -28,17 +29,28 @@ public class PositionMe : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//Repositions trees that aren't touching the planet after 2 seconds
-		if (Time.time >= timeToCheckTreePosition + 2f && checkMyPosition == true && this.GetComponent<Rigidbody> ().constraints != RigidbodyConstraints.FreezeAll) {
-			SpawnTrees planet = GameObject.Find ("Planet").GetComponent<SpawnTrees> ();
-			GameObject child = null;
-			foreach (Transform t in transform) {
-				if (t.gameObject.tag == "WorldObject") {
-					child = t.gameObject;
-					break;
+		if (this.tag == "WorldObject") {
+			if (Time.time >= timeToCheckMyPosition + 2f && checkMyPosition == true && this.GetComponent<Rigidbody> ().constraints != RigidbodyConstraints.FreezeAll) {
+
+				timeToCheckMyPosition = Time.time;
+
+				GameObject child = null;
+				foreach (Transform t in transform) {
+					if (t.gameObject.tag == "WorldObject") {
+						child = t.gameObject;
+						break;
+					}
 				}
+
+				GameObject.Find ("Planet").GetComponent<SpawnTrees> ().position (child);
 			}
-			timeToCheckTreePosition = Time.time;
-			planet.position (child);
+		} else if (this.tag == "Monster") {
+			if ((Time.time >= timeToCheckMyPosition + 2f && checkMyPosition == true && touching == false) || (checkMyPosition == false && touching == false)) {
+				
+				timeToCheckMyPosition = Time.time;
+				
+				GameObject.Find ("Planet").GetComponent<EnemySpawner> ().position (this.gameObject);
+			} 
 		}
 	}
 }

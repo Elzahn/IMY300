@@ -15,11 +15,9 @@ public abstract class Enemy : MonoBehaviour {
 	protected int suspicion;
 	protected int SUSPICION_ALERT = 5;
 	//private Sounds sound;
-	public bool notYetSet;
 
 	void Start () {
 		/* Any other initlization */
-		notYetSet = true;
 //		sound = GameObject.Find("Player").GetComponent<Sounds> ();
 		attackPlayer = false;
 		nextAttack = Time.time + delay;

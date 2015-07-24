@@ -77,7 +77,7 @@ public class TestPositioning : MonoBehaviour {
 			if(tempList.Count() == 0){
 				planted = true;
 				go.transform.parent.gameObject.transform.GetComponent<Rigidbody> ().position = position;
-				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().timeToCheckTreePosition = Time.time;
+				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().timeToCheckMyPosition = Time.time;
 				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().checkMyPosition = true;
 				return;
 			}

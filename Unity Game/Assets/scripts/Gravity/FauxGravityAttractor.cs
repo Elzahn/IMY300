@@ -22,13 +22,15 @@ public class FauxGravityAttractor : MonoBehaviour {
 	void OnCollisionExit (Collision col){
 		if (col.collider.tag == "WorldObject") {
 			GameObject temp;
-			if(col.collider.name == "Sphere001" || col.collider.name == "Cylinder001" || col.collider.name == "Box012"){
+			if (col.collider.name == "Sphere001" || col.collider.name == "Cylinder001" || col.collider.name == "Box012") {
 				temp = col.collider.transform.parent.gameObject;
 			} else {
 				temp = col.collider.gameObject;
 			}
 
 			temp.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;
+		} else if (col.collider.tag == "Monster") {
+			col.collider.GetComponent<PositionMe>().touching = false;
 		}
 	}
 
@@ -43,6 +45,8 @@ public class FauxGravityAttractor : MonoBehaviour {
 			}
 
 			temp.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
+		} else if (col.collider.tag == "Monster") {
+			col.collider.GetComponent<PositionMe>().touching = true;
 		}
 	}
 }

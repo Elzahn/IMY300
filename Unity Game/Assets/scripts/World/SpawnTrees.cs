@@ -17,21 +17,6 @@ public class SpawnTrees : MonoBehaviour {
 	
 	LinkedList<GameObject> trees = new LinkedList <GameObject> ();
 
-	//just to see when all trees have been placed
-	void Update(){
-		bool done = true;
-		foreach (GameObject tree in trees) {
-			if(done == true && tree.GetComponent<Rigidbody>().constraints == RigidbodyConstraints.FreezeAll){
-				done = true;
-			} else {
-				done = false;
-			}
-		}
-		if (done ) {
-			print ("done");
-		}
-	}
-
 	void Start () {
 		planet = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
 		GameObject tree;
@@ -43,7 +28,21 @@ public class SpawnTrees : MonoBehaviour {
 			addTree(tree);
 		}	  
 	}
-	
+
+	void Update(){
+		bool done = true;
+		foreach (GameObject tree in trees) {
+			if(done == true && tree.GetComponent<Rigidbody>().constraints == RigidbodyConstraints.FreezeAll){
+				done = true;
+			} else {
+				done = false;
+			}
+		}
+		if (done ) {
+			print ("Tree are planted");
+		}
+	}
+
 	GameObject chooseTree(int i) {
 		switch(i) {
 		case 0 : 
@@ -76,9 +75,8 @@ public class SpawnTrees : MonoBehaviour {
 			}
 			
 			if(tempList.Count() == 0){
-				planted = true;
 				go.transform.parent.gameObject.transform.GetComponent<Rigidbody> ().position = position;
-				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().timeToCheckTreePosition = Time.time;
+				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().timeToCheckMyPosition = Time.time;
 				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().checkMyPosition = true;
 				return;
 			}
