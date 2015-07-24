@@ -10,7 +10,7 @@ public class TestPositioning : MonoBehaviour {
 		public GameObject tree3;
 		public GameObject tree4;
 		
-		const int TREE_COUNT = 100;
+		const int TREE_COUNT = 100;//300 max
 		
 		FauxGravityAttractor planet;
 		
@@ -41,13 +41,17 @@ public class TestPositioning : MonoBehaviour {
 			}
 		}
 
-	void position(GameObject go){
-		int tries = 6;
+	public void position(GameObject go){
+		GameObject.Find(go.transform.parent.gameObject.name).GetComponent<myTree>().checkMe = true;
+		GameObject.Find (go.transform.parent.gameObject.name).GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;
+		//int tries = 12;
 		Mesh mesh = GameObject.Find ("Planet").GetComponent<MeshFilter> ().mesh;
 		Vector3 position;
+		bool planted = false;
 
-		while (tries > 0) {
-			tries--;
+		while (!planted) {
+			//tries--;
+
 			position = Random.onUnitSphere * ((GameObject.Find("Planet").transform.lossyScale.x/2));
 
 			Collider[] collidedItems = Physics.OverlapSphere(position, 1f);
@@ -60,15 +64,18 @@ public class TestPositioning : MonoBehaviour {
 			}
 
 			if(tempList.Count() == 0){
+				planted = true;
 				go.transform.parent.gameObject.transform.GetComponent<Rigidbody> ().position = position;
 				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<myTree>().check = Time.time;
+				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<myTree>().checkMe = false;
 
+				print ("Tree planted");
 				//GameObject.Find(go.transform.parent.gameObject.name).GetComponent<myTree>().pos = position;
 				return;
 			}
 		}
 
-		Destroy(go.transform.parent.transform.gameObject);
+	//	Destroy(go.transform.parent.transform.gameObject);
 	}
 
 	void addTree(GameObject tree) {	
