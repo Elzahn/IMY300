@@ -9,20 +9,22 @@ public class PositionMe : MonoBehaviour {
 
 	//Keeps Trees out of the start position
 	void OnTriggerEnter(Collider col){
-		if (col.name == "EntrancePlane" && checkMyPosition == true) {
-			TestPositioning planet = GameObject.Find("Planet").GetComponent<TestPositioning>();
-
-			//Finds chid with the worldObject tag
-			GameObject child = null;
-			foreach(Transform t in transform)
-			{
-				if(t.gameObject.tag == "WorldObject"){
-					child = t.gameObject;
-					break;
+		if (this.tag == "WorldObject") {
+			if (col.name == "EntrancePlane" && checkMyPosition == true) {
+				//Finds chid with the worldObject tag
+				GameObject child = null;
+				foreach (Transform t in transform) {
+					if (t.gameObject.tag == "WorldObject") {
+						child = t.gameObject;
+						break;
+					}
 				}
+				timeToCheckMyPosition = Time.time;
+				GameObject.Find ("Planet").GetComponent<SpawnTrees> ().position (child);
 			}
+		} else if (this.tag == "Monster") {
 			timeToCheckMyPosition = Time.time;
-			planet.position(child);
+			GameObject.Find ("Planet").GetComponent<EnemySpawner> ().position (this.gameObject);
 		}
 	}
 
