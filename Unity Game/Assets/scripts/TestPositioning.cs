@@ -10,7 +10,7 @@ public class TestPositioning : MonoBehaviour {
 		public GameObject tree3;
 		public GameObject tree4;
 		
-		const int TREE_COUNT = 100;//300 max
+		const int TREE_COUNT = 400;//300 max
 		
 		FauxGravityAttractor planet;
 		
@@ -43,7 +43,7 @@ public class TestPositioning : MonoBehaviour {
 
 	public void position(GameObject go){
 		GameObject.Find(go.transform.parent.gameObject.name).GetComponent<myTree>().checkMe = true;
-		GameObject.Find (go.transform.parent.gameObject.name).GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;
+		GameObject.Find (go.transform.parent.gameObject.name).GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
 		//int tries = 12;
 		Mesh mesh = GameObject.Find ("Planet").GetComponent<MeshFilter> ().mesh;
 		Vector3 position;
@@ -52,9 +52,9 @@ public class TestPositioning : MonoBehaviour {
 		while (!planted) {
 			//tries--;
 
-			position = Random.onUnitSphere * ((GameObject.Find("Planet").transform.lossyScale.x/2));
+			position = Random.onUnitSphere * (GameObject.Find("Planet").GetComponent<SphereCollider>().radius/2);
 
-			Collider[] collidedItems = Physics.OverlapSphere(position, 1f);
+			Collider[] collidedItems = Physics.OverlapSphere(position, 1.5f);
 			List<Collider> tempList = new List<Collider>();
 
 			foreach(Collider col in collidedItems){
@@ -68,8 +68,6 @@ public class TestPositioning : MonoBehaviour {
 				go.transform.parent.gameObject.transform.GetComponent<Rigidbody> ().position = position;
 				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<myTree>().check = Time.time;
 				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<myTree>().checkMe = false;
-
-				print ("Tree planted");
 				//GameObject.Find(go.transform.parent.gameObject.name).GetComponent<myTree>().pos = position;
 				return;
 			}
