@@ -9,13 +9,28 @@ public class TestPositioning : MonoBehaviour {
 		public GameObject tree2;
 		public GameObject tree3;
 		public GameObject tree4;
-		
-		const int TREE_COUNT = 400;//300 max
+
+		const int TREE_COUNT = 300;
 		
 		FauxGravityAttractor planet;
 		
 		LinkedList<GameObject> trees = new LinkedList <GameObject> ();
 		
+	//just to see when all trees have been placed
+	void Update(){
+		bool done = true;
+		foreach (GameObject tree in trees) {
+			if(done == true && tree.GetComponent<Rigidbody>().constraints == RigidbodyConstraints.FreezeAll){
+				done = true;
+			} else {
+				done = false;
+			}
+		}
+		if (done ) {
+			print ("done");
+		}
+	}
+
 		void Start () {
 			planet = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
 			GameObject tree;
@@ -42,17 +57,13 @@ public class TestPositioning : MonoBehaviour {
 		}
 
 	public void position(GameObject go){
-		GameObject.Find(go.transform.parent.gameObject.name).GetComponent<myTree>().checkMe = true;
-		GameObject.Find (go.transform.parent.gameObject.name).GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
-		//int tries = 12;
-		Mesh mesh = GameObject.Find ("Planet").GetComponent<MeshFilter> ().mesh;
+		GameObject.Find(go.transform.parent.gameObject.name).GetComponent<myTree>().checkMyPosition = false;
 		Vector3 position;
 		bool planted = false;
 
 		while (!planted) {
-			//tries--;
 
-			position = Random.onUnitSphere * (GameObject.Find("Planet").GetComponent<SphereCollider>().radius/2);
+			position = Random.onUnitSphere * (GameObject.Find("Planet").GetComponent<SphereCollider>().radius * GameObject.Find("Planet").transform.lossyScale.x);
 
 			Collider[] collidedItems = Physics.OverlapSphere(position, 1.5f);
 			List<Collider> tempList = new List<Collider>();
@@ -66,44 +77,28 @@ public class TestPositioning : MonoBehaviour {
 			if(tempList.Count() == 0){
 				planted = true;
 				go.transform.parent.gameObject.transform.GetComponent<Rigidbody> ().position = position;
-				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<myTree>().check = Time.time;
-				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<myTree>().checkMe = false;
-				//GameObject.Find(go.transform.parent.gameObject.name).GetComponent<myTree>().pos = position;
+				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<myTree>().timeToCheckTreePosition = Time.time;
+				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<myTree>().checkMyPosition = true;
 				return;
 			}
 		}
-
-	//	Destroy(go.transform.parent.transform.gameObject);
 	}
 
 	void addTree(GameObject tree) {	
 			
 		GameObject go = Instantiate(tree);
-		/*go.AddComponent<FauxGravityBody>();
-		go.AddComponent<Rigidbody> ();*/
 
-		//go.AddComponent<myTree> ();
-
-		GameObject child;
-		if (tree == tree1 || tree == tree3) {
-			child = go.transform.FindChild ("Cylinder001").gameObject;
-			go.transform.localScale = new Vector3 (0.025f, 0.025f, 0.025f);	//size influences attraction to planet too small floates
-		} else if (tree == tree2) {
-			child = go.transform.FindChild ("Sphere001").gameObject;
-			go.transform.localScale = new Vector3 (0.025f, 0.025f, 0.025f);	//size influences attraction to planet too small floates
-		} else {
-			child = go.transform.FindChild ("Box012").gameObject;
-			go.transform.localScale = new Vector3 (0.25f, 0.25f, 0.25f);	//size influences attraction to planet too small floates
+		//Finds chid with the worldObject tag
+		GameObject child = null;
+		foreach(Transform t in go.transform)
+		{
+			if(t.gameObject.tag == "WorldObject"){
+				child = t.gameObject;
+				break;
+			}
 		}
-		/*child.tag = "WorldObject";
-		child.AddComponent<MeshCollider> ();
-		child.GetComponent<MeshCollider> ().convex = true;
-			*/
 		go.GetComponent<FauxGravityBody>().attractor = planet;
-		//go.tag = "WorldObject";
-		/*Mesh mesh = GameObject.Find ("Planet").GetComponent<MeshFilter> ().mesh;
-		go.transform.GetComponent<Rigidbody> ().position = Random.onUnitSphere * Random.value * ((mesh.bounds.size.y));
-		*/
+
 		position (child);
 		trees.AddLast(go);
 	}

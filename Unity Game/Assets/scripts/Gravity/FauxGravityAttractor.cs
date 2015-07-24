@@ -18,7 +18,21 @@ public class FauxGravityAttractor : MonoBehaviour {
 		}
 	}
 
-	//Ensure each object touches sphere if it has the mesh attached.
+	//Ensure each object that doesn't touches the sphere anymore can be moved again
+	void OnCollisionExit (Collision col){
+		if (col.collider.tag == "WorldObject") {
+			GameObject temp;
+			if(col.collider.name == "Sphere001" || col.collider.name == "Cylinder001" || col.collider.name == "Box012"){
+				temp = col.collider.transform.parent.gameObject;
+			} else {
+				temp = col.collider.gameObject;
+			}
+
+			temp.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;
+		}
+	}
+
+	//Ensure each object that touches the sphere and has a mesh attached can't be moved
 	void OnCollisionEnter (Collision col){
 		if (col.collider.tag == "WorldObject") {
 			GameObject temp;
@@ -27,6 +41,7 @@ public class FauxGravityAttractor : MonoBehaviour {
 			} else {
 				temp = col.collider.gameObject;
 			}
+
 			temp.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
 		}
 	}
