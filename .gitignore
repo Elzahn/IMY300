@@ -71,5 +71,12 @@ obj/
 ._*
 .Spotlight-V100
 .Trashes
+
 ehthumbs.db
 Thumbs.db
+
+*.meta
+!*.cs.meta
+
+*_data/
+*.exe
