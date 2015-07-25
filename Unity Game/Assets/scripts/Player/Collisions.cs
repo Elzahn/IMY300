@@ -47,12 +47,14 @@ public class Collisions : MonoBehaviour {
 				playerAttributesScript.addToInventory (new MediumHealthPack ());
 				Destroy (GameObject.Find (col.collider.transform.parent.name));
 				this.GetComponent<Sounds> ().playWorldSound (4);
+				GameObject.Find("Planet").GetComponent<SpawnHealthPacks>().healthPacks.Remove(col.collider.gameObject);
 			}
 		} else if (col.collider.tag == "LargeHealthPack") {
 			if (playerAttributesScript.inventory.Count < playerAttributesScript.inventorySize) {
 				playerAttributesScript.addToInventory (new LargeHealthPack ());
 				Destroy (GameObject.Find (col.collider.transform.parent.name));
 				this.GetComponent<Sounds> ().playWorldSound (4);
+				GameObject.Find("Planet").GetComponent<SpawnHealthPacks>().healthPacks.Remove(col.collider.gameObject);
 			}
 		} else  //Lose health if you run into something that you can't interact with, walk/run on and isn't a monster
 		if (playerScript.run && col.collider.name != "Storage" && col.collider.name != "ExitPlane" && col.collider.name != "EntrancePlane" && col.collider.name != "Platform" && col.collider.name != "Planet" && col.collider.tag != "Monster" && col.collider.tag != "WarpPoint") {

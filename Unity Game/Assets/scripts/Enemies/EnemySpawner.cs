@@ -14,7 +14,7 @@ public class EnemySpawner : MonoBehaviour {
 
 	public GameObject loot;
 
-	private bool giveLoot = false;
+	//private bool giveLoot = false;
 	private string EnemyName;
 	private int numLoot;
 	private PlayerAttributes attributesScript;
@@ -154,7 +154,7 @@ public class EnemySpawner : MonoBehaviour {
 		for (int i = 0; i < enemy.maxLoot; i++) {
 			int chance = Random.Range (0, 101);
 			if (chance >= enemy.lootChance) {
-				giveLoot = true;
+				//giveLoot = true;
 				playerScript.paused = true;
 				EnemyName = enemy.typeID;
 
@@ -274,41 +274,8 @@ public class EnemySpawner : MonoBehaviour {
 		deadEnemy.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
 		Loot lootComponent = deadEnemy.GetComponent<Loot> ();
 		lootComponent.storeLoot (tempLoot, "Dead " + enemy.typeID);
-	}
-
-	void OnGUI() {
-		if (giveLoot) {
-
-			int boxHeight = 250;
-			int boxWidth = 400;
-			int top = Screen.height/2-boxHeight/2;
-			int left = Screen.width/2-boxWidth/2;
-			int itemHeight = 30;
-			int buttonWidth = 100;
-			int closeTop = top;
-
-			GUI.Box (new Rect (left, top, boxWidth, boxHeight), EnemyName);
-
-			foreach (InventoryItem item in tempLoot.ToList()) {
-				GUI.Label (new Rect (left + 30, top + 40, boxWidth-buttonWidth, itemHeight), item.typeID);
-				if (GUI.Button (new Rect (left + 270, top + 40, buttonWidth, itemHeight), "Take it")) {
-					attributesScript.addToInventory (item);
-					tempLoot.Remove (item);
-					GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(2);
-					if (tempLoot.Count == 0) {
-						giveLoot = false;
-						playerScript.paused = false;
-					}
-				}
-				top += 30;
-			}
-			if (GUI.Button (new Rect (left + 270, closeTop + (boxHeight - itemHeight), buttonWidth, itemHeight), "Close")) {
-				giveLoot = false;
-				playerScript.paused =(false);
-				GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(2);
-				tempLoot.Clear ();
-			}
-		}
+		tempLoot.Clear ();
+		lootComponent.showMyLoot ();
 	}
 
 	public void clearLoot(){
