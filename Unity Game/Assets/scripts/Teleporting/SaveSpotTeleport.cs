@@ -47,10 +47,10 @@ public class SaveSpotTeleport : MonoBehaviour {
 			showExitConfirmation = false;
 			this.GetComponent<Rigidbody> ().mass = 0.8f;
 			sound.playWorldSound (3);
-			if (playerScript.run) {
+			/*if (playerScript.run) {
 				playerScript.moveSpeed = 10;
 				playerScript.run = false;
-			}
+			}*/
 			attributesScript.saveInventoryAndStorage ();
 			Application.LoadLevel ("Scene");
 		} else if (showEntranceConfirmation && Input.GetKeyDown (KeyCode.E)) {
@@ -62,10 +62,10 @@ public class SaveSpotTeleport : MonoBehaviour {
 			this.transform.rotation = new Quaternion(0, 0.7f, 0, -0.7f);
 			
 			sound.playWorldSound(3);
-			if(playerScript.run){
+			/*if(playerScript.run){
 				playerScript.moveSpeed = 10;
 				playerScript.run = false;
-			}
+			}*/
 			Application.LoadLevel ("SaveSpot");
 		}
 	}
