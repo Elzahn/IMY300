@@ -14,13 +14,13 @@ public class SpawnHealthPacks : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		spawnHealthPacks ();
+		spawn ();
 	}
 
 	void Update(){
 		bool done = true;
 		foreach (GameObject healthPack in healthPacks) {
-			if(done == true && healthPack.GetComponent<Rigidbody>().constraints == RigidbodyConstraints.FreezeAll){
+			if(done && healthPack.GetComponent<Rigidbody> ().constraints == RigidbodyConstraints.FreezeAll){
 				done = true;
 			} else {
 				done = false;
@@ -59,7 +59,7 @@ public class SpawnHealthPacks : MonoBehaviour {
 		}
 	}
 
-	public void spawnHealthPacks ()
+	public void spawn ()
 	{
 		GameObject[] gameObjectsToDelete =  GameObject.FindGameObjectsWithTag ("MediumHealthPack");
 		
