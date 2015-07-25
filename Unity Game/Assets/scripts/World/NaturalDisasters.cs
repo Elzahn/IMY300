@@ -50,7 +50,7 @@ public class NaturalDisasters : MonoBehaviour {
 			cameraTransform.localRotation = originalCamRotation;
 		}
 
-		if (playerScript.getPaused () == false) {
+		if (playerScript.paused == false) {
 			GameObject.Find ("Directional Light").transform.Rotate (0, -0.01f, 0);	//Rotates light
 
 			if(GameObject.Find ("Player").GetComponent<PlayerAttributes>().dizzy == true && Time.time >= dizzyWearOfNext){
@@ -96,7 +96,7 @@ public class NaturalDisasters : MonoBehaviour {
 					} else {
 					GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(12);
 					spin = 2f;
-						if(GameObject.Find ("Player").GetComponent<PlayerController>().getJumping() == false){
+						if(GameObject.Find ("Player").GetComponent<PlayerController>().jumping == false){
 							GameObject.Find ("Player").GetComponent<PlayerAttributes>().dizzy = true;
 							dizzyWearOfNext = Time.time + dizzyDelay;
 						}

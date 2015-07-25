@@ -32,7 +32,7 @@ public abstract class Enemy : MonoBehaviour {
 	
 	void Update () {
 		PlayerController playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
-		if (playerScript.getPaused () == false) {
+		if (playerScript.paused == false) {
 			/* Called once per frame. AI comes Here */
 			GameObject player = GameObject.Find ("Player");
 			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
@@ -92,7 +92,7 @@ public abstract class Enemy : MonoBehaviour {
 		//this.hp = 0;
 		GameObject player = GameObject.Find ("Player");
 
-		if (player.GetComponent<PlayerController> ().getPaused () == false) {
+		if (player.GetComponent<PlayerController> ().paused == false) {
 			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
 			Vector3 myPos = GetComponent<Rigidbody> ().position;
 			if (Time.time >= nextAttack) {

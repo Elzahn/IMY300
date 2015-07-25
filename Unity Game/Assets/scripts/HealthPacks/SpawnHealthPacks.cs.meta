@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: c2439b1381f3d3648ad30c9027aebd7f
-timeCreated: 1437774086
+timeCreated: 1437826647
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - medHealth: {fileID: 109652, guid: 3df133f02ee39074cb011a62810c0ec1, type: 2}
+  - largeHealth: {fileID: 178162, guid: 2cdd07a42b29ba144809a9d84768224b, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

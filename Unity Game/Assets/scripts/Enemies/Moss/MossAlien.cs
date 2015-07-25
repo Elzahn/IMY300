@@ -38,7 +38,7 @@ public class MossAlien : Enemy {
 	void Update () {
 		/* Called once per frame. AI comes Here */
 		PlayerController playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
-		if (playerScript.getPaused () == false) {
+		if (playerScript.paused == false) {
 			/* Called once per frame. AI comes Here */
 			GameObject player = GameObject.Find ("Player");
 			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;

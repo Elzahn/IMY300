@@ -47,7 +47,7 @@ public class SmoothMouseLook : MonoBehaviour {
 
 	void Update ()
 	{
-		if (playerScript.getPaused() == false) {
+		if (playerScript.paused == false) {
 
 		/*	//Rotate player
 			if(Input.GetMouseButton (1)){

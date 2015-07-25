@@ -2,47 +2,15 @@
 using System.Collections;
 using System.IO;
 
-public class PlayerController : MonoBehaviour {
-
+public class DirtyPlayerController : MonoBehaviour {
+	
 	private PlayerAttributes playerAttributes;
 
 	public const float RUN_MULT = 2f;
 
-	private float moveSpeed;
+	public float moveSpeed;
 	private Vector3 moveDir;
-
-	/**
-	 * Access 'jumping' like normal variable, do not use '_jumping' ever!
-	 * */
-	private bool _jumping = false;
-	public bool jumping {
-		get {
-			return _jumping;
-		}
-		set {
-			_jumping = value;
-			this.GetComponent<Animator>().SetBool("Jumping", _jumping);
-		}
-	}
-
-	private bool showDeath, showPaused, soundPlays = false;
-
-	/**
-	 * Access 'paused' like normal variable, do not use '_paused' ever!
-	 * */
-	private bool _paused;
-	public bool paused {
-		get {
-			if (_paused) {
-				this.GetComponent<Sounds>().stopSound("all");
-			}
-			return _paused;
-		} 
-		set {
-			_paused = value;
-		} 
-	}
-
+	private bool jumping = false, paused, showDeath, showPaused, soundPlays = false;
 	public bool run = false, moving, showQuit = false;
 	private Sounds sound;
 	private float check;
@@ -50,7 +18,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void setJumping(){
 		jumping = false;
-
+		this.GetComponent<Animator>().SetBool("Jumping", jumping);
 	}
 
 	void Start(){
@@ -73,7 +41,8 @@ public class PlayerController : MonoBehaviour {
 		animator.SetBool ("Jumping", false);
 	}
 
-	void checkScreenshot() {
+	// Update is called once per frame
+	void Update () {
 		if (Input.GetKeyDown (KeyCode.KeypadPlus)) {
 			if(!Directory.Exists(Application.dataPath + "/Screenshots"))
 			{    
@@ -90,109 +59,96 @@ public class PlayerController : MonoBehaviour {
 			} while (System.IO.File.Exists(screenshotFilename));
 			Application.CaptureScreenshot(screenshotFilename);
 		}
-	}
-
-	void keysCheck() {
-		if (Input.GetKeyDown (KeyCode.F1)) {
-			this.GetComponent<Warping> ().chooseDestinationUnlocked = true;
-			print ("Warp point destination choice unlocked.");
-		}
-		
-		if (Input.GetKeyDown (KeyCode.F2)) {
-			FallThroughPlanet.fallThroughPlanetUnlocked = true;
-			print ("Fall through plannet unlocked.");
-		}
-		
-		if (Input.GetKeyDown (KeyCode.F3)) {
-			this.GetComponent<SaveSpotTeleport> ().setEnterSaveSpot ();
-			print ("You killed the boss!");
-		}
-		
-		if (Input.GetKeyDown (KeyCode.F4)) {
-			playerAttributes.levelMeUp ();
-		}
-		
-		if (Input.GetKeyDown (KeyCode.R)) {
-			GameObject.Find ("Main Camera").GetComponent<SmoothMouseLook> ().resetRotation ();
-		}
-		
-		if(Input.GetKeyDown(KeyCode.F5)){
-			NaturalDisasters.spin = 2f;
-		}
-		
-		if(Input.GetKeyDown(KeyCode.F6)){
-			NaturalDisasters.shake = 2f;
-		}
-		
-		if(Input.GetKeyDown(KeyCode.Escape)){
-			showQuit = true;
-		}
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		checkScreenshot();
-
-		moveSpeed = playerAttributes.speed;
-		/**
-		 * P Pauses or unpausese
-		 * Only if showpuase the same as pause.
-		 * */
-		if (Input.GetKeyDown (KeyCode.P) && paused == showPaused) {
-			paused = !paused;
-			showPaused = paused;
-			
-		}
-		if (paused) {
+		if (paused == true) {
 			this.GetComponent<Animator> ().speed = 0;
-			moveSpeed = 0;
+		}
 
-		} else {
+		if (paused == false) {
 			playAnimation();
 
-			keysCheck();
+			if(Input.GetKeyDown(KeyCode.Tab)){
+				showQuit = true;
+			}
 
-			if (playerAttributes.isDead ()) {
+			if (playerAttributes.isDead () == true) {
 				showDeath = true;
-				this.GetComponent<Sounds>().stopAlarmSound(1);
+				GameObject.Find("Player").GetComponent<Sounds>().stopAlarmSound(1);
 				paused = true;
 			}
 
-			if (!Sounds.characterAudio.isPlaying) {
-				soundPlays = false;
-			}
-			
-			run = false;
-			if (Input.GetAxis("Run") > 0 && playerAttributes.stamina > 0) {
-				run = true;
-				moveSpeed *= RUN_MULT;
-				playerAttributes.drainStamina ();
+			if(Sounds.characterAudio.isPlaying == false)
+			{
 				soundPlays = false;
 			}
 
-			if (playerAttributes.dizzy) {
+			if (Input.GetKeyDown (KeyCode.LeftShift)) {   
+				moveSpeed = 10;
+				run = true;
+				soundPlays = false;
+			} else if (Input.GetKeyUp (KeyCode.LeftShift)) {
+				moveSpeed = 5;
+				run = false;
+				soundPlays = false;
+			}
+
+			if (playerAttributes.stamina <= 0) {
+				if (playerAttributes.stamina < 0)
+					playerAttributes.stamina = 0;
+				run = false; 
+				moveSpeed = 5; 
+			}
+
+			if (playerAttributes.dizzy == true) {
 				moveDir = new Vector3 (Input.GetAxisRaw ("Vertical"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Horizontal")).normalized;
 			} else {
 				moveDir = new Vector3 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Vertical")).normalized;
 			}
 
 			if (Input.GetAxisRaw ("Jump") == 1) {
-				jumping = true;			
+				jumping = true;
+				this.GetComponent<Animator>().SetBool("Jumping", jumping);
 			}
 
+			if (Input.GetKeyDown (KeyCode.P)) {
+				showPaused = true;
+				setPaused (true);
+			}
 
-			if ((Input.GetAxis ("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) 
-			    && soundPlays == false) {
+			if (Input.GetKeyDown (KeyCode.F1)) {
+				this.GetComponent<Warping> ().chooseDestinationUnlocked = true;
+				print ("Warp point destination choice unlocked.");
+			}
+
+			if (Input.GetKeyDown (KeyCode.F2)) {
+				FallThroughPlanet.fallThroughPlanetUnlocked = true;
+				print ("Fall through plannet unlocked.");
+			}
+
+			if (Input.GetKeyDown (KeyCode.F3)) {
+				this.GetComponent<SaveSpotTeleport> ().setEnterSaveSpot ();
+				print ("You killed the boss!");
+			}
+
+			if (Input.GetKeyDown (KeyCode.F4)) {
+				GameObject.Find ("Player").GetComponent<PlayerAttributes> ().levelMeUp ();
+			}
+
+			if (Input.GetKeyDown (KeyCode.R)) {
+				GameObject.Find ("Main Camera").GetComponent<SmoothMouseLook> ().resetRotation ();
+			}
+
+			if ((Input.GetAxis ("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) && soundPlays == false) {
 				soundPlays = true;
 				moving = true;
 
 				if(run){
+					playerAttributes.drainStamina ();
 					if(Application.loadedLevelName == "SaveSpot"){
 						sound.playCharacterSound (3);
 					} else {
 						sound.playCharacterSound (1);
 					}
-				} else {
+				} else if(run == false){
 					if(Application.loadedLevelName == "SaveSpot"){
 						sound.playCharacterSound (1);
 					} else {
@@ -228,10 +184,12 @@ public class PlayerController : MonoBehaviour {
 					check += 0.25f;
 				}
 			}
-
-		} /*else {
-
-		}*/
+		} else {
+			if (Input.GetKeyDown (KeyCode.P)) {
+				paused = false;
+				showPaused = false;
+			}
+		}
 	}
 
 	void FixedUpdate() {
@@ -239,6 +197,23 @@ public class PlayerController : MonoBehaviour {
 			var rigidbody = GetComponent<Rigidbody> ();
 			rigidbody.MovePosition (rigidbody.position + transform.TransformDirection (moveDir) * moveSpeed * Time.deltaTime);
 		}
+	}
+
+	public bool getJumping(){
+		return jumping;
+	}
+
+	public bool getPaused()
+	{
+		if (paused) {
+			this.GetComponent<Sounds>().stopSound("all");
+		}
+		return paused;
+	}
+	
+	public void setPaused(bool value)
+	{
+		paused = value;
 	}
 
 	void OnGUI(){

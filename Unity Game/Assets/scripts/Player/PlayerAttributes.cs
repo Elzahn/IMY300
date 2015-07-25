@@ -169,7 +169,7 @@ public class PlayerAttributes : MonoBehaviour {
 		if (stamina < 0) 
 			stamina = 0;
 		// Health regenration etc.
-		if (!controllerComponent.getPaused ()) {
+		if (!controllerComponent.paused) {
 			
 			if (this.hp <= 50 && giveAlarm) {
 				soundComponent.playAlarmSound (1);

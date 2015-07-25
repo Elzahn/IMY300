@@ -27,7 +27,7 @@ public class InventoryGUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!playerScript.getPaused ()) {
+		if (!playerScript.paused) {
 
 			if(hasCollided && Input.GetKeyDown(KeyCode.E)){
 				openStorage();

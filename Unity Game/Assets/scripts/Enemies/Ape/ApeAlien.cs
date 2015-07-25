@@ -39,7 +39,7 @@ public class ApeAlien : Enemy {
 	void Update () {
 		PlayerController playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
 
-		if (playerScript.getPaused () == false) {
+		if (playerScript.paused  == false) {
 			/* Called once per frame. AI comes Here */
 			
 			GameObject player = GameObject.Find ("Player");

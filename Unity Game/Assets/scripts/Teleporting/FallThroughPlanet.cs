@@ -18,7 +18,7 @@ public class FallThroughPlanet : MonoBehaviour {
 	}
 	
 	void Update(){
-		if (playerScript.getPaused() == false && fallThroughPlanetUnlocked == true) {
+		if (playerScript.paused == false && fallThroughPlanetUnlocked == true) {
 			if (canFallThroughPlanet == true) {
 				if (Input.GetKeyDown (KeyCode.F)) {
 					canFallThroughPlanet = false;

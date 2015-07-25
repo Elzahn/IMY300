@@ -65,9 +65,9 @@ public class Collisions : MonoBehaviour {
 				this.GetComponent<Sounds> ().playCharacterSound (5);
 			}
 		} else //play landing sound
-		if((col.collider.name == "Platform" || col.collider.name == "Planet") && playerScript.getJumping() == true) {
+		if((col.collider.name == "Platform" || col.collider.name == "Planet") && playerScript.jumping == true) {
 			this.GetComponent<Sounds> ().playCharacterSound (4);
-			playerScript.setJumping();
+			playerScript.jumping = false;
 		} 
 	}
 

@@ -25,7 +25,7 @@ public class Warping : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (playerScript.getPaused() == false) {
+		if (playerScript.paused == false) {
 			if (waitingForMovement && GameObject.Find("Player").GetComponent<Rigidbody> ().velocity.magnitude > 0) {
 				justWarped = false;
 				waitingForMovement = false;
