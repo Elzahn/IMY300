@@ -41,7 +41,7 @@ public class Warping : MonoBehaviour {
 	}
 
 	void generateRandomWarpPoint(int randomWarpPoint){
-		playerScript.setPaused (false);	//resume game
+		playerScript.paused = false;	//resume game
 		showDestinationChoice = false;	//closes menu
 
 		if("WarpPoint"+randomWarpPoint == col.name && !justWarped){
@@ -64,7 +64,7 @@ public class Warping : MonoBehaviour {
 	void OnCollisionEnter (Collision target){
 		if (justWarped == false && target.collider.tag == "WarpPoint") {
 			col = target.collider;
-			playerScript.setPaused(true);	//Pause game
+			playerScript.paused =(true);	//Pause game
 			
 			if(chooseDestinationUnlocked && chooseDestination){
 				showDestinationChoice = true;
@@ -154,7 +154,7 @@ public class Warping : MonoBehaviour {
 
 			if(GUI.Button(new Rect(320, top+210,150,20), "Cancel")) {
 				showDestinationChoice = false;
-				playerScript.setPaused(false);
+				playerScript.paused = false;
 				GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(2);
 			}
 		}

@@ -166,6 +166,8 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	void Update() {
+		if (stamina < 0) 
+			stamina = 0;
 		// Health regenration etc.
 		if (!controllerComponent.getPaused ()) {
 			

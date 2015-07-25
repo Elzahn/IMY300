@@ -46,7 +46,7 @@ public class NaturalDisasters : MonoBehaviour {
 			spin = 0f;
 			shake = 0f;	
 			cameraTransform.localPosition = originalCamPos;
-			playerScript.setPaused (false);
+			playerScript.paused = false;
 			cameraTransform.localRotation = originalCamRotation;
 		}
 
@@ -72,7 +72,7 @@ public class NaturalDisasters : MonoBehaviour {
 					if(chance <= 10){
 						GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(13);
 						shake = 2f;
-						playerScript.setPaused (true);
+						playerScript.paused = true;
 						SpawnWarpPoints.spawnNewTeleports ();
 
 						GameObject[] gameObjects = GameObject.FindGameObjectsWithTag ("WorldObject");
@@ -126,7 +126,7 @@ public class NaturalDisasters : MonoBehaviour {
 							index++;
 						}
 						
-						playerScript.setPaused (true);
+						playerScript.paused = true;
 
 						spinningDone = true;
 						print ("Spinning around and around");

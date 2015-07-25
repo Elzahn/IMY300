@@ -29,7 +29,7 @@ public class Loot : MonoBehaviour {
 
 	void OnGUI(){
 		if (showLoot) {
-			playerScript.setPaused (true);
+			playerScript.paused = true;
 			int boxHeight = 250;
 			int boxWidth = 400;
 			int top = Screen.height/2-boxHeight/2;//30;
@@ -50,14 +50,14 @@ public class Loot : MonoBehaviour {
 						showLoot = false;
 						Destroy(this.gameObject);
 						GameObject.Find("Player").GetComponent<Collisions>().setLootConf();
-						playerScript.setPaused (false);
+						playerScript.paused = false;
 					}
 				}
 				top += 30;
 			}
 			if (GUI.Button (new Rect (left + 270, closeTop + (boxHeight - itemHeight), buttonWidth, itemHeight), "Close")) {
 				showLoot = false;
-				playerScript.setPaused (false);
+				playerScript.paused = false;
 				GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(2);
 			}
 		}

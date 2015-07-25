@@ -155,7 +155,7 @@ public class EnemySpawner : MonoBehaviour {
 			int chance = Random.Range (0, 101);
 			if (chance >= enemy.lootChance) {
 				giveLoot = true;
-				playerScript.setPaused (true);
+				playerScript.paused = true;
 				EnemyName = enemy.typeID;
 
 				chance = Random.Range (0, 101);
@@ -297,14 +297,14 @@ public class EnemySpawner : MonoBehaviour {
 					GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(2);
 					if (tempLoot.Count == 0) {
 						giveLoot = false;
-						playerScript.setPaused (false);
+						playerScript.paused = false;
 					}
 				}
 				top += 30;
 			}
 			if (GUI.Button (new Rect (left + 270, closeTop + (boxHeight - itemHeight), buttonWidth, itemHeight), "Close")) {
 				giveLoot = false;
-				playerScript.setPaused (false);
+				playerScript.paused =(false);
 				GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(2);
 				tempLoot.Clear ();
 			}

@@ -65,14 +65,14 @@ public class InventoryGUI : MonoBehaviour {
 		hasCollided = true;
 		showStorage = false;
 		this.GetComponent<Sounds>().playWorldSound (0);
-		playerScript.setPaused (false);	//Resume game
+		playerScript.paused = false;	//Resume game
 	}
 
 	public void openStorage(){
 		hasCollided = false;
 		showStorage = true;
 		this.GetComponent<Sounds> ().playWorldSound (0);
-		playerScript.setPaused (true);	//Pause game
+		playerScript.paused = true;	//Pause game
 	}
 
 	public void openInventory(){
@@ -80,18 +80,18 @@ public class InventoryGUI : MonoBehaviour {
 		showInventory = true;
 		PlayerLog.showLog = false;
 		this.GetComponent<Sounds>().playWorldSound (1);
-		playerScript.setPaused (true);	//Pause game
+		playerScript.paused = true;	//Pause game
 	}
 
 	public void closeInventory(){
 		showInventory = false;
 		PlayerLog.showLog = true;
 		this.GetComponent<Sounds>().playWorldSound (1);
-		playerScript.setPaused (false);	//Resume game
+		playerScript.paused = false;	//Resume game
 	}
 
 	void OnGUI(){
-		if (hasCollided == true){    
+		if (hasCollided){    
 			GUI.Box(new Rect(140,Screen.height-50,Screen.width-300,120),("Press E to interact"));
 		}
 		if (showInventory) {

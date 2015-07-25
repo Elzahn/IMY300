@@ -15,7 +15,7 @@ public class StartGame : MonoBehaviour {
 	void OnGUI()
 	{
 		if (attributesScript.gender == '?') {
-			playerScript.setPaused (true);
+			playerScript.paused = true;
 
 			int boxWidth = 250;
 			int boxHeight = 150;
@@ -27,13 +27,13 @@ public class StartGame : MonoBehaviour {
 				print ("You chose a male");
 				attributesScript.setGender('m');
 				this.GetComponent<Sounds>().playWorldSound (2);
-				playerScript.setPaused (false);
+				playerScript.paused = false;
 			}
 			if (GUI.Button (new Rect (left+80, top+90, 100, 30), "Female")) {
 				print ("You chose a female");
 				attributesScript.setGender('f');
 				this.GetComponent<Sounds>().playWorldSound (2);
-				playerScript.setPaused (false);
+				playerScript.paused = false;
 			}
 		}
 	}

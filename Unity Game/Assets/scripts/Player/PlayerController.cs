@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour {
 
 	private float moveSpeed;
 	private Vector3 moveDir;
-	private bool jumping = false, paused, showDeath, showPaused, soundPlays = false;
+	private bool jumping = false,showDeath, showPaused, soundPlays = false;
+	public bool paused {get; set; }
 	public bool run = false, moving, showQuit = false;
 	private Sounds sound;
 	private float check;
@@ -59,12 +60,8 @@ public class PlayerController : MonoBehaviour {
 			Application.CaptureScreenshot(screenshotFilename);
 		}
 	}
-	void cheatsAndStuff() {
-		
-		if (Input.GetKeyDown (KeyCode.P)) {
-			showPaused = true;
-			setPaused (true);
-		}
+	void keysCheck() {
+	
 		
 		if (Input.GetKeyDown (KeyCode.F1)) {
 			this.GetComponent<Warping> ().chooseDestinationUnlocked = true;
@@ -100,22 +97,29 @@ public class PlayerController : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.Escape)){
 			showQuit = true;
 		}
+
+
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		run = false;
 		checkScreenshot();
 
 		moveSpeed = playerAttributes.speed;
-
+		if (Input.GetKeyDown (KeyCode.P) && paused == showPaused) {
+			paused = !paused;
+			showPaused = paused;
+			
+		}
 		if (paused) {
 			this.GetComponent<Animator> ().speed = 0;
 			moveSpeed = 0;
+
 		} else {
 			playAnimation();
 
-			cheatsAndStuff();
+			keysCheck();
 
 			if (playerAttributes.isDead ()) {
 				showDeath = true;
@@ -127,7 +131,8 @@ public class PlayerController : MonoBehaviour {
 			{
 				soundPlays = false;
 			}
-
+			
+			run = false;
 			if (Input.GetAxis("Run") > 0 && playerAttributes.stamina > 0) {
 				run = true;
 				moveSpeed *= RUN_MULT;
@@ -135,11 +140,7 @@ public class PlayerController : MonoBehaviour {
 				soundPlays = false;
 			}
 
-			if (playerAttributes.stamina < 0)
-					playerAttributes.stamina = 0;
-
-
-			if (playerAttributes.dizzy == true) {
+			if (playerAttributes.dizzy) {
 				moveDir = new Vector3 (Input.GetAxisRaw ("Vertical"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Horizontal")).normalized;
 			} else {
 				moveDir = new Vector3 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Vertical")).normalized;
@@ -161,7 +162,7 @@ public class PlayerController : MonoBehaviour {
 					} else {
 						sound.playCharacterSound (1);
 					}
-				} else if(run == false){
+				} else {
 					if(Application.loadedLevelName == "SaveSpot"){
 						sound.playCharacterSound (1);
 					} else {
@@ -199,10 +200,7 @@ public class PlayerController : MonoBehaviour {
 			}
 
 		} /*else {
-			if (Input.GetKeyDown (KeyCode.P)) {
-				paused = false;
-				showPaused = false;
-			}
+
 		}*/
 	}
 
@@ -224,13 +222,8 @@ public class PlayerController : MonoBehaviour {
 		}
 		return paused;
 	}
-	
-	public void setPaused(bool value)
-	{
-		paused = value;
-	}
 
-	void OnGUI(){
+    void OnGUI(){
 		if (showDeath) {
 			int boxHeigh = 150;
 			int boxWidth = 200;
