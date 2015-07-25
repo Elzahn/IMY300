@@ -140,9 +140,9 @@ public class PlayerController : MonoBehaviour {
 		 * */
 		if (Input.GetKeyDown (KeyCode.P) && paused == showPaused) {
 			paused = !paused;
-			showPaused = paused;
-			
+			showPaused = paused;			
 		}
+
 		if (paused) {
 			this.GetComponent<Animator> ().speed = 0;
 			moveSpeed = 0;
@@ -181,8 +181,8 @@ public class PlayerController : MonoBehaviour {
 			}
 
 
-			if ((Input.GetAxis ("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0) 
-			    && soundPlays == false) {
+			if ((Input.GetAxis ("Vertical") != 0 || Input.GetAxisRaw ("Horizontal") != 0) 
+				&& !soundPlays) {
 				soundPlays = true;
 				moving = true;
 
