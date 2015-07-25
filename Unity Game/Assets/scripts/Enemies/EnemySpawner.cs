@@ -53,6 +53,23 @@ public class EnemySpawner : MonoBehaviour {
 		addEnemy(bossEnemy);	
 	}
 
+	public bool hasEnemiesLanded(){
+		bool done = true;
+		foreach (GameObject enemy in enemies) {
+			if (done == true && enemy.GetComponent<PositionMe> ().touching == true) {
+				done = true;
+			} else {
+				done = false;
+			}
+		}
+
+		if (done) {
+			print ("Enemies landed");
+		}
+
+		return done;
+	}
+
 	void Update () {
 		foreach (GameObject go in enemies.ToList()) {			
 			Enemy enemy = go.GetComponent<Enemy>();	
@@ -69,17 +86,7 @@ public class EnemySpawner : MonoBehaviour {
 				Destroy(go);
 			}
 		}
-		bool done = true;
-		foreach (GameObject enemy in enemies) {
-			if(done == true && enemy.GetComponent<PositionMe>().touching == true){
-				done = true;
-			} else {
-				done = false;
-			}
-		}
-		if (done) {
-			print ("Enemies landed");
-		}
+		hasEnemiesLanded ();
 	}
 
 	GameObject chooseEnemy(int i) {

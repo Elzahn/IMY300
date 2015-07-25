@@ -115,13 +115,16 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.R)) {
 			GameObject.Find ("Main Camera").GetComponent<SmoothMouseLook> ().resetRotation ();
 		}
-		
+
+		//Spin cheat
 		if(Input.GetKeyDown(KeyCode.F5)){
-			NaturalDisasters.spin = 2f;
+			GameObject.Find("Planet").GetComponent<NaturalDisasters>().spinPlanetNow();
 		}
-		
+
+
+		//Earthquake cheat
 		if(Input.GetKeyDown(KeyCode.F6)){
-			NaturalDisasters.shake = 2f;
+			GameObject.Find("Planet").GetComponent<NaturalDisasters>().makeEarthQuakeHappen();
 		}
 		
 		if(Input.GetKeyDown(KeyCode.Escape)){

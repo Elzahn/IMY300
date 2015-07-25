@@ -22,7 +22,7 @@ public class SpawnWarpPoints : MonoBehaviour {
 	void Update(){
 		bool done = true;
 		foreach (GameObject warpPoint in warpPoints) {
-			if(done == true && warpPoint.GetComponent<Rigidbody>().constraints == RigidbodyConstraints.FreezeAll){
+			if(done == true && warpPoint != null &&warpPoint.GetComponent<Rigidbody>().constraints == RigidbodyConstraints.FreezeAll){
 				done = true;
 			} else {
 				done = false;

@@ -29,7 +29,7 @@ public class SpawnTrees : MonoBehaviour {
 		}	  
 	}
 
-	void Update(){
+	public bool isTreesPlanted(){
 		bool done = true;
 		foreach (GameObject tree in trees) {
 			if(done == true && tree.GetComponent<Rigidbody>().constraints == RigidbodyConstraints.FreezeAll){
@@ -38,9 +38,17 @@ public class SpawnTrees : MonoBehaviour {
 				done = false;
 			}
 		}
+
 		if (done ) {
 			print ("Trees planted");
 		}
+
+		return done;
+
+	}
+
+	void Update(){
+		isTreesPlanted ();
 	}
 
 	GameObject chooseTree(int i) {

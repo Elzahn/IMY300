@@ -3,7 +3,8 @@ using System.Collections;
 
 public class NaturalDisasters : MonoBehaviour {
 	
-//	private Warping warpingScript;
+	private bool earthquakeNow = false;
+	private bool spinNow = false;
 	private PlayerController playerScript;
 	private float nextDisaster, delay = 60, shakeAmount, decreaseFactor, dizzyWearOfNext, dizzyDelay = 10;	
 	public static float shake, spin;	//how long the shake/spin lasts
@@ -12,6 +13,13 @@ public class NaturalDisasters : MonoBehaviour {
 	private Quaternion originalCamRotation;
 	private bool spinningDone, earthquakeDone;	//set to ensure that game isn't resumed entire time
 
+	public void makeEarthQuakeHappen(){
+		earthquakeNow = true;
+	}
+
+	public void spinPlanetNow(){
+		spinNow = true;
+	}
 	// Use this for initialization
 	void Start () {
 		//warpingScript = GameObject.Find ("Player").GetComponent<Warping>();
@@ -37,10 +45,12 @@ public class NaturalDisasters : MonoBehaviour {
 			cameraTransform.localPosition = originalCamPos + Random.insideUnitSphere * shakeAmount;
 			shake -= Time.deltaTime * decreaseFactor;
 			nextDisaster = Time.time + delay;
-		} else if (spin > 0) {
-			cameraTransform.Rotate (5, 10, 5);
-			spin -= Time.deltaTime * decreaseFactor;
-			nextDisaster = Time.time + delay;
+		} else if ((!GameObject.Find("Planet").GetComponent<SpawnTrees>().isTreesPlanted() || !GameObject.Find("Planet").GetComponent<EnemySpawner>().hasEnemiesLanded()) && spin > 0) {
+				cameraTransform.Rotate (5, 10, 5);
+				//spin -= Time.deltaTime * decreaseFactor;
+				nextDisaster = Time.time + delay;
+		} else if(GameObject.Find("Planet").GetComponent<SpawnTrees>().isTreesPlanted() && GameObject.Find("Planet").GetComponent<EnemySpawner>().hasEnemiesLanded()){
+			spin = -1;
 		} else if((shake <= 0 && earthquakeDone == true) || (spin <= 0 && spinningDone == true)){
 			GameObject.Find("Player").GetComponent<Sounds>().stopSound("world");
 			spin = 0f;
@@ -64,12 +74,13 @@ public class NaturalDisasters : MonoBehaviour {
 				GameObject.Find("Player").GetComponent<Sounds>().stopAlarmSound(0);
 			}
 
-			if (Time.time >= nextDisaster) {
+			if (Time.time >= nextDisaster  || earthquakeNow == true || spinNow == true) {
 				nextDisaster = Time.time + delay;
 				int chance = Random.Range(0,101);
 
-				if(chance <= 20){
-					if(chance <= 10){
+				//moved chance to the back so cheats get preferance
+				if(earthquakeNow == true || spinNow == true || chance <= 20){	//Earthquake
+					if(earthquakeNow == true || chance <= 10){
 						GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(13);
 						shake = 2f;
 						playerScript.paused = true;
@@ -80,22 +91,22 @@ public class NaturalDisasters : MonoBehaviour {
 						for (int i = 0; i < gameObjects.Length; i++) {
 						if ((gameObjects[i].name != "Sphere001" && gameObjects[i].name != "Cylinder001") && (gameObjects [i].transform.localScale.y > gameObjects [i].transform.localScale.x) && (gameObjects [i].GetComponent<FauxGravityBody> ().getRotateMe () == true)) { //if it is taller than it is wide
 								chance = Random.Range(0, 101);
-								if(chance <= 30){	//chance of falling over
+								if(chance <= 30 || earthquakeNow == true){	//chance of falling over
 									gameObjects [i].GetComponent<FauxGravityBody> ().setRotateMe ();
 									gameObjects [i].GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
 									gameObjects [i].transform.Rotate (new Vector3 (gameObjects [i].transform.rotation.x + Random.Range(-90, 91), gameObjects [i].transform.rotation.y + Random.Range(-90, 91), gameObjects [i].transform.rotation.z + Random.Range(-90, 91)));	//fall over 
-									
-									//gameObjects [i].GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
 								}
 							}
 						}
 						earthquakeDone = true;
+						earthquakeNow = false;
 						//checking for collision when falling in collision file
 									
 						print ("Earth quake!");
-					} else {
-					GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(12);
-					spin = 2f;
+					} else if(spinNow == true || chance > 10) {	//Spin
+						GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(12);
+						spin = 2f;
+
 						if(GameObject.Find ("Player").GetComponent<PlayerController>().jumping == false){
 							GameObject.Find ("Player").GetComponent<PlayerAttributes>().dizzy = true;
 							dizzyWearOfNext = Time.time + dizzyDelay;
@@ -103,25 +114,29 @@ public class NaturalDisasters : MonoBehaviour {
 
 						GameObject[] objectsToBeMoved = GameObject.FindGameObjectsWithTag("WorldObject");	
 						GameObject[] enemiesToBeMoved = GameObject.FindGameObjectsWithTag("Monster");	
-						
-						int startPoint = Random.Range(0, objectsToBeMoved.Length);
-						int index = startPoint;
+
 						int moveDirection;	
-				
+						int index = Random.Range(0, objectsToBeMoved.Length/2);
+
 						for(int i = 0; i < objectsToBeMoved.Length/2; i++){
+
+							GameObject temp = null;
+
+							if(objectsToBeMoved[index].name == "Cylinder001" || objectsToBeMoved[index].name == "Box012" || objectsToBeMoved[index].name == "Sphere001"){
+								temp = objectsToBeMoved[index].transform.parent.gameObject;
+							} else {
+								temp = objectsToBeMoved[index].gameObject;
+							}
+
 							moveDirection = Random.Range(1, 21);
-							objectsToBeMoved[index].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-							objectsToBeMoved[index].transform.position = new Vector3(moveDirection, objectsToBeMoved[index].transform.position.y, moveDirection);
+							temp.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+							temp.GetComponent<Rigidbody>().position = new Vector3(moveDirection, objectsToBeMoved[index].transform.position.y, moveDirection);
 							index++;
 						}
 
-						startPoint = Random.Range(0, enemiesToBeMoved.Length/2);
-						index = startPoint;
-
+						index = Random.Range(0, enemiesToBeMoved.Length/2);
 						for(int i = 0; i < enemiesToBeMoved.Length/2; i++){
 							moveDirection = Random.Range(1, 21);	
-							//Not sure if the freeze rotation is needed
-							//enemiesToBeMoved[index].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
 							enemiesToBeMoved[index].transform.position = new Vector3(moveDirection, enemiesToBeMoved[index].transform.position.y, moveDirection);
 							index++;
 						}
@@ -129,6 +144,7 @@ public class NaturalDisasters : MonoBehaviour {
 						playerScript.paused = true;
 
 						spinningDone = true;
+						spinNow = false;
 						print ("Spinning around and around");
 					}
 				}
