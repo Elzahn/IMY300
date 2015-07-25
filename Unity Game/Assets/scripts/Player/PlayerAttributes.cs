@@ -29,9 +29,9 @@ public class PlayerAttributes : MonoBehaviour {
 	const int WARP_UNLOCK_LEVEL = 6;
 	const int XP_GAIN_PER_MONSTER_LEVEL = 20;
 
-	//TODO: Ons kan hierdie const maak?
-	private int maxInventory = 15;
-	public int maxStorage = 50;
+	//TODO: Ons kan hierdie const maak? 
+	private int maxInventory = 15;	//Inventory size kan verander met accessories
+	public int maxStorage = 50;		//Sodra die storage menu dit anders kan kry sure
 
 	private Sounds soundComponent;
 	private PlayerController controllerComponent;

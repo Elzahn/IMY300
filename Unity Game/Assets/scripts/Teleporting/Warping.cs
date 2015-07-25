@@ -5,7 +5,7 @@ public class Warping : MonoBehaviour {
 
 	private GameObject target;
 	private bool justWarped, waitingForMovement, chooseDestination, showDestinationChoice;
-	public bool chooseDestinationUnlocked;
+	public bool chooseDestinationUnlocked{ get; set; }
 	private Collider col;
 	private float nextUsage;
 	private float delay = 10;
