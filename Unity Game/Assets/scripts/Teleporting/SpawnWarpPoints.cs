@@ -69,9 +69,10 @@ public class SpawnWarpPoints : MonoBehaviour {
 			Destroy (gameObjectsToDelete [i]);
 		}
 
-		for (int i = 0; i < TOTAL_WARPS; i++) {
+		for (int i = 1; i <= TOTAL_WARPS; i++) {
 
 			GameObject tempWarpPoint = Instantiate(warpPoint);
+			tempWarpPoint.name = "WarpPoint" + i;
 
 			GameObject child = tempWarpPoint.transform.FindChild ("Box012").gameObject;
 

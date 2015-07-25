@@ -10,7 +10,7 @@ public class SpawnHealthPacks : MonoBehaviour {
 
 	const int TOTAL_HEALTH = 10;
 
-	public LinkedList<GameObject> healthPacks = new LinkedList <GameObject> ();
+	LinkedList<GameObject> healthPacks = new LinkedList <GameObject> ();
 
 	// Use this for initialization
 	void Start () {
@@ -20,7 +20,7 @@ public class SpawnHealthPacks : MonoBehaviour {
 	void Update(){
 		bool done = true;
 		foreach (GameObject healthPack in healthPacks) {
-			if(done && healthPack.GetComponent<Rigidbody> ().constraints == RigidbodyConstraints.FreezeAll){
+			if(done && healthPack != null && healthPack.GetComponent<Rigidbody> ().constraints == RigidbodyConstraints.FreezeAll){
 				done = true;
 			} else {
 				done = false;
