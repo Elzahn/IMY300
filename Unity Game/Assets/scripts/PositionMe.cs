@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PositionMe : MonoBehaviour {
 
+	//couldn't get it to work if vars aren't declared like this
 	public float timeToCheckMyPosition;	//gives two seconds for trees to be attracted to the planet
 	public bool checkMyPosition = true;	//variable set to tell when tree's position has been set
 	public bool touching = false; //is the monster touching the sphere

@@ -161,7 +161,7 @@ public class PlayerController : MonoBehaviour {
 				paused = true;
 			}
 
-			if (!Sounds.characterAudio.isPlaying) {
+			if (!GameObject.Find("Player").GetComponent<Sounds>().characterAudio.isPlaying) {
 				soundPlays = false;
 			}
 			
@@ -170,7 +170,8 @@ public class PlayerController : MonoBehaviour {
 				run = true;
 				moveSpeed *= RUN_MULT;
 				playerAttributes.drainStamina ();
-				soundPlays = false;
+				//Took it out to fix sound while running
+				//soundPlays = false;
 			}
 
 			if (playerAttributes.dizzy) {
@@ -232,9 +233,7 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 
-		} /*else {
-
-		}*/
+		}
 	}
 
 	void FixedUpdate() {

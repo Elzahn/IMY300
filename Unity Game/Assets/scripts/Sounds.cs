@@ -9,8 +9,8 @@ public class Sounds : MonoBehaviour {
 	public AudioClip[] monsterClips;
 	public AudioClip[] deathClips;
 	public AudioClip[] alarmClips;
-	public static AudioSource worldAudio, characterAudio, ambienceAudio, monsterAudio, deathAudio, alarmAudio;
-	private int worldClip, characterClip, ambienceClip, monsterClip, alarmClip;//, deathClip;
+	public AudioSource worldAudio, characterAudio, ambienceAudio, monsterAudio, deathAudio, alarmAudio;
+	private int worldClip, characterClip, alarmClip;
 	private bool done = false;
 
 	void Start(){
@@ -33,11 +33,6 @@ public class Sounds : MonoBehaviour {
 			worldAudio.Stop();
 			break;
 		}
-		/*case "alarm":
-		{
-			alarmAudio.Stop();
-			break;
-		}*/
 		default:
 		{
 			characterAudio = GameObject.Find ("Character Audio").GetComponent<AudioSource> ();
@@ -45,11 +40,6 @@ public class Sounds : MonoBehaviour {
 			if(worldClip != 0 && worldClip != 1 && worldClip != 2 && worldClip != 5 && worldClip != 7 && worldClip != 8 && worldClip != 9 && worldClip != 10 && worldClip != 11 && worldClip != 12 && worldClip != 13){
 				worldAudio.Stop ();
 			}
-		/*	GameObject[] temp = GameObject.FindGameObjectsWithTag("Monster");
-			foreach(GameObject monster in temp){
-				monsterAudio = monster.GetComponent<AudioSource> ();
-				monsterAudio.Stop ();
-			}*/
 			if(alarmClip != 0)
 			{
 				alarmAudio.Stop ();
@@ -67,7 +57,6 @@ public class Sounds : MonoBehaviour {
 		ambienceAudio = GameObject.Find ("Ambience Audio").GetComponent<AudioSource> ();
 		ambienceAudio.volume = 0.1f;
 		ambienceAudio.loop = true;
-		ambienceClip = clipAt;
 		ambienceAudio.clip = ambienceClips [clipAt];
 		ambienceAudio.Play ();
 	}
@@ -84,14 +73,11 @@ public class Sounds : MonoBehaviour {
 				monsterAudio.loop = true;
 				monsterAudio.clip = monsterClips [clipAt];
 				monsterAudio.Play ();
-				monsterClip = clipAt;
 			}
-		} else{// if(monsterAudio.isPlaying == false){
-			//monsterAudio.Stop();
+		} else{
 			monsterAudio.loop = false;
 			monsterAudio.clip = monsterClips [clipAt];
 			monsterAudio.Play ();
-			monsterClip = clipAt;
 		}
 	}
 
@@ -164,9 +150,6 @@ public class Sounds : MonoBehaviour {
 			characterAudio.loop = false;
 		}
 
-	/*	if (characterAudio.isPlaying) {
-			characterAudio.Stop ();
-		}*/
 		characterAudio.clip = characterClips [clipAt];
 		characterAudio.Play ();
 	}

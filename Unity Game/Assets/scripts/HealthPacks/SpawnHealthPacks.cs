@@ -74,8 +74,6 @@ public class SpawnHealthPacks : MonoBehaviour {
 		}
 
 		GameObject planet = GameObject.Find("Planet");
-		float PlanetRadius = planet.GetComponent<SphereCollider>().radius;
-		Mesh mesh = GameObject.Find("Planet").GetComponent<MeshFilter>().mesh;
 
 		for (int i = 0; i < TOTAL_HEALTH; i++) {
 
@@ -89,7 +87,7 @@ public class SpawnHealthPacks : MonoBehaviour {
 
 			position(tempHealthPack.transform.FindChild ("Box012").gameObject);//send child through
 
-			tempHealthPack.GetComponent<FauxGravityBody>().attractor = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
+			tempHealthPack.GetComponent<FauxGravityBody>().attractor = planet.GetComponent<FauxGravityAttractor>();
 
 			healthPacks.AddLast(tempHealthPack);
 		}

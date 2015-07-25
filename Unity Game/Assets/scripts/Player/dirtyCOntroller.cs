@@ -76,7 +76,7 @@ public class DirtyPlayerController : MonoBehaviour {
 				paused = true;
 			}
 
-			if(Sounds.characterAudio.isPlaying == false)
+			if(GameObject.Find("Player").GetComponent<Sounds>().characterAudio.isPlaying == false)
 			{
 				soundPlays = false;
 			}

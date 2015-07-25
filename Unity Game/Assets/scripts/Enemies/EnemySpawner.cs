@@ -14,15 +14,12 @@ public class EnemySpawner : MonoBehaviour {
 
 	public GameObject loot;
 
-	//private bool giveLoot = false;
 	private string EnemyName;
 	private int numLoot;
-	private PlayerAttributes attributesScript;
 	private PlayerController playerScript;
 	private Accessory accessoryScript;
 	private LinkedList<InventoryItem> tempLoot;
 	private InventoryItem tempItem;
-	// Use this for initialization
 
 	const int ENEM_COUNT = 20;
 	const int NORMAL_ENEMY_TYPES = 4;
@@ -32,10 +29,10 @@ public class EnemySpawner : MonoBehaviour {
 
 	LinkedList<GameObject> enemies = new LinkedList <GameObject> ();
 
+	// Use this for initialization
 	void Start () {
 		clearLoot ();
 		tempLoot = new LinkedList<InventoryItem> ();
-		attributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
 
 		playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
 		planet = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
@@ -161,7 +158,6 @@ public class EnemySpawner : MonoBehaviour {
 		for (int i = 0; i < enemy.maxLoot; i++) {
 			int chance = Random.Range (0, 101);
 			if (chance >= enemy.lootChance) {
-				//giveLoot = true;
 				playerScript.paused = true;
 				EnemyName = enemy.typeID;
 
@@ -280,7 +276,7 @@ public class EnemySpawner : MonoBehaviour {
 		deadEnemy.tag = "Loot";
 		deadEnemy.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
 		Loot lootComponent = deadEnemy.GetComponent<Loot> ();
-		lootComponent.storeLoot (tempLoot, "Dead " + enemy.typeID);
+		lootComponent.storeLoot (tempLoot, "Dead " + EnemyName);
 		tempLoot.Clear ();
 		lootComponent.showMyLoot ();
 	}
