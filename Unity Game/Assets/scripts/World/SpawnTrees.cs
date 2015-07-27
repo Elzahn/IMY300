@@ -29,6 +29,15 @@ public class SpawnTrees : MonoBehaviour {
 		}	  
 	}
 
+	public void replaceHealth(Vector3 pos){
+		print (pos);
+		GameObject tempShrub = Instantiate(shrub);
+		tempShrub.name = "TempShrub";
+		tempShrub.transform.position = pos;
+		tempShrub.GetComponent<FauxGravityBody>().attractor = planet;
+		trees.AddLast(tempShrub); 
+	}
+	
 	public bool isTreesPlanted(){
 		bool done = true;
 		foreach (GameObject tree in trees) {
@@ -84,14 +93,14 @@ public class SpawnTrees : MonoBehaviour {
 			
 			if(tempList.Count() == 0){
 				go.transform.parent.gameObject.transform.GetComponent<Rigidbody> ().position = position;
-				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().timeToCheckMyPosition = Time.time;
-				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().checkMyPosition = true;
+				go.transform.parent.gameObject.gameObject.GetComponent<PositionMe>().timeToCheckMyPosition = Time.time;
+				go.transform.parent.gameObject.gameObject.GetComponent<PositionMe>().checkMyPosition = true;
 				return;
 			}
 		}
 	}
 
-	void addTree(GameObject tree) {	
+	public void addTree(GameObject tree) {	
 		
 		GameObject go = Instantiate(tree);
 		

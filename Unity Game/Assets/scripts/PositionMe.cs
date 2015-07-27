@@ -62,7 +62,7 @@ public class PositionMe : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//Repositions trees that aren't touching the planet after 2 seconds
-		if (this.tag == "WorldObject") {
+		if (this.tag == "WorldObject" && this.name != "TempShrub") {
 			if (Time.time >= timeToCheckMyPosition + 2f && checkMyPosition == true && this.GetComponent<Rigidbody> ().constraints != RigidbodyConstraints.FreezeAll) {
 
 				timeToCheckMyPosition = Time.time;

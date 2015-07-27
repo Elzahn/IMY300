@@ -112,6 +112,7 @@ public class EnemySpawner : MonoBehaviour {
 	}
 
 	public void position(GameObject go){
+		go.GetComponent<PositionMe> ().touching = false;
 		go.GetComponent<PositionMe>().checkMyPosition = false;
 		Vector3 position;
 		bool landed = false;

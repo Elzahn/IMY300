@@ -238,7 +238,7 @@ public class PlayerAttributes : MonoBehaviour {
 	/********************************************************** Level and XP *********************************************************************/
 	public string levelUp() {
 		int nextTreshold = getExpectedXP();
-		if (xp > nextTreshold) {
+		if (xp >= nextTreshold) {
 			level++;
 			hp = maxHP ();
 			stamina = maxStamina ();
@@ -250,7 +250,7 @@ public class PlayerAttributes : MonoBehaviour {
 	
 	/** Cheat */
 	public void levelMeUp(){
-		xp = levelXP (level);
+		xp = levelXP (level+1);
 		levelUp();
 	}
 
@@ -424,7 +424,9 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 		
 	public void drainStamina(){
-		this.stamina -= RUN_STAMINA_DRAIN;//0.5f;
+		if (Application.loadedLevelName != "SaveSpot") {
+			this.stamina -= RUN_STAMINA_DRAIN;//0.5f;
+		}
 	}
 	
 	public void restoreStaminaToFull(){

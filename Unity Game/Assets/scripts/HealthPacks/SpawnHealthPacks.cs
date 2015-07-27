@@ -20,7 +20,7 @@ public class SpawnHealthPacks : MonoBehaviour {
 	void Update(){
 		bool done = true;
 		foreach (GameObject healthPack in healthPacks) {
-			if(done && healthPack != null && healthPack.GetComponent<Rigidbody> ().constraints == RigidbodyConstraints.FreezeAll){
+			if(done && healthPack.GetComponent<Rigidbody> ().constraints == RigidbodyConstraints.FreezeAll){
 				done = true;
 			} else {
 				done = false;
@@ -31,6 +31,9 @@ public class SpawnHealthPacks : MonoBehaviour {
 		}
 	}
 
+	public void removeHealth(GameObject health){
+		healthPacks.Remove (health);
+	}
 
 	public void position(GameObject go){
 		GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().checkMyPosition = false;

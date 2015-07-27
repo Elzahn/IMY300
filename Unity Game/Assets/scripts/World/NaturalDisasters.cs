@@ -6,7 +6,7 @@ public class NaturalDisasters : MonoBehaviour {
 	private bool earthquakeNow = false;
 	private bool spinNow = false;
 	private PlayerController playerScript;
-	private float nextDisaster, delay = 60, shakeAmount, decreaseFactor, dizzyWearOfNext, dizzyDelay = 10;	
+	private float nextDisaster, delay = 180, shakeAmount, dizzyWearOfNext, dizzyDelay = 10;	//decreaseFactor
 	public static float shake, spin;	//how long the shake/spin lasts
 	private Transform cameraTransform;
 	private Vector3 originalCamPos;
@@ -30,7 +30,7 @@ public class NaturalDisasters : MonoBehaviour {
 		originalCamPos = cameraTransform.localPosition;
 		shake = 0f;
 		spin = 0f;
-		decreaseFactor = 1.0f;
+	//	decreaseFactor = 1.0f;
 		shakeAmount = 0.7f;
 		originalCamRotation = cameraTransform.localRotation;
 		spinningDone = false;
@@ -41,11 +41,13 @@ public class NaturalDisasters : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (shake > 0) {
+		if (!GameObject.Find("Planet").GetComponent<SpawnTrees>().isTreesPlanted() && shake > 0) {
 			cameraTransform.localPosition = originalCamPos + Random.insideUnitSphere * shakeAmount;
-			shake -= Time.deltaTime * decreaseFactor;
+			//shake -= Time.deltaTime * decreaseFactor;
 			nextDisaster = Time.time + delay;
-		} else if ((!GameObject.Find("Planet").GetComponent<SpawnTrees>().isTreesPlanted() || !GameObject.Find("Planet").GetComponent<EnemySpawner>().hasEnemiesLanded()) && spin > 0) {
+		} else if(GameObject.Find("Planet").GetComponent<SpawnTrees>().isTreesPlanted()){
+			shake = -1;
+		}else if ((!GameObject.Find("Planet").GetComponent<SpawnTrees>().isTreesPlanted() || !GameObject.Find("Planet").GetComponent<EnemySpawner>().hasEnemiesLanded()) && spin > 0) {
 				cameraTransform.Rotate (5, 10, 5);
 				//spin -= Time.deltaTime * decreaseFactor;
 				nextDisaster = Time.time + delay;

@@ -107,7 +107,8 @@ public class PlayerController : MonoBehaviour {
 			this.GetComponent<SaveSpotTeleport> ().setEnterSaveSpot ();
 			print ("You killed the boss!");
 		}
-		
+
+		//LevelUp
 		if (Input.GetKeyDown (KeyCode.F4)) {
 			playerAttributes.levelMeUp ();
 		}
@@ -139,7 +140,7 @@ public class PlayerController : MonoBehaviour {
 		moveSpeed = playerAttributes.speed;
 		/**
 		 * P Pauses or unpausese
-		 * Only if showpuase the same as pause.
+		 * Only if showpause the same as pause.
 		 * */
 		if (Input.GetKeyDown (KeyCode.P) && paused == showPaused) {
 			paused = !paused;

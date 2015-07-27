@@ -41,23 +41,39 @@ public class Collisions : MonoBehaviour {
 		if (col.collider.tag == "WorldObject" && NaturalDisasters.shake > 0) {
 			int healthToLose = (int)(playerAttributesScript.hp * 0.02);
 			playerAttributesScript.loseHP (healthToLose);//loses 2% health when hit
-			PlayerLog.addStat ("You lose " + healthToLose + " health");
+			PlayerLog.addStat ("A tree fell on you. You lose " + healthToLose + " health");
 		} else if (col.collider.tag == "MediumHealthPack") {
 			if (playerAttributesScript.inventory.Count < playerAttributesScript.inventorySize) {
 				playerAttributesScript.addToInventory (new MediumHealthPack ());
-				Destroy (GameObject.Find (col.collider.transform.parent.name));
 				this.GetComponent<Sounds> ().playWorldSound (4);
-				//GameObject.Find("Planet").GetComponent<SpawnHealthPacks>().healthPacks.Remove(col.collider.gameObject);
+
+				
+				Vector3 tempPos = col.collider.transform.parent.position;
+				print (tempPos);
+				//Delete health shrub
+				GameObject.Find("Planet").GetComponent<SpawnHealthPacks>().removeHealth(col.collider.transform.parent.gameObject);
+				Destroy (col.collider.transform.parent.gameObject.gameObject);
+
+
+				//Add shrub
+				GameObject.Find("Planet").GetComponent<SpawnTrees>().replaceHealth(tempPos);			
 			}
 		} else if (col.collider.tag == "LargeHealthPack") {
 			if (playerAttributesScript.inventory.Count < playerAttributesScript.inventorySize) {
 				playerAttributesScript.addToInventory (new LargeHealthPack ());
-				Destroy (GameObject.Find (col.collider.transform.parent.name));
 				this.GetComponent<Sounds> ().playWorldSound (4);
-				//GameObject.Find("Planet").GetComponent<SpawnHealthPacks>().healthPacks.Remove(col.collider.gameObject);
+
+				Vector3 tempPos = col.collider.transform.parent.position;
+				print (tempPos);
+				//Delete health shrub
+				GameObject.Find("Planet").GetComponent<SpawnHealthPacks>().removeHealth(col.collider.transform.parent.gameObject);
+				Destroy (col.collider.transform.parent.gameObject);
+
+				//Add shrub
+				GameObject.Find("Planet").GetComponent<SpawnTrees>().replaceHealth(tempPos);
 			}
 		} else  //Lose health if you run into something that you can't interact with, walk/run on and isn't a monster
-		if (playerScript.run && col.collider.name != "Storage" && col.collider.name != "ExitPlane" && col.collider.name != "EntrancePlane" && col.collider.name != "Platform" && col.collider.name != "Planet" && col.collider.tag != "Monster" && col.collider.tag != "WarpPoint") {
+		if (playerScript.run && col.collider.name != "Storage" && col.collider.name != "ExitPlane" && col.collider.name != "EntrancePlane" && col.collider.name != "Wall" && col.collider.name != "Plane002" && col.collider.name != "Plane003" && col.collider.name != "Plane004" && col.collider.name != "Floor" && col.collider.name != "Planet" && col.collider.tag != "Monster" && col.collider.tag != "WarpPoint") {
 			int healthToLose = (int)(playerAttributesScript.hp * 0.02);
 			playerAttributesScript.loseHP (healthToLose);//loses 2% health when running into something
 			PlayerLog.addStat ("You lose " + healthToLose + " health by running into something");
@@ -67,7 +83,7 @@ public class Collisions : MonoBehaviour {
 				this.GetComponent<Sounds> ().playCharacterSound (5);
 			}
 		} else //play landing sound
-		if((col.collider.name == "Platform" || col.collider.name == "Planet") && playerScript.jumping == true) {
+		if((col.collider.name == "Floor" || col.collider.name == "Planet") && playerScript.jumping == true) {
 			this.GetComponent<Sounds> ().playCharacterSound (4);
 			playerScript.jumping = false;
 		} 
