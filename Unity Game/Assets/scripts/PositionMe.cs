@@ -63,7 +63,7 @@ public class PositionMe : MonoBehaviour {
 	void Update () {
 		//Repositions trees that aren't touching the planet after 2 seconds
 		if (this.tag == "WorldObject" && this.name != "TempShrub") {
-			if (Time.time >= timeToCheckMyPosition + 2f && checkMyPosition == true && this.GetComponent<Rigidbody> ().constraints != RigidbodyConstraints.FreezeAll) {
+			if (Time.time >= timeToCheckMyPosition + 2f && checkMyPosition == true && this.GetComponent<Rigidbody> ().constraints != RigidbodyConstraints.FreezeAll || Time.time >= timeToCheckMyPosition + 2f && checkMyPosition == false && this.GetComponent<Rigidbody> ().constraints != RigidbodyConstraints.FreezeAll) {
 
 				timeToCheckMyPosition = Time.time;
 
@@ -77,7 +77,7 @@ public class PositionMe : MonoBehaviour {
 
 				GameObject.Find ("Planet").GetComponent<SpawnTrees> ().position (child);
 			}
-		}//Repositions monsters that aren't touching the planet after 2 seconds
+		} //Repositions monsters that aren't touching the planet after 2 seconds
 		else if (this.tag == "Monster") {
 			if ((Time.time >= timeToCheckMyPosition + 2f && checkMyPosition == true && touching == false) || (checkMyPosition == false && touching == false)) {
 				

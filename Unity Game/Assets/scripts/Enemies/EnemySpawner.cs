@@ -121,7 +121,7 @@ public class EnemySpawner : MonoBehaviour {
 			
 			position = Random.onUnitSphere * (GameObject.Find("Planet").GetComponent<SphereCollider>().radius * GameObject.Find("Planet").transform.lossyScale.x);
 			
-			Collider[] collidedItems = Physics.OverlapSphere(position, 1.5f);//can try with 20
+			Collider[] collidedItems = Physics.OverlapSphere(position, 0.5f);//can try with 20
 			List<Collider> tempList = new List<Collider>();
 			
 			foreach(Collider col in collidedItems){

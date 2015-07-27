@@ -82,7 +82,7 @@ public class SpawnTrees : MonoBehaviour {
 			
 			position = Random.onUnitSphere * (GameObject.Find("Planet").GetComponent<SphereCollider>().radius * GameObject.Find("Planet").transform.lossyScale.x);
 			
-			Collider[] collidedItems = Physics.OverlapSphere(position, 1.5f);
+			Collider[] collidedItems = Physics.OverlapSphere(position, 0.5f);
 			List<Collider> tempList = new List<Collider>();
 			
 			foreach(Collider col in collidedItems){
@@ -101,9 +101,20 @@ public class SpawnTrees : MonoBehaviour {
 	}
 
 	public void addTree(GameObject tree) {	
-		
+
 		GameObject go = Instantiate(tree);
-		
+		float size;
+		if (tree != shrub) {
+			size = Random.value;
+			int multiplyFactor = Random.Range(1, 3);
+			size *= multiplyFactor;
+		} else {
+			size = 2f;
+		}
+
+		//resize plants
+		go.transform.localScale = new Vector3 ((size * tree.transform.localScale.x), (size * tree.transform.localScale.y), (size * tree.transform.localScale.z));
+
 		//Finds chid with the worldObject tag
 		GameObject child = null;
 		foreach(Transform t in go.transform)
@@ -114,7 +125,7 @@ public class SpawnTrees : MonoBehaviour {
 			}
 		}
 		go.GetComponent<FauxGravityBody>().attractor = planet;
-		
+
 		position (child);
 		trees.AddLast(go);
 	}

@@ -44,7 +44,7 @@ public class SpawnHealthPacks : MonoBehaviour {
 			
 			position = Random.onUnitSphere * (GameObject.Find("Planet").GetComponent<SphereCollider>().radius * GameObject.Find("Planet").transform.lossyScale.x);
 			
-			Collider[] collidedItems = Physics.OverlapSphere(position, 1.5f);
+			Collider[] collidedItems = Physics.OverlapSphere(position, 0.5f);
 			List<Collider> tempList = new List<Collider>();
 			
 			foreach(Collider col in collidedItems){
