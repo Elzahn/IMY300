@@ -6,6 +6,7 @@ public class Collisions : MonoBehaviour {
 	private PlayerAttributes playerAttributesScript;
 	private PlayerController playerScript;
 	public bool showLootConfirmation{ get; private set; }
+	public bool showHealthConfirmation{ get; private set; }
 	private GameObject colObj;
 
 	public void setLootConf(){
@@ -18,8 +19,38 @@ public class Collisions : MonoBehaviour {
 	}
 
 	void Update () {
-		if(showLootConfirmation && Input.GetKeyDown(KeyCode.E)){
-			colObj.GetComponent<Loot>().showMyLoot();
+		if (showLootConfirmation && Input.GetKeyDown (KeyCode.E)) {
+			colObj.GetComponent<Loot> ().showMyLoot ();
+		} else if (showHealthConfirmation && Input.GetKeyDown(KeyCode.E) && colObj.tag == "MediumHealthPack") {
+			if (playerAttributesScript.inventory.Count < playerAttributesScript.inventorySize) {
+				playerAttributesScript.addToInventory (new MediumHealthPack ());
+				this.GetComponent<Sounds> ().playWorldSound (4);
+				
+				print (colObj);
+				Vector3 tempPos = colObj.transform.position;
+				print (tempPos);
+				//Delete health shrub
+				GameObject.Find("Planet").GetComponent<SpawnHealthPacks>().removeHealth(colObj);
+				Destroy (colObj.transform.gameObject.gameObject);
+				
+				
+				//Add shrub
+				GameObject.Find("Planet").GetComponent<SpawnTrees>().replaceHealth(tempPos);			
+			}
+		} else if (showHealthConfirmation && Input.GetKeyDown(KeyCode.E) && colObj.tag == "LargeHealthPack") {
+			if (playerAttributesScript.inventory.Count < playerAttributesScript.inventorySize) {
+				playerAttributesScript.addToInventory (new LargeHealthPack ());
+				this.GetComponent<Sounds> ().playWorldSound (4);
+				print (colObj);
+				Vector3 tempPos = colObj.transform.position;
+				print (tempPos);
+				//Delete health shrub
+				GameObject.Find("Planet").GetComponent<SpawnHealthPacks>().removeHealth(colObj);
+				Destroy (colObj.transform.gameObject);
+				
+				//Add shrub
+				GameObject.Find("Planet").GetComponent<SpawnTrees>().replaceHealth(tempPos);
+			}
 		}
 	}
 	
@@ -27,11 +58,15 @@ public class Collisions : MonoBehaviour {
 		if (col.tag == "Loot") {
 			showLootConfirmation = true;
 			colObj = col.gameObject;
+		} else if (col.tag == "MediumHealthPack" || col.tag == "LargeHealthPack") {
+			showHealthConfirmation = true;
+			colObj = col.gameObject;
 		}
 	}
 	
 	void OnTriggerExit(Collider col){
 		showLootConfirmation = false;
+		showHealthConfirmation = false;
 	}
 
 	void OnCollisionEnter (Collision col){	
@@ -42,7 +77,7 @@ public class Collisions : MonoBehaviour {
 			int healthToLose = (int)(playerAttributesScript.hp * 0.02);
 			playerAttributesScript.loseHP (healthToLose);//loses 2% health when hit
 			PlayerLog.addStat ("A tree fell on you. You lose " + healthToLose + " health");
-		} else if (col.collider.tag == "MediumHealthPack") {
+		} /*else if (col.collider.tag == "MediumHealthPack") {
 			if (playerAttributesScript.inventory.Count < playerAttributesScript.inventorySize) {
 				playerAttributesScript.addToInventory (new MediumHealthPack ());
 				this.GetComponent<Sounds> ().playWorldSound (4);
@@ -72,8 +107,8 @@ public class Collisions : MonoBehaviour {
 				//Add shrub
 				GameObject.Find("Planet").GetComponent<SpawnTrees>().replaceHealth(tempPos);
 			}
-		} else  //Lose health if you run into something that you can't interact with, walk/run on and isn't a monster
-		if (playerScript.run && col.collider.name != "Storage" && col.collider.name != "ExitPlane" && col.collider.name != "EntrancePlane" && col.collider.name != "Wall" && col.collider.name != "Plane002" && col.collider.name != "Plane003" && col.collider.name != "Plane004" && col.collider.name != "Floor" && col.collider.name != "Planet" && col.collider.tag != "Monster" && col.collider.tag != "WarpPoint") {
+		} */else  //Lose health if you run into something that you can't interact with, walk/run on and isn't a monster
+		if (playerScript.run && col.collider.name != "Storage" && col.collider.name != "ExitPlane" && col.collider.name != "EntrancePlane" && col.collider.name != "Wall" && col.collider.name != "Plane002" && col.collider.name != "Plane003" && col.collider.name != "Plane004" && col.collider.name != "Floor" && col.collider.name != "Planet" && col.collider.tag != "Monster" && col.collider.tag != "WarpPoint" && col.collider.tag != "MediumHealthPack" && col.collider.tag != "LargeHealthPack") {
 			int healthToLose = (int)(playerAttributesScript.hp * 0.02);
 			playerAttributesScript.loseHP (healthToLose);//loses 2% health when running into something
 			PlayerLog.addStat ("You lose " + healthToLose + " health by running into something");
@@ -90,8 +125,10 @@ public class Collisions : MonoBehaviour {
 	}
 
 	void OnGUI(){
-		if (showLootConfirmation == true){    
-			GUI.Box(new Rect(140,Screen.height-50,Screen.width-300,120),("Press E to loot"));
+		if (showLootConfirmation) {    
+			GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), ("Press E to loot"));
+		} else if (showHealthConfirmation) {
+			GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), ("Press E for HealthPack"));
 		}
 	}
 }

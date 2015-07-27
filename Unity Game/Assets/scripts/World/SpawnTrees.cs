@@ -103,13 +103,14 @@ public class SpawnTrees : MonoBehaviour {
 	public void addTree(GameObject tree) {	
 
 		GameObject go = Instantiate(tree);
-		float size;
+		float size = 1f;
 		if (tree != shrub) {
 			size = Random.value;
+			if(size < 0.25f){
+				size = 0.25f;
+			}
 			int multiplyFactor = Random.Range(1, 3);
 			size *= multiplyFactor;
-		} else {
-			size = 2f;
 		}
 
 		//resize plants

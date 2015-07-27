@@ -55,6 +55,8 @@ public class FauxGravityAttractor : MonoBehaviour {
 			col.collider.transform.parent.gameObject.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
 		} else if (col.collider.tag == "WarpPoint") {	//seperate since warppoint hierarchy might change with remodel
 			col.collider.transform.parent.gameObject.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
+		} else if (col.collider.tag == "Loot") {
+			col.collider.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 		}
 	}
 }
