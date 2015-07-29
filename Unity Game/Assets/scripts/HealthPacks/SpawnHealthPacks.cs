@@ -26,9 +26,9 @@ public class SpawnHealthPacks : MonoBehaviour {
 				done = false;
 			}
 		}
-		if (done ) {
+		/*if (done ) {
 			print ("Healthpacks placed");
-		}
+		}*/
 	}
 
 	public void removeHealth(GameObject health){

@@ -28,9 +28,9 @@ public class SpawnWarpPoints : MonoBehaviour {
 				done = false;
 			}
 		}
-		if (done ) {
+		/*if (done ) {
 			print ("WarpPoints created");
-		}
+		}*/
 	}
 
 	public void position(GameObject go){

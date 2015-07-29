@@ -60,9 +60,9 @@ public class EnemySpawner : MonoBehaviour {
 			}
 		}
 
-		if (done) {
+		/*if (done) {
 			print ("Enemies landed");
-		}
+		}*/
 
 		return done;
 	}

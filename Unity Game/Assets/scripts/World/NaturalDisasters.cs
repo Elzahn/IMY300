@@ -41,19 +41,20 @@ public class NaturalDisasters : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (!GameObject.Find("Planet").GetComponent<SpawnTrees>().isTreesPlanted() && shake > 0) {
+		var spawnTrees = GameObject.Find ("Planet").GetComponent<SpawnTrees> ();
+		if (!spawnTrees.isTreesPlanted () && shake > 0) {
 			cameraTransform.localPosition = originalCamPos + Random.insideUnitSphere * shakeAmount;
 			//shake -= Time.deltaTime * decreaseFactor;
 			nextDisaster = Time.time + delay;
-		} else if(GameObject.Find("Planet").GetComponent<SpawnTrees>().isTreesPlanted()){
+		} else if(spawnTrees.isTreesPlanted ()){
 			shake = -1;
-		}else if ((!GameObject.Find("Planet").GetComponent<SpawnTrees>().isTreesPlanted() || !GameObject.Find("Planet").GetComponent<EnemySpawner>().hasEnemiesLanded()) && spin > 0) {
+		}else if ((!spawnTrees.isTreesPlanted () || !GameObject.Find("Planet").GetComponent<EnemySpawner>().hasEnemiesLanded()) && spin > 0) {
 				cameraTransform.Rotate (5, 10, 5);
 				//spin -= Time.deltaTime * decreaseFactor;
 				nextDisaster = Time.time + delay;
-		} else if(GameObject.Find("Planet").GetComponent<SpawnTrees>().isTreesPlanted() && GameObject.Find("Planet").GetComponent<EnemySpawner>().hasEnemiesLanded()){
+		} else if(spawnTrees.isTreesPlanted () && GameObject.Find("Planet").GetComponent<EnemySpawner>().hasEnemiesLanded()){
 			spin = -1;
-		} else if((shake <= 0 && earthquakeDone == true) || (spin <= 0 && spinningDone == true)){
+		} else if((shake <= 0 && earthquakeDone) || (spin <= 0 && spinningDone)){
 			GameObject.Find("Player").GetComponent<Sounds>().stopSound("world");
 			spin = 0f;
 			shake = 0f;	
@@ -62,28 +63,29 @@ public class NaturalDisasters : MonoBehaviour {
 			cameraTransform.localRotation = originalCamRotation;
 		}
 
-		if (playerScript.paused == false) {
-			GameObject.Find ("Directional Light").transform.Rotate (0, -0.01f, 0);	//Rotates light
+		if (!playerScript.paused) {
 
-			if(GameObject.Find ("Player").GetComponent<PlayerAttributes>().dizzy == true && Time.time >= dizzyWearOfNext){
-				GameObject.Find ("Player").GetComponent<PlayerAttributes>().dizzy = false;
+
+			var playerAttributes = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
+			if (playerAttributes.dizzy && Time.time >= dizzyWearOfNext) {
+				playerAttributes.dizzy = false;
 			}
 
-			if(Time.time >= nextDisaster - 10){
-				GameObject.Find("Player").GetComponent<Sounds>().playAlarmSound(0);
+			if (Time.time >= nextDisaster - 10) {
+				GameObject.Find ("Player").GetComponent<Sounds> ().playAlarmSound (0);
 			}
-			if(Time.time >= nextDisaster - 5){
-				GameObject.Find("Player").GetComponent<Sounds>().stopAlarmSound(0);
+			if (Time.time >= nextDisaster - 5) {
+				GameObject.Find ("Player").GetComponent<Sounds> ().stopAlarmSound (0);
 			}
 
-			if (Time.time >= nextDisaster  || earthquakeNow == true || spinNow == true) {
+			if (Time.time >= nextDisaster || earthquakeNow || spinNow) {
 				nextDisaster = Time.time + delay;
-				int chance = Random.Range(0,101);
+				int chance = Random.Range (0, 101);
 
 				//moved chance to the back so cheats get preferance
-				if(earthquakeNow == true || spinNow == true || chance <= 20){	//Earthquake
-					if(earthquakeNow == true || chance <= 10){
-						GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(13);
+				if (earthquakeNow || spinNow || chance <= 20) {	//Earthquake
+					if (earthquakeNow || chance <= 10) {
+						GameObject.Find ("Player").GetComponent<Sounds> ().playWorldSound (13);
 						shake = 2f;
 						playerScript.paused = true;
 						SpawnWarpPoints.spawnNewTeleports ();
@@ -91,12 +93,12 @@ public class NaturalDisasters : MonoBehaviour {
 						GameObject[] gameObjects = GameObject.FindGameObjectsWithTag ("WorldObject");
 
 						for (int i = 0; i < gameObjects.Length; i++) {
-						if ((gameObjects[i].name != "Sphere001" && gameObjects[i].name != "Cylinder001") && (gameObjects [i].transform.localScale.y > gameObjects [i].transform.localScale.x) && (gameObjects [i].GetComponent<FauxGravityBody> ().getRotateMe () == true)) { //if it is taller than it is wide
-								chance = Random.Range(0, 101);
-								if(chance <= 30 || earthquakeNow == true){	//chance of falling over
+							if ((gameObjects [i].name != "Sphere001" && gameObjects [i].name != "Cylinder001") && (gameObjects [i].transform.localScale.y > gameObjects [i].transform.localScale.x) && (gameObjects [i].GetComponent<FauxGravityBody> ().getRotateMe () == true)) { //if it is taller than it is wide
+								chance = Random.Range (0, 101);
+								if (chance <= 30 || earthquakeNow) {	//chance of falling over
 									gameObjects [i].GetComponent<FauxGravityBody> ().setRotateMe ();
 									gameObjects [i].GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
-									gameObjects [i].transform.Rotate (new Vector3 (gameObjects [i].transform.rotation.x + Random.Range(-90, 91), gameObjects [i].transform.rotation.y + Random.Range(-90, 91), gameObjects [i].transform.rotation.z + Random.Range(-90, 91)));	//fall over 
+									gameObjects [i].transform.Rotate (new Vector3 (gameObjects [i].transform.rotation.x + Random.Range (-90, 91), gameObjects [i].transform.rotation.y + Random.Range (-90, 91), gameObjects [i].transform.rotation.z + Random.Range (-90, 91)));	//fall over 
 								}
 							}
 						}
@@ -105,41 +107,41 @@ public class NaturalDisasters : MonoBehaviour {
 						//checking for collision when falling in collision file
 									
 						print ("Earth quake!");
-					} else if(spinNow == true || chance > 10) {	//Spin
-						GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(12);
+					} else if (spinNow || chance > 10) {	//Spin
+						GameObject.Find ("Player").GetComponent<Sounds> ().playWorldSound (12);
 						spin = 2f;
 
-						if(GameObject.Find ("Player").GetComponent<PlayerController>().jumping == false){
-							GameObject.Find ("Player").GetComponent<PlayerAttributes>().dizzy = true;
+						if (!playerScript.jumping) {
+							playerAttributes.dizzy = true;
 							dizzyWearOfNext = Time.time + dizzyDelay;
 						}
 
-						GameObject[] objectsToBeMoved = GameObject.FindGameObjectsWithTag("WorldObject");	
-						GameObject[] enemiesToBeMoved = GameObject.FindGameObjectsWithTag("Monster");	
+						GameObject[] objectsToBeMoved = GameObject.FindGameObjectsWithTag ("WorldObject");	
+						GameObject[] enemiesToBeMoved = GameObject.FindGameObjectsWithTag ("Monster");	
 
 						int moveDirection;	
-						int index = Random.Range(0, objectsToBeMoved.Length/2);
+						int index = Random.Range (0, objectsToBeMoved.Length / 2);
 
-						for(int i = 0; i < objectsToBeMoved.Length/2; i++){
+						for (int i = 0; i < objectsToBeMoved.Length/2; i++) {
 
 							GameObject temp = null;
 
-							if(objectsToBeMoved[index].name == "Cylinder001" || objectsToBeMoved[index].name == "Box012" || objectsToBeMoved[index].name == "Sphere001"){
-								temp = objectsToBeMoved[index].transform.parent.gameObject;
+							if (objectsToBeMoved [index].name == "Cylinder001" || objectsToBeMoved [index].name == "Box012" || objectsToBeMoved [index].name == "Sphere001") {
+								temp = objectsToBeMoved [index].transform.parent.gameObject;
 							} else {
-								temp = objectsToBeMoved[index].gameObject;
+								temp = objectsToBeMoved [index].gameObject;
 							}
 
-							moveDirection = Random.Range(1, 21);
-							temp.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-							temp.GetComponent<Rigidbody>().position = new Vector3(moveDirection, objectsToBeMoved[index].transform.position.y, moveDirection);
+							moveDirection = Random.Range (1, 21);
+							temp.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;
+							temp.GetComponent<Rigidbody> ().position = new Vector3 (moveDirection, objectsToBeMoved [index].transform.position.y, moveDirection);
 							index++;
 						}
 
-						index = Random.Range(0, enemiesToBeMoved.Length/2);
-						for(int i = 0; i < enemiesToBeMoved.Length/2; i++){
-							moveDirection = Random.Range(1, 21);	
-							enemiesToBeMoved[index].transform.position = new Vector3(moveDirection, enemiesToBeMoved[index].transform.position.y, moveDirection);
+						index = Random.Range (0, enemiesToBeMoved.Length / 2);
+						for (int i = 0; i < enemiesToBeMoved.Length/2; i++) {
+							moveDirection = Random.Range (1, 21);	
+							enemiesToBeMoved [index].transform.position = new Vector3 (moveDirection, enemiesToBeMoved [index].transform.position.y, moveDirection);
 							index++;
 						}
 						

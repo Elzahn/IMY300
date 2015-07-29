@@ -48,9 +48,9 @@ public class SpawnTrees : MonoBehaviour {
 			}
 		}
 
-		if (done ) {
+		/*if (done ) {
 			print ("Trees planted");
-		}
+		}*/
 
 		return done;
 
