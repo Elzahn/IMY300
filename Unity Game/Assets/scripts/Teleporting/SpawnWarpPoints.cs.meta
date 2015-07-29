@@ -1,11 +1,10 @@
 fileFormatVersion: 2
 guid: 9d2aabb615feec9489af3f7499e2d072
-timeCreated: 1437834292
+timeCreated: 1438198250
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences:
-  - warpPoint: {fileID: 190244, guid: c9871381809ef3d40a029ac35c1f3cf1, type: 2}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

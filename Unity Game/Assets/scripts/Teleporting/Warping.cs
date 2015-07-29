@@ -4,7 +4,7 @@ using System.Collections;
 public class Warping : MonoBehaviour {
 
 	private GameObject target;
-	private bool justWarped, waitingForMovement, chooseDestination, showDestinationChoice;
+	private bool waitingForMovement, chooseDestination, showDestinationChoice;
 	public bool chooseDestinationUnlocked{ get; set; }
 	private Collider col;
 	private float nextUsage;
@@ -12,23 +12,25 @@ public class Warping : MonoBehaviour {
 	private GameObject planet;
 	private float PlanetRadius;
 	private PlayerController playerScript;
+	private PlayerAttributes attributesScript;
 
 	// Use this for initialization
 	void Start () {
-		justWarped = false;
 		waitingForMovement = false;
 		chooseDestinationUnlocked = false;	//unlocks at level 6
 		chooseDestination = true;
 		showDestinationChoice = false;
 		playerScript = GameObject.Find("Player").GetComponent<PlayerController> ();
+		attributesScript = GameObject.Find("Player").GetComponent<PlayerAttributes> ();
 	}
 
 	// Update is called once per frame
 	void Update () {
 		if (playerScript.paused == false) {
 			if (waitingForMovement && GameObject.Find("Player").GetComponent<Rigidbody> ().velocity.magnitude > 0) {
-				justWarped = false;
 				waitingForMovement = false;
+			} else {
+				waitingForMovement = true;
 			}
 
 			if (chooseDestination == false && Time.time >= nextUsage){
@@ -44,12 +46,12 @@ public class Warping : MonoBehaviour {
 		playerScript.paused = false;	//resume game
 		showDestinationChoice = false;	//closes menu
 
-		if("WarpPoint"+randomWarpPoint == col.name && !justWarped){
+		if("WarpPoint"+randomWarpPoint == col.name && !attributesScript.justWarped){
 			generateRandomWarpPoint(Random.Range(1,6));
 		}
 		else{
 			GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(6);
-			justWarped = true;
+			attributesScript.justWarped = true;
 			GameObject newLocationWarpPoint = GameObject.Find("WarpPoint"+randomWarpPoint);
 			Vector3 newLocation = newLocationWarpPoint.transform.position;
 			GameObject.Find("Player").transform.position = new Vector3(newLocation.x+1,newLocation.y,newLocation.z+1);	//new Vector3 (newLocation.x, newLocation.y, newLocation.z);
@@ -61,19 +63,23 @@ public class Warping : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionEnter (Collision target){
-		if (justWarped == false && target.collider.tag == "WarpPoint") {
-			col = target.collider;
+	void OnTriggerEnter (Collider target){
+		if (attributesScript.justWarped == false && target.tag == "WarpPoint") {
+			col = target;
 			playerScript.paused =(true);	//Pause game
-			
+
 			if(chooseDestinationUnlocked && chooseDestination){
 				showDestinationChoice = true;
 			}
 			else{
 				generateRandomWarpPoint(Random.Range(1, 6));
 			}
-		} else {
-			waitingForMovement = true;
+		}
+	}
+
+	void OnTriggerExit(Collider col){
+		if (!waitingForMovement) {
+			attributesScript.justWarped = false;
 		}
 	}
 

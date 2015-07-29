@@ -45,16 +45,7 @@ public class PositionMe : MonoBehaviour {
 		} else if (this.tag == "WarpPoint") {
 			if (col.name == "EntrancePlane" && checkMyPosition == true) {
 				timeToCheckMyPosition = Time.time;
-				
-				//Finds chid with the WarpPoint tag
-				GameObject child = null;
-				foreach (Transform t in transform) {
-					if (t.gameObject.tag == "WarpPoint") {
-						child = t.gameObject;
-						break;
-					}
-				}
-				GameObject.Find ("Planet").GetComponent<SpawnWarpPoints> ().position (child);
+				GameObject.Find ("Planet").GetComponent<SpawnWarpPoints> ().position (this.gameObject);
 			}
 		}
 	}
@@ -103,19 +94,9 @@ public class PositionMe : MonoBehaviour {
 			}
 		} //Repositions warpPoints that aren't touching the planet after 2 seconds
 		else if (this.tag == "WarpPoint") {	
-			if (Time.time >= timeToCheckMyPosition + 2f && checkMyPosition == true && this.GetComponent<Rigidbody> ().constraints != RigidbodyConstraints.FreezeAll) {
-				
+			if (Time.time >= timeToCheckMyPosition + 2f && checkMyPosition == true && this.transform.parent.GetComponent<Rigidbody> ().constraints != RigidbodyConstraints.FreezeAll) {
 				timeToCheckMyPosition = Time.time;
-				
-				GameObject child = null;
-				foreach (Transform t in transform) {
-					if (t.gameObject.tag == "WarpPoint") {
-						child = t.gameObject;
-						break;
-					}
-				}
-				
-				GameObject.Find ("Planet").GetComponent<SpawnWarpPoints> ().position (child);
+				GameObject.Find ("Planet").GetComponent<SpawnWarpPoints> ().position (this.gameObject);
 			}
 		}
 	}

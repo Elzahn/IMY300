@@ -17,18 +17,19 @@ public class SpawnHealthPacks : MonoBehaviour {
 		spawn ();
 	}
 
-	void Update(){
+	public bool hasHealthLanded(){
 		bool done = true;
 		foreach (GameObject healthPack in healthPacks) {
-			if(done && healthPack.GetComponent<Rigidbody> ().constraints == RigidbodyConstraints.FreezeAll){
+			if (done && healthPack.GetComponent<Rigidbody> ().constraints == RigidbodyConstraints.FreezeAll) {
 				done = true;
 			} else {
 				done = false;
 			}
 		}
-		/*if (done ) {
+		if (done) {
 			print ("Healthpacks placed");
-		}*/
+		}
+		return done;
 	}
 
 	public void removeHealth(GameObject health){

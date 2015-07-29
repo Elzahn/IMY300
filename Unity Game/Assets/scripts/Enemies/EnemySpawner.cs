@@ -60,9 +60,9 @@ public class EnemySpawner : MonoBehaviour {
 			}
 		}
 
-		/*if (done) {
+		if (done) {
 			print ("Enemies landed");
-		}*/
+		}
 
 		return done;
 	}
@@ -276,7 +276,7 @@ public class EnemySpawner : MonoBehaviour {
 		deadEnemy.transform.position = position;
 		deadEnemy.tag = "Loot";
 		deadEnemy.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
-		Loot lootComponent = deadEnemy.GetComponent<Loot> ();
+		Loot lootComponent = deadEnemy.GetComponentInChildren<Loot> ();
 		lootComponent.storeLoot (tempLoot, "Dead " + EnemyName);
 		tempLoot.Clear ();
 		lootComponent.showMyLoot ();

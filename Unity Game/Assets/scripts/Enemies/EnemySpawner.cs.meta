@@ -1,16 +1,10 @@
 fileFormatVersion: 2
 guid: 320c04c9d77a1f04882ce06dfeafbdff
-timeCreated: 1437594154
+timeCreated: 1438198250
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences:
-  - bossEnemy: {fileID: 161476, guid: 4b822c54e1fd7dd4181fbb782cbf3fab, type: 2}
-  - enemy1: {fileID: 161476, guid: c5c6d64e12a380c41934229c629fbc62, type: 2}
-  - enemy2: {fileID: 161476, guid: ddcf401ac5c84714cbe3a9f63252c127, type: 2}
-  - enemy3: {fileID: 161476, guid: 6f7337d1272c8474c8210b79573c3fb4, type: 2}
-  - enemy4: {fileID: 161476, guid: 7a19bb68b8b9e724da30680192ed7f88, type: 2}
-  - loot: {fileID: 146320, guid: e2badba8dcec76b409a282f17f4fec7f, type: 2}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

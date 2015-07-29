@@ -10,12 +10,16 @@ public class StartGame : MonoBehaviour {
 	void Start () {
 		attributesScript = this.GetComponent<PlayerAttributes> ();
 		playerScript = this.GetComponent<PlayerController> ();
+
+		//take this out when gender GUI is replaced
+		playerScript.paused = false;
+		
 	}
 
 	void OnGUI()
 	{
 		if (attributesScript.gender == '?') {
-			playerScript.paused = true;
+		/*	playerScript.paused = true;
 
 			int boxWidth = 250;
 			int boxHeight = 150;
@@ -34,7 +38,7 @@ public class StartGame : MonoBehaviour {
 				attributesScript.setGender('f');
 				this.GetComponent<Sounds>().playWorldSound (2);
 				playerScript.paused = false;
-			}
+			}*/
 		}
 	}
 }

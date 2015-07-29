@@ -19,22 +19,24 @@ public class SpawnWarpPoints : MonoBehaviour {
 		GameObject.Find("Planet").GetComponent<SpawnWarpPoints>().spawnTeleports();
 	}
 
-	void Update(){
+	public bool wasPlaced(){
 		bool done = true;
 		foreach (GameObject warpPoint in warpPoints) {
-			if(done == true && warpPoint != null &&warpPoint.GetComponent<Rigidbody>().constraints == RigidbodyConstraints.FreezeAll){
+			if(done == true && warpPoint != null && warpPoint.GetComponent<Rigidbody>().constraints == RigidbodyConstraints.FreezeAll){
 				done = true;
 			} else {
 				done = false;
 			}
 		}
-		/*if (done ) {
+		if (done ) {
 			print ("WarpPoints created");
-		}*/
+		}
+
+		return done;
 	}
 
 	public void position(GameObject go){
-		GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().checkMyPosition = false;
+		go.GetComponentInChildren<PositionMe>().checkMyPosition = false;
 		Vector3 position;
 		bool created = false;
 		
@@ -42,7 +44,7 @@ public class SpawnWarpPoints : MonoBehaviour {
 			
 			position = Random.onUnitSphere * (GameObject.Find("Planet").GetComponent<SphereCollider>().radius * GameObject.Find("Planet").transform.lossyScale.x);
 			
-			Collider[] collidedItems = Physics.OverlapSphere(position, 0.5f);
+			Collider[] collidedItems = Physics.OverlapSphere(position, 1.5f);
 			List<Collider> tempList = new List<Collider>();
 			
 			foreach(Collider col in collidedItems){
@@ -52,9 +54,9 @@ public class SpawnWarpPoints : MonoBehaviour {
 			}
 			
 			if(tempList.Count() == 0){
-				go.transform.parent.gameObject.transform.GetComponent<Rigidbody> ().position = position;
-				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().timeToCheckMyPosition = Time.time;
-				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().checkMyPosition = true;
+				go.transform.GetComponentInParent<Rigidbody> ().position = position;
+				go.GetComponentInChildren<PositionMe>().timeToCheckMyPosition = Time.time;
+				go.GetComponentInChildren<PositionMe>().checkMyPosition = true;
 				return;
 			}
 		}
@@ -74,9 +76,7 @@ public class SpawnWarpPoints : MonoBehaviour {
 			GameObject tempWarpPoint = Instantiate(warpPoint);
 			tempWarpPoint.name = "WarpPoint" + i;
 
-			GameObject child = tempWarpPoint.transform.FindChild ("Box012").gameObject;
-
-			position(child);
+			position(tempWarpPoint);
 
 			tempWarpPoint.GetComponent<FauxGravityBody>().attractor = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
 

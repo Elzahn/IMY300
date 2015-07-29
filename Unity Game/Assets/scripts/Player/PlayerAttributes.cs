@@ -41,6 +41,8 @@ public class PlayerAttributes : MonoBehaviour {
 	 */
 	public static PlayerAttributes instance;
 
+	public bool justWarped { get; set; }
+
 	/****************************************************** Inventory en goed  *****************************************************/
 	public LinkedList <InventoryItem> inventory = new LinkedList<InventoryItem>();
 	public LinkedList <InventoryItem> storage = new LinkedList<InventoryItem> ();
@@ -152,7 +154,8 @@ public class PlayerAttributes : MonoBehaviour {
 			DontDestroyOnLoad (gameObject);
 			instance = this;
 		}
-				
+
+		justWarped = false;
 		giveAlarm = true;
 		this.gender = '?';
 		this.dizzy = false;
