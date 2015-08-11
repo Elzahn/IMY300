@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class PlayerLog : MonoBehaviour {
 
-	public static int maxLines = 25;
+	public static int maxLines = 24;
 	public static Queue<string> queue = new Queue<string>();
 	public static string stats = "";
 	public static bool showLog = true;

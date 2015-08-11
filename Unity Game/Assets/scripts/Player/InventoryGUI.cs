@@ -64,34 +64,38 @@ public class InventoryGUI : MonoBehaviour {
 	public void closeStorage(){
 		hasCollided = true;
 		showStorage = false;
-		this.GetComponent<Sounds>().playWorldSound (0);
+		this.GetComponent<Sounds>().playWorldSound (Sounds.STORAGE);
 		playerScript.paused = false;	//Resume game
 	}
 
 	public void openStorage(){
-		hasCollided = false;
-		showStorage = true;
-		this.GetComponent<Sounds> ().playWorldSound (0);
-		playerScript.paused = true;	//Pause game
+		if(this.GetComponent<Tutorial>().teachStorage){
+			showStorage = true;
+			hasCollided = false;
+			this.GetComponent<Sounds> ().playWorldSound (Sounds.STORAGE);
+			playerScript.paused = true;	//Pause game
+		}
 	}
 
 	public void openInventory(){
-		hasCollided = false;
-		showInventory = true;
-		PlayerLog.showLog = false;
-		this.GetComponent<Sounds>().playWorldSound (1);
-		playerScript.paused = true;	//Pause game
+		if (this.GetComponent<Tutorial> ().teachInventory) {
+			hasCollided = false;
+			showInventory = true;
+			PlayerLog.showLog = false;
+			this.GetComponent<Sounds> ().playWorldSound (Sounds.INVENTORY);
+			playerScript.paused = true;	//Pause game
+		}
 	}
 
 	public void closeInventory(){
 		showInventory = false;
 		PlayerLog.showLog = true;
-		this.GetComponent<Sounds>().playWorldSound (1);
+		this.GetComponent<Sounds>().playWorldSound (Sounds.INVENTORY);
 		playerScript.paused = false;	//Resume game
 	}
 
 	void OnGUI(){
-		if (hasCollided){    
+		if (hasCollided && this.GetComponent<Tutorial>().teachStorage){    
 			GUI.Box(new Rect(140,Screen.height-50,Screen.width-300,120),("Press E to interact"));
 		}
 		if (showInventory) {
@@ -116,7 +120,7 @@ public class InventoryGUI : MonoBehaviour {
 					GUI.Label (new Rect (left + 30, top + 80, width-(buttonWidth*2), itemHeight), item.typeID);
 					if (GUI.Button (new Rect (left + width-(buttonWidth*2), top + 80, buttonWidth, itemHeight), "Drop it")) {
 						attributesScript.inventory.Remove (item);
-						this.GetComponent<Sounds>().playWorldSound(8);
+						this.GetComponent<Sounds>().playWorldSound(Sounds.DROP_ITEM);
 					}
 
 					if(item.typeID != "Medium Health Pack" && item.typeID != "Large Health Pack"){
@@ -124,18 +128,18 @@ public class InventoryGUI : MonoBehaviour {
 							attributesScript.equipItem (item);
 							attributesScript.inventory.Remove (item);
 							if(item.typeID == "Rare Accessory" || item.typeID == "Common Accessory" || item.typeID == "Uncommon Accessory"){
-								this.GetComponent<Sounds>().playWorldSound(11);
+								this.GetComponent<Sounds>().playWorldSound(Sounds.EQUIP_ACCESSORY);
 							} else if(item.typeID == "Warhammer"){
-								this.GetComponent<Sounds>().playWorldSound(10);
+								this.GetComponent<Sounds>().playWorldSound(Sounds.EQUIP_HAMMER);
 							} else if(item.typeID != "Warhammer"){
-								this.GetComponent<Sounds>().playWorldSound(9);
+								this.GetComponent<Sounds>().playWorldSound(Sounds.EQUIP_SWORD);
 							}
 						}
 					} else {
 						if (GUI.Button (new Rect (left + width-(buttonWidth), top + 80, buttonWidth, itemHeight), "Use")) {
 							attributesScript.useHealthPack (item);
 							attributesScript.inventory.Remove (item);
-							this.GetComponent<Sounds>().playWorldSound(5);
+							this.GetComponent<Sounds>().playWorldSound(Sounds.USE_HEALTH);
 						}
 					}
 					top += itemHeight;
@@ -157,7 +161,7 @@ public class InventoryGUI : MonoBehaviour {
 					if (GUI.Button (new Rect (secondLeft + width - buttonWidth, secondTop + 80, buttonWidth, itemHeight), "Unequip")) {
 						attributesScript.unequipAccessory (item);
 						attributesScript.addToInventory (item);
-						this.GetComponent<Sounds>().playWorldSound(11);
+						this.GetComponent<Sounds>().playWorldSound(Sounds.EQUIP_ACCESSORY);
 					}
 					secondTop += itemHeight;
 				}
@@ -174,9 +178,9 @@ public class InventoryGUI : MonoBehaviour {
 				if (GUI.Button (new Rect (secondLeft + width - buttonWidth, secondTop + 80, buttonWidth, itemHeight), "Unequip")) {
 					attributesScript.addToInventory (attributesScript.weapon);
 					if(attributesScript.weapon.typeID != "Warhammer"){
-						this.GetComponent<Sounds>().playWorldSound(9);
+						this.GetComponent<Sounds>().playWorldSound(Sounds.EQUIP_SWORD);
 					} else {	
-						this.GetComponent<Sounds>().playWorldSound(10);
+						this.GetComponent<Sounds>().playWorldSound(Sounds.EQUIP_HAMMER);
 					}
 					attributesScript.unequipWeapon ();
 				}
@@ -202,12 +206,12 @@ public class InventoryGUI : MonoBehaviour {
 					GUI.Label (new Rect (left + 30, top + 80, width-buttonWidth*2, itemHeight), item.typeID);
 					if (GUI.Button (new Rect (left + width-buttonWidth*2, top + 80, buttonWidth, itemHeight), "Drop it")) {
 						attributesScript.storage.Remove (item);
-						this.GetComponent<Sounds>().playWorldSound(8);
+						this.GetComponent<Sounds>().playWorldSound(Sounds.DROP_ITEM);
 					}
 					if (GUI.Button (new Rect (left + width-buttonWidth, top + 80, buttonWidth, itemHeight), "Move to Inventory")) {
 						attributesScript.addToInventory(item);
 						attributesScript.storage.Remove (item);
-						this.GetComponent<Sounds>().playWorldSound(7);
+						this.GetComponent<Sounds>().playWorldSound(Sounds.MOVE_ITEM);
 					}
 					top += itemHeight;
 				}
@@ -222,12 +226,12 @@ public class InventoryGUI : MonoBehaviour {
 					GUI.Label (new Rect (secondLeft + 30, secondTop + 80, width-buttonWidth, itemHeight), item.typeID);
 					if (GUI.Button (new Rect (secondLeft + width-buttonWidth*2, secondTop + 80, buttonWidth, itemHeight), "Drop it")) {
 						attributesScript.inventory.Remove (item);
-						this.GetComponent<Sounds>().playWorldSound(8);
+						this.GetComponent<Sounds>().playWorldSound(Sounds.DROP_ITEM);
 					}
 					if (GUI.Button (new Rect (secondLeft + width-buttonWidth, secondTop + 80, buttonWidth, itemHeight), "Move To Storage")) {
 						attributesScript.addToStorage (item);
 						attributesScript.inventory.Remove (item);
-						this.GetComponent<Sounds>().playWorldSound(7);
+						this.GetComponent<Sounds>().playWorldSound(Sounds.MOVE_ITEM);
 					}
 					secondTop += itemHeight;
 				}

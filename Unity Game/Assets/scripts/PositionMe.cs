@@ -26,7 +26,11 @@ public class PositionMe : MonoBehaviour {
 		} else if (this.tag == "Monster") {
 			if (col.name == "EntrancePlane" && checkMyPosition == true) {
 				timeToCheckMyPosition = Time.time;
-				GameObject.Find ("Planet").GetComponent<EnemySpawner> ().position (this.gameObject);
+				if(GameObject.Find ("Planet").GetComponent<EnemySpawner> () != null){
+					GameObject.Find ("Planet").GetComponent<EnemySpawner> ().position (this.gameObject);
+				} else {
+					GameObject.Find ("Planet").GetComponent<TutorialSpawner> ().position (this.gameObject);
+				}
 			}
 		} else if (this.tag == "MediumHealthPack" || this.tag == "LargeHealthPack") {
 			if (col.name == "EntrancePlane" && checkMyPosition == true) {
@@ -73,8 +77,12 @@ public class PositionMe : MonoBehaviour {
 			if ((Time.time >= timeToCheckMyPosition + 2f && checkMyPosition == true && touching == false) || (checkMyPosition == false && touching == false)) {
 				
 				timeToCheckMyPosition = Time.time;
-				
-				GameObject.Find ("Planet").GetComponent<EnemySpawner> ().position (this.gameObject);
+
+				if(Application.loadedLevelName != "Tutorial"){
+					GameObject.Find ("Planet").GetComponent<EnemySpawner> ().position (this.gameObject);
+				} else {
+					GameObject.Find ("Planet").GetComponent<TutorialSpawner> ().position (this.gameObject);
+				}
 			} 
 		} //Repositions healthpacks that aren't touching the planet after 2 seconds
 		else if (this.tag == "MediumHealthPack" || this.tag == "LargeHealthPack") {

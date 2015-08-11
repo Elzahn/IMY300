@@ -24,7 +24,7 @@ public class Collisions : MonoBehaviour {
 		} else if (showHealthConfirmation && Input.GetKeyDown(KeyCode.E) && colObj.tag == "MediumHealthPack") {
 			if (playerAttributesScript.inventory.Count < playerAttributesScript.inventorySize) {
 				playerAttributesScript.addToInventory (new MediumHealthPack ());
-				this.GetComponent<Sounds> ().playWorldSound (4);
+				this.GetComponent<Sounds> ().playWorldSound (Sounds.HEALTH_COLLECTION);
 				
 				print (colObj);
 				Vector3 tempPos = colObj.transform.position;
@@ -40,7 +40,7 @@ public class Collisions : MonoBehaviour {
 		} else if (showHealthConfirmation && Input.GetKeyDown(KeyCode.E) && colObj.tag == "LargeHealthPack") {
 			if (playerAttributesScript.inventory.Count < playerAttributesScript.inventorySize) {
 				playerAttributesScript.addToInventory (new LargeHealthPack ());
-				this.GetComponent<Sounds> ().playWorldSound (4);
+				this.GetComponent<Sounds> ().playWorldSound (Sounds.HEALTH_COLLECTION);
 				print (colObj);
 				Vector3 tempPos = colObj.transform.position;
 				print (tempPos);
@@ -77,49 +77,19 @@ public class Collisions : MonoBehaviour {
 			int healthToLose = (int)(playerAttributesScript.hp * 0.02);
 			playerAttributesScript.loseHP (healthToLose);//loses 2% health when hit
 			PlayerLog.addStat ("A tree fell on you. You lose " + healthToLose + " health");
-		} /*else if (col.collider.tag == "MediumHealthPack") {
-			if (playerAttributesScript.inventory.Count < playerAttributesScript.inventorySize) {
-				playerAttributesScript.addToInventory (new MediumHealthPack ());
-				this.GetComponent<Sounds> ().playWorldSound (4);
-
-				
-				Vector3 tempPos = col.collider.transform.parent.position;
-				print (tempPos);
-				//Delete health shrub
-				GameObject.Find("Planet").GetComponent<SpawnHealthPacks>().removeHealth(col.collider.transform.parent.gameObject);
-				Destroy (col.collider.transform.parent.gameObject.gameObject);
-
-
-				//Add shrub
-				GameObject.Find("Planet").GetComponent<SpawnTrees>().replaceHealth(tempPos);			
-			}
-		} else if (col.collider.tag == "LargeHealthPack") {
-			if (playerAttributesScript.inventory.Count < playerAttributesScript.inventorySize) {
-				playerAttributesScript.addToInventory (new LargeHealthPack ());
-				this.GetComponent<Sounds> ().playWorldSound (4);
-
-				Vector3 tempPos = col.collider.transform.parent.position;
-				print (tempPos);
-				//Delete health shrub
-				GameObject.Find("Planet").GetComponent<SpawnHealthPacks>().removeHealth(col.collider.transform.parent.gameObject);
-				Destroy (col.collider.transform.parent.gameObject);
-
-				//Add shrub
-				GameObject.Find("Planet").GetComponent<SpawnTrees>().replaceHealth(tempPos);
-			}
-		} */else  //Lose health if you run into something that you can't interact with, walk/run on and isn't a monster
-		if (playerScript.run && col.collider.name != "Storage" && col.collider.name != "ExitPlane" && col.collider.name != "EntrancePlane" && col.collider.name != "Wall" && col.collider.name != "Plane002" && col.collider.name != "Plane003" && col.collider.name != "Plane004" && col.collider.name != "Floor" && col.collider.name != "Planet" && col.collider.tag != "Monster" && col.collider.tag != "WarpPoint" && col.collider.tag != "MediumHealthPack" && col.collider.tag != "LargeHealthPack") {
+		} else  //Lose health if you run into something that you can't interact with, walk/run on and isn't a monster
+		if (playerScript.run && col.collider.name != "Storage" && col.collider.name != "ExitPlane" && col.collider.name != "EntrancePlane" && col.collider.name != "Ship_interior" && col.collider.name != "Planet" && col.collider.tag != "Monster" && col.collider.tag != "WarpPoint" && col.collider.tag != "MediumHealthPack" && col.collider.tag != "LargeHealthPack") {
 			int healthToLose = (int)(playerAttributesScript.hp * 0.02);
 			playerAttributesScript.loseHP (healthToLose);//loses 2% health when running into something
 			PlayerLog.addStat ("You lose " + healthToLose + " health by running into something");
 			if (playerAttributesScript.gender == 'f') {
-				this.GetComponent<Sounds> ().playCharacterSound (6);
+				this.GetComponent<Sounds> ().playCharacterSound (Sounds.FEMALE_HURT);
 			} else {
-				this.GetComponent<Sounds> ().playCharacterSound (5);
+				this.GetComponent<Sounds> ().playCharacterSound (Sounds.MALE_HURT);
 			}
 		} else //play landing sound
-		if((col.collider.name == "Floor" || col.collider.name == "Planet") && playerScript.jumping == true) {
-			this.GetComponent<Sounds> ().playCharacterSound (4);
+		if((col.collider.name == "Ship_interior" || col.collider.name == "Planet") && playerScript.jumping == true) {
+			this.GetComponent<Sounds> ().playCharacterSound (Sounds.JUMP);
 			playerScript.jumping = false;
 		} 
 	}

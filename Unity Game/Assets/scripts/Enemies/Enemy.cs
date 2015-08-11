@@ -138,7 +138,7 @@ public abstract class Enemy : MonoBehaviour {
 		float distance = Vector3.Distance (PlayerPos, myPos);
 		//Vector3 direction = PlayerPos - myPos;
 		if (distance > 6 && suspicion < SUSPICION_ALERT) {
-			GameObject.Find("Player").GetComponent<Sounds>().playMonsterSound (0, this);
+			GameObject.Find("Player").GetComponent<Sounds>().playMonsterSound (Sounds.MONSTER_WALKING, this);
 			Vector3 moveDir;
 			Rigidbody rigidbody = GetComponent<Rigidbody> ();
 			//int goTo = Random.Range (1, 5);
@@ -183,21 +183,21 @@ public abstract class Enemy : MonoBehaviour {
 		
 		if (ran <= hitChance){			
 			message = "Monster Hit! ";
-			GameObject.Find("Player").GetComponent<Sounds>().playMonsterSound(3, this);
+			GameObject.Find("Player").GetComponent<Sounds>().playMonsterSound(Sounds.MONSTER_HIT, this);
 			int tmpDamage = damage;
 			if (ran <= critChance) {
 				tmpDamage *= 2;
 				message = "Monster Critical Hit! ";
-				GameObject.Find("Player").GetComponent<Sounds>().playMonsterSound(2, this);
+				GameObject.Find("Player").GetComponent<Sounds>().playMonsterSound(Sounds.MONSTER_CRIT, this);
 			}
 			player.loseHP(tmpDamage);
 
 			if(message == "Monster Miss! "){
-				GameObject.Find("Player").GetComponent<Sounds>().playMonsterSound(4, this);
+				GameObject.Find("Player").GetComponent<Sounds>().playMonsterSound(Sounds.MONSTER_MISS, this);
 			}
 		} 
 		if (GameObject.Find ("Player").GetComponent<PlayerAttributes> ().isDead ()) {
-			GameObject.Find("Player").GetComponent<Sounds>().playDeathSound(1);
+			GameObject.Find("Player").GetComponent<Sounds>().playDeathSound(Sounds.DEAD_MONSTER);
 			message += "You died.";
 		} else {
 			message += player.hp + "/" + player.maxHP ();

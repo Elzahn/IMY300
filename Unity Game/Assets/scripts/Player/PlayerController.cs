@@ -34,12 +34,13 @@ public class PlayerController : MonoBehaviour {
 	public bool paused {
 		get {
 			if (_paused) {
-				this.GetComponent<Sounds>().stopSound("all");
+				this.GetComponent<Sounds>().pauseSound("all");
 			}
 			return _paused;
 		} 
 		set {
 			_paused = value;
+			this.GetComponent<Sounds>().resumeSound("all");
 		} 
 	}
 
@@ -55,7 +56,7 @@ public class PlayerController : MonoBehaviour {
 
 	void Start(){
 		playerAttributes = this.GetComponent<PlayerAttributes> ();
-		paused = true;
+		paused = false;
 		showDeath = false;
 		showPaused = false;
 		moving = false;
@@ -93,18 +94,77 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void keysCheck() {
+
+		//Goto Tutorial Planet
+		if (Input.GetKeyDown (KeyCode.Tab) && this.GetComponent<Tutorial>().startTutorial && Application.loadedLevelName == "SaveSpot") {
+			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = false;
+			this.GetComponent<SaveSpotTeleport> ().setExitConf (false);
+			this.GetComponent<Rigidbody> ().mass = 0.1f;
+			sound.playWorldSound (Sounds.SHIP_DOOR);
+			playerAttributes.saveInventoryAndStorage ();
+			this.transform.position = new Vector3 (0f, 15.03f, 0);
+			sound.stopSound ("computer");
+			Application.LoadLevel ("Tutorial");
+		} else if (Input.GetKeyDown (KeyCode.Tab) && Application.loadedLevelName == "Tutorial")/* if (Input.GetKeyDown (KeyCode.Tab) && this.GetComponent<Tutorial>().startTutorial && Application.loadedLevelName == "Tutorial"){
+			this.transform.position = new Vector3 (-27.01f, 79.65f, 1.93f);
+			this.GetComponent<Rigidbody> ().mass = 1000;
+			sound.playWorldSound (Sounds.SHIP_DOOR);
+			sound.stopSound ("computer");
+			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
+			this.GetComponent<SaveSpotTeleport> ().setExitConf (true);
+			Application.LoadLevel ("SaveSpot");*/
+		{
+			this.GetComponent<Tutorial> ().tutorialDone = true;
+			this.GetComponent<Tutorial> ().teachInventory = true;
+			sound.playWorldSound (Sounds.SHIP_DOOR);
+			sound.stopSound ("computer");
+			Application.LoadLevel ("SaveSpot");
+			Resources.UnloadUnusedAssets();
+			this.transform.position = new Vector3 (-27.01f, 79.65f, 1.93f);
+			this.transform.rotation = new Quaternion(0, 0.7f, 0, -0.7f);
+			this.GetComponent<Rigidbody> ().mass = 100f;
+			this.GetComponent<PlayerAttributes> ().restoreHealthToFull();
+			this.GetComponent<PlayerAttributes> ().restoreStaminaToFull();
+			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
+		}
+
+		//Open SaveSpot open door
+		if (Input.GetKeyDown (KeyCode.O)) {
+			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
+		}
+
+		//build cheat to skip cutscenes
+
+		//Skip Tutorial
+		if (Input.GetKeyDown (KeyCode.Escape) && this.GetComponent<Tutorial>().startTutorial) {
+			this.GetComponent<Tutorial>().stopTutorial();
+			this.GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
+			this.GetComponent<SaveSpotTeleport>().loadTutorial = false;
+			GameObject.Find("Player").transform.position = new Vector3(9.41f, 79.19f, 7.75f);
+			Application.LoadLevel("SaveSpot");
+			this.GetComponent<Rigidbody>().mass = 1000;
+			print ("Tutorial skipped you can now use the teleporter again.");
+		} else if(Input.GetKeyDown(KeyCode.Escape) && !this.GetComponent<Tutorial>().startTutorial){
+			showQuit = true;
+		}
+
+		//Warp cheat
 		if (Input.GetKeyDown (KeyCode.F1)) {
 			this.GetComponent<Warping> ().chooseDestinationUnlocked = true;
+			this.GetComponent<Warping> ().chooseDestination = true;
 			print ("Warp point destination choice unlocked.");
 		}
-		
+
+		//Fall through planet cheat
 		if (Input.GetKeyDown (KeyCode.F2)) {
-			FallThroughPlanet.fallThroughPlanetUnlocked = true;
+			this.GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked = true;
+			this.GetComponent<FallThroughPlanet>().canFallThroughPlanet = true;
 			print ("Fall through plannet unlocked.");
 		}
-		
+
+		//kill the boss and level up
 		if (Input.GetKeyDown (KeyCode.F3)) {
-			this.GetComponent<SaveSpotTeleport> ().setEnterSaveSpot ();
+			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 			print ("You killed the boss!");
 		}
 
@@ -118,7 +178,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		//Spin cheat
-		if(Input.GetKeyDown(KeyCode.F5)){
+		if(Input.GetKeyDown(KeyCode.F5) && Application.loadedLevelName != "Tutorial"){
 			GameObject.Find("Planet").GetComponent<NaturalDisasters>().spinPlanetNow();
 		}
 
@@ -126,10 +186,6 @@ public class PlayerController : MonoBehaviour {
 		//Earthquake cheat
 		if(Input.GetKeyDown(KeyCode.F6)){
 			GameObject.Find("Planet").GetComponent<NaturalDisasters>().makeEarthQuakeHappen();
-		}
-		
-		if(Input.GetKeyDown(KeyCode.Escape)){
-			showQuit = true;
 		}
 	}
 	
@@ -158,7 +214,7 @@ public class PlayerController : MonoBehaviour {
 
 			if (playerAttributes.isDead ()) {
 				showDeath = true;
-				this.GetComponent<Sounds>().stopAlarmSound(1);
+				this.GetComponent<Sounds>().stopAlarmSound(Sounds.LOW_HEALTH_ALARM);
 				paused = true;
 			}
 
@@ -193,15 +249,15 @@ public class PlayerController : MonoBehaviour {
 
 				if(run){
 					if(Application.loadedLevelName == "SaveSpot"){
-						sound.playCharacterSound (3);
+						sound.playCharacterSound (Sounds.SHIP_RUNNING);
 					} else {
-						sound.playCharacterSound (1);
+						sound.playCharacterSound (Sounds.PLANET_RUNNING);
 					}
 				} else {
 					if(Application.loadedLevelName == "SaveSpot"){
-						sound.playCharacterSound (1);
+						sound.playCharacterSound (Sounds.SHIP_WALKING);
 					} else {
-						sound.playCharacterSound (0);
+						sound.playCharacterSound (Sounds.PLANET_WALKING);
 					}
 				}
 			} else {
@@ -228,7 +284,7 @@ public class PlayerController : MonoBehaviour {
 						this.GetComponent<Animator>().SetBool("MovingRight", moving);
 						this.GetComponent<Animator>().SetBool("MovingLeft", moving);
 						soundPlays = false;
-						sound.stopSound ("character");
+						this.GetComponent<Sounds>().stopSound ("character");
 					}
 					check += 0.25f;
 				}
@@ -263,14 +319,14 @@ public class PlayerController : MonoBehaviour {
 				GameObject.Find ("Player").transform.position = new Vector3 (0.63f, 21.9f, 1.68f);
 				GameObject.Find ("Player").transform.rotation = new Quaternion (4.336792f, -0.0001220703f, 0.3787689f, 1);
 				this.GetComponent<Sounds> ().stopSound ("alarm");
-				this.GetComponent<Sounds> ().playWorldSound (2);
+				this.GetComponent<Sounds> ().playWorldSound (Sounds.BUTTON);
 				playerAttributes.resetInventoryAndStorage ();
 				PlayerLog.queue.Clear ();
 				PlayerLog.stats = "";
 				Application.LoadLevel (Application.loadedLevel);
 			}
 			if (GUI.Button (new Rect (left + 30, top + 90, buttonWidth, itemHeight), "Quit")) {
-				this.GetComponent<Sounds> ().playWorldSound (2);
+				this.GetComponent<Sounds> ().playWorldSound (Sounds.BUTTON);
 				Application.Quit ();
 			}
 		} else if (showPaused) {
@@ -290,11 +346,11 @@ public class PlayerController : MonoBehaviour {
 
 			GUI.Box (new Rect (left, top, boxWidth, boxHeigh), "Are you sure you want to quit?");
 			if (GUI.Button (new Rect (left + 10, top + 60, buttonWidth, itemHeight), "Yes")) {
-				this.GetComponent<Sounds> ().playWorldSound (2);
+				this.GetComponent<Sounds> ().playWorldSound (Sounds.BUTTON);
 				Application.Quit();
 			}
 			if (GUI.Button (new Rect (left + buttonWidth + 30, top + 60, buttonWidth, itemHeight), "No")) {
-				this.GetComponent<Sounds> ().playWorldSound (2);
+				this.GetComponent<Sounds> ().playWorldSound (Sounds.BUTTON);
 				showQuit = false;
 				paused = false;
 			}

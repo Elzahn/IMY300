@@ -9,9 +9,77 @@ public class Sounds : MonoBehaviour {
 	public AudioClip[] monsterClips;
 	public AudioClip[] deathClips;
 	public AudioClip[] alarmClips;
-	public AudioSource worldAudio, characterAudio, ambienceAudio, monsterAudio, deathAudio, alarmAudio;
+	public AudioClip[] computerClips;
+	public AudioSource worldAudio{ get; set; }
+	public AudioSource characterAudio{get; set;}
+	public AudioSource ambienceAudio{get; set;}
+	public AudioSource monsterAudio{ get; set; }
+	public AudioSource deathAudio{ get; set; }
+	public AudioSource alarmAudio{get; set;}
+	public AudioSource computerAudio{get; set;}
 	private int worldClip, characterClip, alarmClip;
+	public int computerClip {get; set;}
 	private bool done = false;
+
+	//World sounds
+	public const int STORAGE = 0;
+	public const int INVENTORY = 1;
+	public const int BUTTON = 2;
+	public const int SHIP_DOOR = 3;
+	public const int HEALTH_COLLECTION = 4;
+	public const int USE_HEALTH = 5;
+	public const int WARPING = 6;
+	public const int MOVE_ITEM = 7;
+	public const int DROP_ITEM = 8;
+	public const int EQUIP_SWORD = 9;
+	public const int EQUIP_HAMMER = 10;
+	public const int EQUIP_ACCESSORY = 11;
+	public const int SPINNING_WIND = 12;
+	public const int EARTHQUAKE = 13;
+
+	//Character sounds
+	public const int PLANET_WALKING = 0;
+	public const int PLANET_RUNNING = 1;
+	public const int SHIP_WALKING = 2;
+	public const int SHIP_RUNNING = 3;
+	public const int JUMP = 4;
+	public const int MALE_HURT = 5;
+	public const int FEMALE_HURT = 6;
+	public const int SWORD_HIT = 7;
+	public const int SWORD_CRIT = 8;
+	public const int MISS = 9;
+	public const int HAMMER_HIT = 10;
+	public const int HAMMER_CRIT = 11;
+	public const int FISTS_HIT = 12;
+	public const int FISTS_CRIT = 13;
+
+	//Monster sounds
+	public const int MONSTER_WALKING = 0;
+	public const int MONSTER_FOLLOWING = 1;
+	public const int MONSTER_CRIT = 2;
+	public const int MONSTER_HIT = 3;
+	public const int MONSTER_MISS = 4;
+
+	//Death sounds
+	public const int DEAD_MONSTER = 0;
+	public const int DEAD_PLAYER = 1;
+
+	//Alarm sounds
+	public const int DISASTER_ALARM = 0;
+	public const int LOW_HEALTH_ALARM = 1;
+
+	//Ambience sounds
+	public const int PLANET_AMBIENCE = 0;
+	public const int SHIP_AMBIENCE = 1;
+
+	//Computer sounds
+	public const int COMPUTER_WARP = 0;
+	public const int COMPUTER_RUN = 1;
+	public const int COMPUTER_INVENTORY = 2;
+	public const int COMPUTER_DISASTERD = 3;
+	public const int COMPUTER_GOBACK = 4;
+	public const int COMPUTER_FALL = 5;
+	public const int COMPUTER_WARPDESTINATION = 6;
 
 	void Start(){
 		worldAudio = GameObject.Find ("World Audio").GetComponent<AudioSource> ();
@@ -19,6 +87,75 @@ public class Sounds : MonoBehaviour {
 		characterAudio = GameObject.Find ("Character Audio").GetComponent<AudioSource> ();
 		deathAudio = GameObject.Find ("Death Audio").GetComponent<AudioSource> ();
 		alarmAudio = GameObject.Find ("Alarm Audio").GetComponent<AudioSource> ();
+		computerAudio = GameObject.Find ("Computer Audio").GetComponent<AudioSource> ();
+		computerClip = -1;
+	}
+
+	public void resumeSound(string source){
+		switch (source) {
+			case "character":
+			{
+				characterAudio.UnPause ();
+				break;
+			}
+			case "world":
+			{
+				worldAudio.UnPause();
+				break;
+			}
+			default:
+			{
+				characterAudio = GameObject.Find ("Character Audio").GetComponent<AudioSource> ();
+				characterAudio.UnPause ();
+				if(worldClip == SHIP_DOOR || worldClip == HEALTH_COLLECTION || worldClip == WARPING){
+					worldAudio.UnPause ();
+				}
+				if(alarmClip != DISASTER_ALARM){
+					alarmAudio.UnPause ();
+				}
+				
+				if(GameObject.Find("Planet") != null && GameObject.Find("Planet").GetComponent<EnemySpawner>() != null){
+					GameObject.Find("Planet").GetComponent<EnemySpawner>().resumeEnemySound();
+				}
+			//JUST FOR TESTING
+			computerAudio = GameObject.Find ("Computer Audio").GetComponent<AudioSource> ();
+				computerAudio.UnPause();
+				break;
+			}
+		}
+	}
+
+	public void pauseSound(string source){
+		switch (source) {
+			case "character":
+			{
+				characterAudio.Pause ();
+				break;
+			}
+			case "world":
+			{
+				worldAudio.Pause();
+				break;
+			}
+			default:
+			{
+				characterAudio = GameObject.Find ("Character Audio").GetComponent<AudioSource> ();
+				characterAudio.Pause ();
+				if(worldClip == SHIP_DOOR || worldClip == HEALTH_COLLECTION || worldClip == WARPING){
+					worldAudio.Pause ();
+				}
+				if(alarmClip != DISASTER_ALARM){
+					alarmAudio.Pause ();
+				}
+				
+				if(GameObject.Find("Planet") != null && GameObject.Find("Planet").GetComponent<EnemySpawner>() != null){
+					GameObject.Find("Planet").GetComponent<EnemySpawner>().pauseEnemySound();
+				}
+				
+				computerAudio.Pause();
+				break;
+			}
+		}
 	}
 
 	public void stopSound(string source){
@@ -33,21 +170,40 @@ public class Sounds : MonoBehaviour {
 			worldAudio.Stop();
 			break;
 		}
+		case "computer":
+		{
+			computerAudio.Stop();
+			break;
+		}
 		default:
 		{
 			characterAudio = GameObject.Find ("Character Audio").GetComponent<AudioSource> ();
 			characterAudio.Stop ();
-			if(worldClip != 0 && worldClip != 1 && worldClip != 2 && worldClip != 5 && worldClip != 7 && worldClip != 8 && worldClip != 9 && worldClip != 10 && worldClip != 11 && worldClip != 12 && worldClip != 13){
+			if(worldClip == SHIP_DOOR || worldClip == HEALTH_COLLECTION || worldClip == WARPING){
 				worldAudio.Stop ();
 			}
-			if(alarmClip != 0)
-			{
+			if(alarmClip != DISASTER_ALARM){
 				alarmAudio.Stop ();
 			}
+
+			if(GameObject.Find("Planet") != null && GameObject.Find("Planet").GetComponent<EnemySpawner>() != null){
+				GameObject.Find("Planet").GetComponent<EnemySpawner>().stopEnemiesSound();
+			}
+
+			computerAudio.Stop();
 			break;
 		}
 		}
 	}
+
+	public void pauseMonsterSound(Enemy monster){
+		monster.GetComponent<AudioSource> ().Pause();
+	}
+
+	public void resumeMonsterSound(Enemy monster){
+		monster.GetComponent<AudioSource> ().UnPause();
+	}
+
 
 	public void stopMonsterSound(Enemy monster){
 		monster.GetComponent<AudioSource> ().Stop();
@@ -68,7 +224,7 @@ public class Sounds : MonoBehaviour {
 		monsterAudio.minDistance = 12;
 		monsterAudio.maxDistance = 40;
 
-		if (clipAt == 0) {
+		if (clipAt == MONSTER_WALKING) {
 			if (monsterAudio.isPlaying == false && done) {
 				monsterAudio.loop = true;
 				monsterAudio.clip = monsterClips [clipAt];
@@ -95,7 +251,7 @@ public class Sounds : MonoBehaviour {
 	}
 
 	public void playAlarmSound(int clipAt){
-		if (clipAt == 1) {
+		if (clipAt == LOW_HEALTH_ALARM) {
 			alarmAudio.volume = 0.05f;
 		} else {
 			alarmAudio.volume = 1;
@@ -110,7 +266,7 @@ public class Sounds : MonoBehaviour {
 	}
 
 	void Update(){
-		if (worldAudio.isPlaying == false && worldClip == 3) {
+		if (worldAudio.isPlaying == false && worldClip == SHIP_DOOR) {
 			done = true;
 		}
 	}
@@ -121,17 +277,17 @@ public class Sounds : MonoBehaviour {
 		}
 		worldClip = clipAt;
 
-		if (worldClip == 3) {
+		if (worldClip == SHIP_DOOR) {
 			done = false;
 		}
 
-		if(worldClip == 4){
+		if(worldClip == HEALTH_COLLECTION){
 			worldAudio.volume = 0.25f;
 		} else {
 			worldAudio.volume = 1;
 		}
 
-		if (clipAt == 12 || clipAt == 13) {
+		if (clipAt == SPINNING_WIND || clipAt == EARTHQUAKE) {
 			worldAudio.loop = true;
 		} else {
 			worldAudio.loop = false;
@@ -144,7 +300,7 @@ public class Sounds : MonoBehaviour {
 		characterClip = clipAt;
 		characterAudio.volume = 0.5f;
 
-		if (characterClip >= 0 && characterClip <= 3) {
+		if (characterClip >= PLANET_WALKING && characterClip <= SHIP_RUNNING) {
 			characterAudio.loop = true;
 		} else {
 			characterAudio.loop = false;
@@ -152,5 +308,12 @@ public class Sounds : MonoBehaviour {
 
 		characterAudio.clip = characterClips [clipAt];
 		characterAudio.Play ();
+	}
+
+	public void playComputerSound(int clipAt){
+		computerClip = clipAt;
+		computerAudio.loop = false;
+		computerAudio.clip = computerClips [clipAt];
+		computerAudio.Play ();
 	}
 }

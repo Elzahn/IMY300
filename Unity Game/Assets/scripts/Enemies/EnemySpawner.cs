@@ -50,6 +50,30 @@ public class EnemySpawner : MonoBehaviour {
 		addEnemy(bossEnemy);	
 	}
 
+	public void resumeEnemySound(){
+		Enemy enemy;
+		foreach(GameObject monster in enemies){
+			enemy = monster.GetComponent<Enemy>();
+			GameObject.Find("Player").GetComponent<Sounds>().resumeMonsterSound(enemy);
+		}
+	}
+
+	public void pauseEnemySound(){
+		Enemy enemy;
+		foreach(GameObject monster in enemies){
+			enemy = monster.GetComponent<Enemy>();
+			GameObject.Find("Player").GetComponent<Sounds>().pauseMonsterSound(enemy);
+		}
+	}
+
+	public void stopEnemiesSound(){
+		Enemy enemy;
+		foreach(GameObject monster in enemies){
+			enemy = monster.GetComponent<Enemy>();
+			GameObject.Find("Player").GetComponent<Sounds>().stopMonsterSound(enemy);
+		}
+	}
+
 	public bool hasEnemiesLanded(){
 		bool done = true;
 		foreach (GameObject enemy in enemies) {
@@ -75,8 +99,8 @@ public class EnemySpawner : MonoBehaviour {
 			if (enemy.isDead()) {
 				if(enemy.typeID == "BossAlien")
 				{
-					FallThroughPlanet.fallThroughPlanetUnlocked = true;
-					SaveSpotTeleport.canEnterSaveSpot = true;
+					GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked = true;
+					GameObject.Find("Player").GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
 				}
 				dropLoot(enemy, rigidbody.position);
 				enemies.Remove(go);
@@ -102,7 +126,11 @@ public class EnemySpawner : MonoBehaviour {
 	int chooseLevel() {
 		float r = Random.value;
 		if (r <= 0.3)
-			return playerLevel -1;
+		if (playerLevel - 1 <= 0) {
+			return 1;
+		} else {
+			return playerLevel - 1;
+		}
 		else if (r<= 0.55)
 			return playerLevel;
 		else if (r<= 0.8)
@@ -155,11 +183,11 @@ public class EnemySpawner : MonoBehaviour {
 	
 	void dropLoot(Enemy enemy, Vector3 position) {
 
-		GameObject.Find("Player").GetComponent<Sounds>().playDeathSound(0);
+		GameObject.Find("Player").GetComponent<Sounds>().playDeathSound(Sounds.DEAD_MONSTER);
 		for (int i = 0; i < enemy.maxLoot; i++) {
 			int chance = Random.Range (0, 101);
 			if (chance >= enemy.lootChance) {
-				playerScript.paused = true;
+				//playerScript.paused = true;
 				EnemyName = enemy.typeID;
 
 				chance = Random.Range (0, 101);
@@ -279,7 +307,7 @@ public class EnemySpawner : MonoBehaviour {
 		Loot lootComponent = deadEnemy.GetComponentInChildren<Loot> ();
 		lootComponent.storeLoot (tempLoot, "Dead " + EnemyName);
 		tempLoot.Clear ();
-		lootComponent.showMyLoot ();
+		//lootComponent.showMyLoot ();
 	}
 
 	public void clearLoot(){

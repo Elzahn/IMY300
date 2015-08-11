@@ -11,7 +11,7 @@ public class SpawnTrees : MonoBehaviour {
 
 	public GameObject shrub;
 
-	const int TREE_COUNT = 300;
+	int num_Trees = 300;
 	
 	FauxGravityAttractor planet;
 	
@@ -20,17 +20,20 @@ public class SpawnTrees : MonoBehaviour {
 	void Start () {
 		planet = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
 		GameObject tree;
-		
+
+		if (Application.loadedLevelName == "Tutorial") {
+			num_Trees = 6;
+		}  
+
 		//Spawn Trees
-		for (int i=0; i < TREE_COUNT; ++i) {
-			int index = Random.Range(0, 4);
-			tree = chooseTree(index);
-			addTree(tree);
-		}	  
+		for (int i=0; i < num_Trees; ++i) {
+			int index = Random.Range (0, 4);
+			tree = chooseTree (index);
+			addTree (tree);
+		}
 	}
 
 	public void replaceHealth(Vector3 pos){
-		print (pos);
 		GameObject tempShrub = Instantiate(shrub);
 		tempShrub.name = "TempShrub";
 		tempShrub.transform.position = pos;

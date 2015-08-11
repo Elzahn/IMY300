@@ -45,7 +45,7 @@ public class Loot : MonoBehaviour {
 				if (GUI.Button (new Rect (left + 270, top + 40, buttonWidth, itemHeight), "Take it")) {
 					attributesScript.addToInventory (item);
 					myLoot.Remove (item);
-					GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(2);
+					GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(Sounds.BUTTON);
 					if (myLoot.Count == 0) {
 						showLoot = false;
 						Destroy(this.gameObject);
@@ -58,7 +58,7 @@ public class Loot : MonoBehaviour {
 			if (GUI.Button (new Rect (left + 270, closeTop + (boxHeight - itemHeight), buttonWidth, itemHeight), "Close")) {
 				showLoot = false;
 				playerScript.paused = false;
-				GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(2);
+				GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(Sounds.BUTTON);
 			}
 		}
 	}

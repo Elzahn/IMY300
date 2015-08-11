@@ -44,6 +44,13 @@ ModelImporter:
     4300008: Wall
     4300010: Door
     4300012: Box001
+    6400000: Box001
+    6400002: Door
+    6400004: Plane001
+    6400006: Plane002
+    6400008: Plane003
+    6400010: Plane004
+    6400012: Wall
   materials:
     importMaterials: 1
     materialName: 2
@@ -69,7 +76,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0

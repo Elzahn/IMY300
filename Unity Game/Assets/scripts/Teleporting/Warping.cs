@@ -4,8 +4,9 @@ using System.Collections;
 public class Warping : MonoBehaviour {
 
 	private GameObject target;
-	private bool waitingForMovement, chooseDestination, showDestinationChoice;
+	private bool waitingForMovement, showDestinationChoice;
 	public bool chooseDestinationUnlocked{ get; set; }
+	public bool chooseDestination{ get; set; }
 	private Collider col;
 	private float nextUsage;
 	private float delay = 10;
@@ -50,7 +51,7 @@ public class Warping : MonoBehaviour {
 			generateRandomWarpPoint(Random.Range(1,6));
 		}
 		else{
-			GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(6);
+			GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(Sounds.WARPING);
 			attributesScript.justWarped = true;
 			GameObject newLocationWarpPoint = GameObject.Find("WarpPoint"+randomWarpPoint);
 			Vector3 newLocation = newLocationWarpPoint.transform.position;
@@ -161,7 +162,7 @@ public class Warping : MonoBehaviour {
 			if(GUI.Button(new Rect(320, top+210,150,20), "Cancel")) {
 				showDestinationChoice = false;
 				playerScript.paused = false;
-				GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(2);
+				GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(Sounds.BUTTON);
 			}
 		}
 	}

@@ -188,6 +188,7 @@ public class PlayerAttributes : MonoBehaviour {
 			Warping warp = this.gameObject.GetComponent<Warping> ();
 			if (level == WARP_UNLOCK_LEVEL && warp != null) {
 				warp.chooseDestinationUnlocked = true;
+				GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_WARPDESTINATION);
 			}
 			
 			if (Time.time >= nextRegeneration) {
@@ -281,7 +282,13 @@ public class PlayerAttributes : MonoBehaviour {
 	
 	public string addXP(int value){
 		xp += value;
-		return levelUp();
+
+		string temp = levelUp();
+		if (temp == "") {
+			return "You got " + value + "XP";
+		} else {
+			return temp;
+		}
 	}
 
 	/***************************** Inventory ************************************/
@@ -400,7 +407,9 @@ public class PlayerAttributes : MonoBehaviour {
 
 	/** Returns true if dead */
 	public bool loseHP(int loss) {
-		hp -= loss;
+		if (Application.loadedLevelName != "Tutorial") {
+			hp -= loss;
+		}
 		return isDead ();
 	}
 	
@@ -436,7 +445,7 @@ public class PlayerAttributes : MonoBehaviour {
 		stamina = maxStamina ();
 	}
 
-	/*********************** A*****************************/
+	/*********************** Attack *****************************/
 
 	public string attack(Enemy e) {
 		//string name = e.typeID;
@@ -459,24 +468,24 @@ public class PlayerAttributes : MonoBehaviour {
 
 				if (weapon != null){
 					if (weapon.typeID == "Warhammer") {
-						soundComponent.playCharacterSound (11);
+						soundComponent.playCharacterSound (Sounds.HAMMER_CRIT);
 					} else {
-						soundComponent.playCharacterSound (8);
+						soundComponent.playCharacterSound (Sounds.SWORD_CRIT);
 					}
 				} else {
-					soundComponent.playCharacterSound (13);
+					soundComponent.playCharacterSound (Sounds.FISTS_CRIT);
 				}
 
 			} else {
 				/* Non-crit Sounds */
 				if (weapon != null){
 					if (weapon.typeID == "Warhammer") {
-						soundComponent.playCharacterSound (10);
+						soundComponent.playCharacterSound (Sounds.HAMMER_HIT);
 					} else {
-						soundComponent.playCharacterSound (7);
+						soundComponent.playCharacterSound (Sounds.SWORD_HIT);
 					}
 				} else {
-					soundComponent.playCharacterSound (12);
+					soundComponent.playCharacterSound (Sounds.FISTS_HIT);
 				}
 			}
 
@@ -485,16 +494,17 @@ public class PlayerAttributes : MonoBehaviour {
 			if (weapon != null) {
 				stamina -= weapon.staminaLoss;
 			}
+
 			if (dead) {					
 				message += " Monster died!\n";
-				message += addXP(e.level * XP_GAIN_PER_MONSTER_LEVEL);
+				message += addXP(e.level * XP_GAIN_PER_MONSTER_LEVEL) + "\n";
 			} else {
 				//add Stats to message
 				message += e.getHealth()+"/"+e.getMaxHp();
 			}
 		} 
 		if (message == "Miss! ") {
-			soundComponent.playCharacterSound(9);
+			soundComponent.playCharacterSound(Sounds.MISS);
 			message += e.getHealth () + "/" + e.getMaxHp ();
 		}
 

@@ -4,12 +4,20 @@ using System.Collections;
 public class SaveSpotTeleport : MonoBehaviour {
 
 	private bool showExitConfirmation, showEntranceConfirmation, showNoEntry;
-	public static bool canEnterSaveSpot = false;
+	public bool canEnterSaveSpot{ get; set; }
+	public bool loadTutorial {get; set;}
 	private PlayerAttributes attributesScript;
 	private Sounds sound;
 
+	//Used only for the cheat
+	public void setExitConf(bool val){
+		showExitConfirmation = val;
+	}
+
 	// Use this for initialization
 	void Start () {
+		loadTutorial = true;
+		canEnterSaveSpot = false;
 		showExitConfirmation = false;
 		showNoEntry = false;
 		showEntranceConfirmation = false;
@@ -17,15 +25,13 @@ public class SaveSpotTeleport : MonoBehaviour {
 		sound = GameObject.Find ("Player").GetComponent<Sounds> ();
 	}
 
-	public void setEnterSaveSpot(){
-		canEnterSaveSpot = true;
-	}
-
 	void OnTriggerEnter(Collider col){
-		if (col.name == "ExitPlane") {
+		if (col.name == "ExitPlane"  && canEnterSaveSpot) {
 			showExitConfirmation = true;
 		} else if (col.name == "EntrancePlane" && canEnterSaveSpot) {
 			showEntranceConfirmation = true;
+		} else if (col.name == "ExitPlane"  && canEnterSaveSpot && loadTutorial) {
+
 		} else if (col.name == "EntrancePlane") {
 			showNoEntry = true;
 		}
@@ -38,31 +44,44 @@ public class SaveSpotTeleport : MonoBehaviour {
 	}
 
 	void Update () {
-		if (showExitConfirmation && Input.GetKeyDown (KeyCode.E)) {
+		if (showExitConfirmation && Input.GetKeyDown (KeyCode.E) && !loadTutorial) {
+			canEnterSaveSpot = false;
 			showExitConfirmation = false;
-			this.GetComponent<Rigidbody> ().mass = 0.8f;
-			sound.playWorldSound (3);
+			this.GetComponent<Rigidbody> ().mass = 0.1f;
+			sound.playWorldSound (Sounds.SHIP_DOOR);
 			attributesScript.saveInventoryAndStorage ();
+			GameObject.Find("Player").transform.position = new Vector3(9.41f, 79.19f, 7.75f);
 			Application.LoadLevel ("Scene");
-			PlayerAttributes playerAttributes = GameObject.Find ("Player").GetComponent<PlayerAttributes>();
-			playerAttributes.stamina = playerAttributes.maxStamina ();
-		} else if (showEntranceConfirmation && Input.GetKeyDown (KeyCode.E)) {
+			Resources.UnloadUnusedAssets();
+		} else if(showExitConfirmation && Input.GetKeyDown(KeyCode.E) && loadTutorial){
+			canEnterSaveSpot = false;
+			showExitConfirmation = false;
+			this.GetComponent<Rigidbody> ().mass = 0.1f;
+			sound.playWorldSound (Sounds.SHIP_DOOR);
+			attributesScript.saveInventoryAndStorage ();
+			this.transform.position = new Vector3(0f, 15.03f, 0);
+			Application.LoadLevel("Tutorial");
+			Resources.UnloadUnusedAssets();
+		}else if (showEntranceConfirmation && Input.GetKeyDown (KeyCode.E)) {
+			//showExitConfirmation = true;
 			showEntranceConfirmation = false;
 			attributesScript.restoreHealthToFull();
 			attributesScript.restoreStaminaToFull();
-			canEnterSaveSpot = false;
 			this.GetComponent<Rigidbody>().mass = 100;
 			this.transform.rotation = new Quaternion(0, 0.7f, 0, -0.7f);
-			
-			sound.playWorldSound(3);
+			this.transform.position = new Vector3 (-27.01f, 79.65f, 1.93f);
+			sound.playWorldSound(Sounds.SHIP_DOOR);
 			Application.LoadLevel ("SaveSpot");
+			Resources.UnloadUnusedAssets();
 		}
 	}
 
 	void OnGUI(){
 		if (showNoEntry) {
 			GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), ("Kill the boss to go back."));
-		} else if (showExitConfirmation) {
+		} else if (showExitConfirmation && loadTutorial) {
+			GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), ("Press E to start the tutorial"));
+		} else if (showExitConfirmation){
 			GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), ("Press E to go outside. Remember you can only come back once the level has been cleared."));
 		} else if (showEntranceConfirmation) {
 			GUI.Box(new Rect(140,Screen.height-50,Screen.width-300,120),("Press E to enter. Remember once you have entered coming back starts the next level."));

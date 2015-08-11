@@ -3,8 +3,8 @@ using System.Collections;
 
 public class FallThroughPlanet : MonoBehaviour {
 
-	private bool canFallThroughPlanet;
-	public static bool fallThroughPlanetUnlocked;
+	public bool canFallThroughPlanet { get; set; }
+	public bool fallThroughPlanetUnlocked{ get; set; }
 	private float nextUsage;
 	private float delay = 10;
 	private PlayerController playerScript;
@@ -25,7 +25,7 @@ public class FallThroughPlanet : MonoBehaviour {
 				
 					var pos = transform.position;
 					transform.position = new Vector3 (-pos.x, -pos.y, -pos.z);
-					this.GetComponent<Sounds>().playWorldSound(6);
+					this.GetComponent<Sounds>().playWorldSound(Sounds.WARPING);
 					print ("Cooldown of 10 seconds"); 	//show that waiting
 					PlayerLog.addStat("Cooldown of 10 seconds");
 				} 
