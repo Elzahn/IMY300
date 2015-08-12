@@ -1,0 +1,24 @@
+Set Mesh Colliders as convex.
+Dont set IsKinnectic else can't be attracted.
+Tag WorlObjects with the worldobject tag.
+
+Camera Movement:
+Right click rotate camera
+Scroll weel in hou beweeg camera
+Scroll Zoom in/uit
+R reset camera position
+
+Cheats 
+F1 - Unlocks warping destinations
+F2 - Unlocks fallThroughPlanet
+F3 - Unlocks saveSpotTeleportation
+F4 - Level Up
+
+Run - Left shift
+Inventory - I to open and close
+P - Pause
+Tab - Quit menu
++ - Capture screenshot (Only works in editor at the moment else shows black screenshot)
+WASD - Movement
+Storage is die block aan die linker kant in die save spot loop net in dit vas. Escape maak storage toe.
+
