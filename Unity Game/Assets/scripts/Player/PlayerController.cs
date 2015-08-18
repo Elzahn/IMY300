@@ -121,7 +121,8 @@ public class PlayerController : MonoBehaviour {
 			Application.LoadLevel ("SaveSpot");
 			Resources.UnloadUnusedAssets();
 			this.transform.position = new Vector3 (-27.01f, 79.65f, 1.93f);
-			this.transform.rotation = new Quaternion(0, 0.7f, 0, -0.7f);
+			this.transform.position = new Vector3 (9.4f, 81.38f, 6.62f);
+			//this.transform.rotation = new Quaternion(0, 0.7f, 0, -0.7f);
 			this.GetComponent<Rigidbody> ().mass = 100f;
 			this.GetComponent<PlayerAttributes> ().restoreHealthToFull();
 			this.GetComponent<PlayerAttributes> ().restoreStaminaToFull();
@@ -140,7 +141,8 @@ public class PlayerController : MonoBehaviour {
 			this.GetComponent<Tutorial>().stopTutorial();
 			this.GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
 			this.GetComponent<SaveSpotTeleport>().loadTutorial = false;
-			GameObject.Find("Player").transform.position = new Vector3(9.41f, 79.19f, 7.75f);
+			//GameObject.Find("Player").transform.position = new Vector3(9.41f, 79.19f, 7.75f);
+			GameObject.Find("Player").transform.position = new Vector3 (9.4f, 81.38f, 6.62f);
 			Application.LoadLevel("SaveSpot");
 			this.GetComponent<Rigidbody>().mass = 1000;
 			print ("Tutorial skipped you can now use the teleporter again.");

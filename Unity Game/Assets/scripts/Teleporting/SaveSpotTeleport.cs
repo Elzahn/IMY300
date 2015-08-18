@@ -69,7 +69,8 @@ public class SaveSpotTeleport : MonoBehaviour {
 			attributesScript.restoreStaminaToFull();
 			this.GetComponent<Rigidbody>().mass = 100;
 			this.transform.rotation = new Quaternion(0, 0.7f, 0, -0.7f);
-			this.transform.position = new Vector3 (-27.01f, 79.65f, 1.93f);
+			//this.transform.position = new Vector3 (-27.01f, 79.65f, 1.93f);
+			this.transform.position = new Vector3 (9.4f, 81.38f, 6.62f);
 			sound.playWorldSound(Sounds.SHIP_DOOR);
 			Application.LoadLevel ("SaveSpot");
 			Resources.UnloadUnusedAssets();

@@ -736,9 +736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71cc66172f1d064cb4f3b9adb74ef1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WASD: {fileID: 2800000, guid: 17193f0c662a9f6499df4265f6ad773d, type: 3}
-  Run: {fileID: 2800000, guid: 326ae369b327ea0439ee1cf81205c2c7, type: 3}
-  Attack: {fileID: 2800000, guid: 2563ab9ff427be84eaaa5f30cdf218cc, type: 3}
+  Attack: {fileID: 2800000, guid: a2afa523c66cd6549b14f807d1581dc3, type: 3}
 --- !u!114 &839258581
 MonoBehaviour:
   m_ObjectHideFlags: 0
