@@ -19,8 +19,6 @@ public class Tutorial : MonoBehaviour {
 
 	private float showVisualQue;
 
-	public Texture2D WASD;
-	public Texture2D Run;
 	public Texture2D Attack;
 
 	private int showVisualDuration = 5;
@@ -57,6 +55,7 @@ public class Tutorial : MonoBehaviour {
 		startTutorial = false;
 		sound.stopSound ("computer");
 		teachStorage = true;
+		teachInventory = true;
 		//stop cutscenes
 	}
 
@@ -110,16 +109,24 @@ public class Tutorial : MonoBehaviour {
 			if(showVisuals){
 				if (showWASD) {
 					GUI.depth = 0;
-					GUI.color = new Color32 (255, 255, 255, 100);
-					GUI.DrawTexture (new Rect (Screen.width / 2 - Screen.width / 8, Screen.height / 2 - Screen.height / 3, Screen.width / 4, Screen.height / 4), WASD);
+					GUI.color = new Color32 (255, 255, 255, 50);
+					GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), (""));
+					GUI.color = new Color32 (255, 255, 255, 255);
+					GUI.Label (new Rect (Screen.width/2-100, Screen.height - 35, Screen.width - 300, 120), ("Move around using W/A/S/D"));
+					//GUI.DrawTexture (new Rect (Screen.width / 2 - Screen.width / 8, Screen.height / 2 - Screen.height / 3, Screen.width / 4, Screen.height / 4), WASD);
 				} else if(showRun){
 					GUI.depth = 0;
 					GUI.color = new Color32 (255, 255, 255, 100);
-					GUI.DrawTexture (new Rect (Screen.width / 2 - Screen.width / 8, Screen.height / 2 - Screen.height / 3, Screen.width / 4, Screen.height / 4), Run);
+					GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), (""));
+					GUI.color = new Color32 (255, 255, 255, 255);
+					GUI.Label (new Rect (Screen.width/2-100, Screen.height - 35, Screen.width - 300, 120), ("Run with left shift + W/A/S/D"));
 				} else if(showAttack){
 					GUI.depth = 0;
 					GUI.color = new Color32 (255, 255, 255, 100);
-					GUI.DrawTexture (new Rect (Screen.width / 2 - Screen.width / 8, Screen.height / 2 - Screen.height / 3, Screen.width / 4, Screen.height / 4), Attack);
+					GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), (""));
+					GUI.color = new Color32 (255, 255, 255, 255);
+					GUI.Label (new Rect (Screen.width/2-100, Screen.height - 35, Screen.width - 300, 120), ("Attack with "));
+					GUI.DrawTexture (new Rect (Screen.width / 2 - 25, Screen.height - 45, 30, 40), Attack);
 				}
 			}
 			if (Time.time >= showVisualQue) {
