@@ -12,7 +12,8 @@ public class TutorialSpawner : MonoBehaviour {
 	public GameObject enemy1;
 	public GameObject enemy2;
 
-	private bool showInventory = false;
+	public bool showInventory { get; set; }
+
 	private string EnemyName;
 	private int numLoot;
 	private PlayerController playerScript;
@@ -27,6 +28,8 @@ public class TutorialSpawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		showInventory = false;
+
 		playerLevel = GameObject.Find("Player").GetComponent<PlayerAttributes>().level;
 		tempLoot = new LinkedList<InventoryItem> ();
 		
@@ -122,7 +125,7 @@ public class TutorialSpawner : MonoBehaviour {
 				GameObject.Find("Player").GetComponent<Tutorial>().showAttack = false;
 				if(enemy.typeID == "BossAlien")
 				{
-					tempLoot.AddLast(new UncommonAccessory(1));
+					tempLoot.AddLast(new PowerCore());
 					GameObject deadEnemy = Instantiate(loot);
 					deadEnemy.transform.position = monster.GetComponent<Rigidbody>().position;
 					deadEnemy.tag = "Loot";
@@ -135,6 +138,7 @@ public class TutorialSpawner : MonoBehaviour {
 					GameObject.Find("Player").GetComponent<Tutorial>().tutorialDone = true;
 				} else if (!monsterDead){
 					GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_INVENTORY);
+					GameObject.Find("Player").GetComponent<Tutorial>().setupVisuals();
 					showInventory = true;
 					monsterDead = true;
 					GameObject.Find("Player").GetComponent<Tutorial>().teachInventory = true;

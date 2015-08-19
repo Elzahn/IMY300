@@ -49,6 +49,7 @@
      <Compile Include="Assets\scripts\Accessories\Accessory.cs" />
      <Compile Include="Assets\scripts\Accessories\CommonAccessory.cs" />
      <Compile Include="Assets\scripts\Accessories\NullAccessory.cs" />
+     <Compile Include="Assets\scripts\Accessories\PowerCore.cs" />
      <Compile Include="Assets\scripts\Accessories\RareAccessory.cs" />
      <Compile Include="Assets\scripts\Accessories\UncommonAccessory.cs" />
      <Compile Include="Assets\scripts\Enemies\Ape\ApeAlien.cs" />

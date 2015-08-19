@@ -80,7 +80,9 @@ public class Tutorial : MonoBehaviour {
 	public void setupVisuals(){
 		showWASD = false;
 		showRun = false;
-
+		if (GameObject.Find ("Planet") != null) {
+			GameObject.Find ("Planet").GetComponent<TutorialSpawner> ().showInventory = false;
+		}
 		showVisuals = true;
 		showVisualQue = Time.time + showVisualDuration;
 	}

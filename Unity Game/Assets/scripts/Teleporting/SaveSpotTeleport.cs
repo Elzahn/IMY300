@@ -59,7 +59,8 @@ public class SaveSpotTeleport : MonoBehaviour {
 			this.GetComponent<Rigidbody> ().mass = 0.1f;
 			sound.playWorldSound (Sounds.SHIP_DOOR);
 			attributesScript.saveInventoryAndStorage ();
-			this.transform.position = new Vector3(0f, 15.03f, 0);
+			//this.transform.position = new Vector3(0f, 15.03f, 0);
+			this.transform.position = new Vector3(-0.01f, 16.149f, -0.27f);
 			Application.LoadLevel("Tutorial");
 			Resources.UnloadUnusedAssets();
 		}else if (showEntranceConfirmation && Input.GetKeyDown (KeyCode.E)) {
