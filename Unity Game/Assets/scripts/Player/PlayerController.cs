@@ -103,9 +103,10 @@ public class PlayerController : MonoBehaviour {
 			sound.playWorldSound (Sounds.SHIP_DOOR);
 			playerAttributes.saveInventoryAndStorage ();
 			//this.transform.position = new Vector3 (0f, 15.03f, 0);
-			this.transform.position = new Vector3(-0.01f, 16.149f, -0.27f);
+			//this.transform.position = new Vector3(-0.01f, 16.149f, -0.27f);
 			sound.stopSound ("computer");
 			Application.LoadLevel ("Tutorial");
+			this.transform.position = new Vector3(0, 15.757576f, -0.327f);
 		} else if (Input.GetKeyDown (KeyCode.Tab) && Application.loadedLevelName == "Tutorial")/* if (Input.GetKeyDown (KeyCode.Tab) && this.GetComponent<Tutorial>().startTutorial && Application.loadedLevelName == "Tutorial"){
 			this.transform.position = new Vector3 (-27.01f, 79.65f, 1.93f);
 			this.GetComponent<Rigidbody> ().mass = 1000;
@@ -133,7 +134,8 @@ public class PlayerController : MonoBehaviour {
 		//skip loadingscrene
 		if (Input.GetKeyDown (KeyCode.L)) {
 			GameObject.Find("Planet").GetComponent<LoadingScreen>().loading = false;
-			this.transform.position = new Vector3(9.41f, 79.19f, 7.75f);
+			//this.transform.position = new Vector3(9.41f, 79.19f, 7.75f);
+			this.transform.position = new Vector3(0.32f, 80.37f, 032f);
 		}
 
 		//Open SaveSpot open door
@@ -150,7 +152,6 @@ public class PlayerController : MonoBehaviour {
 			this.GetComponent<SaveSpotTeleport>().loadTutorial = false;
 			//GameObject.Find("Player").transform.position = new Vector3(9.41f, 79.19f, 7.75f);
 			GameObject.Find("Player").transform.position = new Vector3 (9.4f, 81.38f, 6.62f);
-			//GameObject.Find("Player").transform.position = new Vector3(-0.01f, 16.149f, -0.27f);
 			Application.LoadLevel("SaveSpot");
 			this.GetComponent<Rigidbody>().mass = 1000;
 			print ("Tutorial skipped you can now use the teleporter again.");

@@ -36,13 +36,15 @@ public class LoadingScreen : MonoBehaviour {
 			GameObject.Find ("Player").GetComponent<Rigidbody> ().isKinematic = false;
 			GameObject.Find ("Player").transform.position = new Vector3 (-4.17f, 78.85f, 2.17f);
 
-			if(removeLoadingScreen == 0){
+			if (removeLoadingScreen == 0) {
 				removeLoadingScreen = Time.time;
 			}
 			if (Time.time >= removeLoadingScreen + delay) {
 				loading = false;
 				notYetPlaced = false;
 			}
+		} else {
+			GameObject.Find ("Player").transform.position = new Vector3(0.32f, 80.37f, 032f);
 		}
 	}
 
