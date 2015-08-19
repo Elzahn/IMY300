@@ -129,6 +129,12 @@ public class PlayerController : MonoBehaviour {
 			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 		}
 
+		//skip loadingscrene
+		if (Input.GetKeyDown (KeyCode.L)) {
+			GameObject.Find("Planet").GetComponent<LoadingScreen>().loading = false;
+			this.transform.position = new Vector3(9.41f, 79.19f, 7.75f);
+		}
+
 		//Open SaveSpot open door
 		if (Input.GetKeyDown (KeyCode.O)) {
 			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;

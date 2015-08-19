@@ -1,10 +1,16 @@
 fileFormatVersion: 2
 guid: 15521cef4ff472740b7f5c45da5d72ea
-timeCreated: 1438198250
+timeCreated: 1439971968
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Loading_Screen: {fileID: 2800000, guid: 0b75b79c0b77aaa46bc1b5d68cf09717, type: 3}
+  - PlantTrees: {fileID: 2800000, guid: 4df40a0b1423bb24988795a3e3ad33f8, type: 3}
+  - TrainMonsters: {fileID: 2800000, guid: 97c3adc5e6357e849a3b664a02bb3b29, type: 3}
+  - HideHealth: {fileID: 2800000, guid: 6b1034956160b134699d1d4559451efc, type: 3}
+  - CreateDisasters: {fileID: 2800000, guid: f364b2d2f18159548b795508ea6f22da, type: 3}
+  - WarpPlayer: {fileID: 2800000, guid: 29c7e2f78d395be46adf9d7cfd387b61, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

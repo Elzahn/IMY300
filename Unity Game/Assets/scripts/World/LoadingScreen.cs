@@ -10,7 +10,7 @@ public class LoadingScreen : MonoBehaviour {
 	public Texture2D CreateDisasters;
 	public Texture2D WarpPlayer;
 
-	private bool loading = true;
+	public bool loading { get; set; }
 	private bool notYetPlaced = true;
 	private float changeLoading, delay, removeLoadingScreen = 0.0f;
 	private int index = 1;
@@ -18,6 +18,7 @@ public class LoadingScreen : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		loading = true;
 		if (Application.loadedLevelName == "Scene") {
 			GameObject.Find("Player").transform.position = new Vector3(-4.17f, 91.45f, 2.17f);
 			GameObject.Find("Player").GetComponent<Rigidbody>().isKinematic = true;
