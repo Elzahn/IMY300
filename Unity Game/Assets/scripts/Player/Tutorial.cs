@@ -7,6 +7,7 @@ public class Tutorial : MonoBehaviour {
 	public bool teachStorage{ get; set; }
 	public bool teachInventory{ get; set; }
 	public  bool tutorialDone{ get; set; }
+	public bool showVisuals { get; set; }
 
 	private bool justStarted = true;
 	private bool justArrivedOnPlanet = false;
@@ -15,9 +16,7 @@ public class Tutorial : MonoBehaviour {
 	private bool showWASD = false;
 	private bool showRun = false;
 	public bool showAttack { get; set; }
-	private bool showVisuals = true;
-
-	private float showVisualQue;
+	public float showVisualQue { get; set; }
 
 	public Texture2D Attack;
 
@@ -25,6 +24,7 @@ public class Tutorial : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		showVisuals = true;
 		showAttack = false;
 		print ("Press Escape to skip Tutorial");
 		startTutorial = true;

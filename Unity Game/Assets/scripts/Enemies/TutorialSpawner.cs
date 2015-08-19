@@ -11,7 +11,8 @@ public class TutorialSpawner : MonoBehaviour {
 	public GameObject boss;
 	public GameObject enemy1;
 	public GameObject enemy2;
-	
+
+	private bool showInventory = false;
 	private string EnemyName;
 	private int numLoot;
 	private PlayerController playerScript;
@@ -118,6 +119,7 @@ public class TutorialSpawner : MonoBehaviour {
 
 			Rigidbody rigidbody = monster.GetComponent<Rigidbody> ();
 			if (enemy.isDead()) {
+				GameObject.Find("Player").GetComponent<Tutorial>().showAttack = false;
 				if(enemy.typeID == "BossAlien")
 				{
 					tempLoot.AddLast(new UncommonAccessory(1));
@@ -133,6 +135,7 @@ public class TutorialSpawner : MonoBehaviour {
 					GameObject.Find("Player").GetComponent<Tutorial>().tutorialDone = true;
 				} else if (!monsterDead){
 					GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_INVENTORY);
+					showInventory = true;
 					monsterDead = true;
 					GameObject.Find("Player").GetComponent<Tutorial>().teachInventory = true;
 
@@ -281,6 +284,24 @@ public class TutorialSpawner : MonoBehaviour {
 		
 		for (int i = 0; i < gameObjectsToDelete.Length; i++) {
 			Destroy (gameObjectsToDelete [i]);
+		}
+	}
+
+	public void OnGUI(){
+		if (GameObject.Find("Player").GetComponent<Tutorial>().startTutorial) {
+			if(GameObject.Find("Player").GetComponent<Tutorial>().showVisuals){
+				if (showInventory) {
+					GUI.depth = 0;
+					GUI.color = new Color32 (255, 255, 255, 50);
+					GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), (""));
+					GUI.color = new Color32 (255, 255, 255, 255);
+					GUI.Label (new Rect (Screen.width/2-100, Screen.height - 35, Screen.width - 300, 120), ("Access Inventory by pressing I"));
+					//GUI.DrawTexture (new Rect (Screen.width / 2 - Screen.width / 8, Screen.height / 2 - Screen.height / 3, Screen.width / 4, Screen.height / 4), WASD);
+				}
+			}
+			if (Time.time >= GameObject.Find("Player").GetComponent<Tutorial>().showVisualQue) {
+				GameObject.Find("Player").GetComponent<Tutorial>().showVisuals = false;
+			}
 		}
 	}
 }
