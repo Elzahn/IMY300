@@ -43,9 +43,9 @@ public class LoadingScreen : MonoBehaviour {
 				loading = false;
 				notYetPlaced = false;
 			}
-		} else {
+		} /*else {
 			GameObject.Find ("Player").transform.position = new Vector3(0.32f, 80.37f, 032f);
-		}
+		}*/
 	}
 
 	public void OnGUI(){
