@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
 [Serializable()]
@@ -24,7 +22,7 @@ public abstract class Weapon : InventoryItem{
 
 	}
 
-	public Weapon(SerializationInfo info, StreamingContext ctxt) : base(info, ctxt)
+	protected Weapon(SerializationInfo info, StreamingContext ctxt) : base(info, ctxt)
 	{
 		//Get the values from info and assign them to the appropriate properties
 		damage = (int)info.GetValue("damage", typeof(int));

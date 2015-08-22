@@ -1,4 +1,8 @@
-﻿public class RareAccessory : Accessory {
+﻿using System;
+using System.Runtime.Serialization;
+
+[Serializable()]
+public class RareAccessory : Accessory {
 	
 	public RareAccessory(int itemNum) : base("Rare Accessory") {
 		switch (itemNum) {
@@ -64,4 +68,6 @@
 		}
 		}
 	}
+
+	RareAccessory (SerializationInfo info, StreamingContext ctxt) : base(info, ctxt) {}
 }

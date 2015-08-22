@@ -1,4 +1,8 @@
-﻿public class PowerCore : Accessory {
+﻿using System;
+using System.Runtime.Serialization;
+
+[Serializable()]
+public class PowerCore : Accessory {
 	
 	public PowerCore() : base("Power Core") {
 		stamina = 0;

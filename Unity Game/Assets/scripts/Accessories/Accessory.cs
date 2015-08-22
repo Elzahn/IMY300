@@ -36,7 +36,7 @@ public abstract class Accessory : InventoryItem {
 
 	public Accessory(SerializationInfo info, StreamingContext ctxt) : base (info, ctxt){
 		damage = (int)info.GetValue("damage", typeof(int));
-		hp = (int)info.GetValue("level", typeof(int));
+		hp = (int)info.GetValue("hp", typeof(int));
 		stamina = (int) info.GetValue("stamina", typeof(int));		
 		hitChance = (int) info.GetValue("hit", typeof(int));
 		critChance = (float) info.GetValue("crit", typeof(float));

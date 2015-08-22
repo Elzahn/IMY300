@@ -1,4 +1,8 @@
-﻿public class UncommonAccessory : Accessory {
+﻿using System;
+using System.Runtime.Serialization;
+
+[Serializable()]
+public class UncommonAccessory : Accessory {
 	
 	public UncommonAccessory(int itemNum) : base("Uncommon Accessory") {
 		switch (itemNum) {
@@ -94,4 +98,7 @@
 		}
 		}
 	}
+
+	UncommonAccessory (SerializationInfo info, StreamingContext ctxt) : base(info, ctxt) {}
+
 }
