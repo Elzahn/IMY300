@@ -192,7 +192,7 @@ public class EnemySpawner : MonoBehaviour {
 
 				chance = Random.Range (0, 101);
 
-				if (chance <= 25) {
+				if (chance <= enemy.lootChance/2) {
 					int commonItem = Random.Range(1, 8);
 					int uncommonItem = Random.Range(1, 10);
 					int rareItem = Random.Range(1, 7);
@@ -269,7 +269,7 @@ public class EnemySpawner : MonoBehaviour {
 					}
 					}
 					tempLoot.AddLast(tempItem); 
-				} else {
+				} else if (chance <= enemy.lootChance){
 					chance = Random.Range (1, 4);	//choose between available weapons
 					switch (chance) {
 					case 1:
