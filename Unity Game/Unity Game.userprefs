@@ -1,16 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\World\LoadingScreen.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Weapons\Weapon.cs">
     <Files>
-      <File FileName="Assets\scripts\World\LoadingScreen.cs" Line="95" Column="1" />
-      <File FileName="Assets\scripts\Player\Tutorial.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Teleporting\SaveSpotTeleport.cs" Line="76" Column="22" />
-      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Player\Collisions.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Sounds.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Enemies\TutorialSpawner.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Accessories\RareAccessory.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="7" Column="1" />
+      <File FileName="Assets\scripts\InventoryItem.cs" Line="24" Column="2" />
+      <File FileName="Assets\scripts\Weapons\Weapon.cs" Line="19" Column="3" />
+      <File FileName="Assets\scripts\Weapons\WarHammer.cs" Line="10" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

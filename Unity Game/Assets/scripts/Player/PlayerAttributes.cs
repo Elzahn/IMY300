@@ -1,7 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System;
+using System.IO;
 
-public class PlayerAttributes : MonoBehaviour {
+[Serializable()]
+public class PlayerAttributes : MonoBehaviour, ISerializable {
 
 	const int HP_BASE = 100;
 	const float HP_MULT = 1.8f;
@@ -29,9 +34,9 @@ public class PlayerAttributes : MonoBehaviour {
 	const int WARP_UNLOCK_LEVEL = 6;
 	const int XP_GAIN_PER_MONSTER_LEVEL = 20;
 
-	//TODO: Ons kan hierdie const maak? 
-	private int maxInventory = 15;	//Inventory size kan verander met accessories
-	public int maxStorage = 50;		//Sodra die storage menu dit anders kan kry sure
+
+	private int MAX_INVENTORY = 15;	//Inventory size kan verander met accessories
+	public  int MAX_STORAGE = 50;		//Sodra die storage menu dit anders kan kry sure
 
 	private Sounds soundComponent;
 	private PlayerController controllerComponent;
@@ -96,7 +101,7 @@ public class PlayerAttributes : MonoBehaviour {
 
 	public int inventorySize {
 		get {
-			int tmp = maxInventory;
+			int tmp = MAX_INVENTORY;
 			foreach (Accessory a in accessories) {
 				tmp += a.inventory;
 			}
@@ -222,8 +227,8 @@ public class PlayerAttributes : MonoBehaviour {
 	public void setAttributes (int xp, LinkedList <InventoryItem> inventory, int inventoryMax, LinkedList <InventoryItem> storage, int storageMax) {
 		
 		setInitialXp(xp);
-		maxStorage = storageMax;
-		maxInventory = inventoryMax;
+		MAX_STORAGE = storageMax;
+		MAX_INVENTORY = inventoryMax;
 		
 		this.inventory = inventory;
 		this.storage = storage;
@@ -346,7 +351,7 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 	
 	public bool addToStorage(InventoryItem item){
-		if (storage.Count < maxStorage) {
+		if (storage.Count < MAX_STORAGE) {
 			storage.AddLast (item);
 			return true;
 		}
@@ -354,7 +359,7 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	public bool addToInventory(InventoryItem a) {
-		if (inventory.Count < maxInventory) {
+		if (inventory.Count < MAX_INVENTORY) {
 			
 			inventory.AddLast (a);
 			return true;
@@ -517,5 +522,7 @@ public class PlayerAttributes : MonoBehaviour {
 		return  Mathf.RoundToInt((ATTACK_BASE + level -1) * Mathf.Pow (ATTACK_MULT, level - 1));
 	}
 
+	public void save(int slot) {
 
+	}
 }
