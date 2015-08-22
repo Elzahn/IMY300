@@ -5,8 +5,57 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System;
 using System.IO;
 
-[Serializable()]
-public class PlayerAttributes : MonoBehaviour, ISerializable {
+public class PlayerAttributes : MonoBehaviour {
+
+	[Serializable()]
+	private class AttributeContainer : ISerializable {
+		public AttributeContainer(){}
+
+		public int xp;
+		public int hp;
+
+		public int level;
+		public float stamina;	
+		public bool dizzy;
+		
+		public char gender;
+
+		public int levelsComplete;
+
+		public Weapon weapon;
+
+		public LinkedList <InventoryItem> inventory = new LinkedList<InventoryItem>();
+		public LinkedList <InventoryItem> storage = new LinkedList<InventoryItem> ();
+		public LinkedList <InventoryItem> inventory_LevelStart = new LinkedList<InventoryItem>();
+		public LinkedList <InventoryItem> storage_LevelStart = new LinkedList<InventoryItem>();
+		public LinkedList <Accessory> accessories = new LinkedList<Accessory>();
+
+		public void GetObjectData (SerializationInfo info, StreamingContext context)
+		{
+			info.AddValue("xp", xp);
+			info.AddValue("levels", levelsComplete);
+			info.AddValue("inventory", inventory);
+			info.AddValue("storage", storage);
+			info.AddValue("weapon", weapon);
+			info.AddValue("accessories", accessories);
+		}
+		
+		AttributeContainer(SerializationInfo info, StreamingContext context) {
+			xp = (int)info.GetValue("xp", typeof(int));
+			levelsComplete = (int)info.GetValue("levels", typeof(int));
+			inventory = (LinkedList<InventoryItem>) info.GetValue("inventory", typeof(LinkedList<InventoryItem>));
+			storage = (LinkedList<InventoryItem>) info.GetValue("storage", typeof(LinkedList<InventoryItem>));
+
+			/**
+			 * Saving & loading only between levels
+			 * */
+			inventory_LevelStart = new LinkedList<InventoryItem>(inventory);
+			storage_LevelStart = new LinkedList<InventoryItem>(storage);
+		}
+
+	}
+
+	private AttributeContainer myAttributes = new AttributeContainer();
 
 	const int HP_BASE = 100;
 	const float HP_MULT = 1.8f;
@@ -49,28 +98,114 @@ public class PlayerAttributes : MonoBehaviour, ISerializable {
 	public bool justWarped { get; set; }
 
 	/****************************************************** Inventory en goed  *****************************************************/
-	public LinkedList <InventoryItem> inventory = new LinkedList<InventoryItem>();
-	public LinkedList <InventoryItem> storage = new LinkedList<InventoryItem> ();
-	private LinkedList <InventoryItem> inventory_LevelStart = new LinkedList<InventoryItem>();
-	private LinkedList <InventoryItem> storage_LevelStart = new LinkedList<InventoryItem>();
-	public LinkedList <Accessory> accessories = new LinkedList<Accessory>();
+	public LinkedList <InventoryItem> inventory {
+		get {
+			return myAttributes.inventory;
+		} set {
+			myAttributes.inventory = value;
+		}
+	}
+
+	public LinkedList <InventoryItem> storage {
+		get {
+		return myAttributes.storage;
+		} set {
+			myAttributes.storage = value;
+		}
+	}
+
+	private LinkedList <InventoryItem> inventory_LevelStart {
+		get {
+			return myAttributes.inventory_LevelStart;
+		} set {
+			myAttributes.inventory_LevelStart = value;
+		}
+	}
+
+	private LinkedList <InventoryItem> storage_LevelStart {
+		get {
+			return myAttributes.storage_LevelStart;
+		} set {
+			myAttributes.storage_LevelStart = value;
+		}
+	}
+	public LinkedList <Accessory> accessories {
+		get {
+			return myAttributes.accessories;
+		} set {
+			myAttributes.accessories = value;
+		}
+	}
 
 
 	/******************************************************* Public properties *****************************************************/ 
-	public Weapon weapon;
-	public int hp {get; private set;}	
-	public int level {get; private set;}
-	public float stamina {get; set;}
-	public int xp {get; private set;}
-	public bool dizzy {get; set;}
+	public Weapon weapon {
+		get {
+			return myAttributes.weapon;
+		} 
+		set {
+			myAttributes.weapon = value;
+		}
+	}
 	
-	public char gender {get ; private set ;}
+	public int levelsComplete {get {
+			return myAttributes.levelsComplete;
+		} set {
+			myAttributes.levelsComplete = value;
+		}
+	}
+
+	public int hp {
+		get {
+			return myAttributes.hp;
+		}
+		private set {
+			myAttributes.hp = value;
+		}
+	}
+
+	public int level {
+		get {
+			return myAttributes.level;
+		}
+		private set {
+			myAttributes.level = value;
+		}
+	}
+
+	public float stamina {
+		get {
+			return myAttributes.stamina;
+		}
+		set {
+			myAttributes.stamina = value;
+		}}
+
+	public int xp {get {
+			return myAttributes.xp;
+		} private set {
+			myAttributes.xp = value;
+		}}
+
+	public bool dizzy {get {
+			return myAttributes.dizzy;
+		} set {
+			myAttributes.dizzy = value;
+		}}
+	
+	public char gender {get {
+			return myAttributes.gender;
+		} private set  {
+			myAttributes.gender = value;
+		}}
 		
 	public void setGender(char value) {
-		if (value == 'f') {
-			stamina += FEMALE_EXTRA_STAMINA;
+		if (gender == '?') {
+			if (value == 'f') {
+				stamina += FEMALE_EXTRA_STAMINA;
+			}
+			gender = value;
 		}
-		gender = value;
 	}
 
 	public int speed {
@@ -147,6 +282,7 @@ public class PlayerAttributes : MonoBehaviour, ISerializable {
 	public static bool giveAlarm;
 
 
+
 	/**************************************************** Monobehaviour functions *********************************************
 	 * Start - Called after creation
 	 * Update - Called Every frame
@@ -155,6 +291,7 @@ public class PlayerAttributes : MonoBehaviour, ISerializable {
 		//Singleton
 		if (instance) {
 			DestroyImmediate(gameObject);
+			return;
 		} else {
 			DontDestroyOnLoad (gameObject);
 			instance = this;
@@ -168,6 +305,7 @@ public class PlayerAttributes : MonoBehaviour, ISerializable {
 		this.setInitialXp(0);
 		this.nextRegeneration = Time.time + REGEN_INTERVAL;
 		this.lastDamage = 0;
+		this.levelsComplete = 0;
 		
 		this.soundComponent = GameObject.Find("Player").gameObject.GetComponent<Sounds>(); //must be GameObject.Find("Player") else it tries to acces what has been destroyed
 		this.controllerComponent = GameObject.Find("Player").gameObject.GetComponent<PlayerController> (); //must be GameObject.Find("Player") else it tries to acces what has been destroyed
@@ -224,24 +362,14 @@ public class PlayerAttributes : MonoBehaviour, ISerializable {
 		stamina = maxStamina ();
 	}
 
-	public void setAttributes (int xp, LinkedList <InventoryItem> inventory, int inventoryMax, LinkedList <InventoryItem> storage, int storageMax) {
+	public void setAttributes (int xp, LinkedList <InventoryItem> inventory, LinkedList <InventoryItem> storage, Weapon w, LinkedList<Accessory> accesoories) {
 		
 		setInitialXp(xp);
-		MAX_STORAGE = storageMax;
-		MAX_INVENTORY = inventoryMax;
 		
 		this.inventory = inventory;
 		this.storage = storage;
-		/**
-		 * Storage and inventory at start of level
-		 */ 
-		foreach (InventoryItem item in inventory) {
-			inventory_LevelStart.AddLast (item);
-		}
-		
-		foreach (InventoryItem item in storage) {
-			storage_LevelStart.AddLast(item);
-		}
+		this.inventory_LevelStart = new LinkedList<InventoryItem>(inventory);
+		this.storage_LevelStart = new LinkedList<InventoryItem>(storage);
 	}
 
 	/********************************************************** Level and XP *********************************************************************/
@@ -455,7 +583,7 @@ public class PlayerAttributes : MonoBehaviour, ISerializable {
 	public string attack(Enemy e) {
 		//string name = e.typeID;
 		e.lastDamage = Time.time;
-		float ran = Random.value;
+		float ran = UnityEngine.Random.value;
 		float hc = hitChance;
 		string message = "Miss! ";
 
@@ -523,6 +651,27 @@ public class PlayerAttributes : MonoBehaviour, ISerializable {
 	}
 
 	public void save(int slot) {
+		// Open a file and serialize the object into it in binary format.
+		// EmployeeInfo.osl is the file that we are creating. 
+		// Note:- you can give any extension you want for your file
+		// If you use custom extensions, then the user will now 
+		//   that the file is associated with your program.
+		Stream stream = File.Open(getSaveName(slot), FileMode.Create);
+		BinaryFormatter bformatter = new BinaryFormatter();	
 
+		bformatter.Serialize(stream, myAttributes);
+		stream.Close();
+	}
+
+	private String getSaveName(int slot) {
+		return "saves/save_" + slot + ".sav";
+	}
+
+	public void load(int slot) {
+		Stream stream = File.Open(getSaveName(slot), FileMode.Open);
+		BinaryFormatter bformatter = new BinaryFormatter();		
+	
+		myAttributes = (AttributeContainer)bformatter.Deserialize(stream);
+		stream.Close();
 	}
 }

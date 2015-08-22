@@ -29,7 +29,7 @@ public abstract class InventoryItem : ISerializable{
 	}
 	
 	//Serialization function.
-	public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
+	public virtual void GetObjectData(SerializationInfo info, StreamingContext ctxt)
 	{
 		//You can use any custom name for your name-value pair. But make sure you
 		// read the values with the same name. For ex:- If you write EmpId as "EmployeeId"

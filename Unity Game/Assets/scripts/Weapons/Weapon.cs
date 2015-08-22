@@ -15,7 +15,7 @@ public abstract class Weapon : InventoryItem{
 		this.staminaLoss = stamina;
 	}
 
-	public void GetObjectData(SerializationInfo info, StreamingContext ctxt)
+	public override void GetObjectData(SerializationInfo info, StreamingContext ctxt)
 	{
 		base.GetObjectData(info, ctxt);
 		info.AddValue("damage", damage);
