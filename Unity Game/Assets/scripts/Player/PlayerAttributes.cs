@@ -42,6 +42,7 @@ public class PlayerAttributes : MonoBehaviour {
 		
 		AttributeContainer(SerializationInfo info, StreamingContext context) {
 			xp = (int)info.GetValue("xp", typeof(int));
+
 			levelsComplete = (int)info.GetValue("levels", typeof(int));
 			inventory = (LinkedList<InventoryItem>) info.GetValue("inventory", typeof(LinkedList<InventoryItem>));
 			storage = (LinkedList<InventoryItem>) info.GetValue("storage", typeof(LinkedList<InventoryItem>));
@@ -651,12 +652,9 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	public void save(int slot) {
-		// Open a file and serialize the object into it in binary format.
-		// EmployeeInfo.osl is the file that we are creating. 
-		// Note:- you can give any extension you want for your file
-		// If you use custom extensions, then the user will now 
-		//   that the file is associated with your program.
-		Stream stream = File.Open(getSaveName(slot), FileMode.Create);
+		var file = getSaveName (slot);
+
+		Stream stream = File.Open (file, FileMode.Create);
 		BinaryFormatter bformatter = new BinaryFormatter();	
 
 		bformatter.Serialize(stream, myAttributes);
@@ -664,14 +662,25 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	private String getSaveName(int slot) {
+		System.IO.Directory.CreateDirectory("saves");
 		return "saves/save_" + slot + ".sav";
 	}
 
 	public void load(int slot) {
+		AttributeContainer temp;
+		try {
 		Stream stream = File.Open(getSaveName(slot), FileMode.Open);
 		BinaryFormatter bformatter = new BinaryFormatter();		
-	
-		myAttributes = (AttributeContainer)bformatter.Deserialize(stream);
+		temp = (AttributeContainer)bformatter.Deserialize(stream);
 		stream.Close();
+
+			if (temp != null) {
+				myAttributes = temp;
+				setInitialXp(xp);
+			}
+		} catch (IOException e) {
+			throw(new IOException("Cannot load savegame."));
+		}
+
 	}
 }
