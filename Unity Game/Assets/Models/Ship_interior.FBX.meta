@@ -6,39 +6,10 @@ ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
-    100002: back_wall
-    100004: floor
-    100006: front_wall
-    100008: left_wall
-    100010: right_wall
-    100012: roof
     400000: //RootNode
-    400002: back_wall
-    400004: floor
-    400006: front_wall
-    400008: left_wall
-    400010: right_wall
-    400012: roof
     2300000: //RootNode
-    2300002: back_wall
-    2300004: floor
-    2300006: front_wall
-    2300008: left_wall
-    2300010: right_wall
-    2300012: roof
     3300000: //RootNode
-    3300002: back_wall
-    3300004: floor
-    3300006: front_wall
-    3300008: left_wall
-    3300010: right_wall
-    3300012: roof
     4300000: front_wall
-    4300002: right_wall
-    4300004: floor
-    4300006: left_wall
-    4300008: roof
-    4300010: back_wall
   materials:
     importMaterials: 1
     materialName: 0
