@@ -9,7 +9,7 @@ public class SmoothMouseLook : MonoBehaviour {
 
 	public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
 	public RotationAxes axes = RotationAxes.MouseXAndY;
-	public float sensitivityX = 15F;
+	public float sensitivityX = 5F;
 	public float sensitivityY = 15F;
 	
 	public float minimumX = -360F;
@@ -65,7 +65,40 @@ public class SmoothMouseLook : MonoBehaviour {
 				}
 			}*/
 
-			if (Input.GetMouseButton (1)) {		//right
+			/*if(Input.GetKey (KeyCode.H))
+			{
+				Vector3 verticalaxis;
+
+				float speedToRotate = 5F;
+
+				verticalaxis = transform.TransformDirection(GameObject.Find("Player").transform.up);
+
+				transform.RotateAround(GameObject.Find("Player").transform.position, verticalaxis, speedToRotate * Time.deltaTime); 
+
+			}*/
+
+			if (Input.GetMouseButton (1))//right
+			{
+				/*Transform player = GameObject.Find("Player").transform;
+				Quaternion rotation = Quaternion.AngleAxis(90 * Time.deltaTime, player.up);
+				transform.rotation *= rotation;
+
+				Vector3 delta = transform.position - player.position;
+				transform.position = player.position + rotation * delta;*/
+
+				//Rotate Around the player - no player gameObject Rotation
+				/*Transform player = GameObject.FindWithTag("Player").transform;
+				transform.RotateAround(player.transform.position, player.up, Input.GetAxis ("Mouse X") * sensitivityX);*/
+
+
+				//Rotate Around the player - player gameObject Rotation
+				GameObject player = GameObject.FindWithTag("Player");
+				player.transform.RotateAround(player.transform.position, player.transform.up, Input.GetAxis ("Mouse X") * sensitivityX);
+				player.GetComponent<Animator>().SetFloat("Turning", 1f);
+			}
+
+
+			/*if (Input.GetMouseButton (1)) {		//right
 
 			//	rotAverageY = 0f;
 				rotAverageX = 0f;
@@ -93,9 +126,14 @@ public class SmoothMouseLook : MonoBehaviour {
 				//Quaternion yQuaternion = Quaternion.AngleAxis (rotAverageY, Vector3.left);
 				Quaternion xQuaternion = Quaternion.AngleAxis (rotAverageX, Vector3.up);//GameObject.Find("Player").GetComponent<Transform>().up);
 
-				GameObject.Find("Player").transform.rotation = originalRotation * xQuaternion;// * yQuaternion;
+				//print(GameObject.Find("Player").transform.up);
+
+				GameObject.Find("Player").transform.rotation = player.up * xQuaternion;// * yQuaternion;
 				//transform.localRotation = originalRotation * yQuaternion;
-			} 		
+
+
+				//transform.RotateAround(transform.position, player.up, originalRotation * xQuaternion);
+			} 	*/
 
 			//Zoom
 			transform.Translate (Vector3.forward * Input.GetAxis ("Mouse ScrollWheel"));
