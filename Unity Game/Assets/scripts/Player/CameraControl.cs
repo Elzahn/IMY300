@@ -29,15 +29,17 @@ public class CameraControl : MonoBehaviour {
 	void Update ()
 	{
 		if (playerScript.paused == false) {
-
-			if (Input.GetMouseButton (1))//right
+			GameObject player = GameObject.FindWithTag("Player");
+			if (Input.GetMouseButton (1) && Input.GetAxis ("Mouse X") < 0)//right button held and mouse moved left
 			{
 				//Rotate Around the player - no player gameObject Rotation
 				/*Transform player = GameObject.FindWithTag("Player").transform;
 				transform.RotateAround(player.transform.position, player.up, Input.GetAxis ("Mouse X") * sensitivityX);*/
 
 				//Rotate Around the player - player gameObject Rotation
-				GameObject player = GameObject.FindWithTag("Player");
+				player.transform.RotateAround(player.transform.position, player.transform.up, Input.GetAxis ("Mouse X") * sensitivityX);
+				player.GetComponent<Animator>().SetFloat("Turning", -1f);
+			} else if (Input.GetMouseButton (1) && Input.GetAxis ("Mouse X") > 0) {
 				player.transform.RotateAround(player.transform.position, player.transform.up, Input.GetAxis ("Mouse X") * sensitivityX);
 				player.GetComponent<Animator>().SetFloat("Turning", 1f);
 			}
