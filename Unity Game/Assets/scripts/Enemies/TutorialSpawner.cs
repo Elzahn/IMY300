@@ -35,8 +35,8 @@ public class TutorialSpawner : MonoBehaviour {
 		
 	//	playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
 
-		addEnemy (enemy1);
-		addEnemy (enemy2);
+		addEnemy (enemy1, new Vector3(-9.794984f, 8.99264f, 7.973226f));
+		addEnemy (enemy2, new Vector3(13.43f, 4.87f, -6.02f));
 	}
 
 
@@ -95,7 +95,7 @@ public class TutorialSpawner : MonoBehaviour {
 		}
 	}
 
-	void addEnemy(GameObject enemy) {	
+	void addEnemy(GameObject enemy, Vector3 position) {	
 		
 		GameObject go = Instantiate(enemy);
 		go.GetComponent<FauxGravityBody>().attractor = this.GetComponent<FauxGravityAttractor>();
@@ -105,8 +105,9 @@ public class TutorialSpawner : MonoBehaviour {
 		enemyComponent.level = 1;
 		enemyComponent.init();
 		enemies.AddLast(go);
-		
-		position (go);
+
+		go.transform.position = position;
+		//position (go);
 	}
 
 	void Update () {
@@ -148,7 +149,7 @@ public class TutorialSpawner : MonoBehaviour {
 					this.GetComponent<NaturalDisasters>().makeEarthQuakeHappen();
 					while(this.GetComponent<NaturalDisasters>().isShaking() == true){}
 					GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_DISASTERD);
-					addEnemy (boss);
+					addEnemy (boss, new Vector3(-0.04f, -15.52f, 0.15f));
 				}
 				enemies.Remove(monster);
 				Destroy(monster);

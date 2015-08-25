@@ -115,9 +115,9 @@ public class PlayerController : MonoBehaviour {
 			sound.stopSound ("computer");
 			Application.LoadLevel ("SaveSpot");
 			Resources.UnloadUnusedAssets();
-			this.transform.position = new Vector3 (-27.01f, 79.65f, 1.93f);
+			//this.transform.position = new Vector3 (-27.01f, 79.65f, 1.93f);
 			this.transform.position = new Vector3 (9.4f, 81.38f, 6.62f);
-			//this.transform.rotation = new Quaternion(0, 0.7f, 0, -0.7f);
+			this.transform.rotation = new Quaternion(0, 0.7f, 0, 0.7f);
 			this.GetComponent<Rigidbody> ().mass = 100f;
 			this.GetComponent<PlayerAttributes> ().restoreHealthToFull();
 			this.GetComponent<PlayerAttributes> ().restoreStaminaToFull();
@@ -221,10 +221,12 @@ public class PlayerController : MonoBehaviour {
 			}
 			
 			run = false;
-			if (Input.GetAxis("Run") > 0 && playerAttributes.stamina > 0) {
+			if (Input.GetAxis("Run") > 0 && playerAttributes.stamina > 0 && Application.loadedLevelName != "SaveSpot") {
 				run = true;
 				moveSpeed *= RUN_MULT;
-				playerAttributes.drainStamina ();
+				if(Application.loadedLevelName != "Tutorial"){
+					playerAttributes.drainStamina ();
+				}
 				//Took it out to fix sound while running
 				//soundPlays = false;
 			}
