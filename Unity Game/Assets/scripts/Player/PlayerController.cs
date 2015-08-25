@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour {
 	/**
 	 * Access 'jumping' like normal variable, do not use '_jumping' ever!
 	 * */
-	private bool _jumping = false;
+	/*private bool _jumping = false;
 	public bool jumping {
 		get {
 			return _jumping;
@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour {
 			_jumping = value;
 			this.GetComponent<Animator>().SetBool("Jumping", _jumping);
 		}
-	}
+	}*/
 
 	private bool showDeath, showPaused, soundPlays = false;
 
@@ -49,10 +49,10 @@ public class PlayerController : MonoBehaviour {
 	private float check;
 	private int screenshotCount = 0;
 
-	public void setJumping(){
+	/*public void setJumping(){
 		jumping = false;
 
-	}
+	}*/
 
 	void Start(){
 		playerAttributes = this.GetComponent<PlayerAttributes> ();
@@ -238,14 +238,16 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			if (playerAttributes.dizzy) {
-				moveDir = new Vector3 (Input.GetAxisRaw ("Vertical"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Horizontal")).normalized;
+				//moveDir = new Vector3 (Input.GetAxisRaw ("Vertical"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Horizontal")).normalized;
+				moveDir = new Vector3 (Input.GetAxisRaw ("Vertical"), 0, Input.GetAxisRaw ("Horizontal")).normalized;
 			} else {
-				moveDir = new Vector3 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Vertical")).normalized;
+				//moveDir = new Vector3 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Vertical")).normalized;
+				moveDir = new Vector3 (Input.GetAxisRaw ("Horizontal"), 0, Input.GetAxisRaw ("Vertical")).normalized;
 			}
 
-			if (Input.GetAxisRaw ("Jump") == 1) {
+			/*if (Input.GetAxisRaw ("Jump") == 1) {
 				jumping = true;			
-			}
+			}*/
 
 
 			if ((Input.GetAxis ("Vertical") != 0 || Input.GetAxisRaw ("Horizontal") != 0) 
