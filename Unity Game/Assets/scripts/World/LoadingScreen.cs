@@ -20,22 +20,34 @@ public class LoadingScreen : MonoBehaviour {
 	void Start () {
 		loading = true;
 		if (Application.loadedLevelName == "Scene") {
-			GameObject.Find("Player").transform.position = new Vector3(-4.17f, 91.45f, 2.17f);
-			GameObject.Find("Player").GetComponent<Rigidbody>().isKinematic = true;
+			GameObject.Find ("Player").transform.position = new Vector3 (-4.17f, 91.45f, 2.17f);
+			GameObject.Find ("Player").GetComponent<Rigidbody> ().isKinematic = true;
 			delay = 3;
-			changeLoading = Time.time + delay;
-			texture = Loading_Screen;
+		} else if (Application.loadedLevelName == "Tutorial") {
+			delay = 5;
 		}
+		texture = Loading_Screen;
+		changeLoading = Time.time + delay;
 	}
 
 	// Update is called once per frame
 	void Update () {
 
-		GameObject planet = GameObject.Find ("Planet");
-		if (notYetPlaced && planet.GetComponent<SpawnTrees> ().isTreesPlanted () && planet.GetComponent<SpawnHealthPacks> ().hasHealthLanded () && planet.GetComponent<EnemySpawner> ().hasEnemiesLanded () && planet.GetComponent<SpawnWarpPoints> ().wasPlaced ()) {
-			GameObject.Find ("Player").GetComponent<Rigidbody> ().isKinematic = false;
-			GameObject.Find ("Player").transform.position = new Vector3 (-4.17f, 78.85f, 2.17f);
+		if (Application.loadedLevelName == "Scene") {
+			GameObject planet = GameObject.Find ("Planet");
+			if (notYetPlaced && planet.GetComponent<SpawnTrees> ().isTreesPlanted () && planet.GetComponent<SpawnHealthPacks> ().hasHealthLanded () && planet.GetComponent<EnemySpawner> ().hasEnemiesLanded () && planet.GetComponent<SpawnWarpPoints> ().wasPlaced ()) {
+				GameObject.Find ("Player").GetComponent<Rigidbody> ().isKinematic = false;
+				GameObject.Find ("Player").transform.position = new Vector3 (-4.17f, 78.85f, 2.17f);
 
+				if (removeLoadingScreen == 0) {
+					removeLoadingScreen = Time.time;
+				}
+				if (Time.time >= removeLoadingScreen + delay) {
+					loading = false;
+					notYetPlaced = false;
+				}
+			} 
+		} else if (Application.loadedLevelName == "Tutorial") {
 			if (removeLoadingScreen == 0) {
 				removeLoadingScreen = Time.time;
 			}
@@ -43,9 +55,7 @@ public class LoadingScreen : MonoBehaviour {
 				loading = false;
 				notYetPlaced = false;
 			}
-		} /*else {
-			GameObject.Find ("Player").transform.position = new Vector3(0.32f, 80.37f, 032f);
-		}*/
+		}
 	}
 
 	public void OnGUI(){
@@ -88,6 +98,7 @@ public class LoadingScreen : MonoBehaviour {
 			}
 
 			GUI.depth = 0;
+			GUI.color = new Color32 (255, 255, 255, 200);
 			GUI.DrawTexture (new Rect (0, 0, Screen.width, Screen.height), texture);
 		}
 	}

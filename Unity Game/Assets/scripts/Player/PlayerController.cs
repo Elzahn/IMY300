@@ -106,17 +106,11 @@ public class PlayerController : MonoBehaviour {
 			sound.stopSound ("computer");
 			Application.LoadLevel ("Tutorial");
 			this.transform.position = new Vector3(0, 15.757576f, -0.327f);
-		} else if (Input.GetKeyDown (KeyCode.Tab) && Application.loadedLevelName == "Tutorial")/* if (Input.GetKeyDown (KeyCode.Tab) && this.GetComponent<Tutorial>().startTutorial && Application.loadedLevelName == "Tutorial"){
-			this.transform.position = new Vector3 (-27.01f, 79.65f, 1.93f);
-			this.GetComponent<Rigidbody> ().mass = 1000;
-			sound.playWorldSound (Sounds.SHIP_DOOR);
-			sound.stopSound ("computer");
-			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
-			this.GetComponent<SaveSpotTeleport> ().setExitConf (true);
-			Application.LoadLevel ("SaveSpot");*/
+		} else if (Input.GetKeyDown (KeyCode.Tab) && Application.loadedLevelName == "Tutorial")
 		{
 			this.GetComponent<Tutorial> ().tutorialDone = true;
 			this.GetComponent<Tutorial> ().teachInventory = true;
+			this.GetComponent<SaveSpotTeleport>().loadTutorial = false;
 			sound.playWorldSound (Sounds.SHIP_DOOR);
 			sound.stopSound ("computer");
 			Application.LoadLevel ("SaveSpot");
@@ -130,16 +124,11 @@ public class PlayerController : MonoBehaviour {
 			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 		}
 
-		//skip loadingscrene
-		if (Input.GetKeyDown (KeyCode.L)) {
+		//skip loadingscreen
+		if (Input.GetKeyDown (KeyCode.L) && Application.loadedLevelName == "Scene") {
 			GameObject.Find("Planet").GetComponent<LoadingScreen>().loading = false;
 			//this.transform.position = new Vector3(9.41f, 79.19f, 7.75f);
 			this.transform.position = new Vector3(0.32f, 80.37f, 032f);
-		}
-
-		//Open SaveSpot open door
-		if (Input.GetKeyDown (KeyCode.O)) {
-			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 		}
 
 		//build cheat to skip cutscenes
@@ -159,23 +148,22 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		//Warp cheat
-		if (Input.GetKeyDown (KeyCode.F1)) {
+		if (Input.GetKeyDown (KeyCode.F1) && Application.loadedLevelName == "Scene") {
 			this.GetComponent<Warping> ().chooseDestinationUnlocked = true;
 			this.GetComponent<Warping> ().chooseDestination = true;
 			print ("Warp point destination choice unlocked.");
 		}
 
 		//Fall through planet cheat
-		if (Input.GetKeyDown (KeyCode.F2)) {
+		if (Input.GetKeyDown (KeyCode.F2) && Application.loadedLevelName == "Scene") {
 			this.GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked = true;
 			this.GetComponent<FallThroughPlanet>().canFallThroughPlanet = true;
 			print ("Fall through plannet unlocked.");
 		}
 
-		//kill the boss and level up
+		//Open teleported back
 		if (Input.GetKeyDown (KeyCode.F3)) {
 			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
-			print ("You killed the boss!");
 		}
 
 		//LevelUp
@@ -184,14 +172,18 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		//Spin cheat
-		if(Input.GetKeyDown(KeyCode.F5) && Application.loadedLevelName != "Tutorial"){
+		if(Input.GetKeyDown(KeyCode.F5) && Application.loadedLevelName == "Scene"){
 			GameObject.Find("Planet").GetComponent<NaturalDisasters>().spinPlanetNow();
 		}
-
-
+		
 		//Earthquake cheat
-		if(Input.GetKeyDown(KeyCode.F6)){
+		if(Input.GetKeyDown(KeyCode.F6) && Application.loadedLevelName == "Scene"){
 			GameObject.Find("Planet").GetComponent<NaturalDisasters>().makeEarthQuakeHappen();
+		}
+
+		//Skip AI voice
+		if(Input.GetKeyDown(KeyCode.F7)){
+			sound.stopSound("computer");
 		}
 	}
 	

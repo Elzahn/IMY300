@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Linq;
 
@@ -196,7 +196,7 @@ public class InventoryGUI : MonoBehaviour {
 			int buttonWidth = 120;
 			int itemHeight = 30;
 			
-			GUI.Box (new Rect (left, top, boxWidth, boxHeight), "Storage/Inventory Space (Press Esc to close)");
+			GUI.Box (new Rect (left, top, boxWidth, boxHeight), "Storage/Inventory Space (Press E to close)");
 			GUI.Box (new Rect (left, top + 40, width, boxHeight), "Storage \t" + attributesScript.storage.Count + "/" + attributesScript.MAX_STORAGE);
 			
 			if (attributesScript.storage.Count == 0) {

@@ -55,13 +55,16 @@ public class SaveSpotTeleport : MonoBehaviour {
 			Resources.UnloadUnusedAssets();
 		} else if(showExitConfirmation && Input.GetKeyDown(KeyCode.E) && loadTutorial){
 			canEnterSaveSpot = false;
-			showExitConfirmation = false;
+
 			this.GetComponent<Rigidbody> ().mass = 0.1f;
 			sound.playWorldSound (Sounds.SHIP_DOOR);
 			attributesScript.saveInventoryAndStorage ();
 			//this.transform.position = new Vector3(0f, 15.03f, 0);
 			//this.transform.position = new Vector3(-0.01f, 16.149f, -0.27f);
+			sound.stopSound("computer");
 			Application.LoadLevel("Tutorial");
+			showExitConfirmation = false;
+			loadTutorial = false;
 			this.transform.position = new Vector3(0, 15.757576f, -0.327f);
 			Resources.UnloadUnusedAssets();
 		}else if (showEntranceConfirmation && Input.GetKeyDown (KeyCode.E)) {
