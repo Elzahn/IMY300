@@ -47,7 +47,7 @@ public class CameraControl : MonoBehaviour {
 			//Zoom
 			transform.Translate (Vector3.forward * Input.GetAxis ("Mouse ScrollWheel"));
 	
-		/*	//Move
+			//Move
 			if (Input.GetMouseButton (2)) {		//middle
 				if (Input.GetAxis ("Mouse X") != 0) {
 					transform.Translate (Vector3.right * Input.GetAxis ("Mouse X"));
@@ -56,7 +56,7 @@ public class CameraControl : MonoBehaviour {
 				if (Input.GetAxis ("Mouse Y") != 0) {
 					transform.Translate (Vector3.up * Input.GetAxis ("Mouse Y"));
 				}
-			}*/
+			}
 		}
 	}
 	

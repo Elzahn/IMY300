@@ -71,7 +71,6 @@ public class PlayerController : MonoBehaviour {
 		animator.SetBool ("MovingRight", false);
 		animator.SetBool ("MovingLeft", false);
 		animator.SetFloat ("Turning", 0);
-		animator.SetBool ("Jumping", false);
 	}
 
 	void checkScreenshot() {
@@ -269,11 +268,11 @@ public class PlayerController : MonoBehaviour {
 				}
 			} else {
 				if ((Input.GetAxis ("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0)) {
-					if (Input.GetAxis ("Vertical") != 0 && Input.GetAxisRaw("Horizontal") < 0){
+					if (Input.GetAxis ("Vertical") == 0 && Input.GetAxis("Horizontal") < 0){
 						this.GetComponent<Animator>().SetBool("MovingLeft", moving);
 						this.GetComponent<Animator>().SetBool("MovingRight", false);
 						this.GetComponent<Animator>().SetBool("MovingStraight", false);
-					} else if (Input.GetAxis ("Vertical") != 0 && Input.GetAxisRaw("Horizontal") > 0){
+					} else if (Input.GetAxis ("Vertical") == 0 && Input.GetAxis("Horizontal") > 0){
 						this.GetComponent<Animator>().SetBool("MovingRight", moving);
 						this.GetComponent<Animator>().SetBool("MovingStraight", false);
 						this.GetComponent<Animator>().SetBool("MovingLeft", false);
