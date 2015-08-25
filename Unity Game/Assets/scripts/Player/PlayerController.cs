@@ -183,10 +183,6 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.F4)) {
 			playerAttributes.levelMeUp ();
 		}
-		
-		if (Input.GetKeyDown (KeyCode.R)) {
-			GameObject.Find ("Main Camera").GetComponent<SmoothMouseLook> ().resetRotation ();
-		}
 
 		//Spin cheat
 		if(Input.GetKeyDown(KeyCode.F5) && Application.loadedLevelName != "Tutorial"){
