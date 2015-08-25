@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -16,11 +15,6 @@ public class CameraControl : MonoBehaviour {
 	
 	public float minimumY = -60F;
 	public float maximumY = 60F;
-	
-	float rotationX = 0F;
-	
-	private List<float> rotArrayX = new List<float>();
-	float rotAverageX = 0F;	
 
 	public float frameCounter = 20;
 

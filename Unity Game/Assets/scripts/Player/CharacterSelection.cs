@@ -4,12 +4,12 @@ using System.Collections;
 public class CharacterSelection : MonoBehaviour {
 
 	private PlayerAttributes attributesScript;
-	private PlayerController playerScript;
+//	private PlayerController playerScript;
 
 	// Use this for initialization
 	void Start () {
 		attributesScript = this.GetComponent<PlayerAttributes> ();
-		playerScript = this.GetComponent<PlayerController> ();		
+		//playerScript = this.GetComponent<PlayerController> ();		
 	}
 
 	void OnGUI()

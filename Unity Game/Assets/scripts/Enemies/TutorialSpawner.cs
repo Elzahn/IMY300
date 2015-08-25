@@ -16,7 +16,7 @@ public class TutorialSpawner : MonoBehaviour {
 
 	private string EnemyName;
 	private int numLoot;
-	private PlayerController playerScript;
+//	private PlayerController playerScript;
 	private Accessory accessoryScript;
 	private LinkedList<InventoryItem> tempLoot;
 	private InventoryItem tempItem;
@@ -33,7 +33,7 @@ public class TutorialSpawner : MonoBehaviour {
 		playerLevel = GameObject.Find("Player").GetComponent<PlayerAttributes>().level;
 		tempLoot = new LinkedList<InventoryItem> ();
 		
-		playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
+	//	playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
 
 		addEnemy (enemy1);
 		addEnemy (enemy2);

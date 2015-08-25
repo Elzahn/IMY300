@@ -1,9 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Player\PlayerAttributes.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Player\PlayerController.cs">
     <Files>
-      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="677" Column="25" />
-      <File FileName="Assets\scripts\Weapons\Weapon.cs" Line="4" Column="1" />
+      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="522" Column="1" />
+      <File FileName="Assets\scripts\Weapons\Weapon.cs" Line="16" Column="1" />
+      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="377" Column="1" />
+      <File FileName="Assets\scripts\Player\Collisions.cs" Line="105" Column="1" />
+      <File FileName="Assets\scripts\World\NaturalDisasters.cs" Line="185" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
