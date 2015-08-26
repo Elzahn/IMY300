@@ -87,11 +87,11 @@ public class Collisions : MonoBehaviour {
 			} else {
 				this.GetComponent<Sounds> ().playCharacterSound (Sounds.MALE_HURT);
 			}
-		} else //play landing sound
+		}/* else //play landing sound
 		if((col.collider.name == "Ship_interior" || col.collider.name == "Planet") && playerScript.jumping == true) {
 			this.GetComponent<Sounds> ().playCharacterSound (Sounds.JUMP);
 			playerScript.jumping = false;
-		} 
+		} */
 	}
 
 	void OnGUI(){

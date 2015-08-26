@@ -678,7 +678,7 @@ public class PlayerAttributes : MonoBehaviour {
 				myAttributes = temp;
 				setInitialXp(xp);
 			}
-		} catch (IOException e) {
+		} catch (IOException) {
 			throw(new IOException("Cannot load savegame."));
 		}
 

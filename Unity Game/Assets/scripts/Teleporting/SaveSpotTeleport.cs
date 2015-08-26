@@ -44,7 +44,19 @@ public class SaveSpotTeleport : MonoBehaviour {
 	}
 
 	void Update () {
-		if (showExitConfirmation && Input.GetKeyDown (KeyCode.E) && !loadTutorial) {
+		if (Application.loadedLevelName == "Tutorial" && showEntranceConfirmation && Input.GetKeyDown (KeyCode.E) && Loot.gotPowerCore == true) {
+			//showExitConfirmation = true;
+			showEntranceConfirmation = false;
+			attributesScript.restoreHealthToFull();
+			attributesScript.restoreStaminaToFull();
+			this.GetComponent<Rigidbody>().mass = 100;
+			this.transform.rotation = new Quaternion(0, 0.7f, 0, -0.7f);
+			//this.transform.position = new Vector3 (-27.01f, 79.65f, 1.93f);
+			this.transform.position = new Vector3 (9.4f, 81.38f, 6.62f);
+			sound.playWorldSound(Sounds.SHIP_DOOR);
+			Application.LoadLevel ("SaveSpot");
+			Resources.UnloadUnusedAssets();
+		} else if (showExitConfirmation && Input.GetKeyDown (KeyCode.E) && !loadTutorial) {
 			canEnterSaveSpot = false;
 			showExitConfirmation = false;
 			this.GetComponent<Rigidbody> ().mass = 0.1f;
@@ -55,16 +67,19 @@ public class SaveSpotTeleport : MonoBehaviour {
 			Resources.UnloadUnusedAssets();
 		} else if(showExitConfirmation && Input.GetKeyDown(KeyCode.E) && loadTutorial){
 			canEnterSaveSpot = false;
-			showExitConfirmation = false;
+
 			this.GetComponent<Rigidbody> ().mass = 0.1f;
 			sound.playWorldSound (Sounds.SHIP_DOOR);
 			attributesScript.saveInventoryAndStorage ();
 			//this.transform.position = new Vector3(0f, 15.03f, 0);
 			//this.transform.position = new Vector3(-0.01f, 16.149f, -0.27f);
+			sound.stopSound("computer");
 			Application.LoadLevel("Tutorial");
+			showExitConfirmation = false;
+			loadTutorial = false;
 			this.transform.position = new Vector3(0, 15.757576f, -0.327f);
 			Resources.UnloadUnusedAssets();
-		}else if (showEntranceConfirmation && Input.GetKeyDown (KeyCode.E)) {
+		}else if (showEntranceConfirmation && Input.GetKeyDown (KeyCode.E) && Application.loadedLevelName != "Tutorial") {
 			//showExitConfirmation = true;
 			showEntranceConfirmation = false;
 			attributesScript.restoreHealthToFull();
@@ -81,7 +96,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 
 	void OnGUI(){
 		if (showNoEntry) {
-			GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), ("Kill the boss to go back."));
+			GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), ("Kill the boss and take his loot to go back."));
 		} else if (showExitConfirmation && loadTutorial) {
 			GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), ("Press E to start the tutorial"));
 		} else if (showExitConfirmation){

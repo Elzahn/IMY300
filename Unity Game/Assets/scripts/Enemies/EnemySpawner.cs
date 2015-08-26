@@ -16,7 +16,7 @@ public class EnemySpawner : MonoBehaviour {
 
 	private string EnemyName;
 	private int numLoot;
-	private PlayerController playerScript;
+//	private PlayerController playerScript;
 	private Accessory accessoryScript;
 	private LinkedList<InventoryItem> tempLoot;
 	private InventoryItem tempItem;
@@ -34,7 +34,7 @@ public class EnemySpawner : MonoBehaviour {
 		clearLoot ();
 		tempLoot = new LinkedList<InventoryItem> ();
 
-		playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
+	//	playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
 		planet = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
 		playerLevel = GameObject.Find("Player").GetComponent<PlayerAttributes>().level;
 		GameObject enemy;
