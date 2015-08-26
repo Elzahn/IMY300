@@ -44,6 +44,7 @@ GameObject:
   - 33: {fileID: 3353774}
   - 23: {fileID: 2335344}
   - 64: {fileID: 6436166}
+  - 65: {fileID: 6507140}
   m_Layer: 0
   m_Name: Sphere001
   m_TagString: WorldObject
@@ -58,7 +59,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 192690}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 89.5458221, y: -56.7528152, z: -340.96875}
+  m_LocalPosition: {x: -55.6296463, y: 84.6831589, z: 27.5708427}
   m_LocalScale: {x: .0250000004, y: .0250000004, z: .0250000004}
   m_Children:
   - {fileID: 487540}
@@ -71,8 +72,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 197510}
-  m_LocalRotation: {x: -.599407375, y: 0, z: -0, w: .800444126}
-  m_LocalPosition: {x: 1.46062422, y: 283.812988, z: 15.7898626}
+  m_LocalRotation: {x: -.593191981, y: .114972912, z: .0860967189, w: .792143881}
+  m_LocalPosition: {x: 1.46057129, y: 283.812866, z: 15.7898712}
   m_LocalScale: {x: 1.09987891, y: 1.09987915, z: 1.09987915}
   m_Children: []
   m_Father: {fileID: 421122}
@@ -149,6 +150,18 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 1
   m_Mesh: {fileID: 4300002, guid: 0cbcdd1d436cf724ea35b665aef5cb70, type: 3}
+--- !u!65 &6507140
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 197510}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 45.7000008, y: 44.7000008, z: 270.100006}
+  m_Center: {x: -7.86697197, y: -48.2999992, z: -119.12104}
 --- !u!114 &11447696
 MonoBehaviour:
   m_ObjectHideFlags: 1

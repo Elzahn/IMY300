@@ -7,20 +7,17 @@ public class CameraControl : MonoBehaviour {
 	private PlayerController playerScript;
 
 	public float sensitivityX = 5F;
-	
-	public float minimumX = -360F;
-	public float maximumX = 360F;
-	
-	public float minimumY = -60F;
-	public float maximumY = 60F;
 
+	GameObject player;
 	Vector3 originalPosition;
 	Quaternion originalRotation;
 
 	void Update ()
 	{
 		if (playerScript.paused == false) {
-			GameObject player = GameObject.FindWithTag("Player");
+		//	GameObject player = GameObject.FindWithTag("Player");
+			this.transform.RotateAround(player.transform.position, player.transform.up, -0.015f);
+
 			if (Input.GetMouseButton (1) && Input.GetAxis ("Mouse X") < 0)//right button held and mouse moved left
 			{
 				//Rotate Around the player - no player gameObject Rotation
@@ -29,10 +26,12 @@ public class CameraControl : MonoBehaviour {
 
 				//Rotate Around the player - player gameObject Rotation
 				player.transform.RotateAround(player.transform.position, player.transform.up, Input.GetAxis ("Mouse X") * sensitivityX);
-				player.GetComponent<Animator>().SetFloat("Turning", -1f);
+				//GameObject.Find("Player").transform.RotateAround(GameObject.Find("Player").transform.position, GameObject.Find("Player").transform.up, -Input.GetAxis ("Mouse X") * sensitivityX);
+				GameObject.Find("Player").GetComponent<Animator>().SetFloat("Turning", -1f);
 			} else if (Input.GetMouseButton (1) && Input.GetAxis ("Mouse X") > 0) {
 				player.transform.RotateAround(player.transform.position, player.transform.up, Input.GetAxis ("Mouse X") * sensitivityX);
-				player.GetComponent<Animator>().SetFloat("Turning", 1f);
+				//GameObject.Find("Player").transform.RotateAround(GameObject.Find("Player").transform.position, GameObject.Find("Player").transform.up, -Input.GetAxis ("Mouse X") * sensitivityX);
+				GameObject.Find("Player").GetComponent<Animator>().SetFloat("Turning", 1f);
 			}
 
 			//Zoom
@@ -79,19 +78,6 @@ public class CameraControl : MonoBehaviour {
 	void Start ()
 	{			
 		playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
-	}
-	
-	public static float ClampAngle (float angle, float min, float max)
-	{
-		angle = angle % 360;
-		if ((angle >= -360F) && (angle <= 360F)) {
-			if (angle < -360F) {
-				angle += 360F;
-			}
-			if (angle > 360F) {
-				angle -= 360F;
-			}			
-		}
-		return Mathf.Clamp (angle, min, max);
+		player = GameObject.Find ("Player");
 	}
 }

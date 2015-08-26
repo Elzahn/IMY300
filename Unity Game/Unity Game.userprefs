@@ -1,10 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Player\PlayerController.cs">
     <Files>
-      <File FileName="Assets\scripts\World\LoadingScreen.cs" Line="16" Column="24" />
-      <File FileName="Assets\scripts\Enemies\EnemySpawner.cs" Line="54" Column="6" />
-      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="194" Column="1" />
+      <File FileName="Assets\scripts\World\LoadingScreen.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Enemies\EnemySpawner.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="246" Column="9" />
+      <File FileName="Assets\scripts\Player\CameraControl.cs" Line="25" Column="4" />
+      <File FileName="Assets\scripts\World\NaturalDisasters.cs" Line="35" Column="1" />
+      <File FileName="Assets\scripts\Enemies\TutorialSpawner.cs" Line="103" Column="43" />
+      <File FileName="Assets\scripts\Loot.cs" Line="23" Column="3" />
+      <File FileName="Assets\scripts\InventoryItem.cs" Line="22" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
