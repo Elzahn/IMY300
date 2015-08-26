@@ -95,6 +95,7 @@
      <Compile Include="Assets\scripts\World\PlayerLog.cs" />
      <Compile Include="Assets\scripts\World\SetCharacterPosition.cs" />
      <Compile Include="Assets\scripts\World\SpawnTrees.cs" />
+     <Compile Include="Assets\scripts\testLoadingBar.cs" />
      <None Include="Assets\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />
      <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
      <None Include="Assets\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />

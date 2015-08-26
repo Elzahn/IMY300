@@ -6,8 +6,6 @@ public class CameraControl : MonoBehaviour {
 
 	private PlayerController playerScript;
 
-	public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
-	public RotationAxes axes = RotationAxes.MouseXAndY;
 	public float sensitivityX = 5F;
 	
 	public float minimumX = -360F;
@@ -16,9 +14,8 @@ public class CameraControl : MonoBehaviour {
 	public float minimumY = -60F;
 	public float maximumY = 60F;
 
-	public float frameCounter = 20;
-
 	Vector3 originalPosition;
+	Quaternion originalRotation;
 
 	void Update ()
 	{
@@ -41,8 +38,8 @@ public class CameraControl : MonoBehaviour {
 			//Zoom
 			transform.Translate (Vector3.forward * Input.GetAxis ("Mouse ScrollWheel"));
 	
-			//Move
-			if (Input.GetMouseButton (2)) {		//middle
+			/*//Move
+			if (Input.GetMouseButton (2) && Input.GetMouseButton (1)) {		//middle and right
 				if (Input.GetAxis ("Mouse X") != 0) {
 					transform.Translate (Vector3.right * Input.GetAxis ("Mouse X"));
 				}
@@ -50,6 +47,31 @@ public class CameraControl : MonoBehaviour {
 				if (Input.GetAxis ("Mouse Y") != 0) {
 					transform.Translate (Vector3.up * Input.GetAxis ("Mouse Y"));
 				}
+			}*/
+
+			
+			//Seek on planet
+			if (Input.GetMouseButtonDown (2) && Application.loadedLevelName != "SaveSpot") {		//middle  
+				originalPosition = this.transform.position;
+				originalRotation = this.transform.rotation;
+
+				this.transform.position = GameObject.Find("Player").transform.position + new Vector3(0, 60, 0);
+				this.transform.LookAt(GameObject.Find("Player").transform);
+			}
+
+			if(Input.GetMouseButton(2) && Application.loadedLevelName != "SaveSpot"){
+				if(Input.GetAxis("Mouse X") != 0){
+					this.transform.RotateAround(new Vector3(0,0,0), -player.transform.right, Input.GetAxis ("Mouse X") * sensitivityX);
+				} 
+				if(Input.GetAxis("Mouse Y") != 0){
+					this.transform.RotateAround(new Vector3(0,0,0), -player.transform.forward, Input.GetAxis ("Mouse Y") * sensitivityX);
+				}
+			}
+
+			//Release middle mouse button
+			if(Input.GetMouseButtonUp(2) && Application.loadedLevelName != "SaveSpot"){
+				this.transform.position = originalPosition;
+				this.transform.rotation = originalRotation;
 			}
 		}
 	}
