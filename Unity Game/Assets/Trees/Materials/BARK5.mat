@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: BARK5
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: -1
@@ -19,14 +19,14 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: d66f6f199c4465b47bca5c62fab2b435, type: 3}
+          m_Texture: {fileID: 2800000, guid: e3f4346d7ba665c4a9e9cbaffd3bf505, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _BumpMap
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: b9680881a2ca9c748a5f96086a00121a, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -93,6 +93,10 @@ Material:
         second: .5
       data:
         first:
+          name: _Shininess
+        second: .0890000015
+      data:
+        first:
           name: _Parallax
         second: .0199999996
       data:
@@ -136,3 +140,7 @@ Material:
         first:
           name: _Color
         second: {r: .588, g: .588, b: .588, a: 1}
+      data:
+        first:
+          name: _SpecColor
+        second: {r: .713235259, g: .58483845, b: .582125843, a: 1}
