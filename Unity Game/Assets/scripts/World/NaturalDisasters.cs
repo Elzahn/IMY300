@@ -133,10 +133,10 @@ public class NaturalDisasters : MonoBehaviour {
 							GameObject.Find ("Player").GetComponent<Sounds> ().playWorldSound (Sounds.SPINNING_WIND);
 							spin = 2f;
 
-							if (!playerScript.jumping) {
+							//if (!playerScript.jumping) {
 								playerAttributes.dizzy = true;
 								dizzyWearOfNext = Time.time + dizzyDelay;
-							}
+							//}
 
 							GameObject[] objectsToBeMoved = GameObject.FindGameObjectsWithTag ("WorldObject");	
 							GameObject[] enemiesToBeMoved = GameObject.FindGameObjectsWithTag ("Monster");	

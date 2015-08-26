@@ -6,8 +6,11 @@ using System.Linq;
 public class Loot : MonoBehaviour {
 
 	private LinkedList<InventoryItem> myLoot = new LinkedList<InventoryItem>();
+
 	public string myName { get; private set; }
 	public bool showLoot { get; private set; }
+	public static bool gotPowerCore{ get; set; }
+
 	private PlayerAttributes attributesScript;
 	private PlayerController playerScript;
 
@@ -38,7 +41,7 @@ public class Loot : MonoBehaviour {
 			int buttonWidth = 100;
 			int closeTop = top;
 			
-			GUI.Box (new Rect (left, top, boxWidth, boxHeight), name);
+			GUI.Box (new Rect (left, top, boxWidth, boxHeight), myName);
 			
 			foreach (InventoryItem item in myLoot.ToList()) {
 				GUI.Label (new Rect (left + 30, top + 40, boxWidth-buttonWidth, itemHeight), item.typeID);
@@ -46,6 +49,10 @@ public class Loot : MonoBehaviour {
 					attributesScript.addToInventory (item);
 					myLoot.Remove (item);
 					GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(Sounds.BUTTON);
+					if(item.typeID == "Power Core"){
+						gotPowerCore = true;
+						GameObject.Find("Player").GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
+					}
 					if (myLoot.Count == 0) {
 						showLoot = false;
 						Destroy(this.gameObject);

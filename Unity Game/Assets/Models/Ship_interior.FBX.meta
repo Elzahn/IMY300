@@ -6,11 +6,186 @@ ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
+    100002: back_wall
+    100004: Box001
+    100006: floor
+    100008: front_wall
+    100010: h
+    100012: hall
+    100014: hall001
+    100016: left_wall
+    100018: Object001
+    100020: Object002
+    100022: roof
+    100024: wall
+    100026: wall basic
+    100028: wall basic001
+    100030: front_wall001
+    100032: front_wall002
+    100034: front_wall003
+    100036: Box002
+    100038: Box003
+    100040: Box004
+    100042: Box005
+    100044: front_wall004
+    100046: Object003
+    100048: Box007
+    100050: Box008
+    100052: Box009
+    100054: Box010
+    100056: Box011
+    100058: Box012
+    100060: Box013
+    100062: Sphere001
+    100064: Sphere002
+    100066: Sphere003
+    100068: Sphere004
+    100070: Box014
+    100072: Box015
     400000: //RootNode
+    400002: back_wall
+    400004: Box001
+    400006: floor
+    400008: front_wall
+    400010: h
+    400012: hall
+    400014: hall001
+    400016: left_wall
+    400018: Object001
+    400020: Object002
+    400022: roof
+    400024: wall
+    400026: wall basic
+    400028: wall basic001
+    400030: front_wall001
+    400032: front_wall002
+    400034: front_wall003
+    400036: Box002
+    400038: Box003
+    400040: Box004
+    400042: Box005
+    400044: front_wall004
+    400046: Object003
+    400048: Box007
+    400050: Box008
+    400052: Box009
+    400054: Box010
+    400056: Box011
+    400058: Box012
+    400060: Box013
+    400062: Sphere001
+    400064: Sphere002
+    400066: Sphere003
+    400068: Sphere004
+    400070: Box014
+    400072: Box015
     2300000: //RootNode
+    2300002: back_wall
+    2300004: Box001
+    2300006: floor
+    2300008: front_wall
+    2300010: h
+    2300012: hall
+    2300014: hall001
+    2300016: left_wall
+    2300018: Object002
+    2300020: roof
+    2300022: wall
+    2300024: wall basic
+    2300026: wall basic001
+    2300028: front_wall001
+    2300030: front_wall002
+    2300032: front_wall003
+    2300034: Box002
+    2300036: Box003
+    2300038: Box004
+    2300040: Box005
+    2300042: front_wall004
+    2300044: Object003
+    2300046: Box007
+    2300048: Box008
+    2300050: Box009
+    2300052: Box010
+    2300054: Box011
+    2300056: Box012
+    2300058: Box013
+    2300060: Sphere001
+    2300062: Sphere002
+    2300064: Sphere003
+    2300066: Sphere004
+    2300068: Box014
+    2300070: Box015
     3300000: //RootNode
+    3300002: back_wall
+    3300004: Box001
+    3300006: floor
+    3300008: front_wall
+    3300010: h
+    3300012: hall
+    3300014: hall001
+    3300016: left_wall
+    3300018: Object002
+    3300020: roof
+    3300022: wall
+    3300024: wall basic
+    3300026: wall basic001
+    3300028: front_wall001
+    3300030: front_wall002
+    3300032: front_wall003
+    3300034: Box002
+    3300036: Box003
+    3300038: Box004
+    3300040: Box005
+    3300042: front_wall004
+    3300044: Object003
+    3300046: Box007
+    3300048: Box008
+    3300050: Box009
+    3300052: Box010
+    3300054: Box011
+    3300056: Box012
+    3300058: Box013
+    3300060: Sphere001
+    3300062: Sphere002
+    3300064: Sphere003
+    3300066: Sphere004
+    3300068: Box014
+    3300070: Box015
     4300000: front_wall
     4300002: left_wall
+    4300004: floor
+    4300006: roof
+    4300008: back_wall
+    4300010: hall
+    4300012: Box001
+    4300014: hall001
+    4300016: wall
+    4300018: h
+    4300020: wall basic
+    4300022: wall basic001
+    4300024: Object002
+    4300026: front_wall001
+    4300028: front_wall002
+    4300030: front_wall003
+    4300032: Box002
+    4300034: Box003
+    4300036: Box004
+    4300038: Object003
+    4300040: front_wall004
+    4300042: Box005
+    4300044: Box007
+    4300046: Box008
+    4300048: Box009
+    4300050: Box010
+    4300052: Sphere001
+    4300054: Sphere002
+    4300056: Box011
+    4300058: Sphere003
+    4300060: Box012
+    4300062: Sphere004
+    4300064: Box013
+    4300066: Box014
+    4300068: Box015
   materials:
     importMaterials: 1
     materialName: 0

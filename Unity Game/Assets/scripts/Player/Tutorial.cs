@@ -24,6 +24,7 @@ public class Tutorial : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 		showVisuals = true;
 		showAttack = false;
 		print ("Press Escape to skip Tutorial");
@@ -69,7 +70,7 @@ public class Tutorial : MonoBehaviour {
 		}
 
 		if(!sound.computerAudio.isPlaying){
-			this.GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
+	//		this.GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
 			justStarted = false;
 		}
 	}
@@ -88,14 +89,16 @@ public class Tutorial : MonoBehaviour {
 	}
 
 	public void leadTheWay(){
-		//called to clear previous instruction if still on screen
-		this.GetComponent<SaveSpotTeleport>().canEnterSaveSpot = false;
-		setupVisuals();
-		if (!sound.worldAudio.isPlaying) {
-			justArrivedOnPlanet = true;
-			setupVisuals();
-			showRun = true;
-			sound.playComputerSound (Sounds.COMPUTER_RUN);
+		this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = false;
+		if (GameObject.Find ("Planet") != null && GameObject.Find ("Planet").GetComponent<LoadingScreen> ().loading == false) {
+			//called to clear previous instruction if still on screen
+			setupVisuals ();
+			if (!sound.worldAudio.isPlaying) {
+				justArrivedOnPlanet = true;
+				setupVisuals ();
+				showRun = true;
+				sound.playComputerSound (Sounds.COMPUTER_RUN);
+			}
 		}
 	}
 
@@ -131,8 +134,10 @@ public class Tutorial : MonoBehaviour {
 					GUI.DrawTexture (new Rect (Screen.width / 2 - 25, Screen.height - 45, 30, 40), Attack);
 				}
 			}
-			if (Time.time >= showVisualQue) {
+			if (Time.time >= showVisualQue && GameObject.Find ("Planet") != null && GameObject.Find ("Planet").GetComponent<LoadingScreen>().loading == false) {
 				showVisuals = false;
+			} else if(GameObject.Find ("Planet") != null && GameObject.Find ("Planet").GetComponent<LoadingScreen>().loading == true){
+				showVisualQue = Time.time + showVisualDuration;
 			}
 		}
 	}
