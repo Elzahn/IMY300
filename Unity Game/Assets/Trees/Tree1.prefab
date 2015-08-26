@@ -11,6 +11,7 @@ GameObject:
   - 54: {fileID: 5492196}
   - 114: {fileID: 11450788}
   - 114: {fileID: 11484604}
+  - 65: {fileID: 6502604}
   m_Layer: 0
   m_Name: Tree1
   m_TagString: WorldObject
@@ -44,6 +45,7 @@ GameObject:
   - 33: {fileID: 3347156}
   - 23: {fileID: 2365632}
   - 64: {fileID: 6429132}
+  - 65: {fileID: 6588790}
   m_Layer: 0
   m_Name: Cylinder001
   m_TagString: WorldObject
@@ -111,7 +113,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 144930}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.2265797, y: 49.6774826, z: 2.95570755}
+  m_LocalPosition: {x: -28.4814415, y: 76.9160843, z: -3.09090543}
   m_LocalScale: {x: .0250000004, y: .0250000004, z: .0250000004}
   m_Children:
   - {fileID: 429572}
@@ -179,6 +181,30 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 1
   m_Mesh: {fileID: 4300000, guid: f033f0c0f6264b34f9e59c096824e19f, type: 3}
+--- !u!65 &6502604
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144930}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6588790
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162398}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 58.5999985, y: 79.3000031, z: 381.260773}
+  m_Center: {x: 1.87, y: 5.9000001, z: 190.630142}
 --- !u!114 &11450788
 MonoBehaviour:
   m_ObjectHideFlags: 1
