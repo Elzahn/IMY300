@@ -67,34 +67,6 @@ public class TutorialSpawner : MonoBehaviour {
 		}
 	}
 
-	public void position(GameObject go){
-		go.GetComponent<PositionMe> ().touching = false;
-		go.GetComponent<PositionMe>().checkMyPosition = false;
-		Vector3 position;
-		bool landed = false;
-		
-		while (!landed) {
-			
-			position = Random.onUnitSphere * (GameObject.Find("Planet").GetComponent<SphereCollider>().radius * GameObject.Find("Planet").transform.lossyScale.x);
-			
-			Collider[] collidedItems = Physics.OverlapSphere(position, 0.5f);//can try with 20
-			List<Collider> tempList = new List<Collider>();
-			
-			foreach(Collider col in collidedItems){
-				if(col.name != "Planet" && col.transform != go.transform){
-					tempList.Add(col);
-				}
-			}
-			
-			if(tempList.Count() == 0){
-				go.GetComponent<Rigidbody> ().position = position;
-				GameObject.Find(go.name).GetComponent<PositionMe>().timeToCheckMyPosition = Time.time;
-				GameObject.Find(go.name).GetComponent<PositionMe>().checkMyPosition = true;
-				return;
-			}
-		}
-	}
-
 	void addEnemy(GameObject enemy, Vector3 position) {	
 		
 		GameObject go = Instantiate(enemy);
@@ -121,7 +93,7 @@ public class TutorialSpawner : MonoBehaviour {
 
 			Enemy enemy = monster.GetComponent<Enemy>();	
 
-			Rigidbody rigidbody = monster.GetComponent<Rigidbody> ();
+		//	Rigidbody rigidbody = monster.GetComponent<Rigidbody> ();
 			if (enemy.isDead()) {
 				GameObject.Find("Player").GetComponent<Tutorial>().showAttack = false;
 				if(enemy.typeID == "BossAlien")
@@ -144,7 +116,15 @@ public class TutorialSpawner : MonoBehaviour {
 					monsterDead = true;
 					GameObject.Find("Player").GetComponent<Tutorial>().teachInventory = true;
 
-					dropLoot(enemy, rigidbody.position);
+					tempLoot.AddLast(new Longsword(1));
+					GameObject deadEnemy = Instantiate(loot);
+					deadEnemy.transform.position = monster.GetComponent<Rigidbody>().position;
+					deadEnemy.tag = "Loot";
+					deadEnemy.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					Loot lootComponent = deadEnemy.GetComponentInChildren<Loot> ();
+					lootComponent.storeLoot (tempLoot, "Dead " + EnemyName);
+					tempLoot.Clear ();
+					//dropLoot(enemy, rigidbody.position);
 				} else {
 					this.GetComponent<NaturalDisasters>().makeEarthQuakeHappen();
 					while(this.GetComponent<NaturalDisasters>().isShaking() == true){}
