@@ -265,11 +265,6 @@ public class PlayerController : MonoBehaviour {
 			} else {
 				if ((Input.GetAxis ("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0)) {
 
-					/*this.transform.RotateAround(this.transform.position, this.transform.up, -0.101f);
-					if (Input.GetAxis ("Vertical") < 0)
-					{
-						this.transform.RotateAround(this.transform.position, this.transform.up, -0.017f);
-					}*/
 					if (Input.GetAxis ("Vertical") == 0 && Input.GetAxis("Horizontal") < 0){
 						this.GetComponent<Animator>().SetBool("MovingLeft", moving);
 						this.GetComponent<Animator>().SetBool("MovingRight", false);

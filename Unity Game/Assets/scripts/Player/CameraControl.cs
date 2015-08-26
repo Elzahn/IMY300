@@ -15,8 +15,6 @@ public class CameraControl : MonoBehaviour {
 	void Update ()
 	{
 		if (playerScript.paused == false) {
-		//	GameObject player = GameObject.FindWithTag("Player");
-			this.transform.RotateAround(player.transform.position, player.transform.up, -0.015f);
 
 			if (Input.GetMouseButton (1) && Input.GetAxis ("Mouse X") < 0)//right button held and mouse moved left
 			{
@@ -26,11 +24,9 @@ public class CameraControl : MonoBehaviour {
 
 				//Rotate Around the player - player gameObject Rotation
 				player.transform.RotateAround(player.transform.position, player.transform.up, Input.GetAxis ("Mouse X") * sensitivityX);
-				//GameObject.Find("Player").transform.RotateAround(GameObject.Find("Player").transform.position, GameObject.Find("Player").transform.up, -Input.GetAxis ("Mouse X") * sensitivityX);
 				GameObject.Find("Player").GetComponent<Animator>().SetFloat("Turning", -1f);
 			} else if (Input.GetMouseButton (1) && Input.GetAxis ("Mouse X") > 0) {
 				player.transform.RotateAround(player.transform.position, player.transform.up, Input.GetAxis ("Mouse X") * sensitivityX);
-				//GameObject.Find("Player").transform.RotateAround(GameObject.Find("Player").transform.position, GameObject.Find("Player").transform.up, -Input.GetAxis ("Mouse X") * sensitivityX);
 				GameObject.Find("Player").GetComponent<Animator>().SetFloat("Turning", 1f);
 			}
 
@@ -54,7 +50,7 @@ public class CameraControl : MonoBehaviour {
 				originalPosition = this.transform.position;
 				originalRotation = this.transform.rotation;
 
-				this.transform.position = GameObject.Find("Player").transform.position + new Vector3(0, 60, 0);
+				this.transform.position = new Vector3(0, 160, 0);//GameObject.Find("Player").transform.position + 
 				this.transform.LookAt(GameObject.Find("Player").transform);
 			}
 
