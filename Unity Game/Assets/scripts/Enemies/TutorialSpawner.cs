@@ -14,7 +14,6 @@ public class TutorialSpawner : MonoBehaviour {
 
 	public bool showInventory { get; set; }
 
-	private string EnemyName;
 	private int numLoot;
 //	private PlayerController playerScript;
 	private Accessory accessoryScript;
@@ -101,7 +100,7 @@ public class TutorialSpawner : MonoBehaviour {
 					deadEnemy.tag = "Loot";
 					deadEnemy.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
 					Loot lootComponent = deadEnemy.GetComponentInChildren<Loot> ();
-					lootComponent.storeLoot (tempLoot, "Dead " + EnemyName);
+					lootComponent.storeLoot (tempLoot, "Dead " + enemy.typeID);
 					tempLoot.Clear ();
 
 					GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_GOBACK);
@@ -120,7 +119,7 @@ public class TutorialSpawner : MonoBehaviour {
 					deadEnemy.tag = "Loot";
 					deadEnemy.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
 					Loot lootComponent = deadEnemy.GetComponentInChildren<Loot> ();
-					lootComponent.storeLoot (tempLoot, "Dead " + EnemyName);
+					lootComponent.storeLoot (tempLoot, "Dead " + enemy.typeID);
 					tempLoot.Clear ();
 					//dropLoot(enemy, rigidbody.position);
 				} else {

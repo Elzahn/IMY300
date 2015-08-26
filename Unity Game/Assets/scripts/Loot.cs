@@ -41,7 +41,7 @@ public class Loot : MonoBehaviour {
 			int buttonWidth = 100;
 			int closeTop = top;
 			
-			GUI.Box (new Rect (left, top, boxWidth, boxHeight), name);
+			GUI.Box (new Rect (left, top, boxWidth, boxHeight), myName);
 			
 			foreach (InventoryItem item in myLoot.ToList()) {
 				GUI.Label (new Rect (left + 30, top + 40, boxWidth-buttonWidth, itemHeight), item.typeID);
