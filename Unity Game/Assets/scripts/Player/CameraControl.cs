@@ -50,7 +50,7 @@ public class CameraControl : MonoBehaviour {
 				originalPosition = this.transform.position;
 				originalRotation = this.transform.rotation;
 
-				this.transform.position = new Vector3(0, 160, 0);//GameObject.Find("Player").transform.position + 
+				this.transform.position = GameObject.Find("Player").transform.position + (GameObject.Find("Player").transform.up * 25);
 				this.transform.LookAt(GameObject.Find("Player").transform);
 			}
 
