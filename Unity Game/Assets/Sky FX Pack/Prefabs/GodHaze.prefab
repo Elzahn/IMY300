@@ -249,19 +249,19 @@ ParticleAnimator:
   Does Animate Color?: 1
   colorAnimation[0]:
     serializedVersion: 2
-    rgba: 16777215
+    rgba: 15656151
   colorAnimation[1]:
     serializedVersion: 2
-    rgba: 3029126348
+    rgba: 3033123980
   colorAnimation[2]:
     serializedVersion: 2
-    rgba: 4290377727
+    rgba: 4294963641
   colorAnimation[3]:
     serializedVersion: 2
-    rgba: 3029919487
+    rgba: 3036670616
   colorAnimation[4]:
     serializedVersion: 2
-    rgba: 173974713
+    rgba: 179941726
   worldRotationAxis: {x: 0, y: 0, z: 0}
   localRotationAxis: {x: 0, y: 0, z: 0}
   sizeGrow: 0
@@ -282,16 +282,16 @@ ParticleAnimator:
     rgba: 16777215
   colorAnimation[1]:
     serializedVersion: 2
-    rgba: 3029126348
+    rgba: 3033314444
   colorAnimation[2]:
     serializedVersion: 2
-    rgba: 4290377727
+    rgba: 4294961337
   colorAnimation[3]:
     serializedVersion: 2
-    rgba: 3029919487
+    rgba: 3036670616
   colorAnimation[4]:
     serializedVersion: 2
-    rgba: 173974713
+    rgba: 179938910
   worldRotationAxis: {x: 0, y: 0, z: 0}
   localRotationAxis: {x: 0, y: 0, z: 0}
   sizeGrow: 0
@@ -607,7 +607,27 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: colorAnimation[0].rgba
+      value: 15656151
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: colorAnimation[1].rgba
+      value: 3033314444
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: colorAnimation[2].rgba
+      value: 4294961337
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: colorAnimation[3].rgba
+      value: 3036670616
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: colorAnimation[4].rgba
+      value: 179938910
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
