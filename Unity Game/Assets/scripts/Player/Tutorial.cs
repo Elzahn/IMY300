@@ -90,7 +90,7 @@ public class Tutorial : MonoBehaviour {
 
 	public void leadTheWay(){
 		this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = false;
-		if (GameObject.Find ("Planet") != null && GameObject.Find ("Planet").GetComponent<LoadingScreen> ().loading == false) {
+//		if (GameObject.Find ("Planet") != null && GameObject.Find ("Planet").GetComponent<LoadingScreen> ().loading == false) {
 			//called to clear previous instruction if still on screen
 			setupVisuals ();
 			if (!sound.worldAudio.isPlaying) {
@@ -99,7 +99,7 @@ public class Tutorial : MonoBehaviour {
 				showRun = true;
 				sound.playComputerSound (Sounds.COMPUTER_RUN);
 			}
-		}
+		//}
 	}
 
 	public void lastWordsOfWisdom(){
@@ -134,11 +134,11 @@ public class Tutorial : MonoBehaviour {
 					GUI.DrawTexture (new Rect (Screen.width / 2 - 25, Screen.height - 45, 30, 40), Attack);
 				}
 			}
-			if (Time.time >= showVisualQue && GameObject.Find ("Planet") != null && GameObject.Find ("Planet").GetComponent<LoadingScreen>().loading == false) {
+			if (Time.time >= showVisualQue){// && GameObject.Find ("Planet") != null && GameObject.Find ("Planet").GetComponent<LoadingScreen>().loading == false) {
 				showVisuals = false;
-			} else if(GameObject.Find ("Planet") != null && GameObject.Find ("Planet").GetComponent<LoadingScreen>().loading == true){
+			}/* else if(GameObject.Find ("Planet") != null && GameObject.Find ("Planet").GetComponent<LoadingScreen>().loading == true){
 				showVisualQue = Time.time + showVisualDuration;
-			}
+			}*/
 		}
 	}
 }

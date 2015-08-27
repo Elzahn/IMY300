@@ -122,6 +122,8 @@ public class PlayerController : MonoBehaviour {
 			this.GetComponent<PlayerAttributes> ().restoreHealthToFull();
 			this.GetComponent<PlayerAttributes> ().restoreStaminaToFull();
 			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
+			this.GetComponent<SaveSpotTeleport> ().setExitConf(true);
+			Loot.gotPowerCore = true;
 		}
 
 		//skip loadingscreen

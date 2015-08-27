@@ -141,7 +141,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 664dd1e4992e75a41afd30c222095aed, type: 3}
       propertyPath: m_Name
-      value: ExitPlane
+      value: EntrancePlane
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 664dd1e4992e75a41afd30c222095aed, type: 3}
