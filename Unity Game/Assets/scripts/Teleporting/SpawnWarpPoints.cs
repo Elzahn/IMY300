@@ -19,8 +19,22 @@ public class SpawnWarpPoints : MonoBehaviour {
 		GameObject.Find("Planet").GetComponent<SpawnWarpPoints>().spawnTeleports();
 	}
 
+	public int amountWarpsPlaced(){
+		int done = 0;
+		for (int i = 0; i < 5; i++) {
+			done = 0;
+			foreach (GameObject warp in warpPoints) {
+				if (warp.GetComponent<Rigidbody>().constraints == RigidbodyConstraints.FreezeAll) {
+					done++;
+				}
+			}
+		}
+		
+		return done;
+	}
+
 	public bool wasPlaced(){
-		bool done = true;
+	/*	bool done = true;
 		foreach (GameObject warpPoint in warpPoints) {
 			if(done == true && warpPoint != null && warpPoint.GetComponent<Rigidbody>().constraints == RigidbodyConstraints.FreezeAll){
 				done = true;
@@ -30,6 +44,16 @@ public class SpawnWarpPoints : MonoBehaviour {
 		}
 		if (done ) {
 			print ("WarpPoints created");
+		}*/
+
+		bool done = true;
+		
+		for (int i = 0; i < 3; i++) {
+			if (amountWarpsPlaced () == TOTAL_WARPS && done == true) {
+				done = true;
+			} else {
+				done = false;
+			}
 		}
 
 		return done;

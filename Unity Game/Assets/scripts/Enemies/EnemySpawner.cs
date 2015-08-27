@@ -76,7 +76,16 @@ public class EnemySpawner : MonoBehaviour {
 
 	public bool hasEnemiesLanded(){
 		bool done = true;
-		foreach (GameObject enemy in enemies) {
+
+		for (int i = 0; i < 3; i++) {
+			if (amountEnemiesLanded () == ENEM_COUNT && done == true) {
+				done = true;
+			} else {
+				done = false;
+			}
+		}
+
+		/*foreach (GameObject enemy in enemies) {
 			if (done == true && enemy.GetComponent<PositionMe> ().touching == true) {
 				done = true;
 			} else {
@@ -86,6 +95,20 @@ public class EnemySpawner : MonoBehaviour {
 
 		if (done) {
 			print ("Enemies landed");
+		}
+		*/
+		return done;
+	}
+
+	public int amountEnemiesLanded(){
+		int done = 0;
+		for (int i=0; i < 5; i++) {
+			done = 0;
+			foreach (GameObject enemy in enemies) {
+				if (enemy.GetComponent<PositionMe> ().touching == true) {
+					done++;
+				}
+			}
 		}
 
 		return done;

@@ -11,7 +11,7 @@ public class SpawnTrees : MonoBehaviour {
 
 	public GameObject shrub;
 
-	int num_Trees = 300;
+	int num_Trees = 299;
 	
 	FauxGravityAttractor planet;
 	
@@ -21,16 +21,30 @@ public class SpawnTrees : MonoBehaviour {
 		planet = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
 		GameObject tree;
 
-		if (Application.loadedLevelName == "Tutorial") {
+		/*if (Application.loadedLevelName == "Tutorial") {
 			num_Trees = 6;
 		}  
-
+*/
 		//Spawn Trees
 		for (int i=0; i < num_Trees; ++i) {
 			int index = Random.Range (0, 4);
 			tree = chooseTree (index);
 			addTree (tree);
 		}
+	}
+
+	public int amountTreesLanded(){
+		int done = 0;
+		for (int i = 0; i < 5; i++) {
+			done = 0;
+			foreach (GameObject tree in trees) {
+				if (tree.GetComponent<Rigidbody>().constraints == RigidbodyConstraints.FreezeAll) {
+					done++;
+				}
+			}
+		}
+		
+		return done;
 	}
 
 	public void replaceHealth(Vector3 pos){
@@ -42,9 +56,19 @@ public class SpawnTrees : MonoBehaviour {
 	}
 	
 	public bool isTreesPlanted(){
-		bool done = true;
+		/*bool done = true;
 		foreach (GameObject tree in trees) {
 			if(done == true && tree.GetComponent<Rigidbody>().constraints == RigidbodyConstraints.FreezeAll){
+				done = true;
+			} else {
+				done = false;
+			}
+		}*/
+
+		bool done = true;
+		
+		for (int i = 0; i < 3; i++) {
+			if (amountTreesLanded () == num_Trees && done == true) {
 				done = true;
 			} else {
 				done = false;

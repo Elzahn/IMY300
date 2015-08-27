@@ -17,8 +17,22 @@ public class SpawnHealthPacks : MonoBehaviour {
 		spawn ();
 	}
 
+	public int amountHealthLanded(){
+		int done = 0;
+		for (int i = 0; i < 5; i++) {
+			done = 0;
+			foreach (GameObject pack in healthPacks) {
+				if (pack.GetComponent<Rigidbody>().constraints == RigidbodyConstraints.FreezeAll) {
+					done++;
+				}
+			}
+		}
+		
+		return done;
+	}
+
 	public bool hasHealthLanded(){
-		bool done = true;
+		/*bool done = true;
 		foreach (GameObject healthPack in healthPacks) {
 			if (done && healthPack.GetComponent<Rigidbody> ().constraints == RigidbodyConstraints.FreezeAll) {
 				done = true;
@@ -28,7 +42,18 @@ public class SpawnHealthPacks : MonoBehaviour {
 		}
 		if (done) {
 			print ("Healthpacks placed");
+		}*/
+
+		bool done = true;
+		
+		for (int i = 0; i < 3; i++) {
+			if (amountHealthLanded () == TOTAL_HEALTH && done == true) {
+				done = true;
+			} else {
+				done = false;
+			}
 		}
+
 		return done;
 	}
 
