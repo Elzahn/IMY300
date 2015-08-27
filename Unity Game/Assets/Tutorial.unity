@@ -139,6 +139,18 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: .119238608
       objectReference: {fileID: 0}
+    - target: {fileID: 10800000, guid: 82e89607de692fa40b42305b92cc580c, type: 2}
+      propertyPath: m_Color.r
+      value: .828358173
+      objectReference: {fileID: 0}
+    - target: {fileID: 10800000, guid: 82e89607de692fa40b42305b92cc580c, type: 2}
+      propertyPath: m_Color.g
+      value: .95738548
+      objectReference: {fileID: 0}
+    - target: {fileID: 10800000, guid: 82e89607de692fa40b42305b92cc580c, type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 82e89607de692fa40b42305b92cc580c, type: 2}
   m_IsPrefabParent: 0
@@ -214,12 +226,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d859ac3fe543df498db9b94586cd024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainManager: {fileID: 0}
-  m_vDirection: {x: 0, y: 0, z: 0}
-  m_vColor: {x: 0, y: 0, z: 0}
-  domeRadius: 0
-  m_fTheta: 0
-  m_fPhi: 0
 --- !u!1 &1000693437 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 146316, guid: af5bd7626fb83d64489a9124c04d10f9, type: 2}
