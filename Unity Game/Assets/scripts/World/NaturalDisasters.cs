@@ -59,12 +59,8 @@ public class NaturalDisasters : MonoBehaviour {
 				shake = -1;
 				playerScript.paused = false;
 			} else if(Time.time >= tutorialShake){
-				if(!spawnTrees.isTreesPlanted()){
-					tutorialShake += 3;
-				} else {
-					shake -= 1;
-					playerScript.paused = false;
-				}
+				shake -= 1;
+				playerScript.paused = false;
 			}
 		} else if (spin > 0) {
 			cameraTransform.Rotate (5, 10, 5);

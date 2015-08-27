@@ -105,7 +105,7 @@ public class LoadingScreen : MonoBehaviour {
 			} else if(Time.time > removeLoadingScreen && loading){
 				loading = false;
 				GameObject.Find ("Player").GetComponent<Rigidbody> ().isKinematic = false;
-				GameObject.Find ("Player").transform.position = new Vector3 (-4.17f, 78.85f, 2.17f);
+				GameObject.Find ("Player").transform.position = new Vector3 (0.304f, 80.394f, 0.207f);//(-4.17f, 78.85f, 2.17f);
 			} else {
 				texture = WarpPlayer;
 				loaderPos = Time.time * 0.035f;

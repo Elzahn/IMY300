@@ -2975,7 +2975,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1463609512
 Transform:
   m_ObjectHideFlags: 0
@@ -3127,7 +3127,6 @@ GameObject:
   - 65: {fileID: 1557658595}
   - 65: {fileID: 1557658596}
   - 65: {fileID: 1557658597}
-  - 65: {fileID: 1557658599}
   - 65: {fileID: 1557658601}
   - 65: {fileID: 1557658600}
   - 65: {fileID: 1557658602}
@@ -3295,18 +3294,6 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!65 &1557658599
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1557658586}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 31.1000004, y: 63.3948288, z: .226370037}
-  m_Center: {x: -159.899994, y: .979233265, z: 6.49410629}
 --- !u!65 &1557658600
 BoxCollider:
   m_ObjectHideFlags: 0

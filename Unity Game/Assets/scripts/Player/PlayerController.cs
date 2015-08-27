@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour {
 	}*/
 
 	void Start(){
+		//transform.rotation = Quaternion.identity;
 		playerAttributes = this.GetComponent<PlayerAttributes> ();
 		paused = false;
 		showDeath = false;
@@ -106,8 +107,7 @@ public class PlayerController : MonoBehaviour {
 			sound.stopSound ("computer");
 			Application.LoadLevel ("Tutorial");
 			this.transform.position = new Vector3(0, 15.757576f, -0.327f);
-		} else if (Input.GetKeyDown (KeyCode.Tab) && Application.loadedLevelName == "Tutorial")
-		{
+		} else if (Input.GetKeyDown (KeyCode.Tab) && Application.loadedLevelName == "Tutorial"){
 			this.GetComponent<Tutorial> ().tutorialDone = true;
 			this.GetComponent<Tutorial> ().teachInventory = true;
 			this.GetComponent<SaveSpotTeleport>().loadTutorial = false;
@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour {
 			Application.LoadLevel ("SaveSpot");
 			Resources.UnloadUnusedAssets();
 			//this.transform.position = new Vector3 (-27.01f, 79.65f, 1.93f);
-			this.transform.position = new Vector3 (9.4f, 81.38f, 6.62f);
+			this.transform.position = new Vector3 (13.72f, 81.58f, 14.77f);//(9.4f, 81.38f, 6.62f);
 			this.transform.rotation = new Quaternion(0, 0.7f, 0, 0.7f);
 			this.GetComponent<Rigidbody> ().mass = 100f;
 			this.GetComponent<PlayerAttributes> ().restoreHealthToFull();
@@ -141,10 +141,10 @@ public class PlayerController : MonoBehaviour {
 			this.GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
 			this.GetComponent<SaveSpotTeleport>().loadTutorial = false;
 			//GameObject.Find("Player").transform.position = new Vector3(9.41f, 79.19f, 7.75f);
-			GameObject.Find("Player").transform.position = new Vector3 (9.4f, 81.38f, 6.62f);
+			GameObject.Find("Player").transform.position = new Vector3 (13.72f, 81.58f, 14.77f);//(9.4f, 81.38f, 6.62f);
 			Application.LoadLevel("SaveSpot");
 			this.GetComponent<Rigidbody>().mass = 1000;
-			print ("Tutorial skipped you can now use the teleporter again.");
+			//print ("Tutorial skipped you can now use the teleporter again.");
 		} else if(Input.GetKeyDown(KeyCode.Escape) && !this.GetComponent<Tutorial>().startTutorial){
 			showQuit = true;
 		}
@@ -233,12 +233,14 @@ public class PlayerController : MonoBehaviour {
 				//soundPlays = false;
 			}
 
-			if (playerAttributes.dizzy) {
-				//moveDir = new Vector3 (Input.GetAxisRaw ("Vertical"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Horizontal")).normalized;
-				moveDir = new Vector3 (Input.GetAxisRaw ("Vertical"), 0, Input.GetAxisRaw ("Horizontal")).normalized;
-			} else {
-				//moveDir = new Vector3 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Vertical")).normalized;
-				moveDir = new Vector3 (Input.GetAxisRaw ("Horizontal"), 0, Input.GetAxisRaw ("Vertical")).normalized;
+			if(!Camera.main.GetComponent<CameraControl>().birdsEye){
+				if (playerAttributes.dizzy) {
+					//moveDir = new Vector3 (Input.GetAxisRaw ("Vertical"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Horizontal")).normalized;
+					moveDir = new Vector3 (Input.GetAxisRaw ("Vertical"), 0, Input.GetAxisRaw ("Horizontal")).normalized;
+				} else {
+					//moveDir = new Vector3 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Vertical")).normalized;
+					moveDir = new Vector3 (Input.GetAxisRaw ("Horizontal"), 0, Input.GetAxisRaw ("Vertical")).normalized;
+				}
 			}
 
 			/*if (Input.GetAxisRaw ("Jump") == 1) {
@@ -247,7 +249,7 @@ public class PlayerController : MonoBehaviour {
 
 
 			if ((Input.GetAxis ("Vertical") != 0 || Input.GetAxisRaw ("Horizontal") != 0) 
-				&& !soundPlays) {
+				&& !soundPlays && !Camera.main.GetComponent<CameraControl>().birdsEye) {
 				soundPlays = true;
 				moving = true;
 
