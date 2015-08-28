@@ -20,7 +20,7 @@ public class Tutorial : MonoBehaviour {
 
 	public Texture2D Attack;
 
-	private int showVisualDuration = 5;
+	private int showVisualDuration = 7;
 
 	// Use this for initialization
 	void Start () {
@@ -37,19 +37,40 @@ public class Tutorial : MonoBehaviour {
 
 	// Used to determine what happens next in the tutorial
 	void Update () {
-		if (startTutorial) {
-			if(justStarted){
-				playIntro();
+		if (this.GetComponent<PlayerController> ().paused) {
+			sound.pauseSound("all");
+			GameObject[] monsters =  GameObject.FindGameObjectsWithTag("Monster");
+
+			foreach(GameObject m in monsters){
+				sound.pauseMonsterSound(m.GetComponent<Enemy>());
 			}
 
-			if(Application.loadedLevelName == "Tutorial" && !justArrivedOnPlanet){
-				leadTheWay();
-			}
-
-			if(Application.loadedLevelName == "SaveSpot" && tutorialDone && !sound.worldAudio.isPlaying){
-				lastWordsOfWisdom();
+			showVisualQue = Time.time + showVisualDuration;
+		} else {
+			sound.resumeSound("all");
+			GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
+			foreach(GameObject m in monsters){
+				if(m.GetComponent<Enemy>().GetComponent<AudioSource> () != null){
+					sound.resumeMonsterSound(m.GetComponent<Enemy>());
+				}
 			}
 		}
+
+		if (startTutorial) {
+			if (justStarted) {
+				playIntro ();
+			}
+
+		if (Application.loadedLevelName == "Tutorial" && !justArrivedOnPlanet) {
+				leadTheWay ();
+		}
+		
+		if (Application.loadedLevelName == "SaveSpot" && tutorialDone && !sound.worldAudio.isPlaying) {
+			lastWordsOfWisdom ();
+			}
+		}
+		//} else {
+
 	}
 
 	public void stopTutorial(){
@@ -62,16 +83,21 @@ public class Tutorial : MonoBehaviour {
 
 	public void playIntro(){
 		//show cutcenes
+		if (!this.GetComponent<PlayerController> ().paused) {
+			sound.resumeSound("all");
 
-		if(!sound.computerAudio.isPlaying && sound.computerClip != Sounds.COMPUTER_WARP){
-			sound.playComputerSound(Sounds.COMPUTER_WARP);
-			setupVisuals();
-			showWASD = true;
-		}
+			if(!sound.computerAudio.isPlaying && sound.computerClip != Sounds.COMPUTER_WARP){
+				sound.playComputerSound(Sounds.COMPUTER_WARP);
+				setupVisuals();
+				showWASD = true;
+			}
 
-		if(!sound.computerAudio.isPlaying){
-	//		this.GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
-			justStarted = false;
+			if(!sound.computerAudio.isPlaying){
+		//		this.GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
+				justStarted = false;
+			}
+		} else {
+			sound.pauseSound("all");
 		}
 	}
 
@@ -89,24 +115,45 @@ public class Tutorial : MonoBehaviour {
 	}
 
 	public void leadTheWay(){
-		this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = false;
-//		if (GameObject.Find ("Planet") != null && GameObject.Find ("Planet").GetComponent<LoadingScreen> ().loading == false) {
-			//called to clear previous instruction if still on screen
-			setupVisuals ();
-			if (!sound.worldAudio.isPlaying) {
-				justArrivedOnPlanet = true;
-				setupVisuals ();
-				showRun = true;
-				sound.playComputerSound (Sounds.COMPUTER_RUN);
+		if (!this.GetComponent<PlayerController> ().paused) {
+			sound.resumeSound("all");
+			GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
+			foreach(GameObject m in monsters){
+				if(m.GetComponent<Enemy>().GetComponent<AudioSource> () != null){
+					sound.resumeMonsterSound(m.GetComponent<Enemy>());
+				}
 			}
-		//}
+
+			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = false;
+	//		if (GameObject.Find ("Planet") != null && GameObject.Find ("Planet").GetComponent<LoadingScreen> ().loading == false) {
+				//called to clear previous instruction if still on screen
+				setupVisuals ();
+				if (!sound.worldAudio.isPlaying) {
+					justArrivedOnPlanet = true;
+					setupVisuals ();
+					showRun = true;
+					sound.playComputerSound (Sounds.COMPUTER_RUN);
+				}
+			//}
+		} else {
+			sound.pauseSound("all");
+			GameObject[] monsters =  GameObject.FindGameObjectsWithTag("Monster");
+			foreach(GameObject m in monsters){
+				sound.pauseMonsterSound(m.GetComponent<Enemy>());
+			}
+		}
 	}
 
 	public void lastWordsOfWisdom(){
-		//cut scene
-		teachStorage = true;
-		startTutorial = false;
-		this.GetComponent<SaveSpotTeleport> ().loadTutorial = false;
+		if (!this.GetComponent<PlayerController> ().paused) {
+			sound.resumeSound("all");
+			//cut scene
+			teachStorage = true;
+			startTutorial = false;
+			this.GetComponent<SaveSpotTeleport> ().loadTutorial = false;
+		} else {
+			sound.pauseSound("all");
+		}
 	}
 	
 	public void OnGUI(){

@@ -29,6 +29,7 @@ public class LoadingScreen : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		temp = 0;
+		texture = TrainMonsters;
 		loading = true;
 		loaderPos = 0;
 		monstersLoaded = false;
@@ -49,7 +50,6 @@ public class LoadingScreen : MonoBehaviour {
 		if (Application.loadedLevelName == "Scene") {
 
 			GameObject planet = GameObject.Find ("Planet");
-
 
 			if(planet.GetComponent<EnemySpawner> ().hasEnemiesLanded() == false && !monstersLoaded){
 				texture = TrainMonsters;

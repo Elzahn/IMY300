@@ -77,7 +77,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 			Application.LoadLevel("Tutorial");
 			showExitConfirmation = false;
 			loadTutorial = false;
-			this.transform.position = new Vector3(0, 15.757576f, -0.327f);
+			this.transform.position = new Vector3(0, 15.74075f, -0.327f);
 			Resources.UnloadUnusedAssets();
 		}else if (showEntranceConfirmation && Input.GetKeyDown (KeyCode.E) && Application.loadedLevelName != "Tutorial") {
 			//showExitConfirmation = true;

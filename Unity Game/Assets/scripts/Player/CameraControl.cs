@@ -52,6 +52,10 @@ public class CameraControl : MonoBehaviour {
 			
 			//Seek on planet
 			if (Input.GetMouseButtonDown (2) && Application.loadedLevelName != "SaveSpot") {		//middle  
+				if(player.GetComponent<PlayerController>().moveDir != Vector3.zero){
+					player.GetComponent<PlayerController>().moveDir = Vector3.zero;
+				}
+
 				originalPosition = this.transform.position;
 				originalRotation = this.transform.rotation;
 
@@ -75,6 +79,8 @@ public class CameraControl : MonoBehaviour {
 				this.transform.position = originalPosition;
 				this.transform.rotation = originalRotation;
 
+				//player.GetComponent<PlayerController>().playAnimation();
+				
 				birdsEye = false;
 			}
 		}

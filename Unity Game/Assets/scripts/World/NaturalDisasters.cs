@@ -12,7 +12,7 @@ public class NaturalDisasters : MonoBehaviour {
 	private Vector3 originalCamPos;
 	private Quaternion originalCamRotation;
 	private bool spinningDone, earthquakeDone;	//set to ensure that game isn't resumed entire time
-	private float tutorialShake;
+	private float tutorialShake, cheatSpin;
 
 	public bool isShaking(){
 		if (shake > 0) {
@@ -66,24 +66,40 @@ public class NaturalDisasters : MonoBehaviour {
 			cameraTransform.Rotate (5, 10, 5);
 			//spin -= Time.deltaTime * decreaseFactor;
 			nextDisaster = Time.time + delay;
-			if (spawnTrees.isTreesPlanted () && GameObject.Find ("Planet").GetComponent<EnemySpawner> ().hasEnemiesLanded ()) {
+			if(cheatSpin == 0){
+				cheatSpin = Time.time + 3;
+			}
+
+			if (Application.loadedLevelName == "Scene" && spawnTrees.isTreesPlanted () && GameObject.Find ("Planet").GetComponent<EnemySpawner> ().hasEnemiesLanded ()) {
 				spin = -1;
 				playerScript.paused = false;
+			} else if(Application.loadedLevelName == "Tutorial"){
+				if(Time.time >= cheatSpin)
+				{
+					spin = -1;
+				}
 			}
 		} else if ((shake <= 0 && earthquakeDone) || (spin <= 0 && spinningDone)) {
 			GameObject.Find ("Player").GetComponent<Sounds> ().stopSound ("world");
-			spin = 0f;
-			shake = 0f;	
-			cameraTransform.localPosition = originalCamPos;
-			//playerScript.paused = false;
-			cameraTransform.localRotation = originalCamRotation;
+			if(shake < 0 || spin < 0)
+			{
+				spin = 0f;
+				shake = 0f;	
+				cheatSpin = 0f;
+
+				cameraTransform.localPosition = originalCamPos;
+				playerScript.paused = false;
+				cameraTransform.localRotation = originalCamRotation;
+			}
 		}
 
-		if (Application.loadedLevelName != "Tutorial" || spinNow || earthquakeNow) {
-			if (!playerScript.paused) {
+		//if (spinNow || earthquakeNow) {
+			if (!playerScript.paused && !Camera.main.GetComponent<CameraControl>().birdsEye) {
 				var playerAttributes = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
+
 				if (playerAttributes.dizzy && Time.time >= dizzyWearOfNext) {
 					playerAttributes.dizzy = false;
+					dizzyWearOfNext = 0;
 				}
 
 				if (Time.time >= nextDisaster - 10) {
@@ -98,8 +114,8 @@ public class NaturalDisasters : MonoBehaviour {
 					int chance = Random.Range (0, 101);
 
 					//moved chance to the back so cheats get preferance
-					if (earthquakeNow || spinNow || chance <= 20) {	//Earthquake
-						if (earthquakeNow || chance <= 10) {
+					if (earthquakeNow || spinNow || chance <= 20) {
+						if (earthquakeNow || chance <= 10) {	//Earthquake
 							GameObject.Find ("Player").GetComponent<Sounds> ().playWorldSound (Sounds.EARTHQUAKE);
 							shake = 2f;
 							tutorialShake = Time.time + 3;
@@ -113,7 +129,7 @@ public class NaturalDisasters : MonoBehaviour {
 							for (int i = 0; i < gameObjects.Length; i++) {
 								if ((gameObjects [i].name != "Sphere001" && gameObjects [i].name != "Cylinder001") && (gameObjects [i].transform.localScale.y > gameObjects [i].transform.localScale.x) && (gameObjects [i].GetComponent<FauxGravityBody> ().getRotateMe () == true)) { //if it is taller than it is wide
 									chance = Random.Range (0, 101);
-									if (chance <= 30 || earthquakeNow) {	//chance of falling over
+									if (chance <= 30){// || earthquakeNow) {	//chance of falling over
 										gameObjects [i].GetComponent<FauxGravityBody> ().setRotateMe ();
 										gameObjects [i].GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
 										gameObjects [i].transform.Rotate (new Vector3 (gameObjects [i].transform.rotation.x + Random.Range (-90, 91), gameObjects [i].transform.rotation.y + Random.Range (-90, 91), gameObjects [i].transform.rotation.z + Random.Range (-90, 91)));	//fall over 
@@ -124,15 +140,16 @@ public class NaturalDisasters : MonoBehaviour {
 							earthquakeNow = false;
 							//checking for collision when falling in collision file
 									
-							print ("Earth quake!");
+							//print ("Earth quake!");
 						} else if (spinNow || chance > 10) {	//Spin
 							GameObject.Find ("Player").GetComponent<Sounds> ().playWorldSound (Sounds.SPINNING_WIND);
 							spin = 2f;
 
 							//if (!playerScript.jumping) {
+							if(dizzyWearOfNext != 0){	
 								playerAttributes.dizzy = true;
 								dizzyWearOfNext = Time.time + dizzyDelay;
-							//}
+							}
 
 							GameObject[] objectsToBeMoved = GameObject.FindGameObjectsWithTag ("WorldObject");	
 							GameObject[] enemiesToBeMoved = GameObject.FindGameObjectsWithTag ("Monster");	
@@ -167,14 +184,14 @@ public class NaturalDisasters : MonoBehaviour {
 
 							spinningDone = true;
 							spinNow = false;
-							print ("Spinning around and around");
+							//print ("Spinning around and around");
 						}
 					}
-				}
-			} else {
-				nextDisaster = Time.time + delay;	//just so that natural disasters can't occure while game is paused
-				dizzyWearOfNext = Time.time + dizzyDelay;
-			}
+		//		}
+			} 
+		} else {
+			nextDisaster = Time.time + delay;	//just so that natural disasters can't occure while game is paused
+			dizzyWearOfNext = Time.time + dizzyDelay;
 		}
 	}
 }

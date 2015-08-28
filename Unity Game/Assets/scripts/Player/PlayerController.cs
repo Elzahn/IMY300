@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
 	public const float RUN_MULT = 2f;
 
 	private float moveSpeed;
-	private Vector3 moveDir;
+	public Vector3 moveDir{ get; set; }
 
 	/**
 	 * Access 'jumping' like normal variable, do not use '_jumping' ever!
@@ -105,8 +105,9 @@ public class PlayerController : MonoBehaviour {
 			//this.transform.position = new Vector3 (0f, 15.03f, 0);
 			//this.transform.position = new Vector3(-0.01f, 16.149f, -0.27f);
 			sound.stopSound ("computer");
+			this.transform.position = new Vector3(0, 15.74075f, -0.327f);
 			Application.LoadLevel ("Tutorial");
-			this.transform.position = new Vector3(0, 15.757576f, -0.327f);
+
 		} else if (Input.GetKeyDown (KeyCode.Tab) && Application.loadedLevelName == "Tutorial"){
 			this.GetComponent<Tutorial> ().tutorialDone = true;
 			this.GetComponent<Tutorial> ().teachInventory = true;
@@ -174,12 +175,12 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		//Spin cheat
-		if(Input.GetKeyDown(KeyCode.F5) && Application.loadedLevelName == "Scene"){
+		if(Input.GetKeyDown(KeyCode.F5) && Application.loadedLevelName != "SaveSpot"){
 			GameObject.Find("Planet").GetComponent<NaturalDisasters>().spinPlanetNow();
 		}
 		
 		//Earthquake cheat
-		if(Input.GetKeyDown(KeyCode.F6) && Application.loadedLevelName == "Scene"){
+		if(Input.GetKeyDown(KeyCode.F6) && Application.loadedLevelName != "SaveSpot"){
 			GameObject.Find("Planet").GetComponent<NaturalDisasters>().makeEarthQuakeHappen();
 		}
 
@@ -268,7 +269,6 @@ public class PlayerController : MonoBehaviour {
 				}
 			} else {
 				if ((Input.GetAxis ("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0)) {
-
 					if (Input.GetAxis ("Vertical") == 0 && Input.GetAxis("Horizontal") < 0){
 						this.GetComponent<Animator>().SetBool("MovingLeft", moving);
 						this.GetComponent<Animator>().SetBool("MovingRight", false);

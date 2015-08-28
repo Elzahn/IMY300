@@ -117,8 +117,12 @@ public class Sounds : MonoBehaviour {
 				if(GameObject.Find("Planet") != null && GameObject.Find("Planet").GetComponent<EnemySpawner>() != null){
 					GameObject.Find("Planet").GetComponent<EnemySpawner>().resumeEnemySound();
 				}
-			//JUST FOR TESTING
-			computerAudio = GameObject.Find ("Computer Audio").GetComponent<AudioSource> ();
+				
+				ambienceAudio = GameObject.Find("Ambience Audio").GetComponent<AudioSource>();
+				ambienceAudio.UnPause ();
+
+				//JUST FOR TESTING
+				computerAudio = GameObject.Find ("Computer Audio").GetComponent<AudioSource> ();
 				computerAudio.UnPause();
 				break;
 			}
@@ -152,6 +156,9 @@ public class Sounds : MonoBehaviour {
 					GameObject.Find("Planet").GetComponent<EnemySpawner>().pauseEnemySound();
 				}
 				
+				ambienceAudio = GameObject.Find("Ambience Audio").GetComponent<AudioSource>();
+				ambienceAudio.Pause ();
+	
 				computerAudio.Pause();
 				break;
 			}
@@ -177,8 +184,12 @@ public class Sounds : MonoBehaviour {
 		}
 		default:
 		{
+			ambienceAudio = GameObject.Find("Ambience Audio").GetComponent<AudioSource>();
+			ambienceAudio.Stop ();
+
 			characterAudio = GameObject.Find ("Character Audio").GetComponent<AudioSource> ();
 			characterAudio.Stop ();
+
 			if(worldClip == SHIP_DOOR || worldClip == HEALTH_COLLECTION || worldClip == WARPING){
 				worldAudio.Stop ();
 			}
