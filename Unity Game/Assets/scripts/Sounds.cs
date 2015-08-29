@@ -212,7 +212,9 @@ public class Sounds : MonoBehaviour {
 	}
 
 	public void resumeMonsterSound(Enemy monster){
-		monster.GetComponent<AudioSource> ().UnPause();
+		if (monster.GetComponent<AudioSource> () != null) {
+			monster.GetComponent<AudioSource> ().UnPause ();
+		}
 	}
 
 

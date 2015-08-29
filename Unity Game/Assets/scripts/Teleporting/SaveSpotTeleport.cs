@@ -54,6 +54,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 			//this.transform.position = new Vector3 (-27.01f, 79.65f, 1.93f);
 			this.transform.position = new Vector3 (13.72f, 81.58f, 14.77f);//(9.4f, 81.38f, 6.62f);
 			sound.playWorldSound(Sounds.SHIP_DOOR);
+			this.GetComponent<LevelSelect>().currentLevel++;
 			Application.LoadLevel ("SaveSpot");
 			Resources.UnloadUnusedAssets();
 		} else if (showExitConfirmation && Input.GetKeyDown (KeyCode.E) && !loadTutorial) {
@@ -74,6 +75,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 			//this.transform.position = new Vector3(0f, 15.03f, 0);
 			//this.transform.position = new Vector3(-0.01f, 16.149f, -0.27f);
 			sound.stopSound("computer");
+			this.GetComponent<LevelSelect>().currentLevel = 0;
 			Application.LoadLevel("Tutorial");
 			showExitConfirmation = false;
 			loadTutorial = false;
@@ -89,6 +91,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 			//this.transform.position = new Vector3 (-27.01f, 79.65f, 1.93f);
 			this.transform.position = new Vector3 (13.72f, 81.58f, 14.77f);//(9.4f, 81.38f, 6.62f);
 			sound.playWorldSound(Sounds.SHIP_DOOR);
+			this.GetComponent<LevelSelect>().currentLevel++;
 			Application.LoadLevel ("SaveSpot");
 			Resources.UnloadUnusedAssets();
 		}

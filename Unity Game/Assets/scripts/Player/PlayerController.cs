@@ -114,6 +114,7 @@ public class PlayerController : MonoBehaviour {
 			this.GetComponent<SaveSpotTeleport>().loadTutorial = false;
 			sound.playWorldSound (Sounds.SHIP_DOOR);
 			sound.stopSound ("computer");
+			this.GetComponent<LevelSelect>().currentLevel++;
 			Application.LoadLevel ("SaveSpot");
 			Resources.UnloadUnusedAssets();
 			//this.transform.position = new Vector3 (-27.01f, 79.65f, 1.93f);
@@ -144,6 +145,7 @@ public class PlayerController : MonoBehaviour {
 			this.GetComponent<SaveSpotTeleport>().loadTutorial = false;
 			//GameObject.Find("Player").transform.position = new Vector3(9.41f, 79.19f, 7.75f);
 			GameObject.Find("Player").transform.position = new Vector3 (13.72f, 81.58f, 14.77f);//(9.4f, 81.38f, 6.62f);
+			this.GetComponent<LevelSelect>().currentLevel++;
 			Application.LoadLevel("SaveSpot");
 			this.GetComponent<Rigidbody>().mass = 1000;
 			//print ("Tutorial skipped you can now use the teleporter again.");
