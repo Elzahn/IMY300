@@ -444,6 +444,7 @@ GameObject:
   - 114: {fileID: 1218453607}
   - 114: {fileID: 1218453610}
   - 114: {fileID: 1218453609}
+  - 114: {fileID: 1218453611}
   m_Layer: 0
   m_Name: Planet
   m_TagString: Untagged
@@ -617,3 +618,17 @@ MonoBehaviour:
   tree2: {fileID: 192690, guid: 5ab5c00ab5a6eb6479185f29ecca772a, type: 2}
   tree3: {fileID: 196340, guid: 177742eb57cf7b34c8501cdf4c2ed906, type: 2}
   shrub: {fileID: 174706, guid: 7935d09b08b8d5d4a9814da53f31aad4, type: 2}
+--- !u!114 &1218453611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1218453598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87d49373f5ccfb8479bdf91ddfde9beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materials:
+  - {fileID: 2100000, guid: 69c44fa93bd0632489a374e04e67b352, type: 2}
+  - {fileID: 2100000, guid: 80e74e48197d39f40ae37ce5200f4e2d, type: 2}
