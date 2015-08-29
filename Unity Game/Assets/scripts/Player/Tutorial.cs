@@ -27,7 +27,7 @@ public class Tutorial : MonoBehaviour {
 		this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 		showVisuals = true;
 		showAttack = false;
-		print ("Press Escape to skip Tutorial");
+		//print ("Press Escape to skip Tutorial");
 		startTutorial = true;
 		tutorialDone = false;
 		teachStorage = false;

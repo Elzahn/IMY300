@@ -131,7 +131,8 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.L) && Application.loadedLevelName == "Scene") {
 			GameObject.Find("Planet").GetComponent<LoadingScreen>().loading = false;
 			//this.transform.position = new Vector3(9.41f, 79.19f, 7.75f);
-			this.transform.position = new Vector3(0.32f, 80.37f, 032f);
+			this.transform.position = new Vector3 (0.304f, 80.394f, 0.207f);//(0.32f, 80.37f, 032f);
+			this.GetComponent<Rigidbody>().isKinematic = false;
 		}
 
 		//build cheat to skip cutscenes
