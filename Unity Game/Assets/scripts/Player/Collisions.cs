@@ -76,12 +76,12 @@ public class Collisions : MonoBehaviour {
 		if (col.collider.tag == "WorldObject" && NaturalDisasters.shake > 0) {
 			int healthToLose = (int)(playerAttributesScript.hp * 0.02);
 			playerAttributesScript.loseHP (healthToLose);//loses 2% health when hit
-			PlayerLog.addStat ("A tree fell on you. You lose " + healthToLose + " health");
+			//PlayerLog.addStat ("A tree fell on you. You lose " + healthToLose + " health");
 		} else  //Lose health if you run into something that you can't interact with, walk/run on and isn't a monster
 		if (playerScript.run && col.collider.name != "Storage" && col.collider.name != "ExitPlane" && col.collider.name != "EntrancePlane" && col.collider.name != "Ship_interior" && col.collider.name != "Planet" && col.collider.tag != "Monster" && col.collider.tag != "WarpPoint" && col.collider.tag != "MediumHealthPack" && col.collider.tag != "LargeHealthPack") {
 			int healthToLose = (int)(playerAttributesScript.hp * 0.02);
 			playerAttributesScript.loseHP (healthToLose);//loses 2% health when running into something
-			PlayerLog.addStat ("You lose " + healthToLose + " health by running into something");
+			//PlayerLog.addStat ("You lose " + healthToLose + " health by running into something");
 			if (playerAttributesScript.gender == 'f') {
 				this.GetComponent<Sounds> ().playCharacterSound (Sounds.FEMALE_HURT);
 			} else {

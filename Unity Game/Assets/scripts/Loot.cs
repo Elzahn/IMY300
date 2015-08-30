@@ -20,6 +20,7 @@ public class Loot : MonoBehaviour {
 	}
 
 	public void storeLoot(LinkedList<InventoryItem> tempLoot, string name){
+		print ("F");
 		myName = name;
 		foreach (InventoryItem item in tempLoot) {
 			myLoot.AddLast(item);

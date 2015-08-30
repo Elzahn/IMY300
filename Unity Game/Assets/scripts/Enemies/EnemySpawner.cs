@@ -29,6 +29,15 @@ public class EnemySpawner : MonoBehaviour {
 
 	LinkedList<GameObject> enemies = new LinkedList <GameObject> ();
 
+	public string enemiesStats(){
+		string temp = "Enemies left: " + enemies.Count ();
+		temp += "\nEnemies dead: " + (ENEM_COUNT - enemies.Count ()) + "\n";
+
+		temp += "\n";//for split between monster and player stats
+
+		return temp;
+	}
+
 	// Use this for initialization
 	public void spawnEnemies (int enemy_count) {	//Previously know as Start
 		ENEM_COUNT = enemy_count;
@@ -165,7 +174,7 @@ public class EnemySpawner : MonoBehaviour {
 
 	public void position(GameObject go){
 		go.GetComponent<PositionMe> ().touching = false;
-		go.GetComponent<PositionMe>().checkMyPosition = false;
+		//go.GetComponent<PositionMe>().checkMyPosition = false;
 		Vector3 position;
 		bool landed = false;
 		
@@ -185,7 +194,7 @@ public class EnemySpawner : MonoBehaviour {
 			if(tempList.Count() == 0){
 				go.GetComponent<Rigidbody> ().position = position;
 				GameObject.Find(go.name).GetComponent<PositionMe>().timeToCheckMyPosition = Time.time;
-				GameObject.Find(go.name).GetComponent<PositionMe>().checkMyPosition = true;
+				//GameObject.Find(go.name).GetComponent<PositionMe>().checkMyPosition = true;
 				return;
 			}
 		}

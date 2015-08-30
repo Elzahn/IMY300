@@ -4,15 +4,17 @@ using System.Collections.Generic;
 
 public class PlayerLog : MonoBehaviour {
 
-	public static int maxLines = 24;
-	public static Queue<string> queue = new Queue<string>();
-	public static string stats = "";
-	public static bool showLog = true;
+	//private static int maxLines = 24;
+	private static Queue<string> queue = new Queue<string>();
+	private static string stats = "";
+	public static bool showLog{ get; set;}
 
 	public static void addStat(string message) {
-		if (queue.Count >= maxLines)
-			queue.Dequeue();
-		
+	/*	if (queue.Count >= maxLines) {
+			queue.Dequeue ();
+		}*/
+		queue.Clear ();
+
 		queue.Enqueue(message);
 		
 		stats = "";

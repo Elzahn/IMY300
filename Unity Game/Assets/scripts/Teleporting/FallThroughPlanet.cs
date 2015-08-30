@@ -27,7 +27,7 @@ public class FallThroughPlanet : MonoBehaviour {
 					transform.position = new Vector3 (-pos.x, -pos.y, -pos.z);
 					this.GetComponent<Sounds>().playWorldSound(Sounds.WARPING);
 					print ("Cooldown of 10 seconds"); 	//show that waiting
-					PlayerLog.addStat("Cooldown of 10 seconds");
+					//PlayerLog.addStat("Cooldown of 10 seconds");
 				} 
 			}
 
@@ -35,11 +35,11 @@ public class FallThroughPlanet : MonoBehaviour {
 				nextUsage = Time.time + delay;
 				canFallThroughPlanet = true;
 				print ("Recharged!");	//show when done waiting
-				PlayerLog.addStat("Recharged!");
+			//	PlayerLog.addStat("Recharged!");
 			}
 		} else if(Input.GetKeyDown (KeyCode.F) && fallThroughPlanetUnlocked == false){
 			print ("You have not unlocked the power to fall through the planet yet (Mapped to F)");
-			PlayerLog.addStat("You have not unlocked the power to fall through the planet yet (Mapped to F)");
+			//PlayerLog.addStat("You have not unlocked the power to fall through the planet yet (Mapped to F)");
 		}
 	}
 }

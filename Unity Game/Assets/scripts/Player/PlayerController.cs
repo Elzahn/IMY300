@@ -205,9 +205,11 @@ public class PlayerController : MonoBehaviour {
 		 * P Pauses or unpausese
 		 * Only if showpause the same as pause.
 		 * */
-		if (Input.GetKeyDown (KeyCode.P) && paused == showPaused) {
-			paused = !paused;
-			showPaused = paused;			
+		if (Input.GetKeyDown (KeyCode.P) && paused == showPaused){
+			if(Application.loadedLevelName != "Scene" || (Application.loadedLevelName == "Scene" && !GameObject.Find("Planet").GetComponent<LoadingScreen>().loading)) {
+				paused = !paused;
+				showPaused = paused;			
+			}
 		}
 
 		if (paused) {
@@ -334,8 +336,8 @@ public class PlayerController : MonoBehaviour {
 				this.GetComponent<Sounds> ().stopSound ("alarm");
 				this.GetComponent<Sounds> ().playWorldSound (Sounds.BUTTON);
 				playerAttributes.resetInventoryAndStorage ();
-				PlayerLog.queue.Clear ();
-				PlayerLog.stats = "";
+				//PlayerLog.queue.Clear ();
+				//PlayerLog.stats = "";
 				Application.LoadLevel (Application.loadedLevel);
 			}
 			if (GUI.Button (new Rect (left + 30, top + 90, buttonWidth, itemHeight), "Quit")) {

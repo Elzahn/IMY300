@@ -53,7 +53,6 @@ public class PlayerAttributes : MonoBehaviour {
 			inventory_LevelStart = new LinkedList<InventoryItem>(inventory);
 			storage_LevelStart = new LinkedList<InventoryItem>(storage);
 		}
-
 	}
 
 	private AttributeContainer myAttributes = new AttributeContainer();
@@ -326,7 +325,7 @@ public class PlayerAttributes : MonoBehaviour {
 			
 			string tempMessage = levelUp ();
 			if (tempMessage != "") {
-				PlayerLog.addStat (tempMessage);			
+				//PlayerLog.addStat (tempMessage);			
 			}
 
 			Warping warp = this.gameObject.GetComponent<Warping> ();
@@ -642,7 +641,7 @@ public class PlayerAttributes : MonoBehaviour {
 			message += e.getHealth () + "/" + e.getMaxHp ();
 		}
 
-		PlayerLog.addStat (message);
+		//PlayerLog.addStat (message);
 		return message;
 	}
 

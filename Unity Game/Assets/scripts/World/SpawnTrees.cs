@@ -103,7 +103,7 @@ public class SpawnTrees : MonoBehaviour {
 	}
 
 	public void position(GameObject go){
-		GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().checkMyPosition = false;
+		//GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().checkMyPosition = false;
 		Vector3 position;
 		bool planted = false;
 		
@@ -123,7 +123,7 @@ public class SpawnTrees : MonoBehaviour {
 			if(tempList.Count() == 0){
 				go.transform.parent.gameObject.transform.GetComponent<Rigidbody> ().position = position;
 				go.transform.parent.gameObject.gameObject.GetComponent<PositionMe>().timeToCheckMyPosition = Time.time;
-				go.transform.parent.gameObject.gameObject.GetComponent<PositionMe>().checkMyPosition = true;
+		//		go.transform.parent.gameObject.gameObject.GetComponent<PositionMe>().checkMyPosition = true;
 				return;
 			}
 		}

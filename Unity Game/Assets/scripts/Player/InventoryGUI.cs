@@ -78,10 +78,11 @@ public class InventoryGUI : MonoBehaviour {
 	}
 
 	public void openInventory(){
-		if (this.GetComponent<Tutorial> ().teachInventory) {
+		GameObject planet = GameObject.Find ("Planet");
+		if (this.GetComponent<Tutorial> ().teachInventory && planet != null && !planet.GetComponent<LoadingScreen>().loading) {
 			hasCollided = false;
 			showInventory = true;
-			PlayerLog.showLog = false;
+			//PlayerLog.showLog = false;
 			this.GetComponent<Sounds> ().playWorldSound (Sounds.INVENTORY);
 			playerScript.paused = true;	//Pause game
 		}
@@ -89,7 +90,7 @@ public class InventoryGUI : MonoBehaviour {
 
 	public void closeInventory(){
 		showInventory = false;
-		PlayerLog.showLog = true;
+		//PlayerLog.showLog = true;
 		this.GetComponent<Sounds>().playWorldSound (Sounds.INVENTORY);
 		playerScript.paused = false;	//Resume game
 	}

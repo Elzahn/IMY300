@@ -20,6 +20,7 @@ public class TutorialSpawner : MonoBehaviour {
 	private LinkedList<InventoryItem> tempLoot;
 	private InventoryItem tempItem;
 	private bool monsterDead = false;
+	private int deadEnemies = 0;
 
 	LinkedList<GameObject> enemies = new LinkedList <GameObject> ();
 
@@ -35,6 +36,15 @@ public class TutorialSpawner : MonoBehaviour {
 		addEnemy (enemy2, new Vector3(13.43f, 4.87f, -6.02f));
 	}
 
+	public string enemiesStats(){
+		string temp = "Enemies left: " + enemies.Count ();
+
+		temp += "\nEnemies dead: " + deadEnemies + "\n";
+		
+		temp += "\n";//for split between monster and player stats
+		
+		return temp;
+	}
 
 	public void resumeEnemySound(){
 		Enemy enemy;
@@ -94,6 +104,7 @@ public class TutorialSpawner : MonoBehaviour {
 				GameObject.Find("Player").GetComponent<Tutorial>().showAttack = false;
 				if(enemy.typeID == "BossAlien")
 				{
+					deadEnemies++;
 					tempLoot.AddLast(new PowerCore());
 					GameObject deadEnemy = Instantiate(loot);
 					deadEnemy.transform.position = monster.GetComponent<Rigidbody>().position;
@@ -107,6 +118,7 @@ public class TutorialSpawner : MonoBehaviour {
 					//GameObject.Find("Player").GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
 					GameObject.Find("Player").GetComponent<Tutorial>().tutorialDone = true;
 				} else if (!monsterDead){
+					deadEnemies++;
 					GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_INVENTORY);
 					GameObject.Find("Player").GetComponent<Tutorial>().setupVisuals();
 					showInventory = true;
@@ -123,6 +135,7 @@ public class TutorialSpawner : MonoBehaviour {
 					tempLoot.Clear ();
 					//dropLoot(enemy, rigidbody.position);
 				} else {
+					deadEnemies++;
 					this.GetComponent<NaturalDisasters>().makeEarthQuakeHappen();
 					while(this.GetComponent<NaturalDisasters>().isShaking() == true){}
 					GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_DISASTERD);

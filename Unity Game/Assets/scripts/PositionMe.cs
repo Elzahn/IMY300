@@ -5,13 +5,13 @@ public class PositionMe : MonoBehaviour {
 
 	//couldn't get it to work if vars aren't declared like this
 	public float timeToCheckMyPosition;	//gives two seconds for trees to be attracted to the planet
-	public bool checkMyPosition = true;	//variable set to tell when tree's position has been set
+	//public bool checkMyPosition = true;	//variable set to tell when tree's position has been set
 	public bool touching = false; //is the monster touching the sphere
 
 	//Keeps Trees out of the start position
 	void OnTriggerEnter(Collider col){
 		if (this.tag == "WorldObject") {
-			if (col.name == "EntrancePlane" && checkMyPosition == true) {
+			if (col.name == "EntrancePlane") {
 				//Finds chid with the worldObject tag
 				GameObject child = null;
 				foreach (Transform t in transform) {
@@ -24,7 +24,7 @@ public class PositionMe : MonoBehaviour {
 				GameObject.Find ("Planet").GetComponent<SpawnTrees> ().position (child);
 			}
 		} else if (this.tag == "Monster") {
-			if (col.name == "EntrancePlane" && checkMyPosition == true) {
+			if (col.name == "EntrancePlane"){// && checkMyPosition == true) {
 				timeToCheckMyPosition = Time.time;
 				if(GameObject.Find ("Planet").GetComponent<EnemySpawner> () != null){
 					GameObject.Find ("Planet").GetComponent<EnemySpawner> ().position (this.gameObject);
@@ -33,7 +33,7 @@ public class PositionMe : MonoBehaviour {
 				}*/
 			}
 		} else if (this.tag == "MediumHealthPack" || this.tag == "LargeHealthPack") {
-			if (col.name == "EntrancePlane" && checkMyPosition == true) {
+			if (col.name == "EntrancePlane"){// && checkMyPosition == true) {
 				timeToCheckMyPosition = Time.time;
 
 				//Finds chid with the MediumHealthPack or LargeHealthPack tag
@@ -47,7 +47,7 @@ public class PositionMe : MonoBehaviour {
 				GameObject.Find ("Planet").GetComponent<SpawnHealthPacks> ().position (child);
 			}
 		} else if (this.tag == "WarpPoint") {
-			if (col.name == "EntrancePlane" && checkMyPosition == true) {
+			if (col.name == "EntrancePlane"){// && checkMyPosition == true) {
 				timeToCheckMyPosition = Time.time;
 				GameObject.Find ("Planet").GetComponent<SpawnWarpPoints> ().position (this.gameObject);
 			}
@@ -58,7 +58,8 @@ public class PositionMe : MonoBehaviour {
 	void Update () {
 		//Repositions trees that aren't touching the planet after 2 seconds
 		if (this.tag == "WorldObject" && this.name != "TempShrub") {
-			if (Time.time >= timeToCheckMyPosition + 2f && checkMyPosition == true && this.GetComponent<Rigidbody> ().constraints != RigidbodyConstraints.FreezeAll || Time.time >= timeToCheckMyPosition + 2f && checkMyPosition == false && this.GetComponent<Rigidbody> ().constraints != RigidbodyConstraints.FreezeAll) {
+			if (Time.time >= timeToCheckMyPosition + 2f && this.GetComponent<Rigidbody> ().constraints != RigidbodyConstraints.FreezeAll){
+			    //|| Time.time >= timeToCheckMyPosition + 2f && checkMyPosition == false && this.GetComponent<Rigidbody> ().constraints != RigidbodyConstraints.FreezeAll) {
 
 				timeToCheckMyPosition = Time.time;
 
@@ -74,7 +75,7 @@ public class PositionMe : MonoBehaviour {
 			}
 		} //Repositions monsters that aren't touching the planet after 2 seconds
 		else if (this.tag == "Monster") {
-			if ((Time.time >= timeToCheckMyPosition + 2f && checkMyPosition == true && touching == false) || (checkMyPosition == false && touching == false)) {
+			if (Time.time >= timeToCheckMyPosition && touching == false){//(Time.time >= timeToCheckMyPosition + 2f && checkMyPosition == true && touching == false) || (checkMyPosition == false && touching == false)) {
 				
 				timeToCheckMyPosition = Time.time;
 
@@ -83,10 +84,10 @@ public class PositionMe : MonoBehaviour {
 				}/* else {
 					GameObject.Find ("Planet").GetComponent<TutorialSpawner> ().position (this.gameObject);
 				}*/
-			} 
+			}
 		} //Repositions healthpacks that aren't touching the planet after 2 seconds
 		else if (this.tag == "MediumHealthPack" || this.tag == "LargeHealthPack") {
-			if (Time.time >= timeToCheckMyPosition + 2f && checkMyPosition == true && this.GetComponent<Rigidbody> ().constraints != RigidbodyConstraints.FreezeAll) {
+			if (Time.time >= timeToCheckMyPosition + 2f && this.GetComponent<Rigidbody> ().constraints != RigidbodyConstraints.FreezeAll) {
 				
 				timeToCheckMyPosition = Time.time;
 				
@@ -102,7 +103,7 @@ public class PositionMe : MonoBehaviour {
 			}
 		} //Repositions warpPoints that aren't touching the planet after 2 seconds
 		else if (this.tag == "WarpPoint") {	
-			if (Time.time >= timeToCheckMyPosition + 2f && checkMyPosition == true && this.transform.parent.GetComponent<Rigidbody> ().constraints != RigidbodyConstraints.FreezeAll) {
+			if (Time.time >= timeToCheckMyPosition + 2f && this.transform.parent.GetComponent<Rigidbody> ().constraints != RigidbodyConstraints.FreezeAll) {
 				timeToCheckMyPosition = Time.time;
 				GameObject.Find ("Planet").GetComponent<SpawnWarpPoints> ().position (this.gameObject);
 			}

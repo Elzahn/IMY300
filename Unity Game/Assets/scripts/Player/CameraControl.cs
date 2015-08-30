@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class CameraControl : MonoBehaviour {
 
-	public float sensitivityX = 5F;
+	public float sensitivityX = 3F;
 
 	public bool birdsEye { get; private set;}
 
@@ -12,6 +12,15 @@ public class CameraControl : MonoBehaviour {
 	private Vector3 originalPosition;
 	private Quaternion originalRotation;
 	private PlayerController playerScript;
+	private PlayerAttributes playerAttributes;
+
+	void Start ()
+	{	
+		player = GameObject.Find ("Player");
+		playerAttributes = player.GetComponent<PlayerAttributes> ();
+		playerScript = player.GetComponent<PlayerController> ();
+		birdsEye = false;
+	}
 
 	void Update ()
 	{
@@ -65,12 +74,36 @@ public class CameraControl : MonoBehaviour {
 				birdsEye = true;
 			}
 
+			if(birdsEye){
+
+				string stats = "";
+
+				if(Application.loadedLevelName != "Tutorial"){
+					stats += GameObject.Find ("Planet").GetComponent<EnemySpawner>().enemiesStats();
+				} else {
+					stats += GameObject.Find ("Planet").GetComponent<TutorialSpawner>().enemiesStats();
+				}
+
+				stats += "HP: " + playerAttributes.hp;
+				stats += "\n";
+				stats += "Stamina: " + playerAttributes.stamina;
+				stats += "\n";
+				stats += "XP: " + playerAttributes.xp;
+				stats += "\n";
+				stats += "Level: " + playerAttributes.level;
+
+				stats += "Show Intermediate Goals?";
+
+				PlayerLog.showLog = true;
+				PlayerLog.addStat(stats);
+			}
+
 			if(Input.GetMouseButton(2) && Application.loadedLevelName != "SaveSpot"){
-				if(Input.GetAxis("Mouse X") != 0){
-					this.transform.RotateAround(new Vector3(0,0,0), -player.transform.right, Input.GetAxis ("Mouse X") * sensitivityX);
+				if(Input.GetAxis("Mouse X") < -0.5 ||Input.GetAxis("Mouse X") > 0.5){
+					this.transform.RotateAround(new Vector3(0,0,0), -player.transform.forward, Input.GetAxis ("Mouse X") * sensitivityX);
 				} 
-				if(Input.GetAxis("Mouse Y") != 0){
-					this.transform.RotateAround(new Vector3(0,0,0), -player.transform.forward, Input.GetAxis ("Mouse Y") * sensitivityX);
+				if(Input.GetAxis("Mouse Y") < -0.5 ||Input.GetAxis("Mouse Y") > 0.5){
+					this.transform.RotateAround(new Vector3(0,0,0), -player.transform.right, Input.GetAxis ("Mouse Y") * sensitivityX);
 				}
 			}
 
@@ -79,17 +112,9 @@ public class CameraControl : MonoBehaviour {
 				this.transform.position = originalPosition;
 				this.transform.rotation = originalRotation;
 
-				//player.GetComponent<PlayerController>().playAnimation();
-				
+				PlayerLog.showLog = false;
 				birdsEye = false;
 			}
 		}
-	}
-	
-	void Start ()
-	{			
-		playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
-		player = GameObject.Find ("Player");
-		birdsEye = false;
 	}
 }

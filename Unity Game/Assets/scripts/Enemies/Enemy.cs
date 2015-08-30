@@ -117,7 +117,14 @@ public abstract class Enemy : MonoBehaviour {
 	//public int xpGain { get; protected set;}
 	public string typeID {get; protected set;}
 
+	private bool minibossDead = false;
+
 	public bool isDead() {
+		if (hp <= 0 && typeID == "BossAlien" && !minibossDead) {
+			minibossDead = true;
+			GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked = true;
+			GameObject.Find("Player").GetComponent<FallThroughPlanet>().canFallThroughPlanet = true;
+		}
 		return hp <= 0;
 	}
 
@@ -203,7 +210,7 @@ public abstract class Enemy : MonoBehaviour {
 			message += player.hp + "/" + player.maxHP ();
 		}
 		//print(message);
-		PlayerLog.addStat (message);
+		//PlayerLog.addStat (message);
 		return message;
 	}
 

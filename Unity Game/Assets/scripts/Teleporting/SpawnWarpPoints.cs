@@ -60,7 +60,7 @@ public class SpawnWarpPoints : MonoBehaviour {
 	}
 
 	public void position(GameObject go){
-		go.GetComponentInChildren<PositionMe>().checkMyPosition = false;
+		//go.GetComponentInChildren<PositionMe>().checkMyPosition = false;
 		Vector3 position;
 		bool created = false;
 		
@@ -80,7 +80,7 @@ public class SpawnWarpPoints : MonoBehaviour {
 			if(tempList.Count() == 0){
 				go.transform.GetComponentInParent<Rigidbody> ().position = position;
 				go.GetComponentInChildren<PositionMe>().timeToCheckMyPosition = Time.time;
-				go.GetComponentInChildren<PositionMe>().checkMyPosition = true;
+			//	go.GetComponentInChildren<PositionMe>().checkMyPosition = true;
 				return;
 			}
 		}
