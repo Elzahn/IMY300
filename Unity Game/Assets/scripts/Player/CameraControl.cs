@@ -4,8 +4,7 @@ using System.Collections.Generic;
 
 public class CameraControl : MonoBehaviour {
 
-	public float sensitivityX = 3F;
-
+	public float sensitivityX{ get; set;}
 	public bool birdsEye { get; private set;}
 
 	private GameObject player;
@@ -20,6 +19,7 @@ public class CameraControl : MonoBehaviour {
 		playerAttributes = player.GetComponent<PlayerAttributes> ();
 		playerScript = player.GetComponent<PlayerController> ();
 		birdsEye = false;
+		sensitivityX = 3F;
 	}
 
 	void Update ()
