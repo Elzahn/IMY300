@@ -101,11 +101,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 161476}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60be845c02359d44f92e97230b975a0c, type: 3}
+  m_Script: {fileID: 11500000, guid: 6425436646df06642b0d37bcf4fb8e44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeToCheckMyPosition: 0
-  checkMyPosition: 1
   touching: 0
 --- !u!114 &11490646
 MonoBehaviour:

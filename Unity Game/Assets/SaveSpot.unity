@@ -269,7 +269,7 @@ RectTransform:
   m_RootOrder: 4
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 79.8700027, y: -502}
+  m_AnchoredPosition: {x: 79.75, y: -502}
   m_SizeDelta: {x: 200, y: 200.800003}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &165379647
@@ -330,7 +330,7 @@ RectTransform:
   m_RootOrder: 8
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 73.0999985, y: -470.790009}
+  m_AnchoredPosition: {x: 73, y: -470.75}
   m_SizeDelta: {x: 200, y: 200.800003}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &168186752
@@ -660,7 +660,7 @@ RectTransform:
   m_RootOrder: 6
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 79.8700027, y: -499.200012}
+  m_AnchoredPosition: {x: 79.75, y: -499.25}
   m_SizeDelta: {x: 200, y: 200.800003}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &335632685
@@ -781,7 +781,7 @@ RectTransform:
   m_RootOrder: 5
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 79.8700027, y: -502.100006}
+  m_AnchoredPosition: {x: 79.75, y: -502.125}
   m_SizeDelta: {x: 200, y: 200.800003}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &402044812
@@ -960,8 +960,8 @@ RectTransform:
   - {fileID: 335632684}
   - {fileID: 733205100}
   - {fileID: 168186751}
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 839258568}
+  m_RootOrder: 9
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -1062,7 +1062,7 @@ RectTransform:
   m_RootOrder: 7
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 79.8700027, y: -500.5}
+  m_AnchoredPosition: {x: 79.75, y: -500.5}
   m_SizeDelta: {x: 200, y: 200.800003}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &733205101
@@ -1416,7 +1416,6 @@ GameObject:
   - 114: {fileID: 839258570}
   - 114: {fileID: 839258580}
   - 114: {fileID: 839258584}
-  - 114: {fileID: 839258585}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1443,6 +1442,7 @@ Transform:
   - {fileID: 1925578954}
   - {fileID: 1279942163}
   - {fileID: 1891613123}
+  - {fileID: 437991879}
   m_Father: {fileID: 0}
   m_RootOrder: 2
 --- !u!33 &839258569
@@ -1719,19 +1719,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: a827ca0321959d94fa8d0a798fa88a76, type: 2}
   - {fileID: 2100000, guid: 82096aab38f01cb40a1cbf8629a810ba, type: 2}
   - {fileID: 2100000, guid: 14c6616de6a706943ac9dd7ef9a742d8, type: 2}
---- !u!114 &839258585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 839258567}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c283f7605b5ac59438a607e5130e9a0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HUD: {fileID: 2800000, guid: b3caebd4058830c42829d5707cea2f97, type: 3}
-  Stamina: {fileID: 2800000, guid: b15a56efeb7069f44bd9a867f473da9f, type: 3}
 --- !u!1 &914770632
 GameObject:
   m_ObjectHideFlags: 0
@@ -2558,7 +2545,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 79.8700027, y: -505.459991}
+  m_AnchoredPosition: {x: 79.75, y: -505.5}
   m_SizeDelta: {x: 200, y: 200.800003}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1203177538
@@ -2646,7 +2633,7 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 79.8700027, y: -504.899994}
+  m_AnchoredPosition: {x: 79.75, y: -504.875}
   m_SizeDelta: {x: 200, y: 200.800003}
   m_Pivot: {x: .5, y: .5}
 --- !u!1 &1279942161
@@ -4604,7 +4591,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 79.8700027, y: -504.700012}
+  m_AnchoredPosition: {x: 79.75, y: -504.75}
   m_SizeDelta: {x: 200, y: 200.800003}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1992626136
@@ -4894,7 +4881,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 426.299988, y: -193.107773}
+  m_AnchoredPosition: {x: 426.25, y: -193.107788}
   m_SizeDelta: {x: 200, y: -376.784454}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &2049289798

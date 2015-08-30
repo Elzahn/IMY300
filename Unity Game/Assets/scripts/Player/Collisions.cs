@@ -28,7 +28,6 @@ public class Collisions : MonoBehaviour {
 				
 				print (colObj);
 				Vector3 tempPos = colObj.transform.position;
-				print (tempPos);
 				//Delete health shrub
 				GameObject.Find("Planet").GetComponent<SpawnHealthPacks>().removeHealth(colObj);
 				Destroy (colObj.transform.gameObject.gameObject);
