@@ -95,14 +95,15 @@ public class CameraControl : MonoBehaviour {
 				stats += "Show Intermediate Goals?";
 
 				PlayerLog.showLog = true;
+				PlayerLog.showHUD = false;
 				PlayerLog.addStat(stats);
 			}
 
 			if(Input.GetMouseButton(2) && Application.loadedLevelName != "SaveSpot"){
-				if(Input.GetAxis("Mouse X") < -0.5 ||Input.GetAxis("Mouse X") > 0.5){
+				if(Input.GetAxis("Mouse X") != 0){
 					this.transform.RotateAround(new Vector3(0,0,0), -player.transform.forward, Input.GetAxis ("Mouse X") * sensitivityX);
 				} 
-				if(Input.GetAxis("Mouse Y") < -0.5 ||Input.GetAxis("Mouse Y") > 0.5){
+				if(Input.GetAxis("Mouse Y") != 0){
 					this.transform.RotateAround(new Vector3(0,0,0), -player.transform.right, Input.GetAxis ("Mouse Y") * sensitivityX);
 				}
 			}
@@ -113,6 +114,7 @@ public class CameraControl : MonoBehaviour {
 				this.transform.rotation = originalRotation;
 
 				PlayerLog.showLog = false;
+				PlayerLog.showHUD = true;
 				birdsEye = false;
 			}
 		}

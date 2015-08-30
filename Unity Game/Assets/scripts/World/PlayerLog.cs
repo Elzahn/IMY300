@@ -7,7 +7,12 @@ public class PlayerLog : MonoBehaviour {
 	//private static int maxLines = 24;
 	private static Queue<string> queue = new Queue<string>();
 	private static string stats = "";
+
+	public Texture2D HUD;
+	public Texture2D Stamina;
+
 	public static bool showLog{ get; set;}
+	public static bool showHUD{ get; set;}
 
 	public static void addStat(string message) {
 	/*	if (queue.Count >= maxLines) {
@@ -30,6 +35,10 @@ public class PlayerLog : MonoBehaviour {
 			int top = 20;
 
 			GUI.Label (new Rect (left, top, boxWidth, boxHeight), stats, GUI.skin.textArea);
+		}
+		if (showHUD) {
+		//	GUI.Label (new Rect (10, Screen.height - Screen.height/3, Screen.height/3, Screen.height/3), HUD);
+		//	GUI.Label (new Rect (10, Screen.height - Screen.height/3, Screen.height/3, Screen.height/3), Stamina);
 		}
 	}
 }

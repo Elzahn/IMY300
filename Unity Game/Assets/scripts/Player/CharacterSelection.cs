@@ -6,9 +6,10 @@ public class CharacterSelection : MonoBehaviour {
 	private PlayerAttributes attributesScript;
 //	private PlayerController playerScript;
 
-	// Use this for initialization
+	// Use this for initialization 
 	void Start () {
 		attributesScript = this.GetComponent<PlayerAttributes> ();
+		PlayerLog.showHUD = true;
 		//playerScript = this.GetComponent<PlayerController> ();		
 	}
 

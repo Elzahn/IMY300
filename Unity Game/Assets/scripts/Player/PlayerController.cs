@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour {
 			//this.transform.position = new Vector3 (0f, 15.03f, 0);
 			//this.transform.position = new Vector3(-0.01f, 16.149f, -0.27f);
 			sound.stopSound ("computer");
-			this.transform.position = new Vector3(0, 15.74075f, -0.327f);
+			this.transform.position = new Vector3(0, 16f, -0.327f);
 			//this.GetComponent<Tutorial>().stopTutorial();
 			Application.LoadLevel ("Tutorial");
 

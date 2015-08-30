@@ -103,7 +103,7 @@ public class PositionMe : MonoBehaviour {
 			}
 		} //Repositions warpPoints that aren't touching the planet after 2 seconds
 		else if (this.tag == "WarpPoint") {	
-			if (Time.time >= timeToCheckMyPosition + 2f && this.transform.parent.GetComponent<Rigidbody> ().constraints != RigidbodyConstraints.FreezeAll) {
+			if (Time.time >= timeToCheckMyPosition + 2f && this.transform.GetComponent<Rigidbody> ().constraints != RigidbodyConstraints.FreezeAll) {
 				timeToCheckMyPosition = Time.time;
 				GameObject.Find ("Planet").GetComponent<SpawnWarpPoints> ().position (this.gameObject);
 			}

@@ -184,9 +184,7 @@ public class Tutorial : MonoBehaviour {
 			}
 			if (Time.time >= showVisualQue){// && GameObject.Find ("Planet") != null && GameObject.Find ("Planet").GetComponent<LoadingScreen>().loading == false) {
 				showVisuals = false;
-			}/* else if(GameObject.Find ("Planet") != null && GameObject.Find ("Planet").GetComponent<LoadingScreen>().loading == true){
-				showVisualQue = Time.time + showVisualDuration;
-			}*/
+			}
 		}
 	}
 }

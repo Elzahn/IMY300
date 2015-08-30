@@ -1,23 +1,35 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\TestParticles.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Teleporting\SpawnWarpPoints.cs">
     <Files>
-      <File FileName="Assets\scripts\World\LevelSelect.cs" Line="54" Column="16" />
-      <File FileName="Assets\scripts\Enemies\EnemySpawner.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\World\SpawnTrees.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\HealthPacks\SpawnHealthPacks.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Teleporting\SaveSpotTeleport.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\World\PlayerLog.cs" Line="41" Column="5" />
+      <File FileName="Assets\scripts\Player\CameraControl.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Player\CharacterSelection.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Player\Tutorial.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Player\PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\TestParticles.cs" Line="8" Column="68" />
+      <File FileName="Assets\scripts\Teleporting\SaveSpotTeleport.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Menu\HUD.cs" Line="8" Column="2" />
+      <File FileName="Assets\scripts\Gravity\FauxGravityAttractor.cs" Line="58" Column="1" />
+      <File FileName="Assets\scripts\Enemies\TutorialSpawner.cs" Line="134" Column="1" />
+      <File FileName="Assets\scripts\World\Loot.cs" Line="22" Column="73" />
+      <File FileName="Assets\scripts\Player\InventoryGUI.cs" Line="83" Column="138" />
+      <File FileName="Assets\scripts\Teleporting\SpawnWarpPoints.cs" Line="82" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
-            <Node name="scripts" expanded="True" />
+            <Node name="scripts" expanded="True">
+              <Node name="Enemies" expanded="True" />
+              <Node name="Gravity" expanded="True" />
+              <Node name="Menu" expanded="True" />
+              <Node name="Player" expanded="True" />
+              <Node name="Teleporting" expanded="True">
+                <Node name="SpawnWarpPoints.cs" selected="True" />
+              </Node>
+              <Node name="World" expanded="True" />
+            </Node>
           </Node>
-          <Node name="Assembly-UnityScript-firstpass" selected="True" />
         </State>
       </Pad>
     </Pads>
