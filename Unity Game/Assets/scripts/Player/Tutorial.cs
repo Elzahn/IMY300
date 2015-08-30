@@ -78,6 +78,7 @@ public class Tutorial : MonoBehaviour {
 		sound.stopSound ("computer");
 		teachStorage = true;
 		teachInventory = true;
+		setupVisuals ();
 		//stop cutscenes
 	}
 

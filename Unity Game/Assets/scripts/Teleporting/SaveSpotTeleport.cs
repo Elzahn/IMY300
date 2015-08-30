@@ -64,6 +64,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 			sound.playWorldSound (Sounds.SHIP_DOOR);
 			attributesScript.saveInventoryAndStorage ();
 			//GameObject.Find("Player").transform.position = new Vector3(9.41f, 79.19f, 7.75f);
+			this.GetComponent<Tutorial>().stopTutorial();
 			Application.LoadLevel ("Scene");
 			Resources.UnloadUnusedAssets();
 		} else if(showExitConfirmation && Input.GetKeyDown(KeyCode.E) && loadTutorial){
@@ -92,6 +93,8 @@ public class SaveSpotTeleport : MonoBehaviour {
 			this.transform.position = new Vector3 (13.72f, 81.58f, 14.77f);//(9.4f, 81.38f, 6.62f);
 			sound.playWorldSound(Sounds.SHIP_DOOR);
 			this.GetComponent<LevelSelect>().currentLevel++;
+			this.GetComponent<LevelSelect>().spawnedLevel = false;
+			this.GetComponent<LevelSelect>().myRenderer = null;
 			Application.LoadLevel ("SaveSpot");
 			Resources.UnloadUnusedAssets();
 		}

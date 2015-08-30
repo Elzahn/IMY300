@@ -106,6 +106,7 @@ public class PlayerController : MonoBehaviour {
 			//this.transform.position = new Vector3(-0.01f, 16.149f, -0.27f);
 			sound.stopSound ("computer");
 			this.transform.position = new Vector3(0, 15.74075f, -0.327f);
+			//this.GetComponent<Tutorial>().stopTutorial();
 			Application.LoadLevel ("Tutorial");
 
 		} else if (Input.GetKeyDown (KeyCode.Tab) && Application.loadedLevelName == "Tutorial"){
@@ -115,6 +116,7 @@ public class PlayerController : MonoBehaviour {
 			sound.playWorldSound (Sounds.SHIP_DOOR);
 			sound.stopSound ("computer");
 			this.GetComponent<LevelSelect>().currentLevel++;
+			this.GetComponent<Tutorial>().stopTutorial();
 			Application.LoadLevel ("SaveSpot");
 			Resources.UnloadUnusedAssets();
 			//this.transform.position = new Vector3 (-27.01f, 79.65f, 1.93f);
@@ -148,6 +150,7 @@ public class PlayerController : MonoBehaviour {
 			this.GetComponent<LevelSelect>().currentLevel++;
 			Application.LoadLevel("SaveSpot");
 			this.GetComponent<Rigidbody>().mass = 1000;
+			this.GetComponent<Tutorial>().stopTutorial();
 			//print ("Tutorial skipped you can now use the teleporter again.");
 		} else if(Input.GetKeyDown(KeyCode.Escape) && !this.GetComponent<Tutorial>().startTutorial){
 			showQuit = true;

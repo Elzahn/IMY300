@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour {
 	private LinkedList<InventoryItem> tempLoot;
 	private InventoryItem tempItem;
 
-	const int ENEM_COUNT = 20;
+	private int ENEM_COUNT;
 	const int NORMAL_ENEMY_TYPES = 4;
 
 	FauxGravityAttractor planet;
@@ -30,7 +30,8 @@ public class EnemySpawner : MonoBehaviour {
 	LinkedList<GameObject> enemies = new LinkedList <GameObject> ();
 
 	// Use this for initialization
-	void Start () {
+	public void spawnEnemies (int enemy_count) {	//Previously know as Start
+		ENEM_COUNT = enemy_count;
 		clearLoot ();
 		tempLoot = new LinkedList<InventoryItem> ();
 
@@ -40,7 +41,7 @@ public class EnemySpawner : MonoBehaviour {
 		GameObject enemy;
 
 		//Spawn Normal Enemies
-		for (int i=0; i<ENEM_COUNT -1; ++i) {
+		for (int i = 0; i < enemy_count -1; ++i) {
 			int index = Mathf.RoundToInt(Random.value * NORMAL_ENEMY_TYPES);
 			enemy = chooseEnemy(index);
 			addEnemy(enemy);

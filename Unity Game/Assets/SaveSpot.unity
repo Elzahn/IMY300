@@ -1012,6 +1012,7 @@ GameObject:
   - 137: {fileID: 839258583}
   - 114: {fileID: 839258570}
   - 114: {fileID: 839258580}
+  - 114: {fileID: 839258584}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1296,6 +1297,24 @@ SkinnedMeshRenderer:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   m_DirtyAABB: 1
+--- !u!114 &839258584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 839258567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87d49373f5ccfb8479bdf91ddfde9beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materials:
+  - {fileID: 2100000, guid: 7e70709a3a24cac45ac7809f7f2a7499, type: 2}
+  - {fileID: 2100000, guid: 80e74e48197d39f40ae37ce5200f4e2d, type: 2}
+  - {fileID: 2100000, guid: a7a290a344a2a9346bb488765a0b191b, type: 2}
+  - {fileID: 2100000, guid: a827ca0321959d94fa8d0a798fa88a76, type: 2}
+  - {fileID: 2100000, guid: 82096aab38f01cb40a1cbf8629a810ba, type: 2}
+  - {fileID: 2100000, guid: 14c6616de6a706943ac9dd7ef9a742d8, type: 2}
 --- !u!1 &914770632
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,14 +8,14 @@ public class SpawnHealthPacks : MonoBehaviour {
 	public GameObject medHealth;
 	public GameObject largeHealth;
 
-	const int TOTAL_HEALTH = 10;
+	int TOTAL_HEALTH;// = 10;
 
 	LinkedList<GameObject> healthPacks = new LinkedList <GameObject> ();
 
 	// Use this for initialization
-	void Start () {
+	/*void Start () {
 		spawn ();
-	}
+	}*/
 
 	public int amountHealthLanded(){
 		int done = 0;
@@ -88,8 +88,10 @@ public class SpawnHealthPacks : MonoBehaviour {
 		}
 	}
 
-	public void spawn ()
+	public void spawnHealth (int numHealth)
 	{
+		TOTAL_HEALTH = numHealth;
+
 		GameObject[] gameObjectsToDelete =  GameObject.FindGameObjectsWithTag ("MediumHealthPack");
 		
 		for (int i = 0; i < gameObjectsToDelete.Length; i++) {

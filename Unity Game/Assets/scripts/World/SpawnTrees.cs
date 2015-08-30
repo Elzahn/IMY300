@@ -11,13 +11,15 @@ public class SpawnTrees : MonoBehaviour {
 
 	public GameObject shrub;
 
-	int num_Trees = 299;
+	int num_Trees;// = 299;
 	
 	FauxGravityAttractor planet;
 	
 	LinkedList<GameObject> trees = new LinkedList <GameObject> ();
 
-	void Start () {
+	public void spawnTrees (int numTrees) {//Previously known as Start
+		num_Trees = numTrees;
+
 		planet = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
 		GameObject tree;
 
