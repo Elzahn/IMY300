@@ -9,6 +9,7 @@ public class HUD : MonoBehaviour {
 	private Image expandingHUD;
 	private Image shrinkButton;
 	private Image expandButton;
+//	private Image hint;
 	//private Text expandText;
 	//private Scrollbar scrollbar;
 
@@ -18,10 +19,12 @@ public class HUD : MonoBehaviour {
 		expandingHUD = GameObject.Find ("Expand").GetComponent<Image> ();
 		shrinkButton = GameObject.Find ("Shrink_Button").GetComponent<Image> ();
 		expandButton = GameObject.Find ("Expand_Button").GetComponent<Image> ();
+		//hint = GameObject.Find ("Hint").GetComponent<Image> ();
 		//expandText = GameObject.Find ("HUD_Extend_Text").GetComponent<Text> ();
 		//scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
 		shrinkButton.enabled = true;
 		expandButton.enabled = false;
+		//hint.enabled = false;
 		expandingHUD.fillAmount = 1;
 	}
 
