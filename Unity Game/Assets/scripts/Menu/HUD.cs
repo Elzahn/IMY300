@@ -9,18 +9,22 @@ public class HUD : MonoBehaviour {
 	private Image expandingHUD;
 	private Image shrinkButton;
 	private Image expandButton;
+	private Text expandText;
+
 	//private Image hudText
 
 	void Start(){
 		expandingHUD = GameObject.Find ("Expand").GetComponent<Image> ();
 		shrinkButton = GameObject.Find ("Shrink_Button").GetComponent<Image> ();
 		expandButton = GameObject.Find ("Expand_Button").GetComponent<Image> ();
+		expandText = GameObject.Find ("HUD_Extend_Text").GetComponent<Text> ();
 		shrinkButton.enabled = true;
 		expandButton.enabled = false;
 		expandingHUD.fillAmount = 1;
 	}
 
 	public void expandHud(){
+		expandText.text += "\nHi there";
 		expandTheHud = true;
 		shrinkTheHud = false;
 		expandButton.enabled = false;
