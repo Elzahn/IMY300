@@ -28,7 +28,7 @@ public class Tutorial : MonoBehaviour {
 	public Sprite Attack;
 	public Sprite Walk;
 
-	private int showVisualDuration = 7;
+	private int visualDuration = 7;
 
 	// Use this for initialization
 	void Start () {
@@ -60,8 +60,14 @@ public class Tutorial : MonoBehaviour {
 				sound.pauseMonsterSound(m.GetComponent<Enemy>());
 			}
 
-			showVisualQue = Time.time + showVisualDuration;
+			showVisualQue = Time.time + visualDuration;
 		} else {
+
+			if (Time.time >= showVisualQue){// && GameObject.Find ("Planet") != null && GameObject.Find ("Planet").GetComponent<LoadingScreen>().loading == false) {
+				moveHintOffScreen = true;
+				moveHintOnScreen = false;
+			}
+
 			if(moveHintOnScreen){
 				if(hint.fillAmount < 1)
 				{
@@ -70,7 +76,9 @@ public class Tutorial : MonoBehaviour {
 			}
 			
 			if(moveHintOffScreen){
-				
+				if(hint.fillAmount > 0){
+					hint.fillAmount -= 0.01f;
+				}
 			}
 
 			sound.resumeSound("all");
@@ -139,7 +147,7 @@ public class Tutorial : MonoBehaviour {
 			GameObject.Find ("Planet").GetComponent<TutorialSpawner> ().showInventory = false;
 		}
 		showVisuals = true;
-		showVisualQue = Time.time + showVisualDuration;
+		showVisualQue = Time.time + visualDuration;
 	}
 
 	public void leadTheWay(){
@@ -185,7 +193,9 @@ public class Tutorial : MonoBehaviour {
 	}
 
 	public void makeHint(string _hintText, Sprite _hintImage){
+		showVisualQue = Time.time + visualDuration;
 		moveHintOnScreen = true;
+		moveHintOffScreen = false;
 		hintText.text = _hintText;
 		hintImage.sprite = _hintImage;
 	}
@@ -193,14 +203,7 @@ public class Tutorial : MonoBehaviour {
 	public void OnGUI(){
 		if (startTutorial) {
 			if(showVisuals){
-				/*if (showWASD) {
-					GUI.depth = 0;
-					GUI.color = new Color32 (255, 255, 255, 50);
-					GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), (""));
-					GUI.color = new Color32 (255, 255, 255, 255);
-					GUI.Label (new Rect (Screen.width/2-100, Screen.height - 35, Screen.width - 300, 120), ("Move around using W/A/S/D"));
-					//GUI.DrawTexture (new Rect (Screen.width / 2 - Screen.width / 8, Screen.height / 2 - Screen.height / 3, Screen.width / 4, Screen.height / 4), WASD);
-				} else */if(showRun){
+				if(showRun){
 					GUI.depth = 0;
 					GUI.color = new Color32 (255, 255, 255, 100);
 					GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), (""));
