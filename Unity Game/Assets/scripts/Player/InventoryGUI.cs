@@ -7,7 +7,10 @@ public class InventoryGUI : MonoBehaviour {
 	private static bool showInventory, showStorage;
 	private PlayerController playerScript;
 	private PlayerAttributes attributesScript;
-	private bool hasCollided = false;
+
+	public static bool hasCollided {get; set;}
+
+	private HUD Hud;
 
 	public static bool getStorage(){
 		return showStorage;
@@ -19,6 +22,8 @@ public class InventoryGUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		hasCollided = false;
+		Hud = Camera.main.GetComponent<HUD> ();
 		showInventory = false;
 		showStorage = false;
 		playerScript = this.GetComponent<PlayerController> ();
@@ -54,6 +59,7 @@ public class InventoryGUI : MonoBehaviour {
 	void OnTriggerEnter(Collider col){
 		if (col.name == "Storage") {
 			hasCollided = true;
+			Hud.makeInteractionHint("Press E to open storage", GameObject.Find("Player").GetComponent<SaveSpotTeleport>().pressE);
 		}
 	}
 	
@@ -98,9 +104,9 @@ public class InventoryGUI : MonoBehaviour {
 	}
 
 	void OnGUI(){
-		if (hasCollided && this.GetComponent<Tutorial>().teachStorage){    
+		/*if (hasCollided && this.GetComponent<Tutorial>().teachStorage){    
 			GUI.Box(new Rect(140,Screen.height-50,Screen.width-300,120),("Press E to interact"));
-		}
+		}*/
 		if (showInventory) {
 			int boxWidth = Screen.width;//800;
 			int boxHeight = Screen.height;//800;
@@ -121,28 +127,37 @@ public class InventoryGUI : MonoBehaviour {
 			} else {
 				foreach (InventoryItem item in attributesScript.inventory.ToList()) {
 					GUI.Label (new Rect (left + 30, top + 80, width-(buttonWidth*2), itemHeight), item.typeID);
-					if (GUI.Button (new Rect (left + width-(buttonWidth*2), top + 80, buttonWidth, itemHeight), "Drop it")) {
-						attributesScript.inventory.Remove (item);
-						this.GetComponent<Sounds>().playWorldSound(Sounds.DROP_ITEM);
+					if(item.typeID != "Power Core"){
+						if (GUI.Button (new Rect (left + width-(buttonWidth*2), top + 80, buttonWidth, itemHeight), "Drop it")) {
+							attributesScript.inventory.Remove (item);
+							this.GetComponent<Sounds>().playWorldSound(Sounds.DROP_ITEM);
+						}
 					}
 
-					if(item.typeID != "Medium Health Pack" && item.typeID != "Large Health Pack"){
-						if (GUI.Button (new Rect (left + width-(buttonWidth), top + 80, buttonWidth, itemHeight), "Equip")) {
-							attributesScript.equipItem (item);
-							attributesScript.inventory.Remove (item);
-							if(item.typeID == "Rare Accessory" || item.typeID == "Common Accessory" || item.typeID == "Uncommon Accessory"){
-								this.GetComponent<Sounds>().playWorldSound(Sounds.EQUIP_ACCESSORY);
-							} else if(item.typeID == "Warhammer"){
-								this.GetComponent<Sounds>().playWorldSound(Sounds.EQUIP_HAMMER);
-							} else if(item.typeID != "Warhammer"){
-								this.GetComponent<Sounds>().playWorldSound(Sounds.EQUIP_SWORD);
+					if(item.typeID != "Medium Health Pack" && item.typeID != "Large Health Pack" && item.typeID != "Cupcake"){
+						if(item.typeID != "Power Core"){
+							if (GUI.Button (new Rect (left + width-(buttonWidth), top + 80, buttonWidth, itemHeight), "Equip")) {
+								attributesScript.equipItem (item);
+								attributesScript.inventory.Remove (item);
+								if(item.typeID == "Rare Accessory" || item.typeID == "Common Accessory" || item.typeID == "Uncommon Accessory"){
+									this.GetComponent<Sounds>().playWorldSound(Sounds.EQUIP_ACCESSORY);
+								} else if(item.typeID == "Warhammer"){
+									this.GetComponent<Sounds>().playWorldSound(Sounds.EQUIP_HAMMER);
+								} else if(item.typeID != "Warhammer"){
+									this.GetComponent<Sounds>().playWorldSound(Sounds.EQUIP_SWORD);
+								}
 							}
 						}
 					} else {
 						if (GUI.Button (new Rect (left + width-(buttonWidth), top + 80, buttonWidth, itemHeight), "Use")) {
-							attributesScript.useHealthPack (item);
-							attributesScript.inventory.Remove (item);
-							this.GetComponent<Sounds>().playWorldSound(Sounds.USE_HEALTH);
+							if(item.typeID != "Cupcake"){
+								attributesScript.useHealthPack (item);
+								attributesScript.inventory.Remove (item);
+								this.GetComponent<Sounds>().playWorldSound(Sounds.USE_HEALTH);
+							} else {
+								attributesScript.inventory.Remove (item);
+								Cupcake.eatCupcake();
+							}
 						}
 					}
 					top += itemHeight;
@@ -227,14 +242,16 @@ public class InventoryGUI : MonoBehaviour {
 			} else {
 				foreach (InventoryItem item in attributesScript.inventory.ToList()) {
 					GUI.Label (new Rect (secondLeft + 30, secondTop + 80, width-buttonWidth, itemHeight), item.typeID);
-					if (GUI.Button (new Rect (secondLeft + width-buttonWidth*2, secondTop + 80, buttonWidth, itemHeight), "Drop it")) {
-						attributesScript.inventory.Remove (item);
-						this.GetComponent<Sounds>().playWorldSound(Sounds.DROP_ITEM);
-					}
-					if (GUI.Button (new Rect (secondLeft + width-buttonWidth, secondTop + 80, buttonWidth, itemHeight), "Move To Storage")) {
-						attributesScript.addToStorage (item);
-						attributesScript.inventory.Remove (item);
-						this.GetComponent<Sounds>().playWorldSound(Sounds.MOVE_ITEM);
+					if(item.typeID != "Power Core"){
+						if (GUI.Button (new Rect (secondLeft + width-buttonWidth*2, secondTop + 80, buttonWidth, itemHeight), "Drop it")) {
+							attributesScript.inventory.Remove (item);
+							this.GetComponent<Sounds>().playWorldSound(Sounds.DROP_ITEM);
+						}
+						if (GUI.Button (new Rect (secondLeft + width-buttonWidth, secondTop + 80, buttonWidth, itemHeight), "Move To Storage")) {
+							attributesScript.addToStorage (item);
+							attributesScript.inventory.Remove (item);
+							this.GetComponent<Sounds>().playWorldSound(Sounds.MOVE_ITEM);
+						}
 					}
 					secondTop += itemHeight;
 				}

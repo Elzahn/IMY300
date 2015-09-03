@@ -37,6 +37,10 @@ public class Tutorial : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
+		GameObject.Find("Tech Light").GetComponent<Light>().enabled = false;
+		GameObject.Find("Console Light").GetComponent<Light>().enabled = false;
+		GameObject.Find("Bedroom Light").GetComponent<Light>().enabled = false;
 		moveHintOnScreen = false;
 		moveHintOffScreen = false;
 
@@ -48,7 +52,6 @@ public class Tutorial : MonoBehaviour {
 		//interactionText = GameObject.Find ("Interaction_Text").GetComponent<Text> ();
 		//interactionImage = GameObject.Find ("Interaction_Image").GetComponent<Image> ();
 
-		this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 		showVisuals = true;
 		//showAttack = false;
 		//print ("Press Escape to skip Tutorial");
@@ -208,7 +211,8 @@ public class Tutorial : MonoBehaviour {
 			sound.resumeSound("all");
 			//cut scene
 			teachStorage = true;
-			startTutorial = false;
+			//startTutorial = false; //here
+			//this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 			this.GetComponent<SaveSpotTeleport> ().loadTutorial = false;
 		} else {
 			sound.pauseSound("all");

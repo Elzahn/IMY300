@@ -3,7 +3,12 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class SaveSpotTeleport : MonoBehaviour {
-
+	/*bool _d = true;
+	public bool canEnterSaveSpot {
+		get{ return _d; }
+		set{ _d = value;
+			print (_d); }
+	}*/
 	public bool canEnterSaveSpot{ get; set; }
 	public bool loadTutorial {get; set;}
 	public bool notInUse {get; set;}
@@ -48,7 +53,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 		} else if (col.name == "EntrancePlane" && canEnterSaveSpot) {
 			showEntranceConfirmation = true;
 		} else if (col.name == "ExitPlane"  && canEnterSaveSpot && loadTutorial) {
-
+			//got lost? showExitConfirmation = true;
 		} else if (col.name == "EntrancePlane") {
 			showNoEntry = true;
 		}
@@ -61,6 +66,17 @@ public class SaveSpotTeleport : MonoBehaviour {
 	}
 
 	void Update () {
+
+		if (Application.loadedLevelName == "SaveSpot" && this.GetComponent<Tutorial> ().startTutorial) {
+//			canEnterSaveSpot = false;
+			GameObject.Find ("Tech Light").GetComponent<Light> ().enabled = true;
+			GameObject.Find ("Console Light").GetComponent<Light> ().enabled = true;
+			GameObject.Find ("Bedroom Light").GetComponent<Light> ().enabled = true;
+		} else if(Application.loadedLevelName == "SaveSpot" && !this.GetComponent<Tutorial> ().startTutorial){
+			GameObject.Find ("Tech Light").GetComponent<Light> ().enabled = false;
+			GameObject.Find ("Console Light").GetComponent<Light> ().enabled = false;
+			GameObject.Find ("Bedroom Light").GetComponent<Light> ().enabled = false;
+		}
 
 		if (showExitConfirmation && loadTutorial) {
 			notInUse = false;
@@ -80,13 +96,17 @@ public class SaveSpotTeleport : MonoBehaviour {
 			interaction_Button.GetComponent<Mask> ().enabled = false;*/
 		} else if (showEntranceConfirmation) {
 			notInUse = false;
-			Hud.makeInteractionHint ("Press E to enter. Remember coming back starts the next level.", pressE);
-		} else if(!showNoEntry && !showExitConfirmation && !showEntranceConfirmation) {
+			Hud.makeInteractionHint ("Press E to teleport. Remember coming back starts the next level.", pressE);
+		} else if(showExitConfirmation){
+			notInUse = false;
+			Hud.makeInteractionHint ("Press E to teleport. Remember you can only return upon killing the boss.", pressE);
+		} else if(!showExitConfirmation && !showNoEntry && !showExitConfirmation && !showEntranceConfirmation) {
 			notInUse = true;
 		}
 
 		if (Application.loadedLevelName == "Tutorial" && showEntranceConfirmation && Input.GetKeyDown (KeyCode.E) && Loot.gotPowerCore == true) {
 			//showExitConfirmation = true;
+			GameObject.Find("Player").GetComponent<PlayerAttributes>().storage.AddLast(new Cupcake());
 			showEntranceConfirmation = false;
 			attributesScript.restoreHealthToFull();
 			attributesScript.restoreStaminaToFull();
@@ -108,6 +128,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 			//GameObject.Find("Player").transform.position = new Vector3(9.41f, 79.19f, 7.75f);
 			this.GetComponent<Tutorial>().stopTutorial();
 			interaction.fillAmount = 0;
+			this.GetComponent<Tutorial> ().startTutorial = false;
 			Application.LoadLevel ("Scene");
 			Resources.UnloadUnusedAssets();
 		} else if(showExitConfirmation && Input.GetKeyDown(KeyCode.E) && loadTutorial){
@@ -141,20 +162,21 @@ public class SaveSpotTeleport : MonoBehaviour {
 			this.GetComponent<LevelSelect>().spawnedLevel = false;
 			this.GetComponent<LevelSelect>().myRenderer = null;
 			interaction.fillAmount = 0;
+			this.GetComponent<Tutorial> ().startTutorial = false;
 			Application.LoadLevel ("SaveSpot");
 			Resources.UnloadUnusedAssets();
 		}
 	}
 
-	void OnGUI(){
+	/*void OnGUI(){
 		if (showNoEntry) {
 			//GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), ("Kill the boss and take his loot to go back."));
 		} else if (showExitConfirmation && loadTutorial) {
 			//GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), ("Press E to start the tutorial"));
 		} else if (showExitConfirmation){
-			GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), ("Press E to go outside. Remember you can only come back once the level has been cleared."));
+			//GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), ("Press E to go outside. Remember you can only come back once the level has been cleared."));
 		} else if (showEntranceConfirmation) {
 			//GUI.Box(new Rect(140,Screen.height-50,Screen.width-300,120),("Press E to enter. Remember once you have entered coming back starts the next level."));
 		}
-	}
+	}*/
 }

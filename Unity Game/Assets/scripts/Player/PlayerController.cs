@@ -113,12 +113,15 @@ public class PlayerController : MonoBehaviour {
 
 		} else if (Input.GetKeyDown (KeyCode.Tab) && Application.loadedLevelName == "Tutorial"){
 			this.GetComponent<Tutorial> ().tutorialDone = true;
-			this.GetComponent<Tutorial> ().teachInventory = true;
+			playerAttributes.inventory.AddLast(TutorialSpawner.bossPowerCore);
+			playerAttributes.inventory.AddLast(new Longsword(1));
+			playerAttributes.storage.AddLast(new Cupcake());
+			this.GetComponent<SaveSpotTeleport>().canEnterSaveSpot = false;
 			this.GetComponent<SaveSpotTeleport>().loadTutorial = false;
 			sound.playWorldSound (Sounds.SHIP_DOOR);
 			sound.stopSound ("computer");
 			this.GetComponent<LevelSelect>().currentLevel++;
-			this.GetComponent<Tutorial>().stopTutorial();
+			//this.GetComponent<Tutorial>().stopTutorial();
 			Application.LoadLevel ("SaveSpot");
 			Resources.UnloadUnusedAssets();
 			//this.transform.position = new Vector3 (-27.01f, 79.65f, 1.93f);
@@ -127,7 +130,6 @@ public class PlayerController : MonoBehaviour {
 			this.GetComponent<Rigidbody> ().mass = 100f;
 			this.GetComponent<PlayerAttributes> ().restoreHealthToFull();
 			this.GetComponent<PlayerAttributes> ().restoreStaminaToFull();
-			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 			this.GetComponent<SaveSpotTeleport> ().setExitConf(true);
 			Loot.gotPowerCore = true;
 		}
@@ -144,7 +146,12 @@ public class PlayerController : MonoBehaviour {
 
 		//Skip Tutorial
 		if (Input.GetKeyDown (KeyCode.Escape) && this.GetComponent<Tutorial>().startTutorial) {
+			playerAttributes.inventory.AddLast(new Longsword(1));
+			GameObject.Find("Tech Light").GetComponent<Light>().enabled = false;
+			GameObject.Find("Console Light").GetComponent<Light>().enabled = false;
+			GameObject.Find("Bedroom Light").GetComponent<Light>().enabled = false;
 			this.GetComponent<Tutorial>().stopTutorial();
+			this.GetComponent<Tutorial>().startTutorial = false;
 			this.GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
 			this.GetComponent<SaveSpotTeleport>().loadTutorial = false;
 			//GameObject.Find("Player").transform.position = new Vector3(9.41f, 79.19f, 7.75f);
@@ -207,9 +214,9 @@ public class PlayerController : MonoBehaviour {
 				collidedWithNumMosters++;
 			}
 		}
-		
+
 		if (collidedWithNumMosters > 0) {
-			collidedWithNumMosters = 0;
+
 			showAttack = true;
 			Camera.main.GetComponent<HUD> ().makeInteractionHint ("Attack by pressing while your mouse is on the monster", Attack);
 		} else {
@@ -220,7 +227,6 @@ public class PlayerController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		print (this.transform.rotation);
 		checkIfAttackPossible ();
 
 		checkScreenshot();

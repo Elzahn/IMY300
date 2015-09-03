@@ -14,6 +14,7 @@ public class TutorialSpawner : MonoBehaviour {
 
 	//public bool showInventory { get; set; }
 
+	public static PowerCore bossPowerCore;
 	private int numLoot;
 //	private PlayerController playerScript;
 	private Accessory accessoryScript;
@@ -27,6 +28,7 @@ public class TutorialSpawner : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//showInventory = false;
+		bossPowerCore = new PowerCore ();
 		tempLoot = new LinkedList<InventoryItem> ();
 		
 	//	playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
@@ -106,10 +108,11 @@ public class TutorialSpawner : MonoBehaviour {
 				if(enemy.typeID == "BossAlien")
 				{
 					deadEnemies++;
-					tempLoot.AddLast(new PowerCore());
+					tempLoot.AddLast(bossPowerCore);
 					GameObject deadEnemy = Instantiate(loot);
+					deadEnemy.GetComponent<FauxGravityBody>().attractor = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
 					deadEnemy.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
-					deadEnemy.transform.position = (monster.GetComponent<Rigidbody>().position - new Vector3(0, -1, 0));
+					deadEnemy.transform.position = monster.GetComponent<Rigidbody>().position;
 					deadEnemy.tag = "Loot";
 
 					Loot lootComponent = deadEnemy.GetComponentInChildren<Loot> ();
@@ -131,6 +134,7 @@ public class TutorialSpawner : MonoBehaviour {
 
 					tempLoot.AddLast(new Longsword(1));
 					GameObject deadEnemy = Instantiate(loot);
+					deadEnemy.GetComponent<FauxGravityBody>().attractor = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
 					deadEnemy.transform.position = monster.GetComponent<Rigidbody>().position;
 					deadEnemy.tag = "Loot";
 					deadEnemy.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);

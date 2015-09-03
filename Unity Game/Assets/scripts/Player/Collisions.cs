@@ -6,7 +6,7 @@ public class Collisions : MonoBehaviour {
 	
 	public bool showLootConfirmation{ get; private set; }
 	public bool showHealthConfirmation{ get; private set; }
-	//public bool showAttack{ get; set; }
+	public bool showRestore{ get; set; }
 
 	public Sprite pressE;
 	//public Sprite Attack;
@@ -15,43 +15,38 @@ public class Collisions : MonoBehaviour {
 	private PlayerAttributes playerAttributesScript;
 	private PlayerController playerScript;
 	private GameObject colObj;
-	private Image interaction;
-	private Text interactionText;
-	private Image interactionImage;
-	private Image hint;
 
 	public void setLootConf(){
 		showLootConfirmation = false;
 	}
 
 	void Start(){
+		showRestore = false;
 		Hud = Camera.main.GetComponent<HUD> ();
 		playerAttributesScript = this.GetComponent<PlayerAttributes> ();
 		playerScript = this.GetComponent<PlayerController> ();
-		interaction = GameObject.Find ("Interaction").GetComponent<Image> ();
-		interactionText = GameObject.Find ("Interaction_Text").GetComponent<Text> ();
-		interactionImage = GameObject.Find ("Interaction_Image").GetComponent<Image> ();
-		hint = GameObject.Find ("Hint").GetComponent<Image> ();
 		//showAttack = false;
 	}
 
-	/*public void makeHint(string _hintText, Sprite _hintImage){
-		interaction.fillAmount = 1;
-		hint.fillAmount = 0;
-		interactionText.text = _hintText;
-		interactionImage.sprite = _hintImage;
-	}*/
-
 	void Update () {
+		if (Application.loadedLevelName == "SaveSpot" && Loot.gotPowerCore && colObj != null && colObj.name == "Console") {
+			showRestore = true;
+			Hud.makeInteractionHint("Press E to replace the power core", pressE);
+		}
+		if (Application.loadedLevelName == "SaveSpot" && Loot.gotPowerCore && colObj != null && colObj.name == "Console" && Input.GetKeyDown(KeyCode.E)) {
+			showRestore = false;
+			Loot.gotPowerCore = false;
+			GameObject.Find("Player").GetComponent<Tutorial>().startTutorial = false;
+			GameObject.Find("Tech Light").GetComponent<Light>().enabled = false;
+			GameObject.Find("Console Light").GetComponent<Light>().enabled = false;
+			GameObject.Find("Bedroom Light").GetComponent<Light>().enabled = false;
+			GameObject.Find("Player").GetComponent<PlayerAttributes>().inventory.Remove(TutorialSpawner.bossPowerCore);
+			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
+		}
+
 		if (showLootConfirmation) {
 			Hud.makeInteractionHint ("Press E to get loot", pressE);
-		} /*else {
-			interaction.fillAmount = 0;
-		}*/
-
-		/*if (showAttack) {
-			Hud.makeInteractionHint("Attack by pressing ", Attack);
-		} */
+		}
 
 		if (showLootConfirmation && Input.GetKeyDown (KeyCode.E)) {
 			colObj.GetComponent<Loot> ().showMyLoot ();
@@ -59,8 +54,7 @@ public class Collisions : MonoBehaviour {
 			if (playerAttributesScript.inventory.Count < playerAttributesScript.inventorySize) {
 				playerAttributesScript.addToInventory (new MediumHealthPack ());
 				this.GetComponent<Sounds> ().playWorldSound (Sounds.HEALTH_COLLECTION);
-				
-				print (colObj);
+
 				Vector3 tempPos = colObj.transform.position;
 				//Delete health shrub
 				GameObject.Find("Planet").GetComponent<SpawnHealthPacks>().removeHealth(colObj);
@@ -74,7 +68,7 @@ public class Collisions : MonoBehaviour {
 			if (playerAttributesScript.inventory.Count < playerAttributesScript.inventorySize) {
 				playerAttributesScript.addToInventory (new LargeHealthPack ());
 				this.GetComponent<Sounds> ().playWorldSound (Sounds.HEALTH_COLLECTION);
-				print (colObj);
+		
 				Vector3 tempPos = colObj.transform.position;
 				print (tempPos);
 				//Delete health shrub
@@ -90,11 +84,12 @@ public class Collisions : MonoBehaviour {
 	void OnTriggerEnter(Collider col){
 		if (col.tag == "Loot") {
 			showLootConfirmation = true;
-			colObj = col.gameObject;
+			//colObj = col.gameObject;
 		} else if (col.tag == "MediumHealthPack" || col.tag == "LargeHealthPack") {
 			showHealthConfirmation = true;
-			colObj = col.gameObject;
+			//colObj = col.gameObject;
 		}
+		colObj = col.gameObject;
 	}
 	
 	void OnTriggerExit(Collider col){

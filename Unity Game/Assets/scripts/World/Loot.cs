@@ -61,7 +61,7 @@ public class Loot : MonoBehaviour {
 					if (myLoot.Count == 0) {
 						if(showInventoryHint){
 							GameObject.Find("Player").GetComponent<Tutorial>().makeHint(inventoryHintText, GameObject.Find ("Player").GetComponent<Tutorial>().PressI);
-						}
+						} 
 						showLoot = false;
 						Destroy(this.transform.parent.gameObject);
 						GameObject.Find("Player").GetComponent<Collisions>().setLootConf();

@@ -42,6 +42,18 @@ public class FauxGravityAttractor : MonoBehaviour {
 		}
 	}
 
+	void OnTriggerEnter(Collider col){
+		if (col.tag == "Loot") {
+			col.transform.parent.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
+		}
+	}
+
+	void OnTriggerExit(Collider col){
+		if (col.tag == "Loot") {
+			col.transform.parent.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;
+		}
+	}
+
 	//Ensure each object that touches the sphere and has a mesh attached can't be moved
 	void OnCollisionEnter (Collision col){
 
@@ -64,8 +76,8 @@ public class FauxGravityAttractor : MonoBehaviour {
 			}
 		} else if (col.collider.tag == "WarpPoint") {	//seperate since warppoint hierarchy might change with remodel
 			col.collider.transform.parent.gameObject.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
-		} else if (col.collider.tag == "Loot") {
+		} /*else if (col.collider.tag == "Loot") {
 			col.collider.transform.parent.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
-		}
+		}*/
 	}
 }
