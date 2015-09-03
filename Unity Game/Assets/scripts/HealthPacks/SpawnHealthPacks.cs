@@ -62,7 +62,7 @@ public class SpawnHealthPacks : MonoBehaviour {
 	}
 
 	public void position(GameObject go){
-		//GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().checkMyPosition = false;
+		GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().checkMyPosition = false;
 		Vector3 position;
 		bool placed = false;
 		
@@ -82,7 +82,7 @@ public class SpawnHealthPacks : MonoBehaviour {
 			if(tempList.Count() == 0){
 				go.transform.parent.gameObject.transform.GetComponent<Rigidbody> ().position = position;
 				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().timeToCheckMyPosition = Time.time;
-			//	GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().checkMyPosition = true;
+				GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().checkMyPosition = true;
 				return;
 			}
 		}

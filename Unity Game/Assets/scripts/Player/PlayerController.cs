@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour {
 	private float moveSpeed;
 	public Vector3 moveDir{ get; set; }
 
+	public Sprite Attack;
+	public bool showAttack{ get; private set;}
 	/**
 	 * Access 'jumping' like normal variable, do not use '_jumping' ever!
 	 * */
@@ -121,7 +123,7 @@ public class PlayerController : MonoBehaviour {
 			Resources.UnloadUnusedAssets();
 			//this.transform.position = new Vector3 (-27.01f, 79.65f, 1.93f);
 			this.transform.position = new Vector3 (13.72f, 81.58f, 14.77f);//(9.4f, 81.38f, 6.62f);
-			this.transform.rotation = new Quaternion(0, 0.7f, 0, 0.7f);
+			this.transform.rotation = new Quaternion(0.0f, 1f, 0, 0f);
 			this.GetComponent<Rigidbody> ().mass = 100f;
 			this.GetComponent<PlayerAttributes> ().restoreHealthToFull();
 			this.GetComponent<PlayerAttributes> ().restoreStaminaToFull();
@@ -195,9 +197,32 @@ public class PlayerController : MonoBehaviour {
 			sound.stopSound("computer");
 		}
 	}
-	
+
+	public void checkIfAttackPossible(){
+		Collider[] collidedItems = Physics.OverlapSphere(this.transform.position, 5f);
+		int collidedWithNumMosters = 0;
+		
+		foreach(Collider col in collidedItems){
+			if(col.tag == "Monster"){
+				collidedWithNumMosters++;
+			}
+		}
+		
+		if (collidedWithNumMosters > 0) {
+			collidedWithNumMosters = 0;
+			showAttack = true;
+			Camera.main.GetComponent<HUD> ().makeInteractionHint ("Attack by pressing while your mouse is on the monster", Attack);
+		} else {
+			showAttack = false;
+		}
+
+	}
+
 	// Update is called once per frame
 	void Update () {
+		print (this.transform.rotation);
+		checkIfAttackPossible ();
+
 		checkScreenshot();
 
 		moveSpeed = playerAttributes.speed;

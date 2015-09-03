@@ -12,7 +12,7 @@ public class TutorialSpawner : MonoBehaviour {
 	public GameObject enemy1;
 	public GameObject enemy2;
 
-	public bool showInventory { get; set; }
+	//public bool showInventory { get; set; }
 
 	private int numLoot;
 //	private PlayerController playerScript;
@@ -26,8 +26,7 @@ public class TutorialSpawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		showInventory = false;
-		
+		//showInventory = false;
 		tempLoot = new LinkedList<InventoryItem> ();
 		
 	//	playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
@@ -91,25 +90,28 @@ public class TutorialSpawner : MonoBehaviour {
 	void Update () {
 		foreach(GameObject monster in enemies.ToList()){
 
-			float distance = Vector3.Distance (monster.GetComponent<Rigidbody> ().position, GameObject.Find("Player").GetComponent<Rigidbody> ().position);
+			/*float distance = Vector3.Distance (monster.GetComponent<Rigidbody> ().position, GameObject.Find("Player").GetComponent<Rigidbody> ().position);
 			if(distance < 6){
 				GameObject.Find("Player").GetComponent<Tutorial>().setupVisuals();
 				GameObject.Find("Player").GetComponent<Tutorial>().showAttack = true;
-			}
+			} else {
+				GameObject.Find("Player").GetComponent<Tutorial>().showAttack = false;
+			}*/
 
 			Enemy enemy = monster.GetComponent<Enemy>();	
 
 		//	Rigidbody rigidbody = monster.GetComponent<Rigidbody> ();
 			if (enemy.isDead()) {
-				GameObject.Find("Player").GetComponent<Tutorial>().showAttack = false;
+				//GameObject.Find("Player").GetComponent<Tutorial>().showAttack = false;
 				if(enemy.typeID == "BossAlien")
 				{
 					deadEnemies++;
 					tempLoot.AddLast(new PowerCore());
 					GameObject deadEnemy = Instantiate(loot);
-					deadEnemy.transform.position = monster.GetComponent<Rigidbody>().position;
-					deadEnemy.tag = "Loot";
 					deadEnemy.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+					deadEnemy.transform.position = (monster.GetComponent<Rigidbody>().position - new Vector3(0, -1, 0));
+					deadEnemy.tag = "Loot";
+
 					Loot lootComponent = deadEnemy.GetComponentInChildren<Loot> ();
 					lootComponent.storeLoot (tempLoot, "Dead " + enemy.typeID);
 					tempLoot.Clear ();
@@ -120,8 +122,10 @@ public class TutorialSpawner : MonoBehaviour {
 				} else if (!monsterDead){
 					deadEnemies++;
 					GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_INVENTORY);
-					GameObject.Find("Player").GetComponent<Tutorial>().setupVisuals();
-					showInventory = true;
+					//GameObject.Find("Player").GetComponent<Tutorial>().setupVisuals();
+					//showInventory = true;
+					Loot.showInventoryHint = true;
+					//showed Inventory hint here GameObject.Find("Player").GetComponent<Tutorial>().makeHint(inventoryHintText, PressI);
 					monsterDead = true;
 					GameObject.Find("Player").GetComponent<Tutorial>().teachInventory = true;
 
@@ -147,7 +151,7 @@ public class TutorialSpawner : MonoBehaviour {
 		}
 	}
 
-	public void OnGUI(){
+	/*public void OnGUI(){
 		if (GameObject.Find("Player").GetComponent<Tutorial>().startTutorial) {
 			if(GameObject.Find("Player").GetComponent<Tutorial>().showVisuals){
 				if (showInventory) {
@@ -163,5 +167,5 @@ public class TutorialSpawner : MonoBehaviour {
 				GameObject.Find("Player").GetComponent<Tutorial>().showVisuals = false;
 			}
 		}
-	}
+	}*/
 }

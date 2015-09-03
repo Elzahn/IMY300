@@ -116,6 +116,7 @@ public class EnemySpawner : MonoBehaviour {
 			done = 0;
 			foreach (GameObject enemy in enemies) {
 				if (enemy.GetComponent<PositionMe> ().touching == true) {
+					enemy.GetComponent<PositionMe>().checkMyPosition = false;
 					done++;
 				}
 			}
@@ -174,7 +175,7 @@ public class EnemySpawner : MonoBehaviour {
 
 	public void position(GameObject go){
 		go.GetComponent<PositionMe> ().touching = false;
-		//go.GetComponent<PositionMe>().checkMyPosition = false;
+		go.GetComponent<PositionMe>().checkMyPosition = false;
 		Vector3 position;
 		bool landed = false;
 		
@@ -194,7 +195,7 @@ public class EnemySpawner : MonoBehaviour {
 			if(tempList.Count() == 0){
 				go.GetComponent<Rigidbody> ().position = position;
 				GameObject.Find(go.name).GetComponent<PositionMe>().timeToCheckMyPosition = Time.time;
-				//GameObject.Find(go.name).GetComponent<PositionMe>().checkMyPosition = true;
+				GameObject.Find(go.name).GetComponent<PositionMe>().checkMyPosition = true;
 				return;
 			}
 		}

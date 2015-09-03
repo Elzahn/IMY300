@@ -49,7 +49,6 @@ public class NaturalDisasters : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
 		var spawnTrees = GameObject.Find ("Planet").GetComponent<SpawnTrees> ();
 		if (shake > 0) {
 			cameraTransform.localPosition = originalCamPos + Random.insideUnitSphere * shakeAmount;
@@ -109,7 +108,7 @@ public class NaturalDisasters : MonoBehaviour {
 					GameObject.Find ("Player").GetComponent<Sounds> ().stopAlarmSound (Sounds.PLANET_AMBIENCE);
 				}
 
-				if (Time.time >= nextDisaster || earthquakeNow || spinNow) {
+				if ((Application.loadedLevelName != "Tutorial" && Time.time >= nextDisaster) || earthquakeNow || spinNow) {
 					nextDisaster = Time.time + delay;
 					int chance = Random.Range (0, 101);
 

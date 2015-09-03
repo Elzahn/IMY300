@@ -5,7 +5,7 @@ public class PositionMe : MonoBehaviour {
 
 	//couldn't get it to work if vars aren't declared like this
 	public float timeToCheckMyPosition;	//gives two seconds for trees to be attracted to the planet
-	//public bool checkMyPosition = true;	//variable set to tell when tree's position has been set
+	public bool checkMyPosition = true;	//variable set to tell when tree's position has been set
 	public bool touching = false; //is the monster touching the sphere
 
 	//Keeps Trees out of the start position
@@ -24,7 +24,7 @@ public class PositionMe : MonoBehaviour {
 				GameObject.Find ("Planet").GetComponent<SpawnTrees> ().position (child);
 			}
 		} else if (this.tag == "Monster") {
-			if (col.name == "EntrancePlane"){// && checkMyPosition == true) {
+			if (col.name == "EntrancePlane" && checkMyPosition == true) {
 				timeToCheckMyPosition = Time.time;
 				if(GameObject.Find ("Planet").GetComponent<EnemySpawner> () != null){
 					GameObject.Find ("Planet").GetComponent<EnemySpawner> ().position (this.gameObject);
@@ -33,7 +33,7 @@ public class PositionMe : MonoBehaviour {
 				}*/
 			}
 		} else if (this.tag == "MediumHealthPack" || this.tag == "LargeHealthPack") {
-			if (col.name == "EntrancePlane"){// && checkMyPosition == true) {
+			if (col.name == "EntrancePlane" && checkMyPosition == true) {
 				timeToCheckMyPosition = Time.time;
 
 				//Finds chid with the MediumHealthPack or LargeHealthPack tag
@@ -47,7 +47,7 @@ public class PositionMe : MonoBehaviour {
 				GameObject.Find ("Planet").GetComponent<SpawnHealthPacks> ().position (child);
 			}
 		} else if (this.tag == "WarpPoint") {
-			if (col.name == "EntrancePlane"){// && checkMyPosition == true) {
+			if (col.name == "EntrancePlane" && checkMyPosition == true) {
 				timeToCheckMyPosition = Time.time;
 				GameObject.Find ("Planet").GetComponent<SpawnWarpPoints> ().position (this.gameObject);
 			}

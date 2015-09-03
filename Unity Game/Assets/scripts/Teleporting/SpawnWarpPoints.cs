@@ -24,7 +24,7 @@ public class SpawnWarpPoints : MonoBehaviour {
 		for (int i = 0; i < 5; i++) {
 			done = 0;
 			foreach (GameObject warp in warpPoints) {
-				if (warp.GetComponent<Rigidbody>().constraints == RigidbodyConstraints.FreezeAll) {
+				if (warp != null && warp.GetComponent<Rigidbody>().constraints == RigidbodyConstraints.FreezeAll) {
 					done++;
 				}
 			}

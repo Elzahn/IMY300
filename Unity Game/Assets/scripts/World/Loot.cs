@@ -7,6 +7,10 @@ public class Loot : MonoBehaviour {
 
 	private LinkedList<InventoryItem> myLoot = new LinkedList<InventoryItem>();
 
+	public static bool showInventoryHint;
+
+	public static string inventoryHintText;
+
 	public string myName { get; private set; }
 	public bool showLoot { get; private set; }
 	public static bool gotPowerCore{ get; set; }
@@ -17,6 +21,7 @@ public class Loot : MonoBehaviour {
 	void Start () {
 		attributesScript = GameObject.Find("Player").GetComponent<PlayerAttributes> ();
 		playerScript = GameObject.Find("Player").GetComponent<PlayerController> ();
+		inventoryHintText = "Access the inventory by pressing I";
 	}
 
 	public void storeLoot(LinkedList<InventoryItem> tempLoot, string name){
@@ -54,18 +59,23 @@ public class Loot : MonoBehaviour {
 						GameObject.Find("Player").GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
 					}
 					if (myLoot.Count == 0) {
+						if(showInventoryHint){
+							GameObject.Find("Player").GetComponent<Tutorial>().makeHint(inventoryHintText, GameObject.Find ("Player").GetComponent<Tutorial>().PressI);
+						}
 						showLoot = false;
-						Destroy(this.gameObject);
+						Destroy(this.transform.parent.gameObject);
 						GameObject.Find("Player").GetComponent<Collisions>().setLootConf();
 						playerScript.paused = false;
 					}
 				}
 				top += 30;
 			}
+			if(!showInventoryHint){
 			if (GUI.Button (new Rect (left + 270, closeTop + (boxHeight - itemHeight), buttonWidth, itemHeight), "Close")) {
 				showLoot = false;
 				playerScript.paused = false;
 				GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(Sounds.BUTTON);
+			}
 			}
 		}
 	}

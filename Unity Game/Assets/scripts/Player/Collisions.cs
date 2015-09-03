@@ -1,24 +1,58 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Collisions : MonoBehaviour {
-
-	private PlayerAttributes playerAttributesScript;
-	private PlayerController playerScript;
+	
 	public bool showLootConfirmation{ get; private set; }
 	public bool showHealthConfirmation{ get; private set; }
+	//public bool showAttack{ get; set; }
+
+	public Sprite pressE;
+	//public Sprite Attack;
+
+	private HUD Hud;
+	private PlayerAttributes playerAttributesScript;
+	private PlayerController playerScript;
 	private GameObject colObj;
+	private Image interaction;
+	private Text interactionText;
+	private Image interactionImage;
+	private Image hint;
 
 	public void setLootConf(){
 		showLootConfirmation = false;
 	}
 
 	void Start(){
+		Hud = Camera.main.GetComponent<HUD> ();
 		playerAttributesScript = this.GetComponent<PlayerAttributes> ();
 		playerScript = this.GetComponent<PlayerController> ();
+		interaction = GameObject.Find ("Interaction").GetComponent<Image> ();
+		interactionText = GameObject.Find ("Interaction_Text").GetComponent<Text> ();
+		interactionImage = GameObject.Find ("Interaction_Image").GetComponent<Image> ();
+		hint = GameObject.Find ("Hint").GetComponent<Image> ();
+		//showAttack = false;
 	}
 
+	/*public void makeHint(string _hintText, Sprite _hintImage){
+		interaction.fillAmount = 1;
+		hint.fillAmount = 0;
+		interactionText.text = _hintText;
+		interactionImage.sprite = _hintImage;
+	}*/
+
 	void Update () {
+		if (showLootConfirmation) {
+			Hud.makeInteractionHint ("Press E to get loot", pressE);
+		} /*else {
+			interaction.fillAmount = 0;
+		}*/
+
+		/*if (showAttack) {
+			Hud.makeInteractionHint("Attack by pressing ", Attack);
+		} */
+
 		if (showLootConfirmation && Input.GetKeyDown (KeyCode.E)) {
 			colObj.GetComponent<Loot> ().showMyLoot ();
 		} else if (showHealthConfirmation && Input.GetKeyDown(KeyCode.E) && colObj.tag == "MediumHealthPack") {
@@ -95,7 +129,7 @@ public class Collisions : MonoBehaviour {
 
 	void OnGUI(){
 		if (showLootConfirmation) {    
-			GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), ("Press E to loot"));
+			//GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), ("Press E to loot"));
 		} else if (showHealthConfirmation) {
 			GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), ("Press E for HealthPack"));
 		}
