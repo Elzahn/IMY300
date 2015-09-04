@@ -34,6 +34,10 @@ public class InventoryGUI : MonoBehaviour {
 	void Update () {
 		if (!playerScript.paused) {
 
+			if(hasCollided && this.GetComponent<Tutorial>().teachStorage){
+				Hud.makeInteractionHint("Press E to open storage", GameObject.Find("Player").GetComponent<SaveSpotTeleport>().pressE);
+			}
+
 			if(hasCollided && Input.GetKeyDown(KeyCode.E)){
 				openStorage();
 			}
@@ -59,7 +63,6 @@ public class InventoryGUI : MonoBehaviour {
 	void OnTriggerEnter(Collider col){
 		if (col.name == "Storage") {
 			hasCollided = true;
-			Hud.makeInteractionHint("Press E to open storage", GameObject.Find("Player").GetComponent<SaveSpotTeleport>().pressE);
 		}
 	}
 	
