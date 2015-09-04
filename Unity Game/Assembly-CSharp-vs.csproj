@@ -120,7 +120,11 @@
      <None Include="Assets\CloudsToy\Shaders\CloudRealistic.shader" />
      <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAdd.shader" />
  <Reference Include="Assembly-UnityScript-firstpass">
+<<<<<<< HEAD
  <HintPath>C:/Users/Frank/Documents/GitHub/IMY300/Unity Game/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+=======
+ <HintPath>C:/Ander Files/Git/IMY300/Unity Game/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+>>>>>>> Renette
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
@@ -132,7 +136,11 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Cloudstoyv5">
+<<<<<<< HEAD
  <HintPath>C:/Users/Frank/Documents/GitHub/IMY300/Unity Game/Assets/CloudsToy/DLL/Cloudstoyv5.dll</HintPath>
+=======
+ <HintPath>C:/Ander Files/Git/IMY300/Unity Game/Assets/CloudsToy/DLL/Cloudstoyv5.dll</HintPath>
+>>>>>>> Renette
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
