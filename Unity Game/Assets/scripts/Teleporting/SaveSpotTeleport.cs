@@ -106,6 +106,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 
 		if (Application.loadedLevelName == "Tutorial" && showEntranceConfirmation && Input.GetKeyDown (KeyCode.E) && Loot.gotPowerCore == true) {
 			//showExitConfirmation = true;
+			canEnterSaveSpot = false;
 			GameObject.Find("Player").GetComponent<PlayerAttributes>().storage.AddLast(new Cupcake());
 			showEntranceConfirmation = false;
 			attributesScript.restoreHealthToFull();
