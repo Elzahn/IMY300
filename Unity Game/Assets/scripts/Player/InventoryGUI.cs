@@ -141,7 +141,6 @@ public class InventoryGUI : MonoBehaviour {
 						if(item.typeID != "Power Core"){
 							if (GUI.Button (new Rect (left + width-(buttonWidth), top + 80, buttonWidth, itemHeight), "Equip")) {
 								attributesScript.equipItem (item);
-								attributesScript.inventory.Remove (item);
 								if(item.typeID == "Rare Accessory" || item.typeID == "Common Accessory" || item.typeID == "Uncommon Accessory"){
 									this.GetComponent<Sounds>().playWorldSound(Sounds.EQUIP_ACCESSORY);
 								} else if(item.typeID == "Warhammer"){
@@ -181,7 +180,7 @@ public class InventoryGUI : MonoBehaviour {
 					GUI.Label (new Rect (secondLeft + 30, secondTop + 80, width-buttonWidth, itemHeight), item.typeID);
 					if (GUI.Button (new Rect (secondLeft + width - buttonWidth, secondTop + 80, buttonWidth, itemHeight), "Unequip")) {
 						attributesScript.unequipAccessory (item);
-						attributesScript.addToInventory (item);
+
 						this.GetComponent<Sounds>().playWorldSound(Sounds.EQUIP_ACCESSORY);
 					}
 					secondTop += itemHeight;
@@ -197,7 +196,6 @@ public class InventoryGUI : MonoBehaviour {
 			} else {
 				GUI.Label (new Rect (secondLeft + 30, secondTop + 80, 300, 30), attributesScript.weapon.typeID);
 				if (GUI.Button (new Rect (secondLeft + width - buttonWidth, secondTop + 80, buttonWidth, itemHeight), "Unequip")) {
-					attributesScript.addToInventory (attributesScript.weapon);
 					if(attributesScript.weapon.typeID != "Warhammer"){
 						this.GetComponent<Sounds>().playWorldSound(Sounds.EQUIP_SWORD);
 					} else {	

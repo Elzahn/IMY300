@@ -426,73 +426,81 @@ public class PlayerAttributes : MonoBehaviour {
 
 	/***************************** Inventory ************************************/
 
-	public bool equipItem(InventoryItem item) {
+	public void equipItem(InventoryItem item) {
 		switch (item.type) {
 			case 0:
-				return equipAccessory((Accessory) item);
+				equipAccessory((Accessory) item);
+				break;
 			case 1:
-				return equipWeapon((Weapon) item);
+				equipWeapon((Weapon) item);
+				break;
 			default:
 				throw new RulesException("Unknown Item");
 		}
 	}
 
-	public bool unequipWeapon(){
+	public void unequipWeapon(){
 		if (weapon != null)  {
-			inventory.AddLast(weapon);
+			addToInventory(weapon);
+			weapon = null;
 		}
-		weapon = null;
-		return true;
 	}
 	/**
 	 * Self Explanatory
 	 * Return Error or Success Message
 	 */
-	bool equipWeapon(Weapon weap) {
+	void equipWeapon(Weapon weap) {
 		if (weap == null) {
 			throw new System.ArgumentNullException ("weapon");
 		}
-		unequipWeapon();
 
 		if (weap.level <= level) {
+			inventory.Remove(weap);
+			unequipWeapon();
 			this.weapon = weap;
-			return true;
+		} else {
+			throw new RulesException("Weapon Level too high");
 		}
-		throw new RulesException("Weapon Level too high");
 	}
 
-	bool equipAccessory(Accessory a) {
+	void equipAccessory(Accessory a) {
+		if (a == null) {
+			throw new System.ArgumentNullException ("weapon");
+		}
+
 		if (accessories.Count < maxAccessories){
-			accessories.AddLast(a);		
-			return true;
-		} 
-		throw new RulesException("Unequip another one first");
+			inventory.Remove(a);
+			accessories.AddLast(a);
+		} else {
+			throw new RulesException("Unequip another one first");
+		}
 	}
 
-	public bool unequipAccessory(Accessory a) {
+	public void unequipAccessory(Accessory a) {
 		if (accessories.Contains (a)) {
+			addToInventory(a);
 			accessories.Remove (a);
-			inventory.AddLast (a);
-			return true;
+		} else {
+			throw new RulesException ("Accessory not equipped");
 		}
-		throw new RulesException ("Accessory not equipped");
 	}
 	
-	public bool addToStorage(InventoryItem item){
+	public void addToStorage(InventoryItem item){
 		if (storage.Count < MAX_STORAGE) {
 			storage.AddLast (item);
-			return true;
-		}
+		} else {
 		throw new RulesException ("Storage full");
+		}
 	}
 
-	public bool addToInventory(InventoryItem a) {
-		if (inventory.Count < MAX_INVENTORY) {
-			
-			inventory.AddLast (a);
-			return true;
+	public void addToInventory(InventoryItem a) {
+		if (!inventory.Contains(a)) {
+			if (inventory.Count < MAX_INVENTORY ) {			
+				inventory.AddLast (a);
+			} else {
+				throw new RulesException ("Inventory Full. Drop something else first");
+			}
 		}
-		throw new RulesException ("Inventory Full");
 	}
 
 	public void saveInventoryAndStorage(){
