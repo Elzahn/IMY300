@@ -74,12 +74,14 @@ public class Sounds : MonoBehaviour {
 
 	//Computer sounds
 	public const int COMPUTER_WARP = 0;
-	public const int COMPUTER_RUN = 1;
-	public const int COMPUTER_INVENTORY = 2;
-	public const int COMPUTER_DISASTERD = 3;
-	public const int COMPUTER_GOBACK = 4;
-	public const int COMPUTER_FALL = 5;
-	public const int COMPUTER_WARPDESTINATION = 6;
+	public const int COMPUTER_SATELLITE = 1;
+	public const int COMPUTER_RUN = 2;
+	public const int COMPUTER_INVENTORY = 3;
+	public const int COMPUTER_DISASTERD = 4;
+	public const int COMPUTER_GOBACK = 5;
+	public const int COMPUTER_STORAGE = 6;
+	public const int COMPUTER_FALL = 7;
+	public const int COMPUTER_WARPDESTINATION = 8;
 
 	void Start(){
 		worldAudio = GameObject.Find ("World Audio").GetComponent<AudioSource> ();

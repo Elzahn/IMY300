@@ -9,9 +9,9 @@ public class Collisions : MonoBehaviour {
 	public bool showRestore{ get; set; }
 
 	public Sprite pressE;
-	//public Sprite Attack;
 
 	private HUD Hud;
+	private Text hudText;
 	private PlayerAttributes playerAttributesScript;
 	private PlayerController playerScript;
 	private GameObject colObj;
@@ -22,10 +22,10 @@ public class Collisions : MonoBehaviour {
 
 	void Start(){
 		showRestore = false;
+		hudText = GameObject.Find ("HUD_Expand_Text").GetComponent<Text> ();
 		Hud = Camera.main.GetComponent<HUD> ();
 		playerAttributesScript = this.GetComponent<PlayerAttributes> ();
 		playerScript = this.GetComponent<PlayerController> ();
-		//showAttack = false;
 	}
 
 	void Update () {
@@ -36,6 +36,11 @@ public class Collisions : MonoBehaviour {
 		if (Application.loadedLevelName == "SaveSpot" && Loot.gotPowerCore && colObj != null && colObj.name == "Console" && Input.GetKeyDown(KeyCode.E)) {
 			showRestore = false;
 			Loot.gotPowerCore = false;
+			GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_STORAGE);
+			hudText.text += "That weapon looks heavy. You can use the closet in your living quarters as a storage area. \nI’ve tracked down the scattered pieces of the spacecraft on various planets of this solar system. With the return of my Power Core I have enough power to teleport you to these planets to retrieve them.\n\n";
+			Canvas.ForceUpdateCanvases();
+			Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
+			scrollbar.value = 0f;
 			GameObject.Find("Player").GetComponent<Tutorial>().startTutorial = false;
 			GameObject.Find("Tech Light").GetComponent<Light>().enabled = false;
 			GameObject.Find("Console Light").GetComponent<Light>().enabled = false;
@@ -60,7 +65,6 @@ public class Collisions : MonoBehaviour {
 				GameObject.Find("Planet").GetComponent<SpawnHealthPacks>().removeHealth(colObj);
 				Destroy (colObj.transform.gameObject.gameObject);
 				
-				
 				//Add shrub
 				GameObject.Find("Planet").GetComponent<SpawnTrees>().replaceHealth(tempPos);			
 			}
@@ -84,10 +88,8 @@ public class Collisions : MonoBehaviour {
 	void OnTriggerEnter(Collider col){
 		if (col.tag == "Loot") {
 			showLootConfirmation = true;
-			//colObj = col.gameObject;
 		} else if (col.tag == "MediumHealthPack" || col.tag == "LargeHealthPack") {
 			showHealthConfirmation = true;
-			//colObj = col.gameObject;
 		}
 		colObj = col.gameObject;
 	}
@@ -115,17 +117,11 @@ public class Collisions : MonoBehaviour {
 			} else {
 				this.GetComponent<Sounds> ().playCharacterSound (Sounds.MALE_HURT);
 			}
-		}/* else //play landing sound
-		if((col.collider.name == "Ship_interior" || col.collider.name == "Planet") && playerScript.jumping == true) {
-			this.GetComponent<Sounds> ().playCharacterSound (Sounds.JUMP);
-			playerScript.jumping = false;
-		} */
+		}
 	}
 
 	void OnGUI(){
-		if (showLootConfirmation) {    
-			//GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), ("Press E to loot"));
-		} else if (showHealthConfirmation) {
+		if (showHealthConfirmation) {
 			GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), ("Press E for HealthPack"));
 		}
 	}

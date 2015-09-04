@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -278,10 +279,9 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	public float lastDamage {get; set;} //Last time damage taken
-	private float nextRegeneration;
 	public static bool giveAlarm;
-
-
+	private float nextRegeneration;
+	private Text hudText;
 
 	/**************************************************** Monobehaviour functions *********************************************
 	 * Start - Called after creation
@@ -306,7 +306,9 @@ public class PlayerAttributes : MonoBehaviour {
 		this.nextRegeneration = Time.time + REGEN_INTERVAL;
 		this.lastDamage = 0;
 		this.levelsComplete = 0;
-		
+
+		hudText = GameObject.Find ("HUD_Expand_Text").GetComponent<Text> ();
+
 		this.soundComponent = GameObject.Find("Player").gameObject.GetComponent<Sounds>(); //must be GameObject.Find("Player") else it tries to acces what has been destroyed
 		this.controllerComponent = GameObject.Find("Player").gameObject.GetComponent<PlayerController> (); //must be GameObject.Find("Player") else it tries to acces what has been destroyed
 	}
@@ -332,6 +334,11 @@ public class PlayerAttributes : MonoBehaviour {
 			if (level == WARP_UNLOCK_LEVEL && warp != null) {
 				warp.chooseDestinationUnlocked = true;
 				GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_WARPDESTINATION);
+				hudText.text = "I have located all the warp points on the planet. I can now warp you to a chosen destination.\n\n";
+				Canvas.ForceUpdateCanvases();
+				Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
+				scrollbar.value = 0f;
+				GameObject.Find("Player").GetComponent<Tutorial>().makeHint("You can warp by walking onto a warp point. Destination warps have a 10s cool down time and drains health.", null);
 			}
 			
 			if (Time.time >= nextRegeneration) {

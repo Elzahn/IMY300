@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,6 @@ public class Loot : MonoBehaviour {
 	private LinkedList<InventoryItem> myLoot = new LinkedList<InventoryItem>();
 
 	public static bool showInventoryHint;
-
 	public static string inventoryHintText;
 
 	public string myName { get; private set; }
@@ -17,8 +17,10 @@ public class Loot : MonoBehaviour {
 
 	private PlayerAttributes attributesScript;
 	private PlayerController playerScript;
+	private Text hudText;
 
 	void Start () {
+		hudText = GameObject.Find ("HUD_Expand_Text").GetComponent<Text> ();
 		attributesScript = GameObject.Find("Player").GetComponent<PlayerAttributes> ();
 		playerScript = GameObject.Find("Player").GetComponent<PlayerController> ();
 		inventoryHintText = "Access the inventory by pressing I";
@@ -61,6 +63,10 @@ public class Loot : MonoBehaviour {
 					if (myLoot.Count == 0) {
 						if(showInventoryHint){
 							GameObject.Find("Player").GetComponent<Tutorial>().makeHint(inventoryHintText, GameObject.Find ("Player").GetComponent<Tutorial>().PressI);
+							hudText.text += "Congratz you found a weapon. Now try to use it.\n\n";
+							Canvas.ForceUpdateCanvases();
+							Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
+							scrollbar.value = 0f;
 						} 
 						showLoot = false;
 						Destroy(this.transform.parent.gameObject);

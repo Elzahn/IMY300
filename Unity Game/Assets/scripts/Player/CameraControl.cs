@@ -92,8 +92,6 @@ public class CameraControl : MonoBehaviour {
 				stats += "\n";
 				stats += "Level: " + playerAttributes.level;
 
-				stats += "Show Intermediate Goals?";
-
 				PlayerLog.showLog = true;
 				PlayerLog.showHUD = false;
 				PlayerLog.addStat(stats);

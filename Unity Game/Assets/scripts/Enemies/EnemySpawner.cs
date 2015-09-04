@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ public class EnemySpawner : MonoBehaviour {
 
 	private string EnemyName;
 	private int numLoot;
-//	private PlayerController playerScript;
+	private Text hudText;
 	private Accessory accessoryScript;
 	private LinkedList<InventoryItem> tempLoot;
 	private InventoryItem tempItem;
@@ -28,6 +29,10 @@ public class EnemySpawner : MonoBehaviour {
 	int playerLevel;
 
 	LinkedList<GameObject> enemies = new LinkedList <GameObject> ();
+
+	void Start(){
+		hudText = GameObject.Find ("HUD_Expand_Text").GetComponent<Text> ();
+	}
 
 	public string enemiesStats(){
 		string temp = "Enemies left: " + enemies.Count ();
@@ -44,7 +49,6 @@ public class EnemySpawner : MonoBehaviour {
 		clearLoot ();
 		tempLoot = new LinkedList<InventoryItem> ();
 
-	//	playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
 		planet = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
 		playerLevel = GameObject.Find("Player").GetComponent<PlayerAttributes>().level;
 		GameObject enemy;
@@ -95,18 +99,6 @@ public class EnemySpawner : MonoBehaviour {
 			}
 		}
 
-		/*foreach (GameObject enemy in enemies) {
-			if (done == true && enemy.GetComponent<PositionMe> ().touching == true) {
-				done = true;
-			} else {
-				done = false;
-			}
-		}
-
-		if (done) {
-			print ("Enemies landed");
-		}
-		*/
 		return done;
 	}
 
@@ -133,7 +125,16 @@ public class EnemySpawner : MonoBehaviour {
 			if (enemy.isDead()) {
 				if(enemy.typeID == "BossAlien")
 				{
-					GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked = true;
+					if(!GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked){
+						GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked = true;
+						GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_FALL);
+						hudText.text = "What does this button do? I probably shouldn’t, oh well whatever I’ll press it anyway. Oh shit! You seem to have fallen through the planet. That could be useful. \n\n";
+						Canvas.ForceUpdateCanvases();
+						Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
+						scrollbar.value = 0f;
+						GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallNow();
+						GameObject.Find("Player").GetComponent<Tutorial>().makeHint("You can use this ability by pressing F. It has a 10s cool down time.", null);
+					}
 					GameObject.Find("Player").GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
 				}
 				dropLoot(enemy, rigidbody.position);
@@ -221,7 +222,6 @@ public class EnemySpawner : MonoBehaviour {
 		for (int i = 0; i < enemy.maxLoot; i++) {
 			int chance = Random.Range (0, 101);
 			if (chance >= enemy.lootChance) {
-				//playerScript.paused = true;
 				EnemyName = enemy.typeID;
 
 				chance = Random.Range (0, 101);
@@ -341,7 +341,6 @@ public class EnemySpawner : MonoBehaviour {
 		Loot lootComponent = deadEnemy.GetComponentInChildren<Loot> ();
 		lootComponent.storeLoot (tempLoot, "Dead " + EnemyName);
 		tempLoot.Clear ();
-		//lootComponent.showMyLoot ();
 	}
 
 	public void clearLoot(){

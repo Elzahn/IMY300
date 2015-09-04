@@ -6,36 +6,25 @@ public class HUD : MonoBehaviour {
 	private bool expandTheHud;
 	private bool shrinkTheHud;
 
-	private Image expandingHUD;
-	private Image shrinkButton;
-	private Image expandButton;
-	private Image interaction;
 	private Text interactionText;
+	private Text proxyText;
+	private Image interaction;
 	private Image interactionImage;
+	private Image expandingHUD;
 	private Image hint;
 
 	private GameObject player;
-//	private Image hint;
-	//private Text expandText;
-	//private Scrollbar scrollbar;
-
-	//private Image hudText
 
 	void Start(){
+		shrinkTheHud = false;
+		expandTheHud = true;
 		player = GameObject.Find ("Player");
 		expandingHUD = GameObject.Find ("Expand").GetComponent<Image> ();
-		shrinkButton = GameObject.Find ("Shrink_Button").GetComponent<Image> ();
-		expandButton = GameObject.Find ("Expand_Button").GetComponent<Image> ();
 		hint = GameObject.Find ("Hint").GetComponent<Image> ();
 		interaction = GameObject.Find ("Interaction").GetComponent<Image> ();
+		proxyText = GameObject.Find ("Proxy_Text").GetComponent<Text> ();
 		interactionText = GameObject.Find ("Interaction_Text").GetComponent<Text> ();
 		interactionImage = GameObject.Find ("Interaction_Image").GetComponent<Image> ();
-		//hint = GameObject.Find ("Hint").GetComponent<Image> ();
-		//expandText = GameObject.Find ("HUD_Extend_Text").GetComponent<Text> ();
-		//scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
-		shrinkButton.enabled = true;
-		expandButton.enabled = false;
-		//hint.enabled = false;
 		expandingHUD.fillAmount = 1;
 	}
 
@@ -48,21 +37,16 @@ public class HUD : MonoBehaviour {
 		interactionImage.sprite = _hintImage;
 	}
 
-	public void expandHud(){
-		//expandText.text += "\nHi there";
-		//Canvas.ForceUpdateCanvases();
-		//scrollbar.value = 0f;
-		expandTheHud = true;
-		shrinkTheHud = false;
-		expandButton.enabled = false;
-		shrinkButton.enabled = true;
-	}
-
-	public void shrinkHUD(){
-		shrinkTheHud = true;
-		expandTheHud = false;
-		expandButton.enabled = true;
-		shrinkButton.enabled = false;
+	public void showOrHideNarative(){
+		if (shrinkTheHud) {
+			proxyText.text = "Click to hide the narrative";
+			shrinkTheHud = false;
+			expandTheHud = true;
+		} else {
+			proxyText.text = "Click to show the narrative";
+			expandTheHud = false;
+			shrinkTheHud = true;
+		}
 	}
 
 	void Update(){

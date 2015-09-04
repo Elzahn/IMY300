@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-//Move hint to -180.5, -90.7, 0
-//Move hint of screen 203.9
+
 public class Tutorial : MonoBehaviour {
 
 	public bool startTutorial{ get; set; }
@@ -12,54 +11,45 @@ public class Tutorial : MonoBehaviour {
 	public bool showVisuals { get; set; }
 	public bool moveHintOnScreen { get; set; }
 	public bool moveHintOffScreen { get; set; }
+	public float showVisualQue { get; set; }
 
-	//private Image interaction;
-//	private Text interactionText;
-//	private Image interactionImage;
 	private Image interaction;
 	private Image hint;
-	private Text hintText;
 	private Image hintImage;
+	private Text hintText;
+	private Text hudText;
 	private bool justStarted = true;
 	private bool justArrivedOnPlanet = false;
-
 	private Sounds sound;
-	//private bool showWASD = false;
-	//private bool showRun = false;
-//	public bool showAttack { get; set; }
-	public float showVisualQue { get; set; }
+	private int visualDuration = 7;
 
 	public Sprite Walk;
 	public Sprite Run;
 	public Sprite PressI;
+	public Sprite Middle;
 
-	private int visualDuration = 7;
-
-	// Use this for initialization
 	void Start () {
-		this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 		GameObject.Find("Tech Light").GetComponent<Light>().enabled = false;
 		GameObject.Find("Console Light").GetComponent<Light>().enabled = false;
 		GameObject.Find("Bedroom Light").GetComponent<Light>().enabled = false;
+
+		this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
+
 		moveHintOnScreen = false;
 		moveHintOffScreen = false;
 
+		hudText = GameObject.Find ("HUD_Expand_Text").GetComponent<Text> ();
 		interaction = GameObject.Find ("Interaction").GetComponent<Image> ();
 		hint = GameObject.Find ("Hint").GetComponent<Image> ();
 		hintText = GameObject.Find ("Hint_Text").GetComponent<Text> ();
 		hintImage = GameObject.Find ("Hint_Image").GetComponent<Image> ();
-		//interaction = GameObject.Find ("Interaction").GetComponent<Image> ();
-		//interactionText = GameObject.Find ("Interaction_Text").GetComponent<Text> ();
-		//interactionImage = GameObject.Find ("Interaction_Image").GetComponent<Image> ();
+		sound = GameObject.Find("Player").GetComponent<Sounds>();
 
 		showVisuals = true;
-		//showAttack = false;
-		//print ("Press Escape to skip Tutorial");
 		startTutorial = true;
 		tutorialDone = false;
 		teachStorage = false;
 		teachInventory = false;
-		sound = GameObject.Find("Player").GetComponent<Sounds>();
 	}
 
 	// Used to determine what happens next in the tutorial
@@ -75,7 +65,7 @@ public class Tutorial : MonoBehaviour {
 			showVisualQue = Time.time + visualDuration;
 		} else {
 
-			if (Time.time >= showVisualQue){// && GameObject.Find ("Planet") != null && GameObject.Find ("Planet").GetComponent<LoadingScreen>().loading == false) {
+			if (Time.time >= showVisualQue){
 				moveHintOffScreen = true;
 				moveHintOnScreen = false;
 			}
@@ -101,13 +91,6 @@ public class Tutorial : MonoBehaviour {
 				this.GetComponent<SaveSpotTeleport>().loadTutorial = false;
 			}
 
-			/*if(showAttack){
-				makeInteraction("Attack by pressing ", Attack);
-			} else if(!showAttack){
-				//interaction.fillAmount = 0;
-			//	hint.fillAmount = 0;
-			}*/
-
 			sound.resumeSound("all");
 			GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
 			foreach(GameObject m in monsters){
@@ -126,6 +109,10 @@ public class Tutorial : MonoBehaviour {
 				leadTheWay ();
 		}
 		
+		if(Application.loadedLevelName == "Tutorial" && !sound.computerAudio.isPlaying && sound.computerClip == Sounds.COMPUTER_SATELLITE){
+			teachToRun();
+		}
+
 		if (Application.loadedLevelName == "SaveSpot" && tutorialDone && !sound.worldAudio.isPlaying) {
 			lastWordsOfWisdom ();
 			}
@@ -137,7 +124,6 @@ public class Tutorial : MonoBehaviour {
 		sound.stopSound ("computer");
 		teachStorage = true;
 		teachInventory = true;
-		//setupVisuals ();
 		//stop cutscenes
 	}
 
@@ -148,32 +134,20 @@ public class Tutorial : MonoBehaviour {
 
 			if(!sound.computerAudio.isPlaying && sound.computerClip != Sounds.COMPUTER_WARP){
 				sound.playComputerSound(Sounds.COMPUTER_WARP);
-				//setupVisuals();
-				//showWASD = true;
+				hudText.text += "The ship's Power Core has disengaged during the crash. You'll need to go outside and retrieve it before the emergency power shuts down. I have detected three potentially hostile lifeforms on the planet. They appear to have taken possession of the core. You may need to take aggressive action to retrieve it. Look around to find the teleportation pad and go outside.\n\n";
 				makeHint("Move around using W/A/S/D", Walk);
+				Canvas.ForceUpdateCanvases();
+				Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
+				scrollbar.value = 0f;
 			}
 
 			if(!sound.computerAudio.isPlaying){
-		//		this.GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
 				justStarted = false;
 			}
 		} else {
 			sound.pauseSound("all");
 		}
 	}
-
-	//Must be before the variable showing the instruction is set to true
-	//Example setupVisuals(); showWASD = true;
-	//This clears the tutorial visuals so that the new one can be shown
-/*	public void setupVisuals(){
-		//showWASD = false;
-		//showRun = false;
-		if (GameObject.Find ("Planet") != null) {
-			GameObject.Find ("Planet").GetComponent<TutorialSpawner> ().showInventory = false;
-		}
-		showVisuals = true;
-		showVisualQue = Time.time + visualDuration;
-	}*/
 
 	public void leadTheWay(){
 		if (!this.GetComponent<PlayerController> ().paused) {
@@ -184,19 +158,18 @@ public class Tutorial : MonoBehaviour {
 					sound.resumeMonsterSound(m.GetComponent<Enemy>());
 				}
 			}
-
 			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = false;
-	//		if (GameObject.Find ("Planet") != null && GameObject.Find ("Planet").GetComponent<LoadingScreen> ().loading == false) {
-				//called to clear previous instruction if still on screen
-			//setupVisuals ();
-				makeHint("Run with left shift + W/A/S/D", Run);
-				if (!sound.worldAudio.isPlaying) {
-					justArrivedOnPlanet = true;
-				//	setupVisuals ();
-					//showRun = true;
-					sound.playComputerSound (Sounds.COMPUTER_RUN);
-				}
-			//}
+
+			makeHint("Access the satelites with ", Middle);
+		
+			if (!sound.worldAudio.isPlaying) {
+				justArrivedOnPlanet = true;
+				sound.playComputerSound (Sounds.COMPUTER_SATELLITE);
+				hudText.text += "I have linked you to satellites orbiting the planet. This will assist you during your mission.\n\n";
+				Canvas.ForceUpdateCanvases();
+				Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
+				scrollbar.value = 0f;
+			}
 		} else {
 			sound.pauseSound("all");
 			GameObject[] monsters =  GameObject.FindGameObjectsWithTag("Monster");
@@ -206,54 +179,38 @@ public class Tutorial : MonoBehaviour {
 		}
 	}
 
+	public void teachToRun(){
+		if (!this.GetComponent<PlayerController> ().paused) {
+			sound.playComputerSound (Sounds.COMPUTER_RUN);
+			makeHint ("Run with left shift + W/A/S/D", Run);
+			hudText.text += "After you have retrieved the power core from the lifeforms head back to the teleporter to return to the ship.\n\n";
+			Canvas.ForceUpdateCanvases();
+			Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
+			scrollbar.value = 0f;
+		}
+	}
+
 	public void lastWordsOfWisdom(){
 		if (!this.GetComponent<PlayerController> ().paused) {
 			sound.resumeSound("all");
 			//cut scene
 			teachStorage = true;
-			//startTutorial = false; //here
-			//this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 			this.GetComponent<SaveSpotTeleport> ().loadTutorial = false;
 		} else {
 			sound.pauseSound("all");
 		}
 	}
 
-/*	public void makeInteraction(string _hintText, Sprite _hintImage){
-		interactionText.text = _hintText;
-		interactionImage.sprite = _hintImage;
-		interaction.fillAmount = 1;
-		hint.fillAmount = 0;
-		showVisualQue = Time.time;
-	}*/
-
 	public void makeHint(string _hintText, Sprite _hintImage){
 		if(_hintText == Loot.inventoryHintText)
 		{
 			interaction.fillAmount = 0;
 		}
+
 		showVisualQue = Time.time + visualDuration;
 		moveHintOnScreen = true;
 		moveHintOffScreen = false;
 		hintText.text = _hintText;
 		hintImage.sprite = _hintImage;
 	}
-
-	/*public void OnGUI(){
-		if (startTutorial) {
-			if(showVisuals){
-				/*if(showAttack){
-					GUI.depth = 0;
-					GUI.color = new Color32 (255, 255, 255, 100);
-					GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), (""));
-					GUI.color = new Color32 (255, 255, 255, 255);
-					GUI.Label (new Rect (Screen.width/2-100, Screen.height - 35, Screen.width - 300, 120), ("Attack with "));
-					//GUI.DrawTexture (new Rect (Screen.width / 2 - 25, Screen.height - 45, 30, 40), Attack);
-				}
-			}
-			if (Time.time >= showVisualQue){// && GameObject.Find ("Planet") != null && GameObject.Find ("Planet").GetComponent<LoadingScreen>().loading == false) {
-				showVisuals = false;
-			}
-		}
-	}*/
 }

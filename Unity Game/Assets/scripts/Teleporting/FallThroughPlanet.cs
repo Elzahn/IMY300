@@ -16,7 +16,14 @@ public class FallThroughPlanet : MonoBehaviour {
 		fallThroughPlanetUnlocked = false; //will be changed to true after first mini boss when it is unlocked
 		playerScript = this.GetComponent<PlayerController>();
 	}
-	
+
+	//used to cause a direct fall
+	public void fallNow(){
+		var pos = transform.position;
+		transform.position = new Vector3 (-pos.x, -pos.y, -pos.z);
+		this.GetComponent<Sounds>().playWorldSound(Sounds.WARPING);
+	}
+
 	void Update(){
 		if (playerScript.paused == false && fallThroughPlanetUnlocked == true) {
 			if (canFallThroughPlanet == true) {
