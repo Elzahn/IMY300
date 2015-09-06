@@ -35,6 +35,7 @@ public class HUD : MonoBehaviour {
 		GameObject.Find ("Player").GetComponent<Tutorial> ().moveHintOnScreen = false;
 		interactionText.text = _hintText;
 		interactionImage.sprite = _hintImage;
+		interactionImage.GetComponent<Mask>().showMaskGraphic = true;
 	}
 
 	public void showOrHideNarative(){
@@ -50,6 +51,10 @@ public class HUD : MonoBehaviour {
 	}
 
 	void Update(){
+		if (interaction.fillAmount == 0) {
+			interactionImage.GetComponent<Mask>().showMaskGraphic = false;
+		}
+
 		if(!player.GetComponent<PlayerController>().showAttack && player.GetComponent<SaveSpotTeleport>().notInUse && !player.GetComponent<Collisions>().showLootConfirmation && !Loot.showInventoryHint && !player.GetComponent<Collisions>().showRestore && !InventoryGUI.hasCollided && !Collisions.showHealthConfirmation){
 			interaction.fillAmount = 0;
 		}
