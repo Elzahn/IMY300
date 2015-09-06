@@ -1793,8 +1793,8 @@ MonoBehaviour:
   HideHealth: {fileID: 2800000, guid: 6b1034956160b134699d1d4559451efc, type: 3}
   CreateDisasters: {fileID: 2800000, guid: f364b2d2f18159548b795508ea6f22da, type: 3}
   WarpPlayer: {fileID: 2800000, guid: 29c7e2f78d395be46adf9d7cfd387b61, type: 3}
-  progressBarEmpty: {fileID: 2800000, guid: efd2f5dbe9d2b5946be23e375860ba67, type: 3}
-  progressBarFull: {fileID: 2800000, guid: d890af53a4743824194327535ccb54f1, type: 3}
+  progressBarEmpty: {fileID: 2800000, guid: fbf26dfb45d1e0c4ca7597c8da0f8192, type: 3}
+  progressBarFull: {fileID: 2800000, guid: 741ac5d9755707746ac14082f067a587, type: 3}
 --- !u!114 &1218453610
 MonoBehaviour:
   m_ObjectHideFlags: 0
