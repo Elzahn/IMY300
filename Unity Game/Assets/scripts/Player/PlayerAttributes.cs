@@ -338,7 +338,7 @@ public class PlayerAttributes : MonoBehaviour {
 				Canvas.ForceUpdateCanvases();
 				Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
 				scrollbar.value = 0f;
-				GameObject.Find("Player").GetComponent<Tutorial>().makeHint("You can warp by walking onto a warp point. Destination warps have a 10s cool down time and drains health.", null);
+				GameObject.Find("Player").GetComponent<Tutorial>().makeHint("You can warp by walking onto a warp point. Destination warps have a 10s cool down time and drains health.", this.GetComponent<Tutorial>().Warp);
 			}
 			
 			if (Time.time >= nextRegeneration) {

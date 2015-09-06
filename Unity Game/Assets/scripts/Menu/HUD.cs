@@ -50,7 +50,7 @@ public class HUD : MonoBehaviour {
 	}
 
 	void Update(){
-		if(!player.GetComponent<PlayerController>().showAttack && player.GetComponent<SaveSpotTeleport>().notInUse && !player.GetComponent<Collisions>().showLootConfirmation && !Loot.showInventoryHint && !player.GetComponent<Collisions>().showRestore && !InventoryGUI.hasCollided){
+		if(!player.GetComponent<PlayerController>().showAttack && player.GetComponent<SaveSpotTeleport>().notInUse && !player.GetComponent<Collisions>().showLootConfirmation && !Loot.showInventoryHint && !player.GetComponent<Collisions>().showRestore && !InventoryGUI.hasCollided && !Collisions.showHealthConfirmation){
 			interaction.fillAmount = 0;
 		}
 

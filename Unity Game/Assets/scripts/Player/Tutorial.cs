@@ -27,6 +27,8 @@ public class Tutorial : MonoBehaviour {
 	public Sprite Run;
 	public Sprite PressI;
 	public Sprite Middle;
+	public Sprite Warp;
+	public Sprite PressE;
 
 	void Start () {
 		GameObject.Find("Tech Light").GetComponent<Light>().enabled = false;

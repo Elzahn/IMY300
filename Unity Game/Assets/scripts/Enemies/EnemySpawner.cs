@@ -133,7 +133,7 @@ public class EnemySpawner : MonoBehaviour {
 						Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
 						scrollbar.value = 0f;
 						GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallNow();
-						GameObject.Find("Player").GetComponent<Tutorial>().makeHint("You can use this ability by pressing F. It has a 10s cool down time.", null);
+						GameObject.Find("Player").GetComponent<Tutorial>().makeHint("You can use this ability by pressing F. It has a 10s cool down time.", GameObject.Find("Player").GetComponent<Tutorial>().Warp);
 					}
 					GameObject.Find("Player").GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
 				}

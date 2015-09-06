@@ -5,10 +5,8 @@ using System.Collections;
 public class Collisions : MonoBehaviour {
 	
 	public bool showLootConfirmation{ get; private set; }
-	public bool showHealthConfirmation{ get; private set; }
 	public bool showRestore{ get; set; }
-
-	public Sprite pressE;
+	public static bool showHealthConfirmation{ get; private set; }
 
 	private HUD Hud;
 	private Text hudText;
@@ -31,26 +29,30 @@ public class Collisions : MonoBehaviour {
 	void Update () {
 		if (Application.loadedLevelName == "SaveSpot" && Loot.gotPowerCore && colObj != null && colObj.name == "Console") {
 			showRestore = true;
-			Hud.makeInteractionHint("Press E to replace the power core", pressE);
+			Hud.makeInteractionHint ("Press E to replace the power core", this.GetComponent<Tutorial> ().PressE);
 		}
-		if (Application.loadedLevelName == "SaveSpot" && Loot.gotPowerCore && colObj != null && colObj.name == "Console" && Input.GetKeyDown(KeyCode.E)) {
+		if (Application.loadedLevelName == "SaveSpot" && Loot.gotPowerCore && colObj != null && colObj.name == "Console" && Input.GetKeyDown (KeyCode.E)) {
 			showRestore = false;
 			Loot.gotPowerCore = false;
-			GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_STORAGE);
+			GameObject.Find ("Player").GetComponent<Sounds> ().playComputerSound (Sounds.COMPUTER_STORAGE);
 			hudText.text += "That weapon looks heavy. You can use the closet in your living quarters as a storage area. \nI’ve tracked down the scattered pieces of the spacecraft on various planets of this solar system. With the return of my Power Core I have enough power to teleport you to these planets to retrieve them.\n\n";
-			Canvas.ForceUpdateCanvases();
+			Canvas.ForceUpdateCanvases ();
 			Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
 			scrollbar.value = 0f;
-			GameObject.Find("Player").GetComponent<Tutorial>().startTutorial = false;
-			GameObject.Find("Tech Light").GetComponent<Light>().enabled = false;
-			GameObject.Find("Console Light").GetComponent<Light>().enabled = false;
-			GameObject.Find("Bedroom Light").GetComponent<Light>().enabled = false;
-			GameObject.Find("Player").GetComponent<PlayerAttributes>().inventory.Remove(TutorialSpawner.bossPowerCore);
+			GameObject.Find ("Player").GetComponent<Tutorial> ().startTutorial = false;
+			GameObject.Find ("Tech Light").GetComponent<Light> ().enabled = false;
+			GameObject.Find ("Console Light").GetComponent<Light> ().enabled = false;
+			GameObject.Find ("Bedroom Light").GetComponent<Light> ().enabled = false;
+			GameObject.Find ("Player").GetComponent<PlayerAttributes> ().inventory.Remove (TutorialSpawner.bossPowerCore);
 			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 		}
 
 		if (showLootConfirmation) {
-			Hud.makeInteractionHint ("Press E to get loot", pressE);
+			Hud.makeInteractionHint ("Press E to get loot", this.GetComponent<Tutorial> ().PressE);
+		}
+
+		if (showHealthConfirmation) {
+			Hud.makeInteractionHint ("Press E to get a healht pack", this.GetComponent<Tutorial> ().PressE);
 		}
 
 		if (showLootConfirmation && Input.GetKeyDown (KeyCode.E)) {
@@ -74,7 +76,7 @@ public class Collisions : MonoBehaviour {
 				this.GetComponent<Sounds> ().playWorldSound (Sounds.HEALTH_COLLECTION);
 		
 				Vector3 tempPos = colObj.transform.position;
-				print (tempPos);
+//				print (tempPos);
 				//Delete health shrub
 				GameObject.Find("Planet").GetComponent<SpawnHealthPacks>().removeHealth(colObj);
 				Destroy (colObj.transform.gameObject);
@@ -117,12 +119,6 @@ public class Collisions : MonoBehaviour {
 			} else {
 				this.GetComponent<Sounds> ().playCharacterSound (Sounds.MALE_HURT);
 			}
-		}
-	}
-
-	void OnGUI(){
-		if (showHealthConfirmation) {
-			GUI.Box (new Rect (140, Screen.height - 50, Screen.width - 300, 120), ("Press E for HealthPack"));
 		}
 	}
 }

@@ -2020,7 +2020,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe57a5865ddad294583cdf13d3f50131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pressE: {fileID: 21300000, guid: f328290f0fd2d664084e567dee5c8fe3, type: 3}
 --- !u!95 &839258571
 Animator:
   serializedVersion: 3
@@ -2203,7 +2202,9 @@ MonoBehaviour:
   Walk: {fileID: 21300000, guid: 95fc53a459a87ea40a32740ada7b5d83, type: 3}
   Run: {fileID: 21300000, guid: 91e64c3cb7757b643b057438e479dae7, type: 3}
   PressI: {fileID: 21300000, guid: 094941c9d43006145982c3312d9242f1, type: 3}
-  Middle: {fileID: 0}
+  Middle: {fileID: 21300000, guid: af5591e21e12af54eabf69ab710341f6, type: 3}
+  Warp: {fileID: 21300000, guid: a0ae53dca1e531642a898fdc71882bcc, type: 3}
+  PressE: {fileID: 21300000, guid: f328290f0fd2d664084e567dee5c8fe3, type: 3}
 --- !u!114 &839258581
 MonoBehaviour:
   m_ObjectHideFlags: 0
