@@ -114,7 +114,6 @@ public class PlayerController : MonoBehaviour {
 		} else if (Input.GetKeyDown (KeyCode.Tab) && Application.loadedLevelName == "Tutorial"){
 			this.GetComponent<Tutorial> ().tutorialDone = true;
 			playerAttributes.inventory.AddLast(TutorialSpawner.bossPowerCore);
-			playerAttributes.inventory.AddLast(new Longsword(1));
 			playerAttributes.storage.AddLast(new Cupcake());
 			this.GetComponent<SaveSpotTeleport>().canEnterSaveSpot = false;
 			this.GetComponent<SaveSpotTeleport>().loadTutorial = false;
@@ -146,7 +145,6 @@ public class PlayerController : MonoBehaviour {
 
 		//Skip Tutorial
 		if (Input.GetKeyDown (KeyCode.Escape) && this.GetComponent<Tutorial>().startTutorial) {
-			playerAttributes.inventory.AddLast(new Longsword(1));
 			GameObject.Find("Tech Light").GetComponent<Light>().enabled = false;
 			GameObject.Find("Console Light").GetComponent<Light>().enabled = false;
 			GameObject.Find("Bedroom Light").GetComponent<Light>().enabled = false;

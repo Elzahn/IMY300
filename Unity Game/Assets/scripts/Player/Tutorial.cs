@@ -29,6 +29,7 @@ public class Tutorial : MonoBehaviour {
 	public Sprite Middle;
 	public Sprite Warp;
 	public Sprite PressE;
+	public Sprite Health;
 
 	void Start () {
 		GameObject.Find("Tech Light").GetComponent<Light>().enabled = false;
@@ -66,6 +67,10 @@ public class Tutorial : MonoBehaviour {
 
 			showVisualQue = Time.time + visualDuration;
 		} else {
+			/*if (Application.loadedLevelName == "Scene" && !GameObject.Find("Planet").GetComponent<LoadingScreen>().loading && this.GetComponent<LevelSelect>().currentLevel == 2) {
+				this.GetComponent<SaveSpotTeleport> ().showedHealthHint = true;
+				makeHint("Need a health pack? Look out for the purple flowers.", Health);
+			}*/
 
 			if (Time.time >= showVisualQue){
 				moveHintOffScreen = true;
@@ -86,6 +91,8 @@ public class Tutorial : MonoBehaviour {
 
 				if (hint.fillAmount <= 0 && hintText.text == Loot.inventoryHintText) {
 					Loot.showInventoryHint = false;
+				} else if(hint.fillAmount <= 0){
+					GameObject.Find("Player").GetComponent<SaveSpotTeleport>().showedHealthHint = false;
 				}
 			}
 
@@ -167,7 +174,7 @@ public class Tutorial : MonoBehaviour {
 			if (!sound.worldAudio.isPlaying) {
 				justArrivedOnPlanet = true;
 				sound.playComputerSound (Sounds.COMPUTER_SATELLITE);
-				hudText.text += "I have linked you to satellites orbiting the planet. This will assist you during your mission.\n\n";
+				hudText.text += "\n\nI have linked you to satellites orbiting the planet. This will assist you during your mission.\n\n";
 				Canvas.ForceUpdateCanvases();
 				Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
 				scrollbar.value = 0f;
@@ -204,8 +211,7 @@ public class Tutorial : MonoBehaviour {
 	}
 
 	public void makeHint(string _hintText, Sprite _hintImage){
-		if(_hintText == Loot.inventoryHintText)
-		{
+		if (_hintText == Loot.inventoryHintText || (Application.loadedLevelName == "Scene" && !GameObject.Find("Planet").GetComponent<LoadingScreen> ().loading)) {
 			interaction.fillAmount = 0;
 		}
 

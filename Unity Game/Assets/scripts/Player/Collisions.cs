@@ -52,7 +52,7 @@ public class Collisions : MonoBehaviour {
 		}
 
 		if (showHealthConfirmation) {
-			Hud.makeInteractionHint ("Press E to get a healht pack", this.GetComponent<Tutorial> ().PressE);
+			Hud.makeInteractionHint ("Press E to get a health pack", this.GetComponent<Tutorial> ().PressE);
 		}
 
 		if (showLootConfirmation && Input.GetKeyDown (KeyCode.E)) {

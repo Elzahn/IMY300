@@ -12,6 +12,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 	public bool canEnterSaveSpot{ get; set; }
 	public bool loadTutorial {get; set;}
 	public bool notInUse {get; set;}
+	public bool showedHealthHint {get; set;}
 
 	private bool showExitConfirmation, showEntranceConfirmation, showNoEntry;
 	private PlayerAttributes attributesScript;
@@ -34,6 +35,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		showedHealthHint = false;
 		notInUse = true;
 		Hud = Camera.main.GetComponent<HUD> ();
 		hint = GameObject.Find ("Hint").GetComponent<Image> ();
@@ -52,8 +54,6 @@ public class SaveSpotTeleport : MonoBehaviour {
 			showExitConfirmation = true;
 		} else if (col.name == "EntrancePlane" && canEnterSaveSpot) {
 			showEntranceConfirmation = true;
-		} else if (col.name == "ExitPlane"  && canEnterSaveSpot && loadTutorial) {
-			//got lost? showExitConfirmation = true;
 		} else if (col.name == "EntrancePlane") {
 			showNoEntry = true;
 		}
@@ -66,7 +66,6 @@ public class SaveSpotTeleport : MonoBehaviour {
 	}
 
 	void Update () {
-
 		if (Application.loadedLevelName == "SaveSpot" && this.GetComponent<Tutorial> ().startTutorial) {
 //			canEnterSaveSpot = false;
 			GameObject.Find ("Tech Light").GetComponent<Light> ().enabled = true;
@@ -89,7 +88,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 				scrollbar.value = 0f;
 				textAdded = true;
 			}*/
-		} else if (showNoEntry && !loadTutorial) {
+		} else if (showNoEntry && !loadTutorial && !showedHealthHint) {
 			notInUse = false;
 			Hud.makeInteractionHint ("Kill the boss and take his loot to go back to the ship.", noEntry);
 			/*interaction_Button.sprite = noEntry;
@@ -118,6 +117,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 			sound.playWorldSound(Sounds.SHIP_DOOR);
 			this.GetComponent<LevelSelect>().currentLevel++;
 			interaction.fillAmount = 0;
+			this.transform.up = GameObject.Find("Floor").transform.up;
 			Application.LoadLevel ("SaveSpot");
 			Resources.UnloadUnusedAssets();
 		} else if (showExitConfirmation && Input.GetKeyDown (KeyCode.E) && !loadTutorial) {
@@ -130,6 +130,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 			this.GetComponent<Tutorial>().stopTutorial();
 			interaction.fillAmount = 0;
 			this.GetComponent<Tutorial> ().startTutorial = false;
+
 			Application.LoadLevel ("Scene");
 			Resources.UnloadUnusedAssets();
 		} else if(showExitConfirmation && Input.GetKeyDown(KeyCode.E) && loadTutorial){
