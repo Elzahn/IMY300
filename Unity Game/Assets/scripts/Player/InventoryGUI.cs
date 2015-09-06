@@ -127,7 +127,6 @@ public class InventoryGUI : MonoBehaviour {
 			int secondTop = top;
 			int buttonWidth = 60;
 			int itemHeight = 30;
-			int specWidth = 150;
 
 			//Inventory
 			Text Inv = GameObject.Find ("inv").GetComponent<Text> ();
@@ -142,7 +141,7 @@ public class InventoryGUI : MonoBehaviour {
 					Text W = GameObject.Find ("weap").GetComponent<Text> ();
 					W.text = item.typeID;
 					if(item.typeID != "Power Core"){
-						if (GUI.Button (new Rect (width+131, top+151, buttonWidth, itemHeight), "Drop it")) {
+						if (GUI.Button (new Rect (width+101, top+151, buttonWidth, itemHeight), "Drop it")) {
 							attributesScript.inventory.Remove (item);
 							W.text = "";
 							this.GetComponent<Sounds>().playWorldSound(Sounds.DROP_ITEM);
@@ -164,7 +163,7 @@ public class InventoryGUI : MonoBehaviour {
 							}
 						}
 					} else {
-						if (GUI.Button (new Rect (width+131, top+151, buttonWidth, itemHeight), "Use")) {
+						if (GUI.Button (new Rect (width+201, top+151, buttonWidth, itemHeight), "Use")) {
 							if(item.typeID != "Cupcake"){
 								attributesScript.useHealthPack (item);
 								attributesScript.inventory.Remove (item);
