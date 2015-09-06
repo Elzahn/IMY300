@@ -136,6 +136,10 @@ public class PlayerController : MonoBehaviour {
 		//skip loadingscreen
 		if (Input.GetKeyDown (KeyCode.L) && Application.loadedLevelName == "Scene") {
 			GameObject.Find("Planet").GetComponent<LoadingScreen>().loading = false;
+			if(GameObject.Find("Player").GetComponent<LevelSelect>().currentLevel == 1){
+				GameObject.Find("Player").GetComponent<SaveSpotTeleport>().showedHealthHint = true;
+				GameObject.Find("Player").GetComponent<Tutorial>().makeHint("Need a health pack? Look out for the purple flowers.", GameObject.Find("Player").GetComponent<Tutorial>().Health);
+			}
 			//this.transform.position = new Vector3(9.41f, 79.19f, 7.75f);
 			this.transform.position = new Vector3 (0.304f, 80.394f, 0.207f);//(0.32f, 80.37f, 032f);
 			this.GetComponent<Rigidbody>().isKinematic = false;
