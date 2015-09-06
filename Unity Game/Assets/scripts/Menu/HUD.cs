@@ -7,11 +7,12 @@ public class HUD : MonoBehaviour {
 	private bool shrinkTheHud;
 
 	private Text interactionText;
-	private Text proxyText;
 	private Image interaction;
 	private Image interactionImage;
 	private Image expandingHUD;
 	private Image hint;
+	private Image expand;
+	private Image shrink;
 
 	private GameObject player;
 
@@ -20,12 +21,14 @@ public class HUD : MonoBehaviour {
 		expandTheHud = true;
 		player = GameObject.Find ("Player");
 		expandingHUD = GameObject.Find ("Expand").GetComponent<Image> ();
+		expand = GameObject.Find ("Expanding").GetComponent<Image> ();
+		shrink = GameObject.Find ("Shrink").GetComponent<Image> ();
 		hint = GameObject.Find ("Hint").GetComponent<Image> ();
 		interaction = GameObject.Find ("Interaction").GetComponent<Image> ();
-		proxyText = GameObject.Find ("Proxy_Text").GetComponent<Text> ();
 		interactionText = GameObject.Find ("Interaction_Text").GetComponent<Text> ();
 		interactionImage = GameObject.Find ("Interaction_Image").GetComponent<Image> ();
 		expandingHUD.fillAmount = 1;
+		expand.enabled = false;
 	}
 
 	public void makeInteractionHint(string _hintText, Sprite _hintImage){
@@ -40,11 +43,13 @@ public class HUD : MonoBehaviour {
 
 	public void showOrHideNarative(){
 		if (shrinkTheHud) {
-			proxyText.text = "Click to hide the narrative";
+			shrink.enabled = true;
+			expand.enabled = false;
 			shrinkTheHud = false;
 			expandTheHud = true;
 		} else {
-			proxyText.text = "Click to show the narrative";
+			expand.enabled = true;
+			shrink.enabled = false;
 			expandTheHud = false;
 			shrinkTheHud = true;
 		}
