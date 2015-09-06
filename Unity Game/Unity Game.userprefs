@@ -1,34 +1,24 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Player\Collisions.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Player\Tutorial.cs">
     <Files>
-      <File FileName="Assets\scripts\Player\Tutorial.cs" Line="188" Column="13" />
-      <File FileName="Assets\scripts\Menu\HUD.cs" Line="2" Column="1" />
-      <File FileName="Assets\scripts\Teleporting\SaveSpotTeleport.cs" Line="12" Column="1" />
+      <File FileName="Assets\scripts\Player\Tutorial.cs" Line="170" Column="34" />
+      <File FileName="Assets\scripts\Menu\HUD.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Teleporting\SaveSpotTeleport.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Player\PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Player\Collisions.cs" Line="40" Column="114" />
-      <File FileName="Assets\scripts\World\Sounds.cs" Line="82" Column="35" />
-      <File FileName="Assets\scripts\World\Loot.cs" Line="69" Column="29" />
+      <File FileName="Assets\scripts\Player\Collisions.cs" Line="7" Column="55" />
+      <File FileName="Assets\scripts\World\Sounds.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\World\Loot.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Enemies\TutorialSpawner.cs" Line="139" Column="27" />
-      <File FileName="Assets\scripts\Player\CameraControl.cs" Line="93" Column="49" />
-      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="340" Column="26" />
-      <File FileName="Assets\scripts\Teleporting\FallThroughPlanet.cs" Line="24" Column="62" />
-      <File FileName="Assets\scripts\Enemies\EnemySpawner.cs" Line="134" Column="28" />
+      <File FileName="Assets\scripts\Player\CameraControl.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="341" Column="60" />
+      <File FileName="Assets\scripts\Teleporting\FallThroughPlanet.cs" Line="48" Column="78" />
+      <File FileName="Assets\scripts\Enemies\EnemySpawner.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="Assembly-CSharp" expanded="True">
-            <Node name="scripts" expanded="True">
-              <Node name="Enemies" expanded="True" />
-              <Node name="Menu" expanded="True" />
-              <Node name="Player" expanded="True">
-                <Node name="Collisions.cs" selected="True" />
-              </Node>
-              <Node name="Teleporting" expanded="True" />
-              <Node name="World" expanded="True" />
-            </Node>
-          </Node>
+          <Node name="Assembly-CSharp-firstpass" expanded="True" />
         </State>
       </Pad>
     </Pads>

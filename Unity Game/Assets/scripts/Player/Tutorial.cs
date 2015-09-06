@@ -134,7 +134,7 @@ public class Tutorial : MonoBehaviour {
 
 			if(!sound.computerAudio.isPlaying && sound.computerClip != Sounds.COMPUTER_WARP){
 				sound.playComputerSound(Sounds.COMPUTER_WARP);
-				hudText.text += "The ship's Power Core has disengaged during the crash. You'll need to go outside and retrieve it before the emergency power shuts down. I have detected three potentially hostile lifeforms on the planet. They appear to have taken possession of the core. You may need to take aggressive action to retrieve it. Look around to find the teleportation pad and go outside.\n\n";
+				hudText.text += "\n\nThe ship's Power Core has disengaged during the crash. You'll need to go outside and retrieve it before the emergency power shuts down. I have detected three potentially hostile lifeforms on the planet. They appear to have taken possession of the core. You may need to take aggressive action to retrieve it. Look around to find the teleportation pad and go outside.\n\n";
 				makeHint("Move around using W/A/S/D", Walk);
 				Canvas.ForceUpdateCanvases();
 				Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
