@@ -13,10 +13,22 @@ public class HUD : MonoBehaviour {
 	private Image hint;
 	private Image expand;
 	private Image shrink;
+	private Image warpLight;
+	private Image warpLightActive;
+	private Image fallLight;
+	private Image fallLightActive;
 
 	private GameObject player;
 
 	void Start(){
+		warpLight = GameObject.Find ("WarpLight").GetComponent<Image> ();
+		warpLightActive = GameObject.Find ("WarpLight_Active").GetComponent<Image> ();
+		fallLight = GameObject.Find ("FallThroughLight").GetComponent<Image> ();
+		fallLightActive = GameObject.Find ("FallThroughLight_Active").GetComponent<Image> ();
+
+		fallLightActive.enabled = false;
+		warpLightActive.enabled = false;
+
 		shrinkTheHud = false;
 		expandTheHud = true;
 		player = GameObject.Find ("Player");
@@ -29,6 +41,36 @@ public class HUD : MonoBehaviour {
 		interactionImage = GameObject.Find ("Interaction_Image").GetComponent<Image> ();
 		expandingHUD.fillAmount = 1;
 		expand.enabled = false;
+	}
+
+	public void turnOffLights(string light){
+		if (light == "warp") {
+			warpLightActive.enabled = false;
+			warpLight.enabled = true;
+		} else {
+			fallLightActive.enabled = false;
+			fallLight.enabled = true;
+		}
+	}
+
+	public void setLight(string light){
+		if (light == "warp") {
+			if (warpLightActive.enabled) {
+				warpLightActive.enabled = false;
+				warpLight.enabled = true;
+			} else {
+				warpLight.enabled = false;
+				warpLightActive.enabled = true;
+			}
+		} else {
+			if (fallLightActive.enabled) {
+				fallLightActive.enabled = false;
+				fallLight.enabled = true;
+			} else {
+				fallLight.enabled = false;
+				fallLightActive.enabled = true;
+			}
+		}
 	}
 
 	public void makeInteractionHint(string _hintText, Sprite _hintImage){

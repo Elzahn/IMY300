@@ -343,6 +343,7 @@ public class PlayerAttributes : MonoBehaviour {
 
 			Warping warp = this.gameObject.GetComponent<Warping> ();
 			if (level == WARP_UNLOCK_LEVEL && warp != null && showWarpHint) {
+				Camera.main.GetComponent<HUD>().setLight("warp");
 				warp.chooseDestinationUnlocked = true;
 				showWarpHint = false;
 				GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_WARPDESTINATION);

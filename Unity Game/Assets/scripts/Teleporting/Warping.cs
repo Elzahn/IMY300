@@ -37,7 +37,8 @@ public class Warping : MonoBehaviour {
 			if (chooseDestination == false && Time.time >= nextUsage){
 				nextUsage = Time.time + delay;
 				chooseDestination = true;
-				print ("You can now choose your destination when warping again.");
+				Camera.main.GetComponent<HUD>().setLight("warp");
+				//print ("You can now choose your destination when warping again.");
 				//PlayerLog.addStat("You can now choose your destination when warping again.");
 			}
 		}
@@ -99,6 +100,7 @@ public class Warping : MonoBehaviour {
 				
 			if(GUI.Button(new Rect(320, top+30,150,20), "Warp point 1")) {
 				chooseDestination = false;
+				Camera.main.GetComponent<HUD>().turnOffLights("warp");
 				nextUsage = Time.time + delay;
 				generateRandomWarpPoint(1);
 			}
@@ -111,6 +113,7 @@ public class Warping : MonoBehaviour {
 
 			if(GUI.Button(new Rect(320, top+60,150,20), "Warp point 2")) {
 				chooseDestination = false;
+				Camera.main.GetComponent<HUD>().turnOffLights("warp");
 				nextUsage = Time.time + delay;
 				generateRandomWarpPoint(2);
 			}
@@ -123,6 +126,7 @@ public class Warping : MonoBehaviour {
 
 			if(GUI.Button(new Rect(320, top+90,150,20), "Warp point 3")) {
 				chooseDestination = false;
+				Camera.main.GetComponent<HUD>().turnOffLights("warp");
 				generateRandomWarpPoint(3);
 				nextUsage = Time.time + delay;
 			}
@@ -135,6 +139,7 @@ public class Warping : MonoBehaviour {
 
 			if(GUI.Button(new Rect(320, top+120,150,20), "Warp point 4")) {
 				chooseDestination = false;
+				Camera.main.GetComponent<HUD>().turnOffLights("warp");
 				nextUsage = Time.time + delay;
 				generateRandomWarpPoint(4);
 			}
@@ -147,6 +152,7 @@ public class Warping : MonoBehaviour {
 
 			if(GUI.Button(new Rect(320, top+150,150,20), "Warp point 5")) {
 				chooseDestination = false;
+				Camera.main.GetComponent<HUD>().turnOffLights("warp");
 				nextUsage = Time.time + delay;
 				generateRandomWarpPoint(5);
 			}
@@ -155,6 +161,7 @@ public class Warping : MonoBehaviour {
 
 			if(GUI.Button(new Rect(320, top+180,150,20), "Random warp point")) {
 				chooseDestination = false;
+				Camera.main.GetComponent<HUD>().turnOffLights("warp");
 				nextUsage = Time.time + delay;
 				generateRandomWarpPoint(Random.Range(1, 6));
 			}

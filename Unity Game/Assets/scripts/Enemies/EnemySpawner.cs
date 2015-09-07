@@ -132,6 +132,7 @@ public class EnemySpawner : MonoBehaviour {
 						if(GameObject.Find("Player").GetComponent<Sounds>().computerAudio.isPlaying){
 							GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallNow();
 							fallFirst = false;
+							Camera.main.GetComponent<HUD>().setLight("fall");
 							GameObject.Find("Player").GetComponent<Tutorial>().makeHint("You can use this ability by pressing F. It has a 10s cool down time.", GameObject.Find("Player").GetComponent<Tutorial>().Warp);
 						}
 
