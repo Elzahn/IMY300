@@ -71,7 +71,11 @@ public class Sounds : MonoBehaviour {
 	//Ambience sounds
 	public const int SHIP_AMBIENCE = 0;
 	public const int TUTORIAL_AMBIENCE = 1;
-	public const int PLANET_AMBIENCE = 1;
+	public const int PLANET_1_AMBIENCE = 2;
+	public const int PLANET_2_AMBIENCE = 3;
+	public const int PLANET_3_AMBIENCE = 4;
+	public const int PLANET_4_AMBIENCE = 5;
+	public const int PLANET_5_AMBIENCE = 6;
 
 	//Computer sounds
 	public const int COMPUTER_WARP = 0;

@@ -2561,20 +2561,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldClips:
-  - {fileID: 8300000, guid: 14ed014cd6d24ac4db0b2a2fc345299a, type: 3}
-  - {fileID: 8300000, guid: d7ea453bc2ad2a24590755b413b2843f, type: 3}
+  - {fileID: 8300000, guid: 3c4cc9887a292cc4c832dca4e4b15fa6, type: 3}
+  - {fileID: 8300000, guid: ed90305a9fe82344da5f25f587caaa56, type: 3}
   - {fileID: 8300000, guid: f10396084e22f0645ab877cd7aaa5fe9, type: 3}
   - {fileID: 8300000, guid: 61f420b83ffb64f4b86e39fc4e216164, type: 3}
   - {fileID: 8300000, guid: affe4c4e4e9905745b687bbafde80596, type: 3}
   - {fileID: 8300000, guid: 806a14ee02c22eb4c804d384bd34caef, type: 3}
   - {fileID: 8300000, guid: bd9aced8f4194c64185b36b73584710e, type: 3}
-  - {fileID: 8300000, guid: ed90305a9fe82344da5f25f587caaa56, type: 3}
+  - {fileID: 8300000, guid: 7f990a2facbf28543aa2445c92faf552, type: 3}
   - {fileID: 8300000, guid: f7fef4e6c99601047a167afb6ce7bdde, type: 3}
   - {fileID: 8300000, guid: 26c82376b68f1ea4e96969cb855ba8b4, type: 3}
   - {fileID: 8300000, guid: e043f8bf83a257048a2f26fcae0c9b1a, type: 3}
   - {fileID: 8300000, guid: cd120940c2d49dd4e9f564f6c1d8de08, type: 3}
   - {fileID: 8300000, guid: 8b41580f32a8b49488ee6eda7b0dcbed, type: 3}
   - {fileID: 8300000, guid: d4be918b3d67ab24e8846888c7062847, type: 3}
+  - {fileID: 8300000, guid: fe5731ecee451ba4482cd37ac89dc2d8, type: 3}
+  - {fileID: 8300000, guid: 81b84d09f449db647bd93261f4afa074, type: 3}
   ambienceClips:
   - {fileID: 8300000, guid: 9fbe89efa05ea954a90a652d706abd30, type: 3}
   - {fileID: 8300000, guid: 15f688accffcb374faed819ebfe9c851, type: 3}
@@ -2605,17 +2607,17 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d5cac29905455874599afa85854bc334, type: 3}
   - {fileID: 8300000, guid: 27d8bb919ae6aa24d85dfe4b170c58c3, type: 3}
   computerClips:
-  - {fileID: 8300000, guid: c0401c5972b26ea4e9cc1e7758412ee3, type: 3}
-  - {fileID: 8300000, guid: b167b0df304ea7d45b3af1eedbe221ad, type: 3}
-  - {fileID: 8300000, guid: d7ea453bc2ad2a24590755b413b2843f, type: 3}
-  - {fileID: 8300000, guid: ee54bd6abcd08a64bb230b586c4fda54, type: 3}
-  - {fileID: 8300000, guid: d7ea453bc2ad2a24590755b413b2843f, type: 3}
-  - {fileID: 8300000, guid: d7ea453bc2ad2a24590755b413b2843f, type: 3}
-  - {fileID: 8300000, guid: d7ea453bc2ad2a24590755b413b2843f, type: 3}
-  - {fileID: 8300000, guid: d7ea453bc2ad2a24590755b413b2843f, type: 3}
-  - {fileID: 8300000, guid: d7ea453bc2ad2a24590755b413b2843f, type: 3}
-  - {fileID: 8300000, guid: d7ea453bc2ad2a24590755b413b2843f, type: 3}
-  - {fileID: 8300000, guid: d7ea453bc2ad2a24590755b413b2843f, type: 3}
+  - {fileID: 8300000, guid: 78e64852842a83c41bc7d127053a5d34, type: 3}
+  - {fileID: 8300000, guid: 7542539492e21c8448d26e4bf0d48813, type: 3}
+  - {fileID: 8300000, guid: 7b6049b482f4a7846a580ae68923a070, type: 3}
+  - {fileID: 8300000, guid: 7b1ebfa44be3c694d8011c239fda9b68, type: 3}
+  - {fileID: 8300000, guid: 49bc1ef6d3e25dd41bda988bd4453f71, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &839258574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2946,7 +2948,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -5, y: .00345611572}
+  m_AnchoredPosition: {x: -5, y: .0143623352}
   m_SizeDelta: {x: 822.030029, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &913601018
@@ -4466,7 +4468,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1308343026}
   m_Direction: 2
   m_Value: 0
-  m_Size: .999941826
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7777,7 +7779,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1742371539}
   m_Direction: 2
   m_Value: 1
-  m_Size: .999929965
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8148,7 +8150,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -16, y: -.00790405273}
+  m_AnchoredPosition: {x: -16, y: -.0199127197}
   m_SizeDelta: {x: 500, y: 180}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &2119784513
