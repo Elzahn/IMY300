@@ -26,8 +26,8 @@ public class BossAlien : Enemy {
 		monsterAudio = gameObject.AddComponent<AudioSource>();
 
 		typeID = "BossAlien";
-		lootChance = 0.100f;
-		maxLoot = 5;
+		lootChance = 0.65f;
+		maxLoot = 3;
 	}
 	
 	/*void Update () {

@@ -25,7 +25,7 @@ public class MossAlien : Enemy {
 		monsterAudio = gameObject.AddComponent<AudioSource>();
 
 		typeID = "MossAlien";
-		lootChance = 0.7f;
+		lootChance = 0.5f;
 		maxLoot = 1;
 		changeDir = Time.time + delayedChange;
 		dir = Random.Range (1, 5);

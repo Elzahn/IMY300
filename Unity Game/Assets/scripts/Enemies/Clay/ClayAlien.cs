@@ -31,7 +31,7 @@ public class ClayAlien : Enemy {
 		monsterAudio = gameObject.AddComponent<AudioSource>();
 
 		typeID = "ClayAlien";
-		lootChance = 0.80f;
+		lootChance = 0.60f;
 		maxLoot = 3;
 		changeDir = Time.time + delayedChange;
 		dir = Random.Range (1, 5);
