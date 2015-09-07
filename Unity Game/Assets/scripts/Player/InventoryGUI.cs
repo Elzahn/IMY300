@@ -138,12 +138,10 @@ public class InventoryGUI : MonoBehaviour {
 			} else {
 				foreach (InventoryItem item in attributesScript.inventory.ToList()) {
 					NOInv.text = "";
-					Text W = GameObject.Find ("weap").GetComponent<Text> ();
-					W.text = item.typeID;
 					if(item.typeID != "Power Core"){
 						if (GUI.Button (new Rect (width+101, top+151, buttonWidth, itemHeight), "Drop it")) {
 							attributesScript.inventory.Remove (item);
-							W.text = "";
+
 							this.GetComponent<Sounds>().playWorldSound(Sounds.DROP_ITEM);
 						}
 					}
@@ -152,7 +150,7 @@ public class InventoryGUI : MonoBehaviour {
 						if(item.typeID != "Power Core"){
 							if (GUI.Button (new Rect (width+201, top+151, buttonWidth, itemHeight), "Equip")) {
 								attributesScript.equipItem (item);
-								W.text = "";
+
 								if(item.typeID == "Rare Accessory" || item.typeID == "Common Accessory" || item.typeID == "Uncommon Accessory"){
 									this.GetComponent<Sounds>().playWorldSound(Sounds.EQUIP_ACCESSORY);
 								} else if(item.typeID == "Warhammer"){

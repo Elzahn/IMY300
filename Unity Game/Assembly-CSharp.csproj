@@ -86,6 +86,7 @@
      <Compile Include="Assets\scripts\Player\Collisions.cs" />
      <Compile Include="Assets\scripts\Player\Equip.cs" />
      <Compile Include="Assets\scripts\Player\InventoryGUI.cs" />
+     <Compile Include="Assets\scripts\Player\InventoryScript.cs" />
      <Compile Include="Assets\scripts\Player\PlayerAttributes.cs" />
      <Compile Include="Assets\scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\scripts\Player\ScrollableList.cs" />

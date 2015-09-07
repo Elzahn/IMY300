@@ -73,8 +73,7 @@ public class ScrollableList : MonoBehaviour
 					GameObject newItem = Instantiate(itemPrefab) as GameObject;
 					newItem.name = gameObject.name + " item at (" + j + item.typeID + ")";
 					newItem.transform.SetParent(gameObject.transform, false);
-					
-					 RectTransform rectTransform = newItem.GetComponent<RectTransform>();
+					RectTransform rectTransform = newItem.GetComponent<RectTransform>();
 
 					float x = -containerRectTransform.rect.width / 2 + width;
 					float y = containerRectTransform.rect.height / 2 - height * j;
@@ -151,11 +150,11 @@ public class ScrollableList : MonoBehaviour
 					RectTransform rectTransform = newItem.GetComponent<RectTransform>();
 
 					float x = -containerRectTransform.rect.width /2;
-					float y = containerRectTransform.rect.height / 2 - height * j;
+					float y = containerRectTransform.rect.height / 2 - height * j-100;
 					rectTransform.offsetMin = new Vector2(x, y);
 
 					x = rectTransform.offsetMin.x + width;
-					y = rectTransform.offsetMin.y + height;
+					y = rectTransform.offsetMin.y + height-100;
 					rectTransform.offsetMax = new Vector2(x, y);
 					NOInv.text = "";
 					/*iitem.typeID != "Power Core"){
