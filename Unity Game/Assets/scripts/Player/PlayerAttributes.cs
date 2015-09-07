@@ -400,7 +400,7 @@ public class PlayerAttributes : MonoBehaviour {
 			level++;
 			hp = maxHP ();
 			stamina = maxStamina ();
-			
+			soundComponent.playWorldSound (Sounds.LEVEL_UP);
 			return "You  are now level " + level;
 		}
 		return "";
@@ -408,6 +408,7 @@ public class PlayerAttributes : MonoBehaviour {
 	
 	/** Cheat */
 	public void levelMeUp(){
+		soundComponent.playWorldSound (Sounds.LEVEL_UP);
 		xp = levelXP (level+1);
 		hp = maxHP ();
 		GameObject.Find("Health").GetComponent<Image>().fillAmount = hp/maxHP();

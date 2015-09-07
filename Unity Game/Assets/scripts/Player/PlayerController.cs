@@ -114,6 +114,7 @@ public class PlayerController : MonoBehaviour {
 
 		} else if (Input.GetKeyDown (KeyCode.Tab) && Application.loadedLevelName == "Tutorial"){
 			this.GetComponent<Tutorial> ().tutorialDone = true;
+			this.GetComponent<Tutorial> ().teachInventory = true;
 			playerAttributes.inventory.AddLast(TutorialSpawner.bossPowerCore);
 			playerAttributes.storage.AddLast(new Cupcake());
 			this.GetComponent<SaveSpotTeleport>().canEnterSaveSpot = false;
