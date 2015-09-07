@@ -65,9 +65,10 @@ public class PlayerAttributes : MonoBehaviour {
 	const int XP_BASE = 100;
 	const float XP_MULT = 2;
 	const float ATTACK_MULT = 1.2f;	
+	public const float STAMINA_LOSS = 0.5f;
 	const int ATTACK_BASE = 6;
 	const int CRIT_MULT = 2;
-	
+
 	const int SPEED_BASE = 5;
 	const int FEMALE_EXTRA_STAMINA = 20;
 	const int MALE_EXTRA_DAMAGE = 12;
@@ -356,10 +357,9 @@ public class PlayerAttributes : MonoBehaviour {
 
 					if (stamina < maxStamina ()) {
 						stamina += (maxStamina () * REGEN_STAMINA);
-						//visual stamina regen here
+						GameObject.Find("Stamina").GetComponent<Image>().fillAmount = stamina/maxStamina();
 					}
 				}
-				
 			}
 		} else {
 			nextRegeneration = Time.time + REGEN_INTERVAL;
@@ -596,6 +596,7 @@ public class PlayerAttributes : MonoBehaviour {
 	public void drainStamina(){
 		if (Application.loadedLevelName != "SaveSpot") {
 			this.stamina -= RUN_STAMINA_DRAIN;//0.5f;
+			GameObject.Find("Stamina").GetComponent<Image>().fillAmount = stamina/maxStamina();
 		}
 	}
 	
@@ -648,9 +649,12 @@ public class PlayerAttributes : MonoBehaviour {
 			}
 
 			bool dead = e.loseHP(tmpdamage);
-
 			if (weapon != null) {
 				stamina -= weapon.staminaLoss;
+				GameObject.Find("Stamina").GetComponent<Image>().fillAmount = stamina/maxStamina();
+			} else {
+				stamina -= STAMINA_LOSS;
+				GameObject.Find("Stamina").GetComponent<Image>().fillAmount = stamina/maxStamina();
 			}
 
 			if (dead) {					

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.IO;
 
@@ -230,7 +231,6 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			showAttack = false;
 		}
-
 	}
 
 	// Update is called once per frame
@@ -271,7 +271,7 @@ public class PlayerController : MonoBehaviour {
 			}
 			
 			run = false;
-			if (Input.GetAxis("Run") > 0 && playerAttributes.stamina > 0 && Application.loadedLevelName != "SaveSpot") {
+			if (Input.GetKey(KeyCode.LeftShift) && playerAttributes.stamina > 0 && Application.loadedLevelName != "SaveSpot" && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)) {
 				run = true;
 				moveSpeed *= RUN_MULT;
 				if(Application.loadedLevelName != "Tutorial"){
