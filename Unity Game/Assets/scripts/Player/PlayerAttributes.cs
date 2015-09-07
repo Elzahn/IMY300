@@ -12,7 +12,7 @@ public class PlayerAttributes : MonoBehaviour {
 	private class AttributeContainer : ISerializable {
 		public AttributeContainer(){}
 
-		public int xp;
+		public float xp;
 		public float hp;
 
 		public int level;
@@ -183,7 +183,7 @@ public class PlayerAttributes : MonoBehaviour {
 			myAttributes.stamina = value;
 		}}
 
-	public int xp {get {
+	public float xp {get {
 			return myAttributes.xp;
 		} private set {
 			myAttributes.xp = value;
@@ -320,6 +320,13 @@ public class PlayerAttributes : MonoBehaviour {
 	void Update() {
 		if (stamina < 0) 
 			stamina = 0;
+
+		/*if (levelXP (level) == 0) {
+			GameObject.Find ("XP").GetComponent<Image> ().fillAmount = xp / levelXP (level+1);
+		} else {*/
+		GameObject.Find ("XP").GetComponent<Image> ().fillAmount = xp / getExpectedXP();
+		//}
+
 		// Health regenration etc.
 		if (!controllerComponent.paused) {
 			
@@ -368,7 +375,7 @@ public class PlayerAttributes : MonoBehaviour {
 
 	/************************************************************************ Initialization *********************************************************************/
 	
-	public void setInitialXp(int xp) {
+	public void setInitialXp(float xp) {
 		this.xp = xp;		
 		level = determineLevel ();
 		hp = maxHP();
@@ -387,7 +394,7 @@ public class PlayerAttributes : MonoBehaviour {
 
 	/********************************************************** Level and XP *********************************************************************/
 	public string levelUp() {
-		int nextTreshold = getExpectedXP();
+		float nextTreshold = getExpectedXP();
 		if (xp >= nextTreshold) {
 			level++;
 			hp = maxHP ();
@@ -411,7 +418,7 @@ public class PlayerAttributes : MonoBehaviour {
 		return (int) (XP_BASE * (Mathf.Pow (XP_MULT, n - 1) / (XP_MULT - 1) - 1));
 	}
 	
-	public int getExpectedXP() {
+	public float getExpectedXP() {
 		return levelXP(level+1);
 	}
 	
@@ -547,6 +554,7 @@ public class PlayerAttributes : MonoBehaviour {
 		HealthPack tempItem = (HealthPack) item;
 		int healthRegen = (int)(maxHP() * tempItem.healthValue);
 		addHealth(healthRegen);
+		GameObject.Find("Health").GetComponent<Image>().fillAmount = hp/maxHP();
 	}	
 
 	public void addHealth(int val){
@@ -602,6 +610,7 @@ public class PlayerAttributes : MonoBehaviour {
 	
 	public void restoreStaminaToFull(){
 		stamina = maxStamina ();
+		GameObject.Find("Stamina").GetComponent<Image>().fillAmount = stamina/maxStamina();
 	}
 
 	/*********************** Attack *****************************/

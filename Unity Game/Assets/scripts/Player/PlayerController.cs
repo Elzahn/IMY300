@@ -379,9 +379,12 @@ public class PlayerController : MonoBehaviour {
 				//PlayerLog.stats = "";
 				if(GameObject.Find("Planet").GetComponent<LevelSelect>() != null){
 					GameObject.Find("Planet").GetComponent<LevelSelect>().spawnedLevel = false;
-					playerAttributes.restoreHealthToFull();
+					//playerAttributes.restoreHealthToFull();
 				}
 				Application.LoadLevel (Application.loadedLevel);
+				GameObject.Find("Stamina").GetComponent<Image>().fillAmount = playerAttributes.stamina/playerAttributes.maxStamina();
+				GameObject.Find("Health").GetComponent<Image>().fillAmount = playerAttributes.hp/playerAttributes.maxHP();
+				GameObject.Find("XP").GetComponent<Image>().fillAmount = playerAttributes.xp/playerAttributes.getExpectedXP();
 			}
 			if (GUI.Button (new Rect (left + 30, top + 90, buttonWidth, itemHeight), "Quit")) {
 				this.GetComponent<Sounds> ().playWorldSound (Sounds.BUTTON);
