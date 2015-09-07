@@ -2580,7 +2580,11 @@ MonoBehaviour:
   ambienceClips:
   - {fileID: 8300000, guid: 9fbe89efa05ea954a90a652d706abd30, type: 3}
   - {fileID: 8300000, guid: 15f688accffcb374faed819ebfe9c851, type: 3}
+  - {fileID: 8300000, guid: ce7472130058a3d4cb88e515a1d14bce, type: 3}
   - {fileID: 0}
+  - {fileID: 8300000, guid: 33274feecd98f3b40a06ccf8f9b92a09, type: 3}
+  - {fileID: 0}
+  - {fileID: 8300000, guid: 33274feecd98f3b40a06ccf8f9b92a09, type: 3}
   characterClips:
   - {fileID: 8300000, guid: c39b1a47171899c4cb2823847c64f576, type: 3}
   - {fileID: 8300000, guid: 610019760bf794f49a646d8778a7fd23, type: 3}
@@ -2607,11 +2611,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d5cac29905455874599afa85854bc334, type: 3}
   - {fileID: 8300000, guid: 27d8bb919ae6aa24d85dfe4b170c58c3, type: 3}
   computerClips:
-  - {fileID: 8300000, guid: 78e64852842a83c41bc7d127053a5d34, type: 3}
-  - {fileID: 8300000, guid: 7542539492e21c8448d26e4bf0d48813, type: 3}
-  - {fileID: 8300000, guid: 7b6049b482f4a7846a580ae68923a070, type: 3}
+  - {fileID: 8300000, guid: 05d4d487348dd294bb431fb0c81e4910, type: 3}
   - {fileID: 8300000, guid: 7b1ebfa44be3c694d8011c239fda9b68, type: 3}
   - {fileID: 8300000, guid: 49bc1ef6d3e25dd41bda988bd4453f71, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -8150,7 +8154,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -16, y: -.0199127197}
+  m_AnchoredPosition: {x: -16, y: -.0184326172}
   m_SizeDelta: {x: 500, y: 180}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &2119784513

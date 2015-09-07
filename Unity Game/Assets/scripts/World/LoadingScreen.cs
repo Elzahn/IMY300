@@ -105,6 +105,7 @@ public class LoadingScreen : MonoBehaviour {
 				removeLoadingScreen = Time.time + delay;
 			} else if(Time.time > removeLoadingScreen && loading){
 				loading = false;
+				GameObject.Find("Player").GetComponent<Sounds>().resumeSound("ambience");
 				if(GameObject.Find("Player").GetComponent<LevelSelect>().currentLevel == 1){
 					GameObject.Find("Player").GetComponent<SaveSpotTeleport>().showedHealthHint = true;
 					GameObject.Find("Player").GetComponent<Tutorial>().makeHint("Need a health pack? Look out for the purple flowers.", GameObject.Find("Player").GetComponent<Tutorial>().Health);
