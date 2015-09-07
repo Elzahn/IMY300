@@ -12,6 +12,7 @@ TagManager:
   - Loot
   - Fire
   - Light
+  - WeaponList
   layers:
   - Default
   - TransparentFX

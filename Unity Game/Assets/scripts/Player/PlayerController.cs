@@ -156,6 +156,9 @@ public class PlayerController : MonoBehaviour {
 			this.GetComponent<Tutorial>().startTutorial = false;
 			this.GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
 			this.GetComponent<SaveSpotTeleport>().loadTutorial = false;
+			GameObject.Find("Player").GetComponent<PlayerAttributes>().inventory.AddLast(new Longsword(1));
+			GameObject.Find("Player").GetComponent<PlayerAttributes>().inventory.AddLast(new Longsword(1));
+			GameObject.Find("Player").GetComponent<PlayerAttributes>().inventory.AddLast(new Longsword(1));
 			//GameObject.Find("Player").transform.position = new Vector3(9.41f, 79.19f, 7.75f);
 			GameObject.Find("Player").transform.position = new Vector3 (13.72f, 81.58f, 14.77f);//(9.4f, 81.38f, 6.62f);
 			this.GetComponent<LevelSelect>().currentLevel++;

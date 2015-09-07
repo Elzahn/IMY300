@@ -88,6 +88,7 @@
      <Compile Include="Assets\scripts\Player\InventoryGUI.cs" />
      <Compile Include="Assets\scripts\Player\PlayerAttributes.cs" />
      <Compile Include="Assets\scripts\Player\PlayerController.cs" />
+     <Compile Include="Assets\scripts\Player\ScrollableList.cs" />
      <Compile Include="Assets\scripts\Player\Tutorial.cs" />
      <Compile Include="Assets\scripts\RulesException.cs" />
      <Compile Include="Assets\scripts\StartGame.cs" />
@@ -130,7 +131,7 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Cloudstoyv5">
- <HintPath>C:/Users/Elzahn/Documents/GitHub/IMY300/Unity Game/Assets/CloudsToy/DLL/Cloudstoyv5.dll</HintPath>
+ <HintPath>C:/Users/Frank/Documents/GitHub/IMY300/Unity Game/Assets/CloudsToy/DLL/Cloudstoyv5.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

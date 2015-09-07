@@ -61,7 +61,7 @@ public class Collisions : MonoBehaviour {
 			if (playerAttributesScript.inventory.Count < playerAttributesScript.inventorySize) {
 				playerAttributesScript.addToInventory (new MediumHealthPack ());
 				this.GetComponent<Sounds> ().playWorldSound (Sounds.HEALTH_COLLECTION);
-
+				showHealthConfirmation = false;
 				Vector3 tempPos = colObj.transform.position;
 				//Delete health shrub
 				GameObject.Find("Planet").GetComponent<SpawnHealthPacks>().removeHealth(colObj);
@@ -74,7 +74,7 @@ public class Collisions : MonoBehaviour {
 			if (playerAttributesScript.inventory.Count < playerAttributesScript.inventorySize) {
 				playerAttributesScript.addToInventory (new LargeHealthPack ());
 				this.GetComponent<Sounds> ().playWorldSound (Sounds.HEALTH_COLLECTION);
-		
+				showHealthConfirmation = false;
 				Vector3 tempPos = colObj.transform.position;
 //				print (tempPos);
 				//Delete health shrub
