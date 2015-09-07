@@ -19,8 +19,7 @@ public class EnemySpawner : MonoBehaviour {
 	private int numLoot;
 	private Text hudText;
 	private Accessory accessoryScript;
-	private LinkedList<InventoryItem> tempLoot;
-	private InventoryItem tempItem;
+
 
 	private int ENEM_COUNT;
 	private bool fallFirst;
@@ -49,7 +48,6 @@ public class EnemySpawner : MonoBehaviour {
 	public void spawnEnemies (int enemy_count) {	//Previously know as Start
 		ENEM_COUNT = enemy_count;
 		clearLoot ();
-		tempLoot = new LinkedList<InventoryItem> ();
 
 		planet = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
 		playerLevel = GameObject.Find("Player").GetComponent<PlayerAttributes>().level;
@@ -172,11 +170,11 @@ public class EnemySpawner : MonoBehaviour {
 	int chooseLevel() {
 		float r = Random.value;
 		if (r <= 0.3)
-		if (playerLevel - 1 <= 0) {
-			return 1;
-		} else {
-			return playerLevel - 1;
-		}
+			if (playerLevel - 1 <= 0) {
+				return 1;
+			} else {
+				return playerLevel - 1;
+			}
 		else if (r<= 0.55)
 			return playerLevel;
 		else if (r<= 0.8)
@@ -230,121 +228,121 @@ public class EnemySpawner : MonoBehaviour {
 	void dropLoot(Enemy enemy, Vector3 position) {
 
 		GameObject.Find("Player").GetComponent<Sounds>().playDeathSound(Sounds.DEAD_MONSTER);
-		for (int i = 0; i < enemy.maxLoot; i++) {
-			int chance = Random.Range (0, 101);
-			if (chance >= enemy.lootChance) {
-				EnemyName = enemy.typeID;
+		LinkedList<InventoryItem> tempLoot = new LinkedList<InventoryItem> ();;
+		InventoryItem tempItem = null;
+		int lootCount = 0;
+		EnemyName = enemy.typeID;
 
-				chance = Random.Range (0, 101);
+		for (int i = 0; i < enemy.maxLoot; i++) {
+			float chance = Random.value;
+			if (chance <= enemy.lootChance) {
+				++lootCount;
 
 				if (chance <= enemy.lootChance/2) {
-					int commonItem = Random.Range(1, 8);
-					int uncommonItem = Random.Range(1, 10);
-					int rareItem = Random.Range(1, 7);
+					int commonItemType = Random.Range(1, 8);
+					int uncommonItemType = Random.Range(1, 10);
+					int rareItemType = Random.Range(1, 7);
 					switch(playerLevel){
-					case 1:
-					case 2: {
-						chance = Random.Range (1, 101);
-						if(chance <= 10){
-							tempItem = new UncommonAccessory(uncommonItem);
-						} else{
-							tempItem = new CommonAccessory(commonItem);
-						}
-						break;
-					}
-					case 3:
-					case 4:{
-						chance = Random.Range (1, 101);
-						if(chance <= 5){
-							tempItem = new RareAccessory(rareItem);
-						} else if(chance <= 20){
-							tempItem = new UncommonAccessory(uncommonItem);
-						} else{
-							tempItem = new CommonAccessory(commonItem);
-						}
-						break;
-					}
-					case 5:
-					case 6:{
-						chance = Random.Range (1, 101);
-						if(chance <= 10){
-							tempItem = new RareAccessory(rareItem);
-						} else if(chance <= 30){
-							tempItem = new UncommonAccessory(uncommonItem);
-						} else{
-							tempItem = new CommonAccessory(commonItem);
-						}
-						break;
-					}
-					case 7:
-					case 8:{
-						chance = Random.Range (1, 101);
-						if(chance <= 15){
-							tempItem = new RareAccessory(rareItem);
-						} else if(chance <= 40){
-							tempItem = new UncommonAccessory(uncommonItem);
-						} else{
-							tempItem = new CommonAccessory(commonItem);
-						}
-						break;
-					}
-					case 9:
-					case 10:{
-						chance = Random.Range (1, 101);
-						if(chance <= 20){
-							tempItem = new RareAccessory(rareItem);
-						} else if(chance <= 30){
-							tempItem = new CommonAccessory(commonItem);
-						} else{
-							tempItem = new UncommonAccessory(uncommonItem);
-						}
-						break;
-					}
-					case 11:
-					case 12:{
-						chance = Random.Range (1, 101);
-						if(chance <= 15){
-							tempItem = new CommonAccessory(commonItem);
-						} else if(chance <= 25){
-							tempItem = new RareAccessory(rareItem);
-						} else{
-							tempItem = new UncommonAccessory(uncommonItem);
-						}
-						break;
-					}
-					}
-					tempLoot.AddLast(tempItem); 
-				} else if (chance <= enemy.lootChance){
-					chance = Random.Range (1, 4);	//choose between available weapons
-					switch (chance) {
-					case 1:
-						{
-							if (playerLevel < 5) {
-								tempItem = new ButterKnife (5);
-								tempLoot.AddLast(tempItem);
-							} else {
-								tempItem = new ButterKnife (playerLevel);
-								tempLoot.AddLast(tempItem);
+						case 1:
+						case 2: {
+							chance = Random.Range (1, 101);
+							if(chance <= 10){
+								tempItem = new UncommonAccessory(uncommonItemType);
+							} else{
+								tempItem = new CommonAccessory(commonItemType);
 							}
 							break;
 						}
-					case 2:
-						{
-							tempItem = new Longsword (playerLevel);
-							tempLoot.AddLast(tempItem);
+						case 3:
+						case 4:{
+							chance = Random.Range (1, 101);
+							if(chance <= 5){
+								tempItem = new RareAccessory(rareItemType);
+							} else if(chance <= 20){
+								tempItem = new UncommonAccessory(uncommonItemType);
+							} else{
+								tempItem = new CommonAccessory(commonItemType);
+							}
 							break;
 						}
-					case 3:
-						{
-							tempItem = new Warhammer (playerLevel);
-							tempLoot.AddLast(tempItem);
+						case 5:
+						case 6:{
+							chance = Random.Range (1, 101);
+							if(chance <= 10){
+								tempItem = new RareAccessory(rareItemType);
+							} else if(chance <= 30){
+								tempItem = new UncommonAccessory(uncommonItemType);
+							} else{
+								tempItem = new CommonAccessory(commonItemType);
+							}
+							break;
+						}
+						case 7:
+						case 8:{
+							chance = Random.Range (1, 101);
+							if(chance <= 15){
+								tempItem = new RareAccessory(rareItemType);
+							} else if(chance <= 40){
+								tempItem = new UncommonAccessory(uncommonItemType);
+							} else{
+								tempItem = new CommonAccessory(commonItemType);
+							}
+							break;
+						}
+						case 9:
+						case 10:{
+							chance = Random.Range (1, 101);
+							if(chance <= 20){
+								tempItem = new RareAccessory(rareItemType);
+							} else if(chance <= 30){
+								tempItem = new CommonAccessory(commonItemType);
+							} else{
+								tempItem = new UncommonAccessory(uncommonItemType);
+							}
+							break;
+						}
+						case 11:
+						case 12:
+						default: {
+							chance = Random.Range (1, 101);
+							if(chance <= 15){
+								tempItem = new CommonAccessory(commonItemType);
+							} else if(chance <= 25){
+								tempItem = new RareAccessory(rareItemType);
+							} else{
+								tempItem = new UncommonAccessory(uncommonItemType);
+							}
 							break;
 						}
 					}
+					tempLoot.AddLast(tempItem); 
+				} 
+				else {
+					int weaponType = Random.Range (1, 4);	//choose between available weapons
+					switch (weaponType) {
+					case 1: {
+							if (playerLevel < 5) {
+								tempItem = new ButterKnife (5);								
+							} else {
+								tempItem = new ButterKnife (playerLevel);
+							}
+							break;
+						}
+					case 2: {
+							tempItem = new Longsword (playerLevel);
+							break;
+						}
+					case 3: {
+							tempItem = new Warhammer (playerLevel);							
+							break;
+						}
+					}
+					tempLoot.AddLast(tempItem);
 				}
 			}
 		}
 
+		if (lootCount > 0) {
 		GameObject deadEnemy = Instantiate(loot);
 		deadEnemy.transform.position = position;
 		deadEnemy.tag = "Loot";
@@ -352,6 +350,7 @@ public class EnemySpawner : MonoBehaviour {
 		Loot lootComponent = deadEnemy.GetComponentInChildren<Loot> ();
 		lootComponent.storeLoot (tempLoot, "Dead " + EnemyName);
 		tempLoot.Clear ();
+		}
 	}
 
 	public void clearLoot(){
