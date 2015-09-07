@@ -25,7 +25,7 @@ public class Sounds : MonoBehaviour {
 	public const int STORAGE = 0;
 	public const int INVENTORY = 1;
 	public const int BUTTON = 2;
-	public const int SHIP_DOOR = 3;
+	public const int TELEPORTING = 3;
 	public const int HEALTH_COLLECTION = 4;
 	public const int USE_HEALTH = 5;
 	public const int WARPING = 6;
@@ -41,17 +41,15 @@ public class Sounds : MonoBehaviour {
 	public const int PLANET_WALKING = 0;
 	public const int PLANET_RUNNING = 1;
 	public const int SHIP_WALKING = 2;
-	public const int SHIP_RUNNING = 3;
-	public const int JUMP = 4;
-	public const int MALE_HURT = 5;
-	public const int FEMALE_HURT = 6;
-	public const int SWORD_HIT = 7;
-	public const int SWORD_CRIT = 8;
-	public const int MISS = 9;
-	public const int HAMMER_HIT = 10;
-	public const int HAMMER_CRIT = 11;
-	public const int FISTS_HIT = 12;
-	public const int FISTS_CRIT = 13;
+	public const int MALE_HURT = 3;
+	public const int FEMALE_HURT = 4;
+	public const int SWORD_HIT = 5;
+	public const int SWORD_CRIT = 6;
+	public const int MISS = 7;
+	public const int HAMMER_HIT = 8;
+	public const int HAMMER_CRIT = 9;
+	public const int FISTS_HIT = 10;
+	public const int FISTS_CRIT = 11;
 
 	//Monster sounds
 	public const int MONSTER_WALKING = 0;
@@ -69,8 +67,9 @@ public class Sounds : MonoBehaviour {
 	public const int LOW_HEALTH_ALARM = 1;
 
 	//Ambience sounds
-	public const int PLANET_AMBIENCE = 0;
-	public const int SHIP_AMBIENCE = 1;
+	public const int SHIP_AMBIENCE = 0;
+	public const int TUTORIAL_AMBIENCE = 1;
+	public const int PLANET_AMBIENCE = 1;
 
 	//Computer sounds
 	public const int COMPUTER_WARP = 0;
@@ -109,7 +108,7 @@ public class Sounds : MonoBehaviour {
 			{
 				characterAudio = GameObject.Find ("Character Audio").GetComponent<AudioSource> ();
 				characterAudio.UnPause ();
-				if(worldClip == SHIP_DOOR || worldClip == HEALTH_COLLECTION || worldClip == WARPING){
+				if(worldClip == TELEPORTING || worldClip == HEALTH_COLLECTION || worldClip == WARPING){
 					worldAudio.UnPause ();
 				}
 				if(alarmClip != DISASTER_ALARM){
@@ -147,7 +146,7 @@ public class Sounds : MonoBehaviour {
 			{
 				characterAudio = GameObject.Find ("Character Audio").GetComponent<AudioSource> ();
 				characterAudio.Pause ();
-				if(worldClip == SHIP_DOOR || worldClip == HEALTH_COLLECTION || worldClip == WARPING){
+				if(worldClip == TELEPORTING || worldClip == HEALTH_COLLECTION || worldClip == WARPING){
 					worldAudio.Pause ();
 				}
 				if(alarmClip != DISASTER_ALARM){
@@ -192,7 +191,7 @@ public class Sounds : MonoBehaviour {
 			characterAudio = GameObject.Find ("Character Audio").GetComponent<AudioSource> ();
 			characterAudio.Stop ();
 
-			if(worldClip == SHIP_DOOR || worldClip == HEALTH_COLLECTION || worldClip == WARPING){
+			if(worldClip == TELEPORTING || worldClip == HEALTH_COLLECTION || worldClip == WARPING){
 				worldAudio.Stop ();
 			}
 			if(alarmClip != DISASTER_ALARM){
@@ -281,7 +280,7 @@ public class Sounds : MonoBehaviour {
 	}
 
 	void Update(){
-		if (worldAudio.isPlaying == false && worldClip == SHIP_DOOR) {
+		if (worldAudio.isPlaying == false && worldClip == TELEPORTING) {
 			done = true;
 		}
 	}
@@ -292,7 +291,7 @@ public class Sounds : MonoBehaviour {
 		}
 		worldClip = clipAt;
 
-		if (worldClip == SHIP_DOOR) {
+		if (worldClip == TELEPORTING) {
 			done = false;
 		}
 
@@ -315,7 +314,7 @@ public class Sounds : MonoBehaviour {
 		characterClip = clipAt;
 		characterAudio.volume = 0.5f;
 
-		if (characterClip >= PLANET_WALKING && characterClip <= SHIP_RUNNING) {
+		if (characterClip >= PLANET_WALKING && characterClip <= SHIP_WALKING) {
 			characterAudio.loop = true;
 		} else {
 			characterAudio.loop = false;

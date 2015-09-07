@@ -108,13 +108,14 @@ public class SaveSpotTeleport : MonoBehaviour {
 			canEnterSaveSpot = false;
 			GameObject.Find("Player").GetComponent<PlayerAttributes>().storage.AddLast(new Cupcake());
 			showEntranceConfirmation = false;
+			sound.playWorldSound(Sounds.TELEPORTING);
 			attributesScript.restoreHealthToFull();
 			attributesScript.restoreStaminaToFull();
 			this.GetComponent<Rigidbody>().mass = 100;
 			this.transform.rotation = new Quaternion(0, 0.7f, 0, 0.7f);
 			//this.transform.position = new Vector3 (-27.01f, 79.65f, 1.93f);
 			this.transform.position = new Vector3 (13.72f, 81.58f, 14.77f);//(9.4f, 81.38f, 6.62f);
-			sound.playWorldSound(Sounds.SHIP_DOOR);
+
 			this.GetComponent<LevelSelect>().currentLevel++;
 			interaction.fillAmount = 0;
 			//this.transform.up = GameObject.Find("Floor").transform.up;
@@ -124,7 +125,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 			canEnterSaveSpot = false;
 			showExitConfirmation = false;
 			this.GetComponent<Rigidbody> ().mass = 0.1f;
-			sound.playWorldSound (Sounds.SHIP_DOOR);
+			sound.playWorldSound (Sounds.TELEPORTING);
 			attributesScript.saveInventoryAndStorage ();
 			//GameObject.Find("Player").transform.position = new Vector3(9.41f, 79.19f, 7.75f);
 			this.GetComponent<Tutorial>().stopTutorial();
@@ -137,7 +138,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 			canEnterSaveSpot = false;
 
 			this.GetComponent<Rigidbody> ().mass = 0.1f;
-			sound.playWorldSound (Sounds.SHIP_DOOR);
+			sound.playWorldSound (Sounds.TELEPORTING);
 			attributesScript.saveInventoryAndStorage ();
 			//this.transform.position = new Vector3(0f, 15.03f, 0);
 			//this.transform.position = new Vector3(-0.01f, 16.149f, -0.27f);
@@ -152,6 +153,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 			Resources.UnloadUnusedAssets();
 		}else if (showEntranceConfirmation && Input.GetKeyDown (KeyCode.E) && Application.loadedLevelName != "Tutorial") {
 			//showExitConfirmation = true;
+
 			showEntranceConfirmation = false;
 			attributesScript.restoreHealthToFull();
 			attributesScript.restoreStaminaToFull();
@@ -159,13 +161,14 @@ public class SaveSpotTeleport : MonoBehaviour {
 			this.transform.rotation = new Quaternion(0, 0.7f, 0, -0.7f);
 			//this.transform.position = new Vector3 (-27.01f, 79.65f, 1.93f);
 			this.transform.position = new Vector3 (13.72f, 81.58f, 14.77f);//(9.4f, 81.38f, 6.62f);
-			sound.playWorldSound(Sounds.SHIP_DOOR);
+
 			this.GetComponent<LevelSelect>().currentLevel++;
 			this.GetComponent<LevelSelect>().spawnedLevel = false;
 			this.GetComponent<LevelSelect>().myRenderer = null;
 			interaction.fillAmount = 0;
 			this.GetComponent<Tutorial> ().startTutorial = false;
 			Application.LoadLevel ("SaveSpot");
+			sound.playWorldSound(Sounds.TELEPORTING);
 			Resources.UnloadUnusedAssets();
 		}
 	}

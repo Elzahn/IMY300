@@ -222,7 +222,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 8, y: -.0849609375}
+  m_AnchoredPosition: {x: 8, y: .00154876709}
   m_SizeDelta: {x: 500, y: 180}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &18939797
@@ -2564,7 +2564,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 14ed014cd6d24ac4db0b2a2fc345299a, type: 3}
   - {fileID: 8300000, guid: d7ea453bc2ad2a24590755b413b2843f, type: 3}
   - {fileID: 8300000, guid: f10396084e22f0645ab877cd7aaa5fe9, type: 3}
-  - {fileID: 8300000, guid: cf5be3f48e78ce141940a3153998a059, type: 3}
+  - {fileID: 8300000, guid: 61f420b83ffb64f4b86e39fc4e216164, type: 3}
   - {fileID: 8300000, guid: affe4c4e4e9905745b687bbafde80596, type: 3}
   - {fileID: 8300000, guid: 806a14ee02c22eb4c804d384bd34caef, type: 3}
   - {fileID: 8300000, guid: bd9aced8f4194c64185b36b73584710e, type: 3}
@@ -2576,14 +2576,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8b41580f32a8b49488ee6eda7b0dcbed, type: 3}
   - {fileID: 8300000, guid: d4be918b3d67ab24e8846888c7062847, type: 3}
   ambienceClips:
-  - {fileID: 8300000, guid: 20b07e8914402f149a8a5eb74b8d83fb, type: 3}
-  - {fileID: 8300000, guid: aa8a121fd803fb141bdeacfda17c65fe, type: 3}
+  - {fileID: 8300000, guid: 9fbe89efa05ea954a90a652d706abd30, type: 3}
+  - {fileID: 8300000, guid: 15f688accffcb374faed819ebfe9c851, type: 3}
+  - {fileID: 0}
   characterClips:
   - {fileID: 8300000, guid: c39b1a47171899c4cb2823847c64f576, type: 3}
   - {fileID: 8300000, guid: 610019760bf794f49a646d8778a7fd23, type: 3}
-  - {fileID: 8300000, guid: 051da56203fd3424cbb20fd40fcf6500, type: 3}
-  - {fileID: 8300000, guid: ec5f542e863a5654288eedc3363dfdee, type: 3}
-  - {fileID: 8300000, guid: 95d924dce2ce3664ca3a6c6ec8d64c7d, type: 3}
+  - {fileID: 8300000, guid: bdbe46321911fdc4d88b28d1537db9be, type: 3}
   - {fileID: 8300000, guid: adfb796e834e540459b2f59895846fa7, type: 3}
   - {fileID: 8300000, guid: 6bc92a260392a3f4a9138b597c3604b1, type: 3}
   - {fileID: 8300000, guid: 192ce492fb64ea349af7f6d217ea524d, type: 3}
@@ -2947,7 +2946,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -5, y: -.0102577209}
+  m_AnchoredPosition: {x: -5, y: .00345611572}
   m_SizeDelta: {x: 822.030029, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &913601018
@@ -4466,8 +4465,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1308343027}
   m_HandleRect: {fileID: 1308343026}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: .999941826
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4510,6 +4509,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1319497681}
   - 64: {fileID: 1319497682}
+  - 114: {fileID: 1319497683}
   m_Layer: 0
   m_Name: Ship_interior
   m_TagString: Untagged
@@ -4574,6 +4574,17 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 0}
+--- !u!114 &1319497683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1319497680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49868f96d1de404da1dfeeef77f3cc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1340229141
 GameObject:
   m_ObjectHideFlags: 0
@@ -7766,7 +7777,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1742371539}
   m_Direction: 2
   m_Value: 1
-  m_Size: .999898314
+  m_Size: .999929965
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8137,7 +8148,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -16, y: -.0238647461}
+  m_AnchoredPosition: {x: -16, y: -.00790405273}
   m_SizeDelta: {x: 500, y: 180}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &2119784513

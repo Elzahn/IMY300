@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour {
 			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = false;
 			this.GetComponent<SaveSpotTeleport> ().setExitConf (false);
 			this.GetComponent<Rigidbody> ().mass = 0.1f;
-			sound.playWorldSound (Sounds.SHIP_DOOR);
+			sound.playWorldSound (Sounds.TELEPORTING);
 			playerAttributes.saveInventoryAndStorage ();
 			//this.transform.position = new Vector3 (0f, 15.03f, 0);
 			//this.transform.position = new Vector3(-0.01f, 16.149f, -0.27f);
@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour {
 			playerAttributes.storage.AddLast(new Cupcake());
 			this.GetComponent<SaveSpotTeleport>().canEnterSaveSpot = false;
 			this.GetComponent<SaveSpotTeleport>().loadTutorial = false;
-			sound.playWorldSound (Sounds.SHIP_DOOR);
+			sound.playWorldSound (Sounds.TELEPORTING);
 			sound.stopSound ("computer");
 			this.GetComponent<LevelSelect>().currentLevel++;
 			//this.GetComponent<Tutorial>().stopTutorial();
@@ -302,11 +302,7 @@ public class PlayerController : MonoBehaviour {
 				moving = true;
 
 				if(run){
-					if(Application.loadedLevelName == "SaveSpot"){
-						sound.playCharacterSound (Sounds.SHIP_RUNNING);
-					} else {
-						sound.playCharacterSound (Sounds.PLANET_RUNNING);
-					}
+					sound.playCharacterSound (Sounds.PLANET_RUNNING);
 				} else {
 					if(Application.loadedLevelName == "SaveSpot"){
 						sound.playCharacterSound (Sounds.SHIP_WALKING);
