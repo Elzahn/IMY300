@@ -5,8 +5,10 @@ public class TranslucentAlien : Enemy {
 	 * Automatically called after level is set. 
 	 * Should initilze other attributes dpendent on level;
 	 */
+
 	public AudioSource monsterAudio;
-	public override int damage { get {
+
+	/*public override int damage { get {
 			var tmp = base.damage;
 			var dark = LightRotation.getDark(this.gameObject);
 			if (dark == "dark") {
@@ -15,7 +17,7 @@ public class TranslucentAlien : Enemy {
 				tmp += 5;
 			}
 			return tmp;
-		} }
+		} }*/
 
 	private float nextTransAttack, transDelay = 3;
 	private float nextTRegeneration;

@@ -2577,13 +2577,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d4be918b3d67ab24e8846888c7062847, type: 3}
   - {fileID: 8300000, guid: fe5731ecee451ba4482cd37ac89dc2d8, type: 3}
   - {fileID: 8300000, guid: 81b84d09f449db647bd93261f4afa074, type: 3}
+  - {fileID: 8300000, guid: dae49149282b2344c9b0ddae905c0110, type: 3}
   ambienceClips:
   - {fileID: 8300000, guid: 9fbe89efa05ea954a90a652d706abd30, type: 3}
   - {fileID: 8300000, guid: 15f688accffcb374faed819ebfe9c851, type: 3}
   - {fileID: 8300000, guid: ce7472130058a3d4cb88e515a1d14bce, type: 3}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 572b2a4efa295344ea5346ecdbf1b917, type: 3}
   - {fileID: 8300000, guid: 33274feecd98f3b40a06ccf8f9b92a09, type: 3}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 918e0aef3eb6dc64f9c7c38894b82dd1, type: 3}
   - {fileID: 8300000, guid: 33274feecd98f3b40a06ccf8f9b92a09, type: 3}
   characterClips:
   - {fileID: 8300000, guid: c39b1a47171899c4cb2823847c64f576, type: 3}

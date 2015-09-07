@@ -38,6 +38,7 @@ public class Sounds : MonoBehaviour {
 	public const int EARTHQUAKE = 13;
 	public const int POWER_ON = 14;
 	public const int LEVEL_UP = 15;
+	public const int FINISHED_GAME = 16;
 
 	//Character sounds
 	public const int PLANET_WALKING = 0;
