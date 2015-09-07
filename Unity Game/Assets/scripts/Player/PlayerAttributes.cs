@@ -282,12 +282,15 @@ public class PlayerAttributes : MonoBehaviour {
 	public static bool giveAlarm;
 	private float nextRegeneration;
 	private Text hudText;
+	private bool showWarpHint;
 
 	/**************************************************** Monobehaviour functions *********************************************
 	 * Start - Called after creation
 	 * Update - Called Every frame
 	 * ***********************************************************************************************************************/
 	void Start () {
+		showWarpHint = true;
+
 		//Singleton
 		if (instance) {
 			DestroyImmediate(gameObject);
@@ -331,14 +334,15 @@ public class PlayerAttributes : MonoBehaviour {
 			}
 
 			Warping warp = this.gameObject.GetComponent<Warping> ();
-			if (level == WARP_UNLOCK_LEVEL && warp != null) {
+			if (level == WARP_UNLOCK_LEVEL && warp != null && showWarpHint) {
 				warp.chooseDestinationUnlocked = true;
+				showWarpHint = false;
 				GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_WARPDESTINATION);
 				hudText.text = "I have located all the warp points on the planet. I can now warp you to a chosen destination.\n\n";
 				Canvas.ForceUpdateCanvases();
 				Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
 				scrollbar.value = 0f;
-				GameObject.Find("Player").GetComponent<Tutorial>().makeHint("You can warp by walking onto a warp point. Destination warps have a 10s cool down time and drains health.", this.GetComponent<Tutorial>().Warp);
+				GameObject.Find("Player").GetComponent<Tutorial>().makeHint("Warp by walking onto a warp point. Destination warps have a 10s cool down time and drains health.", this.GetComponent<Tutorial>().Warp);
 			}
 			
 			if (Time.time >= nextRegeneration) {

@@ -149,9 +149,7 @@ public class PlayerController : MonoBehaviour {
 
 		//Skip Tutorial
 		if (Input.GetKeyDown (KeyCode.Escape) && this.GetComponent<Tutorial>().startTutorial) {
-			GameObject.Find("Tech Light").GetComponent<Light>().enabled = false;
-			GameObject.Find("Console Light").GetComponent<Light>().enabled = false;
-			GameObject.Find("Bedroom Light").GetComponent<Light>().enabled = false;
+
 			this.GetComponent<Tutorial>().stopTutorial();
 			this.GetComponent<Tutorial>().startTutorial = false;
 			this.GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
@@ -163,6 +161,11 @@ public class PlayerController : MonoBehaviour {
 			GameObject.Find("Player").transform.position = new Vector3 (13.72f, 81.58f, 14.77f);//(9.4f, 81.38f, 6.62f);
 			this.GetComponent<LevelSelect>().currentLevel++;
 			Application.LoadLevel("SaveSpot");
+			if(Application.loadedLevelName == "Scene"){
+				GameObject.Find("Tech Light").GetComponent<Light>().enabled = false;
+				GameObject.Find("Console Light").GetComponent<Light>().enabled = false;
+				GameObject.Find("Bedroom Light").GetComponent<Light>().enabled = false;
+			}
 			this.GetComponent<Rigidbody>().mass = 1000;
 			this.GetComponent<Tutorial>().stopTutorial();
 			//print ("Tutorial skipped you can now use the teleporter again.");
