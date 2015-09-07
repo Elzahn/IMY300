@@ -377,6 +377,10 @@ public class PlayerController : MonoBehaviour {
 				playerAttributes.resetInventoryAndStorage ();
 				//PlayerLog.queue.Clear ();
 				//PlayerLog.stats = "";
+				if(GameObject.Find("Planet").GetComponent<LevelSelect>() != null){
+					GameObject.Find("Planet").GetComponent<LevelSelect>().spawnedLevel = false;
+					playerAttributes.restoreHealthToFull();
+				}
 				Application.LoadLevel (Application.loadedLevel);
 			}
 			if (GUI.Button (new Rect (left + 30, top + 90, buttonWidth, itemHeight), "Quit")) {

@@ -13,7 +13,7 @@ public class PlayerAttributes : MonoBehaviour {
 		public AttributeContainer(){}
 
 		public int xp;
-		public int hp;
+		public float hp;
 
 		public int level;
 		public float stamina;	
@@ -156,7 +156,7 @@ public class PlayerAttributes : MonoBehaviour {
 		}
 	}
 
-	public int hp {
+	public float hp {
 		get {
 			return myAttributes.hp;
 		}
@@ -350,11 +350,13 @@ public class PlayerAttributes : MonoBehaviour {
 				if (Time.time >= (lastDamage + REGEN_ATTACK_DELAY)) {
 					if (hp < maxHP ()) {
 						hp += (int)(maxHP () * REGEN_HP);
+						GameObject.Find("Health").GetComponent<Image>().fillAmount = hp/maxHP();
 						giveAlarm = false;
 					}
 
 					if (stamina < maxStamina ()) {
 						stamina += (maxStamina () * REGEN_STAMINA);
+						//visual stamina regen here
 					}
 				}
 				
@@ -399,6 +401,8 @@ public class PlayerAttributes : MonoBehaviour {
 	/** Cheat */
 	public void levelMeUp(){
 		xp = levelXP (level+1);
+		hp = maxHP ();
+		GameObject.Find("Health").GetComponent<Image>().fillAmount = hp/maxHP();
 		levelUp();
 	}
 
@@ -553,7 +557,8 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	public void restoreHealthToFull() {
-			hp = maxHP ();
+		hp = maxHP ();
+		GameObject.Find("Health").GetComponent<Image>().fillAmount = hp/maxHP();
 	}
 	
 
@@ -561,11 +566,12 @@ public class PlayerAttributes : MonoBehaviour {
 	public bool loseHP(int loss) {
 		if (Application.loadedLevelName != "Tutorial") {
 			hp -= loss;
+			GameObject.Find("Health").GetComponent<Image>().fillAmount = hp/maxHP();
 		}
 		return isDead ();
 	}
 	
-	public int maxHP() {
+	public float maxHP() {
 		var tmp = Mathf.RoundToInt(HP_BASE * Mathf.Pow(HP_MULT, level -1));		
 		foreach (Accessory a in accessories) {
 			tmp += a.hp;
