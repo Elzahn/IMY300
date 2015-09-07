@@ -117,7 +117,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 			sound.playWorldSound(Sounds.SHIP_DOOR);
 			this.GetComponent<LevelSelect>().currentLevel++;
 			interaction.fillAmount = 0;
-			this.transform.up = GameObject.Find("Floor").transform.up;
+			//this.transform.up = GameObject.Find("Floor").transform.up;
 			Application.LoadLevel ("SaveSpot");
 			Resources.UnloadUnusedAssets();
 		} else if (showExitConfirmation && Input.GetKeyDown (KeyCode.E) && !loadTutorial) {
