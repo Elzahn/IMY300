@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.IO;
 
@@ -149,9 +150,7 @@ public class PlayerController : MonoBehaviour {
 
 		//Skip Tutorial
 		if (Input.GetKeyDown (KeyCode.Escape) && this.GetComponent<Tutorial>().startTutorial) {
-			GameObject.Find("Tech Light").GetComponent<Light>().enabled = false;
-			GameObject.Find("Console Light").GetComponent<Light>().enabled = false;
-			GameObject.Find("Bedroom Light").GetComponent<Light>().enabled = false;
+
 			this.GetComponent<Tutorial>().stopTutorial();
 			this.GetComponent<Tutorial>().startTutorial = false;
 			this.GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
@@ -163,6 +162,11 @@ public class PlayerController : MonoBehaviour {
 			GameObject.Find("Player").transform.position = new Vector3 (13.72f, 81.58f, 14.77f);//(9.4f, 81.38f, 6.62f);
 			this.GetComponent<LevelSelect>().currentLevel++;
 			Application.LoadLevel("SaveSpot");
+			if(Application.loadedLevelName == "Scene"){
+				GameObject.Find("Tech Light").GetComponent<Light>().enabled = false;
+				GameObject.Find("Console Light").GetComponent<Light>().enabled = false;
+				GameObject.Find("Bedroom Light").GetComponent<Light>().enabled = false;
+			}
 			this.GetComponent<Rigidbody>().mass = 1000;
 			this.GetComponent<Tutorial>().stopTutorial();
 			//print ("Tutorial skipped you can now use the teleporter again.");
@@ -227,7 +231,6 @@ public class PlayerController : MonoBehaviour {
 		} else {
 			showAttack = false;
 		}
-
 	}
 
 	// Update is called once per frame
@@ -268,7 +271,7 @@ public class PlayerController : MonoBehaviour {
 			}
 			
 			run = false;
-			if (Input.GetAxis("Run") > 0 && playerAttributes.stamina > 0 && Application.loadedLevelName != "SaveSpot") {
+			if (Input.GetKey(KeyCode.LeftShift) && playerAttributes.stamina > 0 && Application.loadedLevelName != "SaveSpot" && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)) {
 				run = true;
 				moveSpeed *= RUN_MULT;
 				if(Application.loadedLevelName != "Tutorial"){
@@ -374,7 +377,14 @@ public class PlayerController : MonoBehaviour {
 				playerAttributes.resetInventoryAndStorage ();
 				//PlayerLog.queue.Clear ();
 				//PlayerLog.stats = "";
+				if(GameObject.Find("Planet").GetComponent<LevelSelect>() != null){
+					GameObject.Find("Planet").GetComponent<LevelSelect>().spawnedLevel = false;
+					//playerAttributes.restoreHealthToFull();
+				}
 				Application.LoadLevel (Application.loadedLevel);
+				GameObject.Find("Stamina").GetComponent<Image>().fillAmount = playerAttributes.stamina/playerAttributes.maxStamina();
+				GameObject.Find("Health").GetComponent<Image>().fillAmount = playerAttributes.hp/playerAttributes.maxHP();
+				GameObject.Find("XP").GetComponent<Image>().fillAmount = playerAttributes.xp/playerAttributes.getExpectedXP();
 			}
 			if (GUI.Button (new Rect (left + 30, top + 90, buttonWidth, itemHeight), "Quit")) {
 				this.GetComponent<Sounds> ().playWorldSound (Sounds.BUTTON);

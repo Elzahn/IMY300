@@ -166,6 +166,7 @@ public class InventoryGUI : MonoBehaviour {
 								attributesScript.useHealthPack (item);
 								attributesScript.inventory.Remove (item);
 								this.GetComponent<Sounds>().playWorldSound(Sounds.USE_HEALTH);
+
 							} else {
 								attributesScript.inventory.Remove (item);
 								Cupcake.eatCupcake();

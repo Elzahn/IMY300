@@ -23,6 +23,7 @@ public class EnemySpawner : MonoBehaviour {
 	private InventoryItem tempItem;
 
 	private int ENEM_COUNT;
+	private bool fallFirst;
 	const int NORMAL_ENEMY_TYPES = 4;
 
 	FauxGravityAttractor planet;
@@ -32,6 +33,7 @@ public class EnemySpawner : MonoBehaviour {
 
 	void Start(){
 		hudText = GameObject.Find ("HUD_Expand_Text").GetComponent<Text> ();
+		fallFirst = true;
 	}
 
 	public string enemiesStats(){
@@ -125,15 +127,24 @@ public class EnemySpawner : MonoBehaviour {
 			if (enemy.isDead()) {
 				if(enemy.typeID == "BossAlien")
 				{
-					if(!GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked){
-						GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked = true;
+					print (GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked && fallFirst);
+					if(GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked && fallFirst){
+
 						GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_FALL);
+						if(GameObject.Find("Player").GetComponent<Sounds>().computerAudio.isPlaying){
+							GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallNow();
+							fallFirst = false;
+							GameObject.Find("Player").GetComponent<Tutorial>().makeHint("You can use this ability by pressing F. It has a 10s cool down time.", GameObject.Find("Player").GetComponent<Tutorial>().Warp);
+						}
+
+						GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked = true;
+
 						hudText.text = "What does this button do? I probably shouldn’t, oh well whatever I’ll press it anyway. Oh shit! You seem to have fallen through the planet. That could be useful. \n\n";
 						Canvas.ForceUpdateCanvases();
 						Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
 						scrollbar.value = 0f;
-						GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallNow();
-						GameObject.Find("Player").GetComponent<Tutorial>().makeHint("You can use this ability by pressing F. It has a 10s cool down time.", GameObject.Find("Player").GetComponent<Tutorial>().Warp);
+						
+
 					}
 					GameObject.Find("Player").GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
 				}

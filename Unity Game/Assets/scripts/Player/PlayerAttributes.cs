@@ -12,8 +12,8 @@ public class PlayerAttributes : MonoBehaviour {
 	private class AttributeContainer : ISerializable {
 		public AttributeContainer(){}
 
-		public int xp;
-		public int hp;
+		public float xp;
+		public float hp;
 
 		public int level;
 		public float stamina;	
@@ -65,9 +65,10 @@ public class PlayerAttributes : MonoBehaviour {
 	const int XP_BASE = 100;
 	const float XP_MULT = 2;
 	const float ATTACK_MULT = 1.2f;	
+	public const float STAMINA_LOSS = 0.5f;
 	const int ATTACK_BASE = 6;
 	const int CRIT_MULT = 2;
-	
+
 	const int SPEED_BASE = 5;
 	const int FEMALE_EXTRA_STAMINA = 20;
 	const int MALE_EXTRA_DAMAGE = 12;
@@ -156,7 +157,7 @@ public class PlayerAttributes : MonoBehaviour {
 		}
 	}
 
-	public int hp {
+	public float hp {
 		get {
 			return myAttributes.hp;
 		}
@@ -182,7 +183,7 @@ public class PlayerAttributes : MonoBehaviour {
 			myAttributes.stamina = value;
 		}}
 
-	public int xp {get {
+	public float xp {get {
 			return myAttributes.xp;
 		} private set {
 			myAttributes.xp = value;
@@ -282,12 +283,15 @@ public class PlayerAttributes : MonoBehaviour {
 	public static bool giveAlarm;
 	private float nextRegeneration;
 	private Text hudText;
+	private bool showWarpHint;
 
 	/**************************************************** Monobehaviour functions *********************************************
 	 * Start - Called after creation
 	 * Update - Called Every frame
 	 * ***********************************************************************************************************************/
 	void Start () {
+		showWarpHint = true;
+
 		//Singleton
 		if (instance) {
 			DestroyImmediate(gameObject);
@@ -316,6 +320,13 @@ public class PlayerAttributes : MonoBehaviour {
 	void Update() {
 		if (stamina < 0) 
 			stamina = 0;
+
+		/*if (levelXP (level) == 0) {
+			GameObject.Find ("XP").GetComponent<Image> ().fillAmount = xp / levelXP (level+1);
+		} else {*/
+		GameObject.Find ("XP").GetComponent<Image> ().fillAmount = xp / getExpectedXP();
+		//}
+
 		// Health regenration etc.
 		if (!controllerComponent.paused) {
 			
@@ -331,14 +342,15 @@ public class PlayerAttributes : MonoBehaviour {
 			}
 
 			Warping warp = this.gameObject.GetComponent<Warping> ();
-			if (level == WARP_UNLOCK_LEVEL && warp != null) {
+			if (level == WARP_UNLOCK_LEVEL && warp != null && showWarpHint) {
 				warp.chooseDestinationUnlocked = true;
+				showWarpHint = false;
 				GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_WARPDESTINATION);
 				hudText.text = "I have located all the warp points on the planet. I can now warp you to a chosen destination.\n\n";
 				Canvas.ForceUpdateCanvases();
 				Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
 				scrollbar.value = 0f;
-				GameObject.Find("Player").GetComponent<Tutorial>().makeHint("You can warp by walking onto a warp point. Destination warps have a 10s cool down time and drains health.", this.GetComponent<Tutorial>().Warp);
+				GameObject.Find("Player").GetComponent<Tutorial>().makeHint("Warp by walking onto a warp point. Destination warps have a 10s cool down time and drains health.", this.GetComponent<Tutorial>().Warp);
 			}
 			
 			if (Time.time >= nextRegeneration) {
@@ -346,14 +358,15 @@ public class PlayerAttributes : MonoBehaviour {
 				if (Time.time >= (lastDamage + REGEN_ATTACK_DELAY)) {
 					if (hp < maxHP ()) {
 						hp += (int)(maxHP () * REGEN_HP);
+						GameObject.Find("Health").GetComponent<Image>().fillAmount = hp/maxHP();
 						giveAlarm = false;
 					}
 
 					if (stamina < maxStamina ()) {
 						stamina += (maxStamina () * REGEN_STAMINA);
+						GameObject.Find("Stamina").GetComponent<Image>().fillAmount = stamina/maxStamina();
 					}
 				}
-				
 			}
 		} else {
 			nextRegeneration = Time.time + REGEN_INTERVAL;
@@ -362,7 +375,7 @@ public class PlayerAttributes : MonoBehaviour {
 
 	/************************************************************************ Initialization *********************************************************************/
 	
-	public void setInitialXp(int xp) {
+	public void setInitialXp(float xp) {
 		this.xp = xp;		
 		level = determineLevel ();
 		hp = maxHP();
@@ -381,7 +394,7 @@ public class PlayerAttributes : MonoBehaviour {
 
 	/********************************************************** Level and XP *********************************************************************/
 	public string levelUp() {
-		int nextTreshold = getExpectedXP();
+		float nextTreshold = getExpectedXP();
 		if (xp >= nextTreshold) {
 			level++;
 			hp = maxHP ();
@@ -395,6 +408,8 @@ public class PlayerAttributes : MonoBehaviour {
 	/** Cheat */
 	public void levelMeUp(){
 		xp = levelXP (level+1);
+		hp = maxHP ();
+		GameObject.Find("Health").GetComponent<Image>().fillAmount = hp/maxHP();
 		levelUp();
 	}
 
@@ -403,7 +418,7 @@ public class PlayerAttributes : MonoBehaviour {
 		return (int) (XP_BASE * (Mathf.Pow (XP_MULT, n - 1) / (XP_MULT - 1) - 1));
 	}
 	
-	public int getExpectedXP() {
+	public float getExpectedXP() {
 		return levelXP(level+1);
 	}
 	
@@ -539,6 +554,7 @@ public class PlayerAttributes : MonoBehaviour {
 		HealthPack tempItem = (HealthPack) item;
 		int healthRegen = (int)(maxHP() * tempItem.healthValue);
 		addHealth(healthRegen);
+		GameObject.Find("Health").GetComponent<Image>().fillAmount = hp/maxHP();
 	}	
 
 	public void addHealth(int val){
@@ -549,7 +565,8 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	public void restoreHealthToFull() {
-			hp = maxHP ();
+		hp = maxHP ();
+		GameObject.Find("Health").GetComponent<Image>().fillAmount = hp/maxHP();
 	}
 	
 
@@ -557,11 +574,12 @@ public class PlayerAttributes : MonoBehaviour {
 	public bool loseHP(int loss) {
 		if (Application.loadedLevelName != "Tutorial") {
 			hp -= loss;
+			GameObject.Find("Health").GetComponent<Image>().fillAmount = hp/maxHP();
 		}
 		return isDead ();
 	}
 	
-	public int maxHP() {
+	public float maxHP() {
 		var tmp = Mathf.RoundToInt(HP_BASE * Mathf.Pow(HP_MULT, level -1));		
 		foreach (Accessory a in accessories) {
 			tmp += a.hp;
@@ -586,11 +604,13 @@ public class PlayerAttributes : MonoBehaviour {
 	public void drainStamina(){
 		if (Application.loadedLevelName != "SaveSpot") {
 			this.stamina -= RUN_STAMINA_DRAIN;//0.5f;
+			GameObject.Find("Stamina").GetComponent<Image>().fillAmount = stamina/maxStamina();
 		}
 	}
 	
 	public void restoreStaminaToFull(){
 		stamina = maxStamina ();
+		GameObject.Find("Stamina").GetComponent<Image>().fillAmount = stamina/maxStamina();
 	}
 
 	/*********************** Attack *****************************/
@@ -638,9 +658,12 @@ public class PlayerAttributes : MonoBehaviour {
 			}
 
 			bool dead = e.loseHP(tmpdamage);
-
 			if (weapon != null) {
 				stamina -= weapon.staminaLoss;
+				GameObject.Find("Stamina").GetComponent<Image>().fillAmount = stamina/maxStamina();
+			} else {
+				stamina -= STAMINA_LOSS;
+				GameObject.Find("Stamina").GetComponent<Image>().fillAmount = stamina/maxStamina();
 			}
 
 			if (dead) {					

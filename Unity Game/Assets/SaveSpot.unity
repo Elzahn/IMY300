@@ -1940,7 +1940,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 18
+    m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -2550,6 +2550,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d7ea453bc2ad2a24590755b413b2843f, type: 3}
   - {fileID: 8300000, guid: d7ea453bc2ad2a24590755b413b2843f, type: 3}
   - {fileID: 8300000, guid: d7ea453bc2ad2a24590755b413b2843f, type: 3}
+  - {fileID: 8300000, guid: d7ea453bc2ad2a24590755b413b2843f, type: 3}
+  - {fileID: 8300000, guid: d7ea453bc2ad2a24590755b413b2843f, type: 3}
+  - {fileID: 8300000, guid: d7ea453bc2ad2a24590755b413b2843f, type: 3}
+  - {fileID: 8300000, guid: d7ea453bc2ad2a24590755b413b2843f, type: 3}
 --- !u!114 &839258574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2880,7 +2884,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -5, y: .00735473633}
+  m_AnchoredPosition: {x: -5, y: -.0048828125}
   m_SizeDelta: {x: 822.030029, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &913601018
@@ -7406,7 +7410,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 18
+    m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
