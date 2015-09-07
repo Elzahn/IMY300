@@ -44,7 +44,7 @@ public class NaturalDisasters : MonoBehaviour {
 		originalCamRotation = cameraTransform.localRotation;
 		spinningDone = false;
 		earthquakeDone = false;
-		GameObject.Find ("Player").GetComponent<Sounds> ().playAmbienceSound (Sounds.PLANET_AMBIENCE);
+		//GameObject.Find ("Player").GetComponent<Sounds> ().playAmbienceSound (Sounds.PLANET_AMBIENCE);
 	}
 	
 	// Update is called once per frame
@@ -102,10 +102,10 @@ public class NaturalDisasters : MonoBehaviour {
 				}
 
 				if (Time.time >= nextDisaster - 10) {
-					GameObject.Find ("Player").GetComponent<Sounds> ().playAlarmSound (Sounds.PLANET_AMBIENCE);
+					GameObject.Find ("Player").GetComponent<Sounds> ().playAlarmSound (Sounds.DISASTER_ALARM);
 				}
 				if (Time.time >= nextDisaster - 5) {
-					GameObject.Find ("Player").GetComponent<Sounds> ().stopAlarmSound (Sounds.PLANET_AMBIENCE);
+					GameObject.Find ("Player").GetComponent<Sounds> ().stopAlarmSound (Sounds.DISASTER_ALARM);
 				}
 
 				if ((Application.loadedLevelName != "Tutorial" && Time.time >= nextDisaster) || earthquakeNow || spinNow) {
