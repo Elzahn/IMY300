@@ -110,7 +110,7 @@ public abstract class Enemy : MonoBehaviour {
 	public int maxHp{ get; protected set; }
 	public int hp { get; protected set; }
 	public int level { get; set; }
-	public int damage { get; protected set;}
+	public virtual int damage { get; protected set;}
 	public float hitChance { get; protected set;}
 	public float critChance { get; protected set;}
 	public float lootChance { get; protected set;}
