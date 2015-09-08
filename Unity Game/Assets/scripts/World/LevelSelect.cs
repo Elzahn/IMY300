@@ -32,6 +32,7 @@ public class LevelSelect : MonoBehaviour {
 							planet.GetComponent<SpawnTrees>().spawnTrees(299);
 							planet.GetComponent<SpawnHealthPacks>().spawnHealth(10);
 							this.GetComponent<Sounds>().playAmbienceSound(Sounds.PLANET_1_AMBIENCE);
+							this.GetComponent<Sounds>().pauseSound("ambience");
 							spawnedLevel = true;
 						}
 						break;
@@ -44,6 +45,7 @@ public class LevelSelect : MonoBehaviour {
 							planet.GetComponent<SpawnTrees>().spawnTrees(190);
 							planet.GetComponent<SpawnHealthPacks>().spawnHealth(12);
 							this.GetComponent<Sounds>().playAmbienceSound(Sounds.PLANET_2_AMBIENCE);
+							this.GetComponent<Sounds>().pauseSound("ambience");
 							spawnedLevel = true;
 						}
 						break;
@@ -56,6 +58,7 @@ public class LevelSelect : MonoBehaviour {
 							planet.GetComponent<SpawnTrees>().spawnTrees(350);
 							planet.GetComponent<SpawnHealthPacks>().spawnHealth(2);
 							this.GetComponent<Sounds>().playAmbienceSound(Sounds.PLANET_3_AMBIENCE);
+							this.GetComponent<Sounds>().pauseSound("ambience");
 							spawnedLevel = true;
 						}
 						break;
@@ -68,6 +71,7 @@ public class LevelSelect : MonoBehaviour {
 							planet.GetComponent<SpawnTrees>().spawnTrees(80);
 							planet.GetComponent<SpawnHealthPacks>().spawnHealth(15);
 							this.GetComponent<Sounds>().playAmbienceSound(Sounds.PLANET_4_AMBIENCE);
+							this.GetComponent<Sounds>().pauseSound("ambience");
 							spawnedLevel = true;
 						}
 						break;
@@ -80,6 +84,7 @@ public class LevelSelect : MonoBehaviour {
 							planet.GetComponent<SpawnTrees>().spawnTrees(20);
 							planet.GetComponent<SpawnHealthPacks>().spawnHealth(20);
 							this.GetComponent<Sounds>().playAmbienceSound(Sounds.PLANET_5_AMBIENCE);
+							this.GetComponent<Sounds>().pauseSound("ambience");
 							spawnedLevel = true;
 						}
 						break;

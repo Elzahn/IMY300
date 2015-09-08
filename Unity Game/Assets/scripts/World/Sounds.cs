@@ -110,7 +110,13 @@ public class Sounds : MonoBehaviour {
 				worldAudio.UnPause();
 				break;
 			}
-			default:
+			case "ambience":
+			{
+				ambienceAudio = GameObject.Find("Ambience Audio").GetComponent<AudioSource>();
+				ambienceAudio.UnPause ();
+				break;
+			}
+		default:
 			{
 				characterAudio = GameObject.Find ("Character Audio").GetComponent<AudioSource> ();
 				characterAudio.UnPause ();
@@ -146,6 +152,12 @@ public class Sounds : MonoBehaviour {
 			case "world":
 			{
 				worldAudio.Pause();
+				break;
+			}
+			case "ambience":
+			{
+				ambienceAudio = GameObject.Find("Ambience Audio").GetComponent<AudioSource>();
+				ambienceAudio.Pause ();
 				break;
 			}
 			default:
