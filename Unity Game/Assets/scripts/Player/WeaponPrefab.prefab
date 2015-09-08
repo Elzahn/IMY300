@@ -11,6 +11,7 @@ GameObject:
   - 222: {fileID: 22209068}
   - 114: {fileID: 11463612}
   - 114: {fileID: 11481608}
+  - 114: {fileID: 11436848}
   m_Layer: 5
   m_Name: Equip
   m_TagString: Untagged
@@ -46,6 +47,7 @@ GameObject:
   - 222: {fileID: 22266240}
   - 114: {fileID: 11464632}
   - 114: {fileID: 11433484}
+  - 114: {fileID: 11467002}
   m_Layer: 5
   m_Name: Drop
   m_TagString: Untagged
@@ -80,6 +82,7 @@ GameObject:
   - 224: {fileID: 22416278}
   - 222: {fileID: 22226124}
   - 114: {fileID: 11467220}
+  - 114: {fileID: 11453544}
   m_Layer: 5
   m_Name: WeaponPrefab
   m_TagString: WeaponList
@@ -186,7 +189,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 11467002}
         m_MethodName: dropWeapon
         m_Mode: 1
         m_Arguments:
@@ -199,6 +202,17 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &11436848
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303fb00d834e9144f951dad21bec3d5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11452050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -225,6 +239,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Equip
+--- !u!114 &11453544
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfeb3bd8401f0cf4f87d0b6491486516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11463612
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -288,6 +313,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11467002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 121578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303fb00d834e9144f951dad21bec3d5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11467220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -348,7 +384,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 11436848}
         m_MethodName: equipWeapon
         m_Mode: 1
         m_Arguments:
@@ -436,7 +472,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155490}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: .000397760014}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1.00765347, y: .340522707, z: 1.19842541}
   m_Children:
   - {fileID: 22431160}
