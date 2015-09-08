@@ -165,8 +165,10 @@ public abstract class Enemy : MonoBehaviour {
 	}
 
 	public void followPlayer(){
+
 		GameObject player = GameObject.Find("Player");
-		Vector3 PlayerPos = player.GetComponent<Rigidbody>().position;
+		Vector3 PlayerPos = player.GetComponent<Rigidbody>().position;		
+		transform.LookAt(PlayerPos);
 		Vector3 myPos = GetComponent<Rigidbody>().position;
 
 		float distance = Vector3.Distance (PlayerPos, myPos);
