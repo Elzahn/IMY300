@@ -97,6 +97,7 @@ public class InventoryGUI : MonoBehaviour {
 			if((Application.loadedLevelName == "Scene" && !planet.GetComponent<LoadingScreen>().loading) || Application.loadedLevelName != "Scene"){
 				hasCollided = false;
 				Inventory.enabled = true;
+				GameObject.Find("WeaponScroll").GetComponent<ScrollableList>().checkInventory();
 				showInventory = true;
 				//PlayerLog.showLog = false;
 				this.GetComponent<Sounds> ().playWorldSound (Sounds.INVENTORY);

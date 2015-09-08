@@ -123,7 +123,7 @@ public class ScrollableList : MonoBehaviour
 			}
     }
 
-	void Update()
+	public void checkInventory()
 	{
 		GameObject[] gameObjectsToDelete = GameObject.FindGameObjectsWithTag ("WeaponList");
 		

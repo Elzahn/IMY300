@@ -81,6 +81,7 @@
      <Compile Include="Assets\scripts\Light\LightRotation.cs" />
      <Compile Include="Assets\scripts\Light\LightTest.cs" />
      <Compile Include="Assets\scripts\Menu\HUD.cs" />
+     <Compile Include="Assets\scripts\Menu\Inventory.cs" />
      <Compile Include="Assets\scripts\Menu\MenuScript.cs" />
      <Compile Include="Assets\scripts\Player\CameraControl.cs" />
      <Compile Include="Assets\scripts\Player\CharacterSelection.cs" />
