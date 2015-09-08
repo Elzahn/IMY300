@@ -30,6 +30,13 @@ GameObject:
   - 114: {fileID: 11465068}
   - 64: {fileID: 6440982}
   - 65: {fileID: 6564112}
+  - 65: {fileID: 6569852}
+  - 65: {fileID: 6541964}
+  - 65: {fileID: 6503622}
+  - 65: {fileID: 6515306}
+  - 65: {fileID: 6573326}
+  - 65: {fileID: 6553102}
+  - 65: {fileID: 6534562}
   m_Layer: 0
   m_Name: warppoint
   m_TagString: WarpPoint
@@ -44,7 +51,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 134530}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -66.4352951, y: 1.78301907, z: -58.308815}
+  m_LocalPosition: {x: 232.617401, y: 214.728378, z: -89.4635468}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 459104}
@@ -120,6 +127,66 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 1
   m_Mesh: {fileID: 4300000, guid: 6e1401178a55e5447b66d936f95d1037, type: 3}
+--- !u!65 &6503622
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 177728}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.66000009, y: 4.17000008, z: .235104308}
+  m_Center: {x: 0, y: 0, z: .117552124}
+--- !u!65 &6515306
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 177728}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.98000002, y: 4.42000008, z: .235104308}
+  m_Center: {x: 0, y: 0, z: .117552124}
+--- !u!65 &6534562
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 177728}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .310000002, y: 5.36000013, z: .235104308}
+  m_Center: {x: 0, y: 0, z: .117552124}
+--- !u!65 &6541964
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 177728}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.3900001, y: 3.75999999, z: .235104308}
+  m_Center: {x: 0, y: 0, z: .117552124}
+--- !u!65 &6553102
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 177728}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.03999996, y: 5.05000019, z: .235104308}
+  m_Center: {x: 0, y: 0, z: .117552124}
 --- !u!65 &6564112
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -131,6 +198,30 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 4.5999999, y: 3.05999994, z: .235104308}
+  m_Center: {x: 0, y: 0, z: .117552124}
+--- !u!65 &6569852
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 177728}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.09000015, y: 3.45000005, z: .235104308}
+  m_Center: {x: 0, y: 0, z: .117552124}
+--- !u!65 &6573326
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 177728}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.42999995, y: 4.69999981, z: .235104308}
   m_Center: {x: 0, y: 0, z: .117552124}
 --- !u!114 &11436604
 MonoBehaviour:
@@ -157,6 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToCheckMyPosition: 0
+  checkMyPosition: 1
   touching: 0
 --- !u!1001 &100100000
 Prefab:
@@ -175,6 +267,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

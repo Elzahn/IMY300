@@ -374,11 +374,11 @@ public class PlayerController : MonoBehaviour {
 				playerAttributes.resetInventoryAndStorage ();
 				//PlayerLog.queue.Clear ();
 				//PlayerLog.stats = "";
-				if(GameObject.Find("Planet").GetComponent<LevelSelect>() != null){
-					GameObject.Find("Planet").GetComponent<LevelSelect>().spawnedLevel = false;
+				/*if(GameObject.Find("Planet").GetComponent<LevelSelect>() != null){
 					//playerAttributes.restoreHealthToFull();
-				}
-				Application.LoadLevel (Application.loadedLevel);
+				}*/
+
+				Application.LoadLevel ("Scene");
 				GameObject.Find("Stamina").GetComponent<Image>().fillAmount = playerAttributes.stamina/playerAttributes.maxStamina();
 				GameObject.Find("Health").GetComponent<Image>().fillAmount = playerAttributes.hp/playerAttributes.maxHP();
 				GameObject.Find("XP").GetComponent<Image>().fillAmount = playerAttributes.xp/playerAttributes.getExpectedXP();

@@ -66,7 +66,7 @@ public class Tutorial : MonoBehaviour {
 			}
 
 			showVisualQue = Time.time + visualDuration;
-		} else {
+		} else if(Application.loadedLevelName == "Tutorial"){
 			/*if (Application.loadedLevelName == "Scene" && !GameObject.Find("Planet").GetComponent<LoadingScreen>().loading && this.GetComponent<LevelSelect>().currentLevel == 2) {
 				this.GetComponent<SaveSpotTeleport> ().showedHealthHint = true;
 				makeHint("Need a health pack? Look out for the purple flowers.", Health);

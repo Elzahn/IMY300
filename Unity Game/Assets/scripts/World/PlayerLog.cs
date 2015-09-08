@@ -26,8 +26,8 @@ public class PlayerLog : MonoBehaviour {
 
 	public void OnGUI(){
 		if (showLog) {
-			int boxWidth = 300;
-			int boxHeight = 400;
+			int boxWidth = Screen.width/4;
+			int boxHeight = Screen.height/2;
 			int left = 20;
 			int top = 20;
 
