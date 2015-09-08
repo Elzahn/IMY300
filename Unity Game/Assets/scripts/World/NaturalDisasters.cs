@@ -110,11 +110,11 @@ public class NaturalDisasters : MonoBehaviour {
 
 				if ((Application.loadedLevelName != "Tutorial" && Time.time >= nextDisaster) || earthquakeNow || spinNow) {
 					nextDisaster = Time.time + delay;
-					int chance = Random.Range (0, 101);
-
+					int chance = Random.Range (0, 100);
+					int prob = 40;
 					//moved chance to the back so cheats get preferance
-					if (earthquakeNow || spinNow || chance <= 20) {
-						if (earthquakeNow || chance <= 10) {	//Earthquake
+					if (earthquakeNow || spinNow || chance <= prob) {
+						if (earthquakeNow || chance <= prob/2) {	//Earthquake
 							GameObject.Find ("Player").GetComponent<Sounds> ().playWorldSound (Sounds.EARTHQUAKE);
 							shake = 2f;
 							tutorialShake = Time.time + 3;
@@ -140,7 +140,7 @@ public class NaturalDisasters : MonoBehaviour {
 							//checking for collision when falling in collision file
 									
 							//print ("Earth quake!");
-						} else if (spinNow || chance > 10) {	//Spin
+						} else if (spinNow || chance > prob/2) {	//Spin
 							GameObject.Find ("Player").GetComponent<Sounds> ().playWorldSound (Sounds.SPINNING_WIND);
 							spin = 2f;
 
