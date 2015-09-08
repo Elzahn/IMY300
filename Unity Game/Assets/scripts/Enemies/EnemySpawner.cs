@@ -20,7 +20,6 @@ public class EnemySpawner : MonoBehaviour {
 	private Text hudText;
 	private Accessory accessoryScript;
 
-
 	private int ENEM_COUNT;
 	private bool fallFirst;
 	const int NORMAL_ENEMY_TYPES = 4;
@@ -125,7 +124,6 @@ public class EnemySpawner : MonoBehaviour {
 			if (enemy.isDead()) {
 				if(enemy.typeID == "BossAlien")
 				{
-					print (GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked && fallFirst);
 					if(GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked && fallFirst){
 
 						GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_FALL);

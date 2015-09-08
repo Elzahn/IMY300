@@ -1,36 +1,20 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="c:\Users\Elzahn\Documents\GitHub\IMY300\Unity Game\Assets\scripts\World\NaturalDisasters.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Enemies\EnemySpawner.cs">
     <Files>
-      <File FileName="Assets\scripts\Menu\HUD.cs" Line="53" Column="4" />
-      <File FileName="Assets\scripts\Player\InventoryGUI.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="117" Column="57" />
-      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="403" Column="52" />
-      <File FileName="Assets\scripts\Teleporting\SaveSpotTeleport.cs" Line="171" Column="45" />
-      <File FileName="Assets\scripts\Teleporting\Warping.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Teleporting\FallThroughPlanet.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\World\Sounds.cs" Line="68" Column="33" />
-      <File FileName="Assets\scripts\World\SaveSpotSound.cs" Line="19" Column="1" />
-      <File FileName="Assets\scripts\Enemies\TutorialSpawner.cs" Line="38" Column="99" />
-      <File FileName="Assets\scripts\Player\Collisions.cs" Line="36" Column="24" />
-      <File FileName="Assets\scripts\World\LoadingScreen.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\World\LevelSelect.cs" Line="46" Column="8" />
-      <File FileName="c:\Users\Elzahn\Documents\GitHub\IMY300\Unity Game\Assets\scripts\World\NaturalDisasters.cs" Line="105" Column="6" />
+      <File FileName="Assets\scripts\TestParticles.cs" Line="19" Column="33" />
+      <File FileName="Assets\scripts\Teleporting\SaveSpotTeleport.cs" Line="188" Column="1" />
+      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="418" Column="1" />
+      <File FileName="Assets\scripts\Menu\MenuScript.cs" Line="9" Column="2" />
+      <File FileName="Assets\scripts\Enemies\Enemy.cs" Line="191" Column="15" />
+      <File FileName="Assets\scripts\Enemies\Ape\ApeAlien.cs" Line="52" Column="19" />
+      <File FileName="Assets\scripts\Light\LightRotation.cs" Line="23" Column="19" />
+      <File FileName="Assets\scripts\Enemies\Clay\ClayAlien.cs" Line="110" Column="8" />
+      <File FileName="Assets\scripts\Enemies\Moss\MossAlien.cs" Line="46" Column="4" />
+      <File FileName="Assets\scripts\Enemies\Boss\BossAlien.cs" Line="30" Column="15" />
+      <File FileName="Assets\scripts\Enemies\Translucent\TranslucentAlien.cs" Line="87" Column="30" />
+      <File FileName="Assets\scripts\Enemies\EnemySpawner.cs" Line="33" Column="1" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="Assembly-CSharp" expanded="True">
-            <Node name="scripts" expanded="True">
-              <Node name="Player" expanded="True" />
-              <Node name="World" expanded="True">
-                <Node name="NaturalDisasters.cs" selected="True" />
-              </Node>
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

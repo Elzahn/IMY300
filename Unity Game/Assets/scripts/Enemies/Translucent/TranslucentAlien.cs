@@ -5,7 +5,9 @@ public class TranslucentAlien : Enemy {
 	 * Automatically called after level is set. 
 	 * Should initilze other attributes dpendent on level;
 	 */
+
 	public AudioSource monsterAudio;
+
 	public override int damage { get {
 			var tmp = base.damage;
 			var dark = LightRotation.getDark(this.gameObject);
@@ -77,6 +79,8 @@ public class TranslucentAlien : Enemy {
 					}
 					followPlayer ();
 				}
+			} else {
+				followDark();
 			}
 
 			if (Time.time >= nextTRegeneration) {

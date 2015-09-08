@@ -14,9 +14,11 @@ public class Warping : MonoBehaviour {
 	private float PlanetRadius;
 	private PlayerController playerScript;
 	private PlayerAttributes attributesScript;
+	private bool temp;
 
 	// Use this for initialization
 	void Start () {
+		temp = false;
 		waitingForMovement = false;
 		chooseDestinationUnlocked = false;	//unlocks at level 6
 		chooseDestination = true;
@@ -54,6 +56,7 @@ public class Warping : MonoBehaviour {
 		else{
 			GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(Sounds.WARPING);
 			attributesScript.justWarped = true;
+			temp = true;
 			GameObject newLocationWarpPoint = GameObject.Find("WarpPoint"+randomWarpPoint);
 			Vector3 newLocation = newLocationWarpPoint.transform.position;
 			GameObject.Find("Player").transform.position = new Vector3(newLocation.x+1,newLocation.y,newLocation.z+1);	//new Vector3 (newLocation.x, newLocation.y, newLocation.z);
@@ -62,6 +65,12 @@ public class Warping : MonoBehaviour {
 			playerAttributesScript.loseHP(healthToLose);//loses 5% health when warping
 			print ("You lose " + healthToLose + " health");
 			//PlayerLog.addStat("You lose " + healthToLose + " health");
+		}
+	}
+
+	void OnCollisionEnter(Collision col){
+		if (col.collider.name == "Planet" && !temp) {
+			attributesScript.justWarped = false;
 		}
 	}
 
@@ -80,8 +89,10 @@ public class Warping : MonoBehaviour {
 	}
 
 	void OnTriggerExit(Collider col){
-		if (!waitingForMovement) {
-			attributesScript.justWarped = false;
+		//if (!waitingForMovement ) {
+		if(col.tag == "WarpPoint"){
+			temp = false;
+			//attributesScript.justWarped = false;
 		}
 	}
 

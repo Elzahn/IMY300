@@ -89,6 +89,14 @@ public class LevelSelect : MonoBehaviour {
 						}
 						break;
 					}
+					default:
+					{
+						GameObject.Find("Player").GetComponent<Rigidbody>().useGravity = true;
+						GameObject.Find("Player").GetComponent<FauxGravityBody>().attractor = null;
+						GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(Sounds.FINISHED_GAME);
+						Application.LoadLevel("EndOfGame");
+						break;
+					}
 				}
 			}
 		} else {

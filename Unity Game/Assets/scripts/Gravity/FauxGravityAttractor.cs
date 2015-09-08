@@ -29,8 +29,11 @@ public class FauxGravityAttractor : MonoBehaviour {
 			}
 
 			temp.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;
-		} else if (col.collider.tag == "Monster") {
+		} else if (col.collider.tag == "Monster" && col.collider.name != "Ape") {
 			col.collider.GetComponent<PositionMe> ().touching = false;
+		} else if (col.collider.tag == "Monster") {
+			//took out to help with placement?
+			//col.collider.GetComponentInParent<PositionMe> ().touching = false;
 		} else if (col.collider.tag == "MediumHealthPack" || col.collider.tag == "LargeHealthPack") {
 			if(col.collider.name == "Box012"){
 				col.collider.transform.parent.gameObject.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;
@@ -56,7 +59,6 @@ public class FauxGravityAttractor : MonoBehaviour {
 
 	//Ensure each object that touches the sphere and has a mesh attached can't be moved
 	void OnCollisionEnter (Collision col){
-
 		if (col.collider.tag == "WorldObject") {
 			GameObject temp;
 			if (col.collider.name == "Sphere001" || col.collider.name == "Cylinder001" || col.collider.name == "Box012") {
@@ -66,8 +68,10 @@ public class FauxGravityAttractor : MonoBehaviour {
 			}
 
 			temp.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
-		} else if (col.collider.tag == "Monster") {
+		} else if (col.collider.tag == "Monster" && col.collider.name != "Ape") {
 			col.collider.GetComponent<PositionMe> ().touching = true;
+		} else if (col.collider.tag == "Monster") {
+			col.collider.GetComponentInParent<PositionMe> ().touching = true;
 		} else if (col.collider.tag == "MediumHealthPack" || col.collider.tag == "LargeHealthPack") {
 			if (col.collider.name == "Box012") {
 				col.collider.transform.parent.gameObject.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
