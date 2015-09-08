@@ -3,7 +3,7 @@ using System.Collections;
 
 public class LightRotation : MonoBehaviour {
 
-	public int lightSpeed = 20;
+	public static int lightSpeed = 5;
 
 	
 	// Update is called once per frame

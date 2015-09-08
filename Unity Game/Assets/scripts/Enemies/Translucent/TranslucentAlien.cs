@@ -79,6 +79,8 @@ public class TranslucentAlien : Enemy {
 					}
 					followPlayer ();
 				}
+			} else {
+				followDark();
 			}
 
 			if (Time.time >= nextTRegeneration) {

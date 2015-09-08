@@ -2,6 +2,7 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Enemies\EnemySpawner.cs">
     <Files>
+
       <File FileName="Assets\scripts\Enemies\EnemyHealth.cs" Line="41" Column="27" />
       <File FileName="Assets\scripts\Enemies\EnemySpawner.cs" Line="218" Column="48" />
       <File FileName="Assets\scripts\World\Sounds.cs" Line="1" Column="1" />
@@ -22,6 +23,16 @@
         </State>
       </Pad>
     </Pads>
+      <File FileName="Assets\scripts\TestParticles.cs" Line="19" Column="33" />
+      <File FileName="Assets\scripts\Teleporting\SaveSpotTeleport.cs" Line="188" Column="1" />
+      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="418" Column="1" />
+      <File FileName="Assets\scripts\Menu\MenuScript.cs" Line="9" Column="2" />
+      <File FileName="Assets\scripts\Light\LightRotation.cs" Line="23" Column="19" />
+      <File FileName="Assets\scripts\Enemies\Clay\ClayAlien.cs" Line="110" Column="8" />
+      <File FileName="Assets\scripts\Enemies\Moss\MossAlien.cs" Line="46" Column="4" />
+      <File FileName="Assets\scripts\Enemies\Boss\BossAlien.cs" Line="30" Column="15" />
+      <File FileName="Assets\scripts\Enemies\Translucent\TranslucentAlien.cs" Line="87" Column="30" />
+    </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
