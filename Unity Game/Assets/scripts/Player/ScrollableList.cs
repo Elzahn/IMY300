@@ -145,6 +145,8 @@ public class ScrollableList : MonoBehaviour
 					newItem.name = j +" " + item.typeID;
 					newItem.transform.SetParent(gameObject.transform, false);
 					
+					newItem.GetComponent<PlaceInList>().myItem = item;
+
 					Text W = newItem.GetComponentInChildren(typeof(Text)) as Text;
 					W.text = item.typeID;
 					RectTransform rectTransform = newItem.GetComponent<RectTransform>();

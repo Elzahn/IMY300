@@ -222,7 +222,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 8, y: -.0705795288}
+  m_AnchoredPosition: {x: 8, y: -.076461792}
   m_SizeDelta: {x: 500, y: 180}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &18939797
@@ -5840,7 +5840,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22416278, guid: 94f9fbd395ef4cb43aca8f8460ab26de, type: 2}
       propertyPath: m_LocalPosition.z
-      value: .000397760014
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 22416278, guid: 94f9fbd395ef4cb43aca8f8460ab26de, type: 2}
       propertyPath: m_LocalRotation.x
@@ -5902,63 +5902,13 @@ Prefab:
       propertyPath: m_Pivot.y
       value: .5
       objectReference: {fileID: 0}
-    - target: {fileID: 11433484, guid: 94f9fbd395ef4cb43aca8f8460ab26de, type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1547827569}
-    - target: {fileID: 11481608, guid: 94f9fbd395ef4cb43aca8f8460ab26de, type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1547827570}
     - target: {fileID: 155490, guid: 94f9fbd395ef4cb43aca8f8460ab26de, type: 2}
       propertyPath: m_Name
       value: Weapon_prefab
       objectReference: {fileID: 0}
-    - target: {fileID: 155490, guid: 94f9fbd395ef4cb43aca8f8460ab26de, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11481608, guid: 94f9fbd395ef4cb43aca8f8460ab26de, type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: equipWeapon
-      objectReference: {fileID: 0}
-    - target: {fileID: 11433484, guid: 94f9fbd395ef4cb43aca8f8460ab26de, type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: dropWeapon
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 94f9fbd395ef4cb43aca8f8460ab26de, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1547827567 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 121578, guid: 94f9fbd395ef4cb43aca8f8460ab26de, type: 2}
-  m_PrefabInternal: {fileID: 1547827566}
---- !u!1 &1547827568 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 114152, guid: 94f9fbd395ef4cb43aca8f8460ab26de, type: 2}
-  m_PrefabInternal: {fileID: 1547827566}
---- !u!114 &1547827569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1547827567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd1c9de6cdd22f841a06ba1030e4f573, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1547827570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1547827568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd1c9de6cdd22f841a06ba1030e4f573, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1557658586
 GameObject:
   m_ObjectHideFlags: 0
@@ -8113,8 +8063,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1742371540}
   m_HandleRect: {fileID: 1742371539}
   m_Direction: 2
-  m_Value: 0
-  m_Size: .999952614
+  m_Value: 1
+  m_Size: .999979317
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8478,14 +8428,14 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2119784511}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: .89996469, y: .357929707, z: 1}
   m_Children: []
   m_Father: {fileID: 1460884822}
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -16, y: -.00326538086}
+  m_AnchoredPosition: {x: -16, y: -.0157241821}
   m_SizeDelta: {x: 500, y: 180}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &2119784513
