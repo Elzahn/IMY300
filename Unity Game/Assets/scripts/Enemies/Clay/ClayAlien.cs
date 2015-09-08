@@ -39,33 +39,52 @@ public class ClayAlien : Enemy {
 	
 	void Update () {
 		/* Called once per frame. AI comes Here */
-		PlayerController playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
-		if (playerScript.paused  == false) {
-			/* Called once per frame. AI comes Here */
-			GameObject player = GameObject.Find ("Player");
-			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
+		GameObject player = GameObject.Find("Player");
+		PlayerController playerScript = player.GetComponent<PlayerController> ();
+		if (!playerScript.paused) {
+
+
+			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;		
+			transform.LookAt (PlayerPos);
 			Vector3 myPos = GetComponent<Rigidbody> ().position;
-			
-			if (Vector3.Distance (PlayerPos, myPos) < 12) {
+
+			float distance = Vector3.Distance (PlayerPos, myPos);
+			if (distance < 6 || suspicion >= 10) {
+				//player.GetComponent<Sounds>().playMonsterSound (1, this);
+				if (!onPlayer) {//distance < 10 && 
+					Vector3 direction = PlayerPos - myPos;
+					this.GetComponent<Rigidbody> ().MovePosition (this.GetComponent<Rigidbody> ().position + direction * 0.25f * Time.deltaTime);
+					//this.transform.Translate (direction * 0.025f);
+				} else if (distance >= 1.5f) {
+					onPlayer = false;
+				}
+			}
+			var viewdist = 13;
+			var dark = LightRotation.getDark (this.gameObject);
+			if (dark == "dark") {
+				viewdist += 5;
+			} else if (dark == "dusk") {
+				viewdist += 2;
+			}
+			if (Vector3.Distance (PlayerPos, myPos) < viewdist) {
 				
-				if(GameObject.Find("Player").GetComponent<PlayerController>().moving){
-					if(suspicion < 10){
+				if (GameObject.Find ("Player").GetComponent<PlayerController> ().moving) {
+					if (suspicion < 10) {
 						suspicion++;
 					} else {
-						followPlayer();
+						followPlayer ();
 					}
 					
 				} else {
-					if(suspicion > 0)
-					{
+					if (suspicion > 0) {
 						suspicion--;
 					}
 				}
 				
-				if (Vector3.Distance (PlayerPos, myPos) < 6) {
+				if (Vector3.Distance (PlayerPos, myPos) < viewdist / 2) {
 					followPlayer ();
 				}
-			} else{
+			} else {
 				attackPlayer = false;
 			}
 			
@@ -78,7 +97,7 @@ public class ClayAlien : Enemy {
 			
 			if (Time.time >= nextRegeneration) {
 				nextRegeneration = Time.time + delayRegeneration;
-				if (Time.time >= (lastDamage+3) && getHealth () < getMaxHp ()) {
+				if (Time.time >= (lastDamage + 3) && getHealth () < getMaxHp ()) {
 					hp += (int)(getMaxHp () * 0.01);
 				}
 			}

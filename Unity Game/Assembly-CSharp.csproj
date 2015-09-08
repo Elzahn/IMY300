@@ -132,22 +132,9 @@
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:\Program Files\Unity\Editor\Data\UnityExtensions\Unity\UnityAnalytics\UnityEngine.Analytics.dll</HintPath>
     </Reference>
-    <Reference Include="Cloudstoyv5">
-      <HintPath>C:\Users\Elzahn\Documents\GitHub\IMY300\Unity Game\Assets\CloudsToy\DLL\Cloudstoyv5.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>C:\Program Files\Unity\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{33C579C2-ADD1-FD5E-63F2-F57172AFC99F}</Project>
-      <Name>Assembly-CSharp-firstpass</Name>
-    </ProjectReference>
-    <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
-      <Project>{87228867-ED94-722A-DF0D-F105469E6F02}</Project>
-      <Name>Assembly-UnityScript-firstpass</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

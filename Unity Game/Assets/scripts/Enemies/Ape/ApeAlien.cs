@@ -45,7 +45,14 @@ public class ApeAlien : Enemy {
 			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
 			Vector3 myPos = GetComponent<Rigidbody> ().position;
 			
-			if (Vector3.Distance (PlayerPos, myPos) < 15) {
+			var viewdist = 18;
+			var dark = LightRotation.getDark(this.gameObject);
+			if (dark == "dark") {
+				viewdist -= 8;
+			} else if (dark == "dusk") {
+				viewdist -= 4;
+			}
+			if (Vector3.Distance (PlayerPos, myPos) < viewdist) {
 				
 				if(GameObject.Find("Player").GetComponent<PlayerController>().moving){
 					if(suspicion < 10){
@@ -61,7 +68,7 @@ public class ApeAlien : Enemy {
 					}
 				}
 
-				if (Vector3.Distance (PlayerPos, myPos) < 6) {
+				if (Vector3.Distance (PlayerPos, myPos) < viewdist/2) {
 					if (Time.time >= nextApeAttack) {
 						nextApeAttack = Time.time + apeDelay;
 						attack (player.GetComponent<PlayerAttributes> ());	//Attack Player

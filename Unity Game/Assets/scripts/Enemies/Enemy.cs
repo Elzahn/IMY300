@@ -184,6 +184,16 @@ public abstract class Enemy : MonoBehaviour {
 		}
 	}
 
+	public void followDark() {
+		var d = LightRotation.getDark(this.gameObject);
+		int speed = LightRotation.lightSpeed;
+		if (d != "dark") {
+			speed /= 2;
+		} 
+		transform.RotateAround(Vector3.zero, Vector3.up, speed * Time.deltaTime);
+
+	}
+
 	public string attack(PlayerAttributes player) {
 		player.lastDamage = Time.time;
 		PlayerAttributes.giveAlarm = true;
