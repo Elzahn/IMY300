@@ -107,8 +107,8 @@ public abstract class Enemy : MonoBehaviour {
 		}
 	}
 
-	public int maxHp{ get; protected set; }
-	public int hp { get; protected set; }
+	public float maxHp{ get; protected set; }
+	public float hp { get; protected set; }
 	public int level { get; set; }
 	public virtual int damage { get; protected set;}
 	public float hitChance { get; protected set;}
@@ -131,6 +131,10 @@ public abstract class Enemy : MonoBehaviour {
 
 	public bool loseHP(int loss) {
 		hp -= loss;
+
+		if (hp < 0)
+			hp = 0;
+
 		return isDead();
 	}
 
@@ -215,11 +219,11 @@ public abstract class Enemy : MonoBehaviour {
 		return message;
 	}
 
-	public int getMaxHp(){
+	public float getMaxHp(){
 		return this.maxHp;
 	}
 
-	public int getHealth(){
+	public float getHealth(){
 		return this.hp;
 	}
 

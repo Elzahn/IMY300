@@ -187,48 +187,48 @@ public class Sounds : MonoBehaviour {
 
 	public void stopSound(string source){
 		switch (source) {
-		case "character":
-		{
-			characterAudio.Stop ();
-			break;
-		}
-		case "world":
-		{
-			worldAudio.Stop();
-			break;
-		}
-		case "computer":
-		{
-			computerAudio.Stop();
-			break;
-		}
-		default:
-		{
-			ambienceAudio = GameObject.Find("Ambience Audio").GetComponent<AudioSource>();
-			ambienceAudio.Stop ();
-
-			characterAudio = GameObject.Find ("Character Audio").GetComponent<AudioSource> ();
-			characterAudio.Stop ();
-
-			if(worldClip == TELEPORTING || worldClip == HEALTH_COLLECTION || worldClip == WARPING){
-				worldAudio.Stop ();
+			case "character":
+			{
+				characterAudio.Stop ();
+				break;
 			}
-			if(alarmClip != DISASTER_ALARM){
-				alarmAudio.Stop ();
+			case "world":
+			{
+				worldAudio.Stop();
+				break;
 			}
-
-			if(GameObject.Find("Planet") != null && GameObject.Find("Planet").GetComponent<EnemySpawner>() != null){
-				GameObject.Find("Planet").GetComponent<EnemySpawner>().stopEnemiesSound();
+			case "computer":
+			{
+				computerAudio.Stop();
+				break;
 			}
+			default:
+			{
+				ambienceAudio = GameObject.Find("Ambience Audio").GetComponent<AudioSource>();
+				ambienceAudio.Stop ();
 
-			computerAudio.Stop();
-			break;
-		}
+				characterAudio = GameObject.Find ("Character Audio").GetComponent<AudioSource> ();
+				characterAudio.Stop ();
+
+				if(worldClip == TELEPORTING || worldClip == HEALTH_COLLECTION || worldClip == WARPING){
+					worldAudio.Stop ();
+				}
+				if(alarmClip != DISASTER_ALARM){
+					alarmAudio.Stop ();
+				}
+
+				if(GameObject.Find("Planet") != null && GameObject.Find("Planet").GetComponent<EnemySpawner>() != null){
+					GameObject.Find("Planet").GetComponent<EnemySpawner>().stopEnemiesSound();
+				}
+
+				computerAudio.Stop();
+				break;
+			}
 		}
 	}
 
 	public void pauseMonsterSound(Enemy monster){
-		monster.GetComponent<AudioSource> ().Pause();
+		monster.GetComponent<AudioSource> ().Pause ();
 	}
 
 	public void resumeMonsterSound(Enemy monster){
@@ -236,7 +236,6 @@ public class Sounds : MonoBehaviour {
 			monster.GetComponent<AudioSource> ().UnPause ();
 		}
 	}
-
 
 	public void stopMonsterSound(Enemy monster){
 		monster.GetComponent<AudioSource> ().Stop();

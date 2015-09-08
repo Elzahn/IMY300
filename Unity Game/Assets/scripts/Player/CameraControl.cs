@@ -72,6 +72,7 @@ public class CameraControl : MonoBehaviour {
 				this.transform.LookAt(GameObject.Find("Player").transform);
 
 				birdsEye = true;
+			//	player.GetComponent<PlayerController>().paused = true;
 			}
 
 			if(birdsEye){
@@ -114,6 +115,7 @@ public class CameraControl : MonoBehaviour {
 				PlayerLog.showLog = false;
 				PlayerLog.showHUD = true;
 				birdsEye = false;
+				//player.GetComponent<PlayerController>().paused = false;
 			}
 		}
 	}

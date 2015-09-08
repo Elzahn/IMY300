@@ -213,6 +213,11 @@ public class EnemySpawner : MonoBehaviour {
 	void addEnemy(GameObject enemy) {	
 
 		GameObject go = Instantiate(enemy);
+		//if (go.name == "ApeMonster(Clone)") {
+			//go.GetComponent<TrackEnemyHealth>().canvas = GameObject.Find("Monster_Canvas").GetComponent<Canvas>();
+			go.GetComponent<EnemyHealth>().canvas = go.GetComponentInChildren<Canvas>();
+			//go.GetComponentInChildren<Canvas>().eventCamera = Camera.main;
+	//	}
 		go.GetComponent<FauxGravityBody>().attractor = planet;
 		go.tag = "Monster";
 
