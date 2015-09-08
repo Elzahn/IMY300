@@ -7,7 +7,7 @@ public class SpawnWarpPoints : MonoBehaviour {
 
 	public GameObject warpPoint;
 
-	const int TOTAL_WARPS = 5;
+	public const int TOTAL_WARPS = 5;
 
 	LinkedList<GameObject> warpPoints = new LinkedList <GameObject> ();
 

@@ -8,6 +8,7 @@ public class CharacterSelection : MonoBehaviour {
 
 	// Use this for initialization 
 	void Start () {
+		GameObject.Find ("Loading Screen").GetComponent<Canvas> ().enabled = false;
 		attributesScript = this.GetComponent<PlayerAttributes> ();
 		PlayerLog.showHUD = true;
 		//playerScript = this.GetComponent<PlayerController> ();		

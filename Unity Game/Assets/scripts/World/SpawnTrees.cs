@@ -11,7 +11,7 @@ public class SpawnTrees : MonoBehaviour {
 
 	public GameObject shrub;
 
-	int num_Trees;// = 299;
+	public int num_Trees{ get; set; }// = 299;
 	
 	FauxGravityAttractor planet;
 	

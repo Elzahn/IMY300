@@ -1787,13 +1787,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15521cef4ff472740b7f5c45da5d72ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlantTrees: {fileID: 2800000, guid: 4df40a0b1423bb24988795a3e3ad33f8, type: 3}
-  TrainMonsters: {fileID: 2800000, guid: 97c3adc5e6357e849a3b664a02bb3b29, type: 3}
-  HideHealth: {fileID: 2800000, guid: 6b1034956160b134699d1d4559451efc, type: 3}
-  CreateDisasters: {fileID: 2800000, guid: f364b2d2f18159548b795508ea6f22da, type: 3}
-  WarpPlayer: {fileID: 2800000, guid: 29c7e2f78d395be46adf9d7cfd387b61, type: 3}
-  progressBarEmpty: {fileID: 2800000, guid: fbf26dfb45d1e0c4ca7597c8da0f8192, type: 3}
-  progressBarFull: {fileID: 2800000, guid: 741ac5d9755707746ac14082f067a587, type: 3}
+  LoadingTrees: {fileID: 21300000, guid: 4df40a0b1423bb24988795a3e3ad33f8, type: 3}
+  LoadingWarps: {fileID: 21300000, guid: f364b2d2f18159548b795508ea6f22da, type: 3}
+  LoadingHealth: {fileID: 21300000, guid: 6b1034956160b134699d1d4559451efc, type: 3}
+  LoadingMonsters: {fileID: 21300000, guid: 97c3adc5e6357e849a3b664a02bb3b29, type: 3}
+  LoadingPlayer: {fileID: 21300000, guid: 29c7e2f78d395be46adf9d7cfd387b61, type: 3}
 --- !u!114 &1218453610
 MonoBehaviour:
   m_ObjectHideFlags: 0

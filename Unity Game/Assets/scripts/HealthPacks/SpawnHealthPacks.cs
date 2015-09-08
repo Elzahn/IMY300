@@ -8,7 +8,7 @@ public class SpawnHealthPacks : MonoBehaviour {
 	public GameObject medHealth;
 	public GameObject largeHealth;
 
-	int TOTAL_HEALTH;// = 10;
+	public int TOTAL_HEALTH{ get; set; }// = 10;
 
 	LinkedList<GameObject> healthPacks = new LinkedList <GameObject> ();
 

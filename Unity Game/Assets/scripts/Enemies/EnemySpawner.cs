@@ -20,7 +20,7 @@ public class EnemySpawner : MonoBehaviour {
 	private Text hudText;
 	private Accessory accessoryScript;
 
-	private int ENEM_COUNT;
+	public int ENEM_COUNT{ get; set; }
 	private bool fallFirst;
 	const int NORMAL_ENEMY_TYPES = 4;
 
