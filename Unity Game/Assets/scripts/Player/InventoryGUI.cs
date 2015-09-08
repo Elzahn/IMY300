@@ -140,16 +140,16 @@ public class InventoryGUI : MonoBehaviour {
 				foreach (InventoryItem item in attributesScript.inventory.ToList()) {
 					NOInv.text = "";
 					if(item.typeID != "Power Core"){
-						if (GUI.Button (new Rect (width+101, top+151, buttonWidth, itemHeight), "Drop it")) {
+						/*if (GUI.Button (new Rect (width+101, top+151, buttonWidth, itemHeight), "Drop it")) {
 							attributesScript.inventory.Remove (item);
 
 							this.GetComponent<Sounds>().playWorldSound(Sounds.DROP_ITEM);
-						}
+						}*/
 					}
 
 					if(item.typeID != "Medium Health Pack" && item.typeID != "Large Health Pack" && item.typeID != "Cupcake"){
 						if(item.typeID != "Power Core"){
-							if (GUI.Button (new Rect (width+201, top+151, buttonWidth, itemHeight), "Equip")) {
+							/*if (GUI.Button (new Rect (width+201, top+151, buttonWidth, itemHeight), "Equip")) {
 								attributesScript.equipItem (item);
 
 								if(item.typeID == "Rare Accessory" || item.typeID == "Common Accessory" || item.typeID == "Uncommon Accessory"){
@@ -159,7 +159,7 @@ public class InventoryGUI : MonoBehaviour {
 								} else if(item.typeID != "Warhammer"){
 									this.GetComponent<Sounds>().playWorldSound(Sounds.EQUIP_SWORD);
 								}
-							}
+							}*/
 						}
 					} else {
 						if (GUI.Button (new Rect (width+201, top+151, buttonWidth, itemHeight), "Use")) {
