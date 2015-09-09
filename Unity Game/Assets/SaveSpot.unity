@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: .0469999984, g: .0430000015, b: .0350000001, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 9efbdf6fd98127a48a4c99424d34ee95, type: 2}
   m_HaloStrength: .5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -222,7 +222,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 8, y: -.0796127319}
+  m_AnchoredPosition: {x: 8, y: .0344848633}
   m_SizeDelta: {x: 500, y: 180}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &18939797
@@ -3015,7 +3015,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -5, y: .00579833984}
+  m_AnchoredPosition: {x: -5, y: .0410957336}
   m_SizeDelta: {x: 822.030029, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &913601018
@@ -4535,7 +4535,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1308343026}
   m_Direction: 2
   m_Value: 0
-  m_Size: .999966323
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8064,7 +8064,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1742371539}
   m_Direction: 2
   m_Value: 1
-  m_Size: .999979317
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8435,7 +8435,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -16, y: -.0157241821}
+  m_AnchoredPosition: {x: -16, y: 7.62939453e-06}
   m_SizeDelta: {x: 500, y: 180}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &2119784513
