@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class CharacterSelection : MonoBehaviour {
@@ -11,6 +12,7 @@ public class CharacterSelection : MonoBehaviour {
 		GameObject.Find ("Loading Screen").GetComponent<Canvas> ().enabled = false;
 		attributesScript = this.GetComponent<PlayerAttributes> ();
 		PlayerLog.showHUD = true;
+		GameObject.Find ("LevelUp").GetComponent<Image> ().enabled = false;
 		//playerScript = this.GetComponent<PlayerController> ();		
 	}
 

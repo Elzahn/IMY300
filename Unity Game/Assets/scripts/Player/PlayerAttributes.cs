@@ -91,6 +91,7 @@ public class PlayerAttributes : MonoBehaviour {
 
 	private Sounds soundComponent;
 	private PlayerController controllerComponent;
+	private float levelUpShown;
 
 	/**
 	 * Singleton
@@ -284,6 +285,7 @@ public class PlayerAttributes : MonoBehaviour {
 	private float nextRegeneration;
 	private Text hudText;
 	private bool showWarpHint;
+	private bool showLevelUp;
 
 	/**************************************************** Monobehaviour functions *********************************************
 	 * Start - Called after creation
@@ -291,6 +293,7 @@ public class PlayerAttributes : MonoBehaviour {
 	 * ***********************************************************************************************************************/
 	void Start () {
 		showWarpHint = true;
+		showLevelUp = false;
 
 		//Singleton
 		if (instance) {
@@ -327,9 +330,15 @@ public class PlayerAttributes : MonoBehaviour {
 		GameObject.Find ("XP").GetComponent<Image> ().fillAmount = xp / getExpectedXP();
 		//}
 
+		if(GameObject.Find ("LevelUp").GetComponent<Image> ().enabled == true && showLevelUp && Time.time >= levelUpShown){
+			GameObject.Find ("LevelUp").GetComponent<Image> ().enabled = false;
+			showLevelUp = false;
+		}
+
 		// Health regenration etc.
 		if (!controllerComponent.paused) {
-			
+
+
 			if (this.hp <= 50 && giveAlarm) {
 				soundComponent.playAlarmSound (1);
 			} else {
@@ -402,6 +411,9 @@ public class PlayerAttributes : MonoBehaviour {
 			stamina = maxStamina ();
 			soundComponent.playWorldSound (Sounds.LEVEL_UP);
 			return "You  are now level " + level;
+			GameObject.Find ("LevelUp").GetComponent<Image> ().enabled = true;
+			levelUpShown = Time.time + 3;
+			showLevelUp = true;
 		}
 		return "";
 	}
@@ -409,6 +421,9 @@ public class PlayerAttributes : MonoBehaviour {
 	/** Cheat */
 	public void levelMeUp(){
 		soundComponent.playWorldSound (Sounds.LEVEL_UP);
+		GameObject.Find ("LevelUp").GetComponent<Image> ().enabled = true;
+		levelUpShown = Time.time + 3;
+		showLevelUp = true;
 		xp = levelXP (level+1);
 		hp = maxHP ();
 		GameObject.Find("Health").GetComponent<Image>().fillAmount = hp/maxHP();

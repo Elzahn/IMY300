@@ -1,27 +1,21 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Teleporting\TeleporterActive.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\World\Sounds.cs">
     <Files>
-      <File FileName="Assets\scripts\Teleporting\TeleporterActive.cs" Line="11" Column="29" />
+      <File FileName="Assets\scripts\Teleporting\TeleporterActive.cs" Line="27" Column="1" />
       <File FileName="Assets\scripts\Menu\InventoryScript.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Player\ScrollableList.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Enemies\EnemySpawner.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Player\CharacterSelection.cs" Line="1" Column="1" />
       <File FileName="c:\Users\Elzahn\Documents\GitHub\IMY300\Unity Game\Assets\scripts\Player\InventoryGUI.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Menu\PlaceInList.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\World\SpawnTrees.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\World\SpawnTrees.cs" Line="20" Column="58" />
       <File FileName="Assets\scripts\TestParticles.cs" Line="8" Column="59" />
+      <File FileName="Assets\scripts\World\Sounds.cs" Line="233" Column="4" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="Assembly-CSharp" expanded="True">
-            <Node name="scripts" expanded="True">
-              <Node name="Teleporting" expanded="True" />
-            </Node>
-          </Node>
-          <Node name="Assembly-UnityScript-firstpass" selected="True" />
-        </State>
+        <State expanded="True" selected="True" />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
