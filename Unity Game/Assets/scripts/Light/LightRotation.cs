@@ -3,14 +3,19 @@ using System.Collections;
 
 public class LightRotation : MonoBehaviour {
 
-	public static int lightSpeed = 5;
+	public const int lightSpeed = 5;
+	private float rot = 0;
 
-	
 	// Update is called once per frame
 	void Update () {
 		PlayerController playerScript = GameObject.Find("Player").GetComponent<PlayerController>();
 		if (!playerScript.paused) {
 			transform.RotateAround(Vector3.zero, Vector3.up, lightSpeed * Time.deltaTime);
+
+			rot += lightSpeed * Time.deltaTime;
+			rot %= 360;
+			RenderSettings.skybox.SetFloat("_Rotation", rot );
+
 		}
 	}
 
