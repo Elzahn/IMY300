@@ -151,7 +151,9 @@ public class PlayerController : MonoBehaviour {
 
 		//Skip Tutorial
 		if (Input.GetKeyDown (KeyCode.Escape) && this.GetComponent<Tutorial>().startTutorial) {
-
+			if(GameObject.Find("Particles") != null){
+				GameObject.Find ("Particles").GetComponentInParent<SphereCollider>().enabled = false;
+			}
 			this.GetComponent<Tutorial>().stopTutorial();
 			this.GetComponent<Tutorial>().startTutorial = false;
 			this.GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;

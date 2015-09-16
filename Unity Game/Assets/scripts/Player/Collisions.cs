@@ -67,10 +67,12 @@ public class Collisions : MonoBehaviour {
 				Vector3 tempPos = colObj.transform.position;
 				//Delete health shrub
 				GameObject.Find("Planet").GetComponent<SpawnHealthPacks>().removeHealth(colObj);
-				Destroy (colObj.transform.gameObject.gameObject);
+				Destroy (colObj.transform.Find("Box015").gameObject);
+				Destroy (colObj.transform.Find("Box016").gameObject);
+				colObj.tag = "WorldObject";
 				
 				//Add shrub
-				GameObject.Find("Planet").GetComponent<SpawnTrees>().replaceHealth(tempPos);			
+				//GameObject.Find("Planet").GetComponent<SpawnTrees>().replaceHealth(tempPos);			
 			}
 		} else if (showHealthConfirmation && Input.GetKeyDown(KeyCode.E) && colObj.tag == "LargeHealthPack") {
 			if (playerAttributesScript.inventory.Count < playerAttributesScript.inventorySize) {
@@ -81,10 +83,11 @@ public class Collisions : MonoBehaviour {
 //				print (tempPos);
 				//Delete health shrub
 				GameObject.Find("Planet").GetComponent<SpawnHealthPacks>().removeHealth(colObj);
-				Destroy (colObj.transform.gameObject);
-				
+				Destroy (colObj.transform.Find("Box015").gameObject);
+				Destroy (colObj.transform.Find("Box016").gameObject);
+				colObj.tag = "WorldObject";
 				//Add shrub
-				GameObject.Find("Planet").GetComponent<SpawnTrees>().replaceHealth(tempPos);
+				//GameObject.Find("Planet").GetComponent<SpawnTrees>().replaceHealth(tempPos);
 			}
 		}
 	}

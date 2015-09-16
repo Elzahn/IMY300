@@ -103,7 +103,9 @@ public class SpawnTrees : MonoBehaviour {
 	}
 
 	public void position(GameObject go){
-		GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().checkMyPosition = false;
+		if(GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>() != null){
+			GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>().checkMyPosition = false;
+		}
 		Vector3 position;
 		bool planted = false;
 		
