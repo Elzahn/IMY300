@@ -103,7 +103,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109652}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.0260780975, y: 75.9392014, z: 21.5583687}
+  m_LocalPosition: {x: 72.5693359, y: -30.517931, z: 20.9966965}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 465676}
@@ -133,7 +133,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 85116d50c9ca6684d9aa924a0cbd79c7, type: 2}
+  - {fileID: 2100000, guid: 591c4f11b1597b449bd930f52f019fd2, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -181,7 +181,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 85116d50c9ca6684d9aa924a0cbd79c7, type: 2}
+  - {fileID: 2100000, guid: 591c4f11b1597b449bd930f52f019fd2, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -279,6 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToCheckMyPosition: 0
+  checkMyPosition: 1
   touching: 0
 --- !u!114 &11443224
 MonoBehaviour:

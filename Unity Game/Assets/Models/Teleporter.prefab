@@ -1,20 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &103970
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 496872}
-  m_Layer: 0
-  m_Name: Particles
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &108284
 GameObject:
   m_ObjectHideFlags: 1
@@ -103,6 +88,21 @@ GameObject:
   - 65: {fileID: 6573004}
   m_Layer: 0
   m_Name: Stairs Side 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &133864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 458110}
+  m_Layer: 0
+  m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -222,6 +222,7 @@ GameObject:
   - 65: {fileID: 6570514}
   - 65: {fileID: 6547106}
   - 114: {fileID: 11482568}
+  - 135: {fileID: 13560020}
   m_Layer: 0
   m_Name: Teleporter
   m_TagString: Untagged
@@ -348,6 +349,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 498566}
   m_RootOrder: 1
+--- !u!4 &458110
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 133864}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 493190}
+  m_Father: {fileID: 498566}
+  m_RootOrder: 5
 --- !u!4 &462066
 Transform:
   m_ObjectHideFlags: 1
@@ -446,7 +460,7 @@ Transform:
   - {fileID: 495794}
   - {fileID: 466726}
   - {fileID: 426946}
-  m_Father: {fileID: 496872}
+  m_Father: {fileID: 458110}
   m_RootOrder: 0
 --- !u!4 &495794
 Transform:
@@ -460,27 +474,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 493190}
   m_RootOrder: 1
---- !u!4 &496872
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 103970}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 493190}
-  m_Father: {fileID: 498566}
-  m_RootOrder: 5
 --- !u!4 &498566
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174206}
-  m_LocalRotation: {x: .00345610012, y: -.703072965, z: -.0121523393, w: .711005569}
-  m_LocalPosition: {x: .850000024, y: 18.1399994, z: -.0299999993}
+  m_LocalRotation: {x: .00487543317, y: -.320123494, z: -.00304159056, w: .947358429}
+  m_LocalPosition: {x: 13.9300003, y: 83.4899979, z: 14.4200001}
   m_LocalScale: {x: 8.38654232, y: 8.38654232, z: 8.38654232}
   m_Children:
   - {fileID: 481486}
@@ -488,7 +489,7 @@ Transform:
   - {fileID: 485748}
   - {fileID: 462066}
   - {fileID: 490258}
-  - {fileID: 496872}
+  - {fileID: 458110}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!12 &1217974
@@ -1187,6 +1188,18 @@ MonoBehaviour:
   materialIndex: 0
   uvAnimationRate: {x: .100000001, y: -.100000001}
   textureName: 5f4d61696e546578
+--- !u!135 &13560020
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174206}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
