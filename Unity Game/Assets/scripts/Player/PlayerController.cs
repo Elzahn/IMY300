@@ -138,6 +138,7 @@ public class PlayerController : MonoBehaviour {
 		//skip loadingscreen
 		if (Input.GetKeyDown (KeyCode.L) && Application.loadedLevelName == "Scene") {
 			GameObject.Find("Planet").GetComponent<LoadingScreen>().loading = false;
+			GameObject.Find("Loading Screen").GetComponent<Canvas>().enabled = false;
 			if(GameObject.Find("Player").GetComponent<LevelSelect>().currentLevel == 1){
 				GameObject.Find("Player").GetComponent<SaveSpotTeleport>().showedHealthHint = true;
 				GameObject.Find("Player").GetComponent<Tutorial>().makeHint("Need a health pack? Look out for the purple flowers.", GameObject.Find("Player").GetComponent<Tutorial>().Health);
@@ -150,7 +151,8 @@ public class PlayerController : MonoBehaviour {
 		//build cheat to skip cutscenes
 
 		//Skip Tutorial
-		if (Input.GetKeyDown (KeyCode.Escape) && this.GetComponent<Tutorial>().startTutorial) {
+		if (Input.GetKeyDown (KeyCode.Escape) && this.GetComponent<Tutorial>().startTutorial && !InventoryGUI.showInventory && !InventoryGUI.showStorage) {
+
 			if(GameObject.Find("Particles") != null){
 				GameObject.Find ("Particles").GetComponentInParent<SphereCollider>().enabled = false;
 			}
@@ -173,7 +175,7 @@ public class PlayerController : MonoBehaviour {
 			this.GetComponent<Rigidbody>().mass = 1000;
 			this.GetComponent<Tutorial>().stopTutorial();
 			//print ("Tutorial skipped you can now use the teleporter again.");
-		} else if(Input.GetKeyDown(KeyCode.Escape) && !this.GetComponent<Tutorial>().startTutorial){
+		} else if(Input.GetKeyDown(KeyCode.Escape) && !this.GetComponent<Tutorial>().startTutorial && !InventoryGUI.showInventory && !InventoryGUI.showStorage){
 			showQuit = true;
 		}
 

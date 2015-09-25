@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class InventoryGUI : MonoBehaviour {
 
-	private static bool showInventory, showStorage;
+	public static bool showInventory{ get; private set; }
+	public static bool showStorage{ get; private set; }
 	private PlayerController playerScript;
 	private PlayerAttributes attributesScript;
 	public Texture2D icon;
@@ -39,6 +40,12 @@ public class InventoryGUI : MonoBehaviour {
 	void Update () {
 		if (!playerScript.paused) {
 
+			//Done for the extra mapping of the inventory and storage close to the escape key. Else it thinks escape was pressed twice for example it also opens quite menu.
+			if(!Inventory.enabled && (Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.I))){
+				showInventory = false;
+				showStorage = false;
+			}
+
 			if(hasCollided && this.GetComponent<Tutorial>().teachStorage){
 				Hud.makeInteractionHint("Press E to open storage", GameObject.Find("Player").GetComponent<SaveSpotTeleport>().pressE);
 			}
@@ -51,13 +58,13 @@ public class InventoryGUI : MonoBehaviour {
 				openInventory ();
 			}
 		} else {
-			if (Input.GetKeyDown (KeyCode.E)) {
+			if (Input.GetKeyDown (KeyCode.E) || Input.GetKeyDown(KeyCode.Escape)) {
 				if (showStorage) {
 					closeStorage ();
 				}
 			}
 
-			if (Input.GetKeyDown (KeyCode.I)) {
+			if (Input.GetKeyDown (KeyCode.I) || Input.GetKeyDown(KeyCode.Escape)) {
 				if (showInventory) {
 					closeInventory ();
 				}
@@ -77,7 +84,6 @@ public class InventoryGUI : MonoBehaviour {
 
 	public void closeStorage(){
 		hasCollided = true;
-		showStorage = false;
 		this.GetComponent<Sounds>().playWorldSound (Sounds.STORAGE);
 		playerScript.paused = false;	//Resume game
 	}
@@ -107,7 +113,7 @@ public class InventoryGUI : MonoBehaviour {
 	}
 
 	public void closeInventory(){
-		showInventory = false;
+
 		Inventory.enabled = false;
 		//PlayerLog.showLog = true;
 		this.GetComponent<Sounds>().playWorldSound (Sounds.INVENTORY);
