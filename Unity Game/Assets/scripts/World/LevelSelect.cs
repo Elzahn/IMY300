@@ -12,12 +12,28 @@ public class LevelSelect : MonoBehaviour {
 	public bool spawnedLevel{ get; set;}
 
 	private GameObject planet;
+//	private ParticleSystem fireMist, rain, snow, desert;
 
 	public int currentLevel { get; set; }
 
 	void Start(){
 		spawnedLevel = false;
+	/*	fireMist = GameObject.Find ("Fire Mist").GetComponent<ParticleSystem> ();
+		rain = GameObject.Find ("Rain").GetComponent<ParticleSystem> ();
+		snow = GameObject.Find ("Snow").GetComponent<ParticleSystem> ();
+		desert = GameObject.Find ("Desert").GetComponent<ParticleSystem> ();*/
 	}
+
+	/*void clearParticles(){
+		fireMist.enableEmission = false;
+		fireMist.Clear ();
+		rain.enableEmission = false;
+		rain.Clear ();
+		snow.enableEmission = false;
+		snow.Clear ();
+		desert.enableEmission = false;
+		desert.Clear ();
+	}*/
 
 	void Update () {
 		if (myRenderer != null) {	//You are on a planet and now will customise the level
