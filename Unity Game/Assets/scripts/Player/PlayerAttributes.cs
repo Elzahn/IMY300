@@ -410,10 +410,10 @@ public class PlayerAttributes : MonoBehaviour {
 			hp = maxHP ();
 			stamina = maxStamina ();
 			soundComponent.playWorldSound (Sounds.LEVEL_UP);
-			return "You  are now level " + level;
 			GameObject.Find ("LevelUp").GetComponent<Image> ().enabled = true;
 			levelUpShown = Time.time + 3;
 			showLevelUp = true;
+			return "You  are now level " + level;
 		}
 		return "";
 	}
