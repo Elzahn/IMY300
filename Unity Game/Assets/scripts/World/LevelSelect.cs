@@ -52,7 +52,8 @@ public class LevelSelect : MonoBehaviour {
 							clearParticles();
 							fireMist.SetActive(true);
 							planet.GetComponent<EnemySpawner>().spawnEnemies(20);
-							planet.GetComponent<SpawnTrees>().spawnTrees(299);
+							//Burning Tree, Green Tree, Big Tree, Bare Tree, Shrub
+							planet.GetComponent<SpawnTrees>().spawnTrees(110, 0, 60, 0, 50);
 							planet.GetComponent<SpawnHealthPacks>().spawnHealth(10);
 							this.GetComponent<Sounds>().playAmbienceSound(Sounds.PLANET_1_AMBIENCE);
 							this.GetComponent<Sounds>().pauseSound("ambience");
@@ -67,7 +68,8 @@ public class LevelSelect : MonoBehaviour {
 							clearParticles();
 							rain.SetActive(true);
 							planet.GetComponent<EnemySpawner>().spawnEnemies(35);
-							planet.GetComponent<SpawnTrees>().spawnTrees(190);
+							//Burning Tree, Green Tree, Big Tree, Bare Tree, Shrub
+							planet.GetComponent<SpawnTrees>().spawnTrees(0, 95, 0, 0, 40);
 							planet.GetComponent<SpawnHealthPacks>().spawnHealth(12);
 							this.GetComponent<Sounds>().playAmbienceSound(Sounds.PLANET_2_AMBIENCE);
 							this.GetComponent<Sounds>().pauseSound("ambience");
@@ -82,7 +84,8 @@ public class LevelSelect : MonoBehaviour {
 							clearParticles();
 							snow.SetActive(true);
 							planet.GetComponent<EnemySpawner>().spawnEnemies(10);
-							planet.GetComponent<SpawnTrees>().spawnTrees(350);
+							//Burning Tree, Green Tree, Big Tree, Bare Tree, Shrub
+							planet.GetComponent<SpawnTrees>().spawnTrees(0, 10, 120, 0, 50);
 							planet.GetComponent<SpawnHealthPacks>().spawnHealth(2);
 							this.GetComponent<Sounds>().playAmbienceSound(Sounds.PLANET_3_AMBIENCE);
 							this.GetComponent<Sounds>().pauseSound("ambience");
@@ -97,7 +100,8 @@ public class LevelSelect : MonoBehaviour {
 							clearParticles();
 							desert.SetActive(true);
 							planet.GetComponent<EnemySpawner>().spawnEnemies(40);
-							planet.GetComponent<SpawnTrees>().spawnTrees(80);
+							//Burning Tree, Green Tree, Big Tree, Bare Tree, Shrub
+							planet.GetComponent<SpawnTrees>().spawnTrees(0, 0, 0, 75, 35);
 							planet.GetComponent<SpawnHealthPacks>().spawnHealth(15);
 							this.GetComponent<Sounds>().playAmbienceSound(Sounds.PLANET_4_AMBIENCE);
 							this.GetComponent<Sounds>().pauseSound("ambience");
@@ -111,8 +115,10 @@ public class LevelSelect : MonoBehaviour {
 						{
 							clearParticles();
 							desert.SetActive(true);
+							rain.SetActive(true);
 							planet.GetComponent<EnemySpawner>().spawnEnemies(50);
-							planet.GetComponent<SpawnTrees>().spawnTrees(20);
+							//Burning Tree, Green Tree, Big Tree, Bare Tree, Shrub
+							planet.GetComponent<SpawnTrees>().spawnTrees(8, 8, 8, 8, 40);
 							planet.GetComponent<SpawnHealthPacks>().spawnHealth(20);
 							this.GetComponent<Sounds>().playAmbienceSound(Sounds.PLANET_5_AMBIENCE);
 							this.GetComponent<Sounds>().pauseSound("ambience");

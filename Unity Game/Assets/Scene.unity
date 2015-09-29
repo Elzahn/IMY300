@@ -659,6 +659,7 @@ MonoBehaviour:
   tree1: {fileID: 144930, guid: 448242b25e34e0b4ba12a441dadb846a, type: 2}
   tree2: {fileID: 192690, guid: 5ab5c00ab5a6eb6479185f29ecca772a, type: 2}
   tree3: {fileID: 196340, guid: 177742eb57cf7b34c8501cdf4c2ed906, type: 2}
+  tree4: {fileID: 144930, guid: 72783855e369f6749937f13d8f5e472b, type: 2}
   shrub: {fileID: 174706, guid: 7935d09b08b8d5d4a9814da53f31aad4, type: 2}
 --- !u!1001 &1252867183
 Prefab:

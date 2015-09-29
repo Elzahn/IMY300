@@ -8,6 +8,7 @@ public class SpawnTrees : MonoBehaviour {
 	public GameObject tree1;
 	public GameObject tree2;
 	public GameObject tree3;
+	public GameObject tree4;
 
 	public GameObject shrub;
 
@@ -17,21 +18,45 @@ public class SpawnTrees : MonoBehaviour {
 	
 	LinkedList<GameObject> trees = new LinkedList <GameObject> ();
 
-	public void spawnTrees (int numTrees) {//Previously known as Start
-		num_Trees = numTrees;
+	public void spawnTrees (int numTrees1, int numTrees2, int numTrees3, int numTrees4, int numShrub) {//Previously known as Start
+		num_Trees = numTrees1 + numTrees2 + numTrees3 + numTrees4 + numShrub;
 
 		planet = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
-		GameObject tree;
+		//GameObject tree;
 
 		/*if (Application.loadedLevelName == "Tutorial") {
 			num_Trees = 6;
 		}  
 */
 		//Spawn Trees
-		for (int i=0; i < num_Trees; ++i) {
-			int index = Random.Range (0, 4);
-			tree = chooseTree (index);
-			addTree (tree);
+		for (int i=0; i < numTrees1; ++i) {
+			//int index = Random.Range (0, 4);
+		//	tree = chooseTree (0);
+			addTree (tree1);
+		}
+
+		for (int i=0; i < numTrees2; ++i) {
+			//int index = Random.Range (0, 4);
+			//tree = chooseTree (1);
+			addTree (tree2);
+		}
+
+		for (int i=0; i < numTrees3; ++i) {
+			//int index = Random.Range (0, 4);
+			//tree = chooseTree (2);
+			addTree (tree3);
+		}
+
+		for (int i=0; i < numTrees4; ++i) {
+			//int index = Random.Range (0, 4);
+			//tree = chooseTree (2);
+			addTree (tree4);
+		}
+
+		for (int i=0; i < numShrub; ++i) {
+			//int index = Random.Range (0, 4);
+			//tree = chooseTree ();
+			addTree (shrub);
 		}
 	}
 
@@ -49,13 +74,13 @@ public class SpawnTrees : MonoBehaviour {
 		return done;
 	}
 
-	public void replaceHealth(Vector3 pos){
+	/*public void replaceHealth(Vector3 pos){
 		GameObject tempShrub = Instantiate(shrub);
 		tempShrub.name = "TempShrub";
 		tempShrub.transform.position = pos;
 		tempShrub.GetComponent<FauxGravityBody>().attractor = planet;
 		trees.AddLast(tempShrub); 
-	}
+	}*/
 	
 	public bool isTreesPlanted(){
 		/*bool done = true;
@@ -89,7 +114,7 @@ public class SpawnTrees : MonoBehaviour {
 		isTreesPlanted ();
 	}
 
-	GameObject chooseTree(int i) {
+	/*GameObject chooseTree(int i) {
 		switch(i) {
 		case 0 : 
 			return tree1;
@@ -100,7 +125,7 @@ public class SpawnTrees : MonoBehaviour {
 		default :  
 			return shrub;
 		}
-	}
+	}*/
 
 	public void position(GameObject go){
 		if(GameObject.Find(go.transform.parent.gameObject.name).GetComponent<PositionMe>() != null){

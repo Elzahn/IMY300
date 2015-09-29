@@ -98,6 +98,26 @@ public class PlayerController : MonoBehaviour {
 
 	void keysCheck() {
 
+		if (Input.GetKeyDown (KeyCode.Keypad1)) {
+			this.GetComponent<LevelSelect>().currentLevel = 1;
+		}
+
+		if (Input.GetKeyDown (KeyCode.Keypad2)) {
+			this.GetComponent<LevelSelect>().currentLevel = 2;
+		}
+
+		if (Input.GetKeyDown (KeyCode.Keypad3)) {
+			this.GetComponent<LevelSelect>().currentLevel = 3;
+		}
+
+		if (Input.GetKeyDown (KeyCode.Keypad4)) {
+			this.GetComponent<LevelSelect>().currentLevel = 4;
+		}
+
+		if (Input.GetKeyDown (KeyCode.Keypad5)) {
+			this.GetComponent<LevelSelect>().currentLevel = 5;
+		}
+
 		//Goto Tutorial Planet
 		if (Input.GetKeyDown (KeyCode.Tab) && this.GetComponent<Tutorial>().startTutorial && Application.loadedLevelName == "SaveSpot") {
 			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = false;
