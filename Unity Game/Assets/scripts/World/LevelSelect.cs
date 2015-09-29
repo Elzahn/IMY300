@@ -24,9 +24,13 @@ public class LevelSelect : MonoBehaviour {
 	}
 
 	void clearParticles(){
+		fireMist.GetComponent<ParticleSystem>().enableEmission = false;
 		fireMist.SetActive (false);
+		rain.GetComponent<ParticleSystem>().enableEmission = false;
 		rain.SetActive (false);
+		snow.GetComponent<ParticleSystem>().enableEmission = false;
 		snow.SetActive (false);
+		desert.GetComponent<ParticleSystem>().enableEmission = false;
 		desert.SetActive (false);
 	}
 
@@ -34,9 +38,13 @@ public class LevelSelect : MonoBehaviour {
 		if (Application.loadedLevelName == "Scene") {
 			if (fireMist == null) {
 				fireMist = GameObject.Find ("Fire Mist");
+
 				rain = GameObject.Find ("Rain");
+
 				snow = GameObject.Find ("Snow");
+
 				desert = GameObject.Find ("Desert");
+
 				clearParticles();
 			}
 		}
@@ -51,6 +59,7 @@ public class LevelSelect : MonoBehaviour {
 						{
 							clearParticles();
 							fireMist.SetActive(true);
+							fireMist.GetComponent<ParticleSystem>().enableEmission = true;
 							planet.GetComponent<EnemySpawner>().spawnEnemies(20);
 							//Burning Tree, Green Tree, Big Tree, Bare Tree, Shrub
 							planet.GetComponent<SpawnTrees>().spawnTrees(110, 0, 60, 0, 50);
@@ -67,6 +76,7 @@ public class LevelSelect : MonoBehaviour {
 						{
 							clearParticles();
 							rain.SetActive(true);
+							rain.GetComponent<ParticleSystem>().enableEmission = true;
 							planet.GetComponent<EnemySpawner>().spawnEnemies(35);
 							//Burning Tree, Green Tree, Big Tree, Bare Tree, Shrub
 							planet.GetComponent<SpawnTrees>().spawnTrees(0, 95, 0, 0, 40);
@@ -83,6 +93,7 @@ public class LevelSelect : MonoBehaviour {
 						{
 							clearParticles();
 							snow.SetActive(true);
+							snow.GetComponent<ParticleSystem>().enableEmission = true;
 							planet.GetComponent<EnemySpawner>().spawnEnemies(10);
 							//Burning Tree, Green Tree, Big Tree, Bare Tree, Shrub
 							planet.GetComponent<SpawnTrees>().spawnTrees(0, 10, 120, 0, 50);
@@ -99,6 +110,7 @@ public class LevelSelect : MonoBehaviour {
 						{
 							clearParticles();
 							desert.SetActive(true);
+							desert.GetComponent<ParticleSystem>().enableEmission = true;
 							planet.GetComponent<EnemySpawner>().spawnEnemies(40);
 							//Burning Tree, Green Tree, Big Tree, Bare Tree, Shrub
 							planet.GetComponent<SpawnTrees>().spawnTrees(0, 0, 0, 75, 35);
@@ -115,7 +127,9 @@ public class LevelSelect : MonoBehaviour {
 						{
 							clearParticles();
 							desert.SetActive(true);
+							desert.GetComponent<ParticleSystem>().enableEmission = true;
 							rain.SetActive(true);
+							rain.GetComponent<ParticleSystem>().enableEmission = true;
 							planet.GetComponent<EnemySpawner>().spawnEnemies(50);
 							//Burning Tree, Green Tree, Big Tree, Bare Tree, Shrub
 							planet.GetComponent<SpawnTrees>().spawnTrees(8, 8, 8, 8, 40);

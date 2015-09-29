@@ -31,6 +31,7 @@ public class Tutorial : MonoBehaviour {
 	public Sprite PressE;
 	public Sprite Health;
 	public Sprite CameraMove;
+	public Sprite Dark;
 
 	void Start () {
 		GameObject.Find("Tech Light").GetComponent<Light>().enabled = false;
@@ -67,34 +68,52 @@ public class Tutorial : MonoBehaviour {
 			}
 
 			showVisualQue = Time.time + visualDuration;
-		} else {//if(Application.loadedLevelName == "Tutorial"){
-			/*if (Application.loadedLevelName == "Scene" && !GameObject.Find("Planet").GetComponent<LoadingScreen>().loading && this.GetComponent<LevelSelect>().currentLevel == 2) {
-				this.GetComponent<SaveSpotTeleport> ().showedHealthHint = true;
-				makeHint("Need a health pack? Look out for the purple flowers.", Health);
-			}*/
+		} else {
 
-			if (Time.time >= showVisualQue){
+			if (Time.time >= showVisualQue && hint.fillAmount >= 1){
 				moveHintOffScreen = true;
 				moveHintOnScreen = false;
 			}
 
-			if(moveHintOnScreen){
-				if(hint.fillAmount < 1)
-				{
-					hint.fillAmount += 0.01f;
+			if(Application.loadedLevelName != "Scene"){
+				if(moveHintOnScreen){
+					if(hint.fillAmount < 1)
+					{
+						hint.fillAmount += 0.01f;
+					}
 				}
-			}
-			
-			if(moveHintOffScreen){
-				if(hint.fillAmount > 0){
-					hint.fillAmount -= 0.01f;
+				
+				if(moveHintOffScreen){
+					if(hint.fillAmount > 0){
+						hint.fillAmount -= 0.01f;
+					}
+
+					if (hint.fillAmount <= 0 && hintText.text == Loot.inventoryHintText) {
+						Loot.showInventoryHint = false;
+					}/* else if(hint.fillAmount <= 0){
+						GameObject.Find("Player").GetComponent<SaveSpotTeleport>().showedHealthHint = false;
+					}*/
+				}
+			} else if(Application.loadedLevelName == "Scene"){
+				if(moveHintOnScreen){
+					if(hint.fillAmount < 1)
+					{
+						hint.fillAmount += 0.1f;
+					}
 				}
 
-				if (hint.fillAmount <= 0 && hintText.text == Loot.inventoryHintText) {
-					Loot.showInventoryHint = false;
-				} else if(hint.fillAmount <= 0){
-					GameObject.Find("Player").GetComponent<SaveSpotTeleport>().showedHealthHint = false;
+				if(moveHintOffScreen){
+					if(hint.fillAmount > 0){
+						hint.fillAmount -= 0.1f;
+					}
+					if(hint.fillAmount <= 0 && hintText.text == "Some monsters prefer the dark as it makes them stronger."){
+						this.GetComponent<SaveSpotTeleport>().showedHealthHint = true;
+					}
 				}
+			}
+
+			if(hint.fillAmount <= 0 && hintText.text == "Need a health pack? Look out for these flowers."){
+				makeHint("Some monsters prefer the dark as it makes them stronger while others follow the light.", Dark);
 			}
 
 			if(hint.fillAmount <= 0 && hintText.text == "Run with left shift + W/A/S/D"){
@@ -104,6 +123,8 @@ public class Tutorial : MonoBehaviour {
 			if(hint.fillAmount <= 0 && hintText.text == "Move around using W/A/S/D"){
 				makeHint("Rotate the camera by moving the mouse while holding down", CameraMove);
 			}
+
+
 
 			if(Application.loadedLevelName == "Tutorial"){
 				sound.resumeSound("all");
@@ -221,6 +242,7 @@ public class Tutorial : MonoBehaviour {
 		if (_hintText == Loot.inventoryHintText || (Application.loadedLevelName == "Scene" && !GameObject.Find("Planet").GetComponent<LoadingScreen> ().loading)) {
 			interaction.fillAmount = 0;
 		}
+		hint.fillAmount = 0.001f;
 
 		showVisualQue = Time.time + visualDuration;
 		moveHintOnScreen = true;

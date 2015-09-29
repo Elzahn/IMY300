@@ -79,7 +79,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 462066}
-  - 65: {fileID: 6524040}
   - 65: {fileID: 6560390}
   - 65: {fileID: 6514272}
   - 65: {fileID: 6511562}
@@ -151,6 +150,7 @@ GameObject:
   - 23: {fileID: 2307686}
   - 95: {fileID: 9572596}
   - 64: {fileID: 6416554}
+  - 65: {fileID: 6503294}
   m_Layer: 0
   m_Name: ActualPlane
   m_TagString: Teleporter
@@ -254,7 +254,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 490258}
-  - 65: {fileID: 6506622}
   - 65: {fileID: 6558744}
   - 65: {fileID: 6592452}
   - 65: {fileID: 6574282}
@@ -835,6 +834,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .629999995, y: .219999999, z: .370000005}
   m_Center: {x: 0, y: -.379999995, z: .0900000036}
+--- !u!65 &6503294
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162456}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .209999993, y: 1, z: .209999993}
+  m_Center: {x: 0, y: 0, z: .100000001}
 --- !u!65 &6505706
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -847,18 +858,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .219999999, y: .0500000007, z: .0700000003}
   m_Center: {x: -.00999999978, y: -.289999992, z: -.0799999982}
---- !u!65 &6506622
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 191276}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: .550000012, y: .0500000007, z: .0700000003}
-  m_Center: {x: 0, y: -.460000008, z: -.439999998}
 --- !u!65 &6511562
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -883,18 +882,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .430000007, y: .0500000007, z: .0700000003}
   m_Center: {x: -.00999999978, y: -.430000007, z: -.330000013}
---- !u!65 &6524040
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 122996}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: .550000012, y: .0500000007, z: .0700000003}
-  m_Center: {x: 0, y: -.460000008, z: -.439999998}
 --- !u!65 &6529964
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1002,7 +989,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: .49000001, y: .0500000007, z: .0700000003}
-  m_Center: {x: -.00999999978, y: -.449999988, z: -.400000006}
+  m_Center: {x: -.00999999978, y: -.460000008, z: -.389999986}
 --- !u!65 &6560390
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1014,7 +1001,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: .49000001, y: .0500000007, z: .0700000003}
-  m_Center: {x: -.00999999978, y: -.449999988, z: -.400000006}
+  m_Center: {x: -.00999999978, y: -.460000008, z: -.389999986}
 --- !u!65 &6570514
 BoxCollider:
   m_ObjectHideFlags: 1

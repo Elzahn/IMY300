@@ -89,8 +89,8 @@ public class LoadingScreen : MonoBehaviour {
 				GameObject.Find ("Loading Screen").GetComponent<Canvas> ().enabled = false;
 				GameObject.Find("Player").GetComponent<Sounds>().resumeSound("ambience");
 				if(GameObject.Find("Player").GetComponent<LevelSelect>().currentLevel == 1){
-					GameObject.Find("Player").GetComponent<SaveSpotTeleport>().showedHealthHint = true;
-					GameObject.Find("Player").GetComponent<Tutorial>().makeHint("Need a health pack? Look out for the purple flowers.", GameObject.Find("Player").GetComponent<Tutorial>().Health);
+					//GameObject.Find("Player").GetComponent<SaveSpotTeleport>().showedHealthHint = true;
+					GameObject.Find("Player").GetComponent<Tutorial>().makeHint("Need a health pack? Look out for these flowers.", GameObject.Find("Player").GetComponent<Tutorial>().Health);
 				}
 				GameObject.Find ("Player").GetComponent<Rigidbody> ().isKinematic = false;
 				GameObject.Find ("Player").transform.rotation = Quaternion.Euler(0f, -95.3399f, 0f);

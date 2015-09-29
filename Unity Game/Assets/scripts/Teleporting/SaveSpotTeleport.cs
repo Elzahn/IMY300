@@ -89,7 +89,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 		if (showExitConfirmation && loadTutorial) {
 			notInUse = false;
 			Hud.makeInteractionHint ("Press E to start the tutorial", pressE);
-		} else if (showNoEntry && !loadTutorial && !showedHealthHint) {
+		} else if (showNoEntry && !loadTutorial && showedHealthHint) {
 			notInUse = false;
 			Hud.makeInteractionHint ("Kill the boss and take his loot to go back to the ship.", noEntry);
 		} else if (showEntranceConfirmation) {
@@ -152,8 +152,6 @@ public class SaveSpotTeleport : MonoBehaviour {
 			attributesScript.restoreHealthToFull();
 			attributesScript.restoreStaminaToFull();
 			this.GetComponent<Rigidbody>().mass = 100;
-			this.transform.rotation = new Quaternion(0, 0.7f, 0, -0.7f);
-			this.transform.position = new Vector3 (13.72f, 81.58f, 14.77f);
 
 			this.GetComponent<LevelSelect>().currentLevel++;
 			this.GetComponent<LevelSelect>().spawnedLevel = false;

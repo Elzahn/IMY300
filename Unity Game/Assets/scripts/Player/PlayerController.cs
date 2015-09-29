@@ -141,12 +141,8 @@ public class PlayerController : MonoBehaviour {
 			sound.playWorldSound (Sounds.TELEPORTING);
 			sound.stopSound ("computer");
 			this.GetComponent<LevelSelect>().currentLevel++;
-			//this.GetComponent<Tutorial>().stopTutorial();
 			Application.LoadLevel ("SaveSpot");
 			Resources.UnloadUnusedAssets();
-			//this.transform.position = new Vector3 (-27.01f, 79.65f, 1.93f);
-			this.transform.position = new Vector3 (13.72f, 81.58f, 14.77f);//(9.4f, 81.38f, 6.62f);
-			this.transform.rotation = new Quaternion(0.0f, 1f, 0, 0f);
 			this.GetComponent<Rigidbody> ().mass = 100f;
 			this.GetComponent<PlayerAttributes> ().restoreHealthToFull();
 			this.GetComponent<PlayerAttributes> ().restoreStaminaToFull();
@@ -159,8 +155,8 @@ public class PlayerController : MonoBehaviour {
 			GameObject.Find("Planet").GetComponent<LoadingScreen>().loading = false;
 			GameObject.Find("Loading Screen").GetComponent<Canvas>().enabled = false;
 			if(GameObject.Find("Player").GetComponent<LevelSelect>().currentLevel == 1){
-				GameObject.Find("Player").GetComponent<SaveSpotTeleport>().showedHealthHint = true;
-				GameObject.Find("Player").GetComponent<Tutorial>().makeHint("Need a health pack? Look out for the purple flowers.", GameObject.Find("Player").GetComponent<Tutorial>().Health);
+				//GameObject.Find("Player").GetComponent<SaveSpotTeleport>().showedHealthHint = true;
+				GameObject.Find("Player").GetComponent<Tutorial>().makeHint("Need a health pack? Look out for these flowers.", GameObject.Find("Player").GetComponent<Tutorial>().Health);
 			}
 			GameObject.Find ("Player").transform.rotation = Quaternion.Euler(0f, -95.3399f, 0f);
 			GameObject.Find ("Player").transform.position = new Vector3 (-1.651f, 80.82f, 0.84f);

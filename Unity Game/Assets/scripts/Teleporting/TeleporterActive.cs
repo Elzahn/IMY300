@@ -17,11 +17,15 @@ public class TeleporterActive : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (Application.loadedLevelName == "SaveSpot") {
+			this.GetComponent<SphereCollider> ().enabled = false;
+		}
+
 		if (Application.loadedLevelName != "SaveSpot" && saveSpot.canEnterSaveSpot) {
 			particles.SetActive (true);
 		} else {
 			particles.SetActive(false);
-			this.GetComponent<SphereCollider>().enabled = false;
 		}
 	}
 }

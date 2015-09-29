@@ -222,7 +222,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 8, y: .0202636719}
+  m_AnchoredPosition: {x: 8, y: .0376815796}
   m_SizeDelta: {x: 500, y: 180}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &18939797
@@ -2905,6 +2905,7 @@ MonoBehaviour:
   PressE: {fileID: 21300000, guid: f328290f0fd2d664084e567dee5c8fe3, type: 3}
   Health: {fileID: 21300000, guid: 818c2486130432746af1555c33c6f969, type: 3}
   CameraMove: {fileID: 21300000, guid: 1066b3542c97d68498f64866c0594753, type: 3}
+  Dark: {fileID: 21300000, guid: 5f38f8518e43ffc4d99338acc6fb3098, type: 3}
 --- !u!114 &839258581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7417,7 +7418,7 @@ ParticleSystemRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9efbdf6fd98127a48a4c99424d34ee95, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -9285,7 +9286,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1742371539}
   m_Direction: 2
   m_Value: 1
-  m_Size: .999977767
+  m_Size: .999989986
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9656,7 +9657,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -16, y: -.0285339355}
+  m_AnchoredPosition: {x: -16, y: -.0218734741}
   m_SizeDelta: {x: 500, y: 180}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &2119784513
