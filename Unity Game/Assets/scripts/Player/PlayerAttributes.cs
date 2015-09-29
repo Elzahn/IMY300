@@ -330,8 +330,9 @@ public class PlayerAttributes : MonoBehaviour {
 		GameObject.Find ("XP").GetComponent<Image> ().fillAmount = xp / getExpectedXP();
 		//}
 
-		if(GameObject.Find ("LevelUp").GetComponent<Image> ().enabled == true && showLevelUp && Time.time >= levelUpShown){
-			GameObject.Find ("LevelUp").GetComponent<Image> ().enabled = false;
+		if(GameObject.Find ("LevelUp").GetComponent<ParticleSystem> ().enableEmission == true && showLevelUp && Time.time >= levelUpShown){
+			//GameObject.Find ("LevelUp").GetComponent<ParticleSystem> ().enableEmission = false;
+			//GameObject.Find ("LevelUp").GetComponent<ParticleSystem> ().Clear();
 			showLevelUp = false;
 		}
 
@@ -410,7 +411,9 @@ public class PlayerAttributes : MonoBehaviour {
 			hp = maxHP ();
 			stamina = maxStamina ();
 			soundComponent.playWorldSound (Sounds.LEVEL_UP);
-			GameObject.Find ("LevelUp").GetComponent<Image> ().enabled = true;
+			GameObject.Find ("LevelUp").GetComponent<ParticleSystem> ().enableEmission = true;
+			GameObject.Find ("LevelUp").GetComponent<ParticleSystem> ().Emit(100);
+			GameObject.Find ("Level").GetComponent<Text> ().text = "" + (int.Parse(GameObject.Find ("Level").GetComponent<Text> ().text)+1);
 			levelUpShown = Time.time + 3;
 			showLevelUp = true;
 			return "You  are now level " + level;
@@ -421,7 +424,8 @@ public class PlayerAttributes : MonoBehaviour {
 	/** Cheat */
 	public void levelMeUp(){
 		soundComponent.playWorldSound (Sounds.LEVEL_UP);
-		GameObject.Find ("LevelUp").GetComponent<Image> ().enabled = true;
+		//GameObject.Find ("LevelUp").GetComponent<ParticleSystem> ().enableEmission = true;
+		//GameObject.Find ("Level").GetComponent<Text> ().text = "" + (int.Parse(GameObject.Find ("Level").GetComponent<Text> ().text)+1);
 		levelUpShown = Time.time + 3;
 		showLevelUp = true;
 		xp = levelXP (level+1);

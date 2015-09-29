@@ -5,6 +5,7 @@ using System.Collections;
 public class CharacterSelection : MonoBehaviour {
 
 	private PlayerAttributes attributesScript;
+	ParticleSystem levelUp;
 //	private PlayerController playerScript;
 
 	// Use this for initialization 
@@ -12,7 +13,10 @@ public class CharacterSelection : MonoBehaviour {
 		GameObject.Find ("Loading Screen").GetComponent<Canvas> ().enabled = false;
 		attributesScript = this.GetComponent<PlayerAttributes> ();
 		PlayerLog.showHUD = true;
-		GameObject.Find ("LevelUp").GetComponent<Image> ().enabled = false;
+		levelUp = GameObject.Find ("LevelUp").GetComponent<ParticleSystem> ();
+		levelUp.enableEmission = false;
+		levelUp.Clear ();
+
 		//playerScript = this.GetComponent<PlayerController> ();		
 	}
 
