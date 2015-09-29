@@ -93,7 +93,8 @@ public class LoadingScreen : MonoBehaviour {
 					GameObject.Find("Player").GetComponent<Tutorial>().makeHint("Need a health pack? Look out for the purple flowers.", GameObject.Find("Player").GetComponent<Tutorial>().Health);
 				}
 				GameObject.Find ("Player").GetComponent<Rigidbody> ().isKinematic = false;
-				GameObject.Find ("Player").transform.position = new Vector3 (0.304f, 80.394f, 0.207f);//(-4.17f, 78.85f, 2.17f);
+				GameObject.Find ("Player").transform.rotation = Quaternion.Euler(0f, -95.3399f, 0f);
+				GameObject.Find ("Player").transform.position = new Vector3 (-1.651f, 80.82f, 0.84f);
 			} else {
 				background.sprite = LoadingPlayer;
 				loadingBar.fillAmount = loadingBar.fillAmount + 0.25f;

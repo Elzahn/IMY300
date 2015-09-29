@@ -162,8 +162,8 @@ public class PlayerController : MonoBehaviour {
 				GameObject.Find("Player").GetComponent<SaveSpotTeleport>().showedHealthHint = true;
 				GameObject.Find("Player").GetComponent<Tutorial>().makeHint("Need a health pack? Look out for the purple flowers.", GameObject.Find("Player").GetComponent<Tutorial>().Health);
 			}
-			//this.transform.position = new Vector3(9.41f, 79.19f, 7.75f);
-			this.transform.position = new Vector3 (0.304f, 80.394f, 0.207f);//(0.32f, 80.37f, 032f);
+			GameObject.Find ("Player").transform.rotation = Quaternion.Euler(0f, -95.3399f, 0f);
+			GameObject.Find ("Player").transform.position = new Vector3 (-1.651f, 80.82f, 0.84f);
 			this.GetComponent<Rigidbody>().isKinematic = false;
 		}
 

@@ -105,11 +105,13 @@ public class Tutorial : MonoBehaviour {
 				makeHint("Rotate the camera by moving the mouse while holding down", CameraMove);
 			}
 
-			sound.resumeSound("all");
-			GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
-			foreach(GameObject m in monsters){
-				if(m.GetComponent<Enemy>().GetComponent<AudioSource> () != null){
-					sound.resumeMonsterSound(m.GetComponent<Enemy>());
+			if(Application.loadedLevelName == "Tutorial"){
+				sound.resumeSound("all");
+				GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
+				foreach(GameObject m in monsters){
+					if(m.GetComponent<Enemy>().GetComponent<AudioSource> () != null){
+						sound.resumeMonsterSound(m.GetComponent<Enemy>());
+					}
 				}
 			}
 		}

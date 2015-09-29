@@ -125,6 +125,10 @@ public class SaveSpotTeleport : MonoBehaviour {
 			interaction.fillAmount = 0;
 			this.GetComponent<Tutorial> ().startTutorial = false;
 			justWarped = false;
+			this.GetComponent<Rigidbody>().isKinematic = true;
+			//this.transform.rotation = Quaternion.Euler(0f, -95.3399f, 0f);
+			//this.transform.position = new Vector3 (-1.651f, 80.82f, 0.84f);
+
 			Application.LoadLevel ("Scene");
 			Resources.UnloadUnusedAssets();
 		} else if(showExitConfirmation && Input.GetKeyDown(KeyCode.E) && loadTutorial){
