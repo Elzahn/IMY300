@@ -282,10 +282,11 @@ public class PlayerAttributes : MonoBehaviour {
 
 	public float lastDamage {get; set;} //Last time damage taken
 	public static bool giveAlarm;
-	private float nextRegeneration;
+	private float nextRegeneration, healthAltered, staminaDrained;
 	private Text hudText;
 	private bool showWarpHint;
 	private bool showLevelUp;
+	private GameObject healthLowering, healthHealing, staminaDrain;
 
 	/**************************************************** Monobehaviour functions *********************************************
 	 * Start - Called after creation
@@ -304,6 +305,16 @@ public class PlayerAttributes : MonoBehaviour {
 			instance = this;
 		}
 
+		healthLowering = GameObject.Find ("Health_Lowering");
+		healthLowering.SetActive (false);
+		healthHealing = GameObject.Find ("Health_Healing");
+		healthHealing.SetActive (false);
+		staminaDrain = GameObject.Find ("Stamina_Drained");
+		staminaDrain.SetActive (false);
+
+		healthAltered = 0f;
+		staminaDrained = 0f;
+
 		justWarped = false;
 		giveAlarm = true;
 		this.gender = '?';
@@ -321,9 +332,22 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	void Update() {
-		if (stamina < 0) 
+		if (stamina <= 0) { 
 			stamina = 0;
+			if(staminaDrained == 0f){
+				staminaDrained = Time.time;
+			}
+			staminaDrain.SetActive(true);
+		}
 
+		if (staminaDrained != 0f && Time.time > staminaDrained + 0.5f) {
+			staminaDrain.SetActive(false);
+			staminaDrained = 0f;
+		}
+
+		if (healthAltered != 0f && Time.time > healthAltered + 0.5f) {
+			hideHealhtAltered();
+		}
 		/*if (levelXP (level) == 0) {
 			GameObject.Find ("XP").GetComponent<Image> ().fillAmount = xp / levelXP (level+1);
 		} else {*/
@@ -369,7 +393,7 @@ public class PlayerAttributes : MonoBehaviour {
 				if (Time.time >= (lastDamage + REGEN_ATTACK_DELAY)) {
 					if (hp < maxHP ()) {
 						hp += (int)(maxHP () * REGEN_HP);
-						GameObject.Find("Health").GetComponent<Image>().fillAmount = hp/maxHP();
+						showHealthAltered("heal");
 						giveAlarm = false;
 					}
 
@@ -430,7 +454,7 @@ public class PlayerAttributes : MonoBehaviour {
 		showLevelUp = true;
 		xp = levelXP (level+1);
 		hp = maxHP ();
-		GameObject.Find("Health").GetComponent<Image>().fillAmount = hp/maxHP();
+		showHealthAltered ("heal");
 		levelUp();
 	}
 
@@ -571,11 +595,34 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	/************************ Health and Stamina *********************/
+
+	public void showHealthAltered(String health){
+		if (health == "heal") {
+			healthHealing.SetActive (true);
+			healthLowering.SetActive(false);
+			healthHealing.GetComponent<Image> ().fillAmount = hp / maxHP ();
+		} else if (health != "reset"){
+			healthLowering.SetActive (true);
+			healthHealing.SetActive(false);
+			healthLowering.GetComponent<Image> ().fillAmount = hp / maxHP ();
+		}
+
+		healthAltered = Time.time;
+
+		GameObject.Find ("Health").GetComponent<Image> ().fillAmount = hp / maxHP ();
+	}
+
+	public void hideHealhtAltered(){
+		healthLowering.SetActive (false);
+		healthHealing.SetActive (false);
+		healthAltered = 0f;
+	}
+
 	public void useHealthPack(InventoryItem item) {
 		HealthPack tempItem = (HealthPack) item;
 		int healthRegen = (int)(maxHP() * tempItem.healthValue);
 		addHealth(healthRegen);
-		GameObject.Find("Health").GetComponent<Image>().fillAmount = hp/maxHP();
+		showHealthAltered ("heal");
 	}	
 
 	public void addHealth(int val){
@@ -587,16 +634,19 @@ public class PlayerAttributes : MonoBehaviour {
 
 	public void restoreHealthToFull() {
 		hp = maxHP ();
-		GameObject.Find("Health").GetComponent<Image>().fillAmount = hp/maxHP();
+		showHealthAltered ("reset");
 	}
 	
 
 	/** Returns true if dead */
 	public bool loseHP(int loss) {
-		if (Application.loadedLevelName != "Tutorial") {
+		if (Application.loadedLevelName == "Tutorial") {
+			hp -= loss/2;
+		} else {
 			hp -= loss;
-			GameObject.Find("Health").GetComponent<Image>().fillAmount = hp/maxHP();
 		}
+
+		showHealthAltered("injured");
 		return isDead ();
 	}
 	
@@ -624,7 +674,11 @@ public class PlayerAttributes : MonoBehaviour {
 		
 	public void drainStamina(){
 		if (Application.loadedLevelName != "SaveSpot") {
-			this.stamina -= RUN_STAMINA_DRAIN;//0.5f;
+			if(Application.loadedLevelName == "Tutorial"){
+				this.stamina -= RUN_STAMINA_DRAIN/4;
+			} else {
+				this.stamina -= RUN_STAMINA_DRAIN;//0.5f;
+			}
 			GameObject.Find("Stamina").GetComponent<Image>().fillAmount = stamina/maxStamina();
 		}
 	}

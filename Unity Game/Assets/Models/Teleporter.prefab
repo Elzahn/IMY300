@@ -66,7 +66,7 @@ GameObject:
   - 65: {fileID: 6555164}
   m_Layer: 0
   m_Name: Stairs Rotated Right
-  m_TagString: Untagged
+  m_TagString: Teleporter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,7 +88,7 @@ GameObject:
   - 65: {fileID: 6573004}
   m_Layer: 0
   m_Name: Stairs Side 1
-  m_TagString: Untagged
+  m_TagString: Teleporter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,7 +153,7 @@ GameObject:
   - 64: {fileID: 6416554}
   m_Layer: 0
   m_Name: ActualPlane
-  m_TagString: Untagged
+  m_TagString: Teleporter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -225,7 +225,7 @@ GameObject:
   - 135: {fileID: 13560020}
   m_Layer: 0
   m_Name: Teleporter
-  m_TagString: Untagged
+  m_TagString: Teleporter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -263,7 +263,7 @@ GameObject:
   - 65: {fileID: 6505706}
   m_Layer: 0
   m_Name: Stairs Side 2
-  m_TagString: Untagged
+  m_TagString: Teleporter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -280,7 +280,7 @@ GameObject:
   - 65: {fileID: 6535706}
   m_Layer: 0
   m_Name: Stairs Rotated Left
-  m_TagString: Untagged
+  m_TagString: Teleporter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

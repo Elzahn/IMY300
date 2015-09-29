@@ -1,30 +1,30 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Enemies\EnemySpawner.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Player\PlayerAttributes.cs">
     <Files>
       <File FileName="Assets\scripts\Player\CharacterSelection.cs" Line="18" Column="20" />
       <File FileName="Assets\scripts\Player\Collisions.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\World\PositionMe.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Enemies\EnemySpawner.cs" Line="193" Column="153" />
       <File FileName="Assets\scripts\World\SpawnTrees.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="415" Column="73" />
+      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="599" Column="26" />
       <File FileName="Assets\scripts\World\Sounds.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Teleporting\TeleporterActive.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\HealthPacks\SpawnHealthPacks.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Player\Tutorial.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Player\Tutorial.cs" Line="177" Column="26" />
       <File FileName="Assets\scripts\Player\InventoryGUI.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\World\LevelSelect.cs" Line="35" Column="19" />
+      <File FileName="Assets\scripts\World\LevelSelect.cs" Line="29" Column="12" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="scripts" expanded="True">
-              <Node name="Enemies" expanded="True" />
+              <Node name="Player" expanded="True" />
               <Node name="World" expanded="True" />
             </Node>
-            <Node name="Tornado.cs" selected="True" />
           </Node>
+          <Node name="Assembly-UnityScript-firstpass" selected="True" />
         </State>
       </Pad>
     </Pads>

@@ -279,9 +279,7 @@ public class PlayerController : MonoBehaviour {
 			if (Input.GetKey(KeyCode.LeftShift) && playerAttributes.stamina > 0 && Application.loadedLevelName != "SaveSpot" && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)) {
 				run = true;
 				moveSpeed *= RUN_MULT;
-				if(Application.loadedLevelName != "Tutorial"){
-					playerAttributes.drainStamina ();
-				}
+				playerAttributes.drainStamina ();
 				//Took it out to fix sound while running
 				//soundPlays = false;
 			}

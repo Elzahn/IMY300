@@ -16,6 +16,7 @@ TagManager:
   - HUD_Extend_Text
   - Scrollbar
   - Expand
+  - Teleporter
   layers:
   - Default
   - TransparentFX
