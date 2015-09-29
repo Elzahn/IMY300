@@ -125,11 +125,10 @@ public class PlayerController : MonoBehaviour {
 			this.GetComponent<Rigidbody> ().mass = 0.1f;
 			sound.playWorldSound (Sounds.TELEPORTING);
 			playerAttributes.saveInventoryAndStorage ();
-			//this.transform.position = new Vector3 (0f, 15.03f, 0);
-			//this.transform.position = new Vector3(-0.01f, 16.149f, -0.27f);
 			sound.stopSound ("computer");
-			this.transform.position = new Vector3(0, 16f, -0.327f);
-			//this.GetComponent<Tutorial>().stopTutorial();
+			
+			this.transform.rotation = Quaternion.Euler(0f, 91.60388f, 0f);
+			this.transform.position = new Vector3 (0.26f, 16.06f, 0.316f);
 			Application.LoadLevel ("Tutorial");
 
 		} else if (Input.GetKeyDown (KeyCode.Tab) && Application.loadedLevelName == "Tutorial"){

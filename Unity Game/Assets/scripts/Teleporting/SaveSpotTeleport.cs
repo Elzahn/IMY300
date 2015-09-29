@@ -140,8 +140,8 @@ public class SaveSpotTeleport : MonoBehaviour {
 			justWarped = false;
 			Application.LoadLevel("Tutorial");
 			showExitConfirmation = false;
-			//Set it once Run hint pasts	loadTutorial = false;
-			this.transform.position = new Vector3(0, 16f, -0.327f);
+			this.transform.rotation = Quaternion.Euler(0f, 91.60388f, 0f);
+			this.transform.position = new Vector3 (0.26f, 16.06f, 0.316f);
 			Resources.UnloadUnusedAssets();
 		}else if (showEntranceConfirmation && Input.GetKeyDown (KeyCode.E) && Application.loadedLevelName != "Tutorial") {
 			showEntranceConfirmation = false;
@@ -160,9 +160,5 @@ public class SaveSpotTeleport : MonoBehaviour {
 			sound.playWorldSound(Sounds.TELEPORTING);
 			Resources.UnloadUnusedAssets();
 		}
-	}
-
-	void setCharacterRotation(Vector3 location, Quaternion rotation){
-
 	}
 }
