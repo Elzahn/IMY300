@@ -21,6 +21,7 @@ public class TeleporterActive : MonoBehaviour {
 			particles.SetActive (true);
 		} else {
 			particles.SetActive(false);
+			this.GetComponent<SphereCollider>().enabled = false;
 		}
 	}
 }

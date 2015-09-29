@@ -30,6 +30,7 @@ public class Tutorial : MonoBehaviour {
 	public Sprite Warp;
 	public Sprite PressE;
 	public Sprite Health;
+	public Sprite CameraMove;
 
 	void Start () {
 		GameObject.Find("Tech Light").GetComponent<Light>().enabled = false;
@@ -66,7 +67,7 @@ public class Tutorial : MonoBehaviour {
 			}
 
 			showVisualQue = Time.time + visualDuration;
-		} else if(Application.loadedLevelName == "Tutorial"){
+		} else {//if(Application.loadedLevelName == "Tutorial"){
 			/*if (Application.loadedLevelName == "Scene" && !GameObject.Find("Planet").GetComponent<LoadingScreen>().loading && this.GetComponent<LevelSelect>().currentLevel == 2) {
 				this.GetComponent<SaveSpotTeleport> ().showedHealthHint = true;
 				makeHint("Need a health pack? Look out for the purple flowers.", Health);
@@ -98,6 +99,10 @@ public class Tutorial : MonoBehaviour {
 
 			if(hint.fillAmount <= 0 && hintText.text == "Run with left shift + W/A/S/D"){
 				this.GetComponent<SaveSpotTeleport>().loadTutorial = false;
+			}
+
+			if(hint.fillAmount <= 0 && hintText.text == "Move around using W/A/S/D"){
+				makeHint("Rotate the camera by moving the mouse while holding down", CameraMove);
 			}
 
 			sound.resumeSound("all");
