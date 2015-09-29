@@ -11,8 +11,7 @@ public class LevelSelect : MonoBehaviour {
 	public Renderer myRenderer{ get; set;}
 	public bool spawnedLevel{ get; set;}
 
-	private GameObject planet;
-	private ParticleSystem fireMist, rain, snow, desert;
+	private GameObject planet, fireMist, rain, snow, desert;
 
 	public int currentLevel { get; set; }
 
@@ -25,23 +24,19 @@ public class LevelSelect : MonoBehaviour {
 	}
 
 	void clearParticles(){
-		fireMist.enableEmission = false;
-		fireMist.Clear ();
-		rain.enableEmission = false;
-		rain.Clear ();
-		snow.enableEmission = false;
-		snow.Clear ();
-		desert.enableEmission = false;
-		desert.Clear ();
+		fireMist.SetActive (false);
+		rain.SetActive (false);
+		snow.SetActive (false);
+		desert.SetActive (false);
 	}
 
 	void Update () {
 		if (Application.loadedLevelName == "Scene") {
 			if (fireMist == null) {
-				fireMist = GameObject.Find ("Fire Mist").GetComponent<ParticleSystem> ();
-				rain = GameObject.Find ("Rain").GetComponent<ParticleSystem> ();
-				snow = GameObject.Find ("Snow").GetComponent<ParticleSystem> ();
-				desert = GameObject.Find ("Desert").GetComponent<ParticleSystem> ();
+				fireMist = GameObject.Find ("Fire Mist");
+				rain = GameObject.Find ("Rain");
+				snow = GameObject.Find ("Snow");
+				desert = GameObject.Find ("Desert");
 				clearParticles();
 			}
 		}
@@ -55,7 +50,7 @@ public class LevelSelect : MonoBehaviour {
 						if(!spawnedLevel)
 						{
 							clearParticles();
-							fireMist.enableEmission = true;
+							fireMist.SetActive(true);
 							planet.GetComponent<EnemySpawner>().spawnEnemies(20);
 							planet.GetComponent<SpawnTrees>().spawnTrees(299);
 							planet.GetComponent<SpawnHealthPacks>().spawnHealth(10);
@@ -70,7 +65,7 @@ public class LevelSelect : MonoBehaviour {
 						if(!spawnedLevel)
 						{
 							clearParticles();
-							rain.enableEmission = true;
+							rain.SetActive(true);
 							planet.GetComponent<EnemySpawner>().spawnEnemies(35);
 							planet.GetComponent<SpawnTrees>().spawnTrees(190);
 							planet.GetComponent<SpawnHealthPacks>().spawnHealth(12);
@@ -85,7 +80,7 @@ public class LevelSelect : MonoBehaviour {
 						if(!spawnedLevel)
 						{
 							clearParticles();
-							snow.enableEmission = true;
+							snow.SetActive(true);
 							planet.GetComponent<EnemySpawner>().spawnEnemies(10);
 							planet.GetComponent<SpawnTrees>().spawnTrees(350);
 							planet.GetComponent<SpawnHealthPacks>().spawnHealth(2);
@@ -100,7 +95,7 @@ public class LevelSelect : MonoBehaviour {
 						if(!spawnedLevel)
 						{
 							clearParticles();
-							desert.enableEmission = true;
+							desert.SetActive(true);
 							planet.GetComponent<EnemySpawner>().spawnEnemies(40);
 							planet.GetComponent<SpawnTrees>().spawnTrees(80);
 							planet.GetComponent<SpawnHealthPacks>().spawnHealth(15);
@@ -115,7 +110,7 @@ public class LevelSelect : MonoBehaviour {
 						if(!spawnedLevel)
 						{
 							clearParticles();
-							desert.enableEmission = true;
+							desert.SetActive(true);
 							planet.GetComponent<EnemySpawner>().spawnEnemies(50);
 							planet.GetComponent<SpawnTrees>().spawnTrees(20);
 							planet.GetComponent<SpawnHealthPacks>().spawnHealth(20);
