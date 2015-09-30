@@ -289,7 +289,6 @@ public class PlayerController : MonoBehaviour {
 				soundPlays = false;
 			}
 			
-			run = false;
 			if (Input.GetKey(KeyCode.LeftShift) && playerAttributes.stamina > 0 && Application.loadedLevelName != "SaveSpot" && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)) {
 				if(GameObject.Find("Stamina").GetComponent<Image>().isActiveAndEnabled == false){
 					GameObject.Find("Stamina").GetComponent<Image>().enabled = true;
@@ -297,10 +296,46 @@ public class PlayerController : MonoBehaviour {
 				run = true;
 				moveSpeed *= RUN_MULT;
 				playerAttributes.drainStamina ();
+				if(sound.characterAudio.isPlaying && sound.characterClip != Sounds.PLANET_RUNNING){
+					sound.stopSound("character");
+				}
+				if(!sound.characterAudio.isPlaying){
+					sound.playCharacterSound (Sounds.PLANET_RUNNING);
+				}
+
+				this.GetComponent<Animator>().SetBool("Running", true);
 				//Took it out to fix sound while running
 				//soundPlays = false;
 			} else {
 				run = false;
+				this.GetComponent<Animator>().SetBool("Running", false);
+				if(sound.characterAudio.isPlaying && sound.characterClip == Sounds.PLANET_RUNNING){
+					sound.stopSound("character");
+				}
+				if(!sound.characterAudio.isPlaying){
+					if(Application.loadedLevelName == "SaveSpot"){
+						sound.playCharacterSound (Sounds.SHIP_WALKING);
+					} else {
+						sound.playCharacterSound (Sounds.PLANET_WALKING);
+					}
+				}
+			}
+
+			if ((Input.GetAxis ("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0)) {
+				moving = true;
+				if (Input.GetAxis ("Vertical") == 0 && Input.GetAxis("Horizontal") < 0){
+					this.GetComponent<Animator>().SetBool("MovingLeft", moving);
+					this.GetComponent<Animator>().SetBool("MovingRight", false);
+					this.GetComponent<Animator>().SetBool("MovingStraight", false);
+				} else if (Input.GetAxis ("Vertical") == 0 && Input.GetAxis("Horizontal") > 0){
+					this.GetComponent<Animator>().SetBool("MovingRight", moving);
+					this.GetComponent<Animator>().SetBool("MovingStraight", false);
+					this.GetComponent<Animator>().SetBool("MovingLeft", false);
+				} else {
+					this.GetComponent<Animator>().SetBool("MovingStraight", moving);
+					this.GetComponent<Animator>().SetBool("MovingRight", false);
+					this.GetComponent<Animator>().SetBool("MovingLeft", false);
+				}
 			}
 
 			if(!Camera.main.GetComponent<CameraControl>().birdsEye){
@@ -318,49 +353,21 @@ public class PlayerController : MonoBehaviour {
 			}*/
 
 
-			if ((Input.GetAxis ("Vertical") != 0 || Input.GetAxisRaw ("Horizontal") != 0) 
-				&& !soundPlays && !Camera.main.GetComponent<CameraControl>().birdsEye) {
-				soundPlays = true;
-				moving = true;
 
-				if(run){
-					sound.playCharacterSound (Sounds.PLANET_RUNNING);
-				} else {
-					if(Application.loadedLevelName == "SaveSpot"){
-						sound.playCharacterSound (Sounds.SHIP_WALKING);
-					} else {
-						sound.playCharacterSound (Sounds.PLANET_WALKING);
-					}
-				}
-			} else {
-				if ((Input.GetAxis ("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0)) {
-					if (Input.GetAxis ("Vertical") == 0 && Input.GetAxis("Horizontal") < 0){
-						this.GetComponent<Animator>().SetBool("MovingLeft", moving);
-						this.GetComponent<Animator>().SetBool("MovingRight", false);
-						this.GetComponent<Animator>().SetBool("MovingStraight", false);
-					} else if (Input.GetAxis ("Vertical") == 0 && Input.GetAxis("Horizontal") > 0){
-						this.GetComponent<Animator>().SetBool("MovingRight", moving);
-						this.GetComponent<Animator>().SetBool("MovingStraight", false);
-						this.GetComponent<Animator>().SetBool("MovingLeft", false);
-					} else {
-						this.GetComponent<Animator>().SetBool("MovingStraight", moving);
-						this.GetComponent<Animator>().SetBool("MovingRight", false);
-						this.GetComponent<Animator>().SetBool("MovingLeft", false);
-					}
-				}
-
-				if (Time.time >= check) {	
+			
+				//if (Time.time >= check) {	
 					if (Input.GetAxis ("Vertical") == 0 && Input.GetAxis ("Horizontal") == 0) {
 						moving = false;
 						this.GetComponent<Animator>().SetBool("MovingStraight", moving);
 						this.GetComponent<Animator>().SetBool("MovingRight", moving);
 						this.GetComponent<Animator>().SetBool("MovingLeft", moving);
+						this.GetComponent<Animator>().SetBool("Running", moving);
 						soundPlays = false;
 						this.GetComponent<Sounds>().stopSound ("character");
 					}
-					check += 0.25f;
-				}
-			}
+					//check += 0.25f;
+			//	}
+			//}
 
 		}
 	}

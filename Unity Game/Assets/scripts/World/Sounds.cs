@@ -17,8 +17,10 @@ public class Sounds : MonoBehaviour {
 	public AudioSource deathAudio{ get; set; }
 	public AudioSource alarmAudio{get; set;}
 	public AudioSource computerAudio{get; set;}
-	private int worldClip, characterClip, alarmClip;
-	public int computerClip {get; set;}
+	public int characterClip { get; private set; }
+	public int computerClip {get; private set;}
+
+	private int worldClip, alarmClip;
 	private bool done = false;
 
 	//World sounds
@@ -98,6 +100,7 @@ public class Sounds : MonoBehaviour {
 		alarmAudio = GameObject.Find ("Alarm Audio").GetComponent<AudioSource> ();
 		computerAudio = GameObject.Find ("Computer Audio").GetComponent<AudioSource> ();
 		computerClip = -1;
+		characterClip = -1;
 	}
 
 	public void resumeSound(string source){
