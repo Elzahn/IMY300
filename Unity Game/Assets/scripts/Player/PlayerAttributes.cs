@@ -21,7 +21,7 @@ public class PlayerAttributes : MonoBehaviour {
 		
 		public char gender;
 
-		public int levelsComplete;
+		public int currentLevel;
 
 		public Weapon weapon;
 
@@ -34,7 +34,7 @@ public class PlayerAttributes : MonoBehaviour {
 		public void GetObjectData (SerializationInfo info, StreamingContext context)
 		{
 			info.AddValue("xp", xp);
-			info.AddValue("levels", levelsComplete);
+			info.AddValue("levels", currentLevel);
 			info.AddValue("inventory", inventory);
 			info.AddValue("storage", storage);
 			info.AddValue("weapon", weapon);
@@ -44,7 +44,7 @@ public class PlayerAttributes : MonoBehaviour {
 		AttributeContainer(SerializationInfo info, StreamingContext context) {
 			xp = (int)info.GetValue("xp", typeof(int));
 
-			levelsComplete = (int)info.GetValue("levels", typeof(int));
+			currentLevel = (int)info.GetValue("levels", typeof(int));
 			inventory = (LinkedList<InventoryItem>) info.GetValue("inventory", typeof(LinkedList<InventoryItem>));
 			storage = (LinkedList<InventoryItem>) info.GetValue("storage", typeof(LinkedList<InventoryItem>));
 
@@ -151,10 +151,10 @@ public class PlayerAttributes : MonoBehaviour {
 		}
 	}
 	
-	public int levelsComplete {get {
-			return myAttributes.levelsComplete;
+	public int CurrentLevel {get {
+			return myAttributes.currentLevel;
 		} set {
-			myAttributes.levelsComplete = value;
+			myAttributes.currentLevel = value;
 		}
 	}
 
@@ -323,7 +323,7 @@ public class PlayerAttributes : MonoBehaviour {
 		this.setInitialXp(0);
 		this.nextRegeneration = Time.time + REGEN_INTERVAL;
 		this.lastDamage = 0;
-		this.levelsComplete = 0;
+		this.CurrentLevel = 0;
 
 		hudText = GameObject.Find ("HUD_Expand_Text").GetComponent<Text> ();
 

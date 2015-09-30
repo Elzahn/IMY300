@@ -8,12 +8,23 @@ public class LevelSelect : MonoBehaviour {
 	public List<Material> materials;
 	public static LevelSelect instance;
 
+	PlayerAttributes attrs;
+
 	public Renderer myRenderer{ get; set;}
 	public bool spawnedLevel{ get; set;}
 
 	private GameObject planet, fireMist, rain, snow, desert;
 
-	public int currentLevel { get; set; }
+	/**
+	 * References Attributes variable to be able to save it easily.
+	 * */
+	public int CurrentLevel { get {
+			return attrs.levelsComplete;
+		} 
+		set {
+			attrs.levelsComplete = value;
+		} 
+	}
 
 	void Start(){
 		spawnedLevel = false;
@@ -21,6 +32,7 @@ public class LevelSelect : MonoBehaviour {
 		rain = null;
 		snow = null;
 		desert = null;
+		attrs = this.GetComponent<PlayerAttributes>();
 	}
 
 	void clearParticles(){
@@ -50,9 +62,9 @@ public class LevelSelect : MonoBehaviour {
 		}
 
 		if (myRenderer != null) {	//You are on a planet and now will customise the level
-			myRenderer.material = GetMaterial (currentLevel);
+			myRenderer.material = GetMaterial (CurrentLevel);
 			if(Application.loadedLevelName != "Tutorial"){
-				switch (currentLevel) {
+				switch (CurrentLevel) {
 					case 1:
 					{
 						if(!spawnedLevel)
