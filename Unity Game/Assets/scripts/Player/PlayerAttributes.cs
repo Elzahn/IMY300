@@ -7,8 +7,7 @@ using System;
 using System.IO;
 
 public class PlayerAttributes : MonoBehaviour {
-
-	[Serializable()]
+    [Serializable()]
 	private class AttributeContainer : ISerializable {
 		public AttributeContainer(){}
 
@@ -223,7 +222,7 @@ public class PlayerAttributes : MonoBehaviour {
 
 	public int damage { 
 		get {
-			int tmp = baseDamage ();
+			int tmp = BaseDamage;
 			if (gender == 'm') {
 				tmp += MALE_EXTRA_DAMAGE;
 			}
@@ -287,8 +286,8 @@ public class PlayerAttributes : MonoBehaviour {
 	private bool showWarpHint;
 	private bool showLevelUp;
 	private GameObject healthLowering, healthHealing, staminaDrain;
-
-	/**************************************************** Monobehaviour functions *********************************************
+    
+    /**************************************************** Monobehaviour functions *********************************************
 	 * Start - Called after creation
 	 * Update - Called Every frame
 	 * ***********************************************************************************************************************/
@@ -317,18 +316,18 @@ public class PlayerAttributes : MonoBehaviour {
 
 		justWarped = false;
 		giveAlarm = true;
-		this.gender = '?';
-		this.dizzy = false;
+		gender = '?';
+		dizzy = false;
 
-		this.setInitialXp(0);
-		this.nextRegeneration = Time.time + REGEN_INTERVAL;
-		this.lastDamage = 0;
-		this.CurrentLevel = 0;
+		setInitialXp(0);
+		nextRegeneration = Time.time + REGEN_INTERVAL;
+		lastDamage = 0;
+		CurrentLevel = 0;
 
 		hudText = GameObject.Find ("HUD_Expand_Text").GetComponent<Text> ();
 
-		this.soundComponent = GameObject.Find("Player").gameObject.GetComponent<Sounds>(); //must be GameObject.Find("Player") else it tries to acces what has been destroyed
-		this.controllerComponent = GameObject.Find("Player").gameObject.GetComponent<PlayerController> (); //must be GameObject.Find("Player") else it tries to acces what has been destroyed
+		soundComponent = GameObject.Find("Player").gameObject.GetComponent<Sounds>(); //must be GameObject.Find("Player") else it tries to acces what has been destroyed
+		controllerComponent = GameObject.Find("Player").gameObject.GetComponent<PlayerController> (); //must be GameObject.Find("Player") else it tries to acces what has been destroyed
 	}
 
 	void Update() {
@@ -346,7 +345,7 @@ public class PlayerAttributes : MonoBehaviour {
 		}
 
 		if (healthAltered != 0f && Time.time > healthAltered + 0.5f) {
-			hideHealhtAltered();
+			HideHealhtAltered();
 		}
 		/*if (levelXP (level) == 0) {
 			GameObject.Find ("XP").GetComponent<Image> ().fillAmount = xp / levelXP (level+1);
@@ -375,12 +374,14 @@ public class PlayerAttributes : MonoBehaviour {
 				//PlayerLog.addStat (tempMessage);			
 			}
 
-			Warping warp = this.gameObject.GetComponent<Warping> ();
+			Warping warp = gameObject.GetComponent<Warping> ();
+
 			if (level == WARP_UNLOCK_LEVEL && warp != null && showWarpHint) {
 				Camera.main.GetComponent<HUD>().setLight("warp");
 				warp.chooseDestinationUnlocked = true;
 				showWarpHint = false;
-				GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_WARPDESTINATION);
+			    
+			    soundComponent.playComputerSound(Sounds.COMPUTER_WARPDESTINATION);
 				hudText.text = "I have located all the warp points on the planet. I can now warp you to a chosen destination.\n\n";
 				Canvas.ForceUpdateCanvases();
 				Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
@@ -391,8 +392,8 @@ public class PlayerAttributes : MonoBehaviour {
 			if (Time.time >= nextRegeneration) {
 				nextRegeneration = Time.time + REGEN_INTERVAL;
 				if (Time.time >= (lastDamage + REGEN_ATTACK_DELAY)) {
-					if (hp < maxHP ()) {
-						hp += (int)(maxHP () * REGEN_HP);
+					if (hp < MaxHp ()) {
+						hp += (int)(MaxHp () * REGEN_HP);
 						showHealthAltered("heal");
 						giveAlarm = false;
 					}
@@ -413,7 +414,7 @@ public class PlayerAttributes : MonoBehaviour {
 	public void setInitialXp(float xp) {
 		this.xp = xp;		
 		level = determineLevel ();
-		hp = maxHP();
+		hp = MaxHp();
 		stamina = maxStamina ();
 	}
 
@@ -432,7 +433,7 @@ public class PlayerAttributes : MonoBehaviour {
 		float nextTreshold = getExpectedXP();
 		if (xp >= nextTreshold) {
 			level++;
-			hp = maxHP ();
+			hp = MaxHp ();
 			stamina = maxStamina ();
 			soundComponent.playWorldSound (Sounds.LEVEL_UP);
 			GameObject.Find ("LevelUp").GetComponent<ParticleSystem> ().enableEmission = true;
@@ -453,7 +454,7 @@ public class PlayerAttributes : MonoBehaviour {
 		levelUpShown = Time.time + 3;
 		showLevelUp = true;
 		xp = levelXP (level+1);
-		hp = maxHP ();
+		hp = MaxHp ();
 		showHealthAltered ("heal");
 		levelUp();
 	}
@@ -518,7 +519,7 @@ public class PlayerAttributes : MonoBehaviour {
 	 */
 	void equipWeapon(Weapon weap) {
 		if (weap == null) {
-			throw new System.ArgumentNullException ("weapon");
+			throw new System.ArgumentNullException ("weap");
 		}
 
 		if (weap.level <= level) {
@@ -532,7 +533,7 @@ public class PlayerAttributes : MonoBehaviour {
 
 	void equipAccessory(Accessory a) {
 		if (a == null) {
-			throw new System.ArgumentNullException ("weapon");
+			throw new ArgumentNullException ("a");
 		}
 
 		if (accessories.Count < maxAccessories){
@@ -600,40 +601,40 @@ public class PlayerAttributes : MonoBehaviour {
 		if (health == "heal") {
 			healthHealing.SetActive (true);
 			healthLowering.SetActive(false);
-			healthHealing.GetComponent<Image> ().fillAmount = hp / maxHP ();
+			healthHealing.GetComponent<Image> ().fillAmount = hp / MaxHp ();
 		} else if (health != "reset"){
 			healthLowering.SetActive (true);
 			healthHealing.SetActive(false);
-			healthLowering.GetComponent<Image> ().fillAmount = hp / maxHP ();
+			healthLowering.GetComponent<Image> ().fillAmount = hp / MaxHp ();
 		}
 
 		healthAltered = Time.time;
 
-		GameObject.Find ("Health").GetComponent<Image> ().fillAmount = hp / maxHP ();
+		GameObject.Find ("Health").GetComponent<Image> ().fillAmount = hp / MaxHp ();
 	}
 
-	public void hideHealhtAltered(){
+	public void HideHealhtAltered(){
 		healthLowering.SetActive (false);
 		healthHealing.SetActive (false);
 		healthAltered = 0f;
 	}
 
-	public void useHealthPack(InventoryItem item) {
+	public void UseHealthPack(InventoryItem item) {
 		HealthPack tempItem = (HealthPack) item;
-		int healthRegen = (int)(maxHP() * tempItem.healthValue);
-		addHealth(healthRegen);
+		int healthRegen = (int)(MaxHp() * tempItem.healthValue);
+		AddHealth(healthRegen);
 		showHealthAltered ("heal");
 	}	
 
-	public void addHealth(int val){
-		this.hp += val;
-		if (this.hp > this.maxHP ()) {
-			restoreHealthToFull();
+	public void AddHealth(int val){
+		hp += val;
+		if (hp > MaxHp ()) {
+			RestoreHealthToFull();
 		}
 	}
 
-	public void restoreHealthToFull() {
-		hp = maxHP ();
+	public void RestoreHealthToFull() {
+		hp = MaxHp ();
 		showHealthAltered ("reset");
 	}
 	
@@ -650,7 +651,7 @@ public class PlayerAttributes : MonoBehaviour {
 		return isDead ();
 	}
 	
-	public float maxHP() {
+	public float MaxHp() {
 		var tmp = Mathf.RoundToInt(HP_BASE * Mathf.Pow(HP_MULT, level -1));		
 		foreach (Accessory a in accessories) {
 			tmp += a.hp;
@@ -675,15 +676,15 @@ public class PlayerAttributes : MonoBehaviour {
 	public void drainStamina(){
 		if (Application.loadedLevelName != "SaveSpot") {
 			if(Application.loadedLevelName == "Tutorial"){
-				this.stamina -= RUN_STAMINA_DRAIN/4;
+				stamina -= RUN_STAMINA_DRAIN/4;
 			} else {
-				this.stamina -= RUN_STAMINA_DRAIN;//0.5f;
+				stamina -= RUN_STAMINA_DRAIN;//0.5f;
 			}
 			GameObject.Find("Stamina").GetComponent<Image>().fillAmount = stamina/maxStamina();
 		}
 	}
 	
-	public void restoreStaminaToFull(){
+	public void RestoreStaminaToFull(){
 		stamina = maxStamina ();
 		GameObject.Find("Stamina").GetComponent<Image>().fillAmount = stamina/maxStamina();
 	}
@@ -703,7 +704,7 @@ public class PlayerAttributes : MonoBehaviour {
 		if (ran <= hc) {			
 			message = "Hit! ";
 		
-			float cc = this.critChance;
+			float cc = critChance;
 			int tmpdamage = damage;
 
 			/*Critical Hit */
@@ -762,11 +763,12 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 
-	int baseDamage() {
-		return  Mathf.RoundToInt((ATTACK_BASE + level -1) * Mathf.Pow (ATTACK_MULT, level - 1));
-	}
+    private int BaseDamage
+    {
+        get { return Mathf.RoundToInt((ATTACK_BASE + level - 1)*Mathf.Pow(ATTACK_MULT, level - 1)); }
+    }
 
-	public void save(int slot) {
+    public void Save(int slot) {
 		var file = getSaveName (slot);
 
 		Stream stream = File.Open (file, FileMode.Create);
@@ -777,14 +779,17 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	private String getSaveName(int slot) {
-		System.IO.Directory.CreateDirectory("saves");
+		Directory.CreateDirectory("saves");
 		return "saves/save_" + slot + ".sav";
 	}
 
-	public void load(int slot) {
+	public void Load(int slot) {
 		AttributeContainer temp;
 		try {
-		Stream stream = File.Open(getSaveName(slot), FileMode.Open);
+		    var saveName = getSaveName(slot);
+            if (!File.Exists(saveName))
+                throw new IOException("Save file doesnt exsit");
+		    Stream stream = File.Open(saveName, FileMode.Open);
 		BinaryFormatter bformatter = new BinaryFormatter();		
 		temp = (AttributeContainer)bformatter.Deserialize(stream);
 		stream.Close();
