@@ -149,6 +149,14 @@ public class PlayerAttributes : MonoBehaviour {
 			myAttributes.weapon = value;
 		}
 	}
+
+    public void returnToSaveSpot()
+    {
+        CurrentLevel++;
+        save(0);
+        Application.LoadLevel("SaveSpot");
+        Resources.UnloadUnusedAssets();
+    }
 	
 	public int CurrentLevel {get {
 			return myAttributes.currentLevel;

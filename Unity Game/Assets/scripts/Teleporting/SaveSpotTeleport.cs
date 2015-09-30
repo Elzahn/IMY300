@@ -15,7 +15,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 	public bool showedHealthHint {get; set;}
 
 	private bool showExitConfirmation, showEntranceConfirmation, showNoEntry, justWarped;
-	private PlayerAttributes attributesScript;
+	private PlayerAttributes attributesComponent;
 	private Sounds sound;
 
 	public Sprite pressE;
@@ -25,8 +25,8 @@ public class SaveSpotTeleport : MonoBehaviour {
 	private Image hint;
 
 	private HUD Hud;
-
-	//Used only for the cheat
+    
+    //Used only for the cheat
 	public void setExitConf(bool val){
 		showExitConfirmation = val;
 		hint.fillAmount = 0;
@@ -46,7 +46,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 		showExitConfirmation = false;
 		showNoEntry = false;
 		showEntranceConfirmation = false;
-		attributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
+		attributesComponent = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
 		sound = GameObject.Find ("Player").GetComponent<Sounds> ();
 	}
 
@@ -102,26 +102,25 @@ public class SaveSpotTeleport : MonoBehaviour {
 			notInUse = true;
 		}
 
-		if (Application.loadedLevelName == "Tutorial" && showEntranceConfirmation && Input.GetKeyDown (KeyCode.E) && Loot.gotPowerCore == true) {
+	    
+	    if (Application.loadedLevelName == "Tutorial" && showEntranceConfirmation && Input.GetKeyDown (KeyCode.E) && Loot.gotPowerCore == true) {
 			canEnterSaveSpot = false;
 			GameObject.Find("Player").GetComponent<PlayerAttributes>().storage.AddLast(new Cupcake());
 			showEntranceConfirmation = false;
 			sound.playWorldSound(Sounds.TELEPORTING);
-			attributesScript.restoreHealthToFull();
-			attributesScript.restoreStaminaToFull();
+			attributesComponent.restoreHealthToFull();
+			attributesComponent.restoreStaminaToFull();
 			this.GetComponent<Rigidbody>().mass = 100;
 
-			this.GetComponent<LevelSelect>().currentLevel++;
-			this.GetComponent<PlayerAttributes>().save(0);
-			interaction.fillAmount = 0;
-			Application.LoadLevel ("SaveSpot");
-			Resources.UnloadUnusedAssets();
+            interaction.fillAmount = 0;
+			attributesComponent.returnToSaveSpot();
+			
 		} else if (showExitConfirmation && Input.GetKeyDown (KeyCode.E) && !loadTutorial) {
 			canEnterSaveSpot = false;
 			showExitConfirmation = false;
 			this.GetComponent<Rigidbody> ().mass = 0.1f;
 			sound.playWorldSound (Sounds.TELEPORTING);
-			attributesScript.saveInventoryAndStorage ();
+			attributesComponent.saveInventoryAndStorage ();
 			this.GetComponent<Tutorial>().stopTutorial();
 			interaction.fillAmount = 0;
 			this.GetComponent<Tutorial> ().startTutorial = false;
@@ -137,7 +136,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 
 			this.GetComponent<Rigidbody> ().mass = 0.1f;
 			sound.playWorldSound (Sounds.TELEPORTING);
-			attributesScript.saveInventoryAndStorage ();
+			attributesComponent.saveInventoryAndStorage ();
 			interaction.fillAmount = 0;
 			sound.stopSound("computer");
 			this.GetComponent<LevelSelect>().currentLevel = 0;
@@ -150,12 +149,12 @@ public class SaveSpotTeleport : MonoBehaviour {
 			Resources.UnloadUnusedAssets();
 		}else if (showEntranceConfirmation && Input.GetKeyDown (KeyCode.E) && Application.loadedLevelName != "Tutorial") {
 			showEntranceConfirmation = false;
-			attributesScript.restoreHealthToFull();
-			attributesScript.restoreStaminaToFull();
+			attributesComponent.restoreHealthToFull();
+			attributesComponent.restoreStaminaToFull();
 			this.GetComponent<Rigidbody>().mass = 100;
 
 			this.GetComponent<LevelSelect>().currentLevel++;
-			this.GetComponent<PlayerAttributes>().save(0);
+			attributesComponent.save(0);
 			this.GetComponent<LevelSelect>().spawnedLevel = false;
 			this.GetComponent<LevelSelect>().myRenderer = null;
 			interaction.fillAmount = 0;
