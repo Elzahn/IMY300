@@ -112,6 +112,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 			this.GetComponent<Rigidbody>().mass = 100;
 
 			this.GetComponent<LevelSelect>().currentLevel++;
+			this.GetComponent<PlayerAttributes>().save(0);
 			interaction.fillAmount = 0;
 			Application.LoadLevel ("SaveSpot");
 			Resources.UnloadUnusedAssets();
@@ -154,6 +155,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 			this.GetComponent<Rigidbody>().mass = 100;
 
 			this.GetComponent<LevelSelect>().currentLevel++;
+			this.GetComponent<PlayerAttributes>().save(0);
 			this.GetComponent<LevelSelect>().spawnedLevel = false;
 			this.GetComponent<LevelSelect>().myRenderer = null;
 			interaction.fillAmount = 0;

@@ -141,6 +141,8 @@ public class PlayerController : MonoBehaviour {
 			sound.playWorldSound (Sounds.TELEPORTING);
 			sound.stopSound ("computer");
 			this.GetComponent<LevelSelect>().currentLevel++;
+			this.GetComponent<PlayerAttributes>().save(0);
+
 			Application.LoadLevel ("SaveSpot");
 			Resources.UnloadUnusedAssets();
 			this.GetComponent<Rigidbody> ().mass = 100f;
@@ -181,6 +183,7 @@ public class PlayerController : MonoBehaviour {
 			//GameObject.Find("Player").transform.position = new Vector3(9.41f, 79.19f, 7.75f);
 			GameObject.Find("Player").transform.position = new Vector3 (13.72f, 81.58f, 14.77f);//(9.4f, 81.38f, 6.62f);
 			this.GetComponent<LevelSelect>().currentLevel++;
+			playerAttributes.save(0);
 			Application.LoadLevel("SaveSpot");
 			if(Application.loadedLevelName == "Scene"){
 				GameObject.Find("Tech Light").GetComponent<Light>().enabled = false;
