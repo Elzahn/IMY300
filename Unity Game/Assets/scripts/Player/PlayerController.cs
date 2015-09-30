@@ -273,8 +273,9 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
-		if (paused) {
-			this.GetComponent<Animator> ().speed = 0;
+	    var animatorComponent = this.GetComponent<Animator>();
+	    if (paused) {
+			animatorComponent.speed = 0;
 			moveSpeed = 0;
 
 		} else {
@@ -306,12 +307,12 @@ public class PlayerController : MonoBehaviour {
 					sound.playCharacterSound (Sounds.PLANET_RUNNING);
 				}
 
-				this.GetComponent<Animator>().SetBool("Running", true);
+				animatorComponent.SetBool("Running", true);
 				//Took it out to fix sound while running
 				//soundPlays = false;
 			} else {
 				run = false;
-				this.GetComponent<Animator>().SetBool("Running", false);
+				animatorComponent.SetBool("Running", false);
 				if(sound.characterAudio.isPlaying && sound.characterClip == Sounds.PLANET_RUNNING){
 					sound.stopSound("character");
 				}
@@ -327,17 +328,17 @@ public class PlayerController : MonoBehaviour {
 			if ((Input.GetAxis ("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0)) {
 				moving = true;
 				if (Input.GetAxis ("Vertical") == 0 && Input.GetAxis("Horizontal") < 0){
-					this.GetComponent<Animator>().SetBool("MovingLeft", moving);
-					this.GetComponent<Animator>().SetBool("MovingRight", false);
-					this.GetComponent<Animator>().SetBool("MovingStraight", false);
+					animatorComponent.SetBool("MovingLeft", moving);
+					animatorComponent.SetBool("MovingRight", false);
+					animatorComponent.SetBool("MovingStraight", false);
 				} else if (Input.GetAxis ("Vertical") == 0 && Input.GetAxis("Horizontal") > 0){
-					this.GetComponent<Animator>().SetBool("MovingRight", moving);
-					this.GetComponent<Animator>().SetBool("MovingStraight", false);
-					this.GetComponent<Animator>().SetBool("MovingLeft", false);
+					animatorComponent.SetBool("MovingRight", moving);
+					animatorComponent.SetBool("MovingStraight", false);
+					animatorComponent.SetBool("MovingLeft", false);
 				} else {
-					this.GetComponent<Animator>().SetBool("MovingStraight", moving);
-					this.GetComponent<Animator>().SetBool("MovingRight", false);
-					this.GetComponent<Animator>().SetBool("MovingLeft", false);
+					animatorComponent.SetBool("MovingStraight", moving);
+					animatorComponent.SetBool("MovingRight", false);
+					animatorComponent.SetBool("MovingLeft", false);
 				}
 			}
 
@@ -361,10 +362,10 @@ public class PlayerController : MonoBehaviour {
 				//if (Time.time >= check) {	
 					if (Input.GetAxis ("Vertical") == 0 && Input.GetAxis ("Horizontal") == 0) {
 						moving = false;
-						this.GetComponent<Animator>().SetBool("MovingStraight", moving);
-						this.GetComponent<Animator>().SetBool("MovingRight", moving);
-						this.GetComponent<Animator>().SetBool("MovingLeft", moving);
-						this.GetComponent<Animator>().SetBool("Running", moving);
+						animatorComponent.SetBool("MovingStraight", moving);
+						animatorComponent.SetBool("MovingRight", moving);
+						animatorComponent.SetBool("MovingLeft", moving);
+						animatorComponent.SetBool("Running", moving);
 						soundPlays = false;
 						this.GetComponent<Sounds>().stopSound ("character");
 					}
@@ -382,8 +383,10 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	void OnGUI(){
-		if (showDeath) {
+	void OnGUI()
+	{
+	    var SoundComponent = this.GetComponent<Sounds> ();
+	    if (showDeath) {
 			int boxHeigh = 150;
 			int boxWidth = 200;
 			int top = Screen.height / 2 - boxHeigh / 2;
@@ -398,10 +401,11 @@ public class PlayerController : MonoBehaviour {
 				playerAttributes.restoreHealthToFull ();
 				playerAttributes.restoreStaminaToFull ();
 				playerAttributes.resetXP ();
-				GameObject.Find ("Player").transform.position = new Vector3 (0.63f, 21.9f, 1.68f);
-				GameObject.Find ("Player").transform.rotation = new Quaternion (4.336792f, -0.0001220703f, 0.3787689f, 1);
-				this.GetComponent<Sounds> ().stopSound ("alarm");
-				this.GetComponent<Sounds> ().playWorldSound (Sounds.BUTTON);
+			    var playerObbject = GameObject.Find ("Player");
+			    playerObbject.transform.position = new Vector3 (0.63f, 21.9f, 1.68f);
+				playerObbject.transform.rotation = new Quaternion (4.336792f, -0.0001220703f, 0.3787689f, 1);
+				SoundComponent.stopSound ("alarm");
+				SoundComponent.playWorldSound (Sounds.BUTTON);
 				playerAttributes.resetInventoryAndStorage ();
 				//PlayerLog.queue.Clear ();
 				//PlayerLog.stats = "";
@@ -415,7 +419,7 @@ public class PlayerController : MonoBehaviour {
 				GameObject.Find("XP").GetComponent<Image>().fillAmount = playerAttributes.xp/playerAttributes.getExpectedXP();
 			}
 			if (GUI.Button (new Rect (left + 30, top + 90, buttonWidth, itemHeight), "Quit")) {
-				this.GetComponent<Sounds> ().playWorldSound (Sounds.BUTTON);
+				SoundComponent.playWorldSound (Sounds.BUTTON);
 				Application.Quit ();
 			}
 		} else if (showPaused) {
@@ -436,11 +440,11 @@ public class PlayerController : MonoBehaviour {
 
 			GUI.Box (new Rect (left, top, boxWidth, boxHeigh), "Are you sure you want to quit?");
 			if (GUI.Button (new Rect (left + 10, top + 60, buttonWidth, itemHeight), "Yes")) {
-				this.GetComponent<Sounds> ().playWorldSound (Sounds.BUTTON);
+				SoundComponent.playWorldSound (Sounds.BUTTON);
 				Application.Quit();
 			}
 			if (GUI.Button (new Rect (left + buttonWidth + 30, top + 60, buttonWidth, itemHeight), "No")) {
-				this.GetComponent<Sounds> ().playWorldSound (Sounds.BUTTON);
+				SoundComponent.playWorldSound (Sounds.BUTTON);
 				showQuit = false;
 				paused = false;
 			}
