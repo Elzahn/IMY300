@@ -92,6 +92,7 @@ public class PlayerAttributes : MonoBehaviour {
 	private PlayerController controllerComponent;
 	private float levelUpShown;
 
+	public bool fallFirst{ get; set;}
 	/**
 	 * Singleton
 	 */
@@ -302,6 +303,7 @@ public class PlayerAttributes : MonoBehaviour {
 	void Start () {
 		showWarpHint = true;
 		showLevelUp = false;
+		fallFirst = true;
 
 		//Singleton
 		if (instance) {

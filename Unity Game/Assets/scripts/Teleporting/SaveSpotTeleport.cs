@@ -83,7 +83,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 			justWarped = true;
 			this.transform.rotation = Quaternion.Euler(351.66f, 179.447f, 358.8f);
 			this.transform.up = Vector3.up;
-			this.transform.position = new Vector3 (12.99f, 81.45f, 15.25f);
+			this.transform.position = new Vector3 (13.18f, 81.55f, 14.8f);
 		}
 
 		if (showExitConfirmation && loadTutorial) {

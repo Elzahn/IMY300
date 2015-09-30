@@ -101,7 +101,7 @@ public class HUD : MonoBehaviour {
 		if (interaction.fillAmount == 0) {
 			interactionImage.GetComponent<Mask>().showMaskGraphic = false;
 		}
-		print (!player.GetComponent<PlayerController>().showAttack + " " + !player.GetComponent<Tutorial>().healthHintShown + " " + player.GetComponent<SaveSpotTeleport>().notInUse + " " + !player.GetComponent<Collisions>().showLootConfirmation + " " + !player.GetComponent<Collisions>().showRestore + " " + !InventoryGUI.hasCollided + " " + !Collisions.showHealthConfirmation);
+		//print (!player.GetComponent<PlayerController>().showAttack + " " + !player.GetComponent<Tutorial>().healthHintShown + " " + player.GetComponent<SaveSpotTeleport>().notInUse + " " + !player.GetComponent<Collisions>().showLootConfirmation + " " + !player.GetComponent<Collisions>().showRestore + " " + !InventoryGUI.hasCollided + " " + !Collisions.showHealthConfirmation);
 		if(!player.GetComponent<PlayerController>().showAttack && !player.GetComponent<Tutorial>().healthHintShown && player.GetComponent<SaveSpotTeleport>().notInUse && !player.GetComponent<Collisions>().showLootConfirmation && !player.GetComponent<Collisions>().showRestore && !InventoryGUI.hasCollided && !Collisions.showHealthConfirmation){
 			interaction.fillAmount = 0;
 		}

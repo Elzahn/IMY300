@@ -2770,8 +2770,8 @@ MonoBehaviour:
   ambienceClips:
   - {fileID: 8300000, guid: 9fbe89efa05ea954a90a652d706abd30, type: 3}
   - {fileID: 8300000, guid: 15f688accffcb374faed819ebfe9c851, type: 3}
-  - {fileID: 8300000, guid: ce7472130058a3d4cb88e515a1d14bce, type: 3}
   - {fileID: 8300000, guid: 572b2a4efa295344ea5346ecdbf1b917, type: 3}
+  - {fileID: 8300000, guid: ce7472130058a3d4cb88e515a1d14bce, type: 3}
   - {fileID: 8300000, guid: 33274feecd98f3b40a06ccf8f9b92a09, type: 3}
   - {fileID: 8300000, guid: b40a74fdd40149c4bae77718d8d88a30, type: 3}
   - {fileID: 8300000, guid: 33274feecd98f3b40a06ccf8f9b92a09, type: 3}
@@ -7420,7 +7420,7 @@ ParticleSystemRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9efbdf6fd98127a48a4c99424d34ee95, type: 2}
+  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -7788,7 +7788,7 @@ ParticleSystem:
   RotationModule:
     enabled: 0
     curve:
-      scalar: .785398185
+      scalar: .785398126
       maxCurve:
         serializedVersion: 2
         m_Curve:
