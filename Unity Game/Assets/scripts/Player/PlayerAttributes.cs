@@ -392,8 +392,8 @@ public class PlayerAttributes : MonoBehaviour {
 			if (Time.time >= nextRegeneration) {
 				nextRegeneration = Time.time + REGEN_INTERVAL;
 				if (Time.time >= (lastDamage + REGEN_ATTACK_DELAY)) {
-					if (hp < MaxHp ()) {
-						hp += (int)(MaxHp () * REGEN_HP);
+					if (hp < maxHP ()) {
+						hp += (int)(maxHP () * REGEN_HP);
 						showHealthAltered("heal");
 						giveAlarm = false;
 					}
@@ -414,7 +414,7 @@ public class PlayerAttributes : MonoBehaviour {
 	public void setInitialXp(float xp) {
 		this.xp = xp;		
 		level = determineLevel ();
-		hp = MaxHp();
+		hp = maxHP();
 		stamina = maxStamina ();
 	}
 
@@ -433,7 +433,7 @@ public class PlayerAttributes : MonoBehaviour {
 		float nextTreshold = getExpectedXP();
 		if (xp >= nextTreshold) {
 			level++;
-			hp = MaxHp ();
+			hp = maxHP ();
 			stamina = maxStamina ();
 			soundComponent.playWorldSound (Sounds.LEVEL_UP);
 			GameObject.Find ("LevelUp").GetComponent<ParticleSystem> ().enableEmission = true;
@@ -454,7 +454,7 @@ public class PlayerAttributes : MonoBehaviour {
 		levelUpShown = Time.time + 3;
 		showLevelUp = true;
 		xp = levelXP (level+1);
-		hp = MaxHp ();
+		hp = maxHP ();
 		showHealthAltered ("heal");
 		levelUp();
 	}
@@ -601,16 +601,16 @@ public class PlayerAttributes : MonoBehaviour {
 		if (health == "heal") {
 			healthHealing.SetActive (true);
 			healthLowering.SetActive(false);
-			healthHealing.GetComponent<Image> ().fillAmount = hp / MaxHp ();
+			healthHealing.GetComponent<Image> ().fillAmount = hp / maxHP ();
 		} else if (health != "reset"){
 			healthLowering.SetActive (true);
 			healthHealing.SetActive(false);
-			healthLowering.GetComponent<Image> ().fillAmount = hp / MaxHp ();
+			healthLowering.GetComponent<Image> ().fillAmount = hp / maxHP ();
 		}
 
 		healthAltered = Time.time;
 
-		GameObject.Find ("Health").GetComponent<Image> ().fillAmount = hp / MaxHp ();
+		GameObject.Find ("Health").GetComponent<Image> ().fillAmount = hp / maxHP ();
 	}
 
 	public void HideHealhtAltered(){
@@ -619,22 +619,22 @@ public class PlayerAttributes : MonoBehaviour {
 		healthAltered = 0f;
 	}
 
-	public void UseHealthPack(InventoryItem item) {
+	public void useHealthPack(InventoryItem item) {
 		HealthPack tempItem = (HealthPack) item;
-		int healthRegen = (int)(MaxHp() * tempItem.healthValue);
+		int healthRegen = (int)(maxHP() * tempItem.healthValue);
 		AddHealth(healthRegen);
 		showHealthAltered ("heal");
 	}	
 
 	public void AddHealth(int val){
 		hp += val;
-		if (hp > MaxHp ()) {
-			RestoreHealthToFull();
+		if (hp > maxHP ()) {
+			restoreHealthToFull();
 		}
 	}
 
-	public void RestoreHealthToFull() {
-		hp = MaxHp ();
+	public void restoreHealthToFull() {
+		hp = maxHP ();
 		showHealthAltered ("reset");
 	}
 	
@@ -651,7 +651,7 @@ public class PlayerAttributes : MonoBehaviour {
 		return isDead ();
 	}
 	
-	public float MaxHp() {
+	public float maxHP() {
 		var tmp = Mathf.RoundToInt(HP_BASE * Mathf.Pow(HP_MULT, level -1));		
 		foreach (Accessory a in accessories) {
 			tmp += a.hp;
@@ -684,7 +684,7 @@ public class PlayerAttributes : MonoBehaviour {
 		}
 	}
 	
-	public void RestoreStaminaToFull(){
+	public void restoreStaminaToFull(){
 		stamina = maxStamina ();
 		GameObject.Find("Stamina").GetComponent<Image>().fillAmount = stamina/maxStamina();
 	}
@@ -768,7 +768,7 @@ public class PlayerAttributes : MonoBehaviour {
         get { return Mathf.RoundToInt((ATTACK_BASE + level - 1)*Mathf.Pow(ATTACK_MULT, level - 1)); }
     }
 
-    public void Save(int slot) {
+    public void save(int slot) {
 		var file = getSaveName (slot);
 
 		Stream stream = File.Open (file, FileMode.Create);
@@ -783,7 +783,7 @@ public class PlayerAttributes : MonoBehaviour {
 		return "saves/save_" + slot + ".sav";
 	}
 
-	public void Load(int slot) {
+	public void load(int slot) {
 		AttributeContainer temp;
 		try {
 		    var saveName = getSaveName(slot);

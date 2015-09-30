@@ -224,7 +224,7 @@ public abstract class Enemy : MonoBehaviour {
 			GameObject.Find("Player").GetComponent<Sounds>().playDeathSound(Sounds.DEAD_MONSTER);
 			message += "You died.";
 		} else {
-			message += player.hp + "/" + player.maxHP ();
+			message += player.hp + "/" + player.maxHP();
 		}
 		//print(message);
 		//PlayerLog.addStat (message);
