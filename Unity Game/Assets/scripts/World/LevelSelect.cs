@@ -19,10 +19,10 @@ public class LevelSelect : MonoBehaviour {
 	 * References Attributes variable to be able to save it easily.
 	 * */
 	public int CurrentLevel { get {
-			return attrs.levelsComplete;
+			return attrs.CurrentLevel;
 		} 
 		set {
-			attrs.levelsComplete = value;
+			attrs.CurrentLevel = value;
 		} 
 	}
 
