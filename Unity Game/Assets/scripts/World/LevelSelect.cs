@@ -18,7 +18,7 @@ public class LevelSelect : MonoBehaviour {
 	/**
 	 * References Attributes variable to be able to save it easily.
 	 * */
-	public int CurrentLevel { get {
+	public int currentLevel { get {
 			return attrs.CurrentLevel;
 		} 
 		set {
@@ -62,9 +62,9 @@ public class LevelSelect : MonoBehaviour {
 		}
 
 		if (myRenderer != null) {	//You are on a planet and now will customise the level
-			myRenderer.material = GetMaterial (CurrentLevel);
+			myRenderer.material = GetMaterial (currentLevel);
 			if(Application.loadedLevelName != "Tutorial"){
-				switch (CurrentLevel) {
+				switch (currentLevel) {
 					case 1:
 					{
 						if(!spawnedLevel)
