@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-
+ 
 public class SaveSpotTeleport : MonoBehaviour {
 	/*bool _d = true;
 	public bool canEnterSaveSpot {
