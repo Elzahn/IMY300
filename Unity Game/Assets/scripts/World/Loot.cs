@@ -23,7 +23,7 @@ public class Loot : MonoBehaviour {
 		hudText = GameObject.Find ("HUD_Expand_Text").GetComponent<Text> ();
 		attributesScript = GameObject.Find("Player").GetComponent<PlayerAttributes> ();
 		playerScript = GameObject.Find("Player").GetComponent<PlayerController> ();
-		inventoryHintText = "Access the inventory by pressing I";
+		inventoryHintText = "Keep an eye on your accumulated XP. You can access the inventory by pressing ";
 	}
 
 	public void storeLoot(LinkedList<InventoryItem> tempLoot, string name){
@@ -64,6 +64,7 @@ public class Loot : MonoBehaviour {
 						if(showInventoryHint){
 							GameObject.Find("Player").GetComponent<Tutorial>().makeHint(inventoryHintText, GameObject.Find ("Player").GetComponent<Tutorial>().PressI);
 							hudText.text += "Congratz you found a weapon. Now try to use it.\n\n";
+							GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_INVENTORY);
 							Canvas.ForceUpdateCanvases();
 							Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
 							scrollbar.value = 0f;

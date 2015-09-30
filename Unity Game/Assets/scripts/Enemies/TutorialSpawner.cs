@@ -116,7 +116,6 @@ public class TutorialSpawner : MonoBehaviour {
 					GameObject.Find("Player").GetComponent<Tutorial>().tutorialDone = true;
 				} else if (!monsterDead){
 					deadEnemies++;
-					GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_INVENTORY);
 					Loot.showInventoryHint = true;	//shows hint and add HUD text
 					monsterDead = true;
 					GameObject.Find("Player").GetComponent<Tutorial>().teachInventory = true;

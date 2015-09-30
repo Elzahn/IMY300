@@ -11,8 +11,11 @@ public class Tutorial : MonoBehaviour {
 	public bool showVisuals { get; set; }
 	public bool moveHintOnScreen { get; set; }
 	public bool moveHintOffScreen { get; set; }
+	public bool healthHintShown { get; set; }
 	public float showVisualQue { get; set; }
 
+	private Image health;
+	private Image stamina;
 	private Image interaction;
 	private Image hint;
 	private Image hintImage;
@@ -32,6 +35,7 @@ public class Tutorial : MonoBehaviour {
 	public Sprite Health;
 	public Sprite CameraMove;
 	public Sprite Dark;
+	public Sprite Health_Bar;
 
 	void Start () {
 		GameObject.Find("Tech Light").GetComponent<Light>().enabled = false;
@@ -42,7 +46,10 @@ public class Tutorial : MonoBehaviour {
 
 		moveHintOnScreen = false;
 		moveHintOffScreen = false;
+		healthHintShown = false;
 
+		health = GameObject.Find ("Health").GetComponent<Image> ();
+		stamina = GameObject.Find ("Stamina").GetComponent<Image> ();
 		hudText = GameObject.Find ("HUD_Expand_Text").GetComponent<Text> ();
 		interaction = GameObject.Find ("Interaction").GetComponent<Image> ();
 		hint = GameObject.Find ("Hint").GetComponent<Image> ();
@@ -55,6 +62,9 @@ public class Tutorial : MonoBehaviour {
 		tutorialDone = false;
 		teachStorage = false;
 		teachInventory = false;
+
+		health.enabled = false;
+		stamina.enabled = false;
 	}
 
 	// Used to determine what happens next in the tutorial
@@ -116,7 +126,11 @@ public class Tutorial : MonoBehaviour {
 				makeHint("Some monsters prefer the dark as it makes them stronger while others follow the light.", Dark);
 			}
 
-			if(hint.fillAmount <= 0 && hintText.text == "Run with left shift + W/A/S/D"){
+			if(hint.fillAmount >= 1 && hintText.text == "Run with left shift + W/A/S/D. Just remember that running and attacks deplete your stamina."){
+				stamina.enabled = true;
+			}
+
+			if(hint.fillAmount <= 0 && hintText.text == "Run with left shift + W/A/S/D. Just remember that running and attacks deplete your stamina."){
 				this.GetComponent<SaveSpotTeleport>().loadTutorial = false;
 			}
 
@@ -124,7 +138,13 @@ public class Tutorial : MonoBehaviour {
 				makeHint("Rotate the camera by moving the mouse while holding down", CameraMove);
 			}
 
+			if(hint.fillAmount <= 0 && hintText.text == "Access the satelites with "){
+				makeHint ("Run with left shift + W/A/S/D. Just remember that running and attacks deplete your stamina.", Run);
+			}
 
+			//if(hint.fillAmount <= 0 && hintText.text == "Remember to watch your health during a battle."){
+				
+			//}
 
 			if(Application.loadedLevelName == "Tutorial"){
 				sound.resumeSound("all");
@@ -154,6 +174,12 @@ public class Tutorial : MonoBehaviour {
 			lastWordsOfWisdom ();
 			}
 		}
+	}
+
+	public void showHealthHint(){
+		health.enabled = true;
+		Camera.main.GetComponent<HUD>().makeInteractionHint ("Remember to watch your health during a battle.", Health_Bar);
+		healthHintShown = true;
 	}
 
 	public void stopTutorial(){
@@ -219,7 +245,7 @@ public class Tutorial : MonoBehaviour {
 	public void teachToRun(){
 		if (!this.GetComponent<PlayerController> ().paused) {
 			sound.playComputerSound (Sounds.COMPUTER_RUN);
-			makeHint ("Run with left shift + W/A/S/D", Run);
+			//makeHint ("Run with left shift + W/A/S/D. Just remember that running and attacks deplete your stamina.", Run);
 			hudText.text += "After you have retrieved the power core from the lifeforms head back to the teleporter to return to the ship.\n\n";
 			Canvas.ForceUpdateCanvases();
 			Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
