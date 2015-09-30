@@ -85,6 +85,10 @@ public class Tutorial : MonoBehaviour {
 				moveHintOnScreen = false;
 			}
 
+			if(Time.time >= showVisualQue && healthHintShown){
+				healthHintShown = false;
+			}
+
 			if(Application.loadedLevelName != "Scene"){
 				if(moveHintOnScreen){
 					if(hint.fillAmount < 1)
@@ -180,6 +184,7 @@ public class Tutorial : MonoBehaviour {
 		health.enabled = true;
 		Camera.main.GetComponent<HUD>().makeInteractionHint ("Remember to watch your health during a battle.", Health_Bar);
 		healthHintShown = true;
+		showVisualQue = Time.time + visualDuration;
 	}
 
 	public void stopTutorial(){
