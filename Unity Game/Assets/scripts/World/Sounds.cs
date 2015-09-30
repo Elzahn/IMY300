@@ -118,7 +118,13 @@ public class Sounds : MonoBehaviour {
 				ambienceAudio.UnPause ();
 				break;
 			}
-		default:
+			case "computer":
+			{
+				computerAudio = GameObject.Find("Computer Audio").GetComponent<AudioSource>();
+				computerAudio.UnPause();
+				break;
+			}
+			default:
 			{
 				characterAudio = GameObject.Find ("Character Audio").GetComponent<AudioSource> ();
 				characterAudio.UnPause ();
@@ -133,8 +139,8 @@ public class Sounds : MonoBehaviour {
 					GameObject.Find("Planet").GetComponent<EnemySpawner>().resumeEnemySound();
 				}
 				
-				ambienceAudio = GameObject.Find("Ambience Audio").GetComponent<AudioSource>();
-				ambienceAudio.UnPause ();
+				//ambienceAudio = GameObject.Find("Ambience Audio").GetComponent<AudioSource>();
+				//ambienceAudio.UnPause ();
 
 				//JUST FOR TESTING
 				computerAudio = GameObject.Find ("Computer Audio").GetComponent<AudioSource> ();
@@ -162,6 +168,27 @@ public class Sounds : MonoBehaviour {
 				ambienceAudio.Pause ();
 				break;
 			}
+			case "computer":
+			{
+				computerAudio.Pause();
+				break;
+			}
+			case "computerTalks":
+			{
+				characterAudio = GameObject.Find ("Character Audio").GetComponent<AudioSource> ();
+				characterAudio.Pause ();
+				if(worldClip == TELEPORTING || worldClip == HEALTH_COLLECTION || worldClip == WARPING){
+					worldAudio.Pause ();
+				}
+				if(alarmClip != DISASTER_ALARM){
+					alarmAudio.Pause ();
+				}
+				
+				if(GameObject.Find("Planet") != null && GameObject.Find("Planet").GetComponent<EnemySpawner>() != null){
+					GameObject.Find("Planet").GetComponent<EnemySpawner>().pauseEnemySound();
+				}
+				break;
+			}
 			default:
 			{
 				characterAudio = GameObject.Find ("Character Audio").GetComponent<AudioSource> ();
@@ -177,10 +204,10 @@ public class Sounds : MonoBehaviour {
 					GameObject.Find("Planet").GetComponent<EnemySpawner>().pauseEnemySound();
 				}
 				
-				ambienceAudio = GameObject.Find("Ambience Audio").GetComponent<AudioSource>();
-				ambienceAudio.Pause ();
+				//ambienceAudio = GameObject.Find("Ambience Audio").GetComponent<AudioSource>();
+				//ambienceAudio.Pause ();
 	
-				computerAudio.Pause();
+				//computerAudio.Pause();
 				break;
 			}
 		}

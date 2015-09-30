@@ -94,6 +94,7 @@ public class InventoryGUI : MonoBehaviour {
 			hasCollided = false;
 			this.GetComponent<Sounds> ().playWorldSound (Sounds.STORAGE);
 			playerScript.paused = true;	//Pause game
+			GameObject.Find("Player").GetComponent<Sounds>().resumeSound("computer");
 		}
 	}
 
@@ -108,6 +109,7 @@ public class InventoryGUI : MonoBehaviour {
 				//PlayerLog.showLog = false;
 				this.GetComponent<Sounds> ().playWorldSound (Sounds.INVENTORY);
 				playerScript.paused = true;	//Pause game
+				GameObject.Find("Player").GetComponent<Sounds>().resumeSound("computer");
 			}
 		}
 	}

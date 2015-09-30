@@ -70,7 +70,7 @@ public class Tutorial : MonoBehaviour {
 	// Used to determine what happens next in the tutorial
 	void Update () {
 		if (this.GetComponent<PlayerController> ().paused) {
-			sound.pauseSound("all");
+			//sound.pauseSound("all");
 			GameObject[] monsters =  GameObject.FindGameObjectsWithTag("Monster");
 
 			foreach(GameObject m in monsters){

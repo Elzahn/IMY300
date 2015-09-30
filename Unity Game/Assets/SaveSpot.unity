@@ -222,7 +222,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 8, y: .0376815796}
+  m_AnchoredPosition: {x: 8, y: .0329208374}
   m_SizeDelta: {x: 500, y: 180}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &18939797
@@ -2906,6 +2906,7 @@ MonoBehaviour:
   Health: {fileID: 21300000, guid: 818c2486130432746af1555c33c6f969, type: 3}
   CameraMove: {fileID: 21300000, guid: 1066b3542c97d68498f64866c0594753, type: 3}
   Dark: {fileID: 21300000, guid: 5f38f8518e43ffc4d99338acc6fb3098, type: 3}
+  Health_Bar: {fileID: 21300000, guid: f402db812d5a90d4bb55abe91effd0a9, type: 3}
 --- !u!114 &839258581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9657,7 +9658,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -16, y: -.0218734741}
+  m_AnchoredPosition: {x: -16, y: -.0225830078}
   m_SizeDelta: {x: 500, y: 180}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &2119784513

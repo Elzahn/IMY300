@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour {
 	public bool paused {
 		get {
 			if (_paused) {
-				this.GetComponent<Sounds>().pauseSound("all");
+				this.GetComponent<Sounds>().pauseSound("computerTalks");
 			}
 			return _paused;
 		} 
@@ -243,9 +243,8 @@ public class PlayerController : MonoBehaviour {
 				collidedWithNumMosters++;
 			}
 		}
-
-		if (collidedWithNumMosters > 0) {
-
+		//print (!this.GetComponent<Tutorial> ().healthHintShown);
+		if (collidedWithNumMosters > 0 && !this.GetComponent<Tutorial>().healthHintShown) {
 			showAttack = true;
 			Camera.main.GetComponent<HUD> ().makeInteractionHint ("Attack by pressing while your mouse is on the monster", Attack);
 		} else {
@@ -292,11 +291,16 @@ public class PlayerController : MonoBehaviour {
 			
 			run = false;
 			if (Input.GetKey(KeyCode.LeftShift) && playerAttributes.stamina > 0 && Application.loadedLevelName != "SaveSpot" && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)) {
+				if(GameObject.Find("Stamina").GetComponent<Image>().isActiveAndEnabled == false){
+					GameObject.Find("Stamina").GetComponent<Image>().enabled = true;
+				}
 				run = true;
 				moveSpeed *= RUN_MULT;
 				playerAttributes.drainStamina ();
 				//Took it out to fix sound while running
 				//soundPlays = false;
+			} else {
+				run = false;
 			}
 
 			if(!Camera.main.GetComponent<CameraControl>().birdsEye){
@@ -405,6 +409,7 @@ public class PlayerController : MonoBehaviour {
 				Application.Quit ();
 			}
 		} else if (showPaused) {
+			sound.pauseSound("computer");
 			int boxHeigh = 50;
 			int boxWidth = 200;
 			int top = Screen.height / 2 - boxHeigh / 2;

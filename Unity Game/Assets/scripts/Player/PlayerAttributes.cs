@@ -692,6 +692,9 @@ public class PlayerAttributes : MonoBehaviour {
 
 	public string attack(Enemy e) {
 		//string name = e.typeID;
+		if(GameObject.Find("Health").GetComponent<Image>().isActiveAndEnabled == false){
+			this.GetComponent<Tutorial>().showHealthHint();
+		}
 		e.lastDamage = Time.time;
 		float ran = UnityEngine.Random.value;
 		float hc = hitChance;
