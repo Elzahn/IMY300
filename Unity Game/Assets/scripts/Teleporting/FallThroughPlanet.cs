@@ -27,7 +27,7 @@ public class FallThroughPlanet : MonoBehaviour {
 	void Update(){
 		if (playerScript.paused == false && fallThroughPlanetUnlocked == true) {
 			if (canFallThroughPlanet == true) {
-				if (Input.GetKeyDown (KeyCode.F)) {
+				if (Input.GetKeyDown (KeyCode.F) && Application.loadedLevelName != "SaveSpot") {
 					canFallThroughPlanet = false;
 					Camera.main.GetComponent<HUD>().turnOffLights("fall");
 					var pos = transform.position;

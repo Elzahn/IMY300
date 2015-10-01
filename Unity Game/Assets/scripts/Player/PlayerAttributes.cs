@@ -93,6 +93,8 @@ public class PlayerAttributes : MonoBehaviour {
 	private float levelUpShown;
 
 	public bool fallFirst{ get; set;}
+	public bool doorOpen{ get; set; }
+
 	/**
 	 * Singleton
 	 */
@@ -294,8 +296,8 @@ public class PlayerAttributes : MonoBehaviour {
 	private Text hudText;
 	private bool showWarpHint;
 	private bool showLevelUp;
-	private GameObject healthLowering, healthHealing, staminaDrain;
-    
+	private GameObject healthLowering, healthHealing, staminaDrain, door;
+   
     /**************************************************** Monobehaviour functions *********************************************
 	 * Start - Called after creation
 	 * Update - Called Every frame
@@ -304,6 +306,7 @@ public class PlayerAttributes : MonoBehaviour {
 		showWarpHint = true;
 		showLevelUp = false;
 		fallFirst = true;
+		doorOpen = false;
 
 		//Singleton
 		if (instance) {
@@ -341,6 +344,11 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	void Update() {
+		door = GameObject.Find ("Door");
+		if (Application.loadedLevelName == "SaveSpot" && doorOpen && door != null) {
+			GameObject.Find("Door").SetActive(false);
+		}
+
 		if (stamina <= 0) { 
 			stamina = 0;
 			if(staminaDrained == 0f){

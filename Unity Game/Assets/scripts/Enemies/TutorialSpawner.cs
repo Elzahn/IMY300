@@ -128,6 +128,7 @@ public class TutorialSpawner : MonoBehaviour {
 					deadEnemy.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
 					Loot lootComponent = deadEnemy.GetComponentInChildren<Loot> ();
 					lootComponent.storeLoot (tempLoot, "Dead " + enemy.typeID);
+					lootComponent.showMyLoot();
 					tempLoot.Clear ();
 				} else {
 					deadEnemies++;

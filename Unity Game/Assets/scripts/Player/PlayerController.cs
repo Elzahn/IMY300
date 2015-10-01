@@ -115,6 +115,8 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(0.26f, 16.06f, 0.316f);
             Application.LoadLevel("Tutorial");
         } else if (Input.GetKeyDown(KeyCode.Tab) && Application.loadedLevelName == "Tutorial") {
+			GameObject.Find ("Health").GetComponent<Image> ().enabled = true;
+			GameObject.Find ("Stamina").GetComponent<Image> ().enabled = true;
             GetComponent<Tutorial>().tutorialDone = true;
             GetComponent<Tutorial>().teachInventory = true;
             playerAttributes.inventory.AddLast(TutorialSpawner.bossPowerCore);
@@ -164,12 +166,17 @@ public class PlayerController : MonoBehaviour
             GameObject.Find("Player").GetComponent<PlayerAttributes>().inventory.AddLast(new Longsword(1));
             //GameObject.Find("Player").transform.position = new Vector3(9.41f, 79.19f, 7.75f);
             GameObject.Find("Player").transform.position = new Vector3(13.72f, 81.58f, 14.77f); //(9.4f, 81.38f, 6.62f);
-                playerAttributes.returnToSaveSpot();
-                if (Application.loadedLevelName == "Scene") {
+			playerAttributes.returnToSaveSpot();
+
+			if (Application.loadedLevelName == "Scene") {
                 GameObject.Find("Tech Light").GetComponent<Light>().enabled = false;
                 GameObject.Find("Console Light").GetComponent<Light>().enabled = false;
                 GameObject.Find("Bedroom Light").GetComponent<Light>().enabled = false;
             }
+
+			GameObject.Find ("Health").GetComponent<Image> ().enabled = true;
+			GameObject.Find ("Stamina").GetComponent<Image> ().enabled = true;
+			playerAttributes.doorOpen = true;
             GetComponent<Rigidbody>().mass = 1000;
             GetComponent<Tutorial>().stopTutorial();
             //print ("Tutorial skipped you can now use the teleporter again.");
@@ -285,9 +292,10 @@ public class PlayerController : MonoBehaviour
                 run = true;
                 moveSpeed *= RUN_MULT;
                 playerAttributes.drainStamina();
-                if (sound.characterAudio.isPlaying && sound.characterClip != Sounds.PLANET_RUNNING) {
+                if (sound.characterAudio.isPlaying && sound.characterClip == Sounds.PLANET_WALKING) {
                     sound.stopSound("character");
                 }
+
                 if (!sound.characterAudio.isPlaying) {
                     sound.playCharacterSound(Sounds.PLANET_RUNNING);
                 }
