@@ -221,6 +221,7 @@ public class Sounds : MonoBehaviour {
 			case "character":
 			{
 				characterAudio.Stop ();
+			print ("STOP");
 				break;
 			}
 			case "world":
@@ -240,7 +241,7 @@ public class Sounds : MonoBehaviour {
 
 				characterAudio = GameObject.Find ("Character Audio").GetComponent<AudioSource> ();
 				characterAudio.Stop ();
-
+			print ("STOP2");
 				if(worldClip == TELEPORTING || worldClip == HEALTH_COLLECTION || worldClip == WARPING){
 					worldAudio.Stop ();
 				}
@@ -363,7 +364,7 @@ public class Sounds : MonoBehaviour {
 
 	public void playCharacterSound(int clipAt){
 		characterClip = clipAt;
-		characterAudio.volume = 0.5f;
+		characterAudio.volume = 0.7f;
 
 		if (characterClip >= PLANET_WALKING && characterClip <= SHIP_WALKING) {
 			characterAudio.loop = true;

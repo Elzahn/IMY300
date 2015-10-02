@@ -711,6 +711,10 @@ public class PlayerAttributes : MonoBehaviour {
 
 	public string attack(Enemy e) {
 		//string name = e.typeID;
+	/*	if (soundComponent.characterAudio.isPlaying && soundComponent.characterClip < Sounds.SWORD_HIT) {
+			soundComponent.stopSound("character");
+		}*/
+
 		if(GameObject.Find("Health").GetComponent<Image>().isActiveAndEnabled == false){
 			this.GetComponent<Tutorial>().showHealthHint();
 		}
@@ -740,9 +744,9 @@ public class PlayerAttributes : MonoBehaviour {
 				} else {
 					soundComponent.playCharacterSound (Sounds.FISTS_CRIT);
 				}
-
 			} else {
 				/* Non-crit Sounds */
+
 				if (weapon != null){
 					if (weapon.typeID == "Warhammer") {
 						soundComponent.playCharacterSound (Sounds.HAMMER_HIT);
@@ -755,6 +759,7 @@ public class PlayerAttributes : MonoBehaviour {
 			}
 
 			bool dead = e.loseHP(tmpdamage);
+
 			if (weapon != null) {
 				stamina -= weapon.staminaLoss;
 				GameObject.Find("Stamina").GetComponent<Image>().fillAmount = stamina/maxStamina();
@@ -770,8 +775,7 @@ public class PlayerAttributes : MonoBehaviour {
 				//add Stats to message
 				message += e.getHealth()+"/"+e.getMaxHp();
 			}
-		} 
-		if (message == "Miss! ") {
+		} else if (message == "Miss! ") {
 			soundComponent.playCharacterSound(Sounds.MISS);
 			message += e.getHealth () + "/" + e.getMaxHp ();
 		}

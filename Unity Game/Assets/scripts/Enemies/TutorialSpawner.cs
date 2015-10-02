@@ -39,7 +39,7 @@ public class TutorialSpawner : MonoBehaviour {
 	}
 
 	public string enemiesStats(){
-		string temp = "Enemies left: " + enemies.Count ();
+		string temp = "Enemies left: " + (3 - deadEnemies);
 
 		temp += "\nEnemies dead: " + deadEnemies + "\n";
 		

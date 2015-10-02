@@ -132,6 +132,9 @@ public class Tutorial : MonoBehaviour {
 
 			if(hint.fillAmount >= 1 && hintText.text == "Run with left shift + W/A/S/D. Just remember that running and attacks deplete your stamina."){
 				stamina.enabled = true;
+				if (GameObject.Find ("HUD Body Temp").GetComponent<Image> () != null) {
+					GameObject.Find ("HUD Body Temp").GetComponent<Image> ().enabled = false;
+				}
 			}
 
 			if(hint.fillAmount <= 0 && hintText.text == "Run with left shift + W/A/S/D. Just remember that running and attacks deplete your stamina."){
@@ -182,6 +185,9 @@ public class Tutorial : MonoBehaviour {
 
 	public void showHealthHint(){
 		health.enabled = true;
+		if (GameObject.Find ("HUD Body Temp").GetComponent<Image> () != null) {
+			GameObject.Find ("HUD Body Temp").GetComponent<Image> ().enabled = false;
+		}
 		Camera.main.GetComponent<HUD>().makeInteractionHint ("Remember to watch your health during a battle.", Health_Bar);
 		healthHintShown = true;
 		showVisualQue = Time.time + visualDuration;

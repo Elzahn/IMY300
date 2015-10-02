@@ -10,14 +10,14 @@ public class PlayerController : MonoBehaviour
 	 * */
     private bool _paused;
     public Sprite Attack;
-    private float check;
+  //  private float check;
     private float moveSpeed;
     private PlayerAttributes playerAttributes;
     public bool run, moving, showQuit;
     private int screenshotCount;
     
 
-    private bool showDeath, showPaused, soundPlays;
+	private bool showDeath, showPaused;//, soundPlays;
     private Sounds sound;
     public Vector3 moveDir { get; set; }
     public bool showAttack { get; private set; }
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
         showPaused = false;
         moving = false;
         sound = GetComponent<Sounds>();
-        check = Time.time;
+       // check = Time.time;
     }
 
     public void playAnimation() {
@@ -81,6 +81,10 @@ public class PlayerController : MonoBehaviour
     }
 
     private void keysCheck() {
+		if (Input.GetKeyDown(KeyCode.Keypad0)) {
+			GetComponent<LevelSelect>().currentLevel = 0;
+		}
+
         if (Input.GetKeyDown(KeyCode.Keypad1)) {
             GetComponent<LevelSelect>().currentLevel = 1;
         }
@@ -117,6 +121,7 @@ public class PlayerController : MonoBehaviour
         } else if (Input.GetKeyDown(KeyCode.Tab) && Application.loadedLevelName == "Tutorial") {
 			GameObject.Find ("Health").GetComponent<Image> ().enabled = true;
 			GameObject.Find ("Stamina").GetComponent<Image> ().enabled = true;
+			GameObject.Find ("HUD Body Temp").GetComponent<Image> ().enabled = false;
             GetComponent<Tutorial>().tutorialDone = true;
             GetComponent<Tutorial>().teachInventory = true;
             playerAttributes.inventory.AddLast(TutorialSpawner.bossPowerCore);
@@ -175,6 +180,7 @@ public class PlayerController : MonoBehaviour
             }
 
 			GameObject.Find ("Health").GetComponent<Image> ().enabled = true;
+			GameObject.Find ("HUD Body Temp").GetComponent<Image> ().enabled = false;
 			GameObject.Find ("Stamina").GetComponent<Image> ().enabled = true;
 			playerAttributes.doorOpen = true;
             GetComponent<Rigidbody>().mass = 1000;
@@ -279,9 +285,9 @@ public class PlayerController : MonoBehaviour
                 paused = true;
             }
 
-            if (!GameObject.Find("Player").GetComponent<Sounds>().characterAudio.isPlaying) {
+           /* if (!GameObject.Find("Player").GetComponent<Sounds>().characterAudio.isPlaying) {
                 soundPlays = false;
-            }
+            }*/
 
             if (Input.GetKey(KeyCode.LeftShift) && playerAttributes.stamina > 0 &&
                 Application.loadedLevelName != "SaveSpot" &&
@@ -303,7 +309,7 @@ public class PlayerController : MonoBehaviour
                 animatorComponent.SetBool("Running", true);
                 //Took it out to fix sound while running
                 //soundPlays = false;
-            } else {
+			} else if((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)) {
                 run = false;
                 animatorComponent.SetBool("Running", false);
                 if (sound.characterAudio.isPlaying && sound.characterClip == Sounds.PLANET_RUNNING) {
@@ -357,8 +363,8 @@ public class PlayerController : MonoBehaviour
                 animatorComponent.SetBool("MovingRight", moving);
                 animatorComponent.SetBool("MovingLeft", moving);
                 animatorComponent.SetBool("Running", moving);
-                soundPlays = false;
-                GetComponent<Sounds>().stopSound("character");
+               // soundPlays = false;
+               // GetComponent<Sounds>().stopSound("character");
             }
             //check += 0.25f;
             //	}
@@ -390,9 +396,9 @@ public class PlayerController : MonoBehaviour
                 playerAttributes.restoreHealthToFull();
                 playerAttributes.restoreStaminaToFull();
                 playerAttributes.resetXP();
-                var playerObbject = GameObject.Find("Player");
-                playerObbject.transform.position = new Vector3(0.63f, 21.9f, 1.68f);
-                playerObbject.transform.rotation = new Quaternion(4.336792f, -0.0001220703f, 0.3787689f, 1);
+                //var playerObbject = GameObject.Find("Player");
+				GameObject.Find("Player").transform.rotation = Quaternion.Euler(0f, -95.3399f, 0f);
+				GameObject.Find("Player").transform.position = new Vector3(-1.651f, 80.82f, 0.84f);
                 SoundComponent.stopSound("alarm");
                 SoundComponent.playWorldSound(Sounds.BUTTON);
                 playerAttributes.resetInventoryAndStorage();
