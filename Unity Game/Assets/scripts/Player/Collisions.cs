@@ -50,12 +50,16 @@ public class Collisions : MonoBehaviour {
 			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 		}
 
-		if (showLootConfirmation) {
+		if (playerAttributesScript.inventoryFull () && showLootConfirmation) {
 			Hud.makeInteractionHint ("Press E to get loot", this.GetComponent<Tutorial> ().PressE);
+		} else if(!playerAttributesScript.inventoryFull ()){
+			Hud.makeInteractionHint ("Inventory full", this.GetComponent<SaveSpotTeleport>().noEntry);
 		}
 
-		if (showHealthConfirmation) {
+		if (playerAttributesScript.inventoryFull () && showHealthConfirmation) {
 			Hud.makeInteractionHint ("Press E to get a health pack", this.GetComponent<Tutorial> ().PressE);
+		} else if(!playerAttributesScript.inventoryFull ()){
+			Hud.makeInteractionHint ("Inventory full", this.GetComponent<SaveSpotTeleport>().noEntry);
 		}
 
 		if (showLootConfirmation && Input.GetKeyDown (KeyCode.E)) {

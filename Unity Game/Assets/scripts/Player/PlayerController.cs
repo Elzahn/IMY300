@@ -229,6 +229,10 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F7)) {
             sound.stopSound("computer");
         }
+
+		if (Input.GetKeyDown (KeyCode.F8)) {
+			playerAttributes.inventory.AddLast(new Longsword(1));
+		}
     }
 
     public void checkIfAttackPossible() {
@@ -364,7 +368,9 @@ public class PlayerController : MonoBehaviour
                 animatorComponent.SetBool("MovingLeft", moving);
                 animatorComponent.SetBool("Running", moving);
                // soundPlays = false;
-               // GetComponent<Sounds>().stopSound("character");
+				if(sound.characterClip == Sounds.PLANET_RUNNING || sound.characterClip == Sounds.PLANET_WALKING || sound.characterClip == Sounds.SHIP_WALKING){
+                	GetComponent<Sounds>().stopSound("character");
+				}
             }
             //check += 0.25f;
             //	}

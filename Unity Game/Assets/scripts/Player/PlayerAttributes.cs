@@ -257,6 +257,10 @@ public class PlayerAttributes : MonoBehaviour {
 		}
 	}
 
+	public bool inventoryFull(){
+		return (inventory.Count < inventorySize);
+	}
+
 	public float hitChance { 
 		get {
 			float tmp = HIT_CHANCE_BASE;
