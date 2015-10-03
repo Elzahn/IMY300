@@ -15,14 +15,28 @@ public class InventoryScript : MonoBehaviour {
 	}
 
 	public void dropWeapon(){
-		InventoryItem item = this.transform.parent.GetComponent<PlaceInList> ().myItem;
+		InventoryItem item;
+		
+		if (this.transform.parent.GetComponent<PlaceInList>() != null) {
+			item = this.transform.parent.GetComponent<PlaceInList> ().myItem;
+		} else {
+			item = this.transform.parent.parent.GetComponent<PlaceInList> ().myItem;
+		}
+
 		attributesScript.inventory.Remove (item);
 		sound.playWorldSound(Sounds.DROP_ITEM);
 		scrollableList.checkInventory();
 	}
 	
 	public void equipWeapon(){
-		InventoryItem item = this.transform.parent.GetComponent<PlaceInList> ().myItem;
+		InventoryItem item;
+
+		if (this.transform.parent.GetComponent<PlaceInList>() != null) {
+			item = this.transform.parent.GetComponent<PlaceInList> ().myItem;
+		} else {
+			item = this.transform.parent.parent.GetComponent<PlaceInList> ().myItem;
+		}
+
 		attributesScript.equipItem (item);
 		
 		if(item.typeID == "Rare Accessory" || item.typeID == "Common Accessory" || item.typeID == "Uncommon Accessory"){

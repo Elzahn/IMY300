@@ -7,6 +7,9 @@ using System.Linq;
 public class ScrollableList : MonoBehaviour
 {
 	public GameObject itemPrefab;
+	public Sprite butterKnife;
+	public Sprite longSword;
+	public Sprite warHammer;
 
 	private int itemCount;
 	private RectTransform rowRectTransform;
@@ -14,10 +17,10 @@ public class ScrollableList : MonoBehaviour
 	private PlayerAttributes attributesScript;
 	private float height, width, scrollHeight;
 	private Text inventory, xp, hp, stamina, level, noItems, noAccessories, noWeapon;
+	private Image itemDesc;
 
 	void Start()
 	{
-
 		inventory = GameObject.Find ("InventoryText").GetComponent<Text> ();
 		xp = GameObject.Find ("XPStat").GetComponent<Text> ();
 		hp = GameObject.Find ("HPStat").GetComponent<Text> ();
@@ -70,6 +73,7 @@ public class ScrollableList : MonoBehaviour
 		} else {
 			foreach (InventoryItem item in attributesScript.inventory.ToList()) {
 				//create a new item, name it, and set the parent
+
 				j++;
 				GameObject newItem = Instantiate(itemPrefab) as GameObject;
 				newItem.name = j +" " + item.typeID;
@@ -78,8 +82,34 @@ public class ScrollableList : MonoBehaviour
 
 				newItem.GetComponent<PlaceInList>().myItem = item;
 				
-				Text Weapon = newItem.GetComponentInChildren(typeof(Text)) as Text;
-				Weapon.text = item.typeID;
+				Text weaponText = newItem.GetComponentInChildren<Text>();
+				weaponText.text = item.typeID;
+				//To get the weapon image
+				Image[] images = newItem.GetComponentsInChildren<Image>();
+				foreach(Image image in images){
+					if(image.name == "WeaponImage"){
+						if(weaponText.text == "Longsword"){
+							image.sprite = longSword;
+							newItem.GetComponent<PlaceInList>().itemImage = longSword;	//sets image for description
+						} else if(weaponText.text == "Warhammer"){
+							image.sprite = warHammer;
+							newItem.GetComponent<PlaceInList>().itemImage = warHammer;	//sets image for description
+						} else if(weaponText.text == "ButterKnife"){
+							image.sprite = butterKnife;
+							newItem.GetComponent<PlaceInList>().itemImage = butterKnife;	//sets image for description
+						}
+					} else if(image.name == "ItemDescBackground"){
+						//sets all variables for the description of the item
+						newItem.GetComponent<PlaceInList>().desc = image;
+						newItem.GetComponent<PlaceInList>().itemName = weaponText;
+						foreach (Transform child in image.transform) {
+							if(child.gameObject.name != "MouseHover")
+								child.gameObject.SetActive (false);
+						}
+						image.enabled = false;
+					}
+				}
+
 				RectTransform rectTransform = newItem.GetComponent<RectTransform>();
 				
 				float x = (-containerRectTransform.rect.width /2) - 20;
@@ -90,12 +120,12 @@ public class ScrollableList : MonoBehaviour
 				x = rectTransform.offsetMin.x + width;
 				y = rectTransform.offsetMin.y + height - 100;
 				rectTransform.offsetMax = new Vector2(x, y);
-
-				Canvas.ForceUpdateCanvases();
-				Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
-				scrollbar.value = 0f;
 			}
 			noItems.text = "";
+
+			Canvas.ForceUpdateCanvases();
+			Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
+			scrollbar.value = 1f;
 		}
 	}
 
@@ -118,4 +148,6 @@ public class ScrollableList : MonoBehaviour
 			noWeapon.text = "No weapon equiped";
 		}
 	}
+
+
 }

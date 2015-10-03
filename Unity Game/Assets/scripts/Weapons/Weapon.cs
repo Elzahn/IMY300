@@ -6,6 +6,7 @@ public abstract class Weapon : InventoryItem{
 	public int damage {get; private set;}
 	public int level {get; private set;}
 	public float staminaLoss {get; private set;}
+
 	// Use this for initialization
 	public Weapon (int level, int damage, float stamina, string typeID) : base(1, typeID) {
 		this.damage = damage;
@@ -19,7 +20,6 @@ public abstract class Weapon : InventoryItem{
 		info.AddValue("damage", damage);
 		info.AddValue("level", level);
 		info.AddValue("stamina", staminaLoss);
-
 	}
 
 	protected Weapon(SerializationInfo info, StreamingContext ctxt) : base(info, ctxt)
@@ -29,5 +29,4 @@ public abstract class Weapon : InventoryItem{
 		level = (int)info.GetValue("level", typeof(int));
 		staminaLoss = (float)info.GetValue("stamina", typeof(float));
 	}
-
 }

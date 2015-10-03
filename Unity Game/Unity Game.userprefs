@@ -1,32 +1,26 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Enemies\TutorialSpawner.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Player\ScrollableList.cs">
     <Files>
-      <File FileName="Assets\scripts\World\PositionMe.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="180" Column="37" />
-      <File FileName="Assets\scripts\Player\Collisions.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\World\LevelSelect.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Menu\HUD.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Player\Tutorial.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Teleporting\FallThroughPlanet.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Enemies\EnemySpawner.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Teleporting\SaveSpotTeleport.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Enemies\TutorialSpawner.cs" Line="42" Column="64" />
-      <File FileName="Assets\scripts\Player\CameraControl.cs" Line="85" Column="15" />
+      <File FileName="Assets\scripts\Weapons\ButterKnife.cs" Line="11" Column="31" />
+      <File FileName="Assets\scripts\Menu\PlaceInList.cs" Line="11" Column="26" />
+      <File FileName="Assets\scripts\Menu\InventoryScript.cs" Line="2" Column="1" />
+      <File FileName="Assets\scripts\Player\ScrollableList.cs" Line="36" Column="50" />
+      <File FileName="Assets\scripts\Player\InventoryGUI.cs" Line="113" Column="26" />
+      <File FileName="Assets\scripts\Player\Equip.cs" Line="11" Column="4" />
+      <File FileName="Assets\scripts\InventoryItem.cs" Line="14" Column="16" />
+      <File FileName="Assets\scripts\Weapons\Weapon.cs" Line="7" Column="18" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="scripts" expanded="True">
-              <Node name="Enemies" expanded="True" />
               <Node name="Menu" expanded="True" />
               <Node name="Player" expanded="True" />
-              <Node name="Teleporting" expanded="True" />
+              <Node name="Weapons" expanded="True" />
             </Node>
           </Node>
-          <Node name="Assembly-CSharp-firstpass" expanded="True" />
           <Node name="Assembly-UnityScript-firstpass" selected="True" />
         </State>
       </Pad>
