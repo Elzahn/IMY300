@@ -30,7 +30,7 @@ public class InventoryGUI : MonoBehaviour {
 		Hud = Camera.main.GetComponent<HUD> ();
 		showInventory = false;
 		showStorage = false;
-		Inventory = GameObject.Find ("INVENTORY").GetComponent<Canvas> ();
+		Inventory = GameObject.Find ("Inventory").GetComponent<Canvas> ();
 		Inventory.enabled = false;
 		playerScript = this.GetComponent<PlayerController> ();
 		attributesScript = this.GetComponent<PlayerAttributes> ();
@@ -138,15 +138,15 @@ public class InventoryGUI : MonoBehaviour {
 			int itemHeight = 30;
 
 			//Inventory
-			Text Inv = GameObject.Find ("inv").GetComponent<Text> ();
-			Text NOInv = GameObject.Find ("NoInv").GetComponent<Text> ();
-			Inv.text = "Inventory \t" + attributesScript.inventory.Count + "/" + attributesScript.inventorySize;
+			Text inventory = GameObject.Find ("InventoryText").GetComponent<Text> ();
+			Text noItems = GameObject.Find ("NoItems").GetComponent<Text> ();
+			inventory.text = "Inventory \t" + attributesScript.inventory.Count + "/" + attributesScript.inventorySize;
 
 			if (attributesScript.inventory.Count == 0) {
-				NOInv.text =  "No items in inventory";
+				noItems.text =  "No items in inventory";
 			} else {
 				foreach (InventoryItem item in attributesScript.inventory.ToList()) {
-					NOInv.text = "";
+					noItems.text = "";
 					if(item.typeID != "Power Core"){
 						/*if (GUI.Button (new Rect (width+101, top+151, buttonWidth, itemHeight), "Drop it")) {
 							attributesScript.inventory.Remove (item);
@@ -187,14 +187,14 @@ public class InventoryGUI : MonoBehaviour {
 			}
 
 			//show character attributes
-			Text XP = GameObject.Find ("xp").GetComponent<Text> ();
-			Text HP = GameObject.Find ("hp").GetComponent<Text> ();
-			Text STAM = GameObject.Find ("stamina").GetComponent<Text> ();
-			Text LEVEL = GameObject.Find ("level").GetComponent<Text> ();
-			XP.text = "Xp: " + attributesScript.xp + "/" + attributesScript.getExpectedXP ();
-			HP.text = "Hp: " + attributesScript.hp + "/" + attributesScript.maxHP();
-			STAM.text = "Stamina: " + attributesScript.stamina + "/" + attributesScript.maxStamina();
-			LEVEL.text = "Level: " + attributesScript.level;
+			Text xp = GameObject.Find ("XPStat").GetComponent<Text> ();
+			Text hp = GameObject.Find ("HPStat").GetComponent<Text> ();
+			Text stamina = GameObject.Find ("StaminaStat").GetComponent<Text> ();
+			Text level = GameObject.Find ("LevelStat").GetComponent<Text> ();
+			xp.text = "Xp: " + attributesScript.xp + "/" + attributesScript.getExpectedXP ();
+			hp.text = "Hp: " + attributesScript.hp + "/" + attributesScript.maxHP();
+			stamina.text = "Stamina: " + attributesScript.stamina + "/" + attributesScript.maxStamina();
+			level.text = "Level: " + attributesScript.level;
 			secondTop += 100;
 
 			if (attributesScript.accessories.Count != 0) {
@@ -202,24 +202,24 @@ public class InventoryGUI : MonoBehaviour {
 					GUI.Label (new Rect (secondLeft + 30, secondTop + 80, width-buttonWidth, itemHeight), item.typeID);
 					if (GUI.Button (new Rect (secondLeft + width - buttonWidth, secondTop + 80, buttonWidth, itemHeight), "Unequip")) {
 						attributesScript.unequipAccessory (item);
-						NOInv.text = "";
+						noItems.text = "";
 						this.GetComponent<Sounds>().playWorldSound(Sounds.EQUIP_ACCESSORY);
 					}
 					secondTop += itemHeight;
 				}
 			} else {
-				Text NOA = GameObject.Find ("NoA").GetComponent<Text> ();
-				NOA.text = "No accessories equiped";
+				Text noAccessories = GameObject.Find ("NoAccessories").GetComponent<Text> ();
+				noAccessories.text = "No accessories equiped";
 				secondTop += itemHeight;
 			}
 
 			if (attributesScript.weapon == null) {
-				Text NOW = GameObject.Find ("NoW").GetComponent<Text> ();
-				NOW.text = "No weapon equiped";
+				Text noWeapon = GameObject.Find ("NoWeapon").GetComponent<Text> ();
+				noWeapon.text = "No weapon equiped";
 				secondTop += itemHeight;
 			} else {
-				Text WE = GameObject.Find ("NoW").GetComponent<Text> ();
-				WE.text =  attributesScript.weapon.typeID;
+				Text weapon = GameObject.Find ("NoWeapon").GetComponent<Text> ();
+				weapon.text =  attributesScript.weapon.typeID;
 				if (GUI.Button (new Rect (width+601, top+171, buttonWidth, itemHeight), "Unequip")) {
 					if(attributesScript.weapon.typeID != "Warhammer"){
 						this.GetComponent<Sounds>().playWorldSound(Sounds.EQUIP_SWORD);
