@@ -12,6 +12,7 @@ public class InventoryGUI : MonoBehaviour {
 	public Texture2D icon;
 	
 	public static bool hasCollided {get; set;}
+	public static bool HUDshows {get; set;}
 
 	private HUD Hud;
 	private Canvas Inventory;
@@ -27,6 +28,7 @@ public class InventoryGUI : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		hasCollided = false;
+		HUDshows = false;
 		Hud = Camera.main.GetComponent<HUD> ();
 		showInventory = false;
 		showStorage = false;
@@ -84,6 +86,7 @@ public class InventoryGUI : MonoBehaviour {
 
 	public void closeStorage(){
 		hasCollided = true;
+		HUDshows = true;
 		this.GetComponent<Sounds>().playWorldSound (Sounds.STORAGE);
 		playerScript.paused = false;	//Resume game
 	}
@@ -91,6 +94,7 @@ public class InventoryGUI : MonoBehaviour {
 	public void openStorage(){
 		if(this.GetComponent<Tutorial>().teachStorage){
 			showStorage = true;
+			HUDshows = true;
 			hasCollided = false;
 			this.GetComponent<Sounds> ().playWorldSound (Sounds.STORAGE);
 			playerScript.paused = true;	//Pause game
@@ -104,9 +108,9 @@ public class InventoryGUI : MonoBehaviour {
 			if((Application.loadedLevelName == "Scene" && !planet.GetComponent<LoadingScreen>().loading) || Application.loadedLevelName != "Scene"){
 				hasCollided = false;
 				Inventory.enabled = true;
+				HUDshows = true;
 				GameObject.Find("WeaponScroll").GetComponent<ScrollableList>().checkInventory();
 				showInventory = true;
-				//PlayerLog.showLog = false;
 				this.GetComponent<Sounds> ().playWorldSound (Sounds.INVENTORY);
 				playerScript.paused = true;	//Pause game
 				GameObject.Find("Player").GetComponent<Sounds>().resumeSound("computer");
@@ -115,17 +119,13 @@ public class InventoryGUI : MonoBehaviour {
 	}
 
 	public void closeInventory(){
-
+		HUDshows = false;
 		Inventory.enabled = false;
-		//PlayerLog.showLog = true;
 		this.GetComponent<Sounds>().playWorldSound (Sounds.INVENTORY);
 		playerScript.paused = false;	//Resume game
 	}
 
-	void OnGUI(){
-		/*if (hasCollided && this.GetComponent<Tutorial>().teachStorage){    
-			GUI.Box(new Rect(140,Screen.height-50,Screen.width-300,120),("Press E to interact"));
-		}*/
+	/*void OnGUI(){
 		if (showInventory) {
 			int boxWidth = Screen.width;//800;
 			int boxHeight = Screen.height;//800;
@@ -138,36 +138,17 @@ public class InventoryGUI : MonoBehaviour {
 			int itemHeight = 30;
 
 			//Inventory
-			Text inventory = GameObject.Find ("InventoryText").GetComponent<Text> ();
-			Text noItems = GameObject.Find ("NoItems").GetComponent<Text> ();
-			inventory.text = "Inventory \t" + attributesScript.inventory.Count + "/" + attributesScript.inventorySize;
 
-			if (attributesScript.inventory.Count == 0) {
-				noItems.text =  "No items in inventory";
-			} else {
+			 else {
 				foreach (InventoryItem item in attributesScript.inventory.ToList()) {
-					noItems.text = "";
-					if(item.typeID != "Power Core"){
-						/*if (GUI.Button (new Rect (width+101, top+151, buttonWidth, itemHeight), "Drop it")) {
-							attributesScript.inventory.Remove (item);
 
-							this.GetComponent<Sounds>().playWorldSound(Sounds.DROP_ITEM);
-						}*/
+					if(item.typeID != "Power Core"){
+
 					}
 
 					if(item.typeID != "Medium Health Pack" && item.typeID != "Large Health Pack" && item.typeID != "Cupcake"){
 						if(item.typeID != "Power Core"){
-							/*if (GUI.Button (new Rect (width+201, top+151, buttonWidth, itemHeight), "Equip")) {
-								attributesScript.equipItem (item);
 
-								if(item.typeID == "Rare Accessory" || item.typeID == "Common Accessory" || item.typeID == "Uncommon Accessory"){
-									this.GetComponent<Sounds>().playWorldSound(Sounds.EQUIP_ACCESSORY);
-								} else if(item.typeID == "Warhammer"){
-									this.GetComponent<Sounds>().playWorldSound(Sounds.EQUIP_HAMMER);
-								} else if(item.typeID != "Warhammer"){
-									this.GetComponent<Sounds>().playWorldSound(Sounds.EQUIP_SWORD);
-								}
-							}*/
 						}
 					} else {
 						if (GUI.Button (new Rect (width+201, top+151, buttonWidth, itemHeight), "Use")) {
@@ -187,14 +168,7 @@ public class InventoryGUI : MonoBehaviour {
 			}
 
 			//show character attributes
-			Text xp = GameObject.Find ("XPStat").GetComponent<Text> ();
-			Text hp = GameObject.Find ("HPStat").GetComponent<Text> ();
-			Text stamina = GameObject.Find ("StaminaStat").GetComponent<Text> ();
-			Text level = GameObject.Find ("LevelStat").GetComponent<Text> ();
-			xp.text = "Xp: " + attributesScript.xp + "/" + attributesScript.getExpectedXP ();
-			hp.text = "Hp: " + attributesScript.hp + "/" + attributesScript.maxHP();
-			stamina.text = "Stamina: " + attributesScript.stamina + "/" + attributesScript.maxStamina();
-			level.text = "Level: " + attributesScript.level;
+
 			secondTop += 100;
 
 			if (attributesScript.accessories.Count != 0) {
@@ -208,13 +182,13 @@ public class InventoryGUI : MonoBehaviour {
 					secondTop += itemHeight;
 				}
 			} else {
-				Text noAccessories = GameObject.Find ("NoAccessories").GetComponent<Text> ();
+
 				noAccessories.text = "No accessories equiped";
 				secondTop += itemHeight;
 			}
 
 			if (attributesScript.weapon == null) {
-				Text noWeapon = GameObject.Find ("NoWeapon").GetComponent<Text> ();
+
 				noWeapon.text = "No weapon equiped";
 				secondTop += itemHeight;
 			} else {
@@ -283,5 +257,5 @@ public class InventoryGUI : MonoBehaviour {
 				}
 			}
 		}
-	}
+	}*/
 }

@@ -4,11 +4,11 @@ using System.Linq;
 using UnityEngine.UI;
 
 public class Equip : MonoBehaviour {
-	private PlayerController playerScript;
+	//private PlayerController playerScript;
 	private PlayerAttributes attributesScript;
 	// Use this for initialization
 	void Start () {
-		playerScript = this.GetComponent<PlayerController> ();
+	//	playerScript = this.GetComponent<PlayerController> ();
 		attributesScript = this.GetComponent<PlayerAttributes> ();
 		foreach (InventoryItem item in attributesScript.inventory.ToList()) {
 			if(item.typeID != "Power Core"){
