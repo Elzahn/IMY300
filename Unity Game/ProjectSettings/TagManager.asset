@@ -13,9 +13,7 @@ TagManager:
   - Fire
   - Light
   - WeaponList
-  - HUD_Extend_Text
-  - Scrollbar
-  - Expand
+  - Equiped
   - Teleporter
   layers:
   - Default

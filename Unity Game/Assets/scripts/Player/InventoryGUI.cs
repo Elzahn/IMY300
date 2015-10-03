@@ -109,7 +109,7 @@ public class InventoryGUI : MonoBehaviour {
 				hasCollided = false;
 				Inventory.enabled = true;
 				HUDshows = true;
-				GameObject.Find("WeaponScroll").GetComponent<ScrollableList>().checkInventory();
+				GameObject.Find("WeaponScroll").GetComponent<ScrollableList>().setUpInventory();
 				showInventory = true;
 				this.GetComponent<Sounds> ().playWorldSound (Sounds.INVENTORY);
 				playerScript.paused = true;	//Pause game

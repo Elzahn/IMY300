@@ -70,4 +70,15 @@ public class PlaceInList : MonoBehaviour {
 		}
 		desc.enabled = false;
 	}
+
+	public void showEquiped(){
+		foreach (Transform child in desc.transform) {
+			if (child.gameObject.name != "MouseHover")
+				child.gameObject.SetActive (true);
+			if(child.name == "DescName"){
+				child.gameObject.GetComponent<Text>().text = itemName.text;
+			}
+		}
+		desc.enabled = true;
+	}
 }

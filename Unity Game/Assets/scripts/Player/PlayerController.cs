@@ -233,6 +233,10 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetKeyDown (KeyCode.F8)) {
 			playerAttributes.inventory.AddLast(new Longsword(1));
 		}
+
+		if (Input.GetKeyDown (KeyCode.F9)) {
+			playerAttributes.inventory.AddLast(new RareAccessory(1));
+		}
     }
 
     public void checkIfAttackPossible() {

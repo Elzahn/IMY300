@@ -25,7 +25,7 @@ public class InventoryScript : MonoBehaviour {
 
 		attributesScript.inventory.Remove (item);
 		sound.playWorldSound(Sounds.DROP_ITEM);
-		scrollableList.checkInventory();
+		scrollableList.setUpInventory();
 	}
 	
 	public void equipWeapon(){
@@ -46,6 +46,31 @@ public class InventoryScript : MonoBehaviour {
 		} else if(item.typeID != "Warhammer"){
 			sound.playWorldSound(Sounds.EQUIP_SWORD);
 		}
-		scrollableList.checkInventory();
+
+		scrollableList.setUpInventory();
+	}
+
+	public void unequipItem(){
+		InventoryItem item;
+
+		if (this.transform.parent.GetComponent<PlaceInList>() != null) {
+			item = this.transform.parent.GetComponent<PlaceInList> ().myItem;
+		} else {
+			item = this.transform.parent.parent.GetComponent<PlaceInList> ().myItem;
+		}
+
+		if (item.type == 0) {//is accessory
+			attributesScript.unequipAccessory ((Accessory)item);
+			sound.playWorldSound(Sounds.EQUIP_ACCESSORY);
+		} else {
+			attributesScript.unequipWeapon ();
+			if(item.typeID == "Warhammer"){
+				sound.playWorldSound(Sounds.EQUIP_HAMMER);
+			} else {
+				sound.playWorldSound(Sounds.EQUIP_SWORD);
+			}
+		}
+	
+		scrollableList.setUpInventory();
 	}
 }
