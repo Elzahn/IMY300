@@ -8,7 +8,7 @@ public class InventoryGUI : MonoBehaviour {
 	public static bool showInventory{ get; private set; }
 	public static bool showStorage{ get; private set; }
 	private PlayerController playerScript;
-	private PlayerAttributes attributesScript;
+	//private PlayerAttributes attributesScript;
 	public Texture2D icon;
 	
 	public static bool hasCollided {get; set;}
@@ -35,7 +35,7 @@ public class InventoryGUI : MonoBehaviour {
 		Inventory = GameObject.Find ("Inventory").GetComponent<Canvas> ();
 		Inventory.enabled = false;
 		playerScript = this.GetComponent<PlayerController> ();
-		attributesScript = this.GetComponent<PlayerAttributes> ();
+	//	attributesScript = this.GetComponent<PlayerAttributes> ();
 	}
 	
 	// Update is called once per frame

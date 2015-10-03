@@ -6,7 +6,7 @@ using System.Linq;
 
 public class ScrollableList : MonoBehaviour
 {
-	public GameObject itemPrefab;
+	public GameObject weaponPrefab;
 	public GameObject equipedPrefab;
 	public GameObject noItem;
 
@@ -21,9 +21,12 @@ public class ScrollableList : MonoBehaviour
 	private float height, width, scrollHeight;
 	private Text inventory, xp, hp, stamina, level, noItems, noAccessories, weapon;
 	private Image itemDesc;
+	private PlayerAttributes playerAttributes;
 
 	void Start()
 	{
+		playerAttributes = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
+
 		inventory = GameObject.Find ("InventoryText").GetComponent<Text> ();
 		xp = GameObject.Find ("XPStat").GetComponent<Text> ();
 		hp = GameObject.Find ("HPStat").GetComponent<Text> ();
@@ -33,7 +36,7 @@ public class ScrollableList : MonoBehaviour
 		//noAccessories = GameObject.Find ("NoAccessories").GetComponent<Text> ();
 		//weapon = GameObject.Find ("NoWeapon").GetComponent<Text> ();
 
-		rowRectTransform = itemPrefab.GetComponent<RectTransform>();
+		rowRectTransform = weaponPrefab.GetComponent<RectTransform>();
 		containerRectTransform = gameObject.GetComponent<RectTransform>();
 		attributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
 		
@@ -81,42 +84,47 @@ public class ScrollableList : MonoBehaviour
 		} else {
 			foreach (InventoryItem item in attributesScript.inventory.ToList()) {
 				//create a new item, name it, and set the parent
-
 				j++;
-				GameObject newItem = Instantiate(itemPrefab) as GameObject;
-				newItem.name = j +" " + item.typeID;
-				newItem.transform.SetParent(gameObject.transform, false);
-				newItem.transform.localScale = new Vector3(1f, 0.4f, 0.4035253f);
+				GameObject newItem = null;
 
-				newItem.GetComponent<PlaceInList>().myItem = item;
-				
-				Text weaponText = newItem.GetComponentInChildren<Text>();
-				weaponText.text = item.typeID;
+				if(item.type == 1){
+					newItem = Instantiate(weaponPrefab) as GameObject;
+					newItem.name = j +" " + item.typeID;
+					newItem.transform.SetParent(gameObject.transform, false);
+					newItem.transform.localScale = new Vector3(1f, 0.4f, 0.4035253f);
 
-				//To get the weapon image
-				Image[] images = newItem.GetComponentsInChildren<Image>();
+					newItem.GetComponent<PlaceInList>().myItem = item;
+					
+					Text weaponText = newItem.GetComponentInChildren<Text>();
+					weaponText.text = item.typeID;
 
-				foreach(Image image in images){
-					if(image.name == "WeaponImage"){
-						if(weaponText.text == "Longsword"){
-							image.sprite = longSword;
-							newItem.GetComponent<PlaceInList>().itemImage = longSword;	//sets image for description
-						} else if(weaponText.text == "Warhammer"){
-							image.sprite = warHammer;
-							newItem.GetComponent<PlaceInList>().itemImage = warHammer;	//sets image for description
-						} else if(weaponText.text == "ButterKnife"){
-							image.sprite = butterKnife;
-							newItem.GetComponent<PlaceInList>().itemImage = butterKnife;	//sets image for description
-						}
-					} else if(image.name == "ItemDescBackground"){
-						//sets all variables for the description of the item
-						newItem.GetComponent<PlaceInList>().desc = image;
-						newItem.GetComponent<PlaceInList>().itemName = weaponText;
-						foreach (Transform child in image.transform) {
-							if(child.gameObject.name != "MouseHover")
-								child.gameObject.SetActive (false);
-						}
-						image.enabled = false;
+					//To get the weapon image
+					Image[] images = newItem.GetComponentsInChildren<Image>();
+
+					foreach(Image image in images){
+						if(image.name == "WeaponImage"){
+							if(weaponText.text == "Longsword"){
+								image.sprite = longSword;
+								newItem.GetComponent<PlaceInList>().itemImage = longSword;	//sets image for description
+							} else if(weaponText.text == "Warhammer"){
+								image.sprite = warHammer;
+								newItem.GetComponent<PlaceInList>().itemImage = warHammer;	//sets image for description
+							} else if(weaponText.text == "ButterKnife"){
+								image.sprite = butterKnife;
+								newItem.GetComponent<PlaceInList>().itemImage = butterKnife;	//sets image for description
+							}
+						} else if(image.name == "ItemDescBackground"){
+							//sets all variables for the description of the item
+							newItem.GetComponent<PlaceInList>().desc = image;
+							newItem.GetComponent<PlaceInList>().itemName = weaponText;
+							foreach (Transform child in image.transform) {
+								if(child.gameObject.name != "MouseHover")
+									child.gameObject.SetActive (false);
+							}
+							image.enabled = false;
+						} else if(image.name == "Equip" && ((Weapon)item).level > playerAttributes.level){
+							image.GetComponent<Button>().interactable = false;
+						} 
 					}
 				}
 

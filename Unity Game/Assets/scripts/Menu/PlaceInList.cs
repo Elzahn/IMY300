@@ -10,6 +10,13 @@ public class PlaceInList : MonoBehaviour {
 	public Text itemName { get; set; }
 	public Sprite itemImage{ get; set; }
 
+	private PlayerAttributes playerAttributes;
+
+	void Start(){
+		playerAttributes = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
+		//set up in scrollableList line 114 around
+	}
+	
 	public void showItemDescription(){
 		switch (myItem.type) {
 		case 0:
@@ -17,9 +24,16 @@ public class PlaceInList : MonoBehaviour {
 			break;
 		case 1: {
 			//Weapon
-			foreach (Transform child in desc.transform)
-				child.gameObject.SetActive (true);
-
+			foreach (Transform child in desc.transform) {
+				if(child.gameObject.name == "Equip" && ((Weapon)myItem).level > playerAttributes.level){
+					child.gameObject.GetComponent<Button>().interactable = false;
+				} else if(child.gameObject.name == "DescLevel" && ((Weapon)myItem).level > playerAttributes.level){
+					child.gameObject.GetComponent<Text>().color = Color.red;
+					child.gameObject.SetActive (true);
+				} else {
+					child.gameObject.SetActive (true);
+				}
+			}
 			itemName.enabled = false;
 			desc.enabled = true;
 
@@ -77,6 +91,8 @@ public class PlaceInList : MonoBehaviour {
 				child.gameObject.SetActive (true);
 			if(child.name == "DescName"){
 				child.gameObject.GetComponent<Text>().text = itemName.text;
+			} else if(child.name == "DescWeaponImage"){
+				child.gameObject.GetComponent<Image>().sprite = itemImage;
 			}
 		}
 		desc.enabled = true;
