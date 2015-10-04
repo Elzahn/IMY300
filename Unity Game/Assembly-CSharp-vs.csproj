@@ -57,11 +57,12 @@
      <Compile Include="Assets\Sky FX Pack\Scripts\ScrollBehaviour.cs" />
      <Compile Include="Assets\scripts\Accessories\Accessory.cs" />
      <Compile Include="Assets\scripts\Accessories\CommonAccessory.cs" />
-     <Compile Include="Assets\scripts\Accessories\Cupcake.cs" />
      <Compile Include="Assets\scripts\Accessories\NullAccessory.cs" />
-     <Compile Include="Assets\scripts\Accessories\PowerCore.cs" />
      <Compile Include="Assets\scripts\Accessories\RareAccessory.cs" />
      <Compile Include="Assets\scripts\Accessories\UncommonAccessory.cs" />
+     <Compile Include="Assets\scripts\BonusItems\Cupcake.cs" />
+     <Compile Include="Assets\scripts\BonusItems\PowerCore.cs" />
+     <Compile Include="Assets\scripts\BonusItems\Usable.cs" />
      <Compile Include="Assets\scripts\Enemies\Aliens\ApeAlien.cs" />
      <Compile Include="Assets\scripts\Enemies\Boss\BossAlien.cs" />
      <Compile Include="Assets\scripts\Enemies\Clay\ClayAlien.cs" />

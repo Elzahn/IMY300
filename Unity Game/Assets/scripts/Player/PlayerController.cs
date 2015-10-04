@@ -230,15 +230,24 @@ public class PlayerController : MonoBehaviour
             sound.stopSound("computer");
         }
 
+		//gives a weapon
 		if (Input.GetKeyDown (KeyCode.F8)) {
 			playerAttributes.inventory.AddLast(new Longsword(1));
 		}
 
+		//gives accessories
 		if (Input.GetKeyDown (KeyCode.F9)) {
 			playerAttributes.inventory.AddLast(new CommonAccessory(1));
 			playerAttributes.inventory.AddLast(new UncommonAccessory(3));
 			playerAttributes.inventory.AddLast(new RareAccessory(4));
 			playerAttributes.inventory.AddLast(new RareAccessory(2));
+		}
+
+		//gives usable items
+		if (Input.GetKeyDown (KeyCode.F10)) {
+			playerAttributes.inventory.AddLast(new MediumHealthPack());
+			playerAttributes.inventory.AddLast(new LargeHealthPack());
+			playerAttributes.inventory.AddLast(new Cupcake());
 		}
     }
 

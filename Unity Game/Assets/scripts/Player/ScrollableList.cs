@@ -8,6 +8,8 @@ public class ScrollableList : MonoBehaviour
 {
 	public GameObject weaponPrefab;
 	public GameObject attributePrefab;
+	public GameObject usablePrefab;
+	public GameObject shipPiecePrefab;
 
 	public Sprite butterKnife;
 	public Sprite longSword;
@@ -15,6 +17,10 @@ public class ScrollableList : MonoBehaviour
 	public Sprite commonAccessory;
 	public Sprite uncommonAccessory;
 	public Sprite rareAccessory;
+	public Sprite largeHealth;
+	public Sprite mediumHealth;
+	public Sprite cupcake;
+	public Sprite shipPiece;
 
 	private int itemCount;
 	private RectTransform rowRectTransform;
@@ -177,6 +183,74 @@ public class ScrollableList : MonoBehaviour
 							image.enabled = false;
 						} else if(image.name == "Equip" && ((Weapon)item).level > playerAttributes.level){
 							image.GetComponent<Button>().interactable = false;
+						} 
+					}
+				} else if(item.type == 2){	//Health pack or cupcake
+					newItem = Instantiate(usablePrefab) as GameObject;
+					newItem.name = j + " " + item.typeID;
+					newItem.transform.SetParent(gameObject.transform, false);
+					newItem.transform.localScale = new Vector3(1f, 0.4f, 0.4035253f);
+					
+					newItem.GetComponent<PlaceInList>().myItem = item;
+					
+					Text usableText = newItem.GetComponentInChildren<Text>();
+					usableText.text = item.typeID;
+					
+					//To get the weapon image
+					Image[] images = newItem.GetComponentsInChildren<Image>();
+					
+					foreach(Image image in images){
+						if(image.name == "ItemImage"){
+							if(usableText.text == "Large Health Pack"){
+								image.sprite = largeHealth;
+								newItem.GetComponent<PlaceInList>().itemImage = largeHealth;	//sets image for description
+							} else if(usableText.text == "Medium Health Pack"){
+								image.sprite = mediumHealth;
+								newItem.GetComponent<PlaceInList>().itemImage = mediumHealth;	//sets image for description
+							} else if(usableText.text == "Cupcake"){
+								image.sprite = cupcake;
+								newItem.GetComponent<PlaceInList>().itemImage = cupcake;	//sets image for description
+							}
+						} else if(image.name == "ItemDescBackground"){
+							//sets all variables for the description of the item
+							newItem.GetComponent<PlaceInList>().desc = image;
+							newItem.GetComponent<PlaceInList>().itemName = usableText;
+							foreach (Transform child in image.transform) {
+								if(child.gameObject.name != "MouseHover")
+									child.gameObject.SetActive (false);
+							}
+							image.enabled = false;
+						} 
+					}
+				} else if(item.type == 3){	//Ship piece
+					newItem = Instantiate(shipPiecePrefab) as GameObject;
+					newItem.name = j + " " + item.typeID;
+					newItem.transform.SetParent(gameObject.transform, false);
+					newItem.transform.localScale = new Vector3(1f, 0.4f, 0.4035253f);
+					
+					newItem.GetComponent<PlaceInList>().myItem = item;
+					
+					Text shipText = newItem.GetComponentInChildren<Text>();
+					shipText.text = item.typeID;
+					
+					//To get the weapon image
+					Image[] images = newItem.GetComponentsInChildren<Image>();
+					
+					foreach(Image image in images){
+						if(image.name == "ItemImage"){
+							if(shipText.text == "Power Core"){
+								image.sprite = shipPiece;
+								newItem.GetComponent<PlaceInList>().itemImage = shipPiece;	//sets image for description
+							} 
+						} else if(image.name == "ItemDescBackground"){
+							//sets all variables for the description of the item
+							newItem.GetComponent<PlaceInList>().desc = image;
+							newItem.GetComponent<PlaceInList>().itemName = shipText;
+							foreach (Transform child in image.transform) {
+								if(child.gameObject.name != "MouseHover")
+									child.gameObject.SetActive (false);
+							}
+							image.enabled = false;
 						} 
 					}
 				}

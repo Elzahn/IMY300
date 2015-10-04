@@ -73,4 +73,23 @@ public class InventoryScript : MonoBehaviour {
 	
 		scrollableList.setUpInventory();
 	}
+
+	public void useItem(){
+		InventoryItem item;
+		
+		if (this.transform.parent.GetComponent<PlaceInList>() != null) {
+			item = this.transform.parent.GetComponent<PlaceInList> ().myItem;
+		} else {
+			item = this.transform.parent.parent.GetComponent<PlaceInList> ().myItem;
+		}
+
+		if (item.typeID == "Cupcake") {
+			Cupcake.eatCupcake();
+		} else {
+			attributesScript.useHealthPack(item);
+		}
+		
+		attributesScript.inventory.Remove (item);
+		scrollableList.setUpInventory ();
+	}
 }

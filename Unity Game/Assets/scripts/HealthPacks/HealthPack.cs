@@ -11,7 +11,6 @@ public abstract class HealthPack : InventoryItem {
 
 	public HealthPack(SerializationInfo info, StreamingContext ctxt) : base(info, ctxt)
 	{
-
 		healthValue = (float)info.GetValue("health", typeof(float));
 	}
 	

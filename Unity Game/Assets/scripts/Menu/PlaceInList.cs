@@ -120,6 +120,7 @@ public class PlaceInList : MonoBehaviour {
 					child.gameObject.SetActive (true);
 				}
 			}
+
 			itemName.enabled = false;
 			desc.enabled = true;
 
@@ -154,9 +155,73 @@ public class PlaceInList : MonoBehaviour {
 			break;
 		case 2:
 			//Health pack
+			foreach (Transform child in desc.transform) {
+					child.gameObject.SetActive (true);
+			}
+
+			itemName.enabled = false;
+			desc.enabled = true;
+			
+			tempText = desc.GetComponentsInChildren<Text>();
+			
+			foreach(Text textItem in tempText){
+				switch(textItem.name){
+				case "DescName":
+					textItem.text = itemName.text;
+					break;
+				case "DescInfo":
+					if(myItem.typeID == "Cupcake"){
+						textItem.text = "\tLevels you up";
+					} else {
+						textItem.text = "Heals " + (((HealthPack)myItem).healthValue * 100) + "% health";
+					}
+					break;
+				}
+			}
+			
+			tempImage = desc.GetComponentsInChildren<Image>();
+			
+			foreach(Image imageItem in tempImage){
+				if(imageItem.name == "DescItemImage"){
+					imageItem.sprite = itemImage;
+					break;
+				}
+			}
+
 			break;
 		case 3:
 			//Ship piece
+			foreach (Transform child in desc.transform) {
+				child.gameObject.SetActive (true);
+			}
+			
+			itemName.enabled = false;
+			desc.enabled = true;
+			
+			tempText = desc.GetComponentsInChildren<Text>();
+			
+			foreach(Text textItem in tempText){
+				switch(textItem.name){
+				case "DescName":
+					textItem.text = itemName.text;
+					break;
+				case "DescInfo":
+					if(myItem.typeID == "Power Core"){
+						textItem.text = "Power core, return to computer";
+					}
+					break;
+				}
+			}
+			
+			tempImage = desc.GetComponentsInChildren<Image>();
+			
+			foreach(Image imageItem in tempImage){
+				if(imageItem.name == "DescItemImage"){
+					imageItem.sprite = itemImage;
+					break;
+				}
+			}
+
 			break;
 		}
 	}

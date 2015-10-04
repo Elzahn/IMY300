@@ -9472,12 +9472,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: 155490, guid: 8c94e55ce078b0b4095b24525f7ea82c, type: 2}
   attributePrefab: {fileID: 157256, guid: ab78b912979659f4580cd4517446291b, type: 2}
+  usablePrefab: {fileID: 103438, guid: a6dff4235da69ed47a39660932a418e6, type: 2}
+  shipPiecePrefab: {fileID: 100962, guid: fc98f44cc5a5c594c85adc165ff82e34, type: 2}
   butterKnife: {fileID: 21300000, guid: 31a9f3bdc55c9194f99538da92966edb, type: 3}
   longSword: {fileID: 21300000, guid: e6202a6c819388f498ca1e0831f23851, type: 3}
   warHammer: {fileID: 21300000, guid: c4a4471d2f245ee4d9a20196110418f4, type: 3}
   commonAccessory: {fileID: 21300000, guid: 3848ab5e95289a14bab3c4e9fd951071, type: 3}
   uncommonAccessory: {fileID: 21300000, guid: 469e3b90afaf0934f9c22402f7fdd9c6, type: 3}
   rareAccessory: {fileID: 21300000, guid: cffdd4db0101ca949aaff0c2d9ae35d7, type: 3}
+  largeHealth: {fileID: 21300000, guid: 8e5edd20371035d4fbe1c7e2cec258d4, type: 3}
+  mediumHealth: {fileID: 21300000, guid: 18d26b75731641144b18c5aba081b430, type: 3}
+  cupcake: {fileID: 21300000, guid: 35a966eec7657b949b8a71fe8fba52ac, type: 3}
+  shipPiece: {fileID: 21300000, guid: 802c60ee2953d074489fbfb349e63f11, type: 3}
 --- !u!1 &2132061797
 GameObject:
   m_ObjectHideFlags: 0
