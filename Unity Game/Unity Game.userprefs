@@ -1,20 +1,31 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\BonusItems\Usable.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Menu\InventoryScript.cs">
     <Files>
-      <File FileName="Assets\scripts\Player\ScrollableList.cs" Line="182" Column="34" />
-      <File FileName="Assets\scripts\Player\InventoryGUI.cs" Line="11" Column="4" />
-      <File FileName="Assets\scripts\Player\Equip.cs" Line="125" Column="29" />
-      <File FileName="Assets\scripts\InventoryItem.cs" Line="16" Column="21" />
-      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="234" Column="9" />
-      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="561" Column="43" />
-      <File FileName="Assets\scripts\HealthPacks\HealthPack.cs" Line="9" Column="19" />
-      <File FileName="Assets\scripts\BonusItems\Cupcake.cs" Line="9" Column="35" />
-      <File FileName="Assets\scripts\BonusItems\Usable.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Player\ScrollableList.cs" Line="99" Column="43" />
+      <File FileName="Assets\scripts\Player\InventoryGUI.cs" Line="262" Column="69" />
+      <File FileName="Assets\scripts\InventoryItem.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="232" Column="3" />
+      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="648" Column="30" />
+      <File FileName="Assets\scripts\Menu\PlaceInList.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Menu\InventoryScript.cs" Line="98" Column="2" />
+      <File FileName="Assets\scripts\Player\StorageList.cs" Line="64" Column="109" />
+      <File FileName="Assets\scripts\BonusItems\PowerCore.cs" Line="8" Column="2" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True" />
+        <State expanded="True">
+          <Node name="Assembly-CSharp" expanded="True">
+            <Node name="scripts" expanded="True">
+              <Node name="BonusItems" expanded="True" />
+              <Node name="Menu" expanded="True">
+                <Node name="InventoryScript.cs" selected="True" />
+              </Node>
+              <Node name="Player" expanded="True" />
+              <Node name="Teleporting" expanded="True" />
+            </Node>
+          </Node>
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

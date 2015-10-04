@@ -67,101 +67,103 @@ public class SaveSpotTeleport : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Application.loadedLevelName == "SaveSpot" && this.GetComponent<Tutorial> ().startTutorial) {
+		if (!this.GetComponent<PlayerController> ().paused) {
+			if (Application.loadedLevelName == "SaveSpot" && this.GetComponent<Tutorial> ().startTutorial) {
 //			canEnterSaveSpot = false;
-			GameObject.Find ("Tech Light").GetComponent<Light> ().enabled = true;
-			GameObject.Find ("Console Light").GetComponent<Light> ().enabled = true;
-			GameObject.Find ("Bedroom Light").GetComponent<Light> ().enabled = true;
-		} else if(Application.loadedLevelName == "SaveSpot" && !this.GetComponent<Tutorial> ().startTutorial){
-			GameObject.Find ("Tech Light").GetComponent<Light> ().enabled = false;
-			GameObject.Find ("Console Light").GetComponent<Light> ().enabled = false;
-			GameObject.Find ("Bedroom Light").GetComponent<Light> ().enabled = false;
-		}
+				GameObject.Find ("Tech Light").GetComponent<Light> ().enabled = true;
+				GameObject.Find ("Console Light").GetComponent<Light> ().enabled = true;
+				GameObject.Find ("Bedroom Light").GetComponent<Light> ().enabled = true;
+			} else if (Application.loadedLevelName == "SaveSpot" && !this.GetComponent<Tutorial> ().startTutorial) {
+				GameObject.Find ("Tech Light").GetComponent<Light> ().enabled = false;
+				GameObject.Find ("Console Light").GetComponent<Light> ().enabled = false;
+				GameObject.Find ("Bedroom Light").GetComponent<Light> ().enabled = false;
+			}
 
-		//Position player when warping into the ship
-		if(Application.loadedLevelName == "SaveSpot" && this.GetComponent<Tutorial>().tutorialDone && !justWarped){
-			justWarped = true;
-			this.transform.rotation = Quaternion.Euler(351.66f, 179.447f, 358.8f);
-			this.transform.up = Vector3.up;
-			this.transform.position = new Vector3 (13.18f, 81.55f, 14.8f);
-		}
+			//Position player when warping into the ship
+			if (Application.loadedLevelName == "SaveSpot" && this.GetComponent<Tutorial> ().tutorialDone && !justWarped) {
+				justWarped = true;
+				this.transform.rotation = Quaternion.Euler (351.66f, 179.447f, 358.8f);
+				this.transform.up = Vector3.up;
+				this.transform.position = new Vector3 (13.18f, 81.55f, 14.8f);
+			}
 
-		if (showExitConfirmation && loadTutorial) {
-			notInUse = false;
-			Hud.makeInteractionHint ("Press E to start the tutorial", pressE);
-		} else if (showNoEntry && !loadTutorial && showedHealthHint) {
-			notInUse = false;
-			Hud.makeInteractionHint ("Kill the boss and take his loot to go back to the ship.", noEntry);
-		} else if (showEntranceConfirmation) {
-			notInUse = false;
-			Hud.makeInteractionHint ("Press E to teleport. Remember coming back starts the next level.", pressE);
-		} else if(showExitConfirmation){
-			notInUse = false;
-			Hud.makeInteractionHint ("Press E to teleport. Remember you can only return upon killing the boss.", pressE);
-		} else if(!showExitConfirmation && !showNoEntry && !showExitConfirmation && !showEntranceConfirmation) {
-			notInUse = true;
-		}
+			if (showExitConfirmation && loadTutorial) {
+				notInUse = false;
+				Hud.makeInteractionHint ("Press E to start the tutorial", pressE);
+			} else if (showNoEntry && !loadTutorial && showedHealthHint) {
+				notInUse = false;
+				Hud.makeInteractionHint ("Kill the boss and take his loot to go back to the ship.", noEntry);
+			} else if (showEntranceConfirmation) {
+				notInUse = false;
+				Hud.makeInteractionHint ("Press E to teleport. Remember coming back starts the next level.", pressE);
+			} else if (showExitConfirmation) {
+				notInUse = false;
+				Hud.makeInteractionHint ("Press E to teleport. Remember you can only return upon killing the boss.", pressE);
+			} else if (!showExitConfirmation && !showNoEntry && !showExitConfirmation && !showEntranceConfirmation) {
+				notInUse = true;
+			}
 
 	    
-	    if (Application.loadedLevelName == "Tutorial" && showEntranceConfirmation && Input.GetKeyDown (KeyCode.E) && Loot.gotPowerCore == true) {
-			canEnterSaveSpot = false;
-			GameObject.Find("Player").GetComponent<PlayerAttributes>().storage.AddLast(new Cupcake());
-			showEntranceConfirmation = false;
-			sound.playWorldSound(Sounds.TELEPORTING);
-			attributesComponent.restoreHealthToFull();
-			attributesComponent.restoreStaminaToFull();
-			this.GetComponent<Rigidbody>().mass = 100;
+			if (Application.loadedLevelName == "Tutorial" && showEntranceConfirmation && Input.GetKeyDown (KeyCode.E) && Loot.gotPowerCore == true) {
+				canEnterSaveSpot = false;
+				GameObject.Find ("Player").GetComponent<PlayerAttributes> ().storage.AddLast (new Cupcake ());
+				showEntranceConfirmation = false;
+				sound.playWorldSound (Sounds.TELEPORTING);
+				attributesComponent.restoreHealthToFull ();
+				attributesComponent.restoreStaminaToFull ();
+				this.GetComponent<Rigidbody> ().mass = 100;
 
-            interaction.fillAmount = 0;
-			attributesComponent.returnToSaveSpot();
+				interaction.fillAmount = 0;
+				attributesComponent.returnToSaveSpot ();
 			
-		} else if (showExitConfirmation && Input.GetKeyDown (KeyCode.E) && !loadTutorial) {
-			canEnterSaveSpot = false;
-			showExitConfirmation = false;
-			this.GetComponent<Rigidbody> ().mass = 0.1f;
-			sound.playWorldSound (Sounds.TELEPORTING);
-			attributesComponent.saveInventoryAndStorage ();
-			this.GetComponent<Tutorial>().stopTutorial();
-			interaction.fillAmount = 0;
-			this.GetComponent<Tutorial> ().startTutorial = false;
-			justWarped = false;
-			this.GetComponent<Rigidbody>().isKinematic = true;
-			//this.transform.rotation = Quaternion.Euler(0f, -95.3399f, 0f);
-			//this.transform.position = new Vector3 (-1.651f, 80.82f, 0.84f);
+			} else if (showExitConfirmation && Input.GetKeyDown (KeyCode.E) && !loadTutorial) {
+				canEnterSaveSpot = false;
+				showExitConfirmation = false;
+				this.GetComponent<Rigidbody> ().mass = 0.1f;
+				sound.playWorldSound (Sounds.TELEPORTING);
+				attributesComponent.saveInventoryAndStorage ();
+				this.GetComponent<Tutorial> ().stopTutorial ();
+				interaction.fillAmount = 0;
+				this.GetComponent<Tutorial> ().startTutorial = false;
+				justWarped = false;
+				this.GetComponent<Rigidbody> ().isKinematic = true;
+				//this.transform.rotation = Quaternion.Euler(0f, -95.3399f, 0f);
+				//this.transform.position = new Vector3 (-1.651f, 80.82f, 0.84f);
 
-			Application.LoadLevel ("Scene");
-			Resources.UnloadUnusedAssets();
-		} else if(showExitConfirmation && Input.GetKeyDown(KeyCode.E) && loadTutorial){
-			canEnterSaveSpot = false;
+				Application.LoadLevel ("Scene");
+				Resources.UnloadUnusedAssets ();
+			} else if (showExitConfirmation && Input.GetKeyDown (KeyCode.E) && loadTutorial) {
+				canEnterSaveSpot = false;
 
-			this.GetComponent<Rigidbody> ().mass = 0.1f;
-			sound.playWorldSound (Sounds.TELEPORTING);
-			attributesComponent.saveInventoryAndStorage ();
-			interaction.fillAmount = 0;
-			sound.stopSound("computer");
-			this.GetComponent<LevelSelect>().currentLevel = 0;
-			interaction.fillAmount = 0;
-			justWarped = false;
-			Application.LoadLevel("Tutorial");
-			showExitConfirmation = false;
-			this.transform.rotation = Quaternion.Euler(0f, 91.60388f, 0f);
-			this.transform.position = new Vector3 (0.26f, 16.06f, 0.316f);
-			Resources.UnloadUnusedAssets();
-		}else if (showEntranceConfirmation && Input.GetKeyDown (KeyCode.E) && Application.loadedLevelName != "Tutorial") {
-			showEntranceConfirmation = false;
-			attributesComponent.restoreHealthToFull();
-			attributesComponent.restoreStaminaToFull();
-			this.GetComponent<Rigidbody>().mass = 100;
+				this.GetComponent<Rigidbody> ().mass = 0.1f;
+				sound.playWorldSound (Sounds.TELEPORTING);
+				attributesComponent.saveInventoryAndStorage ();
+				interaction.fillAmount = 0;
+				sound.stopSound ("computer");
+				this.GetComponent<LevelSelect> ().currentLevel = 0;
+				interaction.fillAmount = 0;
+				justWarped = false;
+				Application.LoadLevel ("Tutorial");
+				showExitConfirmation = false;
+				this.transform.rotation = Quaternion.Euler (0f, 91.60388f, 0f);
+				this.transform.position = new Vector3 (0.26f, 16.06f, 0.316f);
+				Resources.UnloadUnusedAssets ();
+			} else if (showEntranceConfirmation && Input.GetKeyDown (KeyCode.E) && Application.loadedLevelName != "Tutorial") {
+				showEntranceConfirmation = false;
+				attributesComponent.restoreHealthToFull ();
+				attributesComponent.restoreStaminaToFull ();
+				this.GetComponent<Rigidbody> ().mass = 100;
 
-			this.GetComponent<LevelSelect>().currentLevel++;
-			attributesComponent.save(0);
-			this.GetComponent<LevelSelect>().spawnedLevel = false;
-			this.GetComponent<LevelSelect>().myRenderer = null;
-			interaction.fillAmount = 0;
-			this.GetComponent<Tutorial> ().startTutorial = false;
-			Application.LoadLevel ("SaveSpot");
-			sound.playWorldSound(Sounds.TELEPORTING);
-			Resources.UnloadUnusedAssets();
+				this.GetComponent<LevelSelect> ().currentLevel++;
+				attributesComponent.save (0);
+				this.GetComponent<LevelSelect> ().spawnedLevel = false;
+				this.GetComponent<LevelSelect> ().myRenderer = null;
+				interaction.fillAmount = 0;
+				this.GetComponent<Tutorial> ().startTutorial = false;
+				Application.LoadLevel ("SaveSpot");
+				sound.playWorldSound (Sounds.TELEPORTING);
+				Resources.UnloadUnusedAssets ();
+			}
 		}
 	}
 }

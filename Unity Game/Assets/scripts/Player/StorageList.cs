@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Linq;
 
-public class ScrollableList : MonoBehaviour
+public class StorageList : MonoBehaviour
 {
 	public GameObject weaponPrefab;
 	public GameObject accessoryPrefab;
 	public GameObject usablePrefab;
 	public GameObject shipPiecePrefab;
-
+	
 	public Sprite butterKnife;
 	public Sprite longSword;
 	public Sprite warHammer;
@@ -21,36 +21,36 @@ public class ScrollableList : MonoBehaviour
 	public Sprite mediumHealth;
 	public Sprite cupcake;
 	public Sprite shipPiece;
-
+	
 	private int itemCount;
 	private RectTransform rowRectTransform;
 	private RectTransform containerRectTransform;
 	private PlayerAttributes attributesScript;
 	private float height, width, scrollHeight;
-	private Text inventory, xp, hp, stamina, level, noItems, noAccessories, weapon;
+	private Text inventory, noItems;//, xp, hp, stamina, level, noAccessories, weapon;
 	private Image itemDesc;
 	private PlayerAttributes playerAttributes;
-
+	
 	void Start()
 	{
 		playerAttributes = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
 
-		inventory = GameObject.Find ("InventoryText").GetComponent<Text> ();
-		xp = GameObject.Find ("XPStat").GetComponent<Text> ();
+		inventory = GameObject.Find ("StorageInventoryText").GetComponent<Text> ();
+		/*xp = GameObject.Find ("XPStat").GetComponent<Text> ();
 		hp = GameObject.Find ("HPStat").GetComponent<Text> ();
 		stamina = GameObject.Find ("StaminaStat").GetComponent<Text> ();
-		level = GameObject.Find ("LevelStat").GetComponent<Text> ();
-		noItems = GameObject.Find ("NoItems").GetComponent<Text> ();
-
+		level = GameObject.Find ("LevelStat").GetComponent<Text> ();*/
+		noItems = GameObject.Find ("NoInventoryItems").GetComponent<Text> ();
+		
 		rowRectTransform = weaponPrefab.GetComponent<RectTransform>();
 		containerRectTransform = gameObject.GetComponent<RectTransform>();
 		attributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
 		
 		height = rowRectTransform.rect.height;
-		width = 500;
-
+		width = 350;
+		
 		itemCount = 3;	//set so that it has a starting value
-
+		
 		//adjust the height of the container so that it will just barely fit all its children
 		scrollHeight = height * itemCount;
 		
@@ -58,30 +58,31 @@ public class ScrollableList : MonoBehaviour
 		containerRectTransform.offsetMin = new Vector2(containerRectTransform.offsetMin.x, -scrollHeight / 2);
 		containerRectTransform.offsetMax = new Vector2(containerRectTransform.offsetMax.x, scrollHeight / 2);
 	}
-
-	public void setUpInventory(){
+	
+	public void setUpStorage(){
 		checkInventory ();
-		showInventoryInfo ();
-		GameObject.Find ("EquipedScroll").GetComponent<Equip> ().makeEquipmentList ();
+		inventory.text = "Inventory \t" + attributesScript.inventory.Count + "/" + attributesScript.inventorySize;
+		//showInventoryInfo ();
+		//GameObject.Find ("EquipedScroll").GetComponent<Equip> ().makeEquipmentList ();
 	}
-
+	
 	public void checkInventory()
 	{
 		itemCount = attributesScript.inventory.Count;	//shows all elements now
-
+		
 		//adjust the height of the container so that it will just barely fit all its children
 		scrollHeight = height * itemCount;
 		
 		//maak container groot genoeg om alle items te bevat
 		containerRectTransform.offsetMin = new Vector2(containerRectTransform.offsetMin.x, -scrollHeight / 2);
 		containerRectTransform.offsetMax = new Vector2(containerRectTransform.offsetMax.x, scrollHeight / 2);
-
+		
 		GameObject[] gameObjectsToDelete = GameObject.FindGameObjectsWithTag ("WeaponList");
 		
 		for (int i = 0; i < gameObjectsToDelete.Length; i++) {
 			Destroy (gameObjectsToDelete [i]);
 		}
-
+		
 		Text noItems = GameObject.Find ("NoItems").GetComponent<Text> ();
 		int j = 0;
 		
@@ -94,18 +95,18 @@ public class ScrollableList : MonoBehaviour
 				GameObject newItem = null;
 				RectTransform rectTransform = null;
 				float x, y;
-
+				
 				if(item.type == 0){	//Accessories
 					newItem = Instantiate(accessoryPrefab) as GameObject;
 					newItem.name = j + " " + item.typeID;
 					newItem.transform.SetParent(gameObject.transform, false);
-					newItem.transform.localScale = new Vector3(1f, 0.4f, 0.4035253f);
-
+					newItem.transform.localScale = new Vector3(0.7f, 0.35f, 0.4035253f);
+					
 					newItem.GetComponent<PlaceInList>().myItem = item;
-
+					
 					Text accessoryText = newItem.GetComponentInChildren<Text>();
 					accessoryText.text = item.typeID;
-
+					
 					//To get the weapon image
 					Image[] images = newItem.GetComponentsInChildren<Image>();
 					
@@ -134,7 +135,7 @@ public class ScrollableList : MonoBehaviour
 							image.GetComponent<Button>().interactable = false;
 						} 
 					}
-
+					
 					rectTransform = newItem.GetComponent<RectTransform>();
 					
 					x = (-containerRectTransform.rect.width /2) - 20;
@@ -145,21 +146,21 @@ public class ScrollableList : MonoBehaviour
 					x = rectTransform.offsetMin.x + width;
 					y = rectTransform.offsetMin.y + height - 100;
 					rectTransform.offsetMax = new Vector2(x, y);
-
+					
 				} else if(item.type == 1){	//Weapons
 					newItem = Instantiate(weaponPrefab) as GameObject;
 					newItem.name = j + " " + item.typeID;
 					newItem.transform.SetParent(gameObject.transform, false);
-					newItem.transform.localScale = new Vector3(1f, 0.4f, 0.4035253f);
-
+					newItem.transform.localScale = new Vector3(0.7f, 0.35f, 0.4035253f);
+					
 					newItem.GetComponent<PlaceInList>().myItem = item;
 					
 					Text weaponText = newItem.GetComponentInChildren<Text>();
 					weaponText.text = item.typeID;
-
+					
 					//To get the weapon image
 					Image[] images = newItem.GetComponentsInChildren<Image>();
-
+					
 					foreach(Image image in images){
 						if(image.name == "WeaponImage"){
 							if(weaponText.text == "Longsword"){
@@ -189,7 +190,7 @@ public class ScrollableList : MonoBehaviour
 					newItem = Instantiate(usablePrefab) as GameObject;
 					newItem.name = j + " " + item.typeID;
 					newItem.transform.SetParent(gameObject.transform, false);
-					newItem.transform.localScale = new Vector3(1f, 0.4f, 0.4035253f);
+					newItem.transform.localScale = new Vector3(0.7f, 0.35f, 0.4035253f);
 					
 					newItem.GetComponent<PlaceInList>().myItem = item;
 					
@@ -226,7 +227,7 @@ public class ScrollableList : MonoBehaviour
 					newItem = Instantiate(shipPiecePrefab) as GameObject;
 					newItem.name = j + " " + item.typeID;
 					newItem.transform.SetParent(gameObject.transform, false);
-					newItem.transform.localScale = new Vector3(1f, 0.4f, 0.4035253f);
+					newItem.transform.localScale = new Vector3(0.7f, 0.35f, 0.4035253f);
 					
 					newItem.GetComponent<PlaceInList>().myItem = item;
 					
@@ -254,7 +255,7 @@ public class ScrollableList : MonoBehaviour
 						} 
 					}
 				}
-
+				
 				rectTransform = newItem.GetComponent<RectTransform>();
 				
 				x = (-containerRectTransform.rect.width /2) - 20;
@@ -267,23 +268,23 @@ public class ScrollableList : MonoBehaviour
 				rectTransform.offsetMax = new Vector2(x, y);
 			}
 			noItems.text = "";
-
+			
 			Canvas.ForceUpdateCanvases();
 			Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
 			scrollbar.value = 1f;
 		}
 	}
 	
-	public void showInventoryInfo(){
-
+	/*public void showInventoryInfo(){
+		
 		inventory.text = "Inventory \t" + attributesScript.inventory.Count + "/" + attributesScript.inventorySize;
 		xp.text = "Xp: " + attributesScript.xp + "/" + attributesScript.getExpectedXP ();
 		hp.text = "Hp: " + attributesScript.hp + "/" + attributesScript.maxHP();
 		stamina.text = "Stamina: " + attributesScript.stamina + "/" + attributesScript.maxStamina();
 		level.text = "Level: " + attributesScript.level;
-
+		
 		if (attributesScript.inventory.Count == 0) {
 			noItems.text = "No items in inventory";
 		}
-	}
+	}*/
 }

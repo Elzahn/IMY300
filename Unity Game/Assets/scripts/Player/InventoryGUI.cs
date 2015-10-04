@@ -16,6 +16,7 @@ public class InventoryGUI : MonoBehaviour {
 
 	private HUD Hud;
 	private Canvas Inventory;
+	private Canvas Storage;
 	
 	public static bool getStorage(){
 		return showStorage;
@@ -34,6 +35,8 @@ public class InventoryGUI : MonoBehaviour {
 		showStorage = false;
 		Inventory = GameObject.Find ("Inventory").GetComponent<Canvas> ();
 		Inventory.enabled = false;
+		Storage = GameObject.Find ("Storage").GetComponent<Canvas> ();
+		Storage.enabled = false;
 		playerScript = this.GetComponent<PlayerController> ();
 	//	attributesScript = this.GetComponent<PlayerAttributes> ();
 	}
@@ -87,6 +90,8 @@ public class InventoryGUI : MonoBehaviour {
 	public void closeStorage(){
 		hasCollided = true;
 		HUDshows = true;
+		Storage.enabled = false;
+		showStorage = false;
 		this.GetComponent<Sounds>().playWorldSound (Sounds.STORAGE);
 		playerScript.paused = false;	//Resume game
 	}
@@ -94,6 +99,8 @@ public class InventoryGUI : MonoBehaviour {
 	public void openStorage(){
 		if(this.GetComponent<Tutorial>().teachStorage){
 			showStorage = true;
+			Storage.enabled = true;
+			GameObject.Find("StorageWeaponScroll").GetComponent<StorageList>().setUpStorage();
 			HUDshows = true;
 			hasCollided = false;
 			this.GetComponent<Sounds> ().playWorldSound (Sounds.STORAGE);
@@ -108,6 +115,7 @@ public class InventoryGUI : MonoBehaviour {
 			if((Application.loadedLevelName == "Scene" && !planet.GetComponent<LoadingScreen>().loading) || Application.loadedLevelName != "Scene"){
 				hasCollided = false;
 				Inventory.enabled = true;
+				showInventory = true;
 				HUDshows = true;
 				GameObject.Find("WeaponScroll").GetComponent<ScrollableList>().setUpInventory();
 				showInventory = true;
@@ -120,6 +128,7 @@ public class InventoryGUI : MonoBehaviour {
 
 	public void closeInventory(){
 		HUDshows = false;
+		showInventory = false;
 		Inventory.enabled = false;
 		this.GetComponent<Sounds>().playWorldSound (Sounds.INVENTORY);
 		playerScript.paused = false;	//Resume game

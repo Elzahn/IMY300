@@ -233,6 +233,7 @@ public class PlayerController : MonoBehaviour
 		//gives a weapon
 		if (Input.GetKeyDown (KeyCode.F8)) {
 			playerAttributes.inventory.AddLast(new Longsword(1));
+			playerAttributes.inventory.AddLast(new PowerCore());
 		}
 
 		//gives accessories
