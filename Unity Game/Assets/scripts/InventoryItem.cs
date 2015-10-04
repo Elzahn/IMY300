@@ -12,7 +12,8 @@ public abstract class InventoryItem : ISerializable{
 	/**
 	 *  0 - Accessory
 	 *  1 - Weapon
-	 *  2 - HealthPack
+	 *  2 - HealthPack & CupCake
+	 *  3 - Ship Pieces
 	 */
 	public readonly int type;
 	public readonly string typeID;

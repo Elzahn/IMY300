@@ -235,7 +235,10 @@ public class PlayerController : MonoBehaviour
 		}
 
 		if (Input.GetKeyDown (KeyCode.F9)) {
-			playerAttributes.inventory.AddLast(new RareAccessory(1));
+			playerAttributes.inventory.AddLast(new CommonAccessory(1));
+			playerAttributes.inventory.AddLast(new UncommonAccessory(3));
+			playerAttributes.inventory.AddLast(new RareAccessory(4));
+			playerAttributes.inventory.AddLast(new RareAccessory(2));
 		}
     }
 

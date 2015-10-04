@@ -12,12 +12,13 @@ public class Equip : MonoBehaviour
 	public Sprite butterKnife;
 	public Sprite longSword;
 	public Sprite warHammer;
+	public Sprite commonAccessory;
+	public Sprite uncommonAccessory;
+	public Sprite rareAccessory;
 
-	//private RectTransform rowRectTransform;
 	private RectTransform containerRectTransform;
 	private PlayerAttributes attributesScript;
-	private float width;//, scrollHeight;
-//	private Image itemDesc;
+	private float width;
 
 	void Start()
 	{
@@ -38,15 +39,6 @@ public class Equip : MonoBehaviour
 
 		//Add equiped items
 		if (attributesScript.weapon != null) {
-		/*	rowRectTransform = equipedPrefab.GetComponent<RectTransform>();
-			height = rowRectTransform.rect.height;
-			//adjust the height of the container so that it will just barely fit all its children
-			scrollHeight = height * itemCount;
-			
-			//maak container groot genoeg om alle items te bevat
-			containerRectTransform.offsetMin = new Vector2(containerRectTransform.offsetMin.x, -scrollHeight / 2);
-			containerRectTransform.offsetMax = new Vector2(containerRectTransform.offsetMax.x, scrollHeight / 2);*/
-
 			GameObject newItem = Instantiate (equipedPrefab) as GameObject;
 			newItem.name = attributesScript.weapon.typeID;
 			newItem.transform.SetParent (gameObject.transform, false);
@@ -60,7 +52,7 @@ public class Equip : MonoBehaviour
 			Image[] images = newItem.GetComponentsInChildren<Image>();
 			
 			foreach(Image image in images){
-				if(image.name == "WeaponImage"){
+				if(image.name == "ItemImage"){
 					if(weaponText.text == "Longsword"){
 						image.sprite = longSword;
 						newItem.GetComponent<PlaceInList>().itemImage = longSword;	//sets image for description
@@ -85,7 +77,7 @@ public class Equip : MonoBehaviour
 			
 			RectTransform rectTransform = newItem.GetComponent<RectTransform> ();
 			
-			float x = (-containerRectTransform.rect.width / 2) - 230;
+			float x = (-containerRectTransform.rect.width / 2) - 240;
 			float y = containerRectTransform.rect.height / 2;
 			rectTransform.offsetMin = new Vector2 (x, y);
 			
@@ -110,62 +102,78 @@ public class Equip : MonoBehaviour
 			y = rectTransform.offsetMin.y + 160;
 			rectTransform.offsetMax = new Vector2 (x, y);
 		}
-		
-		/*int l = 0;
-		foreach (Accessory accessory in attributesScript.accessories) {
 
-			l++;
-			GameObject newItem = Instantiate (noItem) as GameObject;
-			newItem.name = l + " No accessory equiped";
-			newItem.GetComponentInChildren<Text>().text = "No accessory equiped";
-			newItem.transform.SetParent (GameObject.Find ("EquipedScroll").transform, false);
-			
-			//newItem.GetComponent<PlaceInList> ().myItem = attributesScript.weapon;
-			
-			RectTransform rectTransform = newItem.GetComponent<RectTransform> ();
-			
-			float k;
-			if( l == 0){
-				k = 1;
+		for(int i = 0; i < attributesScript.maxAccessories; i++){
+			GameObject newItem;
+
+			if(i < attributesScript.accessories.Count){
+				Accessory tempAccessory = attributesScript.accessories.ElementAt(i);
+
+				newItem = Instantiate (equipedPrefab) as GameObject;
+				newItem.name = tempAccessory.typeID;
+				newItem.transform.SetParent (gameObject.transform, false);
+				
+				newItem.GetComponent<PlaceInList> ().myItem = tempAccessory;
+				
+				Text accessoryText = newItem.GetComponentInChildren<Text>();
+				accessoryText.text = tempAccessory.typeID;
+				
+				//To get the accessory image
+				Image[] images = newItem.GetComponentsInChildren<Image>();
+				
+				foreach(Image image in images){
+					if(image.name == "ItemImage"){
+						if(accessoryText.text == "Common Accessory"){
+							image.sprite = commonAccessory;
+							newItem.GetComponent<PlaceInList>().itemImage = commonAccessory;	//sets image for description
+						} else if(accessoryText.text == "Uncommon Accessory"){
+							image.sprite = uncommonAccessory;
+							newItem.GetComponent<PlaceInList>().itemImage = uncommonAccessory;	//sets image for description
+						} else if(accessoryText.text == "Rare Accessory"){
+							image.sprite = rareAccessory;
+							newItem.GetComponent<PlaceInList>().itemImage = rareAccessory;	//sets image for description
+						}
+					} else if(image.name == "ItemDescBackground"){
+						//sets all variables for the description of the item
+						newItem.GetComponent<PlaceInList>().desc = image;
+						newItem.GetComponent<PlaceInList>().itemName = accessoryText;
+						foreach (Transform child in image.transform) {
+							if(child.gameObject.name != "MouseHover")
+								child.gameObject.SetActive (false);
+						}
+						image.enabled = false;
+					}
+				}
+
+				RectTransform rectTransform = newItem.GetComponent<RectTransform> ();
+
+				int height = i * 100;
+				float x = (-containerRectTransform.rect.width /2) - 240;
+				float y = containerRectTransform.rect.height / 2 - height * i ;
+				rectTransform.offsetMin = new Vector2(x, y);
+				
+				//Determines the heigh of the item
+				x = rectTransform.offsetMin.x + width;
+				y = rectTransform.offsetMin.y - height;
+				rectTransform.offsetMax = new Vector2(x, y);
 			} else {
-				k = 1.6f;
+				newItem = Instantiate (noItem) as GameObject;
+				newItem.name = i + " No accessory equiped";
+				newItem.GetComponentInChildren<Text>().text = "No accessory equiped";
+				newItem.transform.SetParent (gameObject.transform, false);
+
+				RectTransform rectTransform = newItem.GetComponent<RectTransform> ();
+				
+				int height  = 120;
+				float x = (-containerRectTransform.rect.width /2) - 320;
+				float y = containerRectTransform.rect.height / 2 - height * i ;
+				rectTransform.offsetMin = new Vector2(x, y);
+				
+				//Determines the heigh of the item
+				x = rectTransform.offsetMin.x + width;
+				y = rectTransform.offsetMin.y - height;
+				rectTransform.offsetMax = new Vector2(x, y);
 			}
-			
-			float x = (-containerRectTransform.rect.width /2) - 70;
-			float y = containerRectTransform.rect.height / 2 - height * k - 170;
-			rectTransform.offsetMin = new Vector2(x, y);
-			
-			//Determines the heigh of the item
-			x = rectTransform.offsetMin.x + width;
-			y = rectTransform.offsetMin.y + height - 100;
-			rectTransform.offsetMax = new Vector2(x, y);
 		}
-		
-		for(int i = attributesScript.accessories.Count; i < attributesScript.maxAccessories; i++){
-			GameObject newItem = Instantiate (noItem) as GameObject;
-			newItem.name = i + " No accessory equiped";
-			newItem.GetComponentInChildren<Text>().text = "No accessory equiped";
-			newItem.transform.SetParent (GameObject.Find ("EquipedScroll").transform, false);
-			
-			//newItem.GetComponent<PlaceInList> ().myItem = attributesScript.weapon;
-			
-			RectTransform rectTransform = newItem.GetComponent<RectTransform> ();
-			
-			float k;
-			if( i == 0){
-				k = 1;
-			} else {
-				k = 1.6f;
-			}
-			
-			/*float x = (-containerRectTransform.rect.width /2) - 70;
-			float y = containerRectTransform.rect.height / 2 - height * k - 170;
-			rectTransform.offsetMin = new Vector2(x, y);
-			
-			//Determines the heigh of the item
-			x = rectTransform.offsetMin.x + width;
-			y = rectTransform.offsetMin.y + height - 100;
-			rectTransform.offsetMax = new Vector2(x, y);*/
-		//}
 	}
 }

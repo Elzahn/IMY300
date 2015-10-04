@@ -18,11 +18,97 @@ public class PlaceInList : MonoBehaviour {
 	}
 	
 	public void showItemDescription(){
+		Text[] tempText = null;
+		Image[] tempImage = null;
+
 		switch (myItem.type) {
-		case 0:
+		case 0: 
 			//Accessory
+			foreach (Transform child in desc.transform) {
+				if(child.gameObject.name == "Equip" && (playerAttributes.accessories.Count >= playerAttributes.maxAccessories)){
+					child.gameObject.GetComponent<Button>().interactable = false;
+				} else {
+					child.gameObject.SetActive (true);
+				}
+			}
+
+			itemName.enabled = false;
+			desc.enabled = true;
+			
+			tempText = desc.GetComponentsInChildren<Text>();
+
+			LinkedList<string> stats = new LinkedList<string>();
+
+			Accessory tempAccessory = (Accessory)myItem;
+
+			if (tempAccessory.stamina != 0){
+				stats.AddLast("Stamina: " + tempAccessory.stamina);
+			}
+			if (tempAccessory.hp != 0){
+				stats.AddLast("Hp: " + tempAccessory.hp);
+			}
+			if (tempAccessory.damage != 0){
+				stats.AddLast("Damage: " + tempAccessory.damage);
+			}
+			if (tempAccessory.speed != 0){
+				stats.AddLast("Speed: " + tempAccessory.speed);
+			}
+			if (tempAccessory.inventory != 0){
+				stats.AddLast("Inventory: " + tempAccessory.inventory);
+			}
+			if (tempAccessory.hitChance != 0){
+				stats.AddLast("Hit chance: " + tempAccessory.hitChance);
+			}
+			if (tempAccessory.critChance != 0){
+				stats.AddLast("Crit chance: " + tempAccessory.critChance);
+			}
+
+			foreach(Text textItem in tempText){
+				switch(textItem.name){
+				case "DescName":
+					textItem.text = itemName.text;
+					break;
+				case "DescStat1":
+					if(stats.Count != 0){
+						textItem.text = stats.First.Value;
+						stats.RemoveFirst();
+					} else {
+						textItem.text = "";
+					}
+
+					break;
+				case "DescStat2":
+					if(stats.Count != 0){
+						textItem.text = stats.First.Value;
+						stats.RemoveFirst();
+					} else {
+						textItem.text = "";
+					}
+
+					break;
+				case "DescStat3":
+					if(stats.Count != 0){
+						textItem.text = stats.First.Value;
+						stats.RemoveFirst();
+					} else {
+						textItem.text = "";
+					}
+
+					break;
+				}
+			}
+			
+			tempImage = desc.GetComponentsInChildren<Image>();
+			
+			foreach(Image imageItem in tempImage){
+				if(imageItem.name == "DescAccessoryImage"){
+					imageItem.sprite = itemImage;
+					break;
+				}
+			}
+
 			break;
-		case 1: {
+		case 1: 
 			//Weapon
 			foreach (Transform child in desc.transform) {
 				if(child.gameObject.name == "Equip" && ((Weapon)myItem).level > playerAttributes.level){
@@ -37,7 +123,7 @@ public class PlaceInList : MonoBehaviour {
 			itemName.enabled = false;
 			desc.enabled = true;
 
-			Text[] tempText = desc.GetComponentsInChildren<Text>();
+			tempText = desc.GetComponentsInChildren<Text>();
 
 			foreach(Text textItem in tempText){
 				switch(textItem.name){
@@ -56,7 +142,7 @@ public class PlaceInList : MonoBehaviour {
 				}
 			}
 			
-			Image[] tempImage = desc.GetComponentsInChildren<Image>();
+			tempImage = desc.GetComponentsInChildren<Image>();
 			
 			foreach(Image imageItem in tempImage){
 				if(imageItem.name == "DescWeaponImage"){
@@ -66,7 +152,6 @@ public class PlaceInList : MonoBehaviour {
 			}
 
 			break;
-		}
 		case 2:
 			//Health pack
 			break;
@@ -91,7 +176,7 @@ public class PlaceInList : MonoBehaviour {
 				child.gameObject.SetActive (true);
 			if(child.name == "DescName"){
 				child.gameObject.GetComponent<Text>().text = itemName.text;
-			} else if(child.name == "DescWeaponImage"){
+			} else if(child.name == "DescItemImage"){
 				child.gameObject.GetComponent<Image>().sprite = itemImage;
 			}
 		}

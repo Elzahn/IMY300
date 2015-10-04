@@ -14,7 +14,7 @@ public class InventoryScript : MonoBehaviour {
 		sound = GameObject.Find ("Player").GetComponent<Sounds>();
 	}
 
-	public void dropWeapon(){
+	public void dropItem(){
 		InventoryItem item;
 		
 		if (this.transform.parent.GetComponent<PlaceInList>() != null) {
@@ -28,7 +28,7 @@ public class InventoryScript : MonoBehaviour {
 		scrollableList.setUpInventory();
 	}
 	
-	public void equipWeapon(){
+	public void equipItem(){
 		InventoryItem item;
 
 		if (this.transform.parent.GetComponent<PlaceInList>() != null) {

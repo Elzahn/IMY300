@@ -27,7 +27,7 @@ public class RareAccessory : Accessory {
 			break;
 		}
 		case 3:{
-			stamina = 00;
+			stamina = 0;
 			hp = 10;
 			damage = 10;
 			speed = 2;
