@@ -50,15 +50,15 @@ public class Collisions : MonoBehaviour {
 			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 		}
 
-		if (playerAttributesScript.inventoryFull () && showLootConfirmation) {
+		if (!playerAttributesScript.inventoryFull () && showLootConfirmation) {
 			Hud.makeInteractionHint ("Press E to get loot", this.GetComponent<Tutorial> ().PressE);
-		} else if(!playerAttributesScript.inventoryFull ()){
+		} else if(playerAttributesScript.inventoryFull ()){
 			Hud.makeInteractionHint ("Inventory full", this.GetComponent<SaveSpotTeleport>().noEntry);
 		}
 
-		if (playerAttributesScript.inventoryFull () && showHealthConfirmation) {
+		if (!playerAttributesScript.inventoryFull () && showHealthConfirmation) {
 			Hud.makeInteractionHint ("Press E to get a health pack", this.GetComponent<Tutorial> ().PressE);
-		} else if(!playerAttributesScript.inventoryFull ()){
+		} else if(playerAttributesScript.inventoryFull ()){
 			Hud.makeInteractionHint ("Inventory full", this.GetComponent<SaveSpotTeleport>().noEntry);
 		}
 
@@ -70,7 +70,7 @@ public class Collisions : MonoBehaviour {
 				this.GetComponent<Sounds> ().playWorldSound (Sounds.HEALTH_COLLECTION);
 				showHealthConfirmation = false;
 
-				//Delete health shrub
+				//Delete health shrub flowers
 				GameObject.Find("Planet").GetComponent<SpawnHealthPacks>().removeHealth(colObj);
 				Destroy (colObj.transform.Find("Box015").gameObject);
 				Destroy (colObj.transform.Find("Box016").gameObject);
@@ -82,7 +82,7 @@ public class Collisions : MonoBehaviour {
 				this.GetComponent<Sounds> ().playWorldSound (Sounds.HEALTH_COLLECTION);
 				showHealthConfirmation = false;
 
-				//Delete health shrub
+				//Delete health shrub flowers
 				GameObject.Find("Planet").GetComponent<SpawnHealthPacks>().removeHealth(colObj);
 				Destroy (colObj.transform.Find("Box015").gameObject);
 				Destroy (colObj.transform.Find("Box016").gameObject);
@@ -112,12 +112,10 @@ public class Collisions : MonoBehaviour {
 		if (col.collider.tag == "WorldObject" && NaturalDisasters.shake > 0) {
 			int healthToLose = (int)(playerAttributesScript.hp * 0.02);
 			playerAttributesScript.loseHP (healthToLose);//loses 2% health when hit
-			//PlayerLog.addStat ("A tree fell on you. You lose " + healthToLose + " health");
 		} else  //Lose health if you run into something that you can't interact with, walk/run on and isn't a monster
 		if (playerScript.run && col.collider.name != "Storage" && col.collider.tag != "Teleporter" && col.collider.name != "Ship_interior" && col.collider.name != "Planet" && col.collider.tag != "Monster" && col.collider.tag != "WarpPoint" && col.collider.tag != "MediumHealthPack" && col.collider.tag != "LargeHealthPack") {
 			int healthToLose = (int)(playerAttributesScript.hp * 0.02);
 			playerAttributesScript.loseHP (healthToLose);//loses 2% health when running into something
-			//PlayerLog.addStat ("You lose " + healthToLose + " health by running into something");
 			if (playerAttributesScript.gender == 'f') {
 				this.GetComponent<Sounds> ().playCharacterSound (Sounds.FEMALE_HURT);
 			} else {

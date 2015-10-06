@@ -10,14 +10,13 @@ public class PlayerController : MonoBehaviour
 	 * */
     private bool _paused;
     public Sprite Attack;
-  //  private float check;
     private float moveSpeed;
     private PlayerAttributes playerAttributes;
     public bool run, moving, showQuit;
     private int screenshotCount;
     
 
-	private bool showDeath, showPaused;//, soundPlays;
+	private bool showDeath, showPaused;
     private Sounds sound;
     public Vector3 moveDir { get; set; }
     public bool showAttack { get; private set; }
@@ -44,14 +43,12 @@ public class PlayerController : MonoBehaviour
 	}*/
 
     private void Start() {
-        //transform.rotation = Quaternion.identity;
         playerAttributes = GetComponent<PlayerAttributes>();
         paused = false;
         showDeath = false;
         showPaused = false;
         moving = false;
         sound = GetComponent<Sounds>();
-       // check = Time.time;
     }
 
     public void playAnimation() {
@@ -143,7 +140,6 @@ public class PlayerController : MonoBehaviour
             GameObject.Find("Planet").GetComponent<LoadingScreen>().loading = false;
             GameObject.Find("Loading Screen").GetComponent<Canvas>().enabled = false;
             if (GameObject.Find("Player").GetComponent<LevelSelect>().currentLevel == 1) {
-                //GameObject.Find("Player").GetComponent<SaveSpotTeleport>().showedHealthHint = true;
                 GameObject.Find("Player")
                     .GetComponent<Tutorial>()
                     .makeHint("Need a health pack? Look out for these flowers.",
@@ -168,7 +164,6 @@ public class PlayerController : MonoBehaviour
             GameObject.Find("Player").GetComponent<PlayerAttributes>().inventory.AddLast(new Longsword(1));
             GameObject.Find("Player").GetComponent<PlayerAttributes>().inventory.AddLast(new ButterKnife(5));
             GameObject.Find("Player").GetComponent<PlayerAttributes>().inventory.AddLast(new Warhammer(2));
-            //GameObject.Find("Player").transform.position = new Vector3(9.41f, 79.19f, 7.75f);
             GameObject.Find("Player").transform.position = new Vector3(13.72f, 81.58f, 14.77f); //(9.4f, 81.38f, 6.62f);
 			playerAttributes.returnToSaveSpot();
 
@@ -184,12 +179,7 @@ public class PlayerController : MonoBehaviour
 			playerAttributes.doorOpen = true;
             GetComponent<Rigidbody>().mass = 1000;
             GetComponent<Tutorial>().stopTutorial();
-            //print ("Tutorial skipped you can now use the teleporter again.");
         } 
-
-		/*if (Input.GetKeyDown(KeyCode.Escape) && !InventoryGUI.showInventory && !InventoryGUI.showStorage) {
-            showQuit = true;
-        }*/
 
         //Warp cheat
         if (Input.GetKeyDown(KeyCode.F1) && Application.loadedLevelName == "Scene") {
@@ -261,8 +251,8 @@ public class PlayerController : MonoBehaviour
                 collidedWithNumMosters++;
             }
         }
-        //print (!this.GetComponent<Tutorial> ().healthHintShown);
-        if (collidedWithNumMosters > 0 && !GetComponent<Tutorial>().healthHintShown) {
+
+		if (collidedWithNumMosters > 0 && !GetComponent<Tutorial>().healthHintShown) {
             showAttack = true;
             Camera.main.GetComponent<HUD>()
                 .makeInteractionHint("Attack by pressing while your mouse is on the monster", Attack);
@@ -306,10 +296,6 @@ public class PlayerController : MonoBehaviour
                 paused = true;
             }
 
-           /* if (!GameObject.Find("Player").GetComponent<Sounds>().characterAudio.isPlaying) {
-                soundPlays = false;
-            }*/
-
             if (Input.GetKey(KeyCode.LeftShift) && playerAttributes.stamina > 0 &&
                 Application.loadedLevelName != "SaveSpot" &&
                 (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)) {
@@ -328,8 +314,7 @@ public class PlayerController : MonoBehaviour
                 }
 
                 animatorComponent.SetBool("Running", true);
-                //Took it out to fix sound while running
-                //soundPlays = false;
+
 			} else if((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)) {
                 run = false;
                 animatorComponent.SetBool("Running", false);
@@ -364,10 +349,8 @@ public class PlayerController : MonoBehaviour
 
             if (!Camera.main.GetComponent<CameraControl>().birdsEye) {
                 if (playerAttributes.dizzy) {
-                    //moveDir = new Vector3 (Input.GetAxisRaw ("Vertical"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Horizontal")).normalized;
                     moveDir = new Vector3(Input.GetAxisRaw("Vertical"), 0, Input.GetAxisRaw("Horizontal")).normalized;
                 } else {
-                    //moveDir = new Vector3 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Jump"), Input.GetAxisRaw ("Vertical")).normalized;
                     moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
                 }
             }
@@ -377,21 +360,17 @@ public class PlayerController : MonoBehaviour
 			}*/
 
 
-            //if (Time.time >= check) {	
             if (Input.GetAxis("Vertical") == 0 && Input.GetAxis("Horizontal") == 0) {
                 moving = false;
                 animatorComponent.SetBool("MovingStraight", moving);
                 animatorComponent.SetBool("MovingRight", moving);
                 animatorComponent.SetBool("MovingLeft", moving);
                 animatorComponent.SetBool("Running", moving);
-               // soundPlays = false;
+
 				if(sound.characterClip == Sounds.PLANET_RUNNING || sound.characterClip == Sounds.PLANET_WALKING || sound.characterClip == Sounds.SHIP_WALKING){
                 	GetComponent<Sounds>().stopSound("character");
 				}
             }
-            //check += 0.25f;
-            //	}
-            //}
         }
     }
 
@@ -419,17 +398,12 @@ public class PlayerController : MonoBehaviour
                 playerAttributes.restoreHealthToFull();
                 playerAttributes.restoreStaminaToFull();
                 playerAttributes.resetXP();
-                //var playerObbject = GameObject.Find("Player");
+
 				GameObject.Find("Player").transform.rotation = Quaternion.Euler(0f, -95.3399f, 0f);
 				GameObject.Find("Player").transform.position = new Vector3(-1.651f, 80.82f, 0.84f);
                 SoundComponent.stopSound("alarm");
                 SoundComponent.playWorldSound(Sounds.BUTTON);
                 playerAttributes.resetInventoryAndStorage();
-                //PlayerLog.queue.Clear ();
-                //PlayerLog.stats = "";
-                /*if(GameObject.Find("Planet").GetComponent<LevelSelect>() != null){
-					//playerAttributes.restoreHealthToFull();
-				}*/
 
                 Application.LoadLevel("Scene");
                 GameObject.Find("Stamina").GetComponent<Image>().fillAmount = playerAttributes.stamina/

@@ -258,7 +258,7 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	public bool inventoryFull(){
-		return (inventory.Count < inventorySize);
+		return (inventory.Count >= inventorySize);
 	}
 
 	public float hitChance { 

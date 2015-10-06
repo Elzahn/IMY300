@@ -27,21 +27,15 @@ public class StorageList : MonoBehaviour
 	private RectTransform containerRectTransform;
 	private static PlayerAttributes attributesScript;
 	private float height, width, scrollHeight;
-	private Text inventory, noItems;//, xp, hp, stamina, level, noAccessories, weapon;
+	private Text inventory, noItems;
 	private Image itemDesc;
-	private PlayerAttributes playerAttributes;
 	private Storage storageScript;
 
 	void Start()
 	{
-		playerAttributes = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
 		storageScript = GameObject.Find ("StorageWeaponScroll").GetComponent<Storage> ();
 
 		inventory = GameObject.Find ("StorageInventoryText").GetComponent<Text> ();
-		/*xp = GameObject.Find ("XPStat").GetComponent<Text> ();
-		hp = GameObject.Find ("HPStat").GetComponent<Text> ();
-		stamina = GameObject.Find ("StaminaStat").GetComponent<Text> ();
-		level = GameObject.Find ("LevelStat").GetComponent<Text> ();*/
 		noItems = GameObject.Find ("NoInventoryItems").GetComponent<Text> ();
 		
 		rowRectTransform = weaponPrefab.GetComponent<RectTransform>();
@@ -65,8 +59,6 @@ public class StorageList : MonoBehaviour
 		checkInventory ();
 		inventory.text = "Inventory \t" + attributesScript.inventory.Count + "/" + attributesScript.inventorySize;
 		storageScript.showStorage ();
-		//showInventoryInfo ();
-		//GameObject.Find ("EquipedScroll").GetComponent<Equip> ().makeEquipmentList ();
 	}
 	
 	public void checkInventory()
@@ -86,7 +78,6 @@ public class StorageList : MonoBehaviour
 			Destroy (gameObjectsToDelete [i]);
 		}
 		
-		//Text noItems = GameObject.Find ("NoItems").GetComponent<Text> ();
 		int j = 0;
 		
 		if (attributesScript.inventory.Count == 0) {
@@ -134,7 +125,7 @@ public class StorageList : MonoBehaviour
 									child.gameObject.SetActive (false);
 							}
 							image.enabled = false;
-						} else if(image.gameObject.name == "Equip" && (playerAttributes.accessories.Count >= playerAttributes.maxAccessories)){
+						} else if(image.gameObject.name == "Equip" && (attributesScript.accessories.Count >= attributesScript.maxAccessories)){
 							image.GetComponent<Button>().interactable = false;
 						} 
 					}
@@ -185,7 +176,7 @@ public class StorageList : MonoBehaviour
 									child.gameObject.SetActive (false);
 							}
 							image.enabled = false;
-						} else if(image.name == "Equip" && ((Weapon)item).level > playerAttributes.level){
+						} else if(image.name == "Equip" && ((Weapon)item).level > attributesScript.level){
 							image.GetComponent<Button>().interactable = false;
 						} 
 					}
@@ -277,17 +268,4 @@ public class StorageList : MonoBehaviour
 			scrollbar.value = 1f;
 		}
 	}
-	
-	/*public void showInventoryInfo(){
-		
-		inventory.text = "Inventory \t" + attributesScript.inventory.Count + "/" + attributesScript.inventorySize;
-		xp.text = "Xp: " + attributesScript.xp + "/" + attributesScript.getExpectedXP ();
-		hp.text = "Hp: " + attributesScript.hp + "/" + attributesScript.maxHP();
-		stamina.text = "Stamina: " + attributesScript.stamina + "/" + attributesScript.maxStamina();
-		level.text = "Level: " + attributesScript.level;
-		
-		if (attributesScript.inventory.Count == 0) {
-			noItems.text = "No items in inventory";
-		}
-	}*/
 }

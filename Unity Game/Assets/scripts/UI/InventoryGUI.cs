@@ -8,7 +8,6 @@ public class InventoryGUI : MonoBehaviour {
 	public static bool showInventory{ get; private set; }
 	public static bool showStorage{ get; private set; }
 	private PlayerController playerScript;
-	//private PlayerAttributes attributesScript;
 	public Texture2D icon;
 	
 	public static bool hasCollided {get; set;}
@@ -30,18 +29,11 @@ public class InventoryGUI : MonoBehaviour {
 		Storage = GameObject.Find ("Storage").GetComponent<Canvas> ();
 		Storage.enabled = false;
 		playerScript = this.GetComponent<PlayerController> ();
-	//	attributesScript = this.GetComponent<PlayerAttributes> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (!playerScript.paused) {
-			
-			/*//Done for the extra mapping of the inventory and storage close to the escape key. Else it thinks escape was pressed twice for example it also opens quite menu.
-			if(!Inventory.enabled && !Storage.enabled && (Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.I))){
-				showInventory = false;
-				showStorage = false;
-			}*/
 
 			if(hasCollided && this.GetComponent<Tutorial>().teachStorage){
 				Hud.makeInteractionHint("Press E to open storage", GameObject.Find("Player").GetComponent<SaveSpotTeleport>().pressE);
@@ -55,12 +47,12 @@ public class InventoryGUI : MonoBehaviour {
 				openInventory ();
 			}
 
-			if (Input.GetKeyDown (KeyCode.Escape) && !GetComponent<Tutorial>().startTutorial){
+			if (Input.GetKeyDown (KeyCode.Escape) && !this.GetComponent<Tutorial>().startTutorial && !this.GetComponent<LoadingScreen>().loading){
 				playerScript.showQuit = true;
 			}
 
 		} else {
-			if (Input.GetKeyDown (KeyCode.Escape)){
+			if (Input.GetKeyDown (KeyCode.Escape) && !this.GetComponent<Tutorial>().startTutorial && !this.GetComponent<LoadingScreen>().loading){
 				playerScript.showQuit = false;
 				playerScript.paused = false;
 			}
@@ -90,7 +82,6 @@ public class InventoryGUI : MonoBehaviour {
 	}
 
 	public void closeStorage(){
-		//hasCollided = true;
 		HUDshows = false;
 		Storage.enabled = false;
 		showStorage = false;
@@ -104,7 +95,6 @@ public class InventoryGUI : MonoBehaviour {
 			Storage.enabled = true;
 			GameObject.Find("StorageInventoryWeaponScroll").GetComponent<StorageList>().setUpStorage();
 			HUDshows = true;
-		//	hasCollided = false;
 			this.GetComponent<Sounds> ().playWorldSound (Sounds.STORAGE);
 			playerScript.paused = true;	//Pause game
 			GameObject.Find("Player").GetComponent<Sounds>().resumeSound("computer");
@@ -115,7 +105,6 @@ public class InventoryGUI : MonoBehaviour {
 		GameObject planet = GameObject.Find ("Planet");
 		if (this.GetComponent<Tutorial> ().teachInventory) {
 			if((Application.loadedLevelName == "Scene" && !planet.GetComponent<LoadingScreen>().loading) || Application.loadedLevelName != "Scene"){
-			//	hasCollided = false;
 				Inventory.enabled = true;
 				showInventory = true;
 				HUDshows = true;

@@ -207,7 +207,11 @@ public class PlaceInList : MonoBehaviour {
 					break;
 				case "DescInfo":
 					if(myItem.typeID == "Power Core"){
-						textItem.text = "Power core, return to computer";
+						if(this.transform.tag == "LootList"){
+							textItem.text = "Power core";
+						} else {
+							textItem.text = "Power core, return to computer";
+						}
 					}
 					break;
 				}

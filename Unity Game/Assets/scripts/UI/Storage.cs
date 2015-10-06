@@ -27,7 +27,7 @@ public class Storage : MonoBehaviour
 	private RectTransform containerRectTransform;
 	private static PlayerAttributes attributesScript;
 	private float height, width, scrollHeight;
-	private Text storage, noItems;//, xp, hp, stamina, level, noAccessories, weapon;
+	private Text storage, noItems;
 	private Image itemDesc;
 	private PlayerAttributes playerAttributes;
 	
@@ -62,8 +62,6 @@ public class Storage : MonoBehaviour
 	public void showStorage(){
 		checkStorage ();
 		storage.text = "Storage \t" + attributesScript.storage.Count + "/" + attributesScript.MAX_STORAGE;
-		//showInventoryInfo ();
-		//GameObject.Find ("EquipedScroll").GetComponent<Equip> ().makeEquipmentList ();
 	}
 	
 	public void checkStorage()
@@ -274,17 +272,4 @@ public class Storage : MonoBehaviour
 			scrollbar.value = 1f;
 		}
 	}
-	
-	/*public void showInventoryInfo(){
-		
-		inventory.text = "Inventory \t" + attributesScript.inventory.Count + "/" + attributesScript.inventorySize;
-		xp.text = "Xp: " + attributesScript.xp + "/" + attributesScript.getExpectedXP ();
-		hp.text = "Hp: " + attributesScript.hp + "/" + attributesScript.maxHP();
-		stamina.text = "Stamina: " + attributesScript.stamina + "/" + attributesScript.maxStamina();
-		level.text = "Level: " + attributesScript.level;
-		
-		if (attributesScript.inventory.Count == 0) {
-			noItems.text = "No items in inventory";
-		}
-	}*/
 }

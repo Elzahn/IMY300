@@ -19,6 +19,7 @@ TagManager:
   - Scrollbar
   - Expand
   - StorageList
+  - LootList
   layers:
   - Default
   - TransparentFX
