@@ -1,28 +1,27 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Menu\InventoryScript.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\UI\StorageList.cs">
     <Files>
-      <File FileName="Assets\scripts\Player\ScrollableList.cs" Line="99" Column="43" />
-      <File FileName="Assets\scripts\Player\InventoryGUI.cs" Line="262" Column="69" />
       <File FileName="Assets\scripts\InventoryItem.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="232" Column="3" />
-      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="648" Column="30" />
-      <File FileName="Assets\scripts\Menu\PlaceInList.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Menu\InventoryScript.cs" Line="98" Column="2" />
-      <File FileName="Assets\scripts\Player\StorageList.cs" Line="64" Column="109" />
-      <File FileName="Assets\scripts\BonusItems\PowerCore.cs" Line="8" Column="2" />
+      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\BonusItems\PowerCore.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\UI\StorageList.cs" Line="55" Column="33" />
+      <File FileName="Assets\scripts\UI\ScrollableList.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\UI\InventoryScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\UI\InventoryGUI.cs" Line="60" Column="1" />
+      <File FileName="Assets\scripts\UI\PlaceInList.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\UI\Equip.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\UI\StorageScript.cs" Line="42" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="scripts" expanded="True">
-              <Node name="BonusItems" expanded="True" />
-              <Node name="Menu" expanded="True">
-                <Node name="InventoryScript.cs" selected="True" />
+              <Node name="UI" expanded="True">
+                <Node name="StorageList.cs" selected="True" />
               </Node>
-              <Node name="Player" expanded="True" />
-              <Node name="Teleporting" expanded="True" />
             </Node>
           </Node>
         </State>

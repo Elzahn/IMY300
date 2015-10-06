@@ -6,13 +6,13 @@ using System.Linq;
 public class InventoryScript : MonoBehaviour {
 	private PlayerAttributes attributesScript;
 	private ScrollableList scrollableList;
-	private StorageList storageList;
+//	private StorageList storageList;
 	private Sounds sound;
 
 	void Start(){
 		attributesScript = GameObject.Find("Player").GetComponent<PlayerAttributes> ();
 		scrollableList = GameObject.Find ("WeaponScroll").GetComponent<ScrollableList> ();
-		storageList = GameObject.Find ("StorageWeaponScroll").GetComponent<StorageList> ();
+	//	storageList = GameObject.Find ("StorageWeaponScroll").GetComponent<StorageList> ();
 		sound = GameObject.Find ("Player").GetComponent<Sounds>();
 	}
 

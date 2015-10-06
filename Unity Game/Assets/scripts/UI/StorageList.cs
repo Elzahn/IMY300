@@ -25,15 +25,17 @@ public class StorageList : MonoBehaviour
 	private int itemCount;
 	private RectTransform rowRectTransform;
 	private RectTransform containerRectTransform;
-	private PlayerAttributes attributesScript;
+	private static PlayerAttributes attributesScript;
 	private float height, width, scrollHeight;
 	private Text inventory, noItems;//, xp, hp, stamina, level, noAccessories, weapon;
 	private Image itemDesc;
 	private PlayerAttributes playerAttributes;
-	
+	private Storage storageScript;
+
 	void Start()
 	{
 		playerAttributes = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
+		storageScript = GameObject.Find ("StorageWeaponScroll").GetComponent<Storage> ();
 
 		inventory = GameObject.Find ("StorageInventoryText").GetComponent<Text> ();
 		/*xp = GameObject.Find ("XPStat").GetComponent<Text> ();
@@ -62,6 +64,7 @@ public class StorageList : MonoBehaviour
 	public void setUpStorage(){
 		checkInventory ();
 		inventory.text = "Inventory \t" + attributesScript.inventory.Count + "/" + attributesScript.inventorySize;
+		storageScript.showStorage ();
 		//showInventoryInfo ();
 		//GameObject.Find ("EquipedScroll").GetComponent<Equip> ().makeEquipmentList ();
 	}
@@ -83,7 +86,7 @@ public class StorageList : MonoBehaviour
 			Destroy (gameObjectsToDelete [i]);
 		}
 		
-		Text noItems = GameObject.Find ("NoItems").GetComponent<Text> ();
+		//Text noItems = GameObject.Find ("NoItems").GetComponent<Text> ();
 		int j = 0;
 		
 		if (attributesScript.inventory.Count == 0) {

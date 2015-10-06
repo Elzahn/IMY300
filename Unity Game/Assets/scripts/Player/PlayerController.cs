@@ -157,8 +157,7 @@ public class PlayerController : MonoBehaviour
         //build cheat to skip cutscenes
 
         //Skip Tutorial
-        if (Input.GetKeyDown(KeyCode.Escape) && GetComponent<Tutorial>().startTutorial && !InventoryGUI.showInventory &&
-            !InventoryGUI.showStorage) {
+        if (Input.GetKeyDown(KeyCode.Escape) && GetComponent<Tutorial>().startTutorial) {
             if (GameObject.Find("Particles") != null) {
                 GameObject.Find("Particles").GetComponentInParent<SphereCollider>().enabled = false;
             }
@@ -186,10 +185,11 @@ public class PlayerController : MonoBehaviour
             GetComponent<Rigidbody>().mass = 1000;
             GetComponent<Tutorial>().stopTutorial();
             //print ("Tutorial skipped you can now use the teleporter again.");
-        } else if (Input.GetKeyDown(KeyCode.Escape) && !GetComponent<Tutorial>().startTutorial &&
-                 !InventoryGUI.showInventory && !InventoryGUI.showStorage) {
+        } 
+
+		/*if (Input.GetKeyDown(KeyCode.Escape) && !InventoryGUI.showInventory && !InventoryGUI.showStorage) {
             showQuit = true;
-        }
+        }*/
 
         //Warp cheat
         if (Input.GetKeyDown(KeyCode.F1) && Application.loadedLevelName == "Scene") {

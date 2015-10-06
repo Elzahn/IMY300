@@ -15,6 +15,10 @@ TagManager:
   - WeaponList
   - Equiped
   - Teleporter
+  - HUD_Extend_Text
+  - Scrollbar
+  - Expand
+  - StorageList
   layers:
   - Default
   - TransparentFX
