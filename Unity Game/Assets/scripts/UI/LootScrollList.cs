@@ -23,12 +23,10 @@ public class LootScrollList : MonoBehaviour
 	private RectTransform containerRectTransform;
 	private float height, width, scrollHeight;
 	private Image itemDesc;
-	private LootScrollList lootScrollList;
 	private PlayerAttributes playerAttributes;
 
 	void Start()
 	{
-		lootScrollList = GameObject.Find ("LootScroll").GetComponent<LootScrollList> ();
 		playerAttributes = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
 
 		rowRectTransform = weaponPrefab.GetComponent<RectTransform>();

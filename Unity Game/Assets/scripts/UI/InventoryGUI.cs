@@ -47,8 +47,14 @@ public class InventoryGUI : MonoBehaviour {
 				openInventory ();
 			}
 
-			if (Input.GetKeyDown (KeyCode.Escape) && !this.GetComponent<Tutorial>().startTutorial && !this.GetComponent<LoadingScreen>().loading){
-				playerScript.showQuit = true;
+			if(Application.loadedLevelName == "Tutorial" || Application.loadedLevelName == "SaveSpot"){
+				if (Input.GetKeyDown (KeyCode.Escape) && !this.GetComponent<Tutorial>().startTutorial){
+					playerScript.showQuit = true;
+				}
+			} else {
+				if (Input.GetKeyDown (KeyCode.Escape) && !this.GetComponent<Tutorial>().startTutorial && !this.GetComponent<LoadingScreen>().loading){
+					playerScript.showQuit = true;
+				}
 			}
 
 		} else {
@@ -104,6 +110,12 @@ public class InventoryGUI : MonoBehaviour {
 	public void openInventory(){
 		GameObject planet = GameObject.Find ("Planet");
 		if (this.GetComponent<Tutorial> ().teachInventory) {
+			GameObject.Find("Hint").GetComponent<Image>().enabled = false;
+			GameObject.Find("Hint_Image").GetComponent<Image>().enabled = false;
+			GameObject.Find("Hint_Text").GetComponent<Text>().enabled = false;
+			GameObject.Find("Interaction").GetComponent<Image>().enabled = false;
+			GameObject.Find("Interaction_Image").GetComponent<Image>().enabled = false;
+			GameObject.Find("Interaction_Text").GetComponent<Text>().enabled = false;
 			if((Application.loadedLevelName == "Scene" && !planet.GetComponent<LoadingScreen>().loading) || Application.loadedLevelName != "Scene"){
 				Inventory.enabled = true;
 				showInventory = true;
@@ -117,6 +129,12 @@ public class InventoryGUI : MonoBehaviour {
 	}
 
 	public void closeInventory(){
+		GameObject.Find("Hint").GetComponent<Image>().enabled = true;
+		GameObject.Find("Hint_Image").GetComponent<Image>().enabled = true;
+		GameObject.Find("Hint_Text").GetComponent<Text>().enabled = true;
+		GameObject.Find("Hint_Image").GetComponent<Image>().enabled = true;
+		GameObject.Find("Interaction").GetComponent<Image>().enabled = true;
+		GameObject.Find("Interaction_Text").GetComponent<Text>().enabled = true;
 		HUDshows = false;
 		showInventory = false;
 		Inventory.enabled = false;

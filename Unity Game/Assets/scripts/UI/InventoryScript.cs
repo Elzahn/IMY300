@@ -58,7 +58,7 @@ public class InventoryScript : MonoBehaviour {
 		} else {
 			item = this.transform.parent.parent.GetComponent<PlaceInList> ().myItem;
 		}
-		print ("F");
+
 		if (item.type == 0) {//is accessory
 			attributesScript.unequipAccessory ((Accessory)item);
 			sound.playWorldSound(Sounds.EQUIP_ACCESSORY);
