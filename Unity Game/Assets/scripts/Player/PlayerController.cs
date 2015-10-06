@@ -15,8 +15,6 @@ public class PlayerController : MonoBehaviour
     public bool run, moving, showQuit;
     private int screenshotCount;
     
-
-	private bool showDeath, showPaused;
     private Sounds sound;
     public Vector3 moveDir { get; set; }
     public bool showAttack { get; private set; }
@@ -45,8 +43,8 @@ public class PlayerController : MonoBehaviour
     private void Start() {
         playerAttributes = GetComponent<PlayerAttributes>();
         paused = false;
-        showDeath = false;
-        showPaused = false;
+		GameObject.Find("Death").GetComponent<Canvas>().enabled = false;
+		GameObject.Find("Popup").GetComponent<Canvas>().enabled = false;
         moving = false;
         sound = GetComponent<Sounds>();
     }
@@ -272,12 +270,17 @@ public class PlayerController : MonoBehaviour
 		 * P Pauses or unpausese
 		 * Only if showpause the same as pause.
 		 * */
-        if (Input.GetKeyDown(KeyCode.P) && paused == showPaused) {
+        if (Input.GetKeyDown(KeyCode.P)) {
             if (Application.loadedLevelName != "Scene" ||
                 (Application.loadedLevelName == "Scene" &&
                  !GameObject.Find("Planet").GetComponent<LoadingScreen>().loading)) {
                 paused = !paused;
-                showPaused = paused;
+				if(GameObject.Find("Popup").GetComponent<Canvas>().enabled){
+					GameObject.Find("Popup").GetComponent<Canvas>().enabled = false;
+				} else {
+					GameObject.Find("Popup").GetComponent<Canvas>().enabled = true;
+					sound.pauseSound("computer");
+				}
             }
         }
 
@@ -291,7 +294,7 @@ public class PlayerController : MonoBehaviour
             keysCheck();
 
             if (playerAttributes.isDead()) {
-                showDeath = true;
+				GameObject.Find("Death").GetComponent<Canvas>().enabled = true;
                 GetComponent<Sounds>().stopAlarmSound(Sounds.LOW_HEALTH_ALARM);
                 paused = true;
             }
@@ -381,50 +384,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+	public void restart(){
+		Application.LoadLevel("Scene");
+		paused = false;
+		playerAttributes.restoreHealthToFull();
+		playerAttributes.restoreStaminaToFull();
+		playerAttributes.resetXP();
+		
+		GameObject.Find("Player").transform.rotation = Quaternion.Euler(0f, -95.3399f, 0f);
+		GameObject.Find("Player").transform.position = new Vector3(-1.651f, 80.82f, 0.84f);
+		sound.stopSound("alarm");
+		sound.playWorldSound(Sounds.BUTTON);
+		playerAttributes.resetInventoryAndStorage();
+
+		GameObject.Find("Stamina").GetComponent<Image>().fillAmount = playerAttributes.stamina/
+			playerAttributes.maxStamina();
+		GameObject.Find("Health").GetComponent<Image>().fillAmount = playerAttributes.hp/
+			playerAttributes.maxHP();
+		GameObject.Find("XP").GetComponent<Image>().fillAmount = playerAttributes.xp/
+			playerAttributes.getExpectedXP();
+		GameObject.Find ("Death").GetComponent<Canvas> ().enabled = false;
+	}
+
+	public void quit(){
+		sound.playWorldSound(Sounds.BUTTON);
+		Application.Quit();
+	}
+
     private void OnGUI() {
-        var SoundComponent = GetComponent<Sounds>();
-        if (showDeath) {
-            var boxHeigh = 150;
-            var boxWidth = 200;
-            var top = Screen.height/2 - boxHeigh/2;
-            var left = Screen.width/2 - boxWidth/2;
-            var buttonWidth = 100;
-            var itemHeight = 30;
-
-            GUI.Box(new Rect(left, top, boxWidth, boxHeigh), "You died! Restart the level?");
-            if (GUI.Button(new Rect(left + 30, top + 30, buttonWidth, itemHeight), "Restart level")) {
-                paused = false;
-                showDeath = false;
-                playerAttributes.restoreHealthToFull();
-                playerAttributes.restoreStaminaToFull();
-                playerAttributes.resetXP();
-
-				GameObject.Find("Player").transform.rotation = Quaternion.Euler(0f, -95.3399f, 0f);
-				GameObject.Find("Player").transform.position = new Vector3(-1.651f, 80.82f, 0.84f);
-                SoundComponent.stopSound("alarm");
-                SoundComponent.playWorldSound(Sounds.BUTTON);
-                playerAttributes.resetInventoryAndStorage();
-
-                Application.LoadLevel("Scene");
-                GameObject.Find("Stamina").GetComponent<Image>().fillAmount = playerAttributes.stamina/
-                                                                              playerAttributes.maxStamina();
-                GameObject.Find("Health").GetComponent<Image>().fillAmount = playerAttributes.hp/
-                                                                             playerAttributes.maxHP();
-                GameObject.Find("XP").GetComponent<Image>().fillAmount = playerAttributes.xp/
-                                                                         playerAttributes.getExpectedXP();
-            }
-            if (GUI.Button(new Rect(left + 30, top + 90, buttonWidth, itemHeight), "Quit")) {
-                SoundComponent.playWorldSound(Sounds.BUTTON);
-                Application.Quit();
-            }
-        } else if (showPaused) {
-            sound.pauseSound("computer");
-            var boxHeigh = 50;
-            var boxWidth = 200;
-            var top = Screen.height/2 - boxHeigh/2;
-            var left = Screen.width/2 - boxWidth/2;
-            GUI.Box(new Rect(left, top, boxWidth, boxHeigh), "Paused \n(Press P to unpause)");
-        } else if (showQuit) {
+       if (showQuit) {
             paused = true;
             var boxHeigh = 150;
             var boxWidth = 250;
@@ -435,11 +423,11 @@ public class PlayerController : MonoBehaviour
 
             GUI.Box(new Rect(left, top, boxWidth, boxHeigh), "Are you sure you want to quit?");
             if (GUI.Button(new Rect(left + 10, top + 60, buttonWidth, itemHeight), "Yes")) {
-                SoundComponent.playWorldSound(Sounds.BUTTON);
+                sound.playWorldSound(Sounds.BUTTON);
                 Application.Quit();
             }
             if (GUI.Button(new Rect(left + buttonWidth + 30, top + 60, buttonWidth, itemHeight), "No")) {
-                SoundComponent.playWorldSound(Sounds.BUTTON);
+                sound.playWorldSound(Sounds.BUTTON);
                 showQuit = false;
                 paused = false;
             }

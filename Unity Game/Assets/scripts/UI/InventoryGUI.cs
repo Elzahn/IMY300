@@ -134,6 +134,7 @@ public class InventoryGUI : MonoBehaviour {
 		GameObject.Find("Hint_Text").GetComponent<Text>().enabled = true;
 		GameObject.Find("Hint_Image").GetComponent<Image>().enabled = true;
 		GameObject.Find("Interaction").GetComponent<Image>().enabled = true;
+		GameObject.Find("Interaction_Image").GetComponent<Image>().enabled = true;
 		GameObject.Find("Interaction_Text").GetComponent<Text>().enabled = true;
 		HUDshows = false;
 		showInventory = false;
