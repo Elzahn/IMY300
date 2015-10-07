@@ -1,0 +1,289 @@
+fileFormatVersion: 2
+guid: b418d24b249757046a93eaf333a9631a
+timeCreated: 1444250115
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: back_wall
+    100002: Bed
+    100004: BedCover
+    100006: BedStand01
+    100008: BedStand02
+    100010: Box001
+    100012: Box002
+    100014: Box003
+    100016: Box004
+    100018: Door01
+    100020: Door02
+    100022: Door03
+    100024: Door04
+    100026: Doorknob_01
+    100028: Doorknob_02
+    100030: Doorknob_03
+    100032: Doorknob_04
+    100034: floor
+    100036: front_wall
+    100038: front_wall001
+    100040: front_wall002
+    100042: front_wall003
+    100044: hall
+    100046: HallSide1
+    100048: HallSide2
+    100050: left_wall
+    100052: Object001
+    100054: Object002
+    100056: PhysCamera001
+    100058: PhysCamera001.Target
+    100060: Pillow01
+    100062: Pillow02
+    100064: roof
+    100066: //RootNode
+    100068: wall
+    100070: wall basic
+    100072: wall basic part01
+    100074: wall basic part02
+    100076: wall basic001
+    400000: back_wall
+    400002: Bed
+    400004: BedCover
+    400006: BedStand01
+    400008: BedStand02
+    400010: Box001
+    400012: Box002
+    400014: Box003
+    400016: Box004
+    400018: Door01
+    400020: Door02
+    400022: Door03
+    400024: Door04
+    400026: Doorknob_01
+    400028: Doorknob_02
+    400030: Doorknob_03
+    400032: Doorknob_04
+    400034: floor
+    400036: front_wall
+    400038: front_wall001
+    400040: front_wall002
+    400042: front_wall003
+    400044: hall
+    400046: HallSide1
+    400048: HallSide2
+    400050: left_wall
+    400052: Object001
+    400054: Object002
+    400056: PhysCamera001
+    400058: PhysCamera001.Target
+    400060: Pillow01
+    400062: Pillow02
+    400064: roof
+    400066: //RootNode
+    400068: wall
+    400070: wall basic
+    400072: wall basic part01
+    400074: wall basic part02
+    400076: wall basic001
+    2300000: back_wall
+    2300002: Bed
+    2300004: BedCover
+    2300006: BedStand01
+    2300008: BedStand02
+    2300010: Box001
+    2300012: Box002
+    2300014: Box003
+    2300016: Box004
+    2300018: Door01
+    2300020: Door02
+    2300022: Door03
+    2300024: Door04
+    2300026: Doorknob_01
+    2300028: Doorknob_02
+    2300030: Doorknob_03
+    2300032: Doorknob_04
+    2300034: floor
+    2300036: front_wall
+    2300038: front_wall001
+    2300040: front_wall002
+    2300042: front_wall003
+    2300044: hall
+    2300046: HallSide1
+    2300048: HallSide2
+    2300050: left_wall
+    2300052: Object002
+    2300054: Pillow01
+    2300056: Pillow02
+    2300058: roof
+    2300060: wall
+    2300062: wall basic
+    2300064: wall basic part01
+    2300066: wall basic part02
+    2300068: wall basic001
+    3300000: back_wall
+    3300002: Bed
+    3300004: BedCover
+    3300006: BedStand01
+    3300008: BedStand02
+    3300010: Box001
+    3300012: Box002
+    3300014: Box003
+    3300016: Box004
+    3300018: Door01
+    3300020: Door02
+    3300022: Door03
+    3300024: Door04
+    3300026: Doorknob_01
+    3300028: Doorknob_02
+    3300030: Doorknob_03
+    3300032: Doorknob_04
+    3300034: floor
+    3300036: front_wall
+    3300038: front_wall001
+    3300040: front_wall002
+    3300042: front_wall003
+    3300044: hall
+    3300046: HallSide1
+    3300048: HallSide2
+    3300050: left_wall
+    3300052: Object002
+    3300054: Pillow01
+    3300056: Pillow02
+    3300058: roof
+    3300060: wall
+    3300062: wall basic
+    3300064: wall basic part01
+    3300066: wall basic part02
+    3300068: wall basic001
+    4300000: left_wall
+    4300002: roof
+    4300004: floor
+    4300006: front_wall
+    4300008: back_wall
+    4300010: hall
+    4300012: Box001
+    4300014: wall
+    4300016: wall basic
+    4300018: wall basic001
+    4300020: Box002
+    4300022: Box003
+    4300024: Box004
+    4300026: Bed
+    4300028: Pillow02
+    4300030: Pillow01
+    4300032: BedCover
+    4300034: Door01
+    4300036: Doorknob_04
+    4300038: Doorknob_03
+    4300040: Door02
+    4300042: Doorknob_02
+    4300044: Door03
+    4300046: Doorknob_01
+    4300048: Door04
+    4300050: BedStand02
+    4300052: BedStand01
+    4300054: HallSide1
+    4300056: HallSide2
+    4300058: wall basic part01
+    4300060: wall basic part02
+    4300062: front_wall003
+    4300064: Object002
+    4300066: front_wall002
+    4300068: front_wall001
+    6400000: back_wall
+    6400002: Bed
+    6400004: BedCover
+    6400006: BedStand01
+    6400008: BedStand02
+    6400010: Box001
+    6400012: Box002
+    6400014: Box003
+    6400016: Box004
+    6400018: Door01
+    6400020: Door02
+    6400022: Door03
+    6400024: Door04
+    6400026: Doorknob_01
+    6400028: Doorknob_02
+    6400030: Doorknob_03
+    6400032: Doorknob_04
+    6400034: floor
+    6400036: front_wall
+    6400038: front_wall001
+    6400040: front_wall002
+    6400042: front_wall003
+    6400044: hall
+    6400046: HallSide1
+    6400048: HallSide2
+    6400050: left_wall
+    6400052: Object002
+    6400054: Pillow01
+    6400056: Pillow02
+    6400058: roof
+    6400060: wall
+    6400062: wall basic
+    6400064: wall basic part01
+    6400066: wall basic part02
+    6400068: wall basic001
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
