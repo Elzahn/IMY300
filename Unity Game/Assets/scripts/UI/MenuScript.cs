@@ -8,9 +8,10 @@ public class MenuScript : MonoBehaviour {
 	public Font defaultFont;
 
 	private PlayerAttributes attributesScript;
-
+	private GameObject player;
 	void Start(){
-		//attributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
+		player = GameObject.Find ("Player");
+		attributesScript = player.GetComponent<PlayerAttributes> ();
 		//GameObject.Find ("Player").GetComponent<Tutorial> ().enabled = false;
 	}
 
@@ -37,6 +38,9 @@ public class MenuScript : MonoBehaviour {
 
 	public void load(){
 
+		player.transform.rotation = Quaternion.Euler (351.66f, 179.447f, 358.8f);
+		player.transform.up = Vector3.up;
+		player.transform.position = new Vector3 (13.18f, 81.55f, 14.8f);
 	}
 
 	public void settings(){
