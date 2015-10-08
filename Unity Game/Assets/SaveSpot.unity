@@ -3417,7 +3417,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f1f45daafda65648af3fc232ca4a0e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
 --- !u!114 &839258573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6306,7 +6305,7 @@ GameObject:
   - 64: {fileID: 1340229145}
   - 65: {fileID: 1340229146}
   m_Layer: 0
-  m_Name: Storage
+  m_Name: Storage1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

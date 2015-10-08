@@ -38,9 +38,11 @@ public class Tutorial : MonoBehaviour {
 	public Sprite Health_Bar;
 
 	void Start () {
-		GameObject.Find("Tech Light").GetComponent<Light>().enabled = false;
-		GameObject.Find("Console Light").GetComponent<Light>().enabled = false;
-		GameObject.Find("Bedroom Light").GetComponent<Light>().enabled = false;
+		if (Application.loadedLevelName == "SaveSpot") {
+			GameObject.Find ("Tech Light").GetComponent<Light> ().enabled = false;
+			GameObject.Find ("Console Light").GetComponent<Light> ().enabled = false;
+			GameObject.Find ("Bedroom Light").GetComponent<Light> ().enabled = false;
+		}
 
 		this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 

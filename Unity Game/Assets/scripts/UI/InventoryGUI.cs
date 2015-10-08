@@ -8,7 +8,6 @@ public class InventoryGUI : MonoBehaviour {
 	public static bool showInventory{ get; private set; }
 	public static bool showStorage{ get; private set; }
 	private PlayerController playerScript;
-	public Texture2D icon;
 	
 	public static bool hasCollided {get; set;}
 	public static bool HUDshows {get; set;}
