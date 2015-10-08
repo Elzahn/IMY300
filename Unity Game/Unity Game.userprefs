@@ -1,15 +1,15 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Miscellaneous\GameCredits.txt">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\UI\MenuScript.cs">
     <Files>
-      <File FileName="Assets\Miscellaneous\GameCredits.txt" Line="1" Column="82" />
-      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\UI\MenuScript.cs" Line="11" Column="47" />
+      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="3" Column="1" />
       <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\World\Loot.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\UI\HUD.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Player\Collisions.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\UI\StorageList.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\UI\LootScrollList.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\UI\LootScrollList.cs" Line="2" Column="23" />
       <File FileName="Assets\scripts\Enemies\TutorialSpawner.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\UI\InventoryGUI.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\UI\PlaceInList.cs" Line="1" Column="1" />
@@ -34,10 +34,9 @@
             </Node>
           </Node>
           <Node name="Assembly-CSharp-firstpass" expanded="True">
-            <Node name="Miscellaneous" expanded="True">
-              <Node name="GameCredits.txt" selected="True" />
-            </Node>
+            <Node name="Miscellaneous" expanded="True" />
           </Node>
+          <Node name="Assembly-UnityScript-firstpass" selected="True" />
         </State>
       </Pad>
     </Pads>
