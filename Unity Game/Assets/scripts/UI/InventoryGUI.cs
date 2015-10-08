@@ -32,7 +32,7 @@ public class InventoryGUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!playerScript.paused) {
+		if (!playerScript.paused) {//if not paused
 
 			if(hasCollided && this.GetComponent<Tutorial>().teachStorage){
 				Hud.makeInteractionHint("Press E to open storage", GameObject.Find("Player").GetComponent<SaveSpotTeleport>().pressE);
@@ -47,28 +47,35 @@ public class InventoryGUI : MonoBehaviour {
 			}
 
 			if(Application.loadedLevelName == "Tutorial" || Application.loadedLevelName == "SaveSpot"){
-				if (Input.GetKeyDown (KeyCode.Escape) && !this.GetComponent<Tutorial>().startTutorial){
+				if (!playerScript.showQuit && Input.GetKeyDown (KeyCode.Escape) && !this.GetComponent<Tutorial>().startTutorial){
 					playerScript.showQuit = true;
 				}
-			} else {
-				if (Input.GetKeyDown (KeyCode.Escape) && !this.GetComponent<Tutorial>().startTutorial && !this.GetComponent<LoadingScreen>().loading){
+			} else if(Application.loadedLevelName != "Main_Menu"){
+				if (!playerScript.showQuit && Input.GetKeyDown (KeyCode.Escape) && !this.GetComponent<Tutorial>().startTutorial && !this.GetComponent<LoadingScreen>().loading){
 					playerScript.showQuit = true;
 				}
 			}
 
 		} else {
-			if (Input.GetKeyDown (KeyCode.Escape) && !this.GetComponent<Tutorial>().startTutorial && !this.GetComponent<LoadingScreen>().loading){
-				playerScript.showQuit = false;
-				playerScript.paused = false;
+			if(Application.loadedLevelName == "Tutorial" || Application.loadedLevelName == "SaveSpot"){
+				if (playerScript.showQuit && Input.GetKeyDown (KeyCode.Escape) && !this.GetComponent<Tutorial>().startTutorial){
+					playerScript.showQuit = false;
+					playerScript.paused = false;
+				}
+			} else  if(Application.loadedLevelName != "Main_Menu"){
+				if (playerScript.showQuit && Input.GetKeyDown (KeyCode.Escape) && !this.GetComponent<Tutorial>().startTutorial && !this.GetComponent<LoadingScreen>().loading){
+					playerScript.showQuit = false;
+					playerScript.paused = false;
+				}
 			}
 
 			if (Input.GetKeyDown (KeyCode.E) || Input.GetKeyDown(KeyCode.Escape)) {
 				if (showStorage) {
 					closeStorage ();
-				}
+				} 
 			}
 
-			if (Input.GetKeyDown (KeyCode.I) || Input.GetKeyDown(KeyCode.Escape)) {
+			if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown (KeyCode.I)){
 				if (showInventory) {
 					closeInventory ();
 				}
@@ -77,7 +84,7 @@ public class InventoryGUI : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider col){
-		if (col.name == "Storage") {
+		if (col.tag == "Storage") {
 			hasCollided = true;
 		}
 	}
@@ -109,13 +116,15 @@ public class InventoryGUI : MonoBehaviour {
 	public void openInventory(){
 		GameObject planet = GameObject.Find ("Planet");
 		if (this.GetComponent<Tutorial> ().teachInventory) {
-			GameObject.Find("Hint").GetComponent<Image>().enabled = false;
-			GameObject.Find("Hint_Image").GetComponent<Image>().enabled = false;
-			GameObject.Find("Hint_Text").GetComponent<Text>().enabled = false;
-			GameObject.Find("Interaction").GetComponent<Image>().enabled = false;
-			GameObject.Find("Interaction_Image").GetComponent<Image>().enabled = false;
-			GameObject.Find("Interaction_Text").GetComponent<Text>().enabled = false;
 			if((Application.loadedLevelName == "Scene" && !planet.GetComponent<LoadingScreen>().loading) || Application.loadedLevelName != "Scene"){
+				//Disabled so it isn't in the way
+				GameObject.Find("Hint").GetComponent<Image>().enabled = false;
+				GameObject.Find("Hint_Image").GetComponent<Image>().enabled = false;
+				GameObject.Find("Hint_Text").GetComponent<Text>().enabled = false;
+				GameObject.Find("Interaction").GetComponent<Image>().enabled = false;
+				GameObject.Find("Interaction_Image").GetComponent<Image>().enabled = false;
+				GameObject.Find("Interaction_Text").GetComponent<Text>().enabled = false;
+
 				Inventory.enabled = true;
 				showInventory = true;
 				HUDshows = true;

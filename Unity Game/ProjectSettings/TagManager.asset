@@ -20,6 +20,7 @@ TagManager:
   - Expand
   - StorageList
   - LootList
+  - Storage
   layers:
   - Default
   - TransparentFX

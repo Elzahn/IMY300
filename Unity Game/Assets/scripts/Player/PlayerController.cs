@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public bool run, moving, showQuit;
     private int screenshotCount;
     
+	private Canvas MainMenu;
     private Sounds sound;
     public Vector3 moveDir { get; set; }
     public bool showAttack { get; private set; }
@@ -41,6 +42,8 @@ public class PlayerController : MonoBehaviour
 	}*/
 
     private void Start() {
+		MainMenu = GameObject.Find ("MainMenu").GetComponent<Canvas> ();
+		MainMenu.enabled = false;
         playerAttributes = GetComponent<PlayerAttributes>();
         paused = false;
 		GameObject.Find("Death").GetComponent<Canvas>().enabled = false;
@@ -380,6 +383,19 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate() {
+		if (showQuit) {
+			MainMenu.enabled = true;
+			paused = true;
+			if(GameObject.Find("MenuMask").GetComponent<Image>().fillAmount < 1){
+				GameObject.Find("MenuMask").GetComponent<Image>().fillAmount += 0.01f;
+			}
+		} else {
+			if(GameObject.Find("MenuMask").GetComponent<Image>().fillAmount > 0){
+				GameObject.Find("MenuMask").GetComponent<Image>().fillAmount -= 0.01f;
+			} else if(GameObject.Find("MenuMask").GetComponent<Image>().fillAmount == 0){
+				MainMenu.enabled = false;
+			}
+		}
         if (!paused) {
             var rBody = GetComponent<Rigidbody>();
             rBody.MovePosition(rBody.position + transform.TransformDirection(moveDir)*moveSpeed*Time.deltaTime);
@@ -413,7 +429,7 @@ public class PlayerController : MonoBehaviour
 		Application.Quit();
 	}
 
-    private void OnGUI() {
+   /* private void OnGUI() {
        if (showQuit) {
             paused = true;
             var boxHeigh = 150;
@@ -434,5 +450,5 @@ public class PlayerController : MonoBehaviour
                 paused = false;
             }
         }
-    }
+    }*/
 }

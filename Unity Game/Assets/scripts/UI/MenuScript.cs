@@ -43,6 +43,7 @@ public class MenuScript : MonoBehaviour {
 		Application.LoadLevel ("SaveSpot");
 		
 		player.GetComponent<Tutorial>().startTutorial = true;
+		GameObject.Find ("HUD").GetComponent<Canvas> ().enabled = true;
 		player.transform.rotation = Quaternion.Euler (351.66f, 179.447f, 358.8f);
 		player.transform.up = Vector3.up;
 		player.transform.position = new Vector3 (10.88f, 79.831f, -11.14f);
@@ -79,6 +80,7 @@ public class MenuScript : MonoBehaviour {
 		try{
 			attributesScript.load (slot);
 		} catch (IOException exception){
+			print (exception);
 			error = true;
 			errorPopup.SetActive (true);
 			errorTime = Time.time;
@@ -88,6 +90,8 @@ public class MenuScript : MonoBehaviour {
 			player.transform.rotation = Quaternion.Euler (351.66f, 179.447f, 358.8f);
 			player.transform.up = Vector3.up;
 			player.transform.position = new Vector3 (10.88f, 79.831f, -11.14f);
+			GameObject.Find ("HUD").GetComponent<Canvas> ().enabled = true;
+			Application.LoadLevel("SaveSpot");
 		}
 	}
 
@@ -95,6 +99,22 @@ public class MenuScript : MonoBehaviour {
 		if (Time.time >= errorTime + checkTime && errorTime != 0f) {
 			errorPopup.SetActive(false);
 			errorTime = 0f;
+		}
+	}
+
+	public void hovering(){
+		Color textColor;
+		Color.TryParseHexString("#95E0FFFF", out textColor);
+		Text[] temp = this.GetComponentsInChildren<Text> ();
+		foreach (Text t in temp) {
+			t.color = textColor;
+		}
+	}
+
+	public void notHovering(){
+		Text[] temp = this.GetComponentsInChildren<Text> ();
+		foreach (Text t in temp) {
+			t.color = Color.white;
 		}
 	}
 }

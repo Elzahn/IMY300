@@ -827,7 +827,7 @@ public class PlayerAttributes : MonoBehaviour {
 			temp = (AttributeContainer)bformatter.Deserialize(stream);
 			stream.Close();
 			
-			if (temp != null) {
+			if (temp != null && temp.level != 0) {
 				return (File.GetCreationTime(saveName) + "\nLevel: " + temp.level + "\nXp: " + temp.xp + "/" + levelXP(temp.level+1));
 			}
 		} catch (IOException) {
