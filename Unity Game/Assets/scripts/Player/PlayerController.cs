@@ -261,120 +261,122 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     private void Update() {
-        checkIfAttackPossible();
+		if (Application.loadedLevelName != "Main_Menu") {
+			checkIfAttackPossible ();
 
-        checkScreenshot();
+			checkScreenshot ();
 
-        moveSpeed = playerAttributes.speed;
-        /**
+			moveSpeed = playerAttributes.speed;
+			/**
 		 * P Pauses or unpausese
 		 * Only if showpause the same as pause.
 		 * */
-        if (Input.GetKeyDown(KeyCode.P)) {
-            if (Application.loadedLevelName != "Scene" ||
-                (Application.loadedLevelName == "Scene" &&
-                 !GameObject.Find("Planet").GetComponent<LoadingScreen>().loading)) {
-                paused = !paused;
-				if(GameObject.Find("Popup").GetComponent<Canvas>().enabled){
-					GameObject.Find("Popup").GetComponent<Canvas>().enabled = false;
-				} else {
-					GameObject.Find("Popup").GetComponent<Canvas>().enabled = true;
-					sound.pauseSound("computer");
+			if (Input.GetKeyDown (KeyCode.P)) {
+				if (Application.loadedLevelName != "Scene" ||
+					(Application.loadedLevelName == "Scene" &&
+					!GameObject.Find ("Planet").GetComponent<LoadingScreen> ().loading)) {
+					paused = !paused;
+					if (GameObject.Find ("Popup").GetComponent<Canvas> ().enabled) {
+						GameObject.Find ("Popup").GetComponent<Canvas> ().enabled = false;
+					} else {
+						GameObject.Find ("Popup").GetComponent<Canvas> ().enabled = true;
+						sound.pauseSound ("computer");
+					}
 				}
-            }
-        }
+			}
 
-        var animatorComponent = GetComponent<Animator>();
-        if (paused) {
-            animatorComponent.speed = 0;
-            moveSpeed = 0;
-        } else {
-            playAnimation();
+			var animatorComponent = GetComponent<Animator> ();
+			if (paused) {
+				animatorComponent.speed = 0;
+				moveSpeed = 0;
+			} else {
+				playAnimation ();
 
-            keysCheck();
+				keysCheck ();
 
-            if (playerAttributes.isDead()) {
-				GameObject.Find("Death").GetComponent<Canvas>().enabled = true;
-                GetComponent<Sounds>().stopAlarmSound(Sounds.LOW_HEALTH_ALARM);
-                paused = true;
-            }
+				if (playerAttributes.isDead ()) {
+					GameObject.Find ("Death").GetComponent<Canvas> ().enabled = true;
+					GetComponent<Sounds> ().stopAlarmSound (Sounds.LOW_HEALTH_ALARM);
+					paused = true;
+				}
 
-            if (Input.GetKey(KeyCode.LeftShift) && playerAttributes.stamina > 0 &&
-                Application.loadedLevelName != "SaveSpot" &&
-                (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)) {
-                if (GameObject.Find("Stamina").GetComponent<Image>().isActiveAndEnabled == false) {
-                    GameObject.Find("Stamina").GetComponent<Image>().enabled = true;
-                }
-                run = true;
-                moveSpeed *= RUN_MULT;
-                playerAttributes.drainStamina();
-                if (sound.characterAudio.isPlaying && sound.characterClip == Sounds.PLANET_WALKING) {
-                    sound.stopSound("character");
-                }
+				if (Input.GetKey (KeyCode.LeftShift) && playerAttributes.stamina > 0 &&
+					Application.loadedLevelName != "SaveSpot" &&
+					(Input.GetAxis ("Horizontal") != 0 || Input.GetAxis ("Vertical") != 0)) {
+					if (GameObject.Find ("Stamina").GetComponent<Image> ().isActiveAndEnabled == false) {
+						GameObject.Find ("Stamina").GetComponent<Image> ().enabled = true;
+					}
+					run = true;
+					moveSpeed *= RUN_MULT;
+					playerAttributes.drainStamina ();
+					if (sound.characterAudio.isPlaying && sound.characterClip == Sounds.PLANET_WALKING) {
+						sound.stopSound ("character");
+					}
 
-                if (!sound.characterAudio.isPlaying) {
-                    sound.playCharacterSound(Sounds.PLANET_RUNNING);
-                }
+					if (!sound.characterAudio.isPlaying) {
+						sound.playCharacterSound (Sounds.PLANET_RUNNING);
+					}
 
-                animatorComponent.SetBool("Running", true);
+					animatorComponent.SetBool ("Running", true);
 
-			} else if((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)) {
-                run = false;
-                animatorComponent.SetBool("Running", false);
-                if (sound.characterAudio.isPlaying && sound.characterClip == Sounds.PLANET_RUNNING) {
-                    sound.stopSound("character");
-                }
-                if (!sound.characterAudio.isPlaying) {
-                    if (Application.loadedLevelName == "SaveSpot") {
-                        sound.playCharacterSound(Sounds.SHIP_WALKING);
-                    } else {
-                        sound.playCharacterSound(Sounds.PLANET_WALKING);
-                    }
-                }
-            }
+				} else if ((Input.GetAxis ("Horizontal") != 0 || Input.GetAxis ("Vertical") != 0)) {
+					run = false;
+					animatorComponent.SetBool ("Running", false);
+					if (sound.characterAudio.isPlaying && sound.characterClip == Sounds.PLANET_RUNNING) {
+						sound.stopSound ("character");
+					}
+					if (!sound.characterAudio.isPlaying) {
+						if (Application.loadedLevelName == "SaveSpot") {
+							sound.playCharacterSound (Sounds.SHIP_WALKING);
+						} else {
+							sound.playCharacterSound (Sounds.PLANET_WALKING);
+						}
+					}
+				}
 
-            if ((Input.GetAxis("Vertical") != 0 || Input.GetAxisRaw("Horizontal") != 0)) {
-                moving = true;
-                if (Input.GetAxis("Vertical") == 0 && Input.GetAxis("Horizontal") < 0) {
-                    animatorComponent.SetBool("MovingLeft", moving);
-                    animatorComponent.SetBool("MovingRight", false);
-                    animatorComponent.SetBool("MovingStraight", false);
-                } else if (Input.GetAxis("Vertical") == 0 && Input.GetAxis("Horizontal") > 0) {
-                    animatorComponent.SetBool("MovingRight", moving);
-                    animatorComponent.SetBool("MovingStraight", false);
-                    animatorComponent.SetBool("MovingLeft", false);
-                } else {
-                    animatorComponent.SetBool("MovingStraight", moving);
-                    animatorComponent.SetBool("MovingRight", false);
-                    animatorComponent.SetBool("MovingLeft", false);
-                }
-            }
+				if ((Input.GetAxis ("Vertical") != 0 || Input.GetAxisRaw ("Horizontal") != 0)) {
+					moving = true;
+					if (Input.GetAxis ("Vertical") == 0 && Input.GetAxis ("Horizontal") < 0) {
+						animatorComponent.SetBool ("MovingLeft", moving);
+						animatorComponent.SetBool ("MovingRight", false);
+						animatorComponent.SetBool ("MovingStraight", false);
+					} else if (Input.GetAxis ("Vertical") == 0 && Input.GetAxis ("Horizontal") > 0) {
+						animatorComponent.SetBool ("MovingRight", moving);
+						animatorComponent.SetBool ("MovingStraight", false);
+						animatorComponent.SetBool ("MovingLeft", false);
+					} else {
+						animatorComponent.SetBool ("MovingStraight", moving);
+						animatorComponent.SetBool ("MovingRight", false);
+						animatorComponent.SetBool ("MovingLeft", false);
+					}
+				}
 
-            if (!Camera.main.GetComponent<CameraControl>().birdsEye) {
-                if (playerAttributes.dizzy) {
-                    moveDir = new Vector3(Input.GetAxisRaw("Vertical"), 0, Input.GetAxisRaw("Horizontal")).normalized;
-                } else {
-                    moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
-                }
-            }
+				if (!Camera.main.GetComponent<CameraControl> ().birdsEye) {
+					if (playerAttributes.dizzy) {
+						moveDir = new Vector3 (Input.GetAxisRaw ("Vertical"), 0, Input.GetAxisRaw ("Horizontal")).normalized;
+					} else {
+						moveDir = new Vector3 (Input.GetAxisRaw ("Horizontal"), 0, Input.GetAxisRaw ("Vertical")).normalized;
+					}
+				}
 
-            /*if (Input.GetAxisRaw ("Jump") == 1) {
+				/*if (Input.GetAxisRaw ("Jump") == 1) {
 				jumping = true;			
 			}*/
 
 
-            if (Input.GetAxis("Vertical") == 0 && Input.GetAxis("Horizontal") == 0) {
-                moving = false;
-                animatorComponent.SetBool("MovingStraight", moving);
-                animatorComponent.SetBool("MovingRight", moving);
-                animatorComponent.SetBool("MovingLeft", moving);
-                animatorComponent.SetBool("Running", moving);
+				if (Input.GetAxis ("Vertical") == 0 && Input.GetAxis ("Horizontal") == 0) {
+					moving = false;
+					animatorComponent.SetBool ("MovingStraight", moving);
+					animatorComponent.SetBool ("MovingRight", moving);
+					animatorComponent.SetBool ("MovingLeft", moving);
+					animatorComponent.SetBool ("Running", moving);
 
-				if(sound.characterClip == Sounds.PLANET_RUNNING || sound.characterClip == Sounds.PLANET_WALKING || sound.characterClip == Sounds.SHIP_WALKING){
-                	GetComponent<Sounds>().stopSound("character");
+					if (sound.characterClip == Sounds.PLANET_RUNNING || sound.characterClip == Sounds.PLANET_WALKING || sound.characterClip == Sounds.SHIP_WALKING) {
+						GetComponent<Sounds> ().stopSound ("character");
+					}
 				}
-            }
-        }
+			}
+		}
     }
 
     private void FixedUpdate() {

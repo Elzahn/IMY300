@@ -80,6 +80,7 @@ public class Sounds : MonoBehaviour {
 	public const int PLANET_4_AMBIENCE = 5;
 	public const int PLANET_5_AMBIENCE = 6;
 
+
 	//Computer sounds
 	public const int COMPUTER_WARP = 0;
 	public const int COMPUTER_SATELLITE = 1;

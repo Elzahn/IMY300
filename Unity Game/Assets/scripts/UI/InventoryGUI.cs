@@ -25,7 +25,7 @@ public class InventoryGUI : MonoBehaviour {
 		showStorage = false;
 		Inventory = GameObject.Find ("Inventory").GetComponent<Canvas> ();
 		Inventory.enabled = false;
-		//Storage = GameObject.Find ("Storage").GetComponent<Canvas> ();
+		Storage = GameObject.Find ("Storage").GetComponent<Canvas> ();
 //		Storage.enabled = false;
 		playerScript = this.GetComponent<PlayerController> ();
 	}

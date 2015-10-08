@@ -60,7 +60,7 @@ public class Tutorial : MonoBehaviour {
 		sound = GameObject.Find("Player").GetComponent<Sounds>();
 
 		showVisuals = true;
-		startTutorial = true;
+		startTutorial = false;
 		tutorialDone = false;
 		teachStorage = false;
 		teachInventory = false;
@@ -106,9 +106,7 @@ public class Tutorial : MonoBehaviour {
 
 					if (hint.fillAmount <= 0 && hintText.text == Loot.inventoryHintText) {
 						Loot.showInventoryHint = false;
-					}/* else if(hint.fillAmount <= 0){
-						GameObject.Find("Player").GetComponent<SaveSpotTeleport>().showedHealthHint = false;
-					}*/
+					}
 				}
 			} else if(Application.loadedLevelName == "Scene"){
 				if(moveHintOnScreen){
@@ -150,10 +148,6 @@ public class Tutorial : MonoBehaviour {
 			if(hint.fillAmount <= 0 && hintText.text == "Access the satelites with "){
 				makeHint ("Run with left shift + W/A/S/D. Just remember that running and attacks deplete your stamina.", Run);
 			}
-
-			//if(hint.fillAmount <= 0 && hintText.text == "Remember to watch your health during a battle."){
-				
-			//}
 
 			if(Application.loadedLevelName == "Tutorial"){
 				sound.resumeSound("all");

@@ -1,26 +1,24 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Player\Tutorial.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\UI\Settings.cs">
     <Files>
-      <File FileName="Assets\scripts\UI\MenuScript.cs" Line="9" Column="2" />
-      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="161" Column="50" />
-      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="812" Column="18" />
-      <File FileName="Assets\scripts\World\Loot.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\UI\HUD.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Player\Collisions.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\UI\StorageList.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\UI\LootScrollList.cs" Line="2" Column="23" />
-      <File FileName="Assets\scripts\Enemies\TutorialSpawner.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\UI\InventoryGUI.cs" Line="146" Column="1" />
-      <File FileName="Assets\scripts\UI\PlaceInList.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\UI\Equip.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\UI\InventoryScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Player\Tutorial.cs" Line="41" Column="1" />
-      <File FileName="Assets\scripts\UI\InventoryGUI.cs" Line="30" Column="1" />
+      <File FileName="Assets\scripts\UI\MenuScript.cs" Line="64" Column="4" />
+      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="101" Column="43" />
+      <File FileName="Assets\scripts\UI\Settings.cs" Line="11" Column="22" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True" selected="True" />
+        <State expanded="True">
+          <Node name="Assembly-CSharp" expanded="True">
+            <Node name="scripts" expanded="True">
+              <Node name="Player" expanded="True" />
+              <Node name="UI" expanded="True">
+                <Node name="Settings.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

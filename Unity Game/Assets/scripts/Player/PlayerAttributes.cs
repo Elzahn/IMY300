@@ -95,6 +95,10 @@ public class PlayerAttributes : MonoBehaviour {
 	public bool fallFirst{ get; set;}
 	public bool doorOpen{ get; set; }
 
+	//Settings values
+	public float difficulty { get; set; }
+	public float soundVolume { get; set; }
+	public float narrativeShown { get; set; }
 	/**
 	 * Singleton
 	 */
@@ -307,6 +311,10 @@ public class PlayerAttributes : MonoBehaviour {
 	 * Update - Called Every frame
 	 * ***********************************************************************************************************************/
 	void Start () {
+		narrativeShown = 1;
+		difficulty = 2;
+		soundVolume = 1;
+
 		showWarpHint = true;
 		showLevelUp = false;
 		fallFirst = true;
@@ -788,7 +796,6 @@ public class PlayerAttributes : MonoBehaviour {
 		return message;
 	}
 
-
     private int BaseDamage
     {
         get { return Mathf.RoundToInt((ATTACK_BASE + level - 1)*Mathf.Pow(ATTACK_MULT, level - 1)); }
@@ -809,6 +816,26 @@ public class PlayerAttributes : MonoBehaviour {
 		return "saves/save_" + slot + ".sav";
 	}
 
+	public String readData(int slot){
+		AttributeContainer temp;
+		try {
+			var saveName = getSaveName(slot);
+			if (!File.Exists(saveName))
+				return "No save file";
+			Stream stream = File.Open(saveName, FileMode.Open);
+			BinaryFormatter bformatter = new BinaryFormatter();		
+			temp = (AttributeContainer)bformatter.Deserialize(stream);
+			stream.Close();
+			
+			if (temp != null) {
+				return (File.GetCreationTime(saveName) + "\nLevel: " + temp.level + "\nXp: " + temp.xp + "/" + levelXP(temp.level+1));
+			}
+		} catch (IOException) {
+			return "No save file";
+		}
+		return "No save file";
+	}
+	
 	public void load(int slot) {
 		AttributeContainer temp;
 		try {
@@ -816,9 +843,9 @@ public class PlayerAttributes : MonoBehaviour {
             if (!File.Exists(saveName))
                 throw new IOException("Save file doesnt exsit");
 		    Stream stream = File.Open(saveName, FileMode.Open);
-		BinaryFormatter bformatter = new BinaryFormatter();		
-		temp = (AttributeContainer)bformatter.Deserialize(stream);
-		stream.Close();
+			BinaryFormatter bformatter = new BinaryFormatter();		
+			temp = (AttributeContainer)bformatter.Deserialize(stream);
+			stream.Close();
 
 			if (temp != null) {
 				myAttributes = temp;
@@ -827,6 +854,5 @@ public class PlayerAttributes : MonoBehaviour {
 		} catch (IOException) {
 			throw(new IOException("Cannot load savegame."));
 		}
-
 	}
 }
