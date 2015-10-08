@@ -10,13 +10,13 @@ public class MenuScript : MonoBehaviour {
 	private PlayerAttributes attributesScript;
 
 	void Start(){
-		attributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
-		GameObject.Find ("Player").GetComponent<Tutorial> ().enabled = false;
+		//attributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
+		//GameObject.Find ("Player").GetComponent<Tutorial> ().enabled = false;
 	}
 
 	public void changeFont(){
 		Text textMesh = this.GetComponentInChildren<Text>();
-
+		print (this);
 		if (textMesh.font == defaultFont) {
 			textMesh.font = alienFont;
 			Color textColor;
