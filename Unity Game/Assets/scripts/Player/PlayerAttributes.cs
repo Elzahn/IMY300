@@ -19,34 +19,76 @@ public class PlayerAttributes : MonoBehaviour {
 		public bool dizzy;
 		
 		public char gender;
-
 		public int currentLevel;
 
 		public Weapon weapon;
+		public LinkedList <Accessory> accessories = new LinkedList<Accessory>();
 
 		public LinkedList <InventoryItem> inventory = new LinkedList<InventoryItem>();
 		public LinkedList <InventoryItem> storage = new LinkedList<InventoryItem> ();
 		public LinkedList <InventoryItem> inventory_LevelStart = new LinkedList<InventoryItem>();
 		public LinkedList <InventoryItem> storage_LevelStart = new LinkedList<InventoryItem>();
-		public LinkedList <Accessory> accessories = new LinkedList<Accessory>();
+		
+		public float difficulty;
+		public float soundVolume;
+		public float narrativeShown;
+
+		public float levelUpShown;
+		public bool fallFirst;
+		public bool doorOpen;
+		public bool justWarped;
 
 		public void GetObjectData (SerializationInfo info, StreamingContext context)
 		{
 			info.AddValue("xp", xp);
+			info.AddValue("hp", hp);
+			info.AddValue("level", level);
+			info.AddValue("stamina", stamina);
+
+			info.AddValue("dizzy", dizzy);
+			info.AddValue("gender", gender);
 			info.AddValue("levels", currentLevel);
+
 			info.AddValue("inventory", inventory);
 			info.AddValue("storage", storage);
+
 			info.AddValue("weapon", weapon);
 			info.AddValue("accessories", accessories);
+
+			info.AddValue("difficulty", difficulty);
+			info.AddValue("soundVolume", soundVolume);
+			info.AddValue("narrativeShown", narrativeShown);
+
+			info.AddValue("levelUpShown", levelUpShown);
+			info.AddValue("fallFirst", fallFirst);
+			info.AddValue("doorOpen", doorOpen);
+			info.AddValue("justWraped", justWarped);
 		}
 		
 		AttributeContainer(SerializationInfo info, StreamingContext context) {
-			xp = (int)info.GetValue("xp", typeof(int));
+			xp 		= (int)  info.GetValue("xp",	 typeof(int));
+			hp 		= (int)  info.GetValue("hp", 	 typeof(int));
+			level 	= (int)  info.GetValue("level",  typeof(int));
+			stamina = (float)info.GetValue("stamina",typeof(float));
 
-			currentLevel = (int)info.GetValue("levels", typeof(int));
-			inventory = (LinkedList<InventoryItem>) info.GetValue("inventory", typeof(LinkedList<InventoryItem>));
-			storage = (LinkedList<InventoryItem>) info.GetValue("storage", typeof(LinkedList<InventoryItem>));
+			dizzy 		= (bool) info.GetValue("dizzy",  typeof(bool));
+			gender 	 	= (char) info.GetValue("gender", typeof(char));
+			currentLevel = (int) info.GetValue("levels", typeof(int));
 
+			inventory 	= (LinkedList<InventoryItem>) info.GetValue("inventory", typeof(LinkedList<InventoryItem>));
+			storage 	= (LinkedList<InventoryItem>) info.GetValue("storage",   typeof(LinkedList<InventoryItem>));
+
+			weapon 		= (Weapon) info.GetValue("weapon", typeof(Weapon));
+			accessories = (LinkedList <Accessory>) info.GetValue("accessories", typeof(LinkedList <Accessory>));
+
+			difficulty 		= (float) info.GetValue("difficulty",     typeof(float));
+			soundVolume 	= (float) info.GetValue("soundVolume", 	  typeof(float));
+			narrativeShown 	= (float) info.GetValue("narrativeShown", typeof(float));
+
+			levelUpShown = (float) info.GetValue("levelUpShown", typeof(float));
+			fallFirst 	 = (bool) info.GetValue("fallFirst",  typeof(bool));
+			doorOpen 	 = (bool) info.GetValue("doorOpen",   typeof(bool));
+			justWarped 	 = (bool) info.GetValue("justWraped", typeof(bool));
 			/**
 			 * Saving & loading only between levels
 			 * */
@@ -90,21 +132,44 @@ public class PlayerAttributes : MonoBehaviour {
 
 	private Sounds soundComponent;
 	private PlayerController controllerComponent;
-	private float levelUpShown;
 
-	public bool fallFirst{ get; set;}
-	public bool doorOpen{ get; set; }
+	private float levelUpShown {
+		get {return myAttributes.levelUpShown;}
+		set {myAttributes.levelUpShown = value;}
+	}
+	public bool fallFirst{ 
+		get {return myAttributes.fallFirst;} 
+		set {myAttributes.fallFirst = value;}
+	}
+	public bool doorOpen{ 
+		get {return myAttributes.doorOpen; }
+		set {myAttributes.doorOpen = value;} 
+	}	
+	public bool justWarped { 
+		get {return myAttributes.justWarped;}
+		set {myAttributes.justWarped = value;} 
+	}
 
 	//Settings values
-	public float difficulty { get; set; }
-	public float soundVolume { get; set; }
-	public float narrativeShown { get; set; }
+	public float difficulty { 
+		get {return myAttributes.difficulty; }
+		set {myAttributes.difficulty = value;}
+	}
+
+	public float soundVolume {
+		get {return myAttributes.soundVolume;}
+		set {myAttributes.soundVolume = value;} 
+	}
+	public float narrativeShown { 
+		get {return myAttributes.narrativeShown;}
+		set {myAttributes.narrativeShown = value;}
+	}
+
 	/**
 	 * Singleton
 	 */
 	public static PlayerAttributes instance;
 
-	public bool justWarped { get; set; }
 
 	/****************************************************** Inventory en goed  *****************************************************/
 	public LinkedList <InventoryItem> inventory {
@@ -849,10 +914,9 @@ public class PlayerAttributes : MonoBehaviour {
 
 			if (temp != null) {
 				myAttributes = temp;
-				setInitialXp(xp);
 			}
-		} catch (IOException) {
-			throw(new IOException("Cannot load savegame."));
+		} catch (Exception e) {
+			throw new Exception("Cannot load savegame: " + e.Message);
 		}
 	}
 }
