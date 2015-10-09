@@ -160,7 +160,7 @@ public class Tutorial : MonoBehaviour {
 			}
 		}
 
-		if (startTutorial) {
+		if (startTutorial && !Application.isLoadingLevel) {
 			if (justStarted) {
 				playIntro ();
 			}

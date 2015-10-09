@@ -15,7 +15,7 @@ TagManager:
   - WeaponList
   - Equiped
   - Teleporter
-  - HUD_Extend_Text
+  - Button
   - Scrollbar
   - Expand
   - StorageList

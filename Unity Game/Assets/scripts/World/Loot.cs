@@ -39,6 +39,7 @@ public class Loot : MonoBehaviour {
 	public void showMyLoot(){
 		lootToDelete = this.transform.parent.gameObject;
 		GameObject.Find ("Loot").GetComponent<Canvas> ().enabled = true;
+		print ("G");
 		GameObject.Find("Hint").GetComponent<Image>().enabled = false;
 		GameObject.Find("Hint_Image").GetComponent<Image>().enabled = false;
 		GameObject.Find("Hint_Text").GetComponent<Text>().enabled = false;
