@@ -25,7 +25,7 @@ public class MenuScript : MonoBehaviour {
 	}
 
 	public void changeFont(){
-	//	if (GameObject.Find ("Play").GetComponent<Button> ().interactable == true) {
+		if (this.GetComponent<Button> ().interactable == true) {
 			Text textMesh = this.GetComponentInChildren<Text> ();
 
 			if (textMesh.font == defaultFont) {
@@ -38,7 +38,7 @@ public class MenuScript : MonoBehaviour {
 				textMesh.font = defaultFont;
 				textMesh.color = Color.white;
 			}
-	//	}
+		}
 	}
 
 	public void play(){
@@ -55,7 +55,6 @@ public class MenuScript : MonoBehaviour {
 	public void load(){
 		disableCanvas ();
 		loadCanvas.enabled = true;
-		print(GameObject.Find ("Slot2").transform.FindChild ("Info"));
 		GameObject.Find ("Autosave").transform.FindChild ("Hovering").FindChild ("Info").GetComponent<Text> ().text = attributesScript.readData (0);
 		GameObject.Find ("Slot1").transform.FindChild ("Hovering").FindChild ("Info").GetComponent<Text> ().text = attributesScript.readData (1);
 		GameObject.Find ("Slot2").transform.FindChild ("Hovering").FindChild ("Info").GetComponent<Text> ().text = attributesScript.readData (2);
@@ -128,17 +127,17 @@ public class MenuScript : MonoBehaviour {
 	}
 
 	public void disableCanvas (){
-		GameObject.Find ("Play").GetComponent<Button> ().interactable = false;
-		GameObject.Find ("Load").GetComponent<Button> ().interactable = false;
-		GameObject.Find ("Settings").GetComponent<Button> ().interactable = false;
-		GameObject.Find ("Quit").GetComponent<Button> ().interactable = false;
+		GameObject.Find ("Canvas").transform.FindChild("Play").GetComponent<Button> ().interactable = false;
+		GameObject.Find ("Canvas").transform.FindChild("Load").GetComponent<Button> ().interactable = false;
+		GameObject.Find ("Canvas").transform.FindChild("Settings").GetComponent<Button> ().interactable = false;
+		GameObject.Find ("Canvas").transform.FindChild("Quit").GetComponent<Button> ().interactable = false;
 	}
 
 	public void enableCanvas (){
-		GameObject.Find ("Play").GetComponent<Button> ().interactable = true;
-		GameObject.Find ("Load").GetComponent<Button> ().interactable = true;
-		GameObject.Find ("Settings").GetComponent<Button> ().interactable = true;
-		GameObject.Find ("Quit").GetComponent<Button> ().interactable = true;
+		GameObject.Find ("Canvas").transform.FindChild("Play").GetComponent<Button> ().interactable = true;
+		GameObject.Find ("Canvas").transform.FindChild("Load").GetComponent<Button> ().interactable = true;
+		GameObject.Find ("Canvas").transform.FindChild("Settings").GetComponent<Button> ().interactable = true;
+		GameObject.Find ("Canvas").transform.FindChild("Quit").GetComponent<Button> ().interactable = true;
 	}
 
 	public void quitToMenu(){

@@ -7,8 +7,10 @@ public class MovieTexturePlayer : MonoBehaviour {
 	void Start () {
 		var movietexture = GetComponent<Renderer>().material.mainTexture as MovieTexture;
 		// this line of code will make the Movie Texture begin playing
-		movietexture.loop = true;
-		(movietexture).Play();
+		if (movietexture != null) {
+			movietexture.loop = true;
+			(movietexture).Play ();
+		}
 	}
 	
 	// Update is called once per frame
