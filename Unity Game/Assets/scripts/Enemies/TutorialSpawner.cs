@@ -22,11 +22,14 @@ public class TutorialSpawner : MonoBehaviour {
 	private InventoryItem tempItem;
 	private bool monsterDead = false;
 	private int deadEnemies = 0;
+	private PlayerAttributes attributesScript;
 
 	LinkedList<GameObject> enemies = new LinkedList <GameObject> ();
 
 	// Use this for initialization
 	void Start () {
+		attributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
+
 		bossPowerCore = new PowerCore ();
 		tempLoot = new LinkedList<InventoryItem> ();
 
@@ -99,6 +102,7 @@ public class TutorialSpawner : MonoBehaviour {
 				{
 					GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_GOBACK);
 					hudText.text += "I didn’t think you’d survive that… Oh well, return the Power Core to the ship immediately.\n\n";
+					attributesScript.narrativeSoFar += "I didn’t think you’d survive that… Oh well, return the Power Core to the ship immediately.\n\n";
 					Canvas.ForceUpdateCanvases();
 					Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
 					scrollbar.value = 0f;
@@ -138,6 +142,7 @@ public class TutorialSpawner : MonoBehaviour {
 					while(this.GetComponent<NaturalDisasters>().isShaking() == true){}
 					GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_DISASTERD);
 					hudText.text += "Oh fuck, that earthquake scattered some of the essential pieces of the spacecraft across the solar system.\n\n";
+					attributesScript.narrativeSoFar += "Oh fuck, that earthquake scattered some of the essential pieces of the spacecraft across the solar system.\n\n";
 					Canvas.ForceUpdateCanvases();
 					Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
 					scrollbar.value = 0f;

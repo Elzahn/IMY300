@@ -154,7 +154,7 @@ public class PlayerController : MonoBehaviour
         //build cheat to skip cutscenes
 
         //Skip Tutorial
-        if (Input.GetKeyDown(KeyCode.Escape) && GetComponent<Tutorial>().startTutorial) {
+        if (Input.GetKeyDown(KeyCode.Space) && GetComponent<Tutorial>().startTutorial) {
             if (GameObject.Find("Particles") != null) {
                 GameObject.Find("Particles").GetComponentInParent<SphereCollider>().enabled = false;
             }
@@ -396,6 +396,7 @@ public class PlayerController : MonoBehaviour
 				MainMenu.enabled = false;
 			}
 		}
+
         if (!paused) {
             var rBody = GetComponent<Rigidbody>();
             rBody.MovePosition(rBody.position + transform.TransformDirection(moveDir)*moveSpeed*Time.deltaTime);
@@ -428,27 +429,4 @@ public class PlayerController : MonoBehaviour
 		sound.playWorldSound(Sounds.BUTTON);
 		Application.Quit();
 	}
-
-   /* private void OnGUI() {
-       if (showQuit) {
-            paused = true;
-            var boxHeigh = 150;
-            var boxWidth = 250;
-            var top = Screen.height/2 - boxHeigh/2;
-            var left = Screen.width/2 - boxWidth/2;
-            var buttonWidth = 100;
-            var itemHeight = 30;
-
-            GUI.Box(new Rect(left, top, boxWidth, boxHeigh), "Are you sure you want to quit?");
-            if (GUI.Button(new Rect(left + 10, top + 60, buttonWidth, itemHeight), "Yes")) {
-                sound.playWorldSound(Sounds.BUTTON);
-                Application.Quit();
-            }
-            if (GUI.Button(new Rect(left + buttonWidth + 30, top + 60, buttonWidth, itemHeight), "No")) {
-                sound.playWorldSound(Sounds.BUTTON);
-                showQuit = false;
-                paused = false;
-            }
-        }
-    }*/
 }

@@ -335,7 +335,20 @@ public class Sounds : MonoBehaviour {
 		if (worldAudio.isPlaying == false && worldClip == TELEPORTING) {
 			done = true;
 		}
+
+		if (this.GetComponent<PlayerAttributes> ().soundVolume == 0) {
+			AudioSource[] allAudioSources = GameObject.FindObjectsOfType<AudioSource>();
+			foreach(AudioSource audio in allAudioSources){
+				audio.mute = true;
+			}
+		} else {
+			AudioSource[] allAudioSources = GameObject.FindObjectsOfType<AudioSource>();
+			foreach(AudioSource audio in allAudioSources){
+				audio.mute = false;
+			}
+		}
 	}
+
 
 	public void playWorldSound(int clipAt){
 		if (worldAudio.isPlaying == true) {

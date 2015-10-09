@@ -41,6 +41,14 @@ public class HUD : MonoBehaviour {
 		interactionImage = GameObject.Find ("Interaction_Image").GetComponent<Image> ();
 		expandingHUD.fillAmount = 1;
 		expand.enabled = false;
+
+		if (player.GetComponent<PlayerAttributes> ().narrativeShown == 1) {
+			shrinkTheHud = true;
+		} else {
+			shrinkTheHud = false;
+		}
+		
+		showOrHideNarative ();
 	}
 
 	public void turnOffLights(string light){
@@ -85,11 +93,14 @@ public class HUD : MonoBehaviour {
 
 	public void showOrHideNarative(){
 		if (shrinkTheHud) {
+			//0 = hide; 1 = show
+			player.GetComponent<PlayerAttributes>().narrativeShown = 1;
 			shrink.enabled = true;
 			expand.enabled = false;
 			shrinkTheHud = false;
 			expandTheHud = true;
 		} else {
+			player.GetComponent<PlayerAttributes>().narrativeShown = 0;
 			expand.enabled = true;
 			shrink.enabled = false;
 			expandTheHud = false;
@@ -98,6 +109,15 @@ public class HUD : MonoBehaviour {
 	}
 
 	void Update(){
+
+		if (player.GetComponent<PlayerAttributes> ().narrativeShown == 1) {
+			shrinkTheHud = true;
+		} else {
+			shrinkTheHud = false;
+		}
+
+		showOrHideNarative ();
+
 		if (interaction.fillAmount == 0) {
 			interactionImage.GetComponent<Mask>().showMaskGraphic = false;
 		}

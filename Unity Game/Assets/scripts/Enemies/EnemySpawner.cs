@@ -43,7 +43,7 @@ public class EnemySpawner : MonoBehaviour {
 
 	// Use this for initialization
 	public void spawnEnemies (int enemy_count) {	//Previously know as Start
-		ENEM_COUNT = enemy_count;
+		ENEM_COUNT = (int)(enemy_count * GameObject.Find("Player").GetComponent<PlayerAttributes>().difficulty);
 		clearLoot ();
 
 		planet = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();

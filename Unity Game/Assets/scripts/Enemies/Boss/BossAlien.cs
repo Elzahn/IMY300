@@ -29,9 +29,4 @@ public class BossAlien : Enemy {
 		lootChance = 0.65f;
 		maxLoot = 3;
 	}
-	
-	/*void Update () {
-		/* Called once per frame. AI comes Here */
-
-	//}	
 }

@@ -32,6 +32,9 @@ public class PlayerAttributes : MonoBehaviour {
 		public float difficulty;
 		public float soundVolume;
 		public float narrativeShown;
+		public string narrativeSoFar;
+		public bool gotCore;
+
 
 		public float levelUpShown;
 		public bool fallFirst;
@@ -58,6 +61,8 @@ public class PlayerAttributes : MonoBehaviour {
 			info.AddValue("difficulty", difficulty);
 			info.AddValue("soundVolume", soundVolume);
 			info.AddValue("narrativeShown", narrativeShown);
+			info.AddValue ("narrativeSoFar", narrativeSoFar);
+			info.AddValue ("gotCore", gotCore);
 
 			info.AddValue("levelUpShown", levelUpShown);
 			info.AddValue("fallFirst", fallFirst);
@@ -84,6 +89,8 @@ public class PlayerAttributes : MonoBehaviour {
 			difficulty 		= (float) info.GetValue("difficulty",     typeof(float));
 			soundVolume 	= (float) info.GetValue("soundVolume", 	  typeof(float));
 			narrativeShown 	= (float) info.GetValue("narrativeShown", typeof(float));
+			narrativeSoFar = (string) info.GetValue("narrativeSoFar", typeof(string));
+			gotCore = (bool) info.GetValue("gotCore", typeof(bool));
 
 			levelUpShown = (float) info.GetValue("levelUpShown", typeof(float));
 			fallFirst 	 = (bool) info.GetValue("fallFirst",  typeof(bool));
@@ -163,6 +170,16 @@ public class PlayerAttributes : MonoBehaviour {
 	public float narrativeShown { 
 		get {return myAttributes.narrativeShown;}
 		set {myAttributes.narrativeShown = value;}
+	}
+
+	public String narrativeSoFar {
+		get { return myAttributes.narrativeSoFar;}
+		set { myAttributes.narrativeSoFar += value;}
+	}
+
+	public bool gotCore {
+		get { return myAttributes.gotCore;}
+		set { myAttributes.gotCore = value;}
 	}
 
 	/**
@@ -376,9 +393,14 @@ public class PlayerAttributes : MonoBehaviour {
 	 * Update - Called Every frame
 	 * ***********************************************************************************************************************/
 	void Start () {
+		//1 = show; 0 = hide
 		narrativeShown = 1;
-		difficulty = 2;
+		//1 = easy; 2 = difficult
+		difficulty = 1;
+		//0 = mute; 1 = on
 		soundVolume = 1;
+		narrativeSoFar = "";
+		gotCore = false;
 
 		showWarpHint = true;
 		showLevelUp = false;

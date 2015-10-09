@@ -78,6 +78,7 @@ public class Loot : MonoBehaviour {
 			if(showInventoryHint){
 				GameObject.Find("Player").GetComponent<Tutorial>().makeHint(inventoryHintText, GameObject.Find ("Player").GetComponent<Tutorial>().PressI);
 				hudText.text += "Congratz you found a weapon. Now try to use it.\n\n";
+				attributesScript.narrativeSoFar += "Congratz you found a weapon. Now try to use it.\n\n";
 				GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_INVENTORY);
 				Canvas.ForceUpdateCanvases();
 				Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();

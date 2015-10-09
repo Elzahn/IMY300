@@ -25,6 +25,7 @@ public class Tutorial : MonoBehaviour {
 	private bool justArrivedOnPlanet = false;
 	private Sounds sound;
 	private int visualDuration = 7;
+	private PlayerAttributes attribteScript;
 
 	public Sprite Walk;
 	public Sprite Run;
@@ -44,6 +45,7 @@ public class Tutorial : MonoBehaviour {
 			GameObject.Find ("Bedroom Light").GetComponent<Light> ().enabled = false;
 		}
 
+		attribteScript = this.GetComponent<PlayerAttributes>();
 		this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 
 		moveHintOnScreen = false;
@@ -205,6 +207,7 @@ public class Tutorial : MonoBehaviour {
 			if(!sound.computerAudio.isPlaying && sound.computerClip != Sounds.COMPUTER_WARP){
 				sound.playComputerSound(Sounds.COMPUTER_WARP);
 				hudText.text += "\n\nThe ship's Power Core has disengaged during the crash. You'll need to go outside and retrieve it before the emergency power shuts down. I have detected three potentially hostile lifeforms on the planet. They appear to have taken possession of the core. You may need to take aggressive action to retrieve it. Look around to find the teleportation pad and go outside.\n";
+				attribteScript.narrativeSoFar += "\n\nThe ship's Power Core has disengaged during the crash. You'll need to go outside and retrieve it before the emergency power shuts down. I have detected three potentially hostile lifeforms on the planet. They appear to have taken possession of the core. You may need to take aggressive action to retrieve it. Look around to find the teleportation pad and go outside.\n";
 				makeHint("Move around using W/A/S/D", Walk);
 				Canvas.ForceUpdateCanvases();
 				Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
@@ -236,6 +239,7 @@ public class Tutorial : MonoBehaviour {
 				justArrivedOnPlanet = true;
 				sound.playComputerSound (Sounds.COMPUTER_SATELLITE);
 				hudText.text += "\n\nI have linked you to satellites orbiting the planet. This will assist you during your mission.\n\n";
+				attribteScript.narrativeSoFar += "\n\nI have linked you to satellites orbiting the planet. This will assist you during your mission.\n\n";
 				Canvas.ForceUpdateCanvases();
 				Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
 				scrollbar.value = 0f;
@@ -254,6 +258,7 @@ public class Tutorial : MonoBehaviour {
 			sound.playComputerSound (Sounds.COMPUTER_RUN);
 			//makeHint ("Run with left shift + W/A/S/D. Just remember that running and attacks deplete your stamina.", Run);
 			hudText.text += "After you have retrieved the power core from the lifeforms head back to the teleporter to return to the ship.\n\n";
+			attribteScript.narrativeSoFar += "After you have retrieved the power core from the lifeforms head back to the teleporter to return to the ship.\n\n";
 			Canvas.ForceUpdateCanvases();
 			Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
 			scrollbar.value = 0f;

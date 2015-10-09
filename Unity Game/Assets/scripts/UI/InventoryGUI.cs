@@ -47,23 +47,23 @@ public class InventoryGUI : MonoBehaviour {
 			}
 
 			if(Application.loadedLevelName == "Tutorial" || Application.loadedLevelName == "SaveSpot"){
-				if (!playerScript.showQuit && Input.GetKeyDown (KeyCode.Escape) && !this.GetComponent<Tutorial>().startTutorial){
+				if (!playerScript.showQuit && Input.GetKeyDown (KeyCode.Escape)){// && !this.GetComponent<Tutorial>().startTutorial){
 					playerScript.showQuit = true;
 				}
 			} else if(Application.loadedLevelName != "Main_Menu"){
-				if (!playerScript.showQuit && Input.GetKeyDown (KeyCode.Escape) && !this.GetComponent<Tutorial>().startTutorial && !this.GetComponent<LoadingScreen>().loading){
+				if (!playerScript.showQuit && Input.GetKeyDown (KeyCode.Escape) && !GameObject.Find("Planet").GetComponent<LoadingScreen>().loading){// && !this.GetComponent<Tutorial>().startTutorial
 					playerScript.showQuit = true;
 				}
 			}
 
 		} else {
 			if(Application.loadedLevelName == "Tutorial" || Application.loadedLevelName == "SaveSpot"){
-				if (playerScript.showQuit && Input.GetKeyDown (KeyCode.Escape) && !this.GetComponent<Tutorial>().startTutorial){
+				if (playerScript.showQuit && Input.GetKeyDown (KeyCode.Escape)){// && !this.GetComponent<Tutorial>().startTutorial){
 					playerScript.showQuit = false;
 					playerScript.paused = false;
 				}
 			} else  if(Application.loadedLevelName != "Main_Menu"){
-				if (playerScript.showQuit && Input.GetKeyDown (KeyCode.Escape) && !this.GetComponent<Tutorial>().startTutorial && !this.GetComponent<LoadingScreen>().loading){
+					if (playerScript.showQuit && Input.GetKeyDown (KeyCode.Escape) && !GameObject.Find("Planet").GetComponent<LoadingScreen>().loading){//&& !this.GetComponent<Tutorial>().startTutorial
 					playerScript.showQuit = false;
 					playerScript.paused = false;
 				}

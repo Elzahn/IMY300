@@ -9,7 +9,6 @@ public class Settings : MonoBehaviour {
 	public static int counter{ get; set; }	//used so all three slides can first be set before it changes the starting values
 
 	void Start () {
-		counter = 0;
 		attributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
 		narrativeSlider = GameObject.Find ("Slider Narrative").GetComponent<Slider> ();
 		soundSlider = GameObject.Find ("Slider Sound").GetComponent<Slider> ();
