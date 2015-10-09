@@ -81,6 +81,7 @@
      <Compile Include="Assets\scripts\InventoryItem.cs" />
      <Compile Include="Assets\scripts\Light\LightRotation.cs" />
      <Compile Include="Assets\scripts\Light\LightTest.cs" />
+     <Compile Include="Assets\scripts\MovieTexturePlayer.cs" />
      <Compile Include="Assets\scripts\Player\CameraControl.cs" />
      <Compile Include="Assets\scripts\Player\CharacterSelection.cs" />
      <Compile Include="Assets\scripts\Player\Collisions.cs" />
