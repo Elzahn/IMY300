@@ -5,4 +5,6 @@ using System.Runtime.Serialization;
 public class Usable : InventoryItem {
 	
 	public Usable(String typeID, int type): base(type, typeID){}
+
+	protected Usable(SerializationInfo info, StreamingContext ctxt) : base(info, ctxt) {}
 }
