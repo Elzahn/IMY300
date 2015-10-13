@@ -162,6 +162,7 @@ public class PlayerController : MonoBehaviour
             GetComponent<Tutorial>().startTutorial = false;
             GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
             GetComponent<SaveSpotTeleport>().loadTutorial = false;
+			playerAttributes.gotCore = true;
             GameObject.Find("Player").GetComponent<PlayerAttributes>().inventory.AddLast(new Longsword(1));
             GameObject.Find("Player").GetComponent<PlayerAttributes>().inventory.AddLast(new ButterKnife(5));
             GameObject.Find("Player").GetComponent<PlayerAttributes>().inventory.AddLast(new Warhammer(2));
@@ -264,10 +265,10 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     private void Update() {
+		checkScreenshot ();
+
 		if (Application.loadedLevelName != "Main_Menu") {
 			checkIfAttackPossible ();
-
-			checkScreenshot ();
 
 			moveSpeed = playerAttributes.speed;
 			/**

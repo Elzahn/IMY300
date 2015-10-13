@@ -242,7 +242,8 @@ public class PlayerAttributes : MonoBehaviour {
     public void returnToSaveSpot()
     {
         CurrentLevel++;
-        save(0);
+		if(!Loot.gotPowerCore)
+        	save(0);
         Application.LoadLevel("SaveSpot");
         Resources.UnloadUnusedAssets();
     }
@@ -890,7 +891,6 @@ public class PlayerAttributes : MonoBehaviour {
 
     public void save(int slot) {
 		var file = getSaveName (slot);
-
 		Stream stream = File.Open (file, FileMode.Create);
 		BinaryFormatter bformatter = new BinaryFormatter();	
 

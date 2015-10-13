@@ -60,6 +60,7 @@ public class NaturalDisasters : MonoBehaviour {
 			} else if(Time.time >= tutorialShake){
 				shake -= 1;
 				playerScript.paused = false;
+				GameObject.Find("Player").GetComponent<Sounds>().playAmbienceSound(Sounds.TUTORIAL_AMBIENCE);
 			}
 		} else if (spin > 0) {
 			cameraTransform.Rotate (5, 10, 5);

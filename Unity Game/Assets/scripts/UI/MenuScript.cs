@@ -158,8 +158,16 @@ public class MenuScript : MonoBehaviour {
 
 	void Update(){
 		if (Time.time >= errorTime + checkTime && errorTime != 0f) {
-			errorPopup.SetActive(false);
+			errorPopup.SetActive (false);
 			errorTime = 0f;
+		}
+
+		if (Application.loadedLevelName == "Tutorial" || GameObject.Find ("Player").GetComponent<Tutorial> ().startTutorial) {
+			GameObject.Find("MainMenu").transform.FindChild("MenuMask").FindChild("Save").GetComponent<Button>().interactable = false;
+			GameObject.Find("MainMenu").transform.FindChild("MenuMask").FindChild("Save").FindChild("Hover").GetComponent<Button>().interactable = false;
+		} else {
+			GameObject.Find("MainMenu").transform.FindChild("MenuMask").FindChild("Save").GetComponent<Button>().interactable = true;
+			GameObject.Find("MainMenu").transform.FindChild("MenuMask").FindChild("Save").FindChild("Hover").GetComponent<Button>().interactable = true;
 		}
 	}
 
