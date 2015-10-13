@@ -102,6 +102,7 @@
      <Compile Include="Assets\scripts\UI\LootScrollList.cs" />
      <Compile Include="Assets\scripts\UI\MenuScript.cs" />
      <Compile Include="Assets\scripts\UI\PlaceInList.cs" />
+     <Compile Include="Assets\scripts\UI\PopupScript.cs" />
      <Compile Include="Assets\scripts\UI\ScrollableList.cs" />
      <Compile Include="Assets\scripts\UI\Settings.cs" />
      <Compile Include="Assets\scripts\UI\Storage.cs" />

@@ -130,7 +130,7 @@ public class MenuScript : MonoBehaviour {
 
 		try{
 			attributesScript.load (slot);
-		} catch (Exception exception){
+		} catch (Exception){
 			error = true;
 			errorPopup.SetActive (true);
 			errorTime = Time.time;

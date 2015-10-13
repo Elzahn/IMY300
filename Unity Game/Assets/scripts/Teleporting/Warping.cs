@@ -4,12 +4,14 @@ using System.Collections;
 public class Warping : MonoBehaviour {
 
 	private GameObject target;
-	private bool waitingForMovement, showDestinationChoice;
+	private bool waitingForMovement;
 	public bool chooseDestinationUnlocked{ get; set; }
 	public bool chooseDestination{ get; set; }
-	private Collider col;
-	private float nextUsage;
-	private float delay = 10;
+
+	public Collider col{ get; private set;}
+	public float nextUsage{ get; set;}
+	public float delay{ get; private set; }
+
 	private GameObject planet;
 	private float PlanetRadius;
 	private PlayerController playerScript;
@@ -19,10 +21,12 @@ public class Warping : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		temp = false;
+		col = null;
+		delay = 10;
 		waitingForMovement = false;
 		chooseDestinationUnlocked = false;	//unlocks at level 6
 		chooseDestination = true;
-		showDestinationChoice = false;
+		GameObject.Find("Warp").GetComponent<Canvas>().enabled = false;
 		playerScript = GameObject.Find("Player").GetComponent<PlayerController> ();
 		attributesScript = GameObject.Find("Player").GetComponent<PlayerAttributes> ();
 	}
@@ -46,9 +50,9 @@ public class Warping : MonoBehaviour {
 		}
 	}
 
-	void generateRandomWarpPoint(int randomWarpPoint){
+	public void generateRandomWarpPoint(int randomWarpPoint){
 		playerScript.paused = false;	//resume game
-		showDestinationChoice = false;	//closes menu
+		GameObject.Find("Warp").GetComponent<Canvas>().enabled = false;
 
 		if("WarpPoint"+randomWarpPoint == col.name && !attributesScript.justWarped){
 			generateRandomWarpPoint(Random.Range(1,6));
@@ -76,11 +80,11 @@ public class Warping : MonoBehaviour {
 
 	void OnTriggerEnter (Collider target){
 		if (attributesScript.justWarped == false && target.tag == "WarpPoint") {
-			col = target;
+			col = target.transform.parent.gameObject.GetComponent<Collider>();
 			playerScript.paused =(true);	//Pause game
 
 			if(chooseDestinationUnlocked && chooseDestination){
-				showDestinationChoice = true;
+				GameObject.Find("Warp").GetComponent<Canvas>().enabled = true;
 			}
 			else{
 				generateRandomWarpPoint(Random.Range(1, 6));
@@ -93,95 +97,6 @@ public class Warping : MonoBehaviour {
 		if(col.tag == "WarpPoint"){
 			temp = false;
 			//attributesScript.justWarped = false;
-		}
-	}
-
-	void OnGUI()
-	{
-		if (showDestinationChoice) {
-
-			int top = 30;
-
-			//x, y top, length, height
-			GUI.Box (new Rect (200, top, 400, 250), "To what warp point would you like to warp?");
-
-			if("WarpPoint1" == col.name){
-				GUI.enabled = false;
-			}
-				
-			if(GUI.Button(new Rect(320, top+30,150,20), "Warp point 1")) {
-				chooseDestination = false;
-				Camera.main.GetComponent<HUD>().turnOffLights("warp");
-				nextUsage = Time.time + delay;
-				generateRandomWarpPoint(1);
-			}
-
-			GUI.enabled = true;
-
-			if("WarpPoint2" == col.name){
-				GUI.enabled = false;
-			}
-
-			if(GUI.Button(new Rect(320, top+60,150,20), "Warp point 2")) {
-				chooseDestination = false;
-				Camera.main.GetComponent<HUD>().turnOffLights("warp");
-				nextUsage = Time.time + delay;
-				generateRandomWarpPoint(2);
-			}
-
-			GUI.enabled = true;
-			
-			if("WarpPoint3" == col.name){
-				GUI.enabled = false;
-			}
-
-			if(GUI.Button(new Rect(320, top+90,150,20), "Warp point 3")) {
-				chooseDestination = false;
-				Camera.main.GetComponent<HUD>().turnOffLights("warp");
-				generateRandomWarpPoint(3);
-				nextUsage = Time.time + delay;
-			}
-
-			GUI.enabled = true;
-			
-			if("WarpPoint4" == col.name){
-				GUI.enabled = false;
-			}
-
-			if(GUI.Button(new Rect(320, top+120,150,20), "Warp point 4")) {
-				chooseDestination = false;
-				Camera.main.GetComponent<HUD>().turnOffLights("warp");
-				nextUsage = Time.time + delay;
-				generateRandomWarpPoint(4);
-			}
-
-			GUI.enabled = true;
-			
-			if("WarpPoint5" == col.name){
-				GUI.enabled = false;
-			}
-
-			if(GUI.Button(new Rect(320, top+150,150,20), "Warp point 5")) {
-				chooseDestination = false;
-				Camera.main.GetComponent<HUD>().turnOffLights("warp");
-				nextUsage = Time.time + delay;
-				generateRandomWarpPoint(5);
-			}
-
-			GUI.enabled = true;
-
-			if(GUI.Button(new Rect(320, top+180,150,20), "Random warp point")) {
-				chooseDestination = false;
-				Camera.main.GetComponent<HUD>().turnOffLights("warp");
-				nextUsage = Time.time + delay;
-				generateRandomWarpPoint(Random.Range(1, 6));
-			}
-
-			if(GUI.Button(new Rect(320, top+210,150,20), "Cancel")) {
-				showDestinationChoice = false;
-				playerScript.paused = false;
-				GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(Sounds.BUTTON);
-			}
 		}
 	}
 }
