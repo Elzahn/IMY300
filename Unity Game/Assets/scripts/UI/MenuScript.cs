@@ -172,7 +172,7 @@ public class MenuScript : MonoBehaviour {
 			errorTime = 0f;
 		}
 
-		if (Application.loadedLevelName == "Tutorial" || GameObject.Find ("Player").GetComponent<Tutorial> ().startTutorial) {
+		if (Application.loadedLevelName == "Tutorial" || GameObject.Find ("Player").GetComponent<Tutorial> ().startTutorial || Application.loadedLevelName == "Scene") {
 			GameObject.Find("MainMenu").transform.FindChild("MenuMask").FindChild("Save").GetComponent<Button>().interactable = false;
 			GameObject.Find("MainMenu").transform.FindChild("MenuMask").FindChild("Save").FindChild("Hover").GetComponent<Button>().interactable = false;
 		} else {
