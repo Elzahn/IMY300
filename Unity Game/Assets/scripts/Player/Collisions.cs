@@ -53,13 +53,13 @@ public class Collisions : MonoBehaviour {
 
 		if (!playerAttributesScript.inventoryFull () && showLootConfirmation) {
 			Hud.makeInteractionHint ("Press E to get loot", this.GetComponent<Tutorial> ().PressE);
-		} else if(playerAttributesScript.inventoryFull ()){
+		} else if(playerAttributesScript.inventoryFull () && showLootConfirmation){
 			Hud.makeInteractionHint ("Inventory full", this.GetComponent<SaveSpotTeleport>().noEntry);
 		}
 
 		if (!playerAttributesScript.inventoryFull () && showHealthConfirmation) {
 			Hud.makeInteractionHint ("Press E to get a health pack", this.GetComponent<Tutorial> ().PressE);
-		} else if(playerAttributesScript.inventoryFull ()){
+		} else if(playerAttributesScript.inventoryFull () && showHealthConfirmation){
 			Hud.makeInteractionHint ("Inventory full", this.GetComponent<SaveSpotTeleport>().noEntry);
 		}
 

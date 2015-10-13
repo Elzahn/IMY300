@@ -12,12 +12,10 @@ public class CameraControl : MonoBehaviour {
 	private Vector3 originalPosition;
 	private Quaternion originalRotation;
 	private PlayerController playerScript;
-	private PlayerAttributes playerAttributes;
 
 	void Start ()
 	{	
 		player = GameObject.Find ("Player");
-		playerAttributes = player.GetComponent<PlayerAttributes> ();
 		playerScript = player.GetComponent<PlayerController> ();
 		birdsEye = false;
 		sensitivityX = 3F;
@@ -73,7 +71,6 @@ public class CameraControl : MonoBehaviour {
 				this.transform.LookAt(GameObject.Find("Player").transform);
 
 				birdsEye = true;
-			//	player.GetComponent<PlayerController>().paused = true;
 			}
 
 			if(birdsEye){
@@ -108,7 +105,6 @@ public class CameraControl : MonoBehaviour {
 
 				//BirdsEye is disabled in the else above
 				birdsEye = false;
-				//player.GetComponent<PlayerController>().paused = false;
 			}
 		}
 	}

@@ -125,8 +125,8 @@ public class TutorialSpawner : MonoBehaviour {
 					GameObject.Find("Player").GetComponent<Tutorial>().teachInventory = true;
 
 					tempLoot.AddLast(new Longsword(1));
-					//tempLoot.AddLast(new Longsword(2));
-					//tempLoot.AddLast(new Longsword(3));
+					tempLoot.AddLast(new Longsword(2));
+					tempLoot.AddLast(new Longsword(3));
 					GameObject deadEnemy = Instantiate(loot);
 					deadEnemy.GetComponent<FauxGravityBody>().attractor = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
 					deadEnemy.transform.position = monster.GetComponent<Rigidbody>().position;

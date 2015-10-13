@@ -113,6 +113,8 @@ public class LootScrollList : MonoBehaviour
 						image.enabled = false;
 					} else if(image.gameObject.name == "Take" && playerAttributes.inventoryFull()){
 						image.GetComponent<Button>().interactable = false;
+						image.GetComponent<Image>().enabled = false;
+						image.transform.FindChild("Text").GetComponent<Text>().enabled = false;
 					} 
 				}
 
@@ -164,6 +166,8 @@ public class LootScrollList : MonoBehaviour
 						image.enabled = false;
 					} else if(image.gameObject.name == "Take" && playerAttributes.inventoryFull()){
 						image.GetComponent<Button>().interactable = false;
+						image.GetComponent<Image>().enabled = false;
+						image.transform.FindChild("Text").GetComponent<Text>().enabled = false;
 					} 
 				}
 			} else if(item.type == 3){	//Ship piece
@@ -197,6 +201,8 @@ public class LootScrollList : MonoBehaviour
 						image.enabled = false;
 					} else if(image.gameObject.name == "Take" && playerAttributes.inventoryFull()){
 						image.GetComponent<Button>().interactable = false;
+						image.GetComponent<Image>().enabled = false;
+						image.transform.FindChild("Text").GetComponent<Text>().enabled = false;
 					} 
 				}
 			}
