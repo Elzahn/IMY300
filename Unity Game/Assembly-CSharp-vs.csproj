@@ -116,7 +116,6 @@
      <Compile Include="Assets\scripts\World\LoadingScreen.cs" />
      <Compile Include="Assets\scripts\World\Loot.cs" />
      <Compile Include="Assets\scripts\World\NaturalDisasters.cs" />
-     <Compile Include="Assets\scripts\World\PlayerLog.cs" />
      <Compile Include="Assets\scripts\World\PositionMe.cs" />
      <Compile Include="Assets\scripts\World\SaveSpotSound.cs" />
      <Compile Include="Assets\scripts\World\Sounds.cs" />

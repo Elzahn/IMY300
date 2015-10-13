@@ -12,7 +12,6 @@ public class CharacterSelection : MonoBehaviour {
 	void Start () {
 		GameObject.Find ("Loading Screen").GetComponent<Canvas> ().enabled = false;
 		attributesScript = this.GetComponent<PlayerAttributes> ();
-		PlayerLog.showHUD = true;
 		levelUp = GameObject.Find ("LevelUp").GetComponent<ParticleSystem> ();
 		levelUp.enableEmission = false;
 		levelUp.Clear ();

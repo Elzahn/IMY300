@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -76,6 +77,7 @@ public class CameraControl : MonoBehaviour {
 			}
 
 			if(birdsEye){
+				GameObject.Find("BirdsEye").GetComponent<Canvas>().enabled = true;
 
 				string stats = "";
 
@@ -85,17 +87,9 @@ public class CameraControl : MonoBehaviour {
 					stats += GameObject.Find ("Planet").GetComponent<TutorialSpawner>().enemiesStats();
 				}
 
-				stats += "HP: " + playerAttributes.hp;
-				stats += "\n";
-				stats += "Stamina: " + playerAttributes.stamina;
-				stats += "\n";
-				stats += "XP: " + playerAttributes.xp;
-				stats += "\n";
-				stats += "Level: " + playerAttributes.level;
-
-				PlayerLog.showLog = true;
-				PlayerLog.showHUD = false;
-				PlayerLog.addStat(stats);
+				GameObject.Find("BirdsEye").transform.FindChild("Background").FindChild("EnemyStats").GetComponent<Text>().text = stats;
+			} else {
+				GameObject.Find("BirdsEye").GetComponent<Canvas>().enabled = false;
 			}
 
 			if(Input.GetMouseButton(2) && Application.loadedLevelName != "SaveSpot"){
@@ -112,8 +106,7 @@ public class CameraControl : MonoBehaviour {
 				this.transform.position = originalPosition;
 				this.transform.rotation = originalRotation;
 
-				PlayerLog.showLog = false;
-				PlayerLog.showHUD = true;
+				//BirdsEye is disabled in the else above
 				birdsEye = false;
 				//player.GetComponent<PlayerController>().paused = false;
 			}
