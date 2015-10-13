@@ -47,11 +47,19 @@ public class MenuScript : MonoBehaviour {
 		Application.LoadLevel ("SaveSpot");
 		
 		player.GetComponent<Tutorial>().startTutorial = true;
+		player.GetComponent<SaveSpotTeleport>().loadTutorial = true;
 		player.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 		GameObject.Find ("HUD").GetComponent<Canvas> ().enabled = true;
 		player.transform.rotation = Quaternion.Euler (351.66f, 179.447f, 358.8f);
 		player.transform.up = Vector3.up;
 		player.transform.position = new Vector3 (10.88f, 79.831f, -11.14f);
+		GameObject.Find("Stamina").GetComponent<Image>().enabled = false;
+		GameObject.Find("Health").GetComponent<Image>().enabled = false;
+		player.GetComponent<Tutorial>().teachInventory = false;
+		GameObject.Find ("HUD_Expand_Text").GetComponent<Text> ().text = "";
+		GameObject.Find("MenuMask").GetComponent<Image>().fillAmount = 0;
+		player.GetComponent<LevelSelect>().currentLevel = 0;
+		attributesScript.resetPlayer ();
 	}
 	
 	public void load(){
@@ -146,12 +154,14 @@ public class MenuScript : MonoBehaviour {
 			loadCanvas.enabled = false;
 			player.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 			player.GetComponent<Tutorial>().stopTutorial();
+			player.GetComponent<SaveSpotTeleport>().loadTutorial = false;
 			GameObject.Find("Stamina").GetComponent<Image>().enabled = true;
 			GameObject.Find("Health").GetComponent<Image>().enabled = true;
 			player.GetComponent<Tutorial>().teachInventory = true;
 			GameObject.Find("HUD_Expand_Text").GetComponent<Text>().text = attributesScript.narrativeSoFar;
 			GameObject.Find("Interaction").GetComponent<Image>().fillAmount = 0;
 			GameObject.Find("MenuMask").GetComponent<Image>().fillAmount = 0;
+			player.GetComponent<LevelSelect>().currentLevel = attributesScript.CurrentLevel;
 			enableCanvas ();
 		}
 	}

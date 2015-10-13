@@ -242,8 +242,7 @@ public class PlayerAttributes : MonoBehaviour {
     public void returnToSaveSpot()
     {
         CurrentLevel++;
-		if(!Loot.gotPowerCore)
-        	save(0);
+        save(0);
         Application.LoadLevel("SaveSpot");
         Resources.UnloadUnusedAssets();
     }
@@ -401,7 +400,6 @@ public class PlayerAttributes : MonoBehaviour {
 		//0 = mute; 1 = on
 		soundVolume = 1;
 		narrativeSoFar = "";
-		gotCore = false;
 
 		showWarpHint = true;
 		showLevelUp = false;
@@ -700,7 +698,20 @@ public class PlayerAttributes : MonoBehaviour {
 			storage_LevelStart.AddLast(item);
 		}
 	}
-	
+
+	public void resetPlayer(){
+		gotCore = false;
+		inventory.Clear ();
+		storage.Clear ();
+		setInitialXp (0);
+		doorOpen = false;
+		difficulty = 1;
+		soundVolume = 1;
+		narrativeShown = 1;
+		narrativeSoFar = "";
+		fallFirst = false;
+	}
+
 	public void resetInventoryAndStorage(){
 		inventory.Clear ();
 		foreach (InventoryItem item in inventory_LevelStart) {
@@ -914,7 +925,7 @@ public class PlayerAttributes : MonoBehaviour {
 			temp = (AttributeContainer)bformatter.Deserialize(stream);
 			stream.Close();
 			
-			if (temp != null && temp.level != 0) {
+			if (temp != null && temp.level != 0 && temp.gotCore) {
 				return (File.GetCreationTime(saveName) + "\nLevel: " + temp.level + "\nXp: " + temp.xp + "/" + levelXP(temp.level+1));
 			}
 		} catch (IOException) {

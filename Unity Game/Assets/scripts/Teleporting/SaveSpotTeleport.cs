@@ -155,8 +155,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 				this.GetComponent<Rigidbody> ().mass = 100;
 
 				this.GetComponent<LevelSelect> ().currentLevel++;
-				if(!Loot.gotPowerCore)
-					attributesComponent.save (0);
+				attributesComponent.save (0);
 				this.GetComponent<LevelSelect> ().spawnedLevel = false;
 				this.GetComponent<LevelSelect> ().myRenderer = null;
 				interaction.fillAmount = 0;

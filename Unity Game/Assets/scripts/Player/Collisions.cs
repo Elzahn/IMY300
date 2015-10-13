@@ -34,6 +34,7 @@ public class Collisions : MonoBehaviour {
 
 		if (Application.loadedLevelName == "SaveSpot" && Loot.gotPowerCore && colObj != null && colObj.name == "Console" && Input.GetKeyDown (KeyCode.E)) {
 			showRestore = false;
+			playerAttributesScript.gotCore = true;
 			this.GetComponent<Sounds>().playWorldSound(Sounds.POWER_ON);
 			Loot.gotPowerCore = false;
 			playerAttributesScript.doorOpen = true;
