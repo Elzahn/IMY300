@@ -13,7 +13,7 @@ public class LevelSelect : MonoBehaviour {
 	public Renderer myRenderer{ get; set;}
 	public bool spawnedLevel{ get; set;}
 
-	private GameObject planet, fireMist, rain, snow, desert;
+	private static GameObject planet, fireMist, rain, snow, desert;
 
 	/**
 	 * References Attributes variable to be able to save it easily.
@@ -28,14 +28,15 @@ public class LevelSelect : MonoBehaviour {
 
 	void Start(){
 		spawnedLevel = false;
-		fireMist = null;
+
+		/*fireMist = null;
 		rain = null;
 		snow = null;
-		desert = null;
+		desert = null;*/
 		attrs = this.GetComponent<PlayerAttributes>();
 	}
 
-	void clearParticles(){
+	public void clearParticles(){
 		fireMist.GetComponent<ParticleSystem>().enableEmission = false;
 		fireMist.SetActive (false);
 		rain.GetComponent<ParticleSystem>().enableEmission = false;
@@ -47,18 +48,17 @@ public class LevelSelect : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Application.loadedLevelName == "Scene") {
-			if (fireMist == null) {
-				fireMist = GameObject.Find ("Fire Mist");
 
-				rain = GameObject.Find ("Rain");
+		if (Application.loadedLevelName == "Scene" && fireMist == null) {
+			fireMist = GameObject.Find ("Fire Mist");
+			
+			rain = GameObject.Find ("Rain");
+			
+			snow = GameObject.Find ("Snow");
+			
+			desert = GameObject.Find ("Desert");
 
-				snow = GameObject.Find ("Snow");
-
-				desert = GameObject.Find ("Desert");
-
-				clearParticles();
-			}
+			clearParticles();
 		}
 
 		if (myRenderer != null) {	//You are on a planet and now will customise the level

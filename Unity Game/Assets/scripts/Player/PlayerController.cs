@@ -153,6 +153,16 @@ public class PlayerController : MonoBehaviour
 
         //build cheat to skip cutscenes
 
+		//Suicide
+		if(Input.GetKeyDown(KeyCode.Backslash)){
+			playerAttributes.loseHP((int)playerAttributes.hp);
+		}
+
+		//Almost Suicide
+		if(Input.GetKeyDown(KeyCode.RightBracket)){
+			playerAttributes.loseHP((int)playerAttributes.hp - 10);
+		}
+
         //Skip Tutorial
         if (Input.GetKeyDown(KeyCode.Space) && GetComponent<Tutorial>().startTutorial) {
 			this.GetComponent<Tutorial> ().tutorialDone = false;
@@ -424,6 +434,7 @@ public class PlayerController : MonoBehaviour
 		GameObject.Find("XP").GetComponent<Image>().fillAmount = playerAttributes.xp/
 			playerAttributes.getExpectedXP();
 		GameObject.Find ("Death").GetComponent<Canvas> ().enabled = false;
+		this.GetComponent<LevelSelect> ().spawnedLevel = false;
 	}
 
 	public void quit(){

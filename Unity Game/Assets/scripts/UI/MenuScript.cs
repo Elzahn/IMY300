@@ -61,6 +61,7 @@ public class MenuScript : MonoBehaviour {
 		player.GetComponent<LevelSelect>().currentLevel = 0;
 		attributesScript.resetPlayer ();
 		player.GetComponent<Tutorial> ().tutorialDone = false;
+		player.GetComponent<LevelSelect> ().spawnedLevel = false;
 	}
 	
 	public void load(){
@@ -164,6 +165,7 @@ public class MenuScript : MonoBehaviour {
 			GameObject.Find("Interaction").GetComponent<Image>().fillAmount = 0;
 			GameObject.Find("MenuMask").GetComponent<Image>().fillAmount = 0;
 			player.GetComponent<LevelSelect>().currentLevel = attributesScript.CurrentLevel;
+			player.GetComponent<LevelSelect> ().spawnedLevel = false;
 			enableCanvas ();
 		}
 	}
