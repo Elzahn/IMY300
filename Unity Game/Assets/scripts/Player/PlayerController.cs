@@ -155,6 +155,7 @@ public class PlayerController : MonoBehaviour
 
         //Skip Tutorial
         if (Input.GetKeyDown(KeyCode.Space) && GetComponent<Tutorial>().startTutorial) {
+			this.GetComponent<Tutorial> ().tutorialDone = false;
             if (GameObject.Find("Particles") != null) {
                 GameObject.Find("Particles").GetComponentInParent<SphereCollider>().enabled = false;
             }
@@ -188,14 +189,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F1) && Application.loadedLevelName == "Scene") {
             GetComponent<Warping>().chooseDestinationUnlocked = true;
             GetComponent<Warping>().chooseDestination = true;
-            print("Warp point destination choice unlocked.");
         }
 
         //Fall through planet cheat
         if (Input.GetKeyDown(KeyCode.F2) && Application.loadedLevelName == "Scene") {
             GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked = true;
             GetComponent<FallThroughPlanet>().canFallThroughPlanet = true;
-            print("Fall through plannet unlocked.");
         }
 
         //Open teleported back

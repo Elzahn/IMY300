@@ -60,6 +60,7 @@ public class MenuScript : MonoBehaviour {
 		GameObject.Find("MenuMask").GetComponent<Image>().fillAmount = 0;
 		player.GetComponent<LevelSelect>().currentLevel = 0;
 		attributesScript.resetPlayer ();
+		player.GetComponent<Tutorial> ().tutorialDone = false;
 	}
 	
 	public void load(){
@@ -148,6 +149,7 @@ public class MenuScript : MonoBehaviour {
 			player.transform.rotation = Quaternion.Euler (351.66f, 179.447f, 358.8f);
 			player.transform.up = Vector3.up;
 			player.transform.position = new Vector3 (10.88f, 79.831f, -11.14f);
+			player.GetComponent<Tutorial> ().tutorialDone = true;
 			GameObject.Find ("HUD").GetComponent<Canvas> ().enabled = true;
 			Application.LoadLevel("SaveSpot");
 			ResumeGame ();

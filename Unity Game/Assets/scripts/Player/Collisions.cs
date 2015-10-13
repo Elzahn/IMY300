@@ -50,6 +50,7 @@ public class Collisions : MonoBehaviour {
 			GameObject.Find ("Bedroom Light").GetComponent<Light> ().enabled = false;
 			GameObject.Find ("Player").GetComponent<PlayerAttributes> ().inventory.Remove (TutorialSpawner.bossPowerCore);
 			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
+			this.GetComponent<Tutorial> ().tutorialDone = true;
 		}
 
 		if (!playerAttributesScript.inventoryFull () && showLootConfirmation) {
