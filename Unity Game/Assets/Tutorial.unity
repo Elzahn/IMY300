@@ -972,8 +972,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loot: {fileID: 195640, guid: e2badba8dcec76b409a282f17f4fec7f, type: 2}
   boss: {fileID: 114748, guid: e03c509222e680d4c9b356953c7befe2, type: 2}
-  enemy1: {fileID: 198872, guid: 22b4d7c04131f354a94bcccda674ed95, type: 2}
-  enemy2: {fileID: 129988, guid: 0e1d85cc6f19d124084268daec3f3994, type: 2}
+  enemy1: {fileID: 129988, guid: 22b4d7c04131f354a94bcccda674ed95, type: 2}
+  enemy2: {fileID: 145382, guid: 0e1d85cc6f19d124084268daec3f3994, type: 2}
 --- !u!114 &1000693442
 MonoBehaviour:
   m_ObjectHideFlags: 0
