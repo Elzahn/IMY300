@@ -193,6 +193,7 @@ public class PlayerController : MonoBehaviour
 			playerAttributes.doorOpen = true;
             GetComponent<Rigidbody>().mass = 1000;
             GetComponent<Tutorial>().stopTutorial();
+			GetComponent<Tutorial>().tutorialDone = true;
         } 
 
         //Warp cheat

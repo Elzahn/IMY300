@@ -236,6 +236,7 @@ public class MenuScript : MonoBehaviour {
 		Application.LoadLevel("Main_Menu");
 		ResumeGame ();
 		player.transform.position = new Vector3 (-374f, 101.4f, 395.3f);
+		player.transform.up = Vector3.up;
 		player.transform.rotation = Quaternion.Euler (0f, 195.0949f, 0f);
 		player.GetComponent<FauxGravityBody> ().attractor = null;
 		player.GetComponent<Rigidbody> ().useGravity = true;

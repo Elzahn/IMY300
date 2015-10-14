@@ -705,9 +705,6 @@ public class PlayerAttributes : MonoBehaviour {
 		storage.Clear ();
 		setInitialXp (0);
 		doorOpen = false;
-		difficulty = 1;
-		soundVolume = 1;
-		narrativeShown = 1;
 		narrativeSoFar = "";
 		fallFirst = false;
 	}

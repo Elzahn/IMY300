@@ -83,6 +83,7 @@ public class Loot : MonoBehaviour {
 				Canvas.ForceUpdateCanvases();
 				Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
 				scrollbar.value = 0f;
+				showInventoryHint = false;
 			} 
 
 			loot.enabled = false;
