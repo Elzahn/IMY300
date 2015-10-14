@@ -64,9 +64,9 @@
      <Compile Include="Assets\scripts\BonusItems\PowerCore.cs" />
      <Compile Include="Assets\scripts\BonusItems\Usable.cs" />
      <Compile Include="Assets\scripts\Enemies\Aliens\ApeAlien.cs" />
+     <Compile Include="Assets\scripts\Enemies\Aliens\ClayAlien.cs" />
      <Compile Include="Assets\scripts\Enemies\Aliens\MossAlien.cs" />
      <Compile Include="Assets\scripts\Enemies\Boss\BossAlien.cs" />
-     <Compile Include="Assets\scripts\Enemies\Clay\ClayAlien.cs" />
      <Compile Include="Assets\scripts\Enemies\Enemy.cs" />
      <Compile Include="Assets\scripts\Enemies\EnemyHealth.cs" />
      <Compile Include="Assets\scripts\Enemies\EnemySpawner.cs" />

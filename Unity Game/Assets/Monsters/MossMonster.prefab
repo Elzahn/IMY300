@@ -1,36 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &124214
+--- !u!1 &101082
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 410694}
-  - 33: {fileID: 3365316}
-  - 23: {fileID: 2378758}
-  - 65: {fileID: 6578234}
+  - 4: {fileID: 495532}
+  - 33: {fileID: 3368864}
+  - 23: {fileID: 2310812}
+  - 65: {fileID: 6555792}
   m_Layer: 0
-  m_Name: MonsterBody
+  m_Name: MossAlien
   m_TagString: Monster
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &127348
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 433704}
-  - 33: {fileID: 3366984}
-  - 23: {fileID: 2313188}
-  m_Layer: 0
-  m_Name: Sphere001
-  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,26 +125,31 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &410694
+--- !u!1 &175966
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 431780}
+  - 33: {fileID: 3367828}
+  - 23: {fileID: 2303432}
+  m_Layer: 0
+  m_Name: Sphere001
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &431780
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 124214}
-  m_LocalRotation: {x: -.173648059, y: 0, z: -0, w: .984807789}
-  m_LocalPosition: {x: .0842607245, y: 1.76775122, z: 7.72708546e-08}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 459314}
-  m_RootOrder: 0
---- !u!4 &433704
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 127348}
+  m_GameObject: {fileID: 175966}
   m_LocalRotation: {x: -.043619357, y: -7.92360345e-17, z: -3.45951748e-18, w: .999048233}
-  m_LocalPosition: {x: .0940589607, y: 2.01954079, z: .311724603}
+  m_LocalPosition: {x: .0900000036, y: 2.01999998, z: .310000002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 459314}
@@ -173,20 +161,32 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 131408}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.08645701, y: -48.5380936, z: 45.0093765}
+  m_LocalPosition: {x: 33.0355682, y: -68.6965332, z: 47.8374405}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 410694}
-  - {fileID: 433704}
+  - {fileID: 495532}
+  - {fileID: 431780}
   - {fileID: 22427788}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!23 &2313188
+--- !u!4 &495532
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101082}
+  m_LocalRotation: {x: -.173648059, y: 0, z: 0, w: .984807789}
+  m_LocalPosition: {x: .0799999982, y: 1.76999998, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 459314}
+  m_RootOrder: 0
+--- !u!23 &2303432
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 127348}
+  m_GameObject: {fileID: 175966}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -205,17 +205,17 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!23 &2378758
+--- !u!23 &2310812
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 124214}
+  m_GameObject: {fileID: 101082}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: d5938de5ebe3dd84cbdf696ea6a4604e, type: 2}
+  - {fileID: 2100000, guid: 967659dbf6ffec3429be781b816532fc, type: 2}
   - {fileID: 2100000, guid: 76ae85fb8134f674d96b93dfc43e5ac1, type: 2}
   - {fileID: 2100000, guid: fc10bb4b5329cd6408a97bfdb4207cf0, type: 2}
   - {fileID: 2100000, guid: 8304c8bfa9dd95e45897d9c784bc4bee, type: 2}
@@ -232,20 +232,20 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &3365316
+--- !u!33 &3367828
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 124214}
-  m_Mesh: {fileID: 4300000, guid: 5c6833cf086a4204b814eaaeea274169, type: 3}
---- !u!33 &3366984
+  m_GameObject: {fileID: 175966}
+  m_Mesh: {fileID: 4300002, guid: b4d4ba49ab2843441abc9e0f6f87c725, type: 3}
+--- !u!33 &3368864
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 127348}
-  m_Mesh: {fileID: 4300002, guid: 5c6833cf086a4204b814eaaeea274169, type: 3}
+  m_GameObject: {fileID: 101082}
+  m_Mesh: {fileID: 4300000, guid: b4d4ba49ab2843441abc9e0f6f87c725, type: 3}
 --- !u!54 &5429914
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -261,18 +261,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &6578234
+--- !u!65 &6555792
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 124214}
+  m_GameObject: {fileID: 101082}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2.62533069, y: 2.41383576, z: 1.57875001}
-  m_Center: {x: .00860023499, y: -.441104352, z: .00959518459}
+  m_Center: {x: .00860023499, y: -.441100538, z: .00959518459}
 --- !u!95 &9510306
 Animator:
   serializedVersion: 3
@@ -606,6 +606,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Monster
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Name
+      value: MossAlien
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

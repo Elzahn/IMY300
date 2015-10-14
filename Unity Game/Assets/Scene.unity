@@ -545,7 +545,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossEnemy: {fileID: 161476, guid: 4b822c54e1fd7dd4181fbb782cbf3fab, type: 2}
   enemy1: {fileID: 167428, guid: 35c2e8fe2cba21c42b94af8dcb849559, type: 2}
-  enemy2: {fileID: 161476, guid: ddcf401ac5c84714cbe3a9f63252c127, type: 2}
+  enemy2: {fileID: 177740, guid: aa335035dcf490944807543d0bd67e59, type: 2}
   enemy3: {fileID: 131408, guid: 0dad1f8c0c237ee478d5cca9571b8cc7, type: 2}
   enemy4: {fileID: 161476, guid: 7a19bb68b8b9e724da30680192ed7f88, type: 2}
   loot: {fileID: 195640, guid: e2badba8dcec76b409a282f17f4fec7f, type: 2}
