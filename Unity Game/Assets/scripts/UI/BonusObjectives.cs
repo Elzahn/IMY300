@@ -9,11 +9,19 @@ public class BonusObjectives : MonoBehaviour {
 	public bool reachTheStars{ get; set; }
 	public bool completeAllQuests { get; set;}
 
+	public int deadEnemiesOnLevel { get; set;}
+	public int deadEnemies{ get; set; }
+
+	private LevelSelect levelSelect;
+
 	// Use this for initialization
 	void Start () {
 		killAllMonstersInGame = false;
 		killAllMonstersOnLevel = false;
 		reachTheStars = false;
+		deadEnemies = 0;
+		deadEnemiesOnLevel = 0;
+		levelSelect = this.GetComponent<LevelSelect> ();
 	}
 
 	void OnTriggerExit(Collider col){
@@ -26,6 +34,12 @@ public class BonusObjectives : MonoBehaviour {
 
 		if (reachTheStars && killAllMonstersOnLevel && killAllMonstersInGame)
 			completeAllQuests = true;
+
+		if (deadEnemies == 155)
+			killAllMonstersInGame = true;
+
+		if((deadEnemiesOnLevel == 20 && levelSelect.currentLevel == 1) || (deadEnemiesOnLevel == 35  && levelSelect.currentLevel == 2) || (deadEnemiesOnLevel == 10 && levelSelect.currentLevel == 3) || (deadEnemiesOnLevel == 40 && levelSelect.currentLevel == 4) || (deadEnemiesOnLevel == 50 && levelSelect.currentLevel == 5))
+			killAllMonstersOnLevel = true;
 
 		if (reachTheStars) 
 			GameObject.Find ("Bonus1StrikeThrough").GetComponent<Text> ().enabled = true;

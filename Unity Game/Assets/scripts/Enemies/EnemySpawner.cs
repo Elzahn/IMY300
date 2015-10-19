@@ -28,8 +28,12 @@ public class EnemySpawner : MonoBehaviour {
 
 	LinkedList<GameObject> enemies = new LinkedList <GameObject> ();
 
+	BonusObjectives bonusObjectives;
+
 	void Start(){
 		hudText = GameObject.Find ("HUD_Expand_Text").GetComponent<Text> ();
+		bonusObjectives = GameObject.Find ("Player").GetComponent<BonusObjectives> ();
+		bonusObjectives.deadEnemiesOnLevel = 0;
 	}
 
 	public string enemiesStats(){
@@ -120,6 +124,8 @@ public class EnemySpawner : MonoBehaviour {
 
 			Rigidbody rigidbody = go.GetComponent<Rigidbody> ();
 			if (enemy.isDead()) {
+				bonusObjectives.deadEnemies++;
+				bonusObjectives.deadEnemiesOnLevel++;
 				if(enemy.typeID == "BossAlien")
 				{
 					if(GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked && GameObject.Find("Player").GetComponent<PlayerAttributes>().fallFirst){

@@ -41,7 +41,7 @@ public class ClayAlien : Enemy {
 		/* Called once per frame. AI comes Here */
 		GameObject player = GameObject.Find("Player");
 		PlayerController playerScript = player.GetComponent<PlayerController> ();
-		if (!playerScript.paused) {
+		if (!playerScript.paused && !Camera.main.GetComponent<CameraControl>().birdsEye) {
 
 
 			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;		

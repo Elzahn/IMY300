@@ -12,7 +12,7 @@ public class PopupScript : MonoBehaviour {
 
 	void Update(){
 		if (this.gameObject.GetComponent<Canvas>().enabled == true && warp.col != null) {
-			print (warp.col.name);
+		
 			if("WarpPoint1" == warp.col.name){
 				this.gameObject.transform.FindChild("Background").FindChild("Warp1").GetComponent<Button>().interactable = false;
 			} else {
