@@ -18,7 +18,7 @@ public class Sounds : MonoBehaviour {
 	public AudioSource alarmAudio{get; set;}
 	public AudioSource computerAudio{get; set;}
 	public int characterClip { get; private set; }
-	public int computerClip {get; private set;}
+	public int computerClip {get; set;}
 
 	private int worldClip, alarmClip;
 	private bool done = false;
