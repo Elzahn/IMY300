@@ -164,7 +164,7 @@ public class PlayerController : MonoBehaviour
 		}
 
         //Skip Tutorial
-        if (Input.GetKeyDown(KeyCode.Space) && GetComponent<Tutorial>().startTutorial) {
+        if (Input.GetKeyDown(KeyCode.Equals) && GetComponent<Tutorial>().startTutorial) {
 			this.GetComponent<Tutorial> ().tutorialDone = false;
             if (GameObject.Find("Particles") != null) {
                 GameObject.Find("Particles").GetComponentInParent<SphereCollider>().enabled = false;
