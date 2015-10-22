@@ -117,7 +117,7 @@ public class ScrollableList : MonoBehaviour
 							} else if(accessoryText.text == "Uncommon Accessory"){
 								image.sprite = uncommonAccessory;
 								newItem.GetComponent<PlaceInList>().itemImage = uncommonAccessory;	//sets image for description
-							} else if(accessoryText.text == "Rare Accessory"){
+							} else if(accessoryText.text == "Rare Accessory" || accessoryText.text == "Bonus Accessory"){
 								image.sprite = rareAccessory;
 								newItem.GetComponent<PlaceInList>().itemImage = rareAccessory;	//sets image for description
 							}
@@ -162,7 +162,7 @@ public class ScrollableList : MonoBehaviour
 
 					foreach(Image image in images){
 						if(image.name == "WeaponImage"){
-							if(weaponText.text == "Longsword"){
+							if(weaponText.text == "Longsword" || weaponText.text == "BonusWeapon"){
 								image.sprite = longSword;
 								newItem.GetComponent<PlaceInList>().itemImage = longSword;	//sets image for description
 							} else if(weaponText.text == "Warhammer"){

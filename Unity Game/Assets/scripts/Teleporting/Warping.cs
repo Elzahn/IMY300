@@ -67,7 +67,7 @@ public class Warping : MonoBehaviour {
 			PlayerAttributes playerAttributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes>();
 			int healthToLose = (int)(playerAttributesScript.hp * 0.05);
 			playerAttributesScript.loseHP(healthToLose);//loses 5% health when warping
-			print ("You lose " + healthToLose + " health");
+			//print ("You lose " + healthToLose + " health");
 			//PlayerLog.addStat("You lose " + healthToLose + " health");
 		}
 	}

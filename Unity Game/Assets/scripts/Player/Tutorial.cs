@@ -38,6 +38,27 @@ public class Tutorial : MonoBehaviour {
 	public Sprite Dark;
 	public Sprite Health_Bar;
 
+	public void restartTutorial(){
+		moveHintOnScreen = false;
+		moveHintOffScreen = false;
+		healthHintShown = false;
+		
+		showVisuals = true;
+		startTutorial = true;
+		tutorialDone = false;
+		teachStorage = false;
+		teachInventory = false;
+		
+		health.enabled = false;
+		stamina.enabled = false;
+
+		hint.fillAmount = 0;
+		hintText.text = "";
+
+		justStarted = true;
+		sound.computerClip = -1;
+	}
+
 	void Start () {
 		if (Application.loadedLevelName == "SaveSpot") {
 			GameObject.Find ("Tech Light").GetComponent<Light> ().enabled = false;
@@ -69,6 +90,7 @@ public class Tutorial : MonoBehaviour {
 
 		health.enabled = false;
 		stamina.enabled = false;
+
 	}
 
 	// Used to determine what happens next in the tutorial

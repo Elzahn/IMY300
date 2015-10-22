@@ -45,7 +45,8 @@ public class MenuScript : MonoBehaviour {
 
 	public void play(){
 		Application.LoadLevel ("SaveSpot");
-		
+
+		player.GetComponent<Tutorial> ().restartTutorial ();
 		player.GetComponent<Tutorial>().startTutorial = true;
 		player.GetComponent<SaveSpotTeleport>().loadTutorial = true;
 		player.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
@@ -235,11 +236,14 @@ public class MenuScript : MonoBehaviour {
 	public void quitToMenu(){
 		Application.LoadLevel("Main_Menu");
 		ResumeGame ();
-		player.transform.position = new Vector3 (-374f, 101.4f, 395.3f);
 		player.transform.up = Vector3.up;
-		player.transform.rotation = Quaternion.Euler (0f, 195.0949f, 0f);
+		player.transform.rotation = Quaternion.Euler (0f, 171.5833f, 0f);
+		player.transform.position = new Vector3 (-375.12f, 101.75f, 395.33f);
 		player.GetComponent<FauxGravityBody> ().attractor = null;
 		player.GetComponent<Rigidbody> ().useGravity = true;
+		player.GetComponent<Sounds> ().stopSound ("all");
+		player.GetComponent<Sounds> ().playAmbienceSound (Sounds.SHIP_AMBIENCE);
+		player.GetComponent<Tutorial> ().stopTutorial ();
 	}
 
 	public void ResumeGame(){
