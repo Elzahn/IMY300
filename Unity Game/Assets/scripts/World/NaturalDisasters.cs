@@ -64,7 +64,7 @@ public class NaturalDisasters : MonoBehaviour {
 			}
 		} else if (spin > 0) {
 			//cameraTransform.Rotate(5, 10, 5);
-			cameraTransform.RotateAround(new Vector3(0,0,0), new Vector3(0,1,0), 10);
+			cameraTransform.RotateAround(new Vector3(0,0,0), new Vector3(1,2,3), 5);
 			//spin -= Time.deltaTime * decreaseFactor;
 			nextDisaster = Time.time + delay;
 			if(cheatSpin == 0){
