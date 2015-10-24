@@ -72,7 +72,11 @@ public class ClayAlien : Enemy {
 					if (suspicion < 10) {
 						suspicion++;
 					} else {
-						followPlayer ();
+						if(!seekingRevenge){
+							followPlayer();
+						} else {
+							seekOutPlayer();
+						}
 					}
 					
 				} else {
@@ -82,7 +86,11 @@ public class ClayAlien : Enemy {
 				}
 				
 				if (Vector3.Distance (PlayerPos, myPos) < viewdist / 2) {
-					followPlayer ();
+					if(!seekingRevenge){
+						followPlayer();
+					} else {
+						seekOutPlayer();
+					}
 				}
 			} else {
 				attackPlayer = false;

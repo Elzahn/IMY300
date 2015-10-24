@@ -6,6 +6,8 @@ using System.Linq;
 
 public class EnemySpawner : MonoBehaviour {
 
+	public Sprite bossImage;
+
 	public GameObject bossEnemy;
 
 	public GameObject enemy1;
@@ -26,6 +28,7 @@ public class EnemySpawner : MonoBehaviour {
 
 	FauxGravityAttractor planet;
 	int playerLevel;
+	bool noHint;
 
 	LinkedList<GameObject> enemies = new LinkedList <GameObject> ();
 
@@ -33,6 +36,8 @@ public class EnemySpawner : MonoBehaviour {
 
 	void Start(){
 		//creates and stores ship pieces to be dropped
+		noHint = true;
+		ENEM_COUNT = 100;
 		if (bossLoot == null) {
 			bossLoot = new LinkedList<InventoryItem>();
 			Collisions.backEngine = new BackEngine();
@@ -135,6 +140,23 @@ public class EnemySpawner : MonoBehaviour {
 	}
 
 	void Update () {
+
+		if(enemies.Count == ENEM_COUNT){
+			noHint = false;
+		}
+
+		if(enemies.Count <= 5){
+			if (!noHint){
+				GameObject.Find("Player").GetComponent<Tutorial>().makeHint("We're coming for you...",  bossImage);
+				noHint = true;
+			}
+
+			foreach (GameObject go in enemies.ToList()) {			
+				Enemy enemy = go.GetComponent<Enemy>();
+
+				enemy.seekOutPlayer();
+			}
+		}
 		foreach (GameObject go in enemies.ToList()) {			
 			Enemy enemy = go.GetComponent<Enemy>();	
 

@@ -58,7 +58,11 @@ public class ApeAlien : Enemy {
 					if(suspicion < 10){
 						suspicion++;
 					} else {
-						followPlayer();
+						if(!seekingRevenge){
+							followPlayer();
+						} else {
+							seekOutPlayer();
+						}
 					}
 					
 				} else {
@@ -73,7 +77,11 @@ public class ApeAlien : Enemy {
 						nextApeAttack = Time.time + apeDelay;
 						attack (player.GetComponent<PlayerAttributes> ());	//Attack Player
 					}
-					followPlayer ();
+					if(!seekingRevenge){
+						followPlayer();
+					} else {
+						seekOutPlayer();
+					}
 				}
 			}
 

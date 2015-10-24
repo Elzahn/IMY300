@@ -50,7 +50,11 @@ public class MossAlien : Enemy {
 					if(suspicion < 10){
 						suspicion++;
 					} else {
-						followPlayer();
+						if(!seekingRevenge){
+							followPlayer();
+						} else {
+							seekOutPlayer();
+						}
 					}
 					
 				} else {
@@ -61,7 +65,11 @@ public class MossAlien : Enemy {
 				}
 
 				if (Vector3.Distance (PlayerPos, myPos) < 6) {
-					followPlayer ();
+					if(!seekingRevenge){
+						followPlayer();
+					} else {
+						seekOutPlayer();
+					}
 				}
 			} else{
 				attackPlayer = false;

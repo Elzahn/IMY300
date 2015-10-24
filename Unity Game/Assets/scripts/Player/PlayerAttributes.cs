@@ -495,6 +495,7 @@ public class PlayerAttributes : MonoBehaviour {
 
 			if (this.hp <= 50 && giveAlarm) {
 				soundComponent.playAlarmSound (1);
+				showHealthAltered("lowering");
 			} else {
 				soundComponent.stopAlarmSound (1);
 			}
@@ -567,8 +568,11 @@ public class PlayerAttributes : MonoBehaviour {
 		float nextTreshold = getExpectedXP();
 		if (xp >= nextTreshold) {
 			level++;
-			hp = maxHP ();
-			stamina = maxStamina ();
+			restoreHealthToFull();
+			//hp = maxHP ();
+			//showHealthAltered("healing");
+			restoreStaminaToFull();
+			//stamina = maxStamina ();
 			soundComponent.playWorldSound (Sounds.LEVEL_UP);
 			GameObject.Find ("LevelUp").GetComponent<ParticleSystem> ().enableEmission = true;
 			GameObject.Find ("LevelUp").GetComponent<ParticleSystem> ().Emit(100);
@@ -804,6 +808,8 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 	
 	public bool isDead() {
+		if(hp <=0)
+			soundComponent.playDeathSound(Sounds.DEAD_PLAYER);
 		return hp <= 0;
 	}
 	
@@ -840,73 +846,77 @@ public class PlayerAttributes : MonoBehaviour {
 	/*	if (soundComponent.characterAudio.isPlaying && soundComponent.characterClip < Sounds.SWORD_HIT) {
 			soundComponent.stopSound("character");
 		}*/
-
-		if(GameObject.Find("Health").GetComponent<Image>().isActiveAndEnabled == false){
-			this.GetComponent<Tutorial>().showHealthHint();
-		}
-		e.lastDamage = Time.time;
-		float ran = UnityEngine.Random.value;
-		float hc = hitChance;
+		
 		string message = "Miss! ";
 
-		if (ran <= hc) {			
-			message = "Hit! ";
-		
-			float cc = critChance;
-			int tmpdamage = damage;
+		if(stamina > 0){
+			if(GameObject.Find("Health").GetComponent<Image>().isActiveAndEnabled == false){
+				this.GetComponent<Tutorial>().showHealthHint();
+			}
+			e.lastDamage = Time.time;
+			float ran = UnityEngine.Random.value;
+			float hc = hitChance;
 
-			/*Critical Hit */
-			if (ran <= cc) {
+			if (ran <= hc) {			
+				message = "Hit! ";
+			
+				float cc = critChance;
+				int tmpdamage = damage;
 
-				tmpdamage *= CRIT_MULT;
-				message = "Critical Hit! ";
+				/*Critical Hit */
+				if (ran <= cc) {
 
-				if (weapon != null){
-					if (weapon.typeID == "Warhammer") {
-						soundComponent.playCharacterSound (Sounds.HAMMER_CRIT);
+					tmpdamage *= CRIT_MULT;
+					message = "Critical Hit! ";
+
+					if (weapon != null){
+						if (weapon.typeID == "Warhammer") {
+							soundComponent.playCharacterSound (Sounds.HAMMER_CRIT);
+						} else {
+							soundComponent.playCharacterSound (Sounds.SWORD_CRIT);
+						}
 					} else {
-						soundComponent.playCharacterSound (Sounds.SWORD_CRIT);
+						soundComponent.playCharacterSound (Sounds.FISTS_CRIT);
 					}
 				} else {
-					soundComponent.playCharacterSound (Sounds.FISTS_CRIT);
-				}
-			} else {
-				/* Non-crit Sounds */
+					/* Non-crit Sounds */
 
-				if (weapon != null){
-					if (weapon.typeID == "Warhammer") {
-						soundComponent.playCharacterSound (Sounds.HAMMER_HIT);
+					if (weapon != null){
+						if (weapon.typeID == "Warhammer") {
+							soundComponent.playCharacterSound (Sounds.HAMMER_HIT);
+						} else {
+							soundComponent.playCharacterSound (Sounds.SWORD_HIT);
+						}
 					} else {
-						soundComponent.playCharacterSound (Sounds.SWORD_HIT);
+						soundComponent.playCharacterSound (Sounds.FISTS_HIT);
 					}
-				} else {
-					soundComponent.playCharacterSound (Sounds.FISTS_HIT);
 				}
-			}
 
-			bool dead = e.loseHP(tmpdamage);
+				bool dead = e.loseHP(tmpdamage);
 
-			if (weapon != null) {
-				stamina -= weapon.staminaLoss;
-				GameObject.Find("Stamina").GetComponent<Image>().fillAmount = stamina/maxStamina();
-			} else {
-				stamina -= STAMINA_LOSS;
-				GameObject.Find("Stamina").GetComponent<Image>().fillAmount = stamina/maxStamina();
-			}
+				if (weapon != null) {
+					stamina -= weapon.staminaLoss;
+					GameObject.Find("Stamina").GetComponent<Image>().fillAmount = stamina/maxStamina();
+				} else {
+					stamina -= STAMINA_LOSS;
+					GameObject.Find("Stamina").GetComponent<Image>().fillAmount = stamina/maxStamina();
+				}
 
-			if (dead) {					
-				message += " Monster died!\n";
-				message += addXP(e.level * XP_GAIN_PER_MONSTER_LEVEL) + "\n";
-			} else {
-				//add Stats to message
-				message += e.getHealth()+"/"+e.getMaxHp();
+				if (dead) {					
+					message += " Monster died!\n";
+					message += addXP(e.level * XP_GAIN_PER_MONSTER_LEVEL) + "\n";
+				} else {
+					//add Stats to message
+					message += e.getHealth()+"/"+e.getMaxHp();
+				}
+			} else if (message == "Miss! ") {
+				soundComponent.playCharacterSound(Sounds.MISS);
+				message += e.getHealth () + "/" + e.getMaxHp ();
 			}
-		} else if (message == "Miss! ") {
+		} else {
 			soundComponent.playCharacterSound(Sounds.MISS);
-			message += e.getHealth () + "/" + e.getMaxHp ();
 		}
 
-		//PlayerLog.addStat (message);
 		return message;
 	}
 

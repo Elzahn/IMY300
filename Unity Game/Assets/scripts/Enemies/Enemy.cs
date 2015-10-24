@@ -15,12 +15,15 @@ public abstract class Enemy : MonoBehaviour {
 	protected bool onPlayer;
 	protected int suspicion;
 	protected int SUSPICION_ALERT = 5;
+	protected bool seekingRevenge;
+
 	//private Sounds sound;
 
 	void Start () {
 		/* Any other initlization */
 //		sound = GameObject.Find("Player").GetComponent<Sounds> ();
 		attackPlayer = false;
+		seekingRevenge = false;
 		nextAttack = Time.time + delay;
 		nextMAttack = Time.time + mDelay;
 		notCollided = false;
@@ -30,7 +33,26 @@ public abstract class Enemy : MonoBehaviour {
 		delay = 5 * (1.5f - player.stamina / player.maxStamina ());
 		nextRegeneration = Time.time + delayRegeneration;
 	}
-	
+
+	public void seekOutPlayer(){
+		seekingRevenge = true;
+		GameObject player = GameObject.Find("Player");
+		Vector3 PlayerPos = player.GetComponent<Rigidbody>().position;		
+		transform.LookAt(PlayerPos);
+		Vector3 myPos = GetComponent<Rigidbody>().position;
+		
+		float distance = Vector3.Distance (PlayerPos, myPos);
+		Vector3 direction = PlayerPos - myPos;
+
+		if (onPlayer == false) {//distance < 10 && 
+			this.GetComponent<Rigidbody> ().MovePosition (this.GetComponent<Rigidbody> ().position + direction * 0.25f * Time.deltaTime);
+		}
+
+		if (distance >= 1.5f) {
+			onPlayer = false;
+		}
+	}
+
 	void Update () {
 		PlayerController playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
 		if (playerScript.paused == false && !Camera.main.GetComponent<CameraControl>().birdsEye) {
@@ -45,7 +67,11 @@ public abstract class Enemy : MonoBehaviour {
 					if(suspicion < SUSPICION_ALERT){
 						suspicion++;
 					} else {
-						followPlayer();
+						if(!seekingRevenge){
+							followPlayer();
+						} else {
+							seekOutPlayer();
+						}
 					}
 
 				} else {
@@ -56,7 +82,11 @@ public abstract class Enemy : MonoBehaviour {
 				}
 
 				if (Vector3.Distance (PlayerPos, myPos) < 6) {
-					followPlayer ();
+					if(!seekingRevenge){
+						followPlayer();
+					} else {
+						seekOutPlayer();
+					}
 				} else {
 					GameObject.Find("Player").GetComponent<Sounds>().stopMonsterSound(this);
 				}
