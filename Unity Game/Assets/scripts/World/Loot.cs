@@ -13,6 +13,11 @@ public class Loot : MonoBehaviour {
 
 	public string myName { get; private set; }
 	public static bool gotPowerCore{ get; set; }
+	public static bool gotBackEngine{ get; set; }
+	public static bool gotTailFin{ get; set; }
+	public static bool gotLeftWing{ get; set; }
+	public static bool gotLandingGear{ get; set; }
+	public static bool gotFlightControl{ get; set; }
 
 	private PlayerAttributes attributesScript;
 	private PlayerController playerScript;
@@ -65,11 +70,31 @@ public class Loot : MonoBehaviour {
 	public void takeIt(InventoryItem item){
 		attributesScript.addToInventory (item);
 		myLoot.Remove (item);
-		GameObject.Find("Player").GetComponent<Sounds>().playWorldSound(Sounds.BUTTON);
+		GameObject.Find ("Player").GetComponent<Sounds> ().playWorldSound (Sounds.BUTTON);
 		
-		if(item.typeID == "Power Core"){
+		if (item.typeID == "Power Core") {
 			gotPowerCore = true;
-			GameObject.Find("Player").GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
+			GameObject.Find ("Player").GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
+		}
+	
+		if (item.typeID == "Back Engine") {
+			gotBackEngine = true;
+		}
+
+		if (item.typeID == "TailFin") {
+			gotTailFin = true;
+		}
+
+		if (item.typeID == "Left Wing") {
+			gotLeftWing = true;
+		}
+
+		if (item.typeID == "Landing Gear") {
+			gotLandingGear = true;
+		}
+
+		if (item.typeID == "Flight Control") {
+			gotFlightControl = true;
 		}
 
 		GameObject.Find("LootScroll").GetComponent<LootScrollList>().gatherLoot(myName, myLoot);

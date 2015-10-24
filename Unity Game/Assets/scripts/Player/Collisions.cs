@@ -7,6 +7,12 @@ public class Collisions : MonoBehaviour {
 	public bool showLootConfirmation{ get; private set; }
 	public bool showRestore{ get; set; }
 	public static bool showHealthConfirmation{ get; private set; }
+	public static BackEngine backEngine { get; set; }
+	public static TailFin tailFin { get; set; }
+	public static LeftWing leftWing { get; set; }
+	public static LandingGear landingGear { get; set; }
+	public static FlightControl flightControl { get; set; }
+	public int totalPieces { get; set; }
 
 	private HUD Hud;
 	private Text hudText;
@@ -24,12 +30,48 @@ public class Collisions : MonoBehaviour {
 		Hud = Camera.main.GetComponent<HUD> ();
 		playerAttributesScript = this.GetComponent<PlayerAttributes> ();
 		playerScript = this.GetComponent<PlayerController> ();
+		totalPieces = 0;
 	}
 
 	void Update () {
 		if (Application.loadedLevelName == "SaveSpot" && Loot.gotPowerCore && colObj != null && colObj.name == "Console") {
 			showRestore = true;
 			Hud.makeInteractionHint ("Press E to replace the power core", this.GetComponent<Tutorial> ().PressE);
+		}
+
+		if (Application.loadedLevelName == "SaveSpot" && (Loot.gotTailFin || Loot.gotLeftWing || Loot.gotLandingGear || Loot.gotFlightControl || Loot.gotBackEngine) && colObj != null && colObj.name == "Console") {
+			int numPieces = 0;
+
+			if(Loot.gotTailFin)
+				numPieces++;
+
+			if(Loot.gotLeftWing)
+				numPieces++;
+
+			if(Loot.gotLandingGear)
+				numPieces++;
+
+			if(Loot.gotFlightControl)
+				numPieces++;
+
+			if(Loot.gotBackEngine)
+				numPieces++;
+
+			if(numPieces == 1){
+				if (Loot.gotTailFin) {
+					Hud.makeInteractionHint ("Press E to replace the TailFin", this.GetComponent<Tutorial> ().PressE);
+				} else if (Loot.gotLeftWing) {
+					Hud.makeInteractionHint ("Press E to replace the Left Wing", this.GetComponent<Tutorial> ().PressE);
+				} else if (Loot.gotLandingGear) {
+					Hud.makeInteractionHint ("Press E to replace the Landing Gear", this.GetComponent<Tutorial> ().PressE);
+				} else if (Loot.gotFlightControl) {
+					Hud.makeInteractionHint ("Press E to replace the Flight Control", this.GetComponent<Tutorial> ().PressE);
+				} else if (Loot.gotBackEngine) {
+					Hud.makeInteractionHint ("Press E to replace the Back Engine", this.GetComponent<Tutorial> ().PressE);
+				}
+			} else {
+				Hud.makeInteractionHint ("Press E to replace the obtained Ship Pieces", this.GetComponent<Tutorial> ().PressE);
+			}
 		}
 
 		if (Application.loadedLevelName == "SaveSpot" && Loot.gotPowerCore && colObj != null && colObj.name == "Console" && Input.GetKeyDown (KeyCode.E)) {
@@ -48,9 +90,42 @@ public class Collisions : MonoBehaviour {
 			GameObject.Find ("Tech Light").GetComponent<Light> ().enabled = false;
 			GameObject.Find ("Console Light").GetComponent<Light> ().enabled = false;
 			GameObject.Find ("Bedroom Light").GetComponent<Light> ().enabled = false;
-			GameObject.Find ("Player").GetComponent<PlayerAttributes> ().inventory.Remove (TutorialSpawner.bossPowerCore);
+			playerAttributesScript.inventory.Remove (TutorialSpawner.bossPowerCore);
 			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 			this.GetComponent<Tutorial> ().tutorialDone = true;
+		}
+
+		if (Application.loadedLevelName == "SaveSpot" && (Loot.gotTailFin || Loot.gotLeftWing || Loot.gotLandingGear || Loot.gotFlightControl || Loot.gotBackEngine) && colObj != null && colObj.name == "Console" && Input.GetKeyDown (KeyCode.E)) {
+
+			if(playerAttributesScript.inventory.Contains(backEngine)){
+				playerAttributesScript.inventory.Remove(backEngine);
+				totalPieces++;
+				Loot.gotBackEngine = false;
+			}
+
+			if(playerAttributesScript.inventory.Contains(leftWing)){
+				playerAttributesScript.inventory.Remove(leftWing);
+				totalPieces++;
+				Loot.gotLeftWing = false;
+			}
+
+			if(playerAttributesScript.inventory.Contains(flightControl)){
+				playerAttributesScript.inventory.Remove(flightControl);
+				totalPieces++;
+				Loot.gotFlightControl = false;
+			}
+
+			if(playerAttributesScript.inventory.Contains(landingGear)){
+				playerAttributesScript.inventory.Remove(landingGear);
+				totalPieces++;
+				Loot.gotLandingGear = false;
+			}
+
+			if(playerAttributesScript.inventory.Contains(tailFin)){
+				playerAttributesScript.inventory.Remove(tailFin);
+				totalPieces++;
+				Loot.gotTailFin = false;
+			}
 		}
 
 		if (!playerAttributesScript.inventoryFull () && showLootConfirmation) {
@@ -106,6 +181,10 @@ public class Collisions : MonoBehaviour {
 	void OnTriggerExit(Collider col){
 		showLootConfirmation = false;
 		showHealthConfirmation = false;
+		if (colObj.name == "Console") {
+			showRestore = false;
+			colObj = null;
+		}
 	}
 
 	void OnCollisionEnter (Collision col){	

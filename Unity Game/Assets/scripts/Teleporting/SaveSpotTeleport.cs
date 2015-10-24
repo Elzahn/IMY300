@@ -17,6 +17,8 @@ public class SaveSpotTeleport : MonoBehaviour {
 	private bool showExitConfirmation, showEntranceConfirmation, showNoEntry, justWarped;
 	private PlayerAttributes attributesComponent;
 	private Sounds sound;
+	private bool showEndGameSuccess;
+	private bool showEndGameFail;
 
 	public Sprite pressE;
 	public Sprite noEntry;
@@ -52,7 +54,15 @@ public class SaveSpotTeleport : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col){
 		if (col.name == "ExitPlane"  && canEnterSaveSpot) {
-			showExitConfirmation = true;
+			if(attributesComponent.CurrentLevel < 5){
+				showExitConfirmation = true;
+			} else {
+				if(this.GetComponent<Collisions>().totalPieces == 5){
+					showEndGameSuccess = true;
+				} else {
+					showEndGameFail = true;
+				}
+			}
 		} else if (col.name == "EntrancePlane" && canEnterSaveSpot) {
 			showEntranceConfirmation = true;
 		} else if (col.name == "EntrancePlane") {
@@ -64,6 +74,8 @@ public class SaveSpotTeleport : MonoBehaviour {
 		showExitConfirmation = false;
 		showEntranceConfirmation = false;
 		showNoEntry = false;
+		showEndGameFail = false;
+		showEndGameSuccess = false;
 	}
 
 	void Update () {
@@ -99,7 +111,13 @@ public class SaveSpotTeleport : MonoBehaviour {
 			} else if (showExitConfirmation) {
 				notInUse = false;
 				Hud.makeInteractionHint ("Press E to teleport. Remember you can only return upon killing the boss.", pressE);
-			} else if (!showExitConfirmation && !showNoEntry && !showExitConfirmation && !showEntranceConfirmation) {
+			} else if (showEndGameSuccess){
+				notInUse = false;
+				Hud.makeInteractionHint ("Press E to go home.", pressE);
+			} else if (showEndGameFail){
+				notInUse = false;
+				Hud.makeInteractionHint ("You must first fix the ship.", noEntry);
+			} else if (!showExitConfirmation && !showNoEntry && !showExitConfirmation && !showEntranceConfirmation && !showEndGameFail && !showEndGameSuccess) {
 				notInUse = true;
 			}
 
@@ -148,6 +166,11 @@ public class SaveSpotTeleport : MonoBehaviour {
 				this.transform.rotation = Quaternion.Euler (0f, 91.60388f, 0f);
 				this.transform.position = new Vector3 (0.26f, 16.06f, 0.316f);
 				Resources.UnloadUnusedAssets ();
+			} else if(showEndGameSuccess && Input.GetKeyDown(KeyCode.E)){
+				this.GetComponent<Rigidbody> ().useGravity = true;
+				this.GetComponent<FauxGravityBody> ().attractor = null;
+				sound.playWorldSound (Sounds.FINISHED_GAME);
+				Application.LoadLevel ("EndOfGame");
 			} else if (showEntranceConfirmation && Input.GetKeyDown (KeyCode.E) && Application.loadedLevelName != "Tutorial") {
 				showEntranceConfirmation = false;
 				attributesComponent.restoreHealthToFull ();
