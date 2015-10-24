@@ -140,6 +140,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L) && Application.loadedLevelName == "Scene") {
             GameObject.Find("Planet").GetComponent<LoadingScreen>().loading = false;
             GameObject.Find("Loading Screen").GetComponent<Canvas>().enabled = false;
+			sound.resumeSound("ambience");
             if (GameObject.Find("Player").GetComponent<LevelSelect>().currentLevel == 1) {
                 GameObject.Find("Player")
                     .GetComponent<Tutorial>()

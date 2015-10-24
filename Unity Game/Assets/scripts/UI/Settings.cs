@@ -16,12 +16,8 @@ public class Settings : MonoBehaviour {
 	}
 
 	public void saveValues(){
-		if (counter >= 3) {
 			attributesScript.narrativeShown = narrativeSlider.value;
 			attributesScript.soundVolume = soundSlider.value;
 			attributesScript.difficulty = difficultySilder.value;
-		} else {
-			counter++;
-		}
 	}
 }

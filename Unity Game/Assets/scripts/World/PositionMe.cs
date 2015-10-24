@@ -75,7 +75,7 @@ public class PositionMe : MonoBehaviour {
 			}
 		} //Repositions monsters that aren't touching the planet after 2 seconds
 		else if (this.tag == "Monster") {
-			if (Time.time >= timeToCheckMyPosition && touching == false){//(Time.time >= timeToCheckMyPosition + 2f && checkMyPosition == true && touching == false) || (checkMyPosition == false && touching == false)) {
+			if (Time.time >= timeToCheckMyPosition + 2f && touching == false){//(Time.time >= timeToCheckMyPosition + 2f && checkMyPosition == true && touching == false) || (checkMyPosition == false && touching == false)) {
 				
 				timeToCheckMyPosition = Time.time;
 

@@ -19,6 +19,7 @@ public class Sounds : MonoBehaviour {
 	public AudioSource computerAudio{get; set;}
 	public int characterClip { get; private set; }
 	public int computerClip {get; set;}
+	public int ambienceClip {get; set;}
 
 	private int worldClip, alarmClip;
 	private bool done = false;
@@ -79,6 +80,7 @@ public class Sounds : MonoBehaviour {
 	public const int PLANET_3_AMBIENCE = 4;
 	public const int PLANET_4_AMBIENCE = 5;
 	public const int PLANET_5_AMBIENCE = 6;
+	public const int DIZZY = 7;
 
 
 	//Computer sounds
@@ -277,7 +279,14 @@ public class Sounds : MonoBehaviour {
 
 	public void playAmbienceSound(int clipAt){
 		ambienceAudio = GameObject.Find ("Ambience Audio").GetComponent<AudioSource> ();
-		ambienceAudio.volume = 0.1f;
+		ambienceClip = clipAt;
+
+		if(ambienceClip == 2){
+			ambienceAudio.volume = 0.3f;
+		} else {
+			ambienceAudio.volume = 0.8f;
+		}
+		
 		ambienceAudio.loop = true;
 		ambienceAudio.clip = ambienceClips [clipAt];
 		ambienceAudio.Play ();

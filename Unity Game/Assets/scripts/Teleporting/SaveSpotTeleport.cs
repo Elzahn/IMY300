@@ -54,7 +54,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col){
 		if (col.name == "ExitPlane"  && canEnterSaveSpot) {
-			if(attributesComponent.CurrentLevel < 5){
+			if(attributesComponent.CurrentLevel < 6){
 				showExitConfirmation = true;
 			} else {
 				if(this.GetComponent<Collisions>().totalPieces == 5){

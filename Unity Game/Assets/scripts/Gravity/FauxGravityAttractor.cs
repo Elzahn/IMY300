@@ -3,7 +3,7 @@ using System.Collections;
 
 public class FauxGravityAttractor : MonoBehaviour {
 
-	public float gravity = -10;
+	public float gravity = -500;
 
 	public void attract(Transform body) {
 		Vector3 gravityUp = (body.position - transform.position).normalized;
@@ -33,7 +33,7 @@ public class FauxGravityAttractor : MonoBehaviour {
 			col.collider.GetComponent<PositionMe> ().touching = false;
 		} else if (col.collider.tag == "Monster") {
 			//took out to help with placement?
-			//col.collider.GetComponentInParent<PositionMe> ().touching = false;
+			col.collider.GetComponentInParent<PositionMe> ().touching = false;
 		} else if (col.collider.tag == "MediumHealthPack" || col.collider.tag == "LargeHealthPack") {
 			if(col.collider.name == "Box012"){
 				col.collider.transform.parent.gameObject.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;
