@@ -230,6 +230,8 @@ public class PlayerAttributes : MonoBehaviour {
 
 
 	/******************************************************* Public properties *****************************************************/ 
+	private int ambienceClip = -1;
+
 	public Weapon weapon {
 		get {
 			return myAttributes.weapon;
@@ -291,7 +293,13 @@ public class PlayerAttributes : MonoBehaviour {
 		} set {
 			myAttributes.dizzy = value;
 			dizzyControl.SetActive(value);
-			print (value);
+			if(value){
+				ambienceClip = soundComponent.ambienceClip;
+				soundComponent.playAmbienceSound(Sounds.DIZZY);
+			} else {
+				if(ambienceClip != -1)
+					soundComponent.playAmbienceSound(ambienceClip);
+			}
 		}}
 	
 	public char gender {get {
