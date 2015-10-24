@@ -29,7 +29,7 @@ public class FauxGravityAttractor : MonoBehaviour {
 			}
 
 			temp.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;
-		} else if (col.collider.tag == "Monster" && col.collider.name != "Ape" && col.collider.name != "MossAlien" && col.collider.name != "ClayAlien") {
+		} else if (col.collider.tag == "Monster" && col.collider.name != "Ape" && col.collider.name != "MossAlien" && col.collider.name != "ClayAlien" && col.collider.name != "MonsterBody") {
 			col.collider.GetComponent<PositionMe> ().touching = false;
 		} else if (col.collider.tag == "Monster") {
 			//took out to help with placement?
@@ -68,7 +68,7 @@ public class FauxGravityAttractor : MonoBehaviour {
 			}
 
 			temp.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
-		} else if (col.collider.tag == "Monster" && col.collider.name != "Ape" && col.collider.name != "MossAlien" && col.collider.name != "ClayAlien") {
+		} else if (col.collider.tag == "Monster" && col.collider.name != "Ape" && col.collider.name != "MossAlien" && col.collider.name != "ClayAlien" && col.collider.name != "MonsterBody") {
 			col.collider.GetComponent<PositionMe> ().touching = true;
 		} else if (col.collider.tag == "Monster") {
 			col.collider.GetComponentInParent<PositionMe> ().touching = true;
