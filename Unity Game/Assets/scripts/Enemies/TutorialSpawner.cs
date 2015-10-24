@@ -103,6 +103,8 @@ public class TutorialSpawner : MonoBehaviour {
 					GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_GOBACK);
 					hudText.text += "I didn’t think you’d survive that… Oh well, return the Power Core to the ship immediately.\n\n";
 					attributesScript.narrativeSoFar += "I didn’t think you’d survive that… Oh well, return the Power Core to the ship immediately.\n\n";
+					GameObject.Find("Player").GetComponent<Tutorial>().sarcasticRemarks = Time.time + 10f;
+					GameObject.Find ("Player").GetComponent<Tutorial>().sarcasm = true;
 					Canvas.ForceUpdateCanvases();
 					Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
 					scrollbar.value = 0f;

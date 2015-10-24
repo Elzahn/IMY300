@@ -94,6 +94,8 @@ public class Sounds : MonoBehaviour {
 	public const int COMPUTER_FALL = 7;
 	public const int COMPUTER_WARPDESTINATION = 8;
 	public const int COMPUTER_CUTSCENE = 9;
+	public const int COMPUTER_SARCASM_1 = 10;
+	public const int COMPUTER_SARCASM_2 = 11;
 
 	void Start(){
 		worldAudio = GameObject.Find ("World Audio").GetComponent<AudioSource> ();
