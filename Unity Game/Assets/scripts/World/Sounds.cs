@@ -277,7 +277,11 @@ public class Sounds : MonoBehaviour {
 
 	public void playAmbienceSound(int clipAt){
 		ambienceAudio = GameObject.Find ("Ambience Audio").GetComponent<AudioSource> ();
-		ambienceAudio.volume = 0.1f;
+		if(clipAt == 2){
+			ambienceAudio.volume = 0.3f;
+		} else {
+			ambienceAudio.volume = 0.8f;
+		}
 		ambienceAudio.loop = true;
 		ambienceAudio.clip = ambienceClips [clipAt];
 		ambienceAudio.Play ();

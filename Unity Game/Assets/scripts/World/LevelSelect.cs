@@ -28,11 +28,6 @@ public class LevelSelect : MonoBehaviour {
 
 	void Start(){
 		spawnedLevel = false;
-
-		/*fireMist = null;
-		rain = null;
-		snow = null;
-		desert = null;*/
 		attrs = this.GetComponent<PlayerAttributes>();
 	}
 
