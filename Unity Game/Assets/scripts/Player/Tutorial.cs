@@ -13,6 +13,8 @@ public class Tutorial : MonoBehaviour {
 	public bool moveHintOffScreen { get; set; }
 	public bool healthHintShown { get; set; }
 	public float showVisualQue { get; set; }
+	public float sarcasticRemarks{get; set;}
+	public bool sarcasm{get; set;}
 
 	private Image health;
 	private Image stamina;
@@ -57,6 +59,8 @@ public class Tutorial : MonoBehaviour {
 
 		justStarted = true;
 		sound.computerClip = -1;
+		sarcasm = false;
+		sarcasticRemarks = -1;
 	}
 
 	void Start () {
@@ -90,11 +94,30 @@ public class Tutorial : MonoBehaviour {
 
 		health.enabled = false;
 		stamina.enabled = false;
-
+		
+		sarcasm = false;
+		sarcasticRemarks = -1;
 	}
 
 	// Used to determine what happens next in the tutorial
 	void Update () {
+		if(sarcasticRemarks != -1){
+			if(Time.time >= sarcasticRemarks && sarcasm)
+			{
+				sound.playComputerSound(Sounds.COMPUTER_SARCASM_1);
+				hudText.text += "Is it necessary for me to provide you with the formal definition of 'immediately'?\n\n";
+				attribteScript.narrativeSoFar += "Is it necessary for me to provide you with the formal definition of 'immediately'?\n\n";
+				sarcasticRemarks = Time.time + 8f;
+				sarcasm = false;
+			} else if(Time.time >= sarcasticRemarks)
+			{
+				sound.playComputerSound(Sounds.COMPUTER_SARCASM_2);
+				hudText.text += "The formal definition as per Oxford dictionary, from your home planet is: Without intervening time or space.\n";
+				attribteScript.narrativeSoFar += "The formal definition as per Oxford dictionary, from your home planet is: Without intervening time or space.\n";
+				sarcasticRemarks = -1;
+			}
+		}
+
 		if (this.GetComponent<PlayerController> ().paused) {
 			//sound.pauseSound("all");
 			GameObject[] monsters =  GameObject.FindGameObjectsWithTag("Monster");
@@ -176,9 +199,10 @@ public class Tutorial : MonoBehaviour {
 			if(Application.loadedLevelName == "Tutorial"){
 				sound.resumeSound("all");
 				GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
-				foreach(GameObject m in monsters){
-					if(m.GetComponent<Enemy>().GetComponent<AudioSource> () != null){
-						sound.resumeMonsterSound(m.GetComponent<Enemy>());
+				if(monsters.Length != 0){
+					foreach(GameObject m in monsters){
+						if(m.GetComponent<Enemy>() != null)
+							sound.resumeMonsterSound(m.GetComponent<Enemy>());
 					}
 				}
 			}
