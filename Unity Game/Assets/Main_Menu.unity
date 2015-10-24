@@ -2526,7 +2526,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -5, y: .0108757019}
+  m_AnchoredPosition: {x: -5, y: -.000579833984}
   m_SizeDelta: {x: 822.030029, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &171712172
@@ -9829,7 +9829,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1394417034}
   m_HandleRect: {fileID: 1394417033}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -18427,6 +18427,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 33274feecd98f3b40a06ccf8f9b92a09, type: 3}
   - {fileID: 8300000, guid: b40a74fdd40149c4bae77718d8d88a30, type: 3}
   - {fileID: 8300000, guid: 33274feecd98f3b40a06ccf8f9b92a09, type: 3}
+  - {fileID: 8300000, guid: 7da5e2a78f9c7da4d8fc179c279964b2, type: 3}
   characterClips:
   - {fileID: 8300000, guid: c39b1a47171899c4cb2823847c64f576, type: 3}
   - {fileID: 8300000, guid: 610019760bf794f49a646d8778a7fd23, type: 3}
@@ -18610,7 +18611,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -16, y: .0129470825}
+  m_AnchoredPosition: {x: -16, y: .0161895752}
   m_SizeDelta: {x: 500, y: 180}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1143866219
@@ -21391,7 +21392,7 @@ ParticleSystemRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a6dbb96b9d112024d000e929e39e7c39, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -23955,7 +23956,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -16, y: .0169525146}
+  m_AnchoredPosition: {x: -16, y: .0194854736}
   m_SizeDelta: {x: 350, y: 180}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1551044914
@@ -29008,7 +29009,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -2, y: .0124511719}
+  m_AnchoredPosition: {x: -2, y: .0150375366}
   m_SizeDelta: {x: 670, y: 442.299988}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1988213410

@@ -1,8 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Teleporting\SaveSpotTeleport.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\World\Sounds.cs">
     <Files>
-      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="143" Column="34" />
+      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="164" Column="27" />
       <File FileName="Assets\scripts\Player\BonusObjectives.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Player\Tutorial.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Teleporting\SaveSpotTeleport.cs" Line="57" Column="43" />
@@ -11,13 +11,26 @@
       <File FileName="Assets\scripts\Player\Collisions.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\UI\ScrollableList.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\UI\InventoryGUI.cs" Line="6" Column="1" />
-      <File FileName="Assets\scripts\World\Sounds.cs" Line="283" Column="30" />
-      <File FileName="Assets\scripts\World\LevelSelect.cs" Line="30" Column="24" />
+      <File FileName="Assets\scripts\World\Sounds.cs" Line="290" Column="29" />
+      <File FileName="Assets\scripts\World\LevelSelect.cs" Line="147" Column="50" />
       <File FileName="Assets\scripts\World\LoadingScreen.cs" Line="90" Column="75" />
+      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="233" Column="31" />
+      <File FileName="Assets\scripts\Enemies\EnemySpawner.cs" Line="171" Column="17" />
+      <File FileName="Assets\scripts\Enemies\Enemy.cs" Line="217" Column="17" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True" selected="True" />
+        <State expanded="True">
+          <Node name="Assembly-CSharp" expanded="True">
+            <Node name="scripts" expanded="True">
+              <Node name="Enemies" expanded="True" />
+              <Node name="Player" expanded="True" />
+              <Node name="World" expanded="True">
+                <Node name="Sounds.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
