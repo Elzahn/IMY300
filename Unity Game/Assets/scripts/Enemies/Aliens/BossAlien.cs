@@ -48,7 +48,11 @@ public class BossAlien : Enemy {
 					if(suspicion < SUSPICION_ALERT){
 						suspicion++;
 					} else {
-						followPlayer();
+						if(!seekingRevenge){
+							followPlayer();
+						} else {
+							seekOutPlayer();
+						}
 						animator.SetBool("Attacking", false);
 					}
 					
@@ -60,7 +64,11 @@ public class BossAlien : Enemy {
 				}
 				
 				if (Vector3.Distance (PlayerPos, myPos) < 6) {
-					followPlayer ();
+					if(!seekingRevenge){
+						followPlayer();
+					} else {
+						seekOutPlayer();
+					}
 				} else {
 					GameObject.Find("Player").GetComponent<Sounds>().stopMonsterSound(this);
 				}

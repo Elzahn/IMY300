@@ -62,7 +62,11 @@ public class TranslucentAlien : Enemy {
 					if(suspicion < 10){
 						suspicion++;
 					} else {
-						followPlayer();
+						if(!seekingRevenge){
+							followPlayer();
+						} else {
+							seekOutPlayer();
+						}
 					}
 					
 				} else {
@@ -77,7 +81,11 @@ public class TranslucentAlien : Enemy {
 						nextTransAttack = Time.time + transDelay;
 						attack (player.GetComponent<PlayerAttributes> ());	//Attack Player
 					}
-					followPlayer ();
+					if(!seekingRevenge){
+						followPlayer();
+					} else {
+						seekOutPlayer();
+					}
 				}
 			} else {
 				followDark();
