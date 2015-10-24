@@ -1,35 +1,35 @@
 ﻿<Properties>
-
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Enemies\Aliens\BossAlien.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Gravity\FauxGravityAttractor.cs">
     <Files>
-      <File FileName="Assets\scripts\Gravity\FauxGravityAttractor.cs" Line="71" Column="183" />
-      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="56" Column="9" />
+      <File FileName="Assets\scripts\Gravity\FauxGravityAttractor.cs" Line="6" Column="28" />
+      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Player\BonusObjectives.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Player\Tutorial.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Teleporting\SaveSpotTeleport.cs" Line="57" Column="43" />
+      <File FileName="Assets\scripts\Player\Tutorial.cs" Line="180" Column="1" />
+      <File FileName="Assets\scripts\Teleporting\SaveSpotTeleport.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\UI\HUD.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Player\CharacterSelection.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Player\Collisions.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\UI\ScrollableList.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\UI\InventoryGUI.cs" Line="6" Column="1" />
-      <File FileName="Assets\scripts\World\Sounds.cs" Line="290" Column="29" />
-      <File FileName="Assets\scripts\World\LevelSelect.cs" Line="147" Column="50" />
-      <File FileName="Assets\scripts\World\LoadingScreen.cs" Line="90" Column="75" />
-      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="233" Column="31" />
-      <File FileName="Assets\scripts\Enemies\EnemySpawner.cs" Line="171" Column="17" />
-      <File FileName="Assets\scripts\Enemies\Enemy.cs" Line="217" Column="17" />
+      <File FileName="Assets\scripts\UI\InventoryGUI.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\World\Sounds.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\World\LevelSelect.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\World\LoadingScreen.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Enemies\EnemySpawner.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Enemies\Enemy.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\World\PositionMe.cs" Line="80" Column="38" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="scripts" expanded="True">
-              <Node name="Enemies" expanded="True" />
-              <Node name="Player" expanded="True" />
-              <Node name="World" expanded="True">
-                <Node name="Sounds.cs" selected="True" />
+              <Node name="Gravity" expanded="True">
+                <Node name="FauxGravityAttractor.cs" selected="True" />
               </Node>
+              <Node name="Player" expanded="True" />
+              <Node name="World" expanded="True" />
             </Node>
           </Node>
         </State>
