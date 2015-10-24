@@ -60,10 +60,15 @@
      <Compile Include="Assets\scripts\Accessories\NullAccessory.cs" />
      <Compile Include="Assets\scripts\Accessories\RareAccessory.cs" />
      <Compile Include="Assets\scripts\Accessories\UncommonAccessory.cs" />
+     <Compile Include="Assets\scripts\BonusItems\BackEngine.cs" />
      <Compile Include="Assets\scripts\BonusItems\BonusAccessory.cs" />
      <Compile Include="Assets\scripts\BonusItems\BonusWeapon.cs" />
      <Compile Include="Assets\scripts\BonusItems\Cupcake.cs" />
+     <Compile Include="Assets\scripts\BonusItems\FlightControl.cs" />
+     <Compile Include="Assets\scripts\BonusItems\LandingGear.cs" />
+     <Compile Include="Assets\scripts\BonusItems\LeftWing.cs" />
      <Compile Include="Assets\scripts\BonusItems\PowerCore.cs" />
+     <Compile Include="Assets\scripts\BonusItems\TailFin.cs" />
      <Compile Include="Assets\scripts\BonusItems\Usable.cs" />
      <Compile Include="Assets\scripts\Enemies\Aliens\ApeAlien.cs" />
      <Compile Include="Assets\scripts\Enemies\Aliens\ClayAlien.cs" />

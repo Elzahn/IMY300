@@ -186,10 +186,10 @@ public class LootScrollList : MonoBehaviour
 
 					foreach(Image image in images){
 					if(image.name == "ItemImage"){
-						if(shipText.text == "Power Core"){
+						//if(shipText.text == "Power Core"){
 							image.sprite = shipPiece;
 							newItem.GetComponent<PlaceInList>().itemImage = shipPiece;	//sets image for description
-						} 
+						//} 
 					} else if(image.name == "ItemDescBackground"){
 						//sets all variables for the description of the item
 						newItem.GetComponent<PlaceInList>().desc = image;

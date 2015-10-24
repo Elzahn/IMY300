@@ -19,6 +19,7 @@ public class EnemySpawner : MonoBehaviour {
 	private int numLoot;
 	private Text hudText;
 	private Accessory accessoryScript;
+	private static LinkedList<InventoryItem> bossLoot = null;
 
 	public int ENEM_COUNT{ get; set; }
 	const int NORMAL_ENEMY_TYPES = 4;
@@ -31,6 +32,21 @@ public class EnemySpawner : MonoBehaviour {
 	BonusObjectives bonusObjectives;
 
 	void Start(){
+		//creates and stores ship pieces to be dropped
+		if (bossLoot == null) {
+			bossLoot = new LinkedList<InventoryItem>();
+			Collisions.backEngine = new BackEngine();
+			bossLoot.AddLast(Collisions.backEngine);
+			Collisions.landingGear = new LandingGear();
+			bossLoot.AddLast(Collisions.landingGear);
+			Collisions.tailFin = new TailFin();
+			bossLoot.AddLast(Collisions.tailFin);
+			Collisions.leftWing = new LeftWing();
+			bossLoot.AddLast(Collisions.leftWing);
+			Collisions.flightControl = new FlightControl();
+			bossLoot.AddLast(Collisions.flightControl);
+		}
+
 		hudText = GameObject.Find ("HUD_Expand_Text").GetComponent<Text> ();
 		bonusObjectives = GameObject.Find ("Player").GetComponent<BonusObjectives> ();
 		bonusObjectives.deadEnemiesOnLevel = 0;
@@ -128,6 +144,7 @@ public class EnemySpawner : MonoBehaviour {
 				bonusObjectives.deadEnemiesOnLevel++;
 				if(enemy.typeID == "BossAlien")
 				{
+
 					if(GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked && GameObject.Find("Player").GetComponent<PlayerAttributes>().fallFirst){
 
 						GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_FALL);
@@ -348,6 +365,12 @@ public class EnemySpawner : MonoBehaviour {
 					tempLoot.AddLast(tempItem);
 				}
 			}
+		}
+
+
+		if (enemy.typeID == "BossAlien") {
+			tempLoot.AddLast(bossLoot.First());
+			bossLoot.RemoveFirst();
 		}
 
 		if (lootCount > 0) {
