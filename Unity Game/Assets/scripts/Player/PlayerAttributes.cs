@@ -290,6 +290,8 @@ public class PlayerAttributes : MonoBehaviour {
 			return myAttributes.dizzy;
 		} set {
 			myAttributes.dizzy = value;
+			dizzyControl.SetActive(value);
+			print (value);
 		}}
 	
 	public char gender {get {
@@ -386,8 +388,8 @@ public class PlayerAttributes : MonoBehaviour {
 	private Text hudText;
 	private bool showWarpHint;
 	private bool showLevelUp;
-	private GameObject healthLowering, healthHealing, staminaDrain, door;
-   
+	private GameObject healthLowering, healthHealing, staminaDrain, door, dizzyControl;
+
     /**************************************************** Monobehaviour functions *********************************************
 	 * Start - Called after creation
 	 * Update - Called Every frame
@@ -425,6 +427,8 @@ public class PlayerAttributes : MonoBehaviour {
 		healthAltered = 0f;
 		staminaDrained = 0f;
 
+		dizzyControl = GameObject.Find("Dizzy");
+
 		justWarped = false;
 		giveAlarm = true;
 		gender = '?';
@@ -442,6 +446,8 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	void Update() {
+
+		dizzyControl.transform.RotateAround(dizzyControl.transform.position, dizzyControl.transform.forward, 5f);
 		door = GameObject.Find ("Door");
 		if (Application.loadedLevelName == "SaveSpot" && doorOpen && door != null) {
 			GameObject.Find("Door").SetActive(false);
@@ -512,6 +518,10 @@ public class PlayerAttributes : MonoBehaviour {
 						hp += (int)(maxHP () * REGEN_HP);
 						showHealthAltered("heal");
 						giveAlarm = false;
+					}
+
+					if(hp > maxHP()){
+						hp = maxHP();
 					}
 
 					if (stamina < maxStamina ()) {
