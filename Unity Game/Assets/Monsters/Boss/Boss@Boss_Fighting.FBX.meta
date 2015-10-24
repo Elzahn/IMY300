@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 01ea321077130b2409071ac48eec5504
-timeCreated: 1445588659
+guid: 7ae2acbc50e8a454aa43d24c05f21b17
+timeCreated: 1445690326
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -74,7 +74,7 @@ ModelImporter:
     4300004: MonsterBody
     4300006: Eye_001
     4300008: Eye_002
-    7400000: Take 001
+    7400000: Boss_Fighting
     9500000: //RootNode
     13700000: MonsterBody
   materials:
@@ -96,7 +96,45 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Boss_Fighting
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 100
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Eye_001
+        weight: 1
+      - path: Eye_002
+        weight: 1
+      - path: FrontView
+        weight: 1
+      - path: MonsterBody
+        weight: 1
+      - path: SideView
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []

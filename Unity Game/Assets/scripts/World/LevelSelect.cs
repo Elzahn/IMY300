@@ -8,7 +8,8 @@ public class LevelSelect : MonoBehaviour {
 	public List<Material> materials;
 	public static LevelSelect instance;
 
-	PlayerAttributes attrs;
+	private PlayerAttributes attrs;
+	private Light sun;
 
 	public Renderer myRenderer{ get; set;}
 	public bool spawnedLevel{ get; set;}
@@ -46,6 +47,8 @@ public class LevelSelect : MonoBehaviour {
 	void Update () {
 
 		if (Application.loadedLevelName == "Scene" && fireMist == null) {
+			sun = GameObject.Find("Sun").GetComponent<Light>();
+
 			fireMist = GameObject.Find ("Fire Mist");
 			
 			rain = GameObject.Find ("Rain");
@@ -74,6 +77,7 @@ public class LevelSelect : MonoBehaviour {
 								this.GetComponent<Sounds> ().playAmbienceSound (Sounds.PLANET_1_AMBIENCE);
 								this.GetComponent<Sounds> ().pauseSound ("ambience");
 								spawnedLevel = true;
+								sun.intensity = 8;
 							}
 							break;
 						}
@@ -90,6 +94,7 @@ public class LevelSelect : MonoBehaviour {
 								this.GetComponent<Sounds> ().playAmbienceSound (Sounds.PLANET_2_AMBIENCE);
 								this.GetComponent<Sounds> ().pauseSound ("ambience");
 								spawnedLevel = true;
+								sun.intensity = 1.2f;
 							}
 							break;
 						}
@@ -106,6 +111,7 @@ public class LevelSelect : MonoBehaviour {
 								this.GetComponent<Sounds> ().playAmbienceSound (Sounds.PLANET_3_AMBIENCE);
 								this.GetComponent<Sounds> ().pauseSound ("ambience");
 								spawnedLevel = true;
+								sun.intensity = 1.2f;
 							}
 							break;
 						}
@@ -122,6 +128,7 @@ public class LevelSelect : MonoBehaviour {
 								this.GetComponent<Sounds> ().playAmbienceSound (Sounds.PLANET_4_AMBIENCE);
 								this.GetComponent<Sounds> ().pauseSound ("ambience");
 								spawnedLevel = true;
+								sun.intensity = 1.3f;
 							}
 							break;
 						}
@@ -140,6 +147,7 @@ public class LevelSelect : MonoBehaviour {
 								this.GetComponent<Sounds> ().playAmbienceSound (Sounds.PLANET_5_AMBIENCE);
 								this.GetComponent<Sounds> ().pauseSound ("ambience");
 								spawnedLevel = true;
+								sun.intensity = 1.2f;
 							}
 							break;
 						}
