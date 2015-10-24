@@ -544,6 +544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 320c04c9d77a1f04882ce06dfeafbdff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossImage: {fileID: 21300000, guid: 338039837721b834fb9ff639d3fb5cdc, type: 3}
   bossEnemy: {fileID: 115528, guid: 09134cc26a9ccbf49a2a32c909584a21, type: 2}
   enemy1: {fileID: 167428, guid: 35c2e8fe2cba21c42b94af8dcb849559, type: 2}
   enemy2: {fileID: 177740, guid: aa335035dcf490944807543d0bd67e59, type: 2}

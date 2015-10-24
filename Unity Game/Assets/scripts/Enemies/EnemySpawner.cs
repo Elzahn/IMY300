@@ -6,6 +6,8 @@ using System.Linq;
 
 public class EnemySpawner : MonoBehaviour {
 
+	public Sprite bossImage;
+
 	public GameObject bossEnemy;
 
 	public GameObject enemy1;
@@ -34,7 +36,8 @@ public class EnemySpawner : MonoBehaviour {
 
 	void Start(){
 		//creates and stores ship pieces to be dropped
-		noHint = false;
+		noHint = true;
+		ENEM_COUNT = 100;
 		if (bossLoot == null) {
 			bossLoot = new LinkedList<InventoryItem>();
 			Collisions.backEngine = new BackEngine();
@@ -138,9 +141,13 @@ public class EnemySpawner : MonoBehaviour {
 
 	void Update () {
 
-		if(enemies.Count <= 5 && Application.loadedLevelName == "Scene" && !Application.isLoadingLevel){
+		if(enemies.Count == ENEM_COUNT){
+			noHint = false;
+		}
+
+		if(enemies.Count <= 5){
 			if (!noHint){
-				GameObject.Find("Player").GetComponent<Tutorial>().makeHint("We're coming for you...",  null);
+				GameObject.Find("Player").GetComponent<Tutorial>().makeHint("We're coming for you...",  bossImage);
 				noHint = true;
 			}
 

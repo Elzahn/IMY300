@@ -35,7 +35,6 @@ public abstract class Enemy : MonoBehaviour {
 	}
 
 	public void seekOutPlayer(){
-		print ("S");
 		seekingRevenge = true;
 		GameObject player = GameObject.Find("Player");
 		Vector3 PlayerPos = player.GetComponent<Rigidbody>().position;		

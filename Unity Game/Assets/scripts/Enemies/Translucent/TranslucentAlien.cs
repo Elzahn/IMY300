@@ -88,7 +88,11 @@ public class TranslucentAlien : Enemy {
 					}
 				}
 			} else {
-				followDark();
+				if(!seekingRevenge){
+					followDark();
+				} else {
+					seekOutPlayer();
+				}
 			}
 
 			if (Time.time >= nextTRegeneration) {
