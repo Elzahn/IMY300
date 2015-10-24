@@ -49,12 +49,12 @@ public class NaturalDisasters : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		var spawnTrees = GameObject.Find ("Planet").GetComponent<SpawnTrees> ();
+		//var spawnTrees = GameObject.Find ("Planet").GetComponent<SpawnTrees> ();
 		if (shake > 0) {
 			cameraTransform.localPosition = originalCamPos + Random.insideUnitSphere * shakeAmount;
 			//shake -= Time.deltaTime * decreaseFactor;
 			nextDisaster = Time.time + delay;
-			if (Application.loadedLevelName != "Tutorial" && spawnTrees.isTreesPlanted ()) {
+			if (Application.loadedLevelName != "Tutorial" && Time.time >= tutorialShake) {//if (Application.loadedLevelName != "Tutorial" && spawnTrees.isTreesPlanted ()) {
 				shake = -1;
 				playerScript.paused = false;
 			} else if(Time.time >= tutorialShake){
@@ -70,13 +70,14 @@ public class NaturalDisasters : MonoBehaviour {
 				cheatSpin = Time.time + 3;
 			}
 
-			if (Application.loadedLevelName == "Scene" && spawnTrees.isTreesPlanted () && GameObject.Find ("Planet").GetComponent<EnemySpawner> ().hasEnemiesLanded ()) {
+			if (Application.loadedLevelName == "Scene" && Time.time >= cheatSpin) {//if (Application.loadedLevelName == "Scene" && spawnTrees.isTreesPlanted () && GameObject.Find ("Planet").GetComponent<EnemySpawner> ().hasEnemiesLanded ()) {
 				spin = -1;
 				playerScript.paused = false;
 			} else if(Application.loadedLevelName == "Tutorial"){
 				if(Time.time >= cheatSpin)
 				{
 					spin = -1;
+					playerScript.paused = false;
 				}
 			}
 		} else if ((shake <= 0 && earthquakeDone) || (spin <= 0 && spinningDone)) {
