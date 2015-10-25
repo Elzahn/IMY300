@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void playAnimation() {
-        var animator = GetComponent<Animator>();
+		var animator = GameObject.Find("Character_Final").GetComponent<Animator>();
         animator.speed = 1;
         animator.SetBool("MovingStraight", false);
         animator.SetBool("MovingRight", false);
@@ -301,7 +301,7 @@ public class PlayerController : MonoBehaviour
 				}
 			}
 
-			var animatorComponent = GetComponent<Animator> ();
+			var animatorComponent = GameObject.Find("Character_Final").GetComponent<Animator>();
 			if (paused) {
 				animatorComponent.speed = 0;
 				moveSpeed = 0;

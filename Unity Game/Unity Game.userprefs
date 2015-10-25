@@ -1,33 +1,33 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Enemies\EnemySpawner.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Player\PlayerController.cs">
     <Files>
-      <File FileName="Assets\scripts\Gravity\FauxGravityAttractor.cs" Line="6" Column="29" />
-      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="18" Column="26" />
+      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="56" Column="15" />
+      <File FileName="Assets\scripts\Gravity\FauxGravityAttractor.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Player\BonusObjectives.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Player\Tutorial.cs" Line="109" Column="125" />
+      <File FileName="Assets\scripts\Player\Tutorial.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Teleporting\SaveSpotTeleport.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\UI\HUD.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Player\CharacterSelection.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Player\Collisions.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\UI\ScrollableList.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\UI\InventoryGUI.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\World\Sounds.cs" Line="272" Column="48" />
-      <File FileName="Assets\scripts\World\LevelSelect.cs" Line="38" Column="3" />
-      <File FileName="Assets\scripts\World\LoadingScreen.cs" Line="40" Column="30" />
-      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="813" Column="7" />
-      <File FileName="Assets\scripts\Enemies\EnemySpawner.cs" Line="136" Column="15" />
-      <File FileName="Assets\scripts\Enemies\Enemy.cs" Line="38" Column="15" />
-      <File FileName="Assets\scripts\World\PositionMe.cs" Line="90" Column="42" />
+      <File FileName="Assets\scripts\World\Sounds.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\World\LevelSelect.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\World\LoadingScreen.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Enemies\EnemySpawner.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Enemies\Enemy.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\World\PositionMe.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\World\Loot.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Enemies\TutorialSpawner.cs" Line="107" Column="73" />
-      <File FileName="Assets\scripts\Enemies\Aliens\MossAlien.cs" Line="72" Column="7" />
-      <File FileName="Assets\scripts\Enemies\Aliens\ApeAlien.cs" Line="84" Column="7" />
-      <File FileName="Assets\scripts\Enemies\Aliens\BossAlien.cs" Line="55" Column="8" />
-      <File FileName="Assets\scripts\Enemies\Aliens\ClayAlien.cs" Line="93" Column="7" />
-      <File FileName="Assets\scripts\Enemies\Translucent\TranslucentAlien.cs" Line="66" Column="20" />
-      <File FileName="Assets\scripts\UI\PopupScript.cs" Line="14" Column="8" />
-      <File FileName="Assets\scripts\Teleporting\Warping.cs" Line="83" Column="1" />
+      <File FileName="Assets\scripts\Enemies\TutorialSpawner.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Enemies\Aliens\MossAlien.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Enemies\Aliens\ApeAlien.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Enemies\Aliens\BossAlien.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Enemies\Aliens\ClayAlien.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Enemies\Translucent\TranslucentAlien.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\UI\PopupScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Teleporting\Warping.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -37,7 +37,6 @@
               <Node name="Enemies" expanded="True">
                 <Node name="Aliens" expanded="True" />
                 <Node name="Translucent" expanded="True" />
-                <Node name="EnemySpawner.cs" selected="True" />
               </Node>
               <Node name="Player" expanded="True" />
               <Node name="Teleporting" expanded="True" />
@@ -45,7 +44,7 @@
               <Node name="World" expanded="True" />
             </Node>
           </Node>
-          <Node name="Assembly-UnityScript-firstpass" expanded="True" />
+          <Node name="Assembly-UnityScript-firstpass" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>
