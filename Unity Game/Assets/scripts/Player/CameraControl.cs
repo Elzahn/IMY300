@@ -35,13 +35,15 @@ public class CameraControl : MonoBehaviour {
 					//Rotate Around the player - player gameObject Rotation
 					player.transform.RotateAround(player.transform.position, player.transform.up, Input.GetAxis ("Mouse X") * sensitivityX);
 					GameObject.Find("Character_Final").GetComponent<Animator>().SetFloat("Turning", -1f);
-					print (GameObject.Find("Character_Final").GetComponent<Animator>());
 				} else if (Input.GetMouseButton (1) && Input.GetAxis ("Mouse X") > 0) {
 					player.transform.RotateAround(player.transform.position, player.transform.up, Input.GetAxis ("Mouse X") * sensitivityX);
 					GameObject.Find("Character_Final").GetComponent<Animator>().SetFloat("Turning", 1f);
 				}
 			}
 
+			if(Input.GetMouseButtonUp(1)){
+				GameObject.Find("Character_Final").GetComponent<Animator>().SetFloat("Turning", 0f);
+			}
 			//Zoom
 			if(!birdsEye){
 				transform.Translate (Vector3.forward * Input.GetAxis ("Mouse ScrollWheel"));

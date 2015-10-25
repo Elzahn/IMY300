@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("MovingStraight", false);
         animator.SetBool("MovingRight", false);
         animator.SetBool("MovingLeft", false);
-        animator.SetFloat("Turning", 0);
+      //  animator.SetFloat("Turning", 0);
     }
 
     private void checkScreenshot() {

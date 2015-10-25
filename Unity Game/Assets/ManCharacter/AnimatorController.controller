@@ -13,31 +13,31 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: MovingStraight
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: MovingLeft
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: MovingRight
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Running
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Movement
@@ -129,18 +129,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: Running
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingLeft
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingRight
-    m_EventTreshold: 0
-  - m_ConditionMode: 3
-    m_ConditionEvent: Turning
-    m_EventTreshold: -1
-  - m_ConditionMode: 4
-    m_ConditionEvent: Turning
-    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 110223784}
   m_Solo: 0
@@ -212,7 +200,13 @@ AnimatorStateTransition:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: MovingRight
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: Running
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 110249938}
   m_Solo: 0
@@ -261,20 +255,8 @@ AnimatorStateTransition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 3
-    m_ConditionEvent: Turning
-    m_EventTreshold: -1
-  - m_ConditionMode: 4
-    m_ConditionEvent: Turning
-    m_EventTreshold: 1
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingStraight
-    m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: MovingLeft
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingRight
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Running
@@ -357,18 +339,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 3
     m_ConditionEvent: Turning
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingStraight
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingLeft
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingRight
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: Running
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 110264462}
   m_Solo: 0
@@ -390,23 +360,11 @@ AnimatorStateTransition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 3
-    m_ConditionEvent: Turning
-    m_EventTreshold: -1
-  - m_ConditionMode: 4
-    m_ConditionEvent: Turning
-    m_EventTreshold: 1
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingStraight
+  - m_ConditionMode: 1
+    m_ConditionEvent: Running
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: MovingLeft
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingRight
-    m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: Running
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 110220108}
@@ -429,18 +387,6 @@ AnimatorStateTransition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 3
-    m_ConditionEvent: Turning
-    m_EventTreshold: -1
-  - m_ConditionMode: 4
-    m_ConditionEvent: Turning
-    m_EventTreshold: 1
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingStraight
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingLeft
-    m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: MovingRight
     m_EventTreshold: 0
@@ -651,18 +597,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 3
     m_ConditionEvent: Turning
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingStraight
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingLeft
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingRight
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: Running
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 110264462}
   m_Solo: 0
@@ -870,20 +804,8 @@ AnimatorStateTransition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 3
-    m_ConditionEvent: Turning
-    m_EventTreshold: -1
-  - m_ConditionMode: 4
-    m_ConditionEvent: Turning
-    m_EventTreshold: 1
   - m_ConditionMode: 1
     m_ConditionEvent: MovingStraight
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingLeft
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingRight
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Running
@@ -909,20 +831,8 @@ AnimatorStateTransition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 3
-    m_ConditionEvent: Turning
-    m_EventTreshold: -1
-  - m_ConditionMode: 4
-    m_ConditionEvent: Turning
-    m_EventTreshold: 1
   - m_ConditionMode: 1
     m_ConditionEvent: MovingStraight
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingLeft
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingRight
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Running
@@ -975,18 +885,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 4
     m_ConditionEvent: Turning
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingStraight
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingLeft
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingRight
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: Running
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 110251276}
   m_Solo: 0
@@ -1014,18 +912,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Running
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingLeft
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingStraight
-    m_EventTreshold: 0
-  - m_ConditionMode: 3
-    m_ConditionEvent: Turning
-    m_EventTreshold: -1
-  - m_ConditionMode: 4
-    m_ConditionEvent: Turning
-    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 110249938}
   m_Solo: 0
@@ -1269,20 +1155,8 @@ AnimatorStateTransition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 3
-    m_ConditionEvent: Turning
-    m_EventTreshold: -1
-  - m_ConditionMode: 4
-    m_ConditionEvent: Turning
-    m_EventTreshold: 1
   - m_ConditionMode: 1
     m_ConditionEvent: MovingStraight
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingLeft
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingRight
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: Running
@@ -1359,18 +1233,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 4
     m_ConditionEvent: Turning
     m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingStraight
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingLeft
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingRight
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: Running
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 110251276}
   m_Solo: 0
@@ -1443,20 +1305,8 @@ AnimatorStateTransition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 3
-    m_ConditionEvent: Turning
-    m_EventTreshold: -1
-  - m_ConditionMode: 4
-    m_ConditionEvent: Turning
-    m_EventTreshold: 1
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingStraight
-    m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: MovingLeft
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingRight
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: Running
@@ -1722,18 +1572,6 @@ AnimatorStateTransition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 3
-    m_ConditionEvent: Turning
-    m_EventTreshold: -1
-  - m_ConditionMode: 3
-    m_ConditionEvent: Turning
-    m_EventTreshold: 1
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingStraight
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingLeft
-    m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: MovingRight
     m_EventTreshold: 0
@@ -1866,20 +1704,8 @@ AnimatorStateTransition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 3
-    m_ConditionEvent: Turning
-    m_EventTreshold: -1
-  - m_ConditionMode: 4
-    m_ConditionEvent: Turning
-    m_EventTreshold: 1
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingStraight
-    m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: MovingLeft
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: MovingRight
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: Running
@@ -2350,7 +2176,7 @@ AnimatorStateMachine:
     m_Position: {x: -180, y: -216, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110249938}
-    m_Position: {x: -12, y: -156, z: 0}
+    m_Position: {x: 0, y: -156, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 110285014}
     m_Position: {x: -72, y: 48, z: 0}
