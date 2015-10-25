@@ -388,8 +388,7 @@ public class EnemySpawner : MonoBehaviour {
 				}
 			}
 		}
-
-
+		
 		if (enemy.typeID == "BossAlien") {
 			tempLoot.AddLast(bossLoot.First());
 			bossLoot.RemoveFirst();
