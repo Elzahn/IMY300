@@ -6,7 +6,7 @@ using System.Linq;
 
 public class Loot : MonoBehaviour {
 
-	public static LinkedList<InventoryItem> myLoot = new LinkedList<InventoryItem> ();
+	public LinkedList<InventoryItem> myLoot = new LinkedList<InventoryItem> ();
 
 	public static bool showInventoryHint;
 	public static string inventoryHintText;

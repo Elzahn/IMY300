@@ -156,6 +156,11 @@ public abstract class Enemy : MonoBehaviour {
 			GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked = true;
 			GameObject.Find("Player").GetComponent<FallThroughPlanet>().canFallThroughPlanet = true;
 		}
+
+		if(hp <= 0){
+			GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Attacking", false);
+		}
+
 		return hp <= 0;
 	}
 
