@@ -28,7 +28,9 @@ public class TranslucentAlien : Enemy {
 		const float CRIT_MULT = 1.14f;
 		const float HIT_MULT = 1.12f;
 		const float DAMAGE_MULT = 1.2f;
-		
+
+		typeID = "TranslucentAlien";
+
 		hp = Mathf.RoundToInt(150 * Mathf.Pow (HP_MULT, level-1));
 		maxHp = hp;
 		hitChance = 0.20f * Mathf.Pow (HIT_MULT, level-1);
@@ -39,8 +41,7 @@ public class TranslucentAlien : Enemy {
 	void Start () {
 		/* Any other initlization */
 		monsterAudio = gameObject.AddComponent<AudioSource>();
-
-		typeID = "TranslucentAlien";
+		
 		lootChance = 0.65f;
 		maxLoot = 4;
 		nextTransAttack = Time.time + transDelay;

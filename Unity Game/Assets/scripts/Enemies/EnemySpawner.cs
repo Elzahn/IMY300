@@ -34,6 +34,10 @@ public class EnemySpawner : MonoBehaviour {
 
 	BonusObjectives bonusObjectives;
 
+	public LinkedList<GameObject> getEnemies(){
+		return enemies;
+	}
+	
 	void Start(){
 		//creates and stores ship pieces to be dropped
 		noHint = true;
