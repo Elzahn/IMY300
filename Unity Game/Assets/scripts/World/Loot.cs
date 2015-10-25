@@ -6,7 +6,7 @@ using System.Linq;
 
 public class Loot : MonoBehaviour {
 
-	public LinkedList<InventoryItem> myLoot = new LinkedList<InventoryItem> ();
+	public static LinkedList<InventoryItem> myLoot = new LinkedList<InventoryItem> ();
 
 	public static bool showInventoryHint;
 	public static string inventoryHintText;
@@ -38,6 +38,17 @@ public class Loot : MonoBehaviour {
 		myName = name;
 		foreach (InventoryItem item in tempLoot) {
 			myLoot.AddLast(item);
+		}
+	}
+
+	void Update(){
+		if(myLoot.Count == 0)
+		{
+			GameObject[] temp = GameObject.FindGameObjectsWithTag("Loot");
+			foreach(GameObject loot in temp)
+			{
+				Destroy(loot);
+			}
 		}
 	}
 
