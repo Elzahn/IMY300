@@ -397,7 +397,7 @@ public class PlayerAttributes : MonoBehaviour {
 	private bool showWarpHint;
 	private bool showLevelUp;
 	private GameObject healthLowering, healthHealing, staminaDrain, door, dizzyControl;
-
+	private Animator animatorComponent;
     /**************************************************** Monobehaviour functions *********************************************
 	 * Start - Called after creation
 	 * Update - Called Every frame
@@ -415,6 +415,8 @@ public class PlayerAttributes : MonoBehaviour {
 		showLevelUp = false;
 		fallFirst = true;
 		doorOpen = false;
+
+		animatorComponent = GameObject.Find("Character_Final").GetComponent<Animator>();
 
 		//Singleton
 		if (instance) {
@@ -747,6 +749,7 @@ public class PlayerAttributes : MonoBehaviour {
 
 	public void showHealthAltered(String health){
 		if (health == "heal") {
+			animatorComponent.SetBool("Attacking", false);
 			healthHealing.SetActive (true);
 			healthLowering.SetActive(false);
 			healthHealing.GetComponent<Image> ().fillAmount = hp / maxHP ();
@@ -846,7 +849,7 @@ public class PlayerAttributes : MonoBehaviour {
 	/*	if (soundComponent.characterAudio.isPlaying && soundComponent.characterClip < Sounds.SWORD_HIT) {
 			soundComponent.stopSound("character");
 		}*/
-		
+		animatorComponent.SetBool("Attacking", true);
 		string message = "Miss! ";
 
 		if(stamina > 0){
