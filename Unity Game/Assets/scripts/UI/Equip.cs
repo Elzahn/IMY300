@@ -39,7 +39,6 @@ public class Equip : MonoBehaviour
 
 		//Add equiped items
 		if (attributesScript.weapon != null) {
-			GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Weapon", true);
 			GameObject newItem = Instantiate (equipedPrefab) as GameObject;
 			newItem.name = attributesScript.weapon.typeID;
 			newItem.transform.SetParent (gameObject.transform, false);
@@ -88,7 +87,6 @@ public class Equip : MonoBehaviour
 			rectTransform.offsetMax = new Vector2 (x, y);
 		} else {
 			GameObject newItem = Instantiate (noItem) as GameObject;
-			GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Weapon", false);
 			newItem.name = "No weapon equiped";
 			newItem.GetComponentInChildren<Text>().text = "No weapon equiped";
 			newItem.transform.SetParent (gameObject.transform, false);

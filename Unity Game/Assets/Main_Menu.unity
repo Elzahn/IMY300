@@ -4292,6 +4292,18 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: .400000006
       objectReference: {fileID: 0}
+    - target: {fileID: 400062, guid: 98432327fb3ed6d4f937daa41170978b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -.0299999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 400062, guid: 98432327fb3ed6d4f937daa41170978b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 16.0300007
+      objectReference: {fileID: 0}
+    - target: {fileID: 400062, guid: 98432327fb3ed6d4f937daa41170978b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -.419999987
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98432327fb3ed6d4f937daa41170978b, type: 3}
   m_IsPrefabParent: 0
@@ -9899,7 +9911,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1394417034}
   m_HandleRect: {fileID: 1394417033}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -16416,7 +16428,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1974743344}
   m_HandleRect: {fileID: 1974743343}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -18296,7 +18308,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: a7a290a344a2a9346bb488765a0b191b, type: 2}
   - {fileID: 2100000, guid: 7e70709a3a24cac45ac7809f7f2a7499, type: 2}
   - {fileID: 2100000, guid: 4658411bb95691f4a8e0cbfc312cf0ff, type: 2}
-  - {fileID: 2100000, guid: 14c6616de6a706943ac9dd7ef9a742d8, type: 2}
+  - {fileID: 2100000, guid: 7102eddf607536842a7c1b31e5825bbc, type: 2}
   - {fileID: 2100000, guid: 75d4cbbf3a1743245867528be1440f10, type: 2}
   - {fileID: 2100000, guid: d389a6b0bf2d4434ca4bfffbadf04149, type: 2}
   - {fileID: 2100000, guid: c53ebbad05bb2054f974d73dee2d9ce3, type: 2}
@@ -18523,6 +18535,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MAX_STORAGE: 50
+  butterKnife: {fileID: 138658, guid: a8676a291d9118f4886cfda8646bb8cb, type: 2}
+  longSword: {fileID: 183908, guid: df8da167f41aded4a97ebf2ce86fba95, type: 2}
+  warHammer: {fileID: 127132, guid: ef75b2010b536e14591003e2e97cec23, type: 2}
 --- !u!114 &1129163717
 MonoBehaviour:
   m_ObjectHideFlags: 0
