@@ -849,8 +849,10 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 	
 	public bool isDead() {
-		if(hp <=0)
+		if(hp <=0){
 			soundComponent.playDeathSound(Sounds.DEAD_PLAYER);
+			animatorComponent.SetBool("Dead", true);
+		}
 		return hp <= 0;
 	}
 	

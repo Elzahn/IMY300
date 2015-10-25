@@ -313,7 +313,7 @@ public class PlayerController : MonoBehaviour
 				if (playerAttributes.isDead ()) {
 					GameObject.Find ("Death").GetComponent<Canvas> ().enabled = true;
 					GetComponent<Sounds> ().stopAlarmSound (Sounds.LOW_HEALTH_ALARM);
-					paused = true;
+					//paused = true;
 				}
 
 				if (Input.GetKey (KeyCode.LeftShift) && playerAttributes.stamina > 0 &&
@@ -417,6 +417,7 @@ public class PlayerController : MonoBehaviour
     }
 
 	public void restart(){
+		GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Dead", false);
 		Application.LoadLevel("Scene");
 		paused = false;
 		playerAttributes.restoreHealthToFull();
