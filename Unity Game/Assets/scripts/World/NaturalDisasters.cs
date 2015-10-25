@@ -6,7 +6,7 @@ public class NaturalDisasters : MonoBehaviour {
 	private bool earthquakeNow = false;
 	private bool spinNow = false;
 	private PlayerController playerScript;
-	private float nextDisaster, delay = 10, shakeAmount, dizzyWearOfNext, dizzyDelay = 10;	//decreaseFactor
+	private float nextDisaster, delay = 120, shakeAmount, dizzyWearOfNext, dizzyDelay = 10;	//decreaseFactor
 	public static float shake, spin;	//how long the shake/spin lasts
 	private Transform cameraTransform;
 	private Vector3 originalCamPos;
@@ -17,6 +17,7 @@ public class NaturalDisasters : MonoBehaviour {
 	private Sounds soundScript;
 	private float stopAlarm;
 	private int chance;
+	private Animator animator;
 
 	public bool isShaking(){
 		if (shake > 0) {
@@ -36,6 +37,7 @@ public class NaturalDisasters : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		animator = GameObject.Find("Character_Final").GetComponent<Animator>();
 		chance = 0;
 		stopAlarm = 0f;
 		earthQuakeHappening = false;
@@ -125,7 +127,6 @@ public class NaturalDisasters : MonoBehaviour {
 					
 					if(!earthQuakeHappening && !spinHappening){
 						chance = Random.Range (0, 100);
-					print (chance);
 					}
 
 					int prob = 40;
@@ -169,10 +170,14 @@ public class NaturalDisasters : MonoBehaviour {
 								}
 								earthquakeDone = true;
 								earthquakeNow = false;
+								animator.SetBool("Attacking", false);
+								animator.SetBool("MovingStraight", false);
+								animator.SetBool("Running", false);
+								animator.SetBool("MovingRight", false);
+								animator.SetBool("MovingLeft", false);
+								animator.SetFloat("Turning", 0f);
 							}
 							//checking for collision when falling in collision file
-									
-							//print ("Earth quake!");
 						} else if (spinNow || chance > prob/2) {	//Spin
 							spinHappening = true;
 							if(stopAlarm == 0){
@@ -191,7 +196,6 @@ public class NaturalDisasters : MonoBehaviour {
 								GameObject.Find ("Player").GetComponent<Sounds> ().playWorldSound (Sounds.SPINNING_WIND);
 								spin = 2f;
 
-								//if (!playerScript.jumping) {
 								if(dizzyWearOfNext != 0){	
 									playerAttributes.dizzy = true;
 									dizzyWearOfNext = Time.time + dizzyDelay;
@@ -213,6 +217,10 @@ public class NaturalDisasters : MonoBehaviour {
 										temp = objectsToBeMoved [index].gameObject;
 									}
 
+									if(temp.tag == "monster"){
+										temp.GetComponentInParent<PositionMe> ().touching = false;
+									}
+
 									moveDirection = Random.Range (1, 21);
 									temp.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;
 									temp.GetComponent<Rigidbody> ().position = new Vector3 (moveDirection, objectsToBeMoved [index].transform.position.y, moveDirection);
@@ -230,6 +238,12 @@ public class NaturalDisasters : MonoBehaviour {
 
 								spinningDone = true;
 								spinNow = false;
+								animator.SetBool("Attacking", false);
+								animator.SetBool("MovingStraight", false);
+								animator.SetBool("Running", false);
+								animator.SetBool("MovingRight", false);
+								animator.SetBool("MovingLeft", false);
+								animator.SetFloat("Turning", 0f);
 								//print ("Spinning around and around");
 							}
 						}

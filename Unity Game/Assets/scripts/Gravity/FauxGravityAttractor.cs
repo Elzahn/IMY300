@@ -32,7 +32,6 @@ public class FauxGravityAttractor : MonoBehaviour {
 		} else if (col.collider.tag == "Monster" && col.collider.name != "Ape" && col.collider.name != "MossAlien" && col.collider.name != "ClayAlien" && col.collider.name != "MonsterBody") {
 			col.collider.GetComponent<PositionMe> ().touching = false;
 		} else if (col.collider.tag == "Monster") {
-			//took out to help with placement?
 			col.collider.GetComponentInParent<PositionMe> ().touching = false;
 		} else if (col.collider.tag == "MediumHealthPack" || col.collider.tag == "LargeHealthPack") {
 			if(col.collider.name == "Box012"){
