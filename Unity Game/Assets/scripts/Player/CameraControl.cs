@@ -23,7 +23,7 @@ public class CameraControl : MonoBehaviour {
 
 	void Update ()
 	{
-		if (playerScript.paused == false) {
+		if (playerScript.paused == false && Application.loadedLevelName != "Main_Menu") {
 
 			if(!birdsEye){
 				if (Input.GetMouseButton (1) && Input.GetAxis ("Mouse X") < 0)//right button held and mouse moved left
