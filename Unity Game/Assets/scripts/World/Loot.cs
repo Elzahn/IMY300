@@ -68,6 +68,7 @@ public class Loot : MonoBehaviour {
 	}
 
 	public void takeIt(InventoryItem item){
+
 		attributesScript.addToInventory (item);
 		myLoot.Remove (item);
 		GameObject.Find ("Player").GetComponent<Sounds> ().playWorldSound (Sounds.BUTTON);
@@ -96,7 +97,7 @@ public class Loot : MonoBehaviour {
 		if (item.typeID == "Flight Control") {
 			gotFlightControl = true;
 		}
-
+		print (myLoot.Count () + " " + item);
 		GameObject.Find("LootScroll").GetComponent<LootScrollList>().gatherLoot(myName, myLoot);
 
 		if (myLoot.Count == 0) {

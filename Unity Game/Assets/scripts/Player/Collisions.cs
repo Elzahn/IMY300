@@ -181,7 +181,7 @@ public class Collisions : MonoBehaviour {
 	void OnTriggerExit(Collider col){
 		showLootConfirmation = false;
 		showHealthConfirmation = false;
-		if (colObj.name == "Console") {
+		if (colObj != null && colObj.name == "Console") {
 			showRestore = false;
 			colObj = null;
 		}
