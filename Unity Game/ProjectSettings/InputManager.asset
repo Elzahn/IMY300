@@ -250,7 +250,7 @@ InputManager:
     descriptiveName: Opens or closes the in-game menu
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: m
+    positiveButton: escape
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
