@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
             do
             {
                 screenshotCount++;
-                screenshotFilename = Application.dataPath + "/Screenshots/screenshot" + DateTime.Now.ToString + ".png";
+                screenshotFilename = Application.dataPath + "/Screenshots/screenshot" + DateTime.Now.ToString() + ".png";
             } while (File.Exists(screenshotFilename));
             Application.CaptureScreenshot(screenshotFilename);
         }
