@@ -6,6 +6,7 @@ public class MossAlien : Enemy {
 	 * Should initilze other attributes dpendent on level;
 	 */
 	public AudioSource monsterAudio;
+	private Animator animator;
 
 	public override void init() {
 		const float HP_MULT = 1.6f;
@@ -24,6 +25,8 @@ public class MossAlien : Enemy {
 
 	void Start () {
 		/* Any other initlization */
+		animator = GetComponent<Animator>();
+		animator.SetBool("Attacking", false);
 		monsterAudio = gameObject.AddComponent<AudioSource>();
 		typeID = "MossAlien";
 		lootChance = 0.3f;
@@ -56,6 +59,7 @@ public class MossAlien : Enemy {
 						} else {
 							seekOutPlayer();
 						}
+						animator.SetBool("Attacking", false);
 					}
 					
 				} else {
@@ -68,18 +72,23 @@ public class MossAlien : Enemy {
 				if (Vector3.Distance (PlayerPos, myPos) < 6) {
 					if(!seekingRevenge){
 						followPlayer();
+						animator.SetBool("Attacking", false);
 					} else {
 						seekOutPlayer();
+						animator.SetBool("Attacking", false);
 					}
+
 				}
 			} else{
 				attackPlayer = false;
+				animator.SetBool("Attacking", false);
 			}
 			
 			if (attackPlayer) {
 				if (Time.time >= nextMAttack) {
 					nextMAttack = Time.time + mDelay;
 					attack (player.GetComponent<PlayerAttributes> ());
+					animator.SetBool("Attacking", true);
 				}
 			}
 			
