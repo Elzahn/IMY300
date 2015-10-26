@@ -1,27 +1,23 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Player\Collisions.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Player\PlayerAttributes.cs">
     <Files>
-      <File FileName="Assets\scripts\World\LevelSelect.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\World\NaturalDisasters.cs" Line="186" Column="9" />
+      <File FileName="Assets\scripts\World\LevelSelect.cs" Line="54" Column="26" />
       <File FileName="Assets\scripts\Enemies\EnemySpawner.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\World\Sounds.cs" Line="287" Column="30" />
-      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="686" Column="4" />
+      <File FileName="Assets\scripts\World\Sounds.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="713" Column="94" />
       <File FileName="Assets\scripts\Player\PlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\UI\InventoryScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\UI\Equip.cs" Line="41" Column="41" />
-      <File FileName="Assets\scripts\Teleporting\SaveSpotTeleport.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Player\BonusObjectives.cs" Line="56" Column="48" />
-      <File FileName="Assets\scripts\BonusItems\BonusWeapon.cs" Line="10" Column="32" />
-      <File FileName="Assets\scripts\Player\Collisions.cs" Line="213" Column="4" />
+      <File FileName="Assets\scripts\Teleporting\SaveSpotTeleport.cs" Line="153" Column="78" />
+      <File FileName="Assets\scripts\UI\ScrollableList.cs" Line="101" Column="54" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="scripts" expanded="True">
-              <Node name="BonusItems" expanded="True" />
               <Node name="Player" expanded="True">
-                <Node name="Collisions.cs" selected="True" />
+                <Node name="PlayerAttributes.cs" selected="True" />
               </Node>
               <Node name="UI" expanded="True" />
               <Node name="World" expanded="True" />
