@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void checkScreenshot() {
-        if (Input.GetKeyDown(KeyCode.KeypadPlus)) {
+        if (Input.GetButtonDown("Screenshot")) {
             if (!Directory.Exists(Application.dataPath + "/Screenshots")) {
                 //if it doesn't, create it
                 Directory.CreateDirectory(Application.dataPath + "/Screenshots");
@@ -72,7 +73,7 @@ public class PlayerController : MonoBehaviour
             do
             {
                 screenshotCount++;
-                screenshotFilename = Application.dataPath + "/Screenshots/screenshot" + screenshotCount + ".png";
+                screenshotFilename = Application.dataPath + "/Screenshots/screenshot" + DateTime.Now.ToString + ".png";
             } while (File.Exists(screenshotFilename));
             Application.CaptureScreenshot(screenshotFilename);
         }
