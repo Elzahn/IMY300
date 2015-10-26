@@ -46,7 +46,7 @@ public class PlayerAttributes : MonoBehaviour {
 		public bool warpUnlock;
 		public bool warpActive;
 
-
+	
 		public bool[] inventoryShipPieces = new bool[6];
 		public bool[] bonusObjs = new bool[3];
 		public bool[] bonusObjsShown = new bool[4];
@@ -82,10 +82,16 @@ public class PlayerAttributes : MonoBehaviour {
 			info.AddValue("doorOpen", doorOpen);
 			info.AddValue("justWraped", justWarped);
 
+			info.AddValue("fallUnlocked", fallUnlocked);
+            info.AddValue("fallActive", fallActive);
+            info.AddValue("warpUnlocked",warpUnlock);
+			info.AddValue("warpActive",warpActive);
+
 			info.AddValue("inventoryShipPieces", inventoryShipPieces);
 			info.AddValue("bonusObjs", bonusObjs);
 			info.AddValue("bonusObjsShown", bonusObjsShown);
 			info.AddValue("deadEnemies", deadEnemies);
+			info.AddValue("shipPieceCount", shipPieces);
 		}
 		
 		AttributeContainer(SerializationInfo info, StreamingContext context) {
@@ -98,11 +104,11 @@ public class PlayerAttributes : MonoBehaviour {
 			gender 	 	= (char) info.GetValue("gender", typeof(char));
 			currentLevel = (int) info.GetValue("levels", typeof(int));
 
-			inventory 	= (LinkedList<InventoryItem>) info.GetValue("inventory", typeof(LinkedList<InventoryItem>));
-			storage 	= (LinkedList<InventoryItem>) info.GetValue("storage",   typeof(LinkedList<InventoryItem>));
+			inventory = info.GetValue ("inventory", typeof(LinkedList<InventoryItem>)) as LinkedList<InventoryItem>;
+			storage = info.GetValue ("storage", typeof(LinkedList<InventoryItem>)) as LinkedList<InventoryItem>;
 
 			weapon 		= (Weapon) info.GetValue("weapon", typeof(Weapon));
-			accessories = (LinkedList <Accessory>) info.GetValue("accessories", typeof(LinkedList <Accessory>));
+			accessories = info.GetValue ("accessories", typeof(LinkedList<Accessory>)) as LinkedList<Accessory>;
 
 			difficulty 		= (float) info.GetValue("difficulty",     typeof(float));
 			soundVolume 	= (float) info.GetValue("soundVolume", 	  typeof(float));
@@ -115,10 +121,16 @@ public class PlayerAttributes : MonoBehaviour {
 			doorOpen 	 = (bool) info.GetValue("doorOpen",   typeof(bool));
 			justWarped 	 = (bool) info.GetValue("justWraped", typeof(bool));
 
-			inventoryShipPieces = (bool[]) info.GetValue("inventoryShipPieces", typeof(bool[]));
+			fallUnlocked = (bool) info.GetValue("fallUnlocked", typeof(bool));
+			fallActive = (bool)info.GetValue("fallActive", typeof(bool));
+			warpUnlock = (bool)info.GetValue("warpUnlocked",typeof(bool));
+			warpActive = (bool) info.GetValue("warpActive",typeof(bool));
+			
+			inventoryShipPieces = info.GetValue ("inventoryShipPieces", typeof(bool[])) as bool[];
 			bonusObjs = info.GetValue ("bonusObjs", typeof(bool[])) as bool[];
 			bonusObjsShown = info.GetValue ("bonusObjsShown", typeof(bool[])) as bool[];
 			deadEnemies = (int) info.GetValue("deadEnemies", typeof(int));
+			shipPieces = (int) info.GetValue("shipPieceCount", typeof(int));
 
 			/**
 			 * Saving & loading only between levels
