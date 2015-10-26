@@ -4,7 +4,7 @@ using System.Collections;
 public class LightRotation : MonoBehaviour {
 
 	public const int lightSpeed = 5;
-	private float rot = 0;
+	private float skyrot = 0;
 
 	// Update is called once per frame
 	void Update () {
@@ -12,9 +12,9 @@ public class LightRotation : MonoBehaviour {
 		if (!playerScript.paused) {
 			transform.RotateAround(Vector3.zero, Vector3.up, lightSpeed * Time.deltaTime);
 
-			rot += lightSpeed * Time.deltaTime;
-			rot %= 360;
-			RenderSettings.skybox.SetFloat("_Rotation", rot );
+			skyrot += lightSpeed/2 * Time.deltaTime;
+			skyrot %= 360;
+			RenderSettings.skybox.SetFloat("_Rotation", skyrot );
 
 		}
 	}

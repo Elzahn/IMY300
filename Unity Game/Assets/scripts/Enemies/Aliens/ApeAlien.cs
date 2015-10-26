@@ -30,8 +30,8 @@ public class ApeAlien : Enemy {
 	void Start () {
 		/* Any other initlization */
 		monsterAudio = gameObject.AddComponent<AudioSource>();
-		
-		lootChance = 0.55f;
+		typeID = "ApeAlien";
+		lootChance = 0.4f;
 		maxLoot = 2;
 		nextApeAttack = Time.time + apeDelay;
 		nextARegeneration = Time.time + delayARegeneration;

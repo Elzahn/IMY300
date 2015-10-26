@@ -30,8 +30,8 @@ public class BossAlien : Enemy {
 		monsterAudio = gameObject.AddComponent<AudioSource>();
 		animator = GetComponent<Animator>();
 		animator.SetBool("Attacking", false);
-		
-		lootChance = 0.65f;
+		typeID = "BossAlien";
+		lootChance = 0.5f;
 		maxLoot = 3;
 	}
 
