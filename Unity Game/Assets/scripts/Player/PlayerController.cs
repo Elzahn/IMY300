@@ -316,9 +316,9 @@ public class PlayerController : MonoBehaviour
 					paused = true;
 				}
 
-				if (Input.GetAxisRaw ("Run") > 0 && playerAttributes.stamina > 0 &&
+				if (Input.GetAxis ("Run") > 0 && playerAttributes.stamina > 0 &&
 					Application.loadedLevelName != "SaveSpot" &&
-					(Input.GetAxis ("Horizontal") != 0 || Input.GetAxis ("Vertical") != 0)) {
+					(Input.GetAxisRaw ("Horizontal") != 0 || Input.GetAxisRaw ("Vertical") != 0)) {
 					if (GameObject.Find ("Stamina").GetComponent<Image> ().isActiveAndEnabled == false) {
 						GameObject.Find ("Stamina").GetComponent<Image> ().enabled = true;
 					}
@@ -335,7 +335,7 @@ public class PlayerController : MonoBehaviour
 
 					animatorComponent.SetBool ("Running", true);
 
-				} else if ((Input.GetAxis ("Horizontal") != 0 || Input.GetAxis ("Vertical") != 0)) {
+				} else if ((Input.GetAxisRaw ("Horizontal") != 0 || Input.GetAxisRaw ("Vertical") != 0)) {
 					run = false;
 					animatorComponent.SetBool ("Running", false);
 					if (sound.characterAudio.isPlaying && sound.characterClip == Sounds.PLANET_RUNNING) {
@@ -350,13 +350,13 @@ public class PlayerController : MonoBehaviour
 					}
 				}
 
-				if ((Input.GetAxis ("Vertical") != 0 || Input.GetAxisRaw ("Horizontal") != 0)) {
+				if ((Input.GetAxisRaw ("Vertical") != 0 || Input.GetAxisRaw ("Horizontal") != 0)) {
 					moving = true;
-					if (Input.GetAxis ("Vertical") == 0 && Input.GetAxis ("Horizontal") < 0) {
+					if (Input.GetAxisRaw ("Vertical") == 0 && Input.GetAxisRaw ("Horizontal") < 0) {
 						animatorComponent.SetBool ("MovingLeft", moving);
 						animatorComponent.SetBool ("MovingRight", false);
 						animatorComponent.SetBool ("MovingStraight", false);
-					} else if (Input.GetAxis ("Vertical") == 0 && Input.GetAxis ("Horizontal") > 0) {
+					} else if (Input.GetAxisRaw ("Vertical") == 0 && Input.GetAxis ("Horizontal") > 0) {
 						animatorComponent.SetBool ("MovingRight", moving);
 						animatorComponent.SetBool ("MovingStraight", false);
 						animatorComponent.SetBool ("MovingLeft", false);
@@ -380,7 +380,7 @@ public class PlayerController : MonoBehaviour
 			}*/
 
 
-				if (Input.GetAxis ("Vertical") == 0 && Input.GetAxis ("Horizontal") == 0) {
+				if (Input.GetAxisRaw ("Vertical") == 0 && Input.GetAxisRaw ("Horizontal") == 0) {
 					moving = false;
 					animatorComponent.SetBool ("MovingStraight", moving);
 					animatorComponent.SetBool ("MovingRight", moving);
