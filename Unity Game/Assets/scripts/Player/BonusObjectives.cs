@@ -17,6 +17,7 @@ public class BonusObjectives : MonoBehaviour {
 	private bool showedBonus2 = false;
 	private bool showedBonus3 = false;
 	private bool showedBonus4 = false;
+
 	// Use this for initialization
 	void Start () {
 		killAllMonstersInGame = false;

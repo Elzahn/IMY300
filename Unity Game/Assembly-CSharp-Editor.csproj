@@ -79,7 +79,7 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Cloudstoyv5">
- <HintPath>C:/Ander Files/Git/IMY300/Unity Game/Assets/CloudsToy/DLL/Cloudstoyv5.dll</HintPath>
+ <HintPath>C:/Users/Elzahn/Documents/GitHub/IMY300/Unity Game/Assets/CloudsToy/DLL/Cloudstoyv5.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
@@ -123,6 +123,8 @@
       <Project>{33C579C2-ADD1-FD5E-63F2-F57172AFC99F}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
       <Project>{87228867-ED94-722A-DF0D-F105469E6F02}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
+    <ProjectReference Include="Assembly-CSharp.csproj">
+      <Project>{E90DE692-4C1D-1309-F740-9ED02D8AD415}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
