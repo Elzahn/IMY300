@@ -663,6 +663,14 @@ MonoBehaviour:
   tree3: {fileID: 196340, guid: 177742eb57cf7b34c8501cdf4c2ed906, type: 2}
   tree4: {fileID: 144930, guid: 72783855e369f6749937f13d8f5e472b, type: 2}
   shrub: {fileID: 174706, guid: 7935d09b08b8d5d4a9814da53f31aad4, type: 2}
+  tree5: {fileID: 0}
+  tree6: {fileID: 0}
+  tree7: {fileID: 0}
+  tree8: {fileID: 0}
+  tree9: {fileID: 0}
+  tree10: {fileID: 0}
+  tree11: {fileID: 0}
+  tree12: {fileID: 0}
 --- !u!1001 &1252867183
 Prefab:
   m_ObjectHideFlags: 0
