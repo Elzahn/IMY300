@@ -7,19 +7,45 @@ using System.Linq;
 public class Loot : MonoBehaviour {
 
 	public static LinkedList<InventoryItem> myLoot = new LinkedList<InventoryItem> ();
+	private PlayerAttributes attributesScript;
 
 	public static bool showInventoryHint;
 	public static string inventoryHintText;
 
 	public string myName { get; private set; }
-	public static bool gotPowerCore{ get; set; }
-	public static bool gotBackEngine{ get; set; }
-	public static bool gotTailFin{ get; set; }
-	public static bool gotLeftWing{ get; set; }
-	public static bool gotLandingGear{ get; set; }
-	public static bool gotFlightControl{ get; set; }
 
-	private PlayerAttributes attributesScript;
+	private static bool[] shipPartsArr {
+		get {
+			var attributesScript = GameObject.Find("Player").GetComponent<PlayerAttributes> ();
+			return attributesScript.myAttributes.inventoryShipPieces;
+		}
+	}
+
+	public static bool gotPowerCore{ 
+		get { return shipPartsArr[0]; }
+		set { shipPartsArr[0] = value; }
+	}
+	public static bool gotBackEngine{ 
+		get { return shipPartsArr[1]; }
+		set { shipPartsArr[1] = value; }
+	}
+	public static bool gotTailFin{ 
+		get { return shipPartsArr[2]; }
+		set { shipPartsArr[2] = value; }
+	}
+	public static bool gotLeftWing{ 
+		get { return shipPartsArr[3]; }
+		set { shipPartsArr[3] = value; }
+	}
+	public static bool gotLandingGear{ 
+		get { return shipPartsArr[4]; }
+		set { shipPartsArr[4] = value; }
+	}
+	public static bool gotFlightControl{		
+		get { return shipPartsArr[5]; }
+		set { shipPartsArr[5] = value; }
+	}
+
 	private PlayerController playerScript;
 	private Canvas loot;
 	private Text hudText;
@@ -87,28 +113,18 @@ public class Loot : MonoBehaviour {
 		if (item.typeID == "Power Core") {
 			gotPowerCore = true;
 			GameObject.Find ("Player").GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
-		}
-	
-		if (item.typeID == "Back Engine") {
+		} else if (item.typeID == "Back Engine") {
 			gotBackEngine = true;
-		}
-
-		if (item.typeID == "TailFin") {
+		} else if (item.typeID == "TailFin") {
 			gotTailFin = true;
-		}
-
-		if (item.typeID == "Left Wing") {
+		} else if (item.typeID == "Left Wing") {
 			gotLeftWing = true;
-		}
-
-		if (item.typeID == "Landing Gear") {
+		} else if (item.typeID == "Landing Gear") {
 			gotLandingGear = true;
-		}
-
-		if (item.typeID == "Flight Control") {
+		} else if (item.typeID == "Flight Control") {
 			gotFlightControl = true;
 		}
-		print (myLoot.Count () + " " + item);
+		//print (myLoot.Count () + " " + item);
 		GameObject.Find("LootScroll").GetComponent<LootScrollList>().gatherLoot(myName, myLoot);
 
 		if (myLoot.Count == 0) {
