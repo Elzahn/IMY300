@@ -122,7 +122,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 			}
 
 	    
-			if (Application.loadedLevelName == "Tutorial" && showEntranceConfirmation && Input.GetKeyDown (KeyCode.E) && Loot.gotPowerCore == true) {
+			if (Application.loadedLevelName == "Tutorial" && showEntranceConfirmation && Input.GetButtonDown ("Interact") && Loot.gotPowerCore == true) {
 				canEnterSaveSpot = false;
 				GameObject.Find ("Player").GetComponent<PlayerAttributes> ().storage.AddLast (new Cupcake ());
 				showEntranceConfirmation = false;
@@ -134,7 +134,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 				interaction.fillAmount = 0;
 				attributesComponent.returnToSaveSpot ();
 			
-			} else if (showExitConfirmation && Input.GetKeyDown (KeyCode.E) && !loadTutorial) {
+			} else if (showExitConfirmation && Input.GetButtonDown ("Interact") && !loadTutorial) {
 				canEnterSaveSpot = false;
 				showExitConfirmation = false;
 				this.GetComponent<Rigidbody> ().mass = 0.1f;
@@ -150,7 +150,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 
 				Application.LoadLevel ("Scene");
 				Resources.UnloadUnusedAssets ();
-			} else if (showExitConfirmation && Input.GetKeyDown (KeyCode.E) && loadTutorial) {
+			} else if (showExitConfirmation && Input.GetButtonDown ("Interact") && loadTutorial) {
 				canEnterSaveSpot = false;
 
 				this.GetComponent<Rigidbody> ().mass = 0.1f;
@@ -166,12 +166,12 @@ public class SaveSpotTeleport : MonoBehaviour {
 				this.transform.rotation = Quaternion.Euler (0f, 91.60388f, 0f);
 				this.transform.position = new Vector3 (0.26f, 16.06f, 0.316f);
 				Resources.UnloadUnusedAssets ();
-			} else if(showEndGameSuccess && Input.GetKeyDown(KeyCode.E)){
+			} else if(showEndGameSuccess && Input.GetButtonDown ("Interact")){
 				this.GetComponent<Rigidbody> ().useGravity = true;
 				this.GetComponent<FauxGravityBody> ().attractor = null;
 				sound.playWorldSound (Sounds.FINISHED_GAME);
 				Application.LoadLevel ("EndOfGame");
-			} else if (showEntranceConfirmation && Input.GetKeyDown (KeyCode.E) && Application.loadedLevelName != "Tutorial") {
+			} else if (showEntranceConfirmation && Input.GetButtonDown ("Interact") && Application.loadedLevelName != "Tutorial") {
 				showEntranceConfirmation = false;
 				attributesComponent.restoreHealthToFull ();
 				attributesComponent.restoreStaminaToFull ();

@@ -74,7 +74,7 @@ public class Collisions : MonoBehaviour {
 			}
 		}
 
-		if (Application.loadedLevelName == "SaveSpot" && Loot.gotPowerCore && colObj != null && colObj.name == "Console" && Input.GetKeyDown (KeyCode.E)) {
+		if (Application.loadedLevelName == "SaveSpot" && Loot.gotPowerCore && colObj != null && colObj.name == "Console" && Input.GetButtonDown ("Interact")) {
 			showRestore = false;
 			playerAttributesScript.gotCore = true;
 			this.GetComponent<Sounds>().playWorldSound(Sounds.POWER_ON);
@@ -95,7 +95,7 @@ public class Collisions : MonoBehaviour {
 			this.GetComponent<Tutorial> ().tutorialDone = true;
 		}
 
-		if (Application.loadedLevelName == "SaveSpot" && (Loot.gotTailFin || Loot.gotLeftWing || Loot.gotLandingGear || Loot.gotFlightControl || Loot.gotBackEngine) && colObj != null && colObj.name == "Console" && Input.GetKeyDown (KeyCode.E)) {
+		if (Application.loadedLevelName == "SaveSpot" && (Loot.gotTailFin || Loot.gotLeftWing || Loot.gotLandingGear || Loot.gotFlightControl || Loot.gotBackEngine) && colObj != null && colObj.name == "Console" && Input.GetButtonDown ("Interact")) {
 
 			if(playerAttributesScript.inventory.Contains(backEngine)){
 				playerAttributesScript.inventory.Remove(backEngine);
@@ -140,9 +140,9 @@ public class Collisions : MonoBehaviour {
 			Hud.makeInteractionHint ("Inventory full", this.GetComponent<SaveSpotTeleport>().noEntry);
 		}
 
-		if (showLootConfirmation && Input.GetKeyDown (KeyCode.E)) {
+		if (showLootConfirmation && Input.GetButtonDown ("Interact")) {
 			colObj.GetComponent<Loot> ().showMyLoot ();
-		} else if (showHealthConfirmation && Input.GetKeyDown(KeyCode.E) && colObj.tag == "MediumHealthPack") {
+		} else if (showHealthConfirmation && Input.GetButtonDown ("Interact") && colObj.tag == "MediumHealthPack") {
 			if (playerAttributesScript.inventory.Count < playerAttributesScript.inventorySize) {
 				playerAttributesScript.addToInventory (new MediumHealthPack ());
 				this.GetComponent<Sounds> ().playWorldSound (Sounds.HEALTH_COLLECTION);
@@ -154,7 +154,7 @@ public class Collisions : MonoBehaviour {
 				Destroy (colObj.transform.Find("Box016").gameObject);
 				colObj.tag = "WorldObject";
 			}
-		} else if (showHealthConfirmation && Input.GetKeyDown(KeyCode.E) && colObj.tag == "LargeHealthPack") {
+		} else if (showHealthConfirmation && Input.GetButtonDown ("Interact") && colObj.tag == "LargeHealthPack") {
 			if (playerAttributesScript.inventory.Count < playerAttributesScript.inventorySize) {
 				playerAttributesScript.addToInventory (new LargeHealthPack ());
 				this.GetComponent<Sounds> ().playWorldSound (Sounds.HEALTH_COLLECTION);
