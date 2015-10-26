@@ -30,7 +30,7 @@ public class BossAlien : Enemy {
 		animator.SetBool("Attacking", false);
 
 		typeID = "BossAlien";
-		lootChance = 0.65f;
+		lootChance = 0.5f;
 		maxLoot = 3;
 	}
 
