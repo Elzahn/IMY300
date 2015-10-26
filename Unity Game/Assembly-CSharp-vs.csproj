@@ -50,6 +50,7 @@
      <Compile Include="Assets\ChangeImpact.cs" />
      <Compile Include="Assets\CloudsToy\FPS Basics\FPS Scripts\FPSFlyerMouse.cs" />
      <Compile Include="Assets\CloudsToy\FPS Basics\FPS Scripts\FPSFlyerMousePhysics.cs" />
+     <Compile Include="Assets\PauseGame.cs" />
      <Compile Include="Assets\SimpleParticlePack\Scripts\ParticleTester.cs" />
      <Compile Include="Assets\Sky FX Pack\Scripts\LightBeamsControlScript.cs" />
      <Compile Include="Assets\Sky FX Pack\Scripts\LookAtBehaviour.cs" />
