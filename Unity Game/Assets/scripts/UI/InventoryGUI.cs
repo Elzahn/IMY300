@@ -38,44 +38,44 @@ public class InventoryGUI : MonoBehaviour {
 				Hud.makeInteractionHint("Press E to open storage", GameObject.Find("Player").GetComponent<SaveSpotTeleport>().pressE);
 			}
 
-			if(hasCollided && Input.GetKeyDown(KeyCode.E)){
+			if(hasCollided && Input.GetButtonDown ("Interact")){
 				openStorage();
 			}
 
-			if (Input.GetKeyDown (KeyCode.I) && !showStorage) {
+			if (Input.GetButtonDown ("Inventory") && !showStorage) {
 				openInventory ();
 			}
 
 			if(Application.loadedLevelName == "Tutorial" || Application.loadedLevelName == "SaveSpot"){
-				if (!playerScript.showQuit && Input.GetKeyDown (KeyCode.Escape)){// && !this.GetComponent<Tutorial>().startTutorial){
+				if (!playerScript.showQuit && Input.GetButtonDown ("Menu")){// && !this.GetComponent<Tutorial>().startTutorial){
 					playerScript.showQuit = true;
 				}
 			} else if(Application.loadedLevelName != "Main_Menu"){
-				if (!playerScript.showQuit && Input.GetKeyDown (KeyCode.Escape) && !GameObject.Find("Planet").GetComponent<LoadingScreen>().loading){// && !this.GetComponent<Tutorial>().startTutorial
+				if (!playerScript.showQuit && Input.GetButtonDown("Menu") && !GameObject.Find("Planet").GetComponent<LoadingScreen>().loading){// && !this.GetComponent<Tutorial>().startTutorial
 					playerScript.showQuit = true;
 				}
 			}
 
 		} else {
 			if(Application.loadedLevelName == "Tutorial" || Application.loadedLevelName == "SaveSpot"){
-				if (playerScript.showQuit && Input.GetKeyDown (KeyCode.Escape)){// && !this.GetComponent<Tutorial>().startTutorial){
+				if (playerScript.showQuit && (Input.GetButtonDown("Menu") || Input.GetButtonDown("Cancel"))){// && !this.GetComponent<Tutorial>().startTutorial){
 					playerScript.showQuit = false;
 					playerScript.paused = false;
 				}
 			} else  if(Application.loadedLevelName != "Main_Menu"){
-					if (playerScript.showQuit && Input.GetKeyDown (KeyCode.Escape) && !GameObject.Find("Planet").GetComponent<LoadingScreen>().loading){//&& !this.GetComponent<Tutorial>().startTutorial
+					if (playerScript.showQuit && (Input.GetButtonDown("Menu") || Input.GetButtonDown("Cancel")) && !GameObject.Find("Planet").GetComponent<LoadingScreen>().loading){//&& !this.GetComponent<Tutorial>().startTutorial
 					playerScript.showQuit = false;
 					playerScript.paused = false;
 				}
 			}
 
-			if (Input.GetKeyDown (KeyCode.E) || Input.GetKeyDown(KeyCode.Escape)) {
+			if (Input.GetButtonDown ("Interact") || Input.GetButtonDown("Cancel")) {
 				if (showStorage) {
 					closeStorage ();
 				} 
 			}
 
-			if(Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown (KeyCode.I)){
+			if(Input.GetButtonDown("Cancel") || Input.GetButtonDown ("Inventory")){
 				if (showInventory) {
 					closeInventory ();
 				}
