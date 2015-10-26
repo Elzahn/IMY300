@@ -661,7 +661,9 @@ public class PlayerAttributes : MonoBehaviour {
 				Destroy(GameObject.Find("LongSword(Clone)"));
 			} else if(weapon.typeID == "Warhammer"){
 				Destroy(GameObject.Find("WarHammer(Clone)"));
-			} 
+			} else if(weapon.typeID == "BonusWeapon"){
+				Destroy(GameObject.Find("LongSword(Clone)"));
+			}
 
 			addToInventory(weapon);
 			weapon = null;
@@ -698,6 +700,12 @@ public class PlayerAttributes : MonoBehaviour {
 				weaponPrefab.transform.localRotation = Quaternion.Euler(22.40055f, 252.2171f, 290.2153f);
 			} else if(weapon.typeID == "Warhammer"){
 				weaponPrefab = Instantiate(warHammer);
+				weaponPrefab.transform.SetParent(GameObject.Find("mixamorig:RightHandMiddle1").transform);
+				weaponPrefab.transform.localScale = new Vector3(10f, 10f, 10f);
+				weaponPrefab.transform.localPosition = new Vector3(4.41f, 0.88f, 0.89f);
+				weaponPrefab.transform.localRotation = Quaternion.Euler(-5.995584e-05f, 269.7404f, -8.875294e-05f);
+			} else if(weapon.typeID == "BonusWeapon"){
+				weaponPrefab = Instantiate(longSword);
 				weaponPrefab.transform.SetParent(GameObject.Find("mixamorig:RightHandMiddle1").transform);
 				weaponPrefab.transform.localScale = new Vector3(10f, 10f, 10f);
 				weaponPrefab.transform.localPosition = new Vector3(4.41f, 0.88f, 0.89f);
