@@ -235,8 +235,14 @@ public abstract class Enemy : MonoBehaviour {
 		if (d != "dark") {
 			speed /= 2;
 		} 
+		var oldPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
 		transform.RotateAround(Vector3.zero, Vector3.up, speed * Time.deltaTime);
 
+		Vector3 lookPos = oldPos - transform.position;
+		lookPos.y = 0;
+		Quaternion rotation = Quaternion.LookRotation(lookPos);
+		transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 1f);
 	}
 
 	public string attack(PlayerAttributes player) {

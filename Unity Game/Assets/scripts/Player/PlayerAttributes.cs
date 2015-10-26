@@ -41,10 +41,10 @@ public class PlayerAttributes : MonoBehaviour {
 		public bool doorOpen;
 		public bool justWarped;
 
-		public bool fallUnlocked;
-		public bool fallActive;
-		public bool warpUnlock;
-		public bool warpActive;
+		public bool fallUnlocked = false;
+		public bool fallActive = false;
+		public bool warpUnlock = false;
+		public bool warpActive = false;
 
 	
 		public bool[] inventoryShipPieces = new bool[6];
@@ -462,7 +462,7 @@ public class PlayerAttributes : MonoBehaviour {
 			DontDestroyOnLoad (gameObject);
 			instance = this;
 		}
-
+		myAttributes = new AttributeContainer();
 		healthLowering = GameObject.Find ("Health_Lowering");
 		healthLowering.SetActive (false);
 		healthHealing = GameObject.Find ("Health_Healing");
@@ -489,7 +489,7 @@ public class PlayerAttributes : MonoBehaviour {
 
 		soundComponent = GameObject.Find("Player").gameObject.GetComponent<Sounds>(); //must be GameObject.Find("Player") else it tries to acces what has been destroyed
 		controllerComponent = GameObject.Find("Player").gameObject.GetComponent<PlayerController> (); //must be GameObject.Find("Player") else it tries to acces what has been destroyed
-		myAttributes = new AttributeContainer();
+
 	}
 
 	void Update() {

@@ -11,16 +11,18 @@ public class FallThroughPlanet : MonoBehaviour {
 		set {playerAttributes.myAttributes.fallUnlocked = value;} }
 	private float nextUsage;
 	private float delay = 10;
-	private PlayerController playerScript;
-	private PlayerAttributes playerAttributes;
+	private PlayerController playerScript { get {
+			return this.GetComponent<PlayerController>();
+		}}
+	private PlayerAttributes playerAttributes { get {
+			return this.GetComponent<PlayerAttributes>();
+		}}
 
 	// Use this for initialization
 	void Start () {
 		canFallThroughPlanet = false; 
 		nextUsage = Time.time + delay;
 		fallThroughPlanetUnlocked = false; //will be changed to true after first mini boss when it is unlocked
-		playerScript = this.GetComponent<PlayerController>();
-		playerAttributes = this.GetComponent<PlayerAttributes>();
 	}
 
 	//used to cause a direct fall
@@ -31,6 +33,7 @@ public class FallThroughPlanet : MonoBehaviour {
 	}
 
 	void Update(){
+	
 		if (!playerScript.paused && fallThroughPlanetUnlocked) {
 			if (canFallThroughPlanet) {
 				if (Input.GetButtonDown ("Fall") && Application.loadedLevelName != "SaveSpot") {
