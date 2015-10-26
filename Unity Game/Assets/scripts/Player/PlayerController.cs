@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void checkScreenshot() {
-        if (Input.GetKeyDown(KeyCode.KeypadPlus)) {
+        if (Input.GetButtonDown("Screenshot")) {
             if (!Directory.Exists(Application.dataPath + "/Screenshots")) {
                 //if it doesn't, create it
                 Directory.CreateDirectory(Application.dataPath + "/Screenshots");
@@ -72,7 +73,7 @@ public class PlayerController : MonoBehaviour
             do
             {
                 screenshotCount++;
-                screenshotFilename = Application.dataPath + "/Screenshots/screenshot" + screenshotCount + ".png";
+                screenshotFilename = Application.dataPath + "/Screenshots/screenshot" + DateTime.Now.ToString() + ".png";
             } while (File.Exists(screenshotFilename));
             Application.CaptureScreenshot(screenshotFilename);
         }
@@ -287,7 +288,7 @@ public class PlayerController : MonoBehaviour
 		 * P Pauses or unpausese
 		 * Only if showpause the same as pause.
 		 * */
-			if (Input.GetKeyDown (KeyCode.P)) {
+			if (Input.GetButtonDown ("Pause")) {
 				if (Application.loadedLevelName != "Scene" ||
 					(Application.loadedLevelName == "Scene" &&
 					!GameObject.Find ("Planet").GetComponent<LoadingScreen> ().loading)) {
@@ -316,7 +317,7 @@ public class PlayerController : MonoBehaviour
 					//paused = true;
 				}
 
-				if (Input.GetAxis ("Run") > 0 && playerAttributes.stamina > 0 &&
+				if (Input.GetButton ("Run") && playerAttributes.stamina > 0 &&
 					Application.loadedLevelName != "SaveSpot" &&
 					(Input.GetAxisRaw ("Horizontal") != 0 || Input.GetAxisRaw ("Vertical") != 0)) {
 					if (GameObject.Find ("Stamina").GetComponent<Image> ().isActiveAndEnabled == false) {

@@ -134,16 +134,18 @@ public class NaturalDisasters : MonoBehaviour {
 					if (earthquakeNow || spinNow || chance <= prob) {
 						if (earthquakeNow || chance <= prob/2) {	//Earthquake
 							earthQuakeHappening = true;
-						
-							if(stopAlarm == 0){
-								stopAlarm = Time.time + 3;
-								soundScript.playAlarmSound (Sounds.DISASTER_ALARM);
-							}
-							
-							if(Time.time >= stopAlarm)
-							{
-								soundScript.stopAlarmSound(Sounds.DISASTER_ALARM);
-								stopAlarm = 0f;
+
+							if(Application.loadedLevelName != "Tutorial"){
+								if(stopAlarm == 0){
+									stopAlarm = Time.time + 3;
+									soundScript.playAlarmSound (Sounds.DISASTER_ALARM);
+								}
+								
+								if(Time.time >= stopAlarm)
+								{
+									soundScript.stopAlarmSound(Sounds.DISASTER_ALARM);
+									stopAlarm = 0f;
+								}
 							}
 
 							if(!soundScript.alarmAudio.isPlaying){
@@ -180,15 +182,18 @@ public class NaturalDisasters : MonoBehaviour {
 							//checking for collision when falling in collision file
 						} else if (spinNow || chance > prob/2) {	//Spin
 							spinHappening = true;
-							if(stopAlarm == 0){
-								stopAlarm = Time.time + 3;
-								soundScript.playAlarmSound (Sounds.DISASTER_ALARM);
-							}
-							
-							if(Time.time >= stopAlarm)
-							{
-								soundScript.stopAlarmSound(Sounds.DISASTER_ALARM);
-								stopAlarm = 0f;
+
+							if(Application.loadedLevelName != "Tutorial"){
+								if(stopAlarm == 0){
+									stopAlarm = Time.time + 3;
+									soundScript.playAlarmSound (Sounds.DISASTER_ALARM);
+								}
+								
+								if(Time.time >= stopAlarm)
+								{
+									soundScript.stopAlarmSound(Sounds.DISASTER_ALARM);
+									stopAlarm = 0f;
+								}
 							}
 							
 							if(!soundScript.alarmAudio.isPlaying){

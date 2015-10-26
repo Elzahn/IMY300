@@ -127,7 +127,7 @@ public class LevelSelect : MonoBehaviour {
 								snow.GetComponent<ParticleSystem> ().enableEmission = true;
 								planet.GetComponent<EnemySpawner> ().spawnEnemies (10);
 							//Burning Tree, Green Tree, Big Tree, Bare Tree, Shrub, Palmtree, snowMan, snowTree, cactus, deserPalm, candy 1, candy 2, candy 3
-								planet.GetComponent<SpawnTrees> ().spawnTrees (0, 10, 0, 0, 50, 0, 40, 80, 0, 0, 0, 0, 0);
+								planet.GetComponent<SpawnTrees> ().spawnTrees (0, 0, 0, 0, 50, 0, 40, 90, 0, 0, 0, 0, 0);
 								planet.GetComponent<SpawnHealthPacks> ().spawnHealth (2);
 								this.GetComponent<Sounds> ().playAmbienceSound (Sounds.PLANET_3_AMBIENCE);
 								this.GetComponent<Sounds> ().pauseSound ("ambience");

@@ -25,20 +25,20 @@ public class FallThroughPlanet : MonoBehaviour {
 	}
 
 	void Update(){
-		if (playerScript.paused == false && fallThroughPlanetUnlocked == true) {
-			if (canFallThroughPlanet == true) {
-				if (Input.GetKeyDown (KeyCode.F) && Application.loadedLevelName != "SaveSpot") {
+		if (!playerScript.paused && fallThroughPlanetUnlocked) {
+			if (canFallThroughPlanet) {
+				if (Input.GetButtonDown ("Fall") && Application.loadedLevelName != "SaveSpot") {
 					canFallThroughPlanet = false;
-					Camera.main.GetComponent<HUD>().turnOffLights("fall");
+					Camera.main.GetComponent<HUD> ().turnOffLights ("fall");
 					var pos = transform.position;
 					transform.position = new Vector3 (-pos.x, -pos.y, -pos.z);
-					this.GetComponent<Sounds>().playWorldSound(Sounds.WARPING);
-				//	print ("Cooldown of 10 seconds"); 	//show that waiting
+					this.GetComponent<Sounds> ().playWorldSound (Sounds.WARPING);
+					//	print ("Cooldown of 10 seconds"); 	//show that waiting
 					//PlayerLog.addStat("Cooldown of 10 seconds");
 				} 
 			}
 
-			if (canFallThroughPlanet == false && Time.time >= nextUsage){
+			if (!canFallThroughPlanet && Time.time >= nextUsage){
 				nextUsage = Time.time + delay;
 				canFallThroughPlanet = true;
 				Camera.main.GetComponent<HUD>().setLight("fall");

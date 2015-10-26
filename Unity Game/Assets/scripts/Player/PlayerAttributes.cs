@@ -8,8 +8,10 @@ using System.IO;
 
 public class PlayerAttributes : MonoBehaviour {
     [Serializable()]
-	private class AttributeContainer : ISerializable {
-		public AttributeContainer(){}
+	public class AttributeContainer : ISerializable {
+		public AttributeContainer(){
+			this.inventoryShipPieces = new bool[] {false, false, false, false, false, false};
+		}
 
 		public float xp;
 		public float hp;
@@ -40,6 +42,15 @@ public class PlayerAttributes : MonoBehaviour {
 		public bool fallFirst;
 		public bool doorOpen;
 		public bool justWarped;
+
+		public bool fallUnlocked;
+		public bool fallActive;
+		public bool warpUnlock;
+		public bool warpActive;
+		public bool[] bonusObjs;
+		public int shipPieces;
+		public bool[] inventoryShipPieces;
+		public int monstersKilled;
 
 		public void GetObjectData (SerializationInfo info, StreamingContext context)
 		{
@@ -104,7 +115,7 @@ public class PlayerAttributes : MonoBehaviour {
 		}
 	}
 
-	private AttributeContainer myAttributes = new AttributeContainer();
+	public AttributeContainer myAttributes = new AttributeContainer();
 
 	const int HP_BASE = 100;
 	const float HP_MULT = 1.8f;
