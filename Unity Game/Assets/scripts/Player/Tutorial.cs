@@ -192,7 +192,7 @@ public class Tutorial : MonoBehaviour {
 				makeHint("Rotate the camera by moving the mouse while holding down", CameraMove);
 			}
 
-			if(hint.fillAmount <= 0 && hintText.text == "Access the satelites with "){
+			if(hint.fillAmount <= 0 && hintText.text == "Access the satelites with " && interaction.fillAmount == 0){
 				makeHint ("Run with left shift + W/A/S/D. Just remember that running and attacks deplete your stamina.", Run);
 			}
 
