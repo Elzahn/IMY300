@@ -6,13 +6,18 @@ public class NaturalDisasters : MonoBehaviour {
 	private bool earthquakeNow = false;
 	private bool spinNow = false;
 	private PlayerController playerScript;
-	private float nextDisaster, delay = 180, shakeAmount, dizzyWearOfNext, dizzyDelay = 10;	//decreaseFactor
+	private float nextDisaster, delay = 120, shakeAmount, dizzyWearOfNext, dizzyDelay = 10;	//decreaseFactor
 	public static float shake, spin;	//how long the shake/spin lasts
 	private Transform cameraTransform;
 	private Vector3 originalCamPos;
 	private Quaternion originalCamRotation;
 	private bool spinningDone, earthquakeDone;	//set to ensure that game isn't resumed entire time
 	private float tutorialShake, cheatSpin;
+	private bool earthQuakeHappening, spinHappening;
+	private Sounds soundScript;
+	private float stopAlarm;
+	private int chance;
+	private Animator animator;
 
 	public bool isShaking(){
 		if (shake > 0) {
@@ -32,6 +37,12 @@ public class NaturalDisasters : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		animator = GameObject.Find("Character_Final").GetComponent<Animator>();
+		chance = 0;
+		stopAlarm = 0f;
+		earthQuakeHappening = false;
+		spinHappening = false;
+		soundScript = GameObject.Find("Player").GetComponent<Sounds>();
 		playerScript = GameObject.Find ("Player").GetComponent<PlayerController>();
 		nextDisaster = Time.time + delay;
 		dizzyWearOfNext = Time.time + dizzyDelay;
@@ -60,7 +71,7 @@ public class NaturalDisasters : MonoBehaviour {
 			} else if(Time.time >= tutorialShake){
 				shake -= 1;
 				playerScript.paused = false;
-				GameObject.Find("Player").GetComponent<Sounds>().playAmbienceSound(Sounds.TUTORIAL_AMBIENCE);
+			//	soundScript.playAmbienceSound(Sounds.TUTORIAL_AMBIENCE);
 			}
 		} else if (spin > 0) {
 			//cameraTransform.Rotate(5, 10, 5);
@@ -82,7 +93,7 @@ public class NaturalDisasters : MonoBehaviour {
 				}
 			}
 		} else if ((shake <= 0 && earthquakeDone) || (spin <= 0 && spinningDone)) {
-			GameObject.Find ("Player").GetComponent<Sounds> ().stopSound ("world");
+			soundScript.stopSound ("world");
 			if(shake < 0 || spin < 0)
 			{
 				spin = 0f;
@@ -104,89 +115,137 @@ public class NaturalDisasters : MonoBehaviour {
 					dizzyWearOfNext = 0;
 				}
 
-				if (Time.time >= nextDisaster - 10) {
+				/*if (Time.time >= nextDisaster - 10) {
 					GameObject.Find ("Player").GetComponent<Sounds> ().playAlarmSound (Sounds.DISASTER_ALARM);
 				}
 				if (Time.time >= nextDisaster - 5) {
 					GameObject.Find ("Player").GetComponent<Sounds> ().stopAlarmSound (Sounds.DISASTER_ALARM);
-				}
+				}*/
 
-				if ((Application.loadedLevelName != "Tutorial" && Time.time >= nextDisaster) || earthquakeNow || spinNow) {
+				if ((Application.loadedLevelName != "Tutorial" && Time.time >= nextDisaster) || earthquakeNow || spinNow || spinHappening || earthQuakeHappening) {
 					nextDisaster = Time.time + delay;
-					int chance = Random.Range (0, 100);
+					
+					if(!earthQuakeHappening && !spinHappening){
+						chance = Random.Range (0, 100);
+					}
+
 					int prob = 40;
 					//moved chance to the back so cheats get preferance
 					if (earthquakeNow || spinNow || chance <= prob) {
 						if (earthquakeNow || chance <= prob/2) {	//Earthquake
-							GameObject.Find ("Player").GetComponent<Sounds> ().playWorldSound (Sounds.EARTHQUAKE);
-							shake = 2f;
-							tutorialShake = Time.time + 3;
-							playerScript.paused = true;
-							if(Application.loadedLevelName != "Tutorial"){
-								SpawnWarpPoints.spawnNewTeleports ();
+							earthQuakeHappening = true;
+						
+							if(stopAlarm == 0){
+								stopAlarm = Time.time + 3;
+								soundScript.playAlarmSound (Sounds.DISASTER_ALARM);
+							}
+							
+							if(Time.time >= stopAlarm)
+							{
+								soundScript.stopAlarmSound(Sounds.DISASTER_ALARM);
+								stopAlarm = 0f;
 							}
 
-							GameObject[] gameObjects = GameObject.FindGameObjectsWithTag ("WorldObject");
+							if(!soundScript.alarmAudio.isPlaying){
+								earthQuakeHappening = false;
+								soundScript.playWorldSound (Sounds.EARTHQUAKE);
+								shake = 2f;
+								tutorialShake = Time.time + 3;
+								playerScript.paused = true;
+								if(Application.loadedLevelName != "Tutorial"){
+									SpawnWarpPoints.spawnNewTeleports ();
+								}
 
-							for (int i = 0; i < gameObjects.Length; i++) {
-								if ((gameObjects [i].name != "Sphere001" && gameObjects [i].name != "Cylinder001") && (gameObjects [i].transform.localScale.y > gameObjects [i].transform.localScale.x) && (gameObjects [i].GetComponent<FauxGravityBody> ().getRotateMe () == true)) { //if it is taller than it is wide
-									chance = Random.Range (0, 101);
-									if (chance <= 30){// || earthquakeNow) {	//chance of falling over
-										gameObjects [i].GetComponent<FauxGravityBody> ().setRotateMe ();
-										gameObjects [i].GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
-										gameObjects [i].transform.Rotate (new Vector3 (gameObjects [i].transform.rotation.x + Random.Range (-90, 91), gameObjects [i].transform.rotation.y + Random.Range (-90, 91), gameObjects [i].transform.rotation.z + Random.Range (-90, 91)));	//fall over 
+								GameObject[] gameObjects = GameObject.FindGameObjectsWithTag ("WorldObject");
+
+								for (int i = 0; i < gameObjects.Length; i++) {
+									if ((gameObjects [i].name != "Sphere001" && gameObjects [i].name != "Cylinder001") && (gameObjects [i].transform.localScale.y > gameObjects [i].transform.localScale.x) && (gameObjects [i].GetComponent<FauxGravityBody> ().getRotateMe () == true)) { //if it is taller than it is wide
+										chance = Random.Range (0, 101);
+										if (chance <= 30){// || earthquakeNow) {	//chance of falling over
+											gameObjects [i].GetComponent<FauxGravityBody> ().setRotateMe ();
+											gameObjects [i].GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.None;
+											gameObjects [i].transform.Rotate (new Vector3 (gameObjects [i].transform.rotation.x + Random.Range (-90, 91), gameObjects [i].transform.rotation.y + Random.Range (-90, 91), gameObjects [i].transform.rotation.z + Random.Range (-90, 91)));	//fall over 
+										}
 									}
 								}
+								earthquakeDone = true;
+								earthquakeNow = false;
+								animator.SetBool("Attacking", false);
+								animator.SetBool("MovingStraight", false);
+								animator.SetBool("Running", false);
+								animator.SetBool("MovingRight", false);
+								animator.SetBool("MovingLeft", false);
+								animator.SetFloat("Turning", 0f);
 							}
-							earthquakeDone = true;
-							earthquakeNow = false;
 							//checking for collision when falling in collision file
-									
-							//print ("Earth quake!");
 						} else if (spinNow || chance > prob/2) {	//Spin
-							GameObject.Find ("Player").GetComponent<Sounds> ().playWorldSound (Sounds.SPINNING_WIND);
-							spin = 2f;
-
-							//if (!playerScript.jumping) {
-							if(dizzyWearOfNext != 0){	
-								playerAttributes.dizzy = true;
-								dizzyWearOfNext = Time.time + dizzyDelay;
+							spinHappening = true;
+							if(stopAlarm == 0){
+								stopAlarm = Time.time + 3;
+								soundScript.playAlarmSound (Sounds.DISASTER_ALARM);
 							}
+							
+							if(Time.time >= stopAlarm)
+							{
+								soundScript.stopAlarmSound(Sounds.DISASTER_ALARM);
+								stopAlarm = 0f;
+							}
+							
+							if(!soundScript.alarmAudio.isPlaying){
+								spinHappening = false;
+								GameObject.Find ("Player").GetComponent<Sounds> ().playWorldSound (Sounds.SPINNING_WIND);
+								spin = 2f;
 
-							GameObject[] objectsToBeMoved = GameObject.FindGameObjectsWithTag ("WorldObject");	
-							GameObject[] enemiesToBeMoved = GameObject.FindGameObjectsWithTag ("Monster");	
-
-							int moveDirection;	
-							int index = Random.Range (0, objectsToBeMoved.Length / 2);
-
-							for (int i = 0; i < objectsToBeMoved.Length/2; i++) {
-
-								GameObject temp = null;
-
-								if (objectsToBeMoved [index].name == "Cylinder001" || objectsToBeMoved [index].name == "Box012" || objectsToBeMoved [index].name == "Sphere001") {
-									temp = objectsToBeMoved [index].transform.parent.gameObject;
-								} else {
-									temp = objectsToBeMoved [index].gameObject;
+								if(dizzyWearOfNext != 0){	
+									playerAttributes.dizzy = true;
+									dizzyWearOfNext = Time.time + dizzyDelay;
 								}
 
-								moveDirection = Random.Range (1, 21);
-								temp.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;
-								temp.GetComponent<Rigidbody> ().position = new Vector3 (moveDirection, objectsToBeMoved [index].transform.position.y, moveDirection);
-								index++;
-							}
+								GameObject[] objectsToBeMoved = GameObject.FindGameObjectsWithTag ("WorldObject");	
+								GameObject[] enemiesToBeMoved = GameObject.FindGameObjectsWithTag ("Monster");	
 
-							index = Random.Range (0, enemiesToBeMoved.Length / 2);
-							for (int i = 0; i < enemiesToBeMoved.Length/2; i++) {
-								moveDirection = Random.Range (1, 21);	
-								enemiesToBeMoved [index].transform.position = new Vector3 (moveDirection, enemiesToBeMoved [index].transform.position.y, moveDirection);
-								index++;
-							}
-						
-							playerScript.paused = true;
+								int moveDirection;	
+								int index = Random.Range (0, objectsToBeMoved.Length / 2);
 
-							spinningDone = true;
-							spinNow = false;
-							//print ("Spinning around and around");
+								for (int i = 0; i < objectsToBeMoved.Length/2; i++) {
+
+									GameObject temp = null;
+
+									if (objectsToBeMoved [index].name == "Cylinder001" || objectsToBeMoved [index].name == "Box012" || objectsToBeMoved [index].name == "Sphere001") {
+										temp = objectsToBeMoved [index].transform.parent.gameObject;
+									} else {
+										temp = objectsToBeMoved [index].gameObject;
+									}
+
+									if(temp.tag == "monster"){
+										temp.GetComponentInParent<PositionMe> ().touching = false;
+									}
+
+									moveDirection = Random.Range (1, 21);
+									temp.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;
+									temp.GetComponent<Rigidbody> ().position = new Vector3 (moveDirection, objectsToBeMoved [index].transform.position.y, moveDirection);
+									index++;
+								}
+
+								index = Random.Range (0, enemiesToBeMoved.Length / 2);
+								for (int i = 0; i < enemiesToBeMoved.Length/2; i++) {
+									moveDirection = Random.Range (1, 21);	
+									enemiesToBeMoved [index].transform.position = new Vector3 (moveDirection, enemiesToBeMoved [index].transform.position.y, moveDirection);
+									index++;
+								}
+							
+								playerScript.paused = true;
+
+								spinningDone = true;
+								spinNow = false;
+								animator.SetBool("Attacking", false);
+								animator.SetBool("MovingStraight", false);
+								animator.SetBool("Running", false);
+								animator.SetBool("MovingRight", false);
+								animator.SetBool("MovingLeft", false);
+								animator.SetFloat("Turning", 0f);
+								//print ("Spinning around and around");
+							}
 						}
 					}
 		//		}

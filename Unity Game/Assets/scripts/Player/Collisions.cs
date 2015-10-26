@@ -181,7 +181,7 @@ public class Collisions : MonoBehaviour {
 	void OnTriggerExit(Collider col){
 		showLootConfirmation = false;
 		showHealthConfirmation = false;
-		if (colObj.name == "Console") {
+		if (colObj != null && colObj.name == "Console") {
 			showRestore = false;
 			colObj = null;
 		}
@@ -194,6 +194,12 @@ public class Collisions : MonoBehaviour {
 		if (col.collider.tag == "WorldObject" && NaturalDisasters.shake > 0) {
 			int healthToLose = (int)(playerAttributesScript.hp * 0.02);
 			playerAttributesScript.loseHP (healthToLose);//loses 2% health when hit
+			if (playerAttributesScript.gender == 'f') {
+				this.GetComponent<Sounds> ().playCharacterSound (Sounds.FEMALE_HURT);
+			} else {
+				this.GetComponent<Sounds> ().playCharacterSound (Sounds.MALE_HURT);
+			}
+			GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Impact", true);
 		} else  //Lose health if you run into something that you can't interact with, walk/run on and isn't a monster
 		if (playerScript.run && col.collider.name != "Storage" && col.collider.tag != "Teleporter" && col.collider.name != "Ship_interior" && col.collider.name != "Planet" && col.collider.tag != "Monster" && col.collider.tag != "WarpPoint" && col.collider.tag != "MediumHealthPack" && col.collider.tag != "LargeHealthPack") {
 			int healthToLose = (int)(playerAttributesScript.hp * 0.02);
@@ -203,6 +209,7 @@ public class Collisions : MonoBehaviour {
 			} else {
 				this.GetComponent<Sounds> ().playCharacterSound (Sounds.MALE_HURT);
 			}
+			GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Impact", true);
 		}
 	}
 }

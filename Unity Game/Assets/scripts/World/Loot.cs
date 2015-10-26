@@ -41,6 +41,17 @@ public class Loot : MonoBehaviour {
 		}
 	}
 
+	void Update(){
+		if(myLoot.Count == 0)
+		{
+			GameObject[] temp = GameObject.FindGameObjectsWithTag("Loot");
+			foreach(GameObject loot in temp)
+			{
+				Destroy(loot);
+			}
+		}
+	}
+
 	public void showMyLoot(){
 		lootToDelete = this.transform.parent.gameObject;
 		GameObject.Find ("Loot").GetComponent<Canvas> ().enabled = true;
@@ -68,6 +79,7 @@ public class Loot : MonoBehaviour {
 	}
 
 	public void takeIt(InventoryItem item){
+
 		attributesScript.addToInventory (item);
 		myLoot.Remove (item);
 		GameObject.Find ("Player").GetComponent<Sounds> ().playWorldSound (Sounds.BUTTON);
@@ -96,7 +108,7 @@ public class Loot : MonoBehaviour {
 		if (item.typeID == "Flight Control") {
 			gotFlightControl = true;
 		}
-
+		print (myLoot.Count () + " " + item);
 		GameObject.Find("LootScroll").GetComponent<LootScrollList>().gatherLoot(myName, myLoot);
 
 		if (myLoot.Count == 0) {

@@ -331,7 +331,7 @@ public class Sounds : MonoBehaviour {
 		if (clipAt == LOW_HEALTH_ALARM) {
 			alarmAudio.volume = 0.05f;
 		} else {
-			alarmAudio.volume = 1;
+			alarmAudio.volume = 0.5f;
 		}
 
 		if (alarmAudio.isPlaying == false || alarmClip != clipAt) {

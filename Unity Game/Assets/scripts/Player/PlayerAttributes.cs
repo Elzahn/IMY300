@@ -397,7 +397,7 @@ public class PlayerAttributes : MonoBehaviour {
 	private bool showWarpHint;
 	private bool showLevelUp;
 	private GameObject healthLowering, healthHealing, staminaDrain, door, dizzyControl;
-
+	private Animator animatorComponent;
     /**************************************************** Monobehaviour functions *********************************************
 	 * Start - Called after creation
 	 * Update - Called Every frame
@@ -415,6 +415,8 @@ public class PlayerAttributes : MonoBehaviour {
 		showLevelUp = false;
 		fallFirst = true;
 		doorOpen = false;
+
+		animatorComponent = GameObject.Find("Character_Final").GetComponent<Animator>();
 
 		//Singleton
 		if (instance) {
@@ -631,6 +633,9 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	/***************************** Inventory ************************************/
+	public GameObject butterKnife;
+	public GameObject longSword;
+	public GameObject warHammer;
 
 	public void equipItem(InventoryItem item) {
 		switch (item.type) {
@@ -647,6 +652,19 @@ public class PlayerAttributes : MonoBehaviour {
 
 	public void unequipWeapon(){
 		if (weapon != null)  {
+			
+			GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Weapon", false);
+
+			if(weapon.typeID == "ButterKnife"){
+				Destroy(GameObject.Find("ButterKnife(Clone)"));
+			} else if(weapon.typeID == "Longsword"){
+				Destroy(GameObject.Find("LongSword(Clone)"));
+			} else if(weapon.typeID == "Warhammer"){
+				Destroy(GameObject.Find("WarHammer(Clone)"));
+			} else if(weapon.typeID == "BonusWeapon"){
+				Destroy(GameObject.Find("LongSword(Clone)"));
+			}
+
 			addToInventory(weapon);
 			weapon = null;
 		}
@@ -664,6 +682,36 @@ public class PlayerAttributes : MonoBehaviour {
 			inventory.Remove(weap);
 			unequipWeapon();
 			this.weapon = weap;
+
+			GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Weapon", true);
+			GameObject weaponPrefab = null;
+
+			if(weapon.typeID == "ButterKnife"){
+				weaponPrefab = Instantiate(butterKnife);
+				weaponPrefab.transform.SetParent(GameObject.Find("mixamorig:RightHandMiddle1").transform);
+				weaponPrefab.transform.localScale = new Vector3(10f, 10f, 10f);
+				weaponPrefab.transform.localPosition = new Vector3(4.41f, 0.88f, 0.89f);
+				weaponPrefab.transform.localRotation = Quaternion.Euler(-5.995584e-05f, 269.7404f, -8.875294e-05f);
+			} else if(weapon.typeID == "Longsword"){
+				weaponPrefab = Instantiate(longSword);
+				weaponPrefab.transform.SetParent(GameObject.Find("mixamorig:RightHandMiddle1").transform);
+				weaponPrefab.transform.localScale = new Vector3(10f, 10f, 10f);
+				weaponPrefab.transform.localPosition = new Vector3(0.9403288f, 2.439571f, 1.70944f);
+				weaponPrefab.transform.localRotation = Quaternion.Euler(22.40055f, 252.2171f, 290.2153f);
+			} else if(weapon.typeID == "Warhammer"){
+				weaponPrefab = Instantiate(warHammer);
+				weaponPrefab.transform.SetParent(GameObject.Find("mixamorig:RightHandMiddle1").transform);
+				weaponPrefab.transform.localScale = new Vector3(10f, 10f, 10f);
+				weaponPrefab.transform.localPosition = new Vector3(4.41f, 0.88f, 0.89f);
+				weaponPrefab.transform.localRotation = Quaternion.Euler(-5.995584e-05f, 269.7404f, -8.875294e-05f);
+			} else if(weapon.typeID == "BonusWeapon"){
+				weaponPrefab = Instantiate(longSword);
+				weaponPrefab.transform.SetParent(GameObject.Find("mixamorig:RightHandMiddle1").transform);
+				weaponPrefab.transform.localScale = new Vector3(10f, 10f, 10f);
+				weaponPrefab.transform.localPosition = new Vector3(4.41f, 0.88f, 0.89f);
+				weaponPrefab.transform.localRotation = Quaternion.Euler(-5.995584e-05f, 269.7404f, -8.875294e-05f);
+			}
+
 		} else {
 			throw new RulesException("Weapon Level too high");
 		}
@@ -747,6 +795,7 @@ public class PlayerAttributes : MonoBehaviour {
 
 	public void showHealthAltered(String health){
 		if (health == "heal") {
+			animatorComponent.SetBool("Attacking", false);
 			healthHealing.SetActive (true);
 			healthLowering.SetActive(false);
 			healthHealing.GetComponent<Image> ().fillAmount = hp / maxHP ();
@@ -808,8 +857,10 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 	
 	public bool isDead() {
-		if(hp <=0)
+		if(hp <=0){
 			soundComponent.playDeathSound(Sounds.DEAD_PLAYER);
+			animatorComponent.SetBool("Dead", true);
+		}
 		return hp <= 0;
 	}
 	
@@ -846,7 +897,7 @@ public class PlayerAttributes : MonoBehaviour {
 	/*	if (soundComponent.characterAudio.isPlaying && soundComponent.characterClip < Sounds.SWORD_HIT) {
 			soundComponent.stopSound("character");
 		}*/
-		
+		animatorComponent.SetBool("Attacking", true);
 		string message = "Miss! ";
 
 		if(stamina > 0){

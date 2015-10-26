@@ -14,6 +14,8 @@ public class ClayAlien : Enemy {
 		const float HIT_MULT = 1.12f;
 		const float DAMAGE_MULT = 1.2f;
 
+		typeID = "ClayAlien";
+
 		hp = Mathf.RoundToInt(100 * Mathf.Pow (HP_MULT, level-1));
 		maxHp = hp;
 		hitChance = 0.18f * Mathf.Pow (HIT_MULT, level-1);
@@ -29,7 +31,6 @@ public class ClayAlien : Enemy {
 		/* Any other initlization */
 		
 		monsterAudio = gameObject.AddComponent<AudioSource>();
-
 		typeID = "ClayAlien";
 		lootChance = 0.45f;
 		maxLoot = 2;

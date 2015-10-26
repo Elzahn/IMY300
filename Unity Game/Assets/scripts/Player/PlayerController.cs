@@ -54,12 +54,12 @@ public class PlayerController : MonoBehaviour
     }
 
     public void playAnimation() {
-        var animator = GetComponent<Animator>();
+		var animator = GameObject.Find("Character_Final").GetComponent<Animator>();
         animator.speed = 1;
         animator.SetBool("MovingStraight", false);
         animator.SetBool("MovingRight", false);
         animator.SetBool("MovingLeft", false);
-        animator.SetFloat("Turning", 0);
+      //  animator.SetFloat("Turning", 0);
     }
 
     private void checkScreenshot() {
@@ -302,7 +302,7 @@ public class PlayerController : MonoBehaviour
 				}
 			}
 
-			var animatorComponent = GetComponent<Animator> ();
+			var animatorComponent = GameObject.Find("Character_Final").GetComponent<Animator>();
 			if (paused) {
 				animatorComponent.speed = 0;
 				moveSpeed = 0;
@@ -314,7 +314,7 @@ public class PlayerController : MonoBehaviour
 				if (playerAttributes.isDead ()) {
 					GameObject.Find ("Death").GetComponent<Canvas> ().enabled = true;
 					GetComponent<Sounds> ().stopAlarmSound (Sounds.LOW_HEALTH_ALARM);
-					paused = true;
+					//paused = true;
 				}
 
 				if (Input.GetButton ("Run") && playerAttributes.stamina > 0 &&
@@ -418,6 +418,7 @@ public class PlayerController : MonoBehaviour
     }
 
 	public void restart(){
+		GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Dead", false);
 		Application.LoadLevel("Scene");
 		paused = false;
 		playerAttributes.restoreHealthToFull();

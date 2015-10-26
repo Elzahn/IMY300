@@ -13,6 +13,8 @@ public class MossAlien : Enemy {
 		const float HIT_MULT = 1.1f;
 		const float DAMAGE_MULT = 1.2f;
 
+		typeID = "MossAlien";
+
 		hp = Mathf.RoundToInt(50 * Mathf.Pow (HP_MULT, level-1));
 		maxHp = hp;
 		critChance = 0.01f * Mathf.Pow (CRIT_MULT, level-1);
@@ -23,7 +25,6 @@ public class MossAlien : Enemy {
 	void Start () {
 		/* Any other initlization */
 		monsterAudio = gameObject.AddComponent<AudioSource>();
-
 		typeID = "MossAlien";
 		lootChance = 0.3f;
 		maxLoot = 1;

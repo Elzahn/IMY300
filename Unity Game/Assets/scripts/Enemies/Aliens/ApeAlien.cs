@@ -18,6 +18,8 @@ public class ApeAlien : Enemy {
 		const float HIT_MULT = 1.12f;
 		const float DAMAGE_MULT = 1.2f;
 
+		typeID = "ApeAlien";
+
 		hp = Mathf.RoundToInt(70 * Mathf.Pow (HP_MULT, level-1));
 		maxHp = hp;
 		hitChance = 0.16f * Mathf.Pow (HIT_MULT, level-1);
@@ -28,7 +30,6 @@ public class ApeAlien : Enemy {
 	void Start () {
 		/* Any other initlization */
 		monsterAudio = gameObject.AddComponent<AudioSource>();
-
 		typeID = "ApeAlien";
 		lootChance = 0.4f;
 		maxLoot = 2;
