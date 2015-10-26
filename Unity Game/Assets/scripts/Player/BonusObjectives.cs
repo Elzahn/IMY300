@@ -54,7 +54,7 @@ public class BonusObjectives : MonoBehaviour {
 			showedBonus2 = true;
 		}
 
-		if(!showedBonus3 && ((deadEnemiesOnLevel == 1 && levelSelect.currentLevel == 1) || (deadEnemiesOnLevel == 35  && levelSelect.currentLevel == 2) || (deadEnemiesOnLevel == 10 && levelSelect.currentLevel == 3) || (deadEnemiesOnLevel == 40 && levelSelect.currentLevel == 4) || (deadEnemiesOnLevel == 50 && levelSelect.currentLevel == 5))) {
+		if(!showedBonus3 && ((deadEnemiesOnLevel == 20 && levelSelect.currentLevel == 1) || (deadEnemiesOnLevel == 35  && levelSelect.currentLevel == 2) || (deadEnemiesOnLevel == 10 && levelSelect.currentLevel == 3) || (deadEnemiesOnLevel == 40 && levelSelect.currentLevel == 4) || (deadEnemiesOnLevel == 50 && levelSelect.currentLevel == 5))) {
 			this.GetComponent<Tutorial>().makeHint("You cleared a planet of all enemy lifeforms! Bonus Objective", this.GetComponent<Tutorial>().Middle);
 			this.GetComponent<PlayerAttributes>().inventory.AddLast(new BonusWeapon(1));
 			showedBonus3 = true;
