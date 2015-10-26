@@ -209,7 +209,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100064, guid: b418d24b249757046a93eaf333a9631a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100024, guid: b418d24b249757046a93eaf333a9631a, type: 3}
       propertyPath: m_TagString
@@ -301,7 +301,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 6400050, guid: b418d24b249757046a93eaf333a9631a, type: 3}
       propertyPath: m_Convex
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6400040, guid: b418d24b249757046a93eaf333a9631a, type: 3}
       propertyPath: m_Convex
@@ -357,7 +357,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 6400060, guid: b418d24b249757046a93eaf333a9631a, type: 3}
       propertyPath: m_Convex
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6400064, guid: b418d24b249757046a93eaf333a9631a, type: 3}
       propertyPath: m_Convex
