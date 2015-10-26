@@ -34,6 +34,10 @@ public class EnemySpawner : MonoBehaviour {
 
 	BonusObjectives bonusObjectives;
 
+	public LinkedList<GameObject> getEnemies(){
+		return enemies;
+	}
+	
 	void Start(){
 		//creates and stores ship pieces to be dropped
 		noHint = true;
@@ -388,8 +392,7 @@ public class EnemySpawner : MonoBehaviour {
 				}
 			}
 		}
-
-
+		
 		if (enemy.typeID == "BossAlien") {
 			tempLoot.AddLast(bossLoot.First());
 			bossLoot.RemoveFirst();

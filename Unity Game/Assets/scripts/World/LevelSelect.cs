@@ -1,21 +1,36 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 [RequireComponent(typeof(Renderer))]
 public class LevelSelect : MonoBehaviour {
 
 	public List<Material> materials;
-	public static LevelSelect instance;
 
 	private PlayerAttributes attrs;
 	private Light sun;
 
 	public Renderer myRenderer{ get; set;}
+	private Renderer monsterRenderer;
+
 	public bool spawnedLevel{ get; set;}
 
-	private static GameObject planet, fireMist, rain, snow, desert;
+	private static GameObject planet, fireMist, rain, snow, desert, candy;
 
+	private LinkedList<GameObject> enemies;
+
+	private const int BOSS_BODY_LEVEL1 = 6;
+	private const int BOSS_EYE_LEVEL1 = 7;
+	private const int BOSS_BODY_LEVEL2 = 8;
+	private const int BOSS_EYE_LEVEL2 = 9;
+	private const int BOSS_BODY_LEVEL3 = 10;
+	private const int BOSS_EYE_LEVEL3 = 11;
+	private const int BOSS_BODY_LEVEL4 = 12;
+	private const int BOSS_EYE_LEVEL4 = 13;
+	private const int BOSS_BODY_LEVEL5 = 14;
+	private const int BOSS_EYE_LEVEL5 = 15;
 	/**
 	 * References Attributes variable to be able to save it easily.
 	 * */
@@ -32,7 +47,7 @@ public class LevelSelect : MonoBehaviour {
 		attrs = this.GetComponent<PlayerAttributes>();
 	}
 
-	public void clearParticles(){
+	void clearParticles(){
 		fireMist.GetComponent<ParticleSystem>().enableEmission = false;
 		fireMist.SetActive (false);
 		rain.GetComponent<ParticleSystem>().enableEmission = false;
@@ -41,6 +56,8 @@ public class LevelSelect : MonoBehaviour {
 		snow.SetActive (false);
 		desert.GetComponent<ParticleSystem>().enableEmission = false;
 		desert.SetActive (false);
+		candy.GetComponent<ParticleSystem>().enableEmission = false;
+		candy.SetActive (false);
 		spawnedLevel = false;
 	}
 
@@ -57,6 +74,8 @@ public class LevelSelect : MonoBehaviour {
 			
 			desert = GameObject.Find ("Desert");
 
+			candy = GameObject.Find ("CandyFlos");
+
 			clearParticles ();
 		} else if (fireMist != null) {
 
@@ -71,13 +90,14 @@ public class LevelSelect : MonoBehaviour {
 								fireMist.SetActive (true);
 								fireMist.GetComponent<ParticleSystem> ().enableEmission = true;
 								planet.GetComponent<EnemySpawner> ().spawnEnemies (20);
-								//Burning Tree, Green Tree, Big Tree, Bare Tree, Shrub
-								planet.GetComponent<SpawnTrees> ().spawnTrees (110, 0, 60, 0, 50);
+							//Burning Tree, Green Tree, Big Tree, Bare Tree, Shrub, Palmtree, snowMan, snowTree, cactus, deserPalm, candy 1, candy 2, candy 3
+								planet.GetComponent<SpawnTrees> ().spawnTrees (110, 0, 60, 0, 50, 0, 0, 0, 0, 0, 0, 0, 0);
 								planet.GetComponent<SpawnHealthPacks> ().spawnHealth (10);
 								this.GetComponent<Sounds> ().playAmbienceSound (Sounds.PLANET_1_AMBIENCE);
 								this.GetComponent<Sounds> ().pauseSound ("ambience");
 								spawnedLevel = true;
-								sun.intensity = 8;
+								sun.intensity = 4;
+								textureMonsters();
 							}
 							break;
 						}
@@ -88,13 +108,14 @@ public class LevelSelect : MonoBehaviour {
 								rain.SetActive (true);
 								rain.GetComponent<ParticleSystem> ().enableEmission = true;
 								planet.GetComponent<EnemySpawner> ().spawnEnemies (35);
-								//Burning Tree, Green Tree, Big Tree, Bare Tree, Shrub
-								planet.GetComponent<SpawnTrees> ().spawnTrees (0, 95, 0, 0, 40);
+							//Burning Tree, Green Tree, Big Tree, Bare Tree, Shrub, Palmtree, snowMan, snowTree, cactus, deserPalm, candy 1, candy 2, candy 3
+								planet.GetComponent<SpawnTrees> ().spawnTrees (0, 45, 0, 0, 40, 50, 0, 0, 0, 0, 0, 0, 0);
 								planet.GetComponent<SpawnHealthPacks> ().spawnHealth (12);
 								this.GetComponent<Sounds> ().playAmbienceSound (Sounds.PLANET_2_AMBIENCE);
 								this.GetComponent<Sounds> ().pauseSound ("ambience");
 								spawnedLevel = true;
 								sun.intensity = 1.2f;
+								textureMonsters();
 							}
 							break;
 						}
@@ -105,13 +126,14 @@ public class LevelSelect : MonoBehaviour {
 								snow.SetActive (true);
 								snow.GetComponent<ParticleSystem> ().enableEmission = true;
 								planet.GetComponent<EnemySpawner> ().spawnEnemies (10);
-								//Burning Tree, Green Tree, Big Tree, Bare Tree, Shrub
-								planet.GetComponent<SpawnTrees> ().spawnTrees (0, 10, 120, 0, 50);
+							//Burning Tree, Green Tree, Big Tree, Bare Tree, Shrub, Palmtree, snowMan, snowTree, cactus, deserPalm, candy 1, candy 2, candy 3
+								planet.GetComponent<SpawnTrees> ().spawnTrees (0, 10, 40, 0, 50, 0, 40, 40, 0, 0, 0, 0, 0);
 								planet.GetComponent<SpawnHealthPacks> ().spawnHealth (2);
 								this.GetComponent<Sounds> ().playAmbienceSound (Sounds.PLANET_3_AMBIENCE);
 								this.GetComponent<Sounds> ().pauseSound ("ambience");
 								spawnedLevel = true;
 								sun.intensity = 1.2f;
+								textureMonsters();
 							}
 							break;
 						}
@@ -122,13 +144,14 @@ public class LevelSelect : MonoBehaviour {
 								desert.SetActive (true);
 								desert.GetComponent<ParticleSystem> ().enableEmission = true;
 								planet.GetComponent<EnemySpawner> ().spawnEnemies (40);
-								//Burning Tree, Green Tree, Big Tree, Bare Tree, Shrub
-								planet.GetComponent<SpawnTrees> ().spawnTrees (0, 0, 0, 75, 35);
+						//Burning Tree, Green Tree, Big Tree, Bare Tree, Shrub, Palmtree, snowMan, snowTree, cactus, deserPalm, candy 1, candy 2, candy 3
+								planet.GetComponent<SpawnTrees> ().spawnTrees (0, 0, 0, 25, 35, 0, 0, 0, 20, 20, 0, 0, 0);
 								planet.GetComponent<SpawnHealthPacks> ().spawnHealth (15);
 								this.GetComponent<Sounds> ().playAmbienceSound (Sounds.PLANET_4_AMBIENCE);
 								this.GetComponent<Sounds> ().pauseSound ("ambience");
 								spawnedLevel = true;
 								sun.intensity = 1.3f;
+								textureMonsters();
 							}
 							break;
 						}
@@ -136,18 +159,17 @@ public class LevelSelect : MonoBehaviour {
 						{
 							if (!spawnedLevel) {
 								clearParticles ();
-								desert.SetActive (true);
-								desert.GetComponent<ParticleSystem> ().enableEmission = true;
-								rain.SetActive (true);
-								rain.GetComponent<ParticleSystem> ().enableEmission = true;
+								candy.SetActive (true);
+								candy.GetComponent<ParticleSystem> ().enableEmission = true;
 								planet.GetComponent<EnemySpawner> ().spawnEnemies (50);
-								//Burning Tree, Green Tree, Big Tree, Bare Tree, Shrub
-								planet.GetComponent<SpawnTrees> ().spawnTrees (8, 8, 8, 8, 40);
+							//Burning Tree, Green Tree, Big Tree, Bare Tree, Shrub, Palmtree, snowMan, snowTree, cactus, deserPalm, candy 1, candy 2, candy 3
+								planet.GetComponent<SpawnTrees> ().spawnTrees (0, 16, 16, 0, 40, 0, 0, 0, 0, 0, 16, 16, 16);
 								planet.GetComponent<SpawnHealthPacks> ().spawnHealth (20);
 								this.GetComponent<Sounds> ().playAmbienceSound (Sounds.PLANET_5_AMBIENCE);
 								this.GetComponent<Sounds> ().pauseSound ("ambience");
 								spawnedLevel = true;
 								sun.intensity = 1.2f;
+								textureMonsters();
 							}
 							break;
 						}
@@ -171,18 +193,71 @@ public class LevelSelect : MonoBehaviour {
 			}
 		}
 	}
-
-	// Use this for initialization
-	public void Awake() {
-		if(instance == null){
-			instance = this; 
-		}
-	}
 	
 	public Material GetMaterial(int level){
 		if(materials != null && materials.Count > 0 && level >= 0 && level < materials.Count){
 			return materials[level];
 		}
 		return null;
+	}
+
+	void textureMonsters(){
+		enemies = GameObject.Find("Planet").GetComponent<EnemySpawner>().getEnemies();
+
+		foreach(GameObject alien in enemies.ToList()){
+			if(alien.GetComponent<Enemy>().typeID == "BossAlien"){
+				textureBoss(alien);
+			}
+		}
+	}
+
+	void textureBoss(GameObject alien){
+		switch (currentLevel) {
+		case 1:{
+			monsterRenderer = alien.transform.FindChild("MonsterBody").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(BOSS_BODY_LEVEL1);
+			monsterRenderer = alien.transform.FindChild("Eye_001").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(BOSS_EYE_LEVEL1);
+			monsterRenderer = alien.transform.FindChild("Eye_002").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(BOSS_EYE_LEVEL1);
+			break;
+		}
+		case 2:{
+			monsterRenderer = alien.transform.FindChild("MonsterBody").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(BOSS_BODY_LEVEL2);
+			monsterRenderer = alien.transform.FindChild("Eye_001").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(BOSS_EYE_LEVEL2);
+			monsterRenderer = alien.transform.FindChild("Eye_002").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(BOSS_EYE_LEVEL2);
+			break;
+		}
+		case 3:{
+			monsterRenderer = alien.transform.FindChild("MonsterBody").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(BOSS_BODY_LEVEL3);
+			monsterRenderer = alien.transform.FindChild("Eye_001").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(BOSS_EYE_LEVEL3);
+			monsterRenderer = alien.transform.FindChild("Eye_002").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(BOSS_EYE_LEVEL3);
+			break;
+		}
+		case 4:{
+			monsterRenderer = alien.transform.FindChild("MonsterBody").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(BOSS_BODY_LEVEL4);
+			monsterRenderer = alien.transform.FindChild("Eye_001").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(BOSS_EYE_LEVEL4);
+			monsterRenderer = alien.transform.FindChild("Eye_002").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(BOSS_EYE_LEVEL4);
+			break;
+		}
+		case 5:{
+			monsterRenderer = alien.transform.FindChild("MonsterBody").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(BOSS_BODY_LEVEL5);
+			monsterRenderer = alien.transform.FindChild("Eye_001").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(BOSS_EYE_LEVEL5);
+			monsterRenderer = alien.transform.FindChild("Eye_002").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(BOSS_EYE_LEVEL5);
+			break;
+		}
+		}
 	}
 }

@@ -9,8 +9,15 @@ public class SpawnTrees : MonoBehaviour {
 	public GameObject tree2;
 	public GameObject tree3;
 	public GameObject tree4;
-
 	public GameObject shrub;
+	public GameObject tree5;
+	public GameObject tree6;
+	public GameObject tree7;
+	public GameObject tree8;
+	public GameObject tree9;
+	public GameObject tree10;
+	public GameObject tree11;
+	public GameObject tree12;
 
 	public int num_Trees{ get; set; }// = 299;
 	
@@ -18,8 +25,8 @@ public class SpawnTrees : MonoBehaviour {
 	
 	LinkedList<GameObject> trees = new LinkedList <GameObject> ();
 
-	public void spawnTrees (int numTrees1, int numTrees2, int numTrees3, int numTrees4, int numShrub) {//Previously known as Start
-		num_Trees = numTrees1 + numTrees2 + numTrees3 + numTrees4 + numShrub;
+	public void spawnTrees (int numTrees1, int numTrees2, int numTrees3, int numTrees4, int numShrub, int numTrees5, int numTrees6, int numTrees7, int numTrees8, int numTrees9, int numTrees10, int numTrees11, int numTrees12) {//Previously known as Start
+		num_Trees = numTrees1 + numTrees2 + numTrees3 + numTrees4 + numShrub + numTrees5 + numTrees6 + numTrees7 + numTrees8 + numTrees9 + numTrees10 + numTrees11 + numTrees12;
 
 		planet = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
 		//GameObject tree;
@@ -57,6 +64,54 @@ public class SpawnTrees : MonoBehaviour {
 			//int index = Random.Range (0, 4);
 			//tree = chooseTree ();
 			addTree (shrub);
+		}
+
+		for (int i=0; i < numTrees5; ++i) {
+			//int index = Random.Range (0, 4);
+			//tree = chooseTree (2);
+			addTree (tree5);
+		}
+
+		for (int i=0; i < numTrees6; ++i) {
+			//int index = Random.Range (0, 4);
+			//tree = chooseTree (2);
+			addTree (tree6);
+		}
+
+		for (int i=0; i < numTrees7; ++i) {
+			//int index = Random.Range (0, 4);
+			//tree = chooseTree (2);
+			addTree (tree7);
+		}
+
+		for (int i=0; i < numTrees8; ++i) {
+			//int index = Random.Range (0, 4);
+			//tree = chooseTree (2);
+			addTree (tree8);
+		}
+
+		for (int i=0; i < numTrees9; ++i) {
+			//int index = Random.Range (0, 4);
+			//tree = chooseTree (2);
+			addTree (tree9);
+		}
+
+		for (int i=0; i < numTrees10; ++i) {
+			//int index = Random.Range (0, 4);
+			//tree = chooseTree (2);
+			addTree (tree10);
+		}
+
+		for (int i=0; i < numTrees11; ++i) {
+			//int index = Random.Range (0, 4);
+			//tree = chooseTree (2);
+			addTree (tree11);
+		}
+
+		for (int i=0; i < numTrees12; ++i) {
+			//int index = Random.Range (0, 4);
+			//tree = chooseTree (2);
+			addTree (tree12);
 		}
 	}
 

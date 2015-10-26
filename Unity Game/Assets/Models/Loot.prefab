@@ -13,6 +13,7 @@ GameObject:
   - 65: {fileID: 6529140}
   - 64: {fileID: 6467210}
   - 114: {fileID: 11488798}
+  - 114: {fileID: 11450274}
   m_Layer: 0
   m_Name: GoldSack
   m_TagString: Loot
@@ -145,6 +146,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attractor: {fileID: 0}
   rotateMe: 1
+--- !u!114 &11450274
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc589fac6b6b6ae44b139c25a6c6db97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11488798
 MonoBehaviour:
   m_ObjectHideFlags: 1

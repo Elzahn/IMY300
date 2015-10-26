@@ -16,6 +16,8 @@ public class BossAlien : Enemy {
 		const float HIT_MULT = 1.12f;
 		const float DAMAGE_MULT = 1.2f;
 
+		typeID = "BossAlien";
+
 		hp = Mathf.RoundToInt(250 * Mathf.Pow (HP_MULT, level-1));
 		maxHp = hp;
 		hitChance = 0.28f * Mathf.Pow (HIT_MULT, level-1);
@@ -28,7 +30,6 @@ public class BossAlien : Enemy {
 		monsterAudio = gameObject.AddComponent<AudioSource>();
 		animator = GetComponent<Animator>();
 		animator.SetBool("Attacking", false);
-
 		typeID = "BossAlien";
 		lootChance = 0.5f;
 		maxLoot = 3;

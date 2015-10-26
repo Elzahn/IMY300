@@ -23,7 +23,7 @@ public class CameraControl : MonoBehaviour {
 
 	void Update ()
 	{
-		if (playerScript.paused == false) {
+		if (playerScript.paused == false && Application.loadedLevelName != "Main_Menu") {
 
 			if(!birdsEye){
 				if (Input.GetMouseButton (1) && Input.GetAxis ("Mouse X") < 0)//right button held and mouse moved left
@@ -34,13 +34,16 @@ public class CameraControl : MonoBehaviour {
 
 					//Rotate Around the player - player gameObject Rotation
 					player.transform.RotateAround(player.transform.position, player.transform.up, Input.GetAxis ("Mouse X") * sensitivityX);
-					GameObject.Find("Player").GetComponent<Animator>().SetFloat("Turning", -1f);
+					GameObject.Find("Character_Final").GetComponent<Animator>().SetFloat("Turning", -1f);
 				} else if (Input.GetMouseButton (1) && Input.GetAxis ("Mouse X") > 0) {
 					player.transform.RotateAround(player.transform.position, player.transform.up, Input.GetAxis ("Mouse X") * sensitivityX);
-					GameObject.Find("Player").GetComponent<Animator>().SetFloat("Turning", 1f);
+					GameObject.Find("Character_Final").GetComponent<Animator>().SetFloat("Turning", 1f);
 				}
 			}
 
+			if(Input.GetMouseButtonUp(1)){
+				GameObject.Find("Character_Final").GetComponent<Animator>().SetFloat("Turning", 0f);
+			}
 			//Zoom
 			if(!birdsEye){
 				transform.Translate (Vector3.forward * Input.GetAxis ("Mouse ScrollWheel"));

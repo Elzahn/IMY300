@@ -44,6 +44,7 @@ public class MenuScript : MonoBehaviour {
 	}
 
 	public void play(){
+		GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Dead", false);
 		Application.LoadLevel ("SaveSpot");
 
 		player.GetComponent<Tutorial> ().restartTutorial ();
@@ -141,6 +142,7 @@ public class MenuScript : MonoBehaviour {
 
 		try{
 			attributesScript.load (slot);
+			GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Dead", false);
 		} catch (Exception){
 			error = true;
 			errorPopup.SetActive (true);
