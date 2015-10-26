@@ -130,9 +130,12 @@ public class SaveSpotTeleport : MonoBehaviour {
 				attributesComponent.restoreHealthToFull ();
 				attributesComponent.restoreStaminaToFull ();
 				this.GetComponent<Rigidbody> ().mass = 100;
-
+				
+				sound.stopSound("computer");
+				this.GetComponent<Tutorial>().sarcasticRemarks = -1;
 				interaction.fillAmount = 0;
 				attributesComponent.returnToSaveSpot ();
+				unequipWeapon();
 			
 			} else if (showExitConfirmation && Input.GetButtonDown ("Interact") && !loadTutorial) {
 				canEnterSaveSpot = false;
@@ -149,6 +152,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 				//this.transform.position = new Vector3 (-1.651f, 80.82f, 0.84f);
 
 				Application.LoadLevel ("Scene");
+				reEquipWeapon();
 				Resources.UnloadUnusedAssets ();
 			} else if (showExitConfirmation && Input.GetButtonDown ("Interact") && loadTutorial) {
 				canEnterSaveSpot = false;
@@ -184,9 +188,55 @@ public class SaveSpotTeleport : MonoBehaviour {
 				interaction.fillAmount = 0;
 				this.GetComponent<Tutorial> ().startTutorial = false;
 				Application.LoadLevel ("SaveSpot");
+				unequipWeapon();
 				sound.playWorldSound (Sounds.TELEPORTING);
 				Resources.UnloadUnusedAssets ();
 			}
+		}
+	}
+
+	void reEquipWeapon(){
+		GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Weapon", true);
+		GameObject weaponPrefab = null;
+		
+		if(attributesComponent.weapon.typeID == "ButterKnife"){
+			weaponPrefab = Instantiate(attributesComponent.butterKnife);
+			weaponPrefab.transform.SetParent(GameObject.Find("mixamorig:RightHandMiddle1").transform);
+			weaponPrefab.transform.localScale = new Vector3(10f, 10f, 10f);
+			weaponPrefab.transform.localPosition = new Vector3(4.41f, 0.88f, 0.89f);
+			weaponPrefab.transform.localRotation = Quaternion.Euler(-5.995584e-05f, 269.7404f, -8.875294e-05f);
+		} else if(attributesComponent.weapon.typeID == "Longsword"){
+			weaponPrefab = Instantiate(attributesComponent.longSword);
+			weaponPrefab.transform.SetParent(GameObject.Find("mixamorig:RightHandMiddle1").transform);
+			weaponPrefab.transform.localScale = new Vector3(10f, 10f, 10f);
+			weaponPrefab.transform.localPosition = new Vector3(0.9403288f, 2.439571f, 1.70944f);
+			weaponPrefab.transform.localRotation = Quaternion.Euler(22.40055f, 252.2171f, 290.2153f);
+		} else if(attributesComponent.weapon.typeID == "Warhammer"){
+			weaponPrefab = Instantiate(attributesComponent.warHammer);
+			weaponPrefab.transform.SetParent(GameObject.Find("mixamorig:RightHandMiddle1").transform);
+			weaponPrefab.transform.localScale = new Vector3(10f, 10f, 10f);
+			weaponPrefab.transform.localPosition = new Vector3(4.41f, 0.88f, 0.89f);
+			weaponPrefab.transform.localRotation = Quaternion.Euler(-5.995584e-05f, 269.7404f, -8.875294e-05f);
+		} else if(attributesComponent.weapon.typeID == "BonusWeapon"){
+			weaponPrefab = Instantiate(attributesComponent.longSword);
+			weaponPrefab.transform.SetParent(GameObject.Find("mixamorig:RightHandMiddle1").transform);
+			weaponPrefab.transform.localScale = new Vector3(10f, 10f, 10f);
+			weaponPrefab.transform.localPosition = new Vector3(4.41f, 0.88f, 0.89f);
+			weaponPrefab.transform.localRotation = Quaternion.Euler(-5.995584e-05f, 269.7404f, -8.875294e-05f);
+		}
+	}
+	
+	void unequipWeapon(){
+		GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Weapon", false);
+		
+		if(attributesComponent.weapon.typeID == "ButterKnife"){
+			Destroy(GameObject.Find("ButterKnife(Clone)"));
+		} else if(attributesComponent.weapon.typeID == "Longsword"){
+			Destroy(GameObject.Find("LongSword(Clone)"));
+		} else if(attributesComponent.weapon.typeID == "Warhammer"){
+			Destroy(GameObject.Find("WarHammer(Clone)"));
+		} else if(attributesComponent.weapon.typeID == "BonusWeapon"){
+			Destroy(GameObject.Find("LongSword(Clone)"));
 		}
 	}
 }
