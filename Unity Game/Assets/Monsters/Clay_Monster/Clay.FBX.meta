@@ -1,0 +1,393 @@
+fileFormatVersion: 2
+guid: 5b56de6f5a5e9f24bba9842808503d61
+timeCreated: 1445877104
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Big_Eye_001
+    100002: body
+    100004: Bone001
+    100006: Bone002
+    100008: Bone003
+    100010: Bone004
+    100012: Bone005
+    100014: Bone006
+    100016: Bone007
+    100018: Bone008
+    100020: Bone009
+    100022: Bone010
+    100024: Bone011
+    100026: Bone012
+    100028: Bone013
+    100030: Bone014
+    100032: Bone015
+    100034: Bone016
+    100036: Bone017
+    100038: Bone018
+    100040: Bone019
+    100042: Bone020
+    100044: Bone021
+    100046: Bone022
+    100048: Bone023
+    100050: //RootNode
+    100052: IK Chain001
+    100054: IK Chain002
+    100056: IK Chain003
+    100058: IK Chain004
+    100060: IK Chain005
+    100062: IK Chain006
+    100064: Small_Eye_001
+    100066: Small_Eye_002
+    100068: Small_Eye_003
+    100070: Small_Eye_004
+    100072: Small_Eye_005
+    100074: Small_Eye_006
+    100076: Small_Eye_007
+    100078: Small_Eye_008
+    400000: Big_Eye_001
+    400002: body
+    400004: Bone001
+    400006: Bone002
+    400008: Bone003
+    400010: Bone004
+    400012: Bone005
+    400014: Bone006
+    400016: Bone007
+    400018: Bone008
+    400020: Bone009
+    400022: Bone010
+    400024: Bone011
+    400026: Bone012
+    400028: Bone013
+    400030: Bone014
+    400032: Bone015
+    400034: Bone016
+    400036: Bone017
+    400038: Bone018
+    400040: Bone019
+    400042: Bone020
+    400044: Bone021
+    400046: Bone022
+    400048: Bone023
+    400050: //RootNode
+    400052: IK Chain001
+    400054: IK Chain002
+    400056: IK Chain003
+    400058: IK Chain004
+    400060: IK Chain005
+    400062: IK Chain006
+    400064: Small_Eye_001
+    400066: Small_Eye_002
+    400068: Small_Eye_003
+    400070: Small_Eye_004
+    400072: Small_Eye_005
+    400074: Small_Eye_006
+    400076: Small_Eye_007
+    400078: Small_Eye_008
+    2300000: Big_Eye_001
+    2300002: Small_Eye_001
+    2300004: Small_Eye_002
+    2300006: Small_Eye_003
+    2300008: Small_Eye_004
+    2300010: Small_Eye_005
+    2300012: Small_Eye_006
+    2300014: Small_Eye_007
+    2300016: Small_Eye_008
+    3300000: Big_Eye_001
+    3300002: Small_Eye_001
+    3300004: Small_Eye_002
+    3300006: Small_Eye_003
+    3300008: Small_Eye_004
+    3300010: Small_Eye_005
+    3300012: Small_Eye_006
+    3300014: Small_Eye_007
+    3300016: Small_Eye_008
+    4300000: body
+    4300002: Big_Eye_001
+    4300004: Small_Eye_001
+    4300006: Small_Eye_002
+    4300008: Small_Eye_003
+    4300010: Small_Eye_004
+    4300012: Small_Eye_005
+    4300014: Small_Eye_006
+    4300016: Small_Eye_007
+    4300018: Small_Eye_008
+    7400000: Clay_Walking
+    7400002: Clay_Fighting
+    9500000: //RootNode
+    13700000: body
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Clay_Walking
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Big_Eye_001
+        weight: 1
+      - path: body
+        weight: 1
+      - path: Bone001
+        weight: 1
+      - path: Bone001/Bone002
+        weight: 1
+      - path: Bone001/Bone002/Bone003
+        weight: 1
+      - path: Bone004
+        weight: 1
+      - path: Bone004/Bone005
+        weight: 1
+      - path: Bone004/Bone005/Bone006
+        weight: 1
+      - path: Bone007
+        weight: 1
+      - path: Bone007/Bone008
+        weight: 1
+      - path: Bone007/Bone008/Bone009
+        weight: 1
+      - path: Bone010
+        weight: 1
+      - path: Bone010/Bone011
+        weight: 1
+      - path: Bone010/Bone011/Bone012
+        weight: 1
+      - path: Bone013
+        weight: 1
+      - path: Bone013/Bone014
+        weight: 1
+      - path: Bone013/Bone014/Bone015
+        weight: 1
+      - path: Bone016
+        weight: 1
+      - path: Bone016/Bone017
+        weight: 1
+      - path: Bone016/Bone017/Bone018
+        weight: 1
+      - path: Bone016/Bone017/Bone018/Bone019
+        weight: 1
+      - path: Bone020
+        weight: 1
+      - path: Bone020/Bone021
+        weight: 1
+      - path: Bone020/Bone021/Bone022
+        weight: 1
+      - path: Bone020/Bone021/Bone022/Bone023
+        weight: 1
+      - path: IK Chain001
+        weight: 1
+      - path: IK Chain002
+        weight: 1
+      - path: IK Chain003
+        weight: 1
+      - path: IK Chain004
+        weight: 1
+      - path: IK Chain005
+        weight: 1
+      - path: IK Chain006
+        weight: 1
+      - path: Small_Eye_001
+        weight: 1
+      - path: Small_Eye_002
+        weight: 1
+      - path: Small_Eye_003
+        weight: 1
+      - path: Small_Eye_004
+        weight: 1
+      - path: Small_Eye_005
+        weight: 1
+      - path: Small_Eye_006
+        weight: 1
+      - path: Small_Eye_007
+        weight: 1
+      - path: Small_Eye_008
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Clay_Fighting
+      takeName: Take 001
+      firstFrame: 41
+      lastFrame: 80
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Big_Eye_001
+        weight: 1
+      - path: body
+        weight: 1
+      - path: Bone001
+        weight: 1
+      - path: Bone001/Bone002
+        weight: 1
+      - path: Bone001/Bone002/Bone003
+        weight: 1
+      - path: Bone004
+        weight: 1
+      - path: Bone004/Bone005
+        weight: 1
+      - path: Bone004/Bone005/Bone006
+        weight: 1
+      - path: Bone007
+        weight: 1
+      - path: Bone007/Bone008
+        weight: 1
+      - path: Bone007/Bone008/Bone009
+        weight: 1
+      - path: Bone010
+        weight: 1
+      - path: Bone010/Bone011
+        weight: 1
+      - path: Bone010/Bone011/Bone012
+        weight: 1
+      - path: Bone013
+        weight: 1
+      - path: Bone013/Bone014
+        weight: 1
+      - path: Bone013/Bone014/Bone015
+        weight: 1
+      - path: Bone016
+        weight: 1
+      - path: Bone016/Bone017
+        weight: 1
+      - path: Bone016/Bone017/Bone018
+        weight: 1
+      - path: Bone016/Bone017/Bone018/Bone019
+        weight: 1
+      - path: Bone020
+        weight: 1
+      - path: Bone020/Bone021
+        weight: 1
+      - path: Bone020/Bone021/Bone022
+        weight: 1
+      - path: Bone020/Bone021/Bone022/Bone023
+        weight: 1
+      - path: IK Chain001
+        weight: 1
+      - path: IK Chain002
+        weight: 1
+      - path: IK Chain003
+        weight: 1
+      - path: IK Chain004
+        weight: 1
+      - path: IK Chain005
+        weight: 1
+      - path: IK Chain006
+        weight: 1
+      - path: Small_Eye_001
+        weight: 1
+      - path: Small_Eye_002
+        weight: 1
+      - path: Small_Eye_003
+        weight: 1
+      - path: Small_Eye_004
+        weight: 1
+      - path: Small_Eye_005
+        weight: 1
+      - path: Small_Eye_006
+        weight: 1
+      - path: Small_Eye_007
+        weight: 1
+      - path: Small_Eye_008
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -70,6 +70,7 @@ public class BossAlien : Enemy {
 					} else {
 						seekOutPlayer();
 					}
+					animator.SetBool("Attacking", false);
 				} else {
 					GameObject.Find("Player").GetComponent<Sounds>().stopMonsterSound(this);
 				}
@@ -81,9 +82,10 @@ public class BossAlien : Enemy {
 			if (attackPlayer) {
 				if (Time.time >= nextMAttack) {
 					nextMAttack = Time.time + mDelay;
-					animator.SetBool("Attacking", true);
 					attack (player.GetComponent<PlayerAttributes> ());
 				}
+				
+				animator.SetBool("Attacking", true);
 			}
 			
 			if (Time.time >= nextRegeneration) {

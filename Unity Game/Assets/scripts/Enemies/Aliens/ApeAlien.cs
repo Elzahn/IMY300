@@ -7,6 +7,7 @@ public class ApeAlien : Enemy {
 	 */
 	
 	public AudioSource monsterAudio;
+	private Animator animator;
 
 	private float nextApeAttack, apeDelay = 3;
 	private float nextARegeneration;
@@ -29,6 +30,8 @@ public class ApeAlien : Enemy {
 
 	void Start () {
 		/* Any other initlization */
+		animator = GetComponent<Animator>();
+		animator.SetBool("Attacking", false);
 		monsterAudio = gameObject.AddComponent<AudioSource>();
 		typeID = "ApeAlien";
 		lootChance = 0.4f;
@@ -64,6 +67,7 @@ public class ApeAlien : Enemy {
 						} else {
 							seekOutPlayer();
 						}
+						animator.SetBool("Attacking", false);
 					}
 					
 				} else {
@@ -77,12 +81,15 @@ public class ApeAlien : Enemy {
 					if (Time.time >= nextApeAttack) {
 						nextApeAttack = Time.time + apeDelay;
 						attack (player.GetComponent<PlayerAttributes> ());	//Attack Player
-					}
-					if(!seekingRevenge){
+						animator.SetBool("Attacking", true);
+					} else if(!seekingRevenge){
 						followPlayer();
+						animator.SetBool("Attacking", false);
 					} else {
 						seekOutPlayer();
+						animator.SetBool("Attacking", false);
 					}
+
 				}
 			}
 

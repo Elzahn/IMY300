@@ -7,6 +7,7 @@ public class ClayAlien : Enemy {
 	 */
 	
 	public AudioSource monsterAudio;
+	private Animator animator;
 
 	public override void init() {
 		const float HP_MULT = 1.6f;
@@ -29,7 +30,8 @@ public class ClayAlien : Enemy {
 
 	void Start () {
 		/* Any other initlization */
-		
+		animator = GetComponent<Animator>();
+		animator.SetBool("Attacking", false);
 		monsterAudio = gameObject.AddComponent<AudioSource>();
 		typeID = "ClayAlien";
 		lootChance = 0.45f;
@@ -78,6 +80,7 @@ public class ClayAlien : Enemy {
 						} else {
 							seekOutPlayer();
 						}
+						animator.SetBool("Attacking", false);
 					}
 					
 				} else {
@@ -89,18 +92,23 @@ public class ClayAlien : Enemy {
 				if (Vector3.Distance (PlayerPos, myPos) < viewdist / 2) {
 					if(!seekingRevenge){
 						followPlayer();
+						animator.SetBool("Attacking", false);
 					} else {
 						seekOutPlayer();
+						animator.SetBool("Attacking", false);
 					}
+
 				}
 			} else {
 				attackPlayer = false;
+				animator.SetBool("Attacking", false);
 			}
 			
 			if (attackPlayer) {
 				if (Time.time >= nextMAttack) {
 					nextMAttack = Time.time + mDelay;
 					attack (player.GetComponent<PlayerAttributes> ());
+					animator.SetBool("Attacking", true);
 				}
 			}
 			

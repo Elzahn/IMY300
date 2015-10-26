@@ -21,16 +21,91 @@ public class LevelSelect : MonoBehaviour {
 
 	private LinkedList<GameObject> enemies;
 
+	//Boss Consts
 	private const int BOSS_BODY_LEVEL1 = 6;
 	private const int BOSS_EYE_LEVEL1 = 7;
+
 	private const int BOSS_BODY_LEVEL2 = 8;
 	private const int BOSS_EYE_LEVEL2 = 9;
+
 	private const int BOSS_BODY_LEVEL3 = 10;
 	private const int BOSS_EYE_LEVEL3 = 11;
+
 	private const int BOSS_BODY_LEVEL4 = 12;
 	private const int BOSS_EYE_LEVEL4 = 13;
+
 	private const int BOSS_BODY_LEVEL5 = 14;
 	private const int BOSS_EYE_LEVEL5 = 15;
+
+	//Ape Consts
+	private const int APE_BODY_LEVEL1 = 16;
+	private const int APE_EYE_LEVEL1 = 17;
+
+	private const int APE_BODY_LEVEL2 = 18;
+	private const int APE_EYE_LEVEL2 = 19;
+
+	private const int APE_BODY_LEVEL3 = 20;
+	private const int APE_EYE_LEVEL3 = 21;
+
+	private const int APE_BODY_LEVEL4 = 22;
+	private const int APE_EYE_LEVEL4 = 23;
+
+	private const int APE_BODY_LEVEL5 = 24;
+	private const int APE_EYE_LEVEL5 = 25;
+
+	//Clay Consts
+	private const int CLAY_BODY_LEVEL1 = 26;
+	private const int CLAY_EYE_LEVEL1 = 27;
+	private const int CLAY_EYES_LEVEL1 = 28;
+
+	private const int CLAY_BODY_LEVEL2 = 29;
+	private const int CLAY_EYE_LEVEL2 = 30;
+	private const int CLAY_EYES_LEVEL2 = 31;
+
+	private const int CLAY_BODY_LEVEL3 = 32;
+	private const int CLAY_EYE_LEVEL3 = 33;
+	private const int CLAY_EYES_LEVEL3 = 34;
+
+	private const int CLAY_BODY_LEVEL4 = 35;
+	private const int CLAY_EYE_LEVEL4 = 36;
+	private const int CLAY_EYES_LEVEL4 = 37;
+
+	private const int CLAY_BODY_LEVEL5 = 38;
+	private const int CLAY_EYE_LEVEL5 = 39;
+	private const int CLAY_EYES_LEVEL5 = 40;
+
+	//Mos Consts
+	private const int MOSS_BODY_LEVEL1 = 41;
+	private const int MOSS_EYE_LEVEL1 = 42;
+
+	private const int MOSS_BODY_LEVEL2 = 43;
+	private const int MOSS_EYE_LEVEL2 = 44;
+
+	private const int MOSS_BODY_LEVEL3 = 45;
+	private const int MOSS_EYE_LEVEL3 = 46;
+
+	private const int MOSS_BODY_LEVEL4 = 47;
+	private const int MOSS_EYE_LEVEL4 = 48;
+
+	private const int MOSS_BODY_LEVEL5 = 49;
+	private const int MOSS_EYE_LEVEL5 = 50;
+
+	//Octo Consts
+	private const int OCTO_BODY_LEVEL1 = 51;
+	private const int OCTO_EYE_LEVE1 = 52;
+
+	private const int OCTO_BODY_LEVEL2 = 53;
+	private const int OCTO_EYE_LEVE2 = 54;
+
+	private const int OCTO_BODY_LEVEL3 = 55;
+	private const int OCTO_EYE_LEVE3 = 56;
+
+	private const int OCTO_BODY_LEVEL4 = 57;
+	private const int OCTO_EYE_LEVE4 = 58;
+
+	private const int OCTO_BODY_LEVEL5 = 59;
+	private const int OCTO_EYE_LEVE5 = 60;
+
 	/**
 	 * References Attributes variable to be able to save it easily.
 	 * */
@@ -207,6 +282,14 @@ public class LevelSelect : MonoBehaviour {
 		foreach(GameObject alien in enemies.ToList()){
 			if(alien.GetComponent<Enemy>().typeID == "BossAlien"){
 				textureBoss(alien);
+			} else if(alien.GetComponent<Enemy>().typeID == "ApeAlien"){
+				textureApe(alien);
+			} else if(alien.GetComponent<Enemy>().typeID == "ClayAlien"){
+				textureClay(alien);
+			} else if(alien.GetComponent<Enemy>().typeID == "MossAlien"){
+				textureMoss(alien);
+			} else if(alien.GetComponent<Enemy>().typeID == "OctoAlien"){
+				textureOcto(alien);
 			}
 		}
 	}
@@ -256,6 +339,196 @@ public class LevelSelect : MonoBehaviour {
 			monsterRenderer.material = GetMaterial(BOSS_EYE_LEVEL5);
 			monsterRenderer = alien.transform.FindChild("Eye_002").GetComponent<Renderer>();
 			monsterRenderer.material = GetMaterial(BOSS_EYE_LEVEL5);
+			break;
+		}
+		}
+	}
+
+	void textureApe(GameObject alien){
+		switch (currentLevel) {
+		case 1:{
+			monsterRenderer = alien.transform.FindChild("Ape_Body").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(APE_BODY_LEVEL1);
+			monsterRenderer = alien.transform.FindChild("Eye").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(APE_EYE_LEVEL1);
+			break;
+		}
+		case 2:{
+			monsterRenderer = alien.transform.FindChild("Ape_Body").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(APE_BODY_LEVEL2);
+			monsterRenderer = alien.transform.FindChild("Eye").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(APE_EYE_LEVEL2);
+			break;
+		}
+		case 3:{
+			monsterRenderer = alien.transform.FindChild("Ape_Body").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(APE_BODY_LEVEL3);
+			monsterRenderer = alien.transform.FindChild("Eye").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(APE_EYE_LEVEL3);
+			break;
+		}
+		case 4:{
+			monsterRenderer = alien.transform.FindChild("Ape_Body").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(APE_BODY_LEVEL4);
+			monsterRenderer = alien.transform.FindChild("Eye").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(APE_EYE_LEVEL4);
+			break;
+		}
+		case 5:{
+			monsterRenderer = alien.transform.FindChild("Ape_Body").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(APE_BODY_LEVEL5);
+			monsterRenderer = alien.transform.FindChild("Eye").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(APE_EYE_LEVEL5);
+			break;
+		}
+		}
+	}
+
+	void textureClay(GameObject alien){
+		switch (currentLevel) {
+		case 1:{
+			monsterRenderer = alien.transform.FindChild("body").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(CLAY_BODY_LEVEL1);
+			monsterRenderer = alien.transform.FindChild("Big_Eye_001").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(CLAY_EYE_LEVEL1);
+			for(int i = 1; i <= 8; i++){
+				monsterRenderer = alien.transform.FindChild("Small_Eye_00"+i).GetComponent<Renderer>();
+				monsterRenderer.material = GetMaterial(CLAY_EYES_LEVEL1);
+			}
+			break;
+		}
+		case 2:{
+			monsterRenderer = alien.transform.FindChild("body").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(CLAY_BODY_LEVEL2);
+			monsterRenderer = alien.transform.FindChild("Big_Eye_001").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(CLAY_EYE_LEVEL2);
+			for(int i = 2; i <= 8; i++){
+				monsterRenderer = alien.transform.FindChild("Small_Eye_00"+i).GetComponent<Renderer>();
+				monsterRenderer.material = GetMaterial(CLAY_EYES_LEVEL2);
+			}
+			break;
+		}
+		case 3:{
+			monsterRenderer = alien.transform.FindChild("body").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(CLAY_BODY_LEVEL3);
+			monsterRenderer = alien.transform.FindChild("Big_Eye_001").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(CLAY_EYE_LEVEL3);
+			for(int i = 3; i <= 8; i++){
+				monsterRenderer = alien.transform.FindChild("Small_Eye_00"+i).GetComponent<Renderer>();
+				monsterRenderer.material = GetMaterial(CLAY_EYES_LEVEL3);
+			}
+			break;
+		}
+		case 4:{
+			monsterRenderer = alien.transform.FindChild("body").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(CLAY_BODY_LEVEL4);
+			monsterRenderer = alien.transform.FindChild("Big_Eye_001").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(CLAY_EYE_LEVEL4);
+			for(int i = 4; i <= 8; i++){
+				monsterRenderer = alien.transform.FindChild("Small_Eye_00"+i).GetComponent<Renderer>();
+				monsterRenderer.material = GetMaterial(CLAY_EYES_LEVEL4);
+			}
+			break;
+		}
+		case 5:{
+			monsterRenderer = alien.transform.FindChild("body").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(CLAY_BODY_LEVEL5);
+			monsterRenderer = alien.transform.FindChild("Big_Eye_001").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(CLAY_EYE_LEVEL5);
+			for(int i = 5; i <= 8; i++){
+				monsterRenderer = alien.transform.FindChild("Small_Eye_00"+i).GetComponent<Renderer>();
+				monsterRenderer.material = GetMaterial(CLAY_EYES_LEVEL5);
+			}
+			break;
+		}
+		}
+	}
+
+	void textureMoss(GameObject alien){
+		switch (currentLevel) {
+		case 1:{
+			monsterRenderer = alien.transform.FindChild("MonsterBody").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(MOSS_BODY_LEVEL1);
+			monsterRenderer = alien.transform.FindChild("Sphere001").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(MOSS_EYE_LEVEL1);
+			break;
+		}
+		case 2:{
+			monsterRenderer = alien.transform.FindChild("MonsterBody").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(MOSS_BODY_LEVEL2);
+			monsterRenderer = alien.transform.FindChild("Sphere001").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(MOSS_EYE_LEVEL2);
+			break;
+		}
+		case 3:{
+			monsterRenderer = alien.transform.FindChild("MonsterBody").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(MOSS_BODY_LEVEL3);
+			monsterRenderer = alien.transform.FindChild("Sphere001").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(MOSS_EYE_LEVEL3);
+			break;
+		}
+		case 4:{
+			monsterRenderer = alien.transform.FindChild("MonsterBody").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(MOSS_BODY_LEVEL4);
+			monsterRenderer = alien.transform.FindChild("Sphere001").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(MOSS_EYE_LEVEL4);
+			break;
+		}
+		case 5:{
+			monsterRenderer = alien.transform.FindChild("MonsterBody").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(MOSS_BODY_LEVEL5);
+			monsterRenderer = alien.transform.FindChild("Sphere001").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(MOSS_EYE_LEVEL5);
+			break;
+		}
+		}
+	}
+
+	void textureOcto(GameObject alien){
+		switch (currentLevel) {
+		case 1:{
+			monsterRenderer = alien.transform.FindChild("Monster_Body").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(OCTO_BODY_LEVEL1);
+			monsterRenderer = alien.transform.FindChild("Eye_001").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(OCTO_EYE_LEVE1);
+			monsterRenderer = alien.transform.FindChild("Eye_002").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(OCTO_EYE_LEVE1);
+			break;
+		}
+		case 2:{
+			monsterRenderer = alien.transform.FindChild("Monster_Body").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(OCTO_BODY_LEVEL2);
+			monsterRenderer = alien.transform.FindChild("Eye_001").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(OCTO_EYE_LEVE2);
+			monsterRenderer = alien.transform.FindChild("Eye_002").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(OCTO_EYE_LEVE2);
+			break;
+		}
+		case 3:{
+			monsterRenderer = alien.transform.FindChild("Monster_Body").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(OCTO_BODY_LEVEL3);
+			monsterRenderer = alien.transform.FindChild("Eye_001").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(OCTO_EYE_LEVE3);
+			monsterRenderer = alien.transform.FindChild("Eye_002").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(OCTO_EYE_LEVE3);
+			break;
+		}
+		case 4:{
+			monsterRenderer = alien.transform.FindChild("Monster_Body").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(OCTO_BODY_LEVEL4);
+			monsterRenderer = alien.transform.FindChild("Eye_001").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(OCTO_EYE_LEVE4);
+			monsterRenderer = alien.transform.FindChild("Eye_002").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(OCTO_EYE_LEVE4);
+			break;
+		}
+		case 5:{
+			monsterRenderer = alien.transform.FindChild("Monster_Body").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(OCTO_BODY_LEVEL5);
+			monsterRenderer = alien.transform.FindChild("Eye_001").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(OCTO_EYE_LEVE5);
+			monsterRenderer = alien.transform.FindChild("Eye_002").GetComponent<Renderer>();
+			monsterRenderer.material = GetMaterial(OCTO_EYE_LEVE5);
 			break;
 		}
 		}

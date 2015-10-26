@@ -150,7 +150,7 @@ public class SpawnTrees : MonoBehaviour {
 		bool done = true;
 		
 		for (int i = 0; i < 3; i++) {
-			if (amountTreesLanded () == num_Trees && done == true) {
+			if (amountTreesLanded () >= (num_Trees - (num_Trees/6)) && done == true) {
 				done = true;
 			} else {
 				done = false;

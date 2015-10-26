@@ -3,7 +3,7 @@ using System.Collections;
 
 public class FauxGravityAttractor : MonoBehaviour {
 
-	public float gravity = -500;
+	public float gravity = -10000;
 
 	public void attract(Transform body) {
 		Vector3 gravityUp = (body.position - transform.position).normalized;
@@ -29,10 +29,12 @@ public class FauxGravityAttractor : MonoBehaviour {
 			}
 
 			temp.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;
-		} else if (col.collider.tag == "Monster" && col.collider.name != "Ape" && col.collider.name != "MossAlien" && col.collider.name != "ClayAlien" && col.collider.name != "MonsterBody") {
+		}/* else if (col.collider.tag == "Monster" && col.collider.name != "Ape_Body" && col.collider.name != "MossAlien" && col.collider.name != "body" && col.collider.name != "MonsterBody") {
 			col.collider.GetComponent<PositionMe> ().touching = false;
-		} else if (col.collider.tag == "Monster") {
+		}*/ else if (col.collider.tag == "Monster") {
+
 			col.collider.GetComponentInParent<PositionMe> ().touching = false;
+			col.collider.GetComponentInParent<PositionMe> ().checkMyPosition = true;
 		} else if (col.collider.tag == "MediumHealthPack" || col.collider.tag == "LargeHealthPack") {
 			if(col.collider.name == "Box012"){
 				col.collider.transform.parent.gameObject.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;
@@ -67,10 +69,11 @@ public class FauxGravityAttractor : MonoBehaviour {
 			}
 
 			temp.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;
-		} else if (col.collider.tag == "Monster" && col.collider.name != "Ape" && col.collider.name != "MossAlien" && col.collider.name != "ClayAlien" && col.collider.name != "MonsterBody") {
+		}/* else if (col.collider.tag == "Monster" && col.collider.name != "Ape_Body" && col.collider.name != "MossAlien" && col.collider.name != "body" && col.collider.name != "MonsterBody") {
 			col.collider.GetComponent<PositionMe> ().touching = true;
-		} else if (col.collider.tag == "Monster") {
+		} */else if (col.collider.tag == "Monster") {
 			col.collider.GetComponentInParent<PositionMe> ().touching = true;
+			col.collider.GetComponentInParent<PositionMe> ().checkMyPosition = true;
 		} else if (col.collider.tag == "MediumHealthPack" || col.collider.tag == "LargeHealthPack") {
 			if (col.collider.name == "Box012") {
 				col.collider.transform.parent.gameObject.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeAll;

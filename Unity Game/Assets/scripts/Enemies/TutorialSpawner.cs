@@ -35,7 +35,8 @@ public class TutorialSpawner : MonoBehaviour {
 
 		hudText = GameObject.Find ("HUD_Expand_Text").GetComponent<Text> ();
 
-		addEnemy (enemy1, new Vector3(-9.794984f, 8.99264f, 7.973226f));
+		//addEnemy (enemy1, new Vector3(-9.794984f, 8.99264f, 7.973226f));
+		addEnemy (enemy1, new Vector3(-9.79f, 8.99f, 7.97f));
 		addEnemy (enemy2, new Vector3(13.43f, 4.87f, -6.02f));
 
 		GameObject.Find ("Player").GetComponent<Sounds> ().playAmbienceSound (Sounds.TUTORIAL_AMBIENCE);

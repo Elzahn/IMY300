@@ -207,7 +207,13 @@ public abstract class Enemy : MonoBehaviour {
 
 		GameObject player = GameObject.Find("Player");
 		Vector3 PlayerPos = player.GetComponent<Rigidbody>().position;		
-		transform.LookAt(PlayerPos);
+		//transform.LookAt(PlayerPos);
+
+		Vector3 lookPos = PlayerPos - transform.position;
+		lookPos.y = 0;
+		Quaternion rotation = Quaternion.LookRotation(lookPos);
+		transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 1f);
+
 		Vector3 myPos = GetComponent<Rigidbody>().position;
 
 		float distance = Vector3.Distance (PlayerPos, myPos);
@@ -234,6 +240,7 @@ public abstract class Enemy : MonoBehaviour {
 	}
 
 	public string attack(PlayerAttributes player) {
+		GetComponent<Animator>().SetBool("Attacking", true);
 		player.lastDamage = Time.time;
 		PlayerAttributes.giveAlarm = true;
 
