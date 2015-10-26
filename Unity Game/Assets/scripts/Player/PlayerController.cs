@@ -316,7 +316,7 @@ public class PlayerController : MonoBehaviour
 					paused = true;
 				}
 
-				if (Input.GetKey (KeyCode.LeftShift) && playerAttributes.stamina > 0 &&
+				if (Input.GetAxisRaw ("Run") > 0 && playerAttributes.stamina > 0 &&
 					Application.loadedLevelName != "SaveSpot" &&
 					(Input.GetAxis ("Horizontal") != 0 || Input.GetAxis ("Vertical") != 0)) {
 					if (GameObject.Find ("Stamina").GetComponent<Image> ().isActiveAndEnabled == false) {
