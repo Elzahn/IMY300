@@ -15,7 +15,7 @@ public class FallThroughPlanet : MonoBehaviour {
 			return this.GetComponent<PlayerController>();
 		}}
 	private PlayerAttributes playerAttributes { get {
-			return this.GetComponent<PlayerAttributes>();
+			return GameObject.Find("Player").GetComponent<PlayerAttributes>();
 		}}
 
 	// Use this for initialization

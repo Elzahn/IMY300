@@ -86,23 +86,33 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Keypad1)) {
             GetComponent<LevelSelect>().currentLevel = 1;
+			this.GetComponent<Collisions>().totalPieces = 0;
         }
 
         if (Input.GetKeyDown(KeyCode.Keypad2)) {
             GetComponent<LevelSelect>().currentLevel = 2;
+			this.GetComponent<Collisions>().totalPieces = 1;
         }
 
         if (Input.GetKeyDown(KeyCode.Keypad3)) {
             GetComponent<LevelSelect>().currentLevel = 3;
+			this.GetComponent<Collisions>().totalPieces = 2;
         }
 
         if (Input.GetKeyDown(KeyCode.Keypad4)) {
             GetComponent<LevelSelect>().currentLevel = 4;
+			this.GetComponent<Collisions>().totalPieces = 3;
         }
 
         if (Input.GetKeyDown(KeyCode.Keypad5)) {
             GetComponent<LevelSelect>().currentLevel = 5;
+			this.GetComponent<Collisions>().totalPieces = 4;
         }
+
+		if (Input.GetKeyDown(KeyCode.Keypad6)) {
+			GetComponent<LevelSelect>().currentLevel = 6;
+			this.GetComponent<Collisions>().totalPieces = 5;
+		}
 
         //Goto Tutorial Planet
         if (Input.GetKeyDown(KeyCode.Tab) && GetComponent<Tutorial>().startTutorial &&
