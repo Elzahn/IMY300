@@ -287,7 +287,7 @@ public class PlayerController : MonoBehaviour
 		 * P Pauses or unpausese
 		 * Only if showpause the same as pause.
 		 * */
-			if (Input.GetKeyDown (KeyCode.P)) {
+			if (Input.GetButtonDown ("Pause")) {
 				if (Application.loadedLevelName != "Scene" ||
 					(Application.loadedLevelName == "Scene" &&
 					!GameObject.Find ("Planet").GetComponent<LoadingScreen> ().loading)) {
@@ -316,7 +316,7 @@ public class PlayerController : MonoBehaviour
 					paused = true;
 				}
 
-				if (Input.GetAxis ("Run") > 0 && playerAttributes.stamina > 0 &&
+				if (Input.GetButton ("Run") && playerAttributes.stamina > 0 &&
 					Application.loadedLevelName != "SaveSpot" &&
 					(Input.GetAxisRaw ("Horizontal") != 0 || Input.GetAxisRaw ("Vertical") != 0)) {
 					if (GameObject.Find ("Stamina").GetComponent<Image> ().isActiveAndEnabled == false) {
