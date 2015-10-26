@@ -663,14 +663,14 @@ MonoBehaviour:
   tree3: {fileID: 196340, guid: 177742eb57cf7b34c8501cdf4c2ed906, type: 2}
   tree4: {fileID: 144930, guid: 72783855e369f6749937f13d8f5e472b, type: 2}
   shrub: {fileID: 174706, guid: 7935d09b08b8d5d4a9814da53f31aad4, type: 2}
-  tree5: {fileID: 0}
-  tree6: {fileID: 0}
-  tree7: {fileID: 0}
-  tree8: {fileID: 0}
-  tree9: {fileID: 0}
-  tree10: {fileID: 0}
-  tree11: {fileID: 0}
-  tree12: {fileID: 0}
+  tree5: {fileID: 180122, guid: 56bd5f9673ae42b4bb295032aaf27143, type: 2}
+  tree6: {fileID: 184478, guid: 91085082701a8a447af0071783eb869b, type: 2}
+  tree7: {fileID: 128832, guid: d3a5223105f746241a76280734810ac1, type: 2}
+  tree8: {fileID: 123804, guid: fd814843eb2e6b04382676e17b16ff11, type: 2}
+  tree9: {fileID: 119622, guid: c81a6c5fb544c344f8805d059c7a31ce, type: 2}
+  tree10: {fileID: 140504, guid: 05956b1482a3e5245822a3cf91f8a9dc, type: 2}
+  tree11: {fileID: 136832, guid: 4b6dd8fba84a16e48acee32cf5b33723, type: 2}
+  tree12: {fileID: 104502, guid: 47fe5da6396069c44833e79ab90f27fb, type: 2}
 --- !u!1001 &1252867183
 Prefab:
   m_ObjectHideFlags: 0

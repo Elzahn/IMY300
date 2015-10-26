@@ -322,9 +322,11 @@ public class Sounds : MonoBehaviour {
 	}
 
 	public void playDeathSound(int clipAt){
-		deathAudio.loop = false;
-		deathAudio.clip = deathClips [clipAt];
-		deathAudio.Play ();
+		if(!deathAudio.isPlaying){
+			deathAudio.loop = false;
+			deathAudio.clip = deathClips [clipAt];
+			deathAudio.Play ();
+		}
 	}
 
 	public void playAlarmSound(int clipAt){
