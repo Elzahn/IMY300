@@ -22,7 +22,7 @@ public class FauxGravityAttractor : MonoBehaviour {
 	void OnCollisionExit (Collision col){
 		if (col.collider.tag == "WorldObject") {
 			GameObject temp;
-			if (col.collider.name == "Sphere001" || col.collider.name == "Cylinder001" || col.collider.name == "Box012") {
+			if (col.collider.name == "Sphere001" || col.collider.name == "Cylinder001" || col.collider.name == "Box012" || col.collider.name == "Plant_Pot") {
 				temp = col.collider.transform.parent.gameObject;
 			} else {
 				temp = col.collider.gameObject;
@@ -60,7 +60,7 @@ public class FauxGravityAttractor : MonoBehaviour {
 	void OnCollisionEnter (Collision col){
 		if (col.collider.tag == "WorldObject") {
 			GameObject temp;
-			if (col.collider.name == "Sphere001" || col.collider.name == "Cylinder001" || col.collider.name == "Box012") {
+			if (col.collider.name == "Sphere001" || col.collider.name == "Cylinder001" || col.collider.name == "Box012" || col.collider.name == "Plant_Pot") {
 				temp = col.collider.transform.parent.gameObject;
 			} else {
 				temp = col.collider.gameObject;
