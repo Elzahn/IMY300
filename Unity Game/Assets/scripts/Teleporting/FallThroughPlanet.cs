@@ -3,11 +3,16 @@ using System.Collections;
 
 public class FallThroughPlanet : MonoBehaviour {
 
-	public bool canFallThroughPlanet { get; set; }
-	public bool fallThroughPlanetUnlocked{ get; set; }
+	public bool canFallThroughPlanet { 
+		get {return playerAttributes.myAttributes.fallActive;}
+		set {playerAttributes.myAttributes.fallActive = value;} }
+	public bool fallThroughPlanetUnlocked{ 
+		get {return playerAttributes.myAttributes.fallUnlocked;}
+		set {playerAttributes.myAttributes.fallUnlocked = value;} }
 	private float nextUsage;
 	private float delay = 10;
 	private PlayerController playerScript;
+	private PlayerAttributes playerAttributes;
 
 	// Use this for initialization
 	void Start () {
@@ -15,6 +20,7 @@ public class FallThroughPlanet : MonoBehaviour {
 		nextUsage = Time.time + delay;
 		fallThroughPlanetUnlocked = false; //will be changed to true after first mini boss when it is unlocked
 		playerScript = this.GetComponent<PlayerController>();
+		playerAttributes = this.GetComponent<PlayerAttributes>();
 	}
 
 	//used to cause a direct fall

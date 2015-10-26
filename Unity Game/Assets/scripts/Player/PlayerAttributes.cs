@@ -9,9 +9,7 @@ using System.IO;
 public class PlayerAttributes : MonoBehaviour {
     [Serializable()]
 	public class AttributeContainer : ISerializable {
-		public AttributeContainer(){
-			this.inventoryShipPieces = new bool[] {false, false, false, false, false, false};
-		}
+		public AttributeContainer(){}
 
 		public float xp;
 		public float hp;
@@ -47,10 +45,14 @@ public class PlayerAttributes : MonoBehaviour {
 		public bool fallActive;
 		public bool warpUnlock;
 		public bool warpActive;
-		public bool[] bonusObjs;
+
+	
+		public bool[] inventoryShipPieces = new bool[6];
+		public bool[] bonusObjs = new bool[3];
+		public bool[] bonusObjsShown = new bool[4];
 		public int shipPieces;
-		public bool[] inventoryShipPieces;
-		public int monstersKilled;
+		public int deadEnemiesOnLevel;
+		public int deadEnemies;
 
 		public void GetObjectData (SerializationInfo info, StreamingContext context)
 		{
@@ -79,6 +81,17 @@ public class PlayerAttributes : MonoBehaviour {
 			info.AddValue("fallFirst", fallFirst);
 			info.AddValue("doorOpen", doorOpen);
 			info.AddValue("justWraped", justWarped);
+
+			info.AddValue("fallUnlocked", fallUnlocked);
+            info.AddValue("fallActive", fallActive);
+            info.AddValue("warpUnlocked",warpUnlock);
+			info.AddValue("warpActive",warpActive);
+
+			info.AddValue("inventoryShipPieces", inventoryShipPieces);
+			info.AddValue("bonusObjs", bonusObjs);
+			info.AddValue("bonusObjsShown", bonusObjsShown);
+			info.AddValue("deadEnemies", deadEnemies);
+			info.AddValue("shipPieceCount", shipPieces);
 		}
 		
 		AttributeContainer(SerializationInfo info, StreamingContext context) {
@@ -91,11 +104,11 @@ public class PlayerAttributes : MonoBehaviour {
 			gender 	 	= (char) info.GetValue("gender", typeof(char));
 			currentLevel = (int) info.GetValue("levels", typeof(int));
 
-			inventory 	= (LinkedList<InventoryItem>) info.GetValue("inventory", typeof(LinkedList<InventoryItem>));
-			storage 	= (LinkedList<InventoryItem>) info.GetValue("storage",   typeof(LinkedList<InventoryItem>));
+			inventory = info.GetValue ("inventory", typeof(LinkedList<InventoryItem>)) as LinkedList<InventoryItem>;
+			storage = info.GetValue ("storage", typeof(LinkedList<InventoryItem>)) as LinkedList<InventoryItem>;
 
 			weapon 		= (Weapon) info.GetValue("weapon", typeof(Weapon));
-			accessories = (LinkedList <Accessory>) info.GetValue("accessories", typeof(LinkedList <Accessory>));
+			accessories = info.GetValue ("accessories", typeof(LinkedList<Accessory>)) as LinkedList<Accessory>;
 
 			difficulty 		= (float) info.GetValue("difficulty",     typeof(float));
 			soundVolume 	= (float) info.GetValue("soundVolume", 	  typeof(float));
@@ -107,6 +120,18 @@ public class PlayerAttributes : MonoBehaviour {
 			fallFirst 	 = (bool) info.GetValue("fallFirst",  typeof(bool));
 			doorOpen 	 = (bool) info.GetValue("doorOpen",   typeof(bool));
 			justWarped 	 = (bool) info.GetValue("justWraped", typeof(bool));
+
+			fallUnlocked = (bool) info.GetValue("fallUnlocked", typeof(bool));
+			fallActive = (bool)info.GetValue("fallActive", typeof(bool));
+			warpUnlock = (bool)info.GetValue("warpUnlocked",typeof(bool));
+			warpActive = (bool) info.GetValue("warpActive",typeof(bool));
+			
+			inventoryShipPieces = info.GetValue ("inventoryShipPieces", typeof(bool[])) as bool[];
+			bonusObjs = info.GetValue ("bonusObjs", typeof(bool[])) as bool[];
+			bonusObjsShown = info.GetValue ("bonusObjsShown", typeof(bool[])) as bool[];
+			deadEnemies = (int) info.GetValue("deadEnemies", typeof(int));
+			shipPieces = (int) info.GetValue("shipPieceCount", typeof(int));
+
 			/**
 			 * Saving & loading only between levels
 			 * */
@@ -464,6 +489,7 @@ public class PlayerAttributes : MonoBehaviour {
 
 		soundComponent = GameObject.Find("Player").gameObject.GetComponent<Sounds>(); //must be GameObject.Find("Player") else it tries to acces what has been destroyed
 		controllerComponent = GameObject.Find("Player").gameObject.GetComponent<PlayerController> (); //must be GameObject.Find("Player") else it tries to acces what has been destroyed
+		myAttributes = new AttributeContainer();
 	}
 
 	void Update() {

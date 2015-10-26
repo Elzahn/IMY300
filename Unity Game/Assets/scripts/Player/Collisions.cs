@@ -12,7 +12,10 @@ public class Collisions : MonoBehaviour {
 	public static LeftWing leftWing { get; set; }
 	public static LandingGear landingGear { get; set; }
 	public static FlightControl flightControl { get; set; }
-	public int totalPieces { get; set; }
+	public int totalPieces { 
+		get { return playerAttributesScript.myAttributes.shipPieces; }
+		set { playerAttributesScript.myAttributes.shipPieces = value;} 
+	}
 
 	private HUD Hud;
 	private Text hudText;
@@ -39,7 +42,8 @@ public class Collisions : MonoBehaviour {
 			Hud.makeInteractionHint ("Press E to replace the power core", this.GetComponent<Tutorial> ().PressE);
 		}
 
-		if (Application.loadedLevelName == "SaveSpot" && (Loot.gotTailFin || Loot.gotLeftWing || Loot.gotLandingGear || Loot.gotFlightControl || Loot.gotBackEngine) && colObj != null && colObj.name == "Console") {
+		var anyLoot = Loot.gotTailFin || Loot.gotLeftWing || Loot.gotLandingGear || Loot.gotFlightControl || Loot.gotBackEngine;
+		if (Application.loadedLevelName == "SaveSpot" && anyLoot && colObj != null && colObj.name == "Console") {
 			int numPieces = 0;
 
 			if(Loot.gotTailFin)
@@ -95,7 +99,7 @@ public class Collisions : MonoBehaviour {
 			this.GetComponent<Tutorial> ().tutorialDone = true;
 		}
 
-		if (Application.loadedLevelName == "SaveSpot" && (Loot.gotTailFin || Loot.gotLeftWing || Loot.gotLandingGear || Loot.gotFlightControl || Loot.gotBackEngine) && colObj != null && colObj.name == "Console" && Input.GetButtonDown ("Interact")) {
+		if (Application.loadedLevelName == "SaveSpot" && (anyLoot) && colObj != null && colObj.name == "Console" && Input.GetButtonDown ("Interact")) {
 
 			if(playerAttributesScript.inventory.Contains(backEngine)){
 				playerAttributesScript.inventory.Remove(backEngine);
