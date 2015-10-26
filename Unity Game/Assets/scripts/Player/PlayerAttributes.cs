@@ -9,9 +9,7 @@ using System.IO;
 public class PlayerAttributes : MonoBehaviour {
     [Serializable()]
 	public class AttributeContainer : ISerializable {
-		public AttributeContainer(){
-			this.inventoryShipPieces = new bool[] {false, false, false, false, false, false};
-		}
+		public AttributeContainer(){}
 
 		public float xp;
 		public float hp;
@@ -47,10 +45,14 @@ public class PlayerAttributes : MonoBehaviour {
 		public bool fallActive;
 		public bool warpUnlock;
 		public bool warpActive;
-		public bool[] bonusObjs;
+
+
+		public bool[] inventoryShipPieces = new bool[6];
+		public bool[] bonusObjs = new bool[3];
+		public bool[] bonusObjsShown = new bool[4];
 		public int shipPieces;
-		public bool[] inventoryShipPieces;
-		public int monstersKilled;
+		public int deadEnemiesOnLevel;
+		public int deadEnemies;
 
 		public void GetObjectData (SerializationInfo info, StreamingContext context)
 		{
@@ -79,6 +81,11 @@ public class PlayerAttributes : MonoBehaviour {
 			info.AddValue("fallFirst", fallFirst);
 			info.AddValue("doorOpen", doorOpen);
 			info.AddValue("justWraped", justWarped);
+
+			info.AddValue("inventoryShipPieces", inventoryShipPieces);
+			info.AddValue("bonusObjs", bonusObjs);
+			info.AddValue("bonusObjsShown", bonusObjsShown);
+			info.AddValue("deadEnemies", deadEnemies);
 		}
 		
 		AttributeContainer(SerializationInfo info, StreamingContext context) {
@@ -107,6 +114,12 @@ public class PlayerAttributes : MonoBehaviour {
 			fallFirst 	 = (bool) info.GetValue("fallFirst",  typeof(bool));
 			doorOpen 	 = (bool) info.GetValue("doorOpen",   typeof(bool));
 			justWarped 	 = (bool) info.GetValue("justWraped", typeof(bool));
+
+			inventoryShipPieces = (bool[]) info.GetValue("inventoryShipPieces", typeof(bool[]));
+			bonusObjs = info.GetValue ("bonusObjs", typeof(bool[])) as bool[];
+			bonusObjsShown = info.GetValue ("bonusObjsShown", typeof(bool[])) as bool[];
+			deadEnemies = (int) info.GetValue("deadEnemies", typeof(int));
+
 			/**
 			 * Saving & loading only between levels
 			 * */
@@ -464,6 +477,7 @@ public class PlayerAttributes : MonoBehaviour {
 
 		soundComponent = GameObject.Find("Player").gameObject.GetComponent<Sounds>(); //must be GameObject.Find("Player") else it tries to acces what has been destroyed
 		controllerComponent = GameObject.Find("Player").gameObject.GetComponent<PlayerController> (); //must be GameObject.Find("Player") else it tries to acces what has been destroyed
+		myAttributes = new AttributeContainer();
 	}
 
 	void Update() {

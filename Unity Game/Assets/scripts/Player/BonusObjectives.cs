@@ -4,22 +4,54 @@ using System.Collections;
 
 public class BonusObjectives : MonoBehaviour {
 
-	public bool killAllMonstersOnLevel{ get; set; }
-	public bool killAllMonstersInGame{ get; set; }
-	public bool reachTheStars{ get; set; }
-	public bool completeAllQuests { get; set;}
+	private PlayerAttributes attributes;
 
-	public int deadEnemiesOnLevel { get; set;}
-	public int deadEnemies{ get; set; }
+	public bool killAllMonstersOnLevel{ 
+		get { return attributes.myAttributes.bonusObjs[1];} 
+		set { attributes.myAttributes.bonusObjs[1] = value;} 
+	}
+	public bool killAllMonstersInGame{ 
+		get { return attributes.myAttributes.bonusObjs[1];} 
+		set { attributes.myAttributes.bonusObjs[1] = value;} 
+	}
+	public bool reachTheStars{ 
+		get { return attributes.myAttributes.bonusObjs[2];} 
+		set { attributes.myAttributes.bonusObjs[2] = value;} 
+	}
+	public bool completeAllQuests { get {
+			return killAllMonstersOnLevel && killAllMonstersInGame && reachTheStars;
+		}}
+
+	public int deadEnemiesOnLevel { 
+		get { return attributes.myAttributes.deadEnemiesOnLevel;} 
+		set { attributes.myAttributes.deadEnemiesOnLevel = value;}
+	}
+	public int deadEnemies{ 
+		get { return attributes.myAttributes.deadEnemies;} 
+		set { attributes.myAttributes.deadEnemies = value;}
+	}
 
 	private LevelSelect levelSelect;
-	private bool showedBonus1 = false;
-	private bool showedBonus2 = false;
-	private bool showedBonus3 = false;
-	private bool showedBonus4 = false;
+	private bool showedBonus1 {
+		get { return attributes.myAttributes.bonusObjsShown[0];} 
+		set { attributes.myAttributes.bonusObjsShown[0] = value;} 
+	}
+	private bool showedBonus2{
+		get { return attributes.myAttributes.bonusObjsShown[1];} 
+		set { attributes.myAttributes.bonusObjsShown[1] = value;} 
+	}
+	private bool showedBonus3 {
+		get { return attributes.myAttributes.bonusObjsShown[2];} 
+		set { attributes.myAttributes.bonusObjsShown[2] = value;} 
+	}
+	private bool showedBonus4 {
+		get { return attributes.myAttributes.bonusObjsShown[3];} 
+		set { attributes.myAttributes.bonusObjsShown[3] = value;} 
+	}
 
 	// Use this for initialization
-	void Start () {
+	void Start () {		
+		attributes = GameObject.Find("Player").GetComponent<PlayerAttributes> ();
 		killAllMonstersInGame = false;
 		killAllMonstersOnLevel = false;
 		reachTheStars = false;
@@ -42,8 +74,8 @@ public class BonusObjectives : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (reachTheStars && killAllMonstersOnLevel && killAllMonstersInGame && !showedBonus1) {
-			completeAllQuests = true;
+		if (completeAllQuests && !showedBonus1) {
+
 			this.GetComponent<Tutorial>().makeHint("You completed all bonus objectives! Bonus Objective", this.GetComponent<Tutorial>().Middle);
 			showedBonus1 = true;
 		}
