@@ -14,17 +14,19 @@ public class OpeningCutScene : MonoBehaviour {
 	void Start () {
 		player = GameObject.Find("Player");
 		attributesScript = player.GetComponent<PlayerAttributes> ();
+		player.GetComponent<Sounds> ().stopSound ("all");
+		player.GetComponent<Sounds> ().playAmbienceSound (Sounds.SHIP_AMBIENCE);
 
-		GameObject.Find("MovieScreen").GetComponent<Renderer>().material.mainTexture = movie;
+		movie = (MovieTexture)GameObject.Find ("MovieScreen").GetComponent<Renderer> ().material.mainTexture;// = movie;
 		movie.Play();
 	}
 
 	void Update() {
 		if(Input.GetButtonDown("Skip")){
-			movie.Stop();
+		/*	movie.Stop();
 		}
 
-		if (!movie.isPlaying) {
+		if (!movie.isPlaying) {*/
 			GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Dead", false);
 			Application.LoadLevel ("SaveSpot");
 			

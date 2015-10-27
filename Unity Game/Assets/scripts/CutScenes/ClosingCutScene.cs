@@ -13,9 +13,11 @@ public class ClosingCutScene : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		player = GameObject.Find("Player");
+		player.GetComponent<Sounds> ().stopSound ("all");
+		player.GetComponent<Sounds> ().playAmbienceSound (Sounds.SHIP_AMBIENCE);
 		attributesScript = player.GetComponent<PlayerAttributes> ();
 		
-		GameObject.Find("MovieScreen").GetComponent<Renderer>().material.mainTexture = movie;
+		movie = (MovieTexture)GameObject.Find ("MovieScreen").GetComponent<Renderer> ().material.mainTexture;// = movie;
 		movie.Play();
 
 		GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Dead", false);
@@ -31,7 +33,7 @@ public class ClosingCutScene : MonoBehaviour {
 		GameObject.Find ("SaveCanvas").GetComponent<Canvas> ().enabled = false;
 		GameObject.Find ("Warp").GetComponent<Canvas> ().enabled = false;
 		GameObject.Find ("BirdsEye").GetComponent<Canvas> ().enabled = false;
-		GameObject.Find ("Dizzy").SetActive(false);
+//		GameObject.Find ("Dizzy").SetActive(false);
 		GameObject.Find("Stamina").GetComponent<Image>().enabled = false;
 		GameObject.Find("Health").GetComponent<Image>().enabled = false;
 		GameObject.Find ("HUD_Expand_Text").GetComponent<Text> ().text = "";
