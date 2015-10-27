@@ -200,7 +200,7 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	public float soundVolume {
-		get {print(myAttributes.soundVolume);return myAttributes.soundVolume;}
+		get {return myAttributes.soundVolume;}
 		set {myAttributes.soundVolume = value;} 
 	}
 	public float narrativeShown { 

@@ -84,6 +84,7 @@ public class InventoryGUI : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider col){
+		print (col.tag);
 		if (col.tag == "Storage") {
 			hasCollided = true;
 		}
