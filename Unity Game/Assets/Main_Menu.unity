@@ -7589,7 +7589,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1016704708}
   m_HandleRect: {fileID: 1016704707}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -9857,7 +9857,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1394417034}
   m_HandleRect: {fileID: 1394417033}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -17926,7 +17926,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1924841575}
   m_HandleRect: {fileID: 1924841574}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -18178,7 +18178,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1129163705}
-  - 95: {fileID: 1129163721}
   - 114: {fileID: 1129163720}
   - 114: {fileID: 1129163719}
   - 114: {fileID: 1129163718}
@@ -18601,24 +18600,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6211b0ccde9d78b46b0714b3366cdb2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &1129163721
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 9500000, guid: 813d6559d9ed6c343869b9e359eabf50,
-    type: 3}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1129163704}
-  m_Enabled: 0
-  m_Avatar: {fileID: 9000000, guid: 98432327fb3ed6d4f937daa41170978b, type: 3}
-  m_Controller: {fileID: 9100000, guid: 26502e674b60a5a449b4ac2fa1cd5db1, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 0
-  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &1129163722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28996,7 +28977,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -2, y: .00833892822}
+  m_AnchoredPosition: {x: -2, y: -.00954437256}
   m_SizeDelta: {x: 670, y: 442.299988}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1988213410
@@ -30802,7 +30783,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2092789481}
   m_HandleRect: {fileID: 2092789480}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
