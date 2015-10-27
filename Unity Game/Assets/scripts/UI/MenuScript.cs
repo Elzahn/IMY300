@@ -121,7 +121,6 @@ public class MenuScript : MonoBehaviour {
 		}
 
 		disableCanvas ();
-
 		GameObject.Find ("Slider Narrative").GetComponent<Slider> ().value = attributesScript.narrativeShown;
 		GameObject.Find ("Slider Sound").GetComponent<Slider> ().value = attributesScript.soundVolume;
 		GameObject.Find ("Slider Difficult").GetComponent<Slider> ().value = attributesScript.difficulty;
