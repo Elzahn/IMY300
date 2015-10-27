@@ -173,7 +173,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 			} else if(showEndGameSuccess && Input.GetButtonDown ("Interact")){
 				this.GetComponent<Rigidbody> ().useGravity = true;
 				this.GetComponent<FauxGravityBody> ().attractor = null;
-				sound.playWorldSound (Sounds.FINISHED_GAME);
+				//sound.playWorldSound (Sounds.FINISHED_GAME);
 				if(BonusObjectives.endGameKing){
 					Application.LoadLevel("EndOfGameKing");
 				} else if(BonusObjectives.endGamePlanet){

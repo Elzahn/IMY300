@@ -46,7 +46,12 @@ public class ClosingCutScene : MonoBehaviour {
 		}
 		
 		if (!movie.isPlaying) {
+			player.transform.rotation = Quaternion.Euler (0f, 171.5833f, 0f);
+			player.transform.position = new Vector3 (-375.12f, 98.75f, 395.33f);
 			Application.LoadLevel ("Main_Menu");
+			player.transform.LookAt(GameObject.Find("Notice board").transform.position);
+			player.transform.rotation = Quaternion.Euler (0f, 171.5833f, 0f);
+			player.transform.position = new Vector3 (-375.12f, 101.75f, 395.33f);
 		}
 	}
 }

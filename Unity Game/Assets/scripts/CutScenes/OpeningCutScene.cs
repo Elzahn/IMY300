@@ -23,10 +23,10 @@ public class OpeningCutScene : MonoBehaviour {
 
 	void Update() {
 		if(Input.GetButtonDown("Skip")){
-		/*	movie.Stop();
+			movie.Stop();
 		}
 
-		if (!movie.isPlaying) {*/
+		if (!movie.isPlaying) {
 			GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Dead", false);
 			Application.LoadLevel ("SaveSpot");
 			
