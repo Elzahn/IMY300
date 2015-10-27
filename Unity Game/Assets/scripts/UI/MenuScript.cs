@@ -82,6 +82,7 @@ public class MenuScript : MonoBehaviour {
 		attributesScript.resetPlayer ();
 		player.GetComponent<Tutorial> ().tutorialDone = false;
 		player.GetComponent<LevelSelect> ().spawnedLevel = false;*/
+		player.GetComponent<Rigidbody>().isKinematic = false;
 		Application.LoadLevel("OpeningCutScene");
 	}
 	
