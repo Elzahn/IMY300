@@ -200,7 +200,7 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	public float soundVolume {
-		get {return myAttributes.soundVolume;}
+		get {print(myAttributes.soundVolume);return myAttributes.soundVolume;}
 		set {myAttributes.soundVolume = value;} 
 	}
 	public float narrativeShown { 
@@ -445,6 +445,7 @@ public class PlayerAttributes : MonoBehaviour {
 		difficulty = 1;
 		//0 = mute; 1 = on
 		soundVolume = 1;
+
 		narrativeSoFar = "";
 
 		showWarpHint = true;

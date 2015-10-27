@@ -15,6 +15,8 @@ public class MenuScript : MonoBehaviour {
 	private static GameObject errorPopup;
 	private float errorTime = 0f, checkTime = 3f;
 
+	private static int soundSet;
+
 	void Start(){
 		player = GameObject.Find ("Player");
 		attributesScript = player.GetComponent<PlayerAttributes> ();
@@ -27,6 +29,19 @@ public class MenuScript : MonoBehaviour {
 		player.transform.LookAt(GameObject.Find("Notice board").transform.position);
 		player.transform.rotation = Quaternion.Euler (0f, 171.5833f, 0f);
 		player.transform.position = new Vector3 (-375.12f, 101.75f, 395.33f);
+	
+		soundSet++;
+
+		if(soundSet == 29){
+			//1 = show; 0 = hide
+			attributesScript.narrativeShown = 1;
+			//1 = easy; 2 = difficult
+			attributesScript.difficulty = 1;
+			//0 = mute; 1 = on
+			attributesScript.soundVolume = 1;
+
+			soundSet = -1;
+		}
 	}
 
 	public void changeFont(){
