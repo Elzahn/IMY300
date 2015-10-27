@@ -174,7 +174,13 @@ public class SaveSpotTeleport : MonoBehaviour {
 				this.GetComponent<Rigidbody> ().useGravity = true;
 				this.GetComponent<FauxGravityBody> ().attractor = null;
 				sound.playWorldSound (Sounds.FINISHED_GAME);
-				Application.LoadLevel ("EndOfGame");
+				if(BonusObjectives.endGameKing){
+					Application.LoadLevel("EndOfGameKing");
+				} else if(BonusObjectives.endGamePlanet){
+					Application.LoadLevel("EndOfGamePlanet");
+				} else {
+					Application.LoadLevel ("EndOfGame");
+				}
 			} else if (showEntranceConfirmation && Input.GetButtonDown ("Interact") && Application.loadedLevelName != "Tutorial") {
 				showEntranceConfirmation = false;
 				attributesComponent.restoreHealthToFull ();

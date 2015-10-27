@@ -62,7 +62,7 @@ public class MenuScript : MonoBehaviour {
 	}
 
 	public void play(){
-		GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Dead", false);
+		/*GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Dead", false);
 		Application.LoadLevel ("SaveSpot");
 
 		player.GetComponent<Tutorial> ().restartTutorial ();
@@ -81,7 +81,8 @@ public class MenuScript : MonoBehaviour {
 		player.GetComponent<LevelSelect>().currentLevel = 0;
 		attributesScript.resetPlayer ();
 		player.GetComponent<Tutorial> ().tutorialDone = false;
-		player.GetComponent<LevelSelect> ().spawnedLevel = false;
+		player.GetComponent<LevelSelect> ().spawnedLevel = false;*/
+		Application.LoadLevel("OpeningCutScene");
 	}
 	
 	public void load(){

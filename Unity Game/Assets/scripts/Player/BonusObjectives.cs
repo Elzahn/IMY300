@@ -49,6 +49,9 @@ public class BonusObjectives : MonoBehaviour {
 		set { attributes.myAttributes.bonusObjsShown[3] = value;} 
 	}
 
+	public static bool endGamePlanet;
+	public static bool endGameKing;
+
 	// Use this for initialization
 	void Start () {		
 		attributes = GameObject.Find("Player").GetComponent<PlayerAttributes> ();
@@ -75,13 +78,16 @@ public class BonusObjectives : MonoBehaviour {
 	void Update () {
 
 		if (completeAllQuests && !showedBonus1) {
-
+			endGameKing = true;
+			endGamePlanet = false;
 			this.GetComponent<Tutorial>().makeHint("You completed all bonus objectives! Bonus Objective", this.GetComponent<Tutorial>().Middle);
 			showedBonus1 = true;
 		}
 
 		if (deadEnemies == 155 && !showedBonus2){
 			killAllMonstersInGame = true;
+			endGameKing = false;
+			endGamePlanet = true;
 			this.GetComponent<Tutorial>().makeHint("You killed all the enemy lifeforms! Bonus Objective", this.GetComponent<Tutorial>().Middle);
 			showedBonus2 = true;
 		}

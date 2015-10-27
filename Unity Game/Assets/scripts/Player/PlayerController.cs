@@ -109,7 +109,26 @@ public class PlayerController : MonoBehaviour
 			this.GetComponent<Collisions>().totalPieces = 4;
         }
 
+		//Normal End Game
 		if (Input.GetKeyDown(KeyCode.Keypad6)) {
+			BonusObjectives.endGamePlanet = false;
+			BonusObjectives.endGameKing = false;
+			GetComponent<LevelSelect>().currentLevel = 6;
+			this.GetComponent<Collisions>().totalPieces = 5;
+		}
+
+		//Planet End Game
+		if (Input.GetKeyDown(KeyCode.Keypad7)) {
+			BonusObjectives.endGamePlanet = true;
+			BonusObjectives.endGameKing = false;
+			GetComponent<LevelSelect>().currentLevel = 6;
+			this.GetComponent<Collisions>().totalPieces = 5;
+		}
+
+		//King End Game
+		if (Input.GetKeyDown(KeyCode.Keypad8)) {
+			BonusObjectives.endGamePlanet = false;
+			BonusObjectives.endGameKing = true;
 			GetComponent<LevelSelect>().currentLevel = 6;
 			this.GetComponent<Collisions>().totalPieces = 5;
 		}
@@ -248,7 +267,6 @@ public class PlayerController : MonoBehaviour
 		//gives a weapon
 		if (Input.GetKeyDown (KeyCode.F8)) {
 			playerAttributes.inventory.AddLast(new Longsword(1));
-			playerAttributes.inventory.AddLast(new PowerCore());
 		}
 
 		//gives accessories

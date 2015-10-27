@@ -6,12 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Main_Menu.unity
+  - enabled: 1
+    path: Assets/OpeningCutScene.unity
+  - enabled: 1
+    path: Assets/Tutorial.unity
+  - enabled: 1
     path: Assets/SaveSpot.unity
   - enabled: 1
     path: Assets/Scene.unity
   - enabled: 1
-    path: Assets/Tutorial.unity
-  - enabled: 1
-    path: Assets/Main_Menu.unity
-  - enabled: 1
     path: Assets/EndOfGame.unity
+  - enabled: 1
+    path: Assets/EndOfGameKing.unity
+  - enabled: 1
+    path: Assets/EndOfGamePlanet.unity

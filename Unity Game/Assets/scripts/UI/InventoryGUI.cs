@@ -50,7 +50,7 @@ public class InventoryGUI : MonoBehaviour {
 				if (!playerScript.showQuit && Input.GetButtonDown ("Menu")){// && !this.GetComponent<Tutorial>().startTutorial){
 					playerScript.showQuit = true;
 				}
-			} else if(Application.loadedLevelName != "Main_Menu"){
+			} else if(Application.loadedLevelName == "Scene" || Application.loadedLevelName == "SaveSpot" || Application.loadedLevelName == "Tutorial"){
 				if (!playerScript.showQuit && Input.GetButtonDown("Menu") && !GameObject.Find("Planet").GetComponent<LoadingScreen>().loading){// && !this.GetComponent<Tutorial>().startTutorial
 					playerScript.showQuit = true;
 				}

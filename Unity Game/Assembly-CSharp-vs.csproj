@@ -73,6 +73,8 @@
      <Compile Include="Assets\scripts\BonusItems\PowerCore.cs" />
      <Compile Include="Assets\scripts\BonusItems\TailFin.cs" />
      <Compile Include="Assets\scripts\BonusItems\Usable.cs" />
+     <Compile Include="Assets\scripts\CutScenes\ClosingCutScene.cs" />
+     <Compile Include="Assets\scripts\CutScenes\OpeningCutScene.cs" />
      <Compile Include="Assets\scripts\Enemies\Aliens\ApeAlien.cs" />
      <Compile Include="Assets\scripts\Enemies\Aliens\BossAlien.cs" />
      <Compile Include="Assets\scripts\Enemies\Aliens\ClayAlien.cs" />
