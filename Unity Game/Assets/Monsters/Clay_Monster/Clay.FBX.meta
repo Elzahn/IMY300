@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 5b56de6f5a5e9f24bba9842808503d61
-timeCreated: 1445877104
+timeCreated: 1445953970
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -31,20 +31,14 @@ ModelImporter:
     100046: Bone022
     100048: Bone023
     100050: //RootNode
-    100052: IK Chain001
-    100054: IK Chain002
-    100056: IK Chain003
-    100058: IK Chain004
-    100060: IK Chain005
-    100062: IK Chain006
-    100064: Small_Eye_001
-    100066: Small_Eye_002
-    100068: Small_Eye_003
-    100070: Small_Eye_004
-    100072: Small_Eye_005
-    100074: Small_Eye_006
-    100076: Small_Eye_007
-    100078: Small_Eye_008
+    100052: Small_Eye_001
+    100054: Small_Eye_002
+    100056: Small_Eye_003
+    100058: Small_Eye_004
+    100060: Small_Eye_005
+    100062: Small_Eye_006
+    100064: Small_Eye_007
+    100066: Small_Eye_008
     400000: Big_Eye_001
     400002: body
     400004: Bone001
@@ -71,20 +65,14 @@ ModelImporter:
     400046: Bone022
     400048: Bone023
     400050: //RootNode
-    400052: IK Chain001
-    400054: IK Chain002
-    400056: IK Chain003
-    400058: IK Chain004
-    400060: IK Chain005
-    400062: IK Chain006
-    400064: Small_Eye_001
-    400066: Small_Eye_002
-    400068: Small_Eye_003
-    400070: Small_Eye_004
-    400072: Small_Eye_005
-    400074: Small_Eye_006
-    400076: Small_Eye_007
-    400078: Small_Eye_008
+    400052: Small_Eye_001
+    400054: Small_Eye_002
+    400056: Small_Eye_003
+    400058: Small_Eye_004
+    400060: Small_Eye_005
+    400062: Small_Eye_006
+    400064: Small_Eye_007
+    400066: Small_Eye_008
     2300000: Big_Eye_001
     2300002: Small_Eye_001
     2300004: Small_Eye_002
@@ -213,18 +201,6 @@ ModelImporter:
         weight: 1
       - path: Bone020/Bone021/Bone022/Bone023
         weight: 1
-      - path: IK Chain001
-        weight: 1
-      - path: IK Chain002
-        weight: 1
-      - path: IK Chain003
-        weight: 1
-      - path: IK Chain004
-        weight: 1
-      - path: IK Chain005
-        weight: 1
-      - path: IK Chain006
-        weight: 1
       - path: Small_Eye_001
         weight: 1
       - path: Small_Eye_002
@@ -318,18 +294,6 @@ ModelImporter:
       - path: Bone020/Bone021/Bone022
         weight: 1
       - path: Bone020/Bone021/Bone022/Bone023
-        weight: 1
-      - path: IK Chain001
-        weight: 1
-      - path: IK Chain002
-        weight: 1
-      - path: IK Chain003
-        weight: 1
-      - path: IK Chain004
-        weight: 1
-      - path: IK Chain005
-        weight: 1
-      - path: IK Chain006
         weight: 1
       - path: Small_Eye_001
         weight: 1

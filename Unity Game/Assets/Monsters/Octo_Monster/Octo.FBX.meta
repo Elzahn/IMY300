@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 9a97bbb468be04b4da18fe2d9a4e1215
-timeCreated: 1445877116
+timeCreated: 1445953811
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -51,19 +51,8 @@ ModelImporter:
     100086: Bone044
     100088: Eye_001
     100090: Eye_002
-    100092: IK Chain001
-    100094: IK Chain002
-    100096: IK Chain003
-    100098: IK Chain004
-    100100: IK Chain005
-    100102: IK Chain006
-    100104: IK Chain007
-    100106: IK Chain008
-    100108: IK Chain009
-    100110: IK Chain010
-    100112: IK Chain011
-    100114: Monster_Body
-    100116: //RootNode
+    100092: Monster_Body
+    100094: //RootNode
     400000: Bone001
     400002: Bone002
     400004: Bone003
@@ -110,24 +99,13 @@ ModelImporter:
     400086: Bone044
     400088: Eye_001
     400090: Eye_002
-    400092: IK Chain001
-    400094: IK Chain002
-    400096: IK Chain003
-    400098: IK Chain004
-    400100: IK Chain005
-    400102: IK Chain006
-    400104: IK Chain007
-    400106: IK Chain008
-    400108: IK Chain009
-    400110: IK Chain010
-    400112: IK Chain011
-    400114: Monster_Body
-    400116: //RootNode
+    400092: Monster_Body
+    400094: //RootNode
     4300000: Monster_Body
     4300002: Eye_001
     4300004: Eye_002
-    7400000: Octo_Walking
-    7400002: Octo_Fighting
+    7400000: Octo_Fighting
+    7400002: Octo_Walking
     9500000: //RootNode
     13700000: Eye_001
     13700002: Eye_002
@@ -153,7 +131,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Octo_Walking
+      name: Octo_Fighting
       takeName: Take 001
       firstFrame: 0
       lastFrame: 75
@@ -270,34 +248,12 @@ ModelImporter:
         weight: 1
       - path: Eye_002
         weight: 1
-      - path: IK Chain001
-        weight: 1
-      - path: IK Chain002
-        weight: 1
-      - path: IK Chain003
-        weight: 1
-      - path: IK Chain004
-        weight: 1
-      - path: IK Chain005
-        weight: 1
-      - path: IK Chain006
-        weight: 1
-      - path: IK Chain007
-        weight: 1
-      - path: IK Chain008
-        weight: 1
-      - path: IK Chain009
-        weight: 1
-      - path: IK Chain010
-        weight: 1
-      - path: IK Chain011
-        weight: 1
       - path: Monster_Body
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Octo_Fighting
+      name: Octo_Walking
       takeName: Take 001
       firstFrame: 76
       lastFrame: 150
@@ -413,28 +369,6 @@ ModelImporter:
       - path: Eye_001
         weight: 1
       - path: Eye_002
-        weight: 1
-      - path: IK Chain001
-        weight: 1
-      - path: IK Chain002
-        weight: 1
-      - path: IK Chain003
-        weight: 1
-      - path: IK Chain004
-        weight: 1
-      - path: IK Chain005
-        weight: 1
-      - path: IK Chain006
-        weight: 1
-      - path: IK Chain007
-        weight: 1
-      - path: IK Chain008
-        weight: 1
-      - path: IK Chain009
-        weight: 1
-      - path: IK Chain010
-        weight: 1
-      - path: IK Chain011
         weight: 1
       - path: Monster_Body
         weight: 1
