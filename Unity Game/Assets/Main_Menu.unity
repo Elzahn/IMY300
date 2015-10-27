@@ -989,7 +989,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 27.2000008, y: -34.4500008}
+  m_AnchoredPosition: {x: 27, y: -34.4500008}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &87962211
@@ -7687,7 +7687,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1016704707}
   m_Direction: 2
   m_Value: 0
-  m_Size: .999912083
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9954,8 +9954,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1394417034}
   m_HandleRect: {fileID: 1394417033}
   m_Direction: 2
-  m_Value: 1
-  m_Size: .999966621
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -16471,8 +16471,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1974743344}
   m_HandleRect: {fileID: 1974743343}
   m_Direction: 2
-  m_Value: 0
-  m_Size: .999996722
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -18024,8 +18024,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1924841575}
   m_HandleRect: {fileID: 1924841574}
   m_Direction: 2
-  m_Value: 0
-  m_Size: .999962687
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -18643,10 +18643,12 @@ MonoBehaviour:
     fallActive: 0
     warpUnlock: 0
     warpActive: 0
-    bonusObjs: 
-    shipPieces: 0
     inventoryShipPieces: 000000000000
-    monstersKilled: 0
+    bonusObjs: 
+    bonusObjsShown: 00000000
+    shipPieces: 0
+    deadEnemiesOnLevel: 0
+    deadEnemies: 0
   MAX_STORAGE: 50
   butterKnife: {fileID: 138658, guid: a8676a291d9118f4886cfda8646bb8cb, type: 2}
   longSword: {fileID: 183908, guid: df8da167f41aded4a97ebf2ce86fba95, type: 2}
@@ -18758,7 +18760,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -16, y: -.00918197632}
+  m_AnchoredPosition: {x: -16, y: .00659561157}
   m_SizeDelta: {x: 500, y: 180}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1143866219
@@ -24103,7 +24105,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -16, y: -.00856781006}
+  m_AnchoredPosition: {x: -16, y: .00826263428}
   m_SizeDelta: {x: 350, y: 180}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1551044914
@@ -24190,7 +24192,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -16, y: -.0110321045}
+  m_AnchoredPosition: {x: -16, y: .00103759766}
   m_SizeDelta: {x: 350, y: 180}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1570986645
@@ -30911,7 +30913,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2092789480}
   m_Direction: 2
   m_Value: 0
-  m_Size: .999992907
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
