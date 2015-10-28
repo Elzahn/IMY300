@@ -879,13 +879,15 @@ public class PlayerAttributes : MonoBehaviour {
 
 	/** Returns true if dead */
 	public bool loseHP(int loss) {
-		if (Application.loadedLevelName == "Tutorial") {
-			hp -= loss/2;
-		} else {
-			hp -= loss;
-		}
+		if(Application.loadedLevelName != "SaveSpot"){
+			if (Application.loadedLevelName == "Tutorial") {
+				hp -= loss/2;
+			} else {
+				hp -= loss;
+			}
 
-		showHealthAltered("injured");
+			showHealthAltered("injured");
+		}
 		return isDead ();
 	}
 	

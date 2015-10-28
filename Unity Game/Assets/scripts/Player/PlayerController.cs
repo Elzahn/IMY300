@@ -347,7 +347,7 @@ public class PlayerController : MonoBehaviour
 
 				if (Input.GetButton ("Run") && playerAttributes.stamina > 0 &&
 				    (Input.GetAxisRaw ("Horizontal") != 0 || Input.GetAxisRaw ("Vertical") != 0)) {//&& Application.loadedLevelName != "SaveSpot" 
-					if (GameObject.Find ("Stamina").GetComponent<Image> ().isActiveAndEnabled == false) {
+					if (GameObject.Find ("Stamina").GetComponent<Image> ().isActiveAndEnabled == false && Application.loadedLevelName != "SaveSpot") {
 						GameObject.Find ("Stamina").GetComponent<Image> ().enabled = true;
 					}
 					run = true;
