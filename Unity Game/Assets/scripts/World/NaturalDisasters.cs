@@ -217,7 +217,7 @@ public class NaturalDisasters : MonoBehaviour {
 
 										GameObject temp = null;
 
-										if (objectsToBeMoved [index].name == "Cylinder001" || objectsToBeMoved [index].name == "Box012" || objectsToBeMoved [index].name == "Sphere001") {
+										if (objectsToBeMoved [index].name == "Cylinder001" || objectsToBeMoved [index].name == "Box012" || objectsToBeMoved [index].name == "Sphere001" ||objectsToBeMoved[index].name == "Plant_Pot") {
 											temp = objectsToBeMoved [index].transform.parent.gameObject;
 										} else {
 											temp = objectsToBeMoved [index].gameObject;
@@ -241,6 +241,8 @@ public class NaturalDisasters : MonoBehaviour {
 									for (int i = 0; i < enemiesToBeMoved.Length/2; i++) {
 										moveDirection = Random.Range (1, 21);	
 										enemiesToBeMoved [index].transform.position = new Vector3 (moveDirection, enemiesToBeMoved [index].transform.position.y, moveDirection);
+										enemiesToBeMoved [index].GetComponentInParent<PositionMe>().checkMyPosition = true;
+									enemiesToBeMoved [index].GetComponentInParent<PositionMe>().touching = false;
 										index++;
 									}
 								

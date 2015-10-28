@@ -446,7 +446,16 @@ public class PlayerController : MonoBehaviour
 
 	public void restart(){
 		GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Dead", false);
-		Application.LoadLevel("Scene");
+
+		if(Application.loadedLevelName == "Scene"){
+			Application.LoadLevel("Scene");
+		} else if(Application.loadedLevelName == "Tutorial"){
+			Application.LoadLevel("Tutorial");
+			playerAttributes.weapon = null;
+		} else {
+			Application.LoadLevel("SaveSpot");
+		}
+
 		paused = false;
 		playerAttributes.restoreHealthToFull();
 		playerAttributes.restoreStaminaToFull();
