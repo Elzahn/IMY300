@@ -149,7 +149,7 @@ public abstract class Enemy : MonoBehaviour {
 	//public int xpGain { get; protected set;}
 	public string typeID {get; protected set;}
 
-	private bool minibossDead = false;
+	private static bool minibossDead = false;
 
 	public bool isDead() {
 		if (hp <= 0 && typeID == "BossAlien" && !minibossDead) {

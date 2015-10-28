@@ -114,14 +114,19 @@ public class Loot : MonoBehaviour {
 			gotPowerCore = true;
 			GameObject.Find ("Player").GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 		} else if (item.typeID == "Back Engine") {
+			GameObject.Find ("Player").GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 			gotBackEngine = true;
 		} else if (item.typeID == "TailFin") {
+			GameObject.Find ("Player").GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 			gotTailFin = true;
 		} else if (item.typeID == "Left Wing") {
+			GameObject.Find ("Player").GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 			gotLeftWing = true;
 		} else if (item.typeID == "Landing Gear") {
+			GameObject.Find ("Player").GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 			gotLandingGear = true;
 		} else if (item.typeID == "Flight Control") {
+			GameObject.Find ("Player").GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 			gotFlightControl = true;
 		}
 		//print (myLoot.Count () + " " + item);

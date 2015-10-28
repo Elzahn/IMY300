@@ -195,7 +195,7 @@ public class EnemySpawner : MonoBehaviour {
 							
 
 						}
-						GameObject.Find("Player").GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
+					//	GameObject.Find("Player").GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
 					}
 					dropLoot(enemy, rigidbody.position);
 					
