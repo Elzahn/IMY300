@@ -399,7 +399,10 @@ public class EnemySpawner : MonoBehaviour {
 		}
 		
 		if (enemy.typeID == "BossAlien") {
-			tempLoot.AddLast(bossLoot.First());
+
+			GameObject.Find("Player").GetComponent<PlayerAttributes>().addToInventory(bossLoot.First());
+			/*tempLoot.AddLast(bossLoot.First());
+			lootCount++;*/
 			bossLoot.RemoveFirst();
 		}
 
