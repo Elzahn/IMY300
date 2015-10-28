@@ -155,6 +155,7 @@ public abstract class Enemy : MonoBehaviour {
 			minibossDead = true;
 			GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked = true;
 			GameObject.Find("Player").GetComponent<FallThroughPlanet>().canFallThroughPlanet = true;
+			GameObject.Find("Player").GetComponent<PlayerAttributes>().fallFirst = true;
 		}
 
 		if(hp <= 0){

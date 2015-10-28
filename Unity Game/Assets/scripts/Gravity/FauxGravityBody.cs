@@ -17,7 +17,7 @@ public class FauxGravityBody : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Application.loadedLevelName == "Scene" && Application.loadedLevelName != "Tutorial") {
+		if (Application.loadedLevelName == "Scene" || Application.loadedLevelName == "Tutorial") {
 			attractor = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
 			this.GetComponent<Rigidbody>().useGravity = false;
 			attractor.attract (myTransform);

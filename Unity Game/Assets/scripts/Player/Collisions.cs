@@ -130,6 +130,8 @@ public class Collisions : MonoBehaviour {
 				totalPieces++;
 				Loot.gotTailFin = false;
 			}
+
+			this.GetComponent<Sounds>().playWorldSound(Sounds.POWER_ON);
 		}
 
 		if (!playerAttributesScript.inventoryFull () && showLootConfirmation) {
@@ -144,7 +146,7 @@ public class Collisions : MonoBehaviour {
 			Hud.makeInteractionHint ("Inventory full", this.GetComponent<SaveSpotTeleport>().noEntry);
 		}
 
-		if (showLootConfirmation && Input.GetButtonDown ("Interact")) {
+		if (showLootConfirmation && Input.GetButtonDown ("Interact") && !InventoryGUI.showInventory) {
 			colObj.GetComponent<Loot> ().showMyLoot ();
 		} else if (showHealthConfirmation && Input.GetButtonDown ("Interact") && colObj.tag == "MediumHealthPack") {
 			if (playerAttributesScript.inventory.Count < playerAttributesScript.inventorySize) {

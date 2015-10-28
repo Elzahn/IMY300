@@ -17,6 +17,22 @@ public class MenuScript : MonoBehaviour {
 
 	private static int soundSet;
 
+	void unequipWeapon(){
+		if(attributesScript.weapon != null){
+			GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Weapon", false);
+			
+			if(attributesScript.weapon.typeID == "ButterKnife"){
+				Destroy(GameObject.Find("ButterKnife(Clone)"));
+			} else if(attributesScript.weapon.typeID == "Longsword"){
+				Destroy(GameObject.Find("LongSword(Clone)"));
+			} else if(attributesScript.weapon.typeID == "Warhammer"){
+				Destroy(GameObject.Find("WarHammer(Clone)"));
+			} else if(attributesScript.weapon.typeID == "BonusWeapon"){
+				Destroy(GameObject.Find("LongSword(Clone)"));
+			}
+		}
+	}
+
 	void Start(){
 		player = GameObject.Find ("Player");
 		attributesScript = player.GetComponent<PlayerAttributes> ();
@@ -29,8 +45,10 @@ public class MenuScript : MonoBehaviour {
 		player.transform.LookAt(GameObject.Find("Notice board").transform.position);
 		player.transform.rotation = Quaternion.Euler (0f, 171.5833f, 0f);
 		player.transform.position = new Vector3 (-375.12f, 101.75f, 395.33f);
-	
+
 		soundSet++;
+
+		unequipWeapon();
 
 		if(soundSet == 29){
 			//1 = show; 0 = hide
@@ -260,6 +278,8 @@ public class MenuScript : MonoBehaviour {
 		//player.transform.up = Vector3.up;//perhaps make forward?
 		//player.transform.rotation = Quaternion.Euler (0f, 171.5833f, 0f);
 		//player.transform.position = new Vector3 (-375.12f, 101.75f, 395.33f);
+		GameObject.Find("Interaction").GetComponent<Image>().fillAmount = 0;
+		GameObject.Find("Hint").GetComponent<Image>().fillAmount = 0;
 		player.GetComponent<FauxGravityBody> ().attractor = null;
 		player.GetComponent<Rigidbody> ().useGravity = true;
 		player.GetComponent<Sounds> ().stopSound ("all");

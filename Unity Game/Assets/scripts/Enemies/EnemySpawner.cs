@@ -118,7 +118,7 @@ public class EnemySpawner : MonoBehaviour {
 		bool done = true;
 
 		for (int i = 0; i < 3; i++) {
-			if (amountEnemiesLanded () >= (ENEM_COUNT-3) && done == true) {
+			if (amountEnemiesLanded () >= (ENEM_COUNT/2) && done == true) {
 				done = true;
 			} else {
 				done = false;

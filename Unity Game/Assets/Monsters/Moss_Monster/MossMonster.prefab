@@ -454,6 +454,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &173552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 467342}
+  - 65: {fileID: 6551382}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Monster
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &186058
 GameObject:
   m_ObjectHideFlags: 1
@@ -716,6 +732,18 @@ Transform:
   - {fileID: 438458}
   m_Father: {fileID: 470994}
   m_RootOrder: 5
+--- !u!4 &467342
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 173552}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 470994}
+  m_RootOrder: 11
 --- !u!4 &470994
 Transform:
   m_ObjectHideFlags: 1
@@ -723,7 +751,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140340}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40.9097519, y: -51.83461, z: -42.7361984}
+  m_LocalPosition: {x: 51.2566566, y: 64.0953369, z: 7.28627205}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22470432}
@@ -737,6 +765,7 @@ Transform:
   - {fileID: 441002}
   - {fileID: 431412}
   - {fileID: 430744}
+  - {fileID: 467342}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &471760
@@ -906,10 +935,22 @@ BoxCollider:
   m_GameObject: {fileID: 118306}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.99000001, y: 3.58403611, z: 2.51870251}
   m_Center: {x: -.00999999978, y: .209999993, z: .0421118736}
+--- !u!65 &6551382
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 173552}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.50999999, y: 2.72000003, z: 1}
+  m_Center: {x: 0, y: 1.40999997, z: 0}
 --- !u!95 &9525000
 Animator:
   serializedVersion: 3
