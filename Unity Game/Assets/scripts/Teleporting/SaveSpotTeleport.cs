@@ -209,27 +209,27 @@ public class SaveSpotTeleport : MonoBehaviour {
 			if(attributesComponent.weapon.typeID == "ButterKnife"){
 				weaponPrefab = Instantiate(attributesComponent.butterKnife);
 				weaponPrefab.transform.SetParent(GameObject.Find("mixamorig:RightHandMiddle1").transform);
-				weaponPrefab.transform.localScale = new Vector3(10f, 10f, 10f);
-				weaponPrefab.transform.localPosition = new Vector3(4.41f, 0.88f, 0.89f);
-				weaponPrefab.transform.localRotation = Quaternion.Euler(-5.995584e-05f, 269.7404f, -8.875294e-05f);
+				weaponPrefab.transform.localScale = new Vector3(10f, 10f, 7);
+				weaponPrefab.transform.localPosition = new Vector3(3.4f, 1.11f, 1.02f);
+				weaponPrefab.transform.localRotation = Quaternion.Euler(5.536556f, 265.9102f, 359.8019f);
 			} else if(attributesComponent.weapon.typeID == "Longsword"){
 				weaponPrefab = Instantiate(attributesComponent.longSword);
 				weaponPrefab.transform.SetParent(GameObject.Find("mixamorig:RightHandMiddle1").transform);
-				weaponPrefab.transform.localScale = new Vector3(10f, 10f, 10f);
-				weaponPrefab.transform.localPosition = new Vector3(0.9403288f, 2.439571f, 1.70944f);
-				weaponPrefab.transform.localRotation = Quaternion.Euler(22.40055f, 252.2171f, 290.2153f);
+				weaponPrefab.transform.localScale = new Vector3(10f, 10f, 20f);
+				weaponPrefab.transform.localPosition = new Vector3(4.81f, 1.22f, 1.77f);
+				weaponPrefab.transform.localRotation = Quaternion.Euler(2.872368f, 264.6271f, 359.299f);
 			} else if(attributesComponent.weapon.typeID == "Warhammer"){
 				weaponPrefab = Instantiate(attributesComponent.warHammer);
 				weaponPrefab.transform.SetParent(GameObject.Find("mixamorig:RightHandMiddle1").transform);
-				weaponPrefab.transform.localScale = new Vector3(10f, 10f, 10f);
-				weaponPrefab.transform.localPosition = new Vector3(4.41f, 0.88f, 0.89f);
-				weaponPrefab.transform.localRotation = Quaternion.Euler(-5.995584e-05f, 269.7404f, -8.875294e-05f);
+				weaponPrefab.transform.localScale = new Vector3(15, 15, 20);
+				weaponPrefab.transform.localPosition = new Vector3(4.149894f, 3.779963f, 3.159975f);
+				weaponPrefab.transform.localRotation = Quaternion.Euler(24.22492f, 252.6553f, 311.9116f);
 			} else if(attributesComponent.weapon.typeID == "BonusWeapon"){
 				weaponPrefab = Instantiate(attributesComponent.longSword);
 				weaponPrefab.transform.SetParent(GameObject.Find("mixamorig:RightHandMiddle1").transform);
-				weaponPrefab.transform.localScale = new Vector3(10f, 10f, 10f);
-				weaponPrefab.transform.localPosition = new Vector3(4.41f, 0.88f, 0.89f);
-				weaponPrefab.transform.localRotation = Quaternion.Euler(-5.995584e-05f, 269.7404f, -8.875294e-05f);
+				weaponPrefab.transform.localScale = new Vector3(10f, 10f, 20f);
+				weaponPrefab.transform.localPosition = new Vector3(4.81f, 1.22f, 1.77f);
+				weaponPrefab.transform.localRotation = Quaternion.Euler(2.872368f, 264.6271f, 359.299f);
 			}
 		}
 	}
@@ -237,7 +237,8 @@ public class SaveSpotTeleport : MonoBehaviour {
 	void unequipWeapon(){
 		if(attributesComponent.weapon != null){
 			GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Weapon", false);
-
+			
+			print (attributesComponent.weapon.typeID);
 			if(attributesComponent.weapon.typeID == "ButterKnife"){
 				Destroy(GameObject.Find("ButterKnife(Clone)"));
 			} else if(attributesComponent.weapon.typeID == "Longsword"){
