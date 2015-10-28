@@ -274,6 +274,7 @@ public class MenuScript : MonoBehaviour {
 
 	public void quitToMenu(){
 		Application.LoadLevel("Main_Menu");
+
 		ResumeGame ();
 		//player.transform.up = Vector3.up;//perhaps make forward?
 		//player.transform.rotation = Quaternion.Euler (0f, 171.5833f, 0f);
@@ -285,6 +286,7 @@ public class MenuScript : MonoBehaviour {
 		player.GetComponent<Sounds> ().stopSound ("all");
 		player.GetComponent<Sounds> ().playAmbienceSound (Sounds.SHIP_AMBIENCE);
 		player.GetComponent<Tutorial> ().stopTutorial ();
+		player.GetComponent<PlayerAttributes>().myAttributes = new PlayerAttributes.AttributeContainer();
 	}
 
 	public void ResumeGame(){

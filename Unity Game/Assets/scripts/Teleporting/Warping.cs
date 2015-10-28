@@ -22,7 +22,7 @@ public class Warping : MonoBehaviour {
 	void Start () {
 		temp = false;
 		col = null;
-		delay = 10;
+		delay = 20;
 		waitingForMovement = false;
 		chooseDestinationUnlocked = false;	//unlocks at level 6
 		chooseDestination = true;
