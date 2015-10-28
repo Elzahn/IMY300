@@ -787,7 +787,7 @@ public class PlayerAttributes : MonoBehaviour {
 
 	public void addToInventory(InventoryItem a) {
 		if (!inventory.Contains(a)) {
-			if (!inventoryFull()) {			
+			if (!inventoryFull() || a.type == 3) {			
 				inventory.AddLast (a);
 			} else {
 				throw new RulesException ("Inventory Full. Drop something else first");
