@@ -6,7 +6,7 @@ public class NaturalDisasters : MonoBehaviour {
 	private bool earthquakeNow = false;
 	private bool spinNow = false;
 	private PlayerController playerScript;
-	private float nextDisaster, delay = 120, shakeAmount, dizzyWearOfNext, dizzyDelay = 10;	//decreaseFactor
+	private float nextDisaster, delay = 30, shakeAmount, dizzyWearOfNext, dizzyDelay = 10;	//decreaseFactor
 	public static float shake, spin;	//how long the shake/spin lasts
 	private Transform cameraTransform;
 	private Vector3 originalCamPos;
