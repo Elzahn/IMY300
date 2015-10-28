@@ -52,7 +52,7 @@ public class ClayAlien : Enemy {
 			Vector3 myPos = GetComponent<Rigidbody> ().position;
 
 			float distance = Vector3.Distance (PlayerPos, myPos);
-			if (distance < 6 || suspicion >= 10) {
+			if (distance < 10 || suspicion >= 10) {
 				//player.GetComponent<Sounds>().playMonsterSound (1, this);
 				if (!onPlayer) {//distance < 10 && 
 					Vector3 direction = PlayerPos - myPos;
@@ -90,6 +90,7 @@ public class ClayAlien : Enemy {
 				}
 				
 				if (Vector3.Distance (PlayerPos, myPos) < viewdist / 2) {
+					attackPlayer = true;
 					if(!seekingRevenge){
 						followPlayer();
 						animator.SetBool("Attacking", false);

@@ -161,7 +161,7 @@ public class PlayerAttributes : MonoBehaviour {
 	const float DIZZY_HC_REDUCE = 0.3f;
 
 	const float RUN_STAMINA_DRAIN = 1;
-	const float REGEN_HP = 0.1f;
+	const float REGEN_HP = 0.05f;
 	const float REGEN_STAMINA = 0.1f;
 	const float REGEN_ATTACK_DELAY = 3;	
 	const float REGEN_INTERVAL = 6;
@@ -297,6 +297,9 @@ public class PlayerAttributes : MonoBehaviour {
 			return myAttributes.hp;
 		}
 		private set {
+			if (value > maxHP())
+				myAttributes.hp = maxHP();
+			else
 			myAttributes.hp = value;
 		}
 	}

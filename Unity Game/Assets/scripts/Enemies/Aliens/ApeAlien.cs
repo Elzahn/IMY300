@@ -49,7 +49,7 @@ public class ApeAlien : Enemy {
 			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
 			Vector3 myPos = GetComponent<Rigidbody> ().position;
 			
-			var viewdist = 18;
+			var viewdist = 22;
 			var dark = LightRotation.getDark(this.gameObject);
 			if (dark == "dark") {
 				viewdist -= 8;

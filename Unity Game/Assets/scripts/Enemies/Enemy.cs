@@ -81,7 +81,8 @@ public abstract class Enemy : MonoBehaviour {
 					}
 				}
 
-				if (Vector3.Distance (PlayerPos, myPos) < 6) {
+				if (Vector3.Distance (PlayerPos, myPos) < 8) {
+					attackPlayer = true;
 					if(!seekingRevenge){
 						followPlayer();
 					} else {

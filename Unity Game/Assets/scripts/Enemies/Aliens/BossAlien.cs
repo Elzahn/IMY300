@@ -43,7 +43,7 @@ public class BossAlien : Enemy {
 			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
 			Vector3 myPos = GetComponent<Rigidbody> ().position;
 			
-			if (Vector3.Distance (PlayerPos, myPos) < 12) {
+			if (Vector3.Distance (PlayerPos, myPos) < 16) {
 				
 				if(GameObject.Find("Player").GetComponent<PlayerController>().moving){
 					if(suspicion < SUSPICION_ALERT){

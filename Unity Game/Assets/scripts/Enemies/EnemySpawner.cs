@@ -161,8 +161,11 @@ public class EnemySpawner : MonoBehaviour {
 				enemy.seekOutPlayer();
 			}
 		}
-		foreach (GameObject go in enemies.ToList()) {			
+		foreach (GameObject go in GameObject.FindGameObjectsWithTag("Monster").ToList()) {		
+
 			Enemy enemy = go.GetComponent<Enemy>();	
+			if (enemy == null)
+				continue;
 
 			Rigidbody rigidbody = go.GetComponent<Rigidbody> ();
 
