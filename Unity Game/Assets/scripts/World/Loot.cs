@@ -96,6 +96,39 @@ public class Loot : MonoBehaviour {
 		takeIt (this.transform.parent.parent.GetComponent<PlaceInList> ().myItem);
 	}
 
+	public void dropLootItem(){
+		dropIt (this.transform.parent.parent.GetComponent<PlaceInList> ().myItem);
+	}
+
+	public void dropIt(InventoryItem item){
+		myLoot.Remove (item);
+		GameObject.Find("LootScroll").GetComponent<LootScrollList>().gatherLoot(myName, myLoot);
+
+		if (myLoot.Count == 0) {
+			
+			loot.enabled = false;
+			GameObject.Find("Hint").GetComponent<Image>().enabled = true;
+			GameObject.Find("Hint_Image").GetComponent<Image>().enabled = true;
+			GameObject.Find("Hint_Text").GetComponent<Text>().enabled = true;
+			GameObject.Find("Hint_Image").GetComponent<Image>().enabled = true;
+			GameObject.Find("Interaction").GetComponent<Image>().enabled = true;
+			GameObject.Find("Interaction_Image").GetComponent<Image>().enabled = true;
+			GameObject.Find("Interaction_Text").GetComponent<Text>().enabled = true;
+			GameObject.Find("Player").GetComponent<Collisions>().setLootConf();
+			playerScript.paused = false;
+			InventoryGUI.HUDshows = false;
+			Destroy(lootToDelete);
+		}
+	}
+
+	public void dropAll(){
+		foreach (InventoryItem item in myLoot.ToList()) {
+			if(item.type != 3){
+				dropIt(item);
+			}
+		}
+	}
+
 	public void takeAll(){
 		foreach (InventoryItem item in myLoot.ToList()) {
 			if(!attributesScript.inventoryFull()){
