@@ -165,36 +165,41 @@ public class EnemySpawner : MonoBehaviour {
 			Enemy enemy = go.GetComponent<Enemy>();	
 
 			Rigidbody rigidbody = go.GetComponent<Rigidbody> ();
+
 			if (enemy.isDead()) {
-				bonusObjectives.deadEnemies++;
-				bonusObjectives.deadEnemiesOnLevel++;
-				if(enemy.typeID == "BossAlien")
-				{
+				try {
+					bonusObjectives.deadEnemies++;
+					bonusObjectives.deadEnemiesOnLevel++;
+					if(enemy.typeID == "BossAlien")
+					{
 
-					if(GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked && GameObject.Find("Player").GetComponent<PlayerAttributes>().fallFirst){
+						if(GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked && GameObject.Find("Player").GetComponent<PlayerAttributes>().fallFirst){
 
-						GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_FALL);
-						if(GameObject.Find("Player").GetComponent<Sounds>().computerAudio.isPlaying){
-							GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallNow();
-							GameObject.Find("Player").GetComponent<PlayerAttributes>().fallFirst = false;
-							Camera.main.GetComponent<HUD>().setLight("fall");
-							GameObject.Find("Player").GetComponent<Tutorial>().makeHint("You can use this ability by pressing F. It has a 10s cool down time.", GameObject.Find("Player").GetComponent<Tutorial>().Warp);
+							GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_FALL);
+							if(GameObject.Find("Player").GetComponent<Sounds>().computerAudio.isPlaying){
+								GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallNow();
+								GameObject.Find("Player").GetComponent<PlayerAttributes>().fallFirst = false;
+								Camera.main.GetComponent<HUD>().setLight("fall");
+								GameObject.Find("Player").GetComponent<Tutorial>().makeHint("You can use this ability by pressing F. It has a 10s cool down time.", GameObject.Find("Player").GetComponent<Tutorial>().Warp);
+							}
+
+							GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked = true;
+
+							hudText.text = "What does this button do? I probably shouldn’t, oh well whatever I’ll press it anyway. Oh shit! You seem to have fallen through the planet. That could be useful. \n\n";
+							Canvas.ForceUpdateCanvases();
+							Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
+							scrollbar.value = 0f;
+							
+
 						}
-
-						GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked = true;
-
-						hudText.text = "What does this button do? I probably shouldn’t, oh well whatever I’ll press it anyway. Oh shit! You seem to have fallen through the planet. That could be useful. \n\n";
-						Canvas.ForceUpdateCanvases();
-						Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
-						scrollbar.value = 0f;
-						
-
+						GameObject.Find("Player").GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
 					}
-					GameObject.Find("Player").GetComponent<SaveSpotTeleport>().canEnterSaveSpot = true;
+					dropLoot(enemy, rigidbody.position);
+					
+				} finally {
+						enemies.Remove(go);						
+						Destroy(go);
 				}
-				dropLoot(enemy, rigidbody.position);
-				enemies.Remove(go);
-				Destroy(go);
 			}
 		}
 		hasEnemiesLanded ();
