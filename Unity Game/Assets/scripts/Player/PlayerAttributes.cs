@@ -308,7 +308,7 @@ public class PlayerAttributes : MonoBehaviour {
 		get {
 			return myAttributes.level;
 		}
-		private set {
+		set {
 			myAttributes.level = value;
 		}
 	}
@@ -900,7 +900,7 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 	
 	public bool isDead() {
-		if(hp <=0){
+		if(hp <=0 && !animatorComponent.GetBool("Dead")){
 			soundComponent.playDeathSound(Sounds.DEAD_PLAYER);
 			animatorComponent.SetBool("Dead", true);
 		}

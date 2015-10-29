@@ -150,7 +150,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 				this.GetComponent<Rigidbody> ().isKinematic = true;
 				//this.transform.rotation = Quaternion.Euler(0f, -95.3399f, 0f);
 				//this.transform.position = new Vector3 (-1.651f, 80.82f, 0.84f);
-
+				sound.stopAlarmSound(Sounds.DISASTER_ALARM);
 				Application.LoadLevel ("Scene");
 				reEquipWeapon();
 				Resources.UnloadUnusedAssets ();

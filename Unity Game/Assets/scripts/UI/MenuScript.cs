@@ -223,9 +223,8 @@ public class MenuScript : MonoBehaviour {
 			GameObject.Find("MainMenu").transform.FindChild("MenuMask").FindChild("Save").GetComponent<Button>().interactable = true;
 			GameObject.Find("MainMenu").transform.FindChild("MenuMask").FindChild("Save").FindChild("Hover").GetComponent<Button>().interactable = true;
 		}
-
 		
-		GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Dead", false);
+		//GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Dead", false);
 	}
 
 	public void hovering(){
@@ -289,13 +288,15 @@ public class MenuScript : MonoBehaviour {
 		player.GetComponent<Sounds> ().stopSound ("all");
 		player.GetComponent<Sounds> ().playAmbienceSound (Sounds.SHIP_AMBIENCE);
 		player.GetComponent<Tutorial> ().stopTutorial ();
-		player.GetComponent<PlayerAttributes>().myAttributes = new PlayerAttributes.AttributeContainer();
+
+		//player.GetComponent<PlayerAttributes>().myAttributes = new PlayerAttributes.AttributeContainer();
 		GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Dead", false);
 		GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Weapon", false);
 		player.GetComponent<PlayerAttributes> ().weapon = null;
 		player.GetComponent<PlayerAttributes> ().accessories.Clear ();
 		player.GetComponent<PlayerAttributes> ().inventory.Clear ();
 		player.GetComponent<PlayerAttributes> ().storage.Clear ();
+		player.GetComponent<PlayerAttributes> ().resetPlayer ();
 	}
 
 	public void ResumeGame(){
