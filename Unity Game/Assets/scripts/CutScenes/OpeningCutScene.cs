@@ -49,4 +49,5 @@ public class OpeningCutScene : MonoBehaviour {
 			player.GetComponent<LevelSelect> ().spawnedLevel = false;
 		}
 	}
+
 }
