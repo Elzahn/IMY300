@@ -175,7 +175,7 @@ public class EnemySpawner : MonoBehaviour {
 					bonusObjectives.deadEnemiesOnLevel++;
 					if(enemy.typeID == "BossAlien")
 					{
-						hudText.text = "You found a spaceship part! \n";
+						//hudText.text = "You found a spaceship part! \n";
 						if(GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked && GameObject.Find("Player").GetComponent<PlayerAttributes>().fallFirst){
 
 							GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_FALL);
@@ -188,7 +188,7 @@ public class EnemySpawner : MonoBehaviour {
 
 							GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked = true;
 
-							hudText.text += "What does this button do? I probably shouldn’t, oh well whatever I’ll press it anyway. Oh shit! You seem to have fallen through the planet. That could be useful. \n\n";
+							hudText.text += "What does this button do? I probably shouldn’t, oh well whatever I’ll press it anyway. You seem to have fallen through the planet. That could be useful. \n\n";
 							Canvas.ForceUpdateCanvases();
 							Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
 							scrollbar.value = 0f;

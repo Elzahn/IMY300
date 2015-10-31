@@ -20,7 +20,7 @@ public class NaturalDisasters : MonoBehaviour {
 	private Animator animator;
 
 	public bool isShaking(){
-		if (shake > 0) {
+		if (shake >= 0) {
 			return true;
 		} else {
 			return false;
@@ -69,7 +69,7 @@ public class NaturalDisasters : MonoBehaviour {
 				shake = -1;
 				playerScript.paused = false;
 			} else if(Time.time >= tutorialShake){
-				shake -= 1;
+				shake = -1;
 				playerScript.paused = false;
 			//	soundScript.playAmbienceSound(Sounds.TUTORIAL_AMBIENCE);
 			}
@@ -136,7 +136,6 @@ public class NaturalDisasters : MonoBehaviour {
 							if (earthquakeNow || chance <= prob/2) {	//Earthquake
 								earthQuakeHappening = true;
 
-								if(Application.loadedLevelName != "Tutorial"){
 									if(stopAlarm == 0){
 										stopAlarm = Time.time + 3;
 										soundScript.playAlarmSound (Sounds.DISASTER_ALARM);
@@ -147,7 +146,6 @@ public class NaturalDisasters : MonoBehaviour {
 										soundScript.stopAlarmSound(Sounds.DISASTER_ALARM);
 										stopAlarm = 0f;
 									}
-								}
 
 								if(!soundScript.alarmAudio.isPlaying){
 									earthQuakeHappening = false;
@@ -184,7 +182,6 @@ public class NaturalDisasters : MonoBehaviour {
 							} else if (spinNow || chance > prob/2) {	//Spin
 								spinHappening = true;
 
-								if(Application.loadedLevelName != "Tutorial"){
 									if(stopAlarm == 0){
 										stopAlarm = Time.time + 3;
 										soundScript.playAlarmSound (Sounds.DISASTER_ALARM);
@@ -195,7 +192,7 @@ public class NaturalDisasters : MonoBehaviour {
 										soundScript.stopAlarmSound(Sounds.DISASTER_ALARM);
 										stopAlarm = 0f;
 									}
-								}
+								
 								
 								if(!soundScript.alarmAudio.isPlaying){
 									spinHappening = false;

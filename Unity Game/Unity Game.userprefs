@@ -2,35 +2,27 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\World\NaturalDisasters.cs">
     <Files>
-      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="499" Column="13" />
+      <File FileName="Assets\scripts\Player\BonusObjectives.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Teleporting\SaveSpotTeleport.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\UI\PopupScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Enemies\EnemySpawner.cs" Line="384" Column="6" />
+      <File FileName="Assets\scripts\Enemies\EnemySpawner.cs" Line="191" Column="112" />
       <File FileName="Assets\scripts\CutScenes\ClosingCutScene.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\CutScenes\OpeningCutScene.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\UI\MenuScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="454" Column="35" />
-      <File FileName="Assets\scripts\Player\BonusObjectives.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Gravity\FauxGravityBody.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\UI\InventoryGUI.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Enemies\Enemy.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Player\Tutorial.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\World\Loot.cs" Line="137" Column="123" />
-      <File FileName="Assets\scripts\World\NaturalDisasters.cs" Line="9" Column="40" />
+      <File FileName="Assets\scripts\Player\Tutorial.cs" Line="1" Column="11" />
+      <File FileName="Assets\scripts\World\Loot.cs" Line="40" Column="35" />
+      <File FileName="Assets\scripts\World\NaturalDisasters.cs" Line="21" Column="1" />
+      <File FileName="Assets\scripts\UI\PlaceInList.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Enemies\TutorialSpawner.cs" Line="145" Column="59" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="Assembly-CSharp" expanded="True">
-            <Node name="scripts" expanded="True">
-              <Node name="Enemies" expanded="True" />
-              <Node name="Player" expanded="True" />
-              <Node name="World" expanded="True">
-                <Node name="NaturalDisasters.cs" selected="True" />
-              </Node>
-            </Node>
-          </Node>
-        </State>
+        <State expanded="True" selected="True" />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

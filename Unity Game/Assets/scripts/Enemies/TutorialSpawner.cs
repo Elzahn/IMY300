@@ -23,11 +23,13 @@ public class TutorialSpawner : MonoBehaviour {
 	private bool monsterDead = false;
 	private int deadEnemies = 0;
 	private PlayerAttributes attributesScript;
+	private bool earthQuake;
 
 	LinkedList<GameObject> enemies = new LinkedList <GameObject> ();
 
 	// Use this for initialization
 	void Start () {
+		earthQuake = false;
 		attributesScript = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
 
 		bossPowerCore = new PowerCore ();
@@ -142,18 +144,22 @@ public class TutorialSpawner : MonoBehaviour {
 				} else {
 					deadEnemies++;
 					this.GetComponent<NaturalDisasters>().makeEarthQuakeHappen();
-					while(this.GetComponent<NaturalDisasters>().isShaking() == true){}
-					GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_DISASTERD);
-					hudText.text += "Oh fuck, that earthquake scattered some of the essential pieces of the spacecraft across the solar system.\n\n";
-					attributesScript.narrativeSoFar += "Oh fuck, that earthquake scattered some of the essential pieces of the spacecraft across the solar system.\n\n";
-					Canvas.ForceUpdateCanvases();
-					Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
-					scrollbar.value = 0f;
+					earthQuake = true;
 					addEnemy (boss, new Vector3(-0.04f, -15.52f, 0.15f));
 				}
 				enemies.Remove(monster);
 				Destroy(monster);
 			}
+		}
+
+		if(earthQuake && !this.GetComponent<NaturalDisasters>().isShaking()){
+			earthQuake = false;
+			GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_DISASTERD);
+			hudText.text += "That earthquake scattered some of the essential pieces of the spacecraft across the solar system.\n\n";
+			attributesScript.narrativeSoFar += "Oh fuck, that earthquake scattered some of the essential pieces of the spacecraft across the solar system.\n\n";
+			Canvas.ForceUpdateCanvases();
+			Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
+			scrollbar.value = 0f;
 		}
 	}
 }
