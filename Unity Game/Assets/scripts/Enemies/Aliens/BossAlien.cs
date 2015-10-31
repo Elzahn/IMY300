@@ -37,12 +37,21 @@ public class BossAlien : Enemy {
 
 	void Update () {
 		PlayerController playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
+
+
+
 		if (playerScript.paused == false && !Camera.main.GetComponent<CameraControl>().birdsEye) {
 			this.GetComponent<Animator>().speed = 1;
 			this.GetComponentInChildren<ParticleSystem>().enableEmission = false;
 			/* Called once per frame. AI comes Here */
 			GameObject player = GameObject.Find ("Player");
 			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
+
+			
+			/*Vector3 lookPos = PlayerPos - transform.position;
+			Quaternion rotation = Quaternion.LookRotation(lookPos);
+			transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 4000f);*/
+
 			Vector3 myPos = GetComponent<Rigidbody> ().position;
 			
 			if (Vector3.Distance (PlayerPos, myPos) < 16) {

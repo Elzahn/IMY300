@@ -86,12 +86,16 @@ public class TutorialSpawner : MonoBehaviour {
 		GameObject go = Instantiate(enemy);
 		go.GetComponent<FauxGravityBody>().attractor = this.GetComponent<FauxGravityAttractor>();
 		go.tag = "Monster";
+		
+		if(go.GetComponentInChildren<ParticleSystem>()){
+			go.GetComponentInChildren<ParticleSystem>().enableEmission = false;
+			go.GetComponentInChildren<ParticleSystem>().emissionRate = 0;
+		}
 
 		Enemy enemyComponent = go.GetComponent<Enemy>();
 		enemyComponent.level = 1;
 		enemyComponent.init();
 		enemies.AddLast(go);
-
 		go.transform.position = position;
 	}
 

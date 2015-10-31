@@ -1,34 +1,43 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\CutScenes\OpeningCutScene.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Enemies\Aliens\BossAlien.cs">
     <Files>
       <File FileName="Assets\scripts\Player\BonusObjectives.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="582" Column="64" />
       <File FileName="Assets\scripts\Teleporting\SaveSpotTeleport.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\UI\PopupScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Enemies\EnemySpawner.cs" Line="251" Column="44" />
+      <File FileName="Assets\scripts\Enemies\EnemySpawner.cs" Line="279" Column="71" />
       <File FileName="Assets\scripts\CutScenes\ClosingCutScene.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\CutScenes\OpeningCutScene.cs" Line="20" Column="115" />
-      <File FileName="Assets\scripts\UI\MenuScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="437" Column="69" />
+      <File FileName="Assets\scripts\UI\MenuScript.cs" Line="61" Column="12" />
+      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="312" Column="17" />
       <File FileName="Assets\scripts\Gravity\FauxGravityBody.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\UI\InventoryGUI.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Enemies\Enemy.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\Player\Tutorial.cs" Line="1" Column="16" />
+      <File FileName="Assets\scripts\Enemies\Enemy.cs" Line="59" Column="44" />
+      <File FileName="Assets\scripts\Player\Tutorial.cs" Line="196" Column="16" />
       <File FileName="Assets\scripts\World\Loot.cs" Line="40" Column="35" />
       <File FileName="Assets\scripts\World\NaturalDisasters.cs" Line="72" Column="14" />
       <File FileName="Assets\scripts\UI\PlaceInList.cs" Line="1" Column="1" />
       <File FileName="Assets\scripts\Enemies\TutorialSpawner.cs" Line="32" Column="22" />
+      <File FileName="Assets\scripts\Player\CameraControl.cs" Line="1" Column="1" />
+      <File FileName="Assets\scripts\Enemies\Aliens\ApeAlien.cs" Line="109" Column="7" />
+      <File FileName="Assets\scripts\Enemies\Aliens\BossAlien.cs" Line="41" Column="44" />
+      <File FileName="Assets\scripts\Enemies\Aliens\ClayAlien.cs" Line="135" Column="7" />
+      <File FileName="Assets\scripts\Enemies\Aliens\MossAlien.cs" Line="116" Column="7" />
+      <File FileName="Assets\scripts\Enemies\Aliens\OctoAlien.cs" Line="122" Column="7" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="scripts" expanded="True">
-              <Node name="CutScenes" expanded="True">
-                <Node name="OpeningCutScene.cs" selected="True" />
+              <Node name="Enemies" expanded="True">
+                <Node name="Aliens" expanded="True">
+                  <Node name="BossAlien.cs" selected="True" />
+                </Node>
               </Node>
               <Node name="Player" expanded="True" />
+              <Node name="UI" expanded="True" />
             </Node>
           </Node>
         </State>
