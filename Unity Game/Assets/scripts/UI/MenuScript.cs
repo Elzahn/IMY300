@@ -289,9 +289,11 @@ public class MenuScript : MonoBehaviour {
 		player.GetComponent<Sounds> ().playAmbienceSound (Sounds.SHIP_AMBIENCE);
 		player.GetComponent<Tutorial> ().stopTutorial ();
 
-		//player.GetComponent<PlayerAttributes>().myAttributes = new PlayerAttributes.AttributeContainer();
+
 		GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Dead", false);
 		GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Weapon", false);
+		player.GetComponent<PlayerAttributes>().myAttributes = new PlayerAttributes.AttributeContainer();
+		player.GetComponent<PlayerAttributes>().setStartAttributes();
 		player.GetComponent<PlayerAttributes> ().weapon = null;
 		player.GetComponent<PlayerAttributes> ().accessories.Clear ();
 		player.GetComponent<PlayerAttributes> ().inventory.Clear ();
