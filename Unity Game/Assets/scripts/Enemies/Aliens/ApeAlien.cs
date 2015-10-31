@@ -43,6 +43,8 @@ public class ApeAlien : Enemy {
 	void Update () {
 		PlayerController playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
 		if (playerScript.paused  == false && !Camera.main.GetComponent<CameraControl>().birdsEye) {
+			this.GetComponent<Animator>().speed = 1;
+			this.GetComponentInChildren<ParticleSystem>().enableEmission = false;
 			/* Called once per frame. AI comes Here */
 			
 			GameObject player = GameObject.Find ("Player");
@@ -101,6 +103,10 @@ public class ApeAlien : Enemy {
 			}
 		}else {
 			nextARegeneration = Time.time + delayARegeneration;
+			this.GetComponent<Animator>().speed = 0;
+			/*if(Camera.main.GetComponent<CameraControl>().birdsEye){
+				this.GetComponentInChildren<ParticleSystem>().enableEmission = true;
+			}*/
 			//lastDamage += 1;
 		}
 	}	

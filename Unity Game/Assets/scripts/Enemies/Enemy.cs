@@ -56,6 +56,7 @@ public abstract class Enemy : MonoBehaviour {
 	void Update () {
 		PlayerController playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
 		if (playerScript.paused == false && !Camera.main.GetComponent<CameraControl>().birdsEye) {
+			this.GetComponent<Animator>().speed = 1;
 			/* Called once per frame. AI comes Here */
 			GameObject player = GameObject.Find ("Player");
 			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
@@ -110,6 +111,7 @@ public abstract class Enemy : MonoBehaviour {
 			}
 		} else {
 			nextRegeneration = Time.time + delayRegeneration;
+			this.GetComponent<Animator>().speed = 0;
 			//lastDamage += 1;
 		}
 	}

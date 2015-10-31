@@ -193,7 +193,7 @@ public class Tutorial : MonoBehaviour {
 			}
 
 			if(hint.fillAmount <= 0 && hintText.text == "Access the satelites with " && interaction.fillAmount == 0){
-				makeHint ("Run with left shift + W/A/S/D. Just remember that running and attacks deplete your stamina.", Run);
+				makeHint ("Run with left shift + W/A/S/D. Just remember that running and attacks deplete your stamina. Without stamina you can't attack.", Run);
 			}
 
 			if(Application.loadedLevelName == "Tutorial"){

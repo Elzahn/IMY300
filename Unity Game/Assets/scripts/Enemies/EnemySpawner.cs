@@ -275,6 +275,9 @@ public class EnemySpawner : MonoBehaviour {
 	//	}
 		go.GetComponent<FauxGravityBody>().attractor = planet;
 		go.tag = "Monster";
+		if(go.GetComponentInChildren<ParticleSystem>()){
+			go.GetComponentInChildren<ParticleSystem>().enableEmission = false;
+		}
 
 		Enemy enemyComponent = go.GetComponent<Enemy>();
 		enemyComponent.level = chooseLevel();

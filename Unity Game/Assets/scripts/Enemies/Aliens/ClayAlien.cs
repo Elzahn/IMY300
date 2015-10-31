@@ -45,7 +45,8 @@ public class ClayAlien : Enemy {
 		GameObject player = GameObject.Find("Player");
 		PlayerController playerScript = player.GetComponent<PlayerController> ();
 		if (!playerScript.paused && !Camera.main.GetComponent<CameraControl>().birdsEye) {
-
+			this.GetComponent<Animator>().speed = 1;
+			this.GetComponentInChildren<ParticleSystem>().enableEmission = false;
 
 			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;		
 			transform.LookAt (PlayerPos);
@@ -128,6 +129,10 @@ public class ClayAlien : Enemy {
 			walkAround (0.5f, dir);
 		} else {
 			nextRegeneration = Time.time + delayRegeneration;
+			this.GetComponent<Animator>().speed = 0;
+			/*if(Camera.main.GetComponent<CameraControl>().birdsEye){
+				this.GetComponentInChildren<ParticleSystem>().enableEmission = true;
+			}*/
 			//lastDamage += 1;
 		}
 	}	

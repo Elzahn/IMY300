@@ -43,6 +43,8 @@ public class MossAlien : Enemy {
 		/* Called once per frame. AI comes Here */
 		PlayerController playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
 		if (playerScript.paused == false && !Camera.main.GetComponent<CameraControl>().birdsEye) {
+			this.GetComponent<Animator>().speed = 1;
+			this.GetComponentInChildren<ParticleSystem>().enableEmission = false;
 			/* Called once per frame. AI comes Here */
 			GameObject player = GameObject.Find ("Player");
 			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
@@ -108,6 +110,10 @@ public class MossAlien : Enemy {
 			walkAround (0.5f, dir);
 		} else {
 			nextRegeneration = Time.time + delayRegeneration;
+			this.GetComponent<Animator>().speed = 0;
+			/*if(Camera.main.GetComponent<CameraControl>().birdsEye){
+				this.GetComponentInChildren<ParticleSystem>().enableEmission = true;
+			}*/
 			//lastDamage += 1;
 		}
 	}	
