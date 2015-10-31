@@ -21,6 +21,8 @@ TagManager:
   - StorageList
   - LootList
   - Storage
+  - HUD_Extend_Text
+  - MonsterAttackCollider
   layers:
   - Default
   - TransparentFX

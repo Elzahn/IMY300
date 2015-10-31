@@ -210,7 +210,7 @@ GameObject:
   - 65: {fileID: 6536840}
   m_Layer: 0
   m_Name: Monster_Body
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -501,7 +501,7 @@ GameObject:
   - 4: {fileID: 405534}
   m_Layer: 0
   m_Name: GameObject
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -884,7 +884,7 @@ GameObject:
   - 114: {fileID: 11499880}
   m_Layer: 0
   m_Name: Enemy 1
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1572,7 +1572,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190662}
   m_LocalRotation: {x: 0, y: .999789, z: 0, w: -.0205419809}
-  m_LocalPosition: {x: 5.03329659, y: -3.63923883, z: -20.3044548}
+  m_LocalPosition: {x: 80.1598969, y: -3.75580025, z: 45.3636551}
   m_LocalScale: {x: .379999995, y: .379999995, z: .379999995}
   m_Children:
   - {fileID: 415722}
@@ -3418,6 +3418,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Monster
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

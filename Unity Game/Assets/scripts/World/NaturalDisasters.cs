@@ -228,7 +228,7 @@ public class NaturalDisasters : MonoBehaviour {
 										try {
 											temp.GetComponent<Rigidbody> ().constraints = RigidbodyConstraints.FreezeRotation;
 											temp.GetComponent<Rigidbody> ().position = new Vector3 (moveDirection, objectsToBeMoved [index].transform.position.y, moveDirection);
-										} catch (MissingComponentException e) {
+										} catch (MissingComponentException) {
 												print ("natural disaster breaking...");
 											}
 										index++;

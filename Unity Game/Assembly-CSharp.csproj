@@ -63,6 +63,7 @@
      <Compile Include="Assets\scripts\Accessories\NullAccessory.cs" />
      <Compile Include="Assets\scripts\Accessories\RareAccessory.cs" />
      <Compile Include="Assets\scripts\Accessories\UncommonAccessory.cs" />
+     <Compile Include="Assets\scripts\Attack.cs" />
      <Compile Include="Assets\scripts\BonusItems\BackEngine.cs" />
      <Compile Include="Assets\scripts\BonusItems\BonusAccessory.cs" />
      <Compile Include="Assets\scripts\BonusItems\BonusWeapon.cs" />

@@ -273,8 +273,10 @@ public class Tutorial : MonoBehaviour {
 			sound.resumeSound("all");
 			GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
 			foreach(GameObject m in monsters){
-				if(m.GetComponent<Enemy>().GetComponent<AudioSource> () != null){
-					sound.resumeMonsterSound(m.GetComponent<Enemy>());
+				if(m.GetComponent<Enemy>()){
+					if(m.GetComponent<Enemy>().GetComponent<AudioSource> ()){
+						sound.resumeMonsterSound(m.GetComponent<Enemy>());
+					}
 				}
 			}
 			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = false;

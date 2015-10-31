@@ -8,14 +8,12 @@ public class ClosingCutScene : MonoBehaviour {
 	
 	private MovieTexture movie;
 	private GameObject player;
-	private PlayerAttributes attributesScript;
 	
 	// Use this for initialization
 	void Start () {
 		player = GameObject.Find("Player");
 		player.GetComponent<Sounds> ().stopSound ("all");
 		player.GetComponent<Sounds> ().playAmbienceSound (Sounds.SHIP_AMBIENCE);
-		attributesScript = player.GetComponent<PlayerAttributes> ();
 		
 		movie = (MovieTexture)GameObject.Find ("MovieScreen").GetComponent<Renderer> ().material.mainTexture;// = movie;
 		movie.Play();

@@ -285,6 +285,35 @@ public class PlayerController : MonoBehaviour
 		}
     }
 
+	public void OnMouseDown() {
+		if (!paused) {
+			var collidedItems = Physics.OverlapSphere(transform.position, 5f);
+
+			Enemy enemy = null;
+
+			foreach (var col in collidedItems) {
+				if(col.tag == "Monster"){
+					if(col.GetComponentInParent<Enemy>()){
+						 enemy = col.GetComponentInParent<Enemy>();
+					} else {
+						enemy = col.GetComponent<Enemy>();
+					}
+
+					if (Time.time >= enemy.nextAttack) {
+						enemy.nextAttack = Time.time + enemy.delay;
+						Vector3 PlayerPos = this.GetComponent<Rigidbody> ().position;
+						Vector3 myPos = GetComponent<Rigidbody> ().position;
+						
+						if (Vector3.Distance (PlayerPos, myPos) < 6) {
+							this.GetComponent<PlayerAttributes> ().attack (enemy);
+							enemy.attackPlayer = true;
+						}
+					}
+				}
+			}
+		}
+	}
+
     public void checkIfAttackPossible() {
         var collidedItems = Physics.OverlapSphere(transform.position, 5f);
         var collidedWithNumMosters = 0;

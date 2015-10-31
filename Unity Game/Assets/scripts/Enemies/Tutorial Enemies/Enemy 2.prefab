@@ -137,7 +137,7 @@ GameObject:
   - 65: {fileID: 6568440}
   m_Layer: 0
   m_Name: MonsterBody
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,7 +175,7 @@ GameObject:
   - 54: {fileID: 5450916}
   m_Layer: 0
   m_Name: Enemy 2
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -775,7 +775,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 152458}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 79.1266937, y: -3.84759712, z: 44.9984207}
   m_LocalScale: {x: .379999995, y: .379999995, z: .379999995}
   m_Children:
   - {fileID: 22441350}

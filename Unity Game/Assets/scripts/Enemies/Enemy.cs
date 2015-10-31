@@ -6,8 +6,11 @@ public abstract class Enemy : MonoBehaviour {
 	 * Automatically called after level is set. Should initilze other attributes based on level;
 	 */
 	public abstract void init();
-	protected bool attackPlayer;
-	protected float nextAttack, delay, nextMAttack, mDelay = 1f;//0.5f;
+	public bool attackPlayer{get; set;}
+	public float nextAttack{get; set;}
+	public float delay{get; set;}
+
+	protected float nextMAttack, mDelay = 1f;//0.5f;
 	protected bool notCollided;
 	public float lastDamage;
 	protected float nextRegeneration;
