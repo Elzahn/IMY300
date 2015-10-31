@@ -13,6 +13,7 @@ public class PlayerAttributes : MonoBehaviour {
 			xp = 0;
 			level = 1;
 			accessories = new LinkedList<Accessory>();
+			gender = '?';
 			
 			inventory = new LinkedList<InventoryItem>();
 			storage = new LinkedList<InventoryItem> ();
@@ -23,6 +24,8 @@ public class PlayerAttributes : MonoBehaviour {
 			fallActive = false;
 			warpUnlock = false;
 			warpActive = false;
+			soundVolume = 1;
+			narrativeShown = 1;
 		}
 
 		public float xp;

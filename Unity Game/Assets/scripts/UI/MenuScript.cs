@@ -283,6 +283,7 @@ public class MenuScript : MonoBehaviour {
 		//player.transform.position = new Vector3 (-375.12f, 101.75f, 395.33f);
 		GameObject.Find("Interaction").GetComponent<Image>().fillAmount = 0;
 		GameObject.Find("Hint").GetComponent<Image>().fillAmount = 0;
+		player = GameObject.Find ("Player");
 		player.GetComponent<FauxGravityBody> ().attractor = null;
 		player.GetComponent<Rigidbody> ().useGravity = true;
 		player.GetComponent<Sounds> ().stopSound ("all");
@@ -292,13 +293,20 @@ public class MenuScript : MonoBehaviour {
 
 		GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Dead", false);
 		GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Weapon", false);
-		player.GetComponent<PlayerAttributes>().myAttributes = new PlayerAttributes.AttributeContainer();
-		player.GetComponent<PlayerAttributes>().setStartAttributes();
-		player.GetComponent<PlayerAttributes> ().weapon = null;
-		player.GetComponent<PlayerAttributes> ().accessories.Clear ();
-		player.GetComponent<PlayerAttributes> ().inventory.Clear ();
-		player.GetComponent<PlayerAttributes> ().storage.Clear ();
-		player.GetComponent<PlayerAttributes> ().resetPlayer ();
+		var attributesScript = player.GetComponent<PlayerAttributes> ();
+		attributesScript.myAttributes = new PlayerAttributes.AttributeContainer();
+		attributesScript.setStartAttributes ();
+		//player.GetComponent<PlayerAttributes> ().weapon = null;
+		//player.GetComponent<PlayerAttributes> ().accessories.Clear ();
+		//player.GetComponent<PlayerAttributes> ().inventory.Clear ();
+		//player.GetComponent<PlayerAttributes> ().storage.Clear ();
+		attributesScript.resetPlayer ();
+
+		attributesScript.narrativeShown = 1;
+		//1 = easy; 2 = difficult
+		attributesScript.difficulty = 1;
+		//0 = mute; 1 = on
+		attributesScript.soundVolume = 1;
 	}
 
 	public void ResumeGame(){
