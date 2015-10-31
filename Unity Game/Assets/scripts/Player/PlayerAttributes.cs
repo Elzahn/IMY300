@@ -9,7 +9,24 @@ using System.IO;
 public class PlayerAttributes : MonoBehaviour {
     [Serializable()]
 	public class AttributeContainer : ISerializable {
-		public AttributeContainer(){}
+		public AttributeContainer(){
+			xp = 0;
+			level = 1;
+			accessories = new LinkedList<Accessory>();
+			gender = '?';
+			
+			inventory = new LinkedList<InventoryItem>();
+			storage = new LinkedList<InventoryItem> ();
+			inventory_LevelStart = new LinkedList<InventoryItem>();
+			storage_LevelStart = new LinkedList<InventoryItem>();
+			weapon = null;
+			fallUnlocked = false;
+			fallActive = false;
+			warpUnlock = false;
+			warpActive = false;
+			soundVolume = 1;
+			narrativeShown = 1;
+		}
 
 		public float xp;
 		public float hp;
@@ -141,6 +158,55 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 
 	public AttributeContainer myAttributes = new AttributeContainer();
+
+	public void setStartAttributes ()
+	{
+		narrativeShown = 1;
+		//1 = easy; 2 = difficult
+		difficulty = 1;
+		//0 = mute; 1 = on
+		soundVolume = 1;
+		narrativeSoFar = "";
+		showWarpHint = true;
+		showLevelUp = false;
+		fallFirst = true;
+		doorOpen = false;
+		//Singleton
+		if (instance) {
+			DestroyImmediate (gameObject);
+			return;
+		}
+		else {
+			DontDestroyOnLoad (gameObject);
+			instance = this;
+		}
+		myAttributes = new AttributeContainer ();
+		healthLowering.SetActive (false);
+		healthHealing.SetActive (false);
+		staminaDrain.SetActive (false);
+		healthAltered = 0f;
+		staminaDrained = 0f;
+		justWarped = false;
+		giveAlarm = true;
+		gender = '?';
+		dizzy = false;
+		setInitialXp (0);
+		nextRegeneration = Time.time + REGEN_INTERVAL;
+		lastDamage = 0;
+		CurrentLevel = 0;
+	}
+
+	void Awake() {
+		healthLowering = GameObject.Find ("Health_Lowering");
+		healthHealing = GameObject.Find ("Health_Healing");
+		staminaDrain = GameObject.Find ("Stamina_Drained");
+		dizzyControl = GameObject.Find ("Dizzy");
+		hudText = GameObject.Find ("HUD_Expand_Text").GetComponent<Text> ();
+		soundComponent = GameObject.Find ("Player").gameObject.GetComponent<Sounds> ();
+		//must be GameObject.Find("Player") else it tries to acces what has been destroyed
+		controllerComponent = GameObject.Find ("Player").gameObject.GetComponent<PlayerController> ();
+		animatorComponent = GameObject.Find ("Character_Final").GetComponent<Animator> ();
+	}
 
 	const int HP_BASE = 100;
 	const float HP_MULT = 1.8f;
@@ -308,7 +374,7 @@ public class PlayerAttributes : MonoBehaviour {
 		get {
 			return myAttributes.level;
 		}
-		private set {
+		set {
 			myAttributes.level = value;
 		}
 	}
@@ -437,63 +503,16 @@ public class PlayerAttributes : MonoBehaviour {
 	private bool showLevelUp;
 	private GameObject healthLowering, healthHealing, staminaDrain, door, dizzyControl;
 	private Animator animatorComponent;
+
+
+
     /**************************************************** Monobehaviour functions *********************************************
 	 * Start - Called after creation
 	 * Update - Called Every frame
 	 * ***********************************************************************************************************************/
 	void Start () {
 		//1 = show; 0 = hide
-		narrativeShown = 1;
-		//1 = easy; 2 = difficult
-		difficulty = 1;
-		//0 = mute; 1 = on
-		soundVolume = 1;
-
-		narrativeSoFar = "";
-
-		showWarpHint = true;
-		showLevelUp = false;
-		fallFirst = true;
-		doorOpen = false;
-
-		animatorComponent = GameObject.Find("Character_Final").GetComponent<Animator>();
-
-		//Singleton
-		if (instance) {
-			DestroyImmediate(gameObject);
-			return;
-		} else {
-			DontDestroyOnLoad (gameObject);
-			instance = this;
-		}
-		myAttributes = new AttributeContainer();
-		healthLowering = GameObject.Find ("Health_Lowering");
-		healthLowering.SetActive (false);
-		healthHealing = GameObject.Find ("Health_Healing");
-		healthHealing.SetActive (false);
-		staminaDrain = GameObject.Find ("Stamina_Drained");
-		staminaDrain.SetActive (false);
-
-		healthAltered = 0f;
-		staminaDrained = 0f;
-
-		dizzyControl = GameObject.Find("Dizzy");
-
-		justWarped = false;
-		giveAlarm = true;
-		gender = '?';
-		dizzy = false;
-
-		setInitialXp(0);
-		nextRegeneration = Time.time + REGEN_INTERVAL;
-		lastDamage = 0;
-		CurrentLevel = 0;
-
-		hudText = GameObject.Find ("HUD_Expand_Text").GetComponent<Text> ();
-
-		soundComponent = GameObject.Find("Player").gameObject.GetComponent<Sounds>(); //must be GameObject.Find("Player") else it tries to acces what has been destroyed
-		controllerComponent = GameObject.Find("Player").gameObject.GetComponent<PlayerController> (); //must be GameObject.Find("Player") else it tries to acces what has been destroyed
-
+		setStartAttributes ();	
 	}
 
 	void Update() {
@@ -900,7 +919,7 @@ public class PlayerAttributes : MonoBehaviour {
 	}
 	
 	public bool isDead() {
-		if(hp <=0){
+		if(hp <=0 && !animatorComponent.GetBool("Dead")){
 			soundComponent.playDeathSound(Sounds.DEAD_PLAYER);
 			animatorComponent.SetBool("Dead", true);
 		}
