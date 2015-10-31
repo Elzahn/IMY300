@@ -428,11 +428,13 @@ public class PlayerController : MonoBehaviour
 			MainMenu.enabled = true;
 			paused = true;
 			if(GameObject.Find("MenuMask").GetComponent<Image>().fillAmount < 1){
-				GameObject.Find("MenuMask").GetComponent<Image>().fillAmount += 0.01f;
+				//GameObject.Find("MenuMask").GetComponent<Image>().fillAmount += 0.01f;
+				GameObject.Find("MenuMask").GetComponent<Image>().fillAmount = 1f;
 			}
 		} else {
 			if(GameObject.Find("MenuMask").GetComponent<Image>().fillAmount > 0){
-				GameObject.Find("MenuMask").GetComponent<Image>().fillAmount -= 0.01f;
+				//GameObject.Find("MenuMask").GetComponent<Image>().fillAmount -= 0.01f;
+				GameObject.Find("MenuMask").GetComponent<Image>().fillAmount = 0f;
 			} else if(GameObject.Find("MenuMask").GetComponent<Image>().fillAmount == 0){
 				MainMenu.enabled = false;
 			}
