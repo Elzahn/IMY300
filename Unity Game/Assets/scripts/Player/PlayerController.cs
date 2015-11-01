@@ -326,8 +326,9 @@ public class PlayerController : MonoBehaviour
 
 		if (collidedWithNumMosters > 0 && !GetComponent<Tutorial>().healthHintShown) {
             showAttack = true;
-            Camera.main.GetComponent<HUD>()
-                .makeInteractionHint("Attack by pressing while your mouse is on the monster", Attack);
+            Camera.main.GetComponent<HUD>().makeInteractionHint("Attack by pressing while your mouse is on the monster", Attack);
+			if(!this.GetComponent<SaveSpotTeleport>().showedHealthHint)
+				this.GetComponent<SaveSpotTeleport>().showedHealthHint = true;
         } else {
             showAttack = false;
         }

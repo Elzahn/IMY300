@@ -167,7 +167,8 @@ public class Tutorial : MonoBehaviour {
 					if(hint.fillAmount > 0){
 						hint.fillAmount -= 0.1f;
 					}
-					if(hint.fillAmount <= 0 && hintText.text == "Some monsters prefer the dark as it makes them stronger."){
+
+					if(hint.fillAmount <= 0 && hintText.text == "Some monsters prefer the dark as it makes them stronger while others follow the light."){
 						this.GetComponent<SaveSpotTeleport>().showedHealthHint = true;
 					}
 				}

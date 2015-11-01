@@ -61,7 +61,7 @@ public class LoadingScreen : MonoBehaviour {
 				loadingBar.fillAmount = 0;
 			} else if(planet.GetComponent<SpawnTrees> ().isTreesPlanted () == false && !treesLoaded){
 				background.sprite = LoadingTrees;
-				if(loadingBar.fillAmount < (float)planet.GetComponent<SpawnTrees> ().amountTreesLanded() / (float)planet.GetComponent<SpawnTrees> ().num_Trees){
+				if(loadingBar && loadingBar.fillAmount < (float)planet.GetComponent<SpawnTrees> ().amountTreesLanded() / (float)planet.GetComponent<SpawnTrees> ().num_Trees){
 					loadingBar.fillAmount = (float)planet.GetComponent<SpawnTrees> ().amountTreesLanded() / (float)planet.GetComponent<SpawnTrees> ().num_Trees;
 				}
 			} else if(planet.GetComponent<SpawnTrees> ().isTreesPlanted () == true && !treesLoaded){
