@@ -94,6 +94,11 @@ public class HUD : MonoBehaviour {
 	public void showOrHideNarative(){
 		if (shrinkTheHud) {
 			//0 = hide; 1 = show
+
+			Canvas.ForceUpdateCanvases();
+			Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
+			scrollbar.value = 0f;
+
 			player.GetComponent<PlayerAttributes>().narrativeShown = 1;
 			shrink.enabled = true;
 			expand.enabled = false;

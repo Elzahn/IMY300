@@ -265,10 +265,10 @@ InputManager:
     m_Name: Skip
     descriptiveName: Skip CutScenes
     descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: escape
-    altNegativeButton: 
-    altPositiveButton: 
+    negativeButton: escape
+    positiveButton: space
+    altNegativeButton: mouse 1
+    altPositiveButton: mouse 0
     gravity: 1000
     dead: .00100000005
     sensitivity: 1000

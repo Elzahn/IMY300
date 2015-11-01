@@ -48,7 +48,7 @@ public class CameraControl : MonoBehaviour {
 			}
 			//Zoom
 			if(!birdsEye){
-				transform.Translate (Vector3.forward * Input.GetAxis ("Mouse ScrollWheel"));
+			//	transform.Translate (Vector3.forward * Input.GetAxis ("Mouse ScrollWheel"));
 			}
 	
 			/*//Move
