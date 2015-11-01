@@ -224,7 +224,7 @@ public abstract class Enemy : MonoBehaviour {
 		Vector3 lookPos = PlayerPos - transform.position;
 
 
-		if(typeID != "BossAlien"){
+		if(typeID != "BossAlien" && typeID != "OctoAlien"){
 			lookPos.y = 0;
 			Quaternion rotation = Quaternion.LookRotation(lookPos);
 			transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 2f);

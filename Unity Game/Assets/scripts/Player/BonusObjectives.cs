@@ -7,8 +7,8 @@ public class BonusObjectives : MonoBehaviour {
 	private PlayerAttributes attributes;
 
 	public bool killAllMonstersOnLevel{ 
-		get { return attributes.myAttributes.bonusObjs[1];} 
-		set { attributes.myAttributes.bonusObjs[1] = value;} 
+		get { return attributes.myAttributes.bonusObjs[0];} 
+		set { attributes.myAttributes.bonusObjs[0] = value;} 
 	}
 	public bool killAllMonstersInGame{ 
 		get { return attributes.myAttributes.bonusObjs[1];} 
@@ -20,7 +20,30 @@ public class BonusObjectives : MonoBehaviour {
 	}
 	public bool completeAllQuests { get {
 			return killAllMonstersOnLevel && killAllMonstersInGame && reachTheStars;
-		}}
+		}
+	}
+
+	public bool killAllMonstersInUniverseLevel1{
+		get {return attributes.myAttributes.bonusObjsEnemiesKilled[0];}
+		set {attributes.myAttributes.bonusObjsEnemiesKilled[0] = value;}
+	}
+	public bool killAllMonstersInUniverseLevel2{
+		get {return attributes.myAttributes.bonusObjsEnemiesKilled[1];}
+		set {attributes.myAttributes.bonusObjsEnemiesKilled[1] = value;}
+	}
+	public bool killAllMonstersInUniverseLevel3{
+		get {return attributes.myAttributes.bonusObjsEnemiesKilled[2];}
+		set {attributes.myAttributes.bonusObjsEnemiesKilled[2] = value;}
+	}
+	public bool killAllMonstersInUniverseLevel4{
+		get {return attributes.myAttributes.bonusObjsEnemiesKilled[3];}
+		set {attributes.myAttributes.bonusObjsEnemiesKilled[3] = value;}
+	}
+	public bool killAllMonstersInUniverseLevel5{
+		get {return attributes.myAttributes.bonusObjsEnemiesKilled[4];}
+		set {attributes.myAttributes.bonusObjsEnemiesKilled[4] = value;}
+	}
+
 
 	public int deadEnemiesOnLevel { 
 		get { return attributes.myAttributes.deadEnemiesOnLevel;} 
@@ -84,7 +107,7 @@ public class BonusObjectives : MonoBehaviour {
 			showedBonus1 = true;
 		}
 
-		if (deadEnemies == 155 && !showedBonus2){
+		if(killAllMonstersInUniverseLevel1 && killAllMonstersInUniverseLevel2 && killAllMonstersInUniverseLevel3 && killAllMonstersInUniverseLevel4 && killAllMonstersInUniverseLevel5 && !showedBonus2){//if (deadEnemies == 155 && !showedBonus2){
 			killAllMonstersInGame = true;
 			endGameKing = false;
 			endGamePlanet = true;
@@ -92,7 +115,32 @@ public class BonusObjectives : MonoBehaviour {
 			showedBonus2 = true;
 		}
 
-		if(!showedBonus3 && ((deadEnemiesOnLevel == 20 && levelSelect.currentLevel == 1) || (deadEnemiesOnLevel == 35  && levelSelect.currentLevel == 2) || (deadEnemiesOnLevel == 10 && levelSelect.currentLevel == 3) || (deadEnemiesOnLevel == 40 && levelSelect.currentLevel == 4) || (deadEnemiesOnLevel == 50 && levelSelect.currentLevel == 5))) {
+		if(deadEnemiesOnLevel == EnemySpawner.ALL_ENEMIES){
+			switch(levelSelect.currentLevel){
+			case 1:{
+				killAllMonstersInUniverseLevel1 = true;
+				break;
+			}
+			case 2: {
+				killAllMonstersInUniverseLevel2 = true;
+				break;
+			}
+			case 3:{
+				killAllMonstersInUniverseLevel3 = true;
+				break;
+			}
+			case 4: {
+				killAllMonstersInUniverseLevel4 = true;
+				break;
+			}
+			case 5:{
+				killAllMonstersInUniverseLevel5 = true;
+				break;
+			}
+			}
+		}
+
+		if((!showedBonus3 && deadEnemiesOnLevel == EnemySpawner.ALL_ENEMIES)){//if(!showedBonus3 && ((deadEnemiesOnLevel == 20 && levelSelect.currentLevel == 1) || (deadEnemiesOnLevel == 35  && levelSelect.currentLevel == 2) || (deadEnemiesOnLevel == 10 && levelSelect.currentLevel == 3) || (deadEnemiesOnLevel == 40 && levelSelect.currentLevel == 4) || (deadEnemiesOnLevel == 50 && levelSelect.currentLevel == 5))) {
 			this.GetComponent<Tutorial>().makeHint("You cleared a planet of all enemy lifeforms! Bonus Objective", this.GetComponent<Tutorial>().Middle);
 			this.GetComponent<PlayerAttributes>().inventory.AddLast(new BonusWeapon(1));
 			showedBonus3 = true;

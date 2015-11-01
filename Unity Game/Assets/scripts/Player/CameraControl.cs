@@ -38,6 +38,8 @@ public class CameraControl : MonoBehaviour {
 				} else if (Input.GetMouseButton (1) && Input.GetAxis ("Mouse X") > 0) {
 					player.transform.RotateAround(player.transform.position, player.transform.up, Input.GetAxis ("Mouse X") * sensitivityX);
 					GameObject.Find("Character_Final").GetComponent<Animator>().SetFloat("Turning", 1f);
+				} else {
+					GameObject.Find("Character_Final").GetComponent<Animator>().SetFloat("Turning", 0f);
 				}
 			}
 

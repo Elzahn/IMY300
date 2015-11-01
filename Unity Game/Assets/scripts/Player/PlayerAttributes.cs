@@ -67,6 +67,7 @@ public class PlayerAttributes : MonoBehaviour {
 		public bool[] inventoryShipPieces = new bool[6];
 		public bool[] bonusObjs = new bool[3];
 		public bool[] bonusObjsShown = new bool[4];
+		public bool[] bonusObjsEnemiesKilled = new bool[5];
 		public int shipPieces;
 		public int deadEnemiesOnLevel;
 		public int deadEnemies;
@@ -107,6 +108,7 @@ public class PlayerAttributes : MonoBehaviour {
 			info.AddValue("inventoryShipPieces", inventoryShipPieces);
 			info.AddValue("bonusObjs", bonusObjs);
 			info.AddValue("bonusObjsShown", bonusObjsShown);
+			info.AddValue("bonusObjsEnemiesKilled", bonusObjsEnemiesKilled);
 			info.AddValue("deadEnemies", deadEnemies);
 			info.AddValue("shipPieceCount", shipPieces);
 		}
@@ -146,6 +148,7 @@ public class PlayerAttributes : MonoBehaviour {
 			inventoryShipPieces = info.GetValue ("inventoryShipPieces", typeof(bool[])) as bool[];
 			bonusObjs = info.GetValue ("bonusObjs", typeof(bool[])) as bool[];
 			bonusObjsShown = info.GetValue ("bonusObjsShown", typeof(bool[])) as bool[];
+			bonusObjsEnemiesKilled = info.GetValue("bonusObjsEnemiesKilled", typeof(bool[])) as bool[];
 			deadEnemies = (int) info.GetValue("deadEnemies", typeof(int));
 			shipPieces = (int) info.GetValue("shipPieceCount", typeof(int));
 

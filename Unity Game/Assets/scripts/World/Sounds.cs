@@ -283,8 +283,8 @@ public class Sounds : MonoBehaviour {
 		ambienceAudio = GameObject.Find ("Ambience Audio").GetComponent<AudioSource> ();
 		ambienceClip = clipAt;
 
-		if(ambienceClip == 2){
-			ambienceAudio.volume = 0.3f;
+		if(ambienceClip == PLANET_1_AMBIENCE){
+			ambienceAudio.volume = 0.1f;
 		} else {
 			ambienceAudio.volume = 0.8f;
 		}

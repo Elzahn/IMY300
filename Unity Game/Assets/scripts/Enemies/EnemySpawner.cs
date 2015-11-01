@@ -26,6 +26,8 @@ public class EnemySpawner : MonoBehaviour {
 	public int ENEM_COUNT{ get; set; }
 	const int NORMAL_ENEMY_TYPES = 4;
 
+	public static int ALL_ENEMIES{ get; set; }
+
 	FauxGravityAttractor planet;
 	int playerLevel;
 	bool noHint;
@@ -73,6 +75,7 @@ public class EnemySpawner : MonoBehaviour {
 	// Use this for initialization
 	public void spawnEnemies (int enemy_count) {	//Previously know as Start
 		ENEM_COUNT = (int)(enemy_count * GameObject.Find("Player").GetComponent<PlayerAttributes>().difficulty);
+		ALL_ENEMIES = ENEM_COUNT;
 		clearLoot ();
 
 		planet = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
