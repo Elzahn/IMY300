@@ -224,16 +224,16 @@ public abstract class Enemy : MonoBehaviour {
 		Vector3 lookPos = PlayerPos - transform.position;
 
 
-		if(typeID != "BossAlien" && typeID != "OctoAlien"){
+		//if(typeID != "BossAlien" && typeID != "OctoAlien"){
 			lookPos.y = 0;
 			Quaternion rotation = Quaternion.LookRotation(lookPos);
 			transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 2f);
 
-		} else {
+		/*} else {
 			//lookPos.y = 0;
 			Quaternion rotation = Quaternion.LookRotation(lookPos);
 			transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 400000f);
-		}
+		}*/
 
 		Vector3 myPos = GetComponent<Rigidbody>().position;
 

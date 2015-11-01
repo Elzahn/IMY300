@@ -146,7 +146,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press escape to skip cutscene
+  m_Text: Press escape to skip
 --- !u!222 &166084345
 CanvasRenderer:
   m_ObjectHideFlags: 0

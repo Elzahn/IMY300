@@ -207,7 +207,8 @@ public class Collisions : MonoBehaviour {
 			}
 			GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Impact", true);
 		} else  //Lose health if you run into something that you can't interact with, walk/run on and isn't a monster
-		if (playerScript.run && col.collider.name != "Storage" && col.collider.tag != "Teleporter" && col.collider.name != "Ship_interior" && col.collider.name != "Planet" && col.collider.tag != "Monster" && col.collider.tag != "WarpPoint" && col.collider.tag != "MediumHealthPack" && col.collider.tag != "LargeHealthPack") {
+			// && col.collider.name != "Ship_interior"
+		if (Application.loadedLevelName != "SaveSpot" && playerScript.run && col.collider.name != "Storage" && col.collider.tag != "Teleporter" && col.collider.name != "Planet" && col.collider.tag != "Monster" && col.collider.tag != "WarpPoint" && col.collider.tag != "MediumHealthPack" && col.collider.tag != "LargeHealthPack") {
 			int healthToLose = (int)(playerAttributesScript.hp * 0.02);
 			playerAttributesScript.loseHP (healthToLose);//loses 2% health when running into something
 			if (playerAttributesScript.gender == 'f') {
