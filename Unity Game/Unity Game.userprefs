@@ -1,22 +1,25 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\Player\Collisions.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\UI\MenuScript.cs">
     <Files>
       <File FileName="Assets\scripts\Player\Collisions.cs" Line="204" Column="67" />
+      <File FileName="Assets\scripts\World\LoadingScreen.cs" Line="64" Column="22" />
+      <File FileName="Assets\scripts\Teleporting\SaveSpotTeleport.cs" Line="15" Column="30" />
+      <File FileName="Assets\scripts\Player\Tutorial.cs" Line="171" Column="137" />
+      <File FileName="Assets\scripts\Player\PlayerController.cs" Line="331" Column="67" />
+      <File FileName="Assets\scripts\Player\PlayerAttributes.cs" Line="8" Column="1" />
+      <File FileName="Assets\scripts\UI\MenuScript.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="scripts" expanded="True">
-              <Node name="Enemies" expanded="True">
-                <Node name="Aliens" expanded="True" />
+              <Node name="Player" expanded="True" />
+              <Node name="Teleporting" expanded="True" />
+              <Node name="UI" expanded="True">
+                <Node name="MenuScript.cs" selected="True" />
               </Node>
-              <Node name="Gravity" expanded="True" />
-              <Node name="Player" expanded="True">
-                <Node name="Collisions.cs" selected="True" />
-              </Node>
-              <Node name="UI" expanded="True" />
               <Node name="World" expanded="True" />
             </Node>
           </Node>
