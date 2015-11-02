@@ -366,8 +366,9 @@ public class PlayerAttributes : MonoBehaviour {
 			return myAttributes.hp;
 		}
 		private set {
-			if (value > maxHP())
-				myAttributes.hp = maxHP();
+			var max = maxHP ();
+			if (value > max)
+				myAttributes.hp = max;
 			else
 			myAttributes.hp = value;
 		}
@@ -387,6 +388,10 @@ public class PlayerAttributes : MonoBehaviour {
 			return myAttributes.stamina;
 		}
 		set {
+			var max = maxStamina ();
+			if (value > max)
+				myAttributes.stamina = max;
+			else
 			myAttributes.stamina = value;
 		}}
 
