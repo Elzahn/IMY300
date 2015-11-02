@@ -66,6 +66,16 @@ public class PlayerAttributes : MonoBehaviour {
 		public bool warpUnlock = false;
 		public bool warpActive = false;
 
+		public LinkedList<InventoryItem> bossLoot {
+			get {
+				return EnemySpawner.bossLoot;
+			}
+			set {
+				EnemySpawner.bossLoot = value;
+			}
+
+		}
+
 	
 		public bool[] inventoryShipPieces = new bool[6];
 		public bool[] bonusObjs = new bool[3];
@@ -87,6 +97,7 @@ public class PlayerAttributes : MonoBehaviour {
 			info.AddValue("levels", currentLevel);
 
 			info.AddValue("inventory", inventory);
+			info.AddValue("bossLoot", bossLoot);
 			info.AddValue("storage", storage);
 
 			info.AddValue("weapon", weapon);
@@ -127,6 +138,7 @@ public class PlayerAttributes : MonoBehaviour {
 			currentLevel = (int) info.GetValue("levels", typeof(int));
 
 			inventory = info.GetValue ("inventory", typeof(LinkedList<InventoryItem>)) as LinkedList<InventoryItem>;
+			bossLoot = info.GetValue ("bossLoot", typeof(LinkedList<InventoryItem>)) as LinkedList<InventoryItem>;
 			storage = info.GetValue ("storage", typeof(LinkedList<InventoryItem>)) as LinkedList<InventoryItem>;
 
 			weapon 		= (Weapon) info.GetValue("weapon", typeof(Weapon));

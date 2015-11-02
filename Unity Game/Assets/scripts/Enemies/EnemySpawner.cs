@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour {
 	private int numLoot;
 	private Text hudText;
 	private Accessory accessoryScript;
-	private static LinkedList<InventoryItem> bossLoot = null;
+	public static LinkedList<InventoryItem> bossLoot = null;
 
 	public int ENEM_COUNT{ get; set; }
 	const int NORMAL_ENEMY_TYPES = 4;

@@ -25,18 +25,6 @@ public class InventoryScript : MonoBehaviour {
 		scrollableList.setUpInventory();
 	}
 
-	public InventoryItem removeFirstByName(string name) {
-
-		var item = attributesScript.inventory.First;
-		while (item != null) {
-			if (item.Value.typeID.Equals(name)) {			
-				attributesScript.inventory.Remove(item.Value);
-				return item.Value;
-			}
-			item = item.Next;
-		}
-		return null;
-	}
 	
 	public void equipItem(){
 		InventoryItem item;
