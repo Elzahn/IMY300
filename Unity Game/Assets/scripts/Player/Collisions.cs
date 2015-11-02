@@ -111,20 +111,17 @@ public class Collisions : MonoBehaviour {
 				Loot.gotLeftWing = false;
 			}
 
-			if(playerAttributesScript.inventory.Contains(flightControl)){
-				playerAttributesScript.inventory.Remove(flightControl);
+			if(playerAttributesScript.removeFirstByName(flightControl.typeID)!= null){
 				totalPieces++;
 				Loot.gotFlightControl = false;
 			}
 
-			if(playerAttributesScript.inventory.Contains(landingGear)){
-				playerAttributesScript.inventory.Remove(landingGear);
+			if(playerAttributesScript.removeFirstByName(landingGear.typeID)!= null){
 				totalPieces++;
 				Loot.gotLandingGear = false;
 			}
 
-			if(playerAttributesScript.inventory.Contains(tailFin)){
-				playerAttributesScript.inventory.Remove(tailFin);
+			if(playerAttributesScript.removeFirstByName(tailFin.typeID)!= null){
 				totalPieces++;
 				Loot.gotTailFin = false;
 			}
