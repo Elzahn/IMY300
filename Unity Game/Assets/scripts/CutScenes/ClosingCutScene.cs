@@ -4,10 +4,13 @@ using System.Collections;
 using System.IO;
 using System;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class ClosingCutScene : MonoBehaviour {
 	
 	private MovieTexture movie;
 	private GameObject player;
+	private AudioSource movieAudio;
 	
 	// Use this for initialization
 	void Start () {
@@ -36,11 +39,24 @@ public class ClosingCutScene : MonoBehaviour {
 		GameObject.Find("Health").GetComponent<Image>().enabled = false;
 		GameObject.Find ("HUD_Expand_Text").GetComponent<Text> ().text = "";
 		GameObject.Find("MenuMask").GetComponent<Image>().fillAmount = 0;
+
+		movieAudio = GetComponent<AudioSource>();
+
+		if(movieAudio){
+			movieAudio.clip = movie.audioClip;
+		
+			if(player.GetComponent<PlayerAttributes>().soundVolume == 1){
+				movieAudio.Play();
+			}
+		}
 	}
 	
 	void Update() {
 		if(Input.GetButtonDown("Skip")){
 			movie.Stop();
+			if(movieAudio){
+				movieAudio.Stop();
+			}
 		}
 		
 		if (!movie.isPlaying) {
