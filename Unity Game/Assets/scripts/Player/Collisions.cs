@@ -101,14 +101,12 @@ public class Collisions : MonoBehaviour {
 
 		if (Application.loadedLevelName == "SaveSpot" && (anyLoot) && colObj != null && colObj.name == "Console" && Input.GetButtonDown ("Interact")) {
 
-			if(playerAttributesScript.inventory.Contains(backEngine)){
-				playerAttributesScript.inventory.Remove(backEngine);
+			if(playerAttributesScript.removeFirstByName(backEngine.typeID) != null){
 				totalPieces++;
 				Loot.gotBackEngine = false;
 			}
 
-			if(playerAttributesScript.inventory.Contains(leftWing)){
-				playerAttributesScript.inventory.Remove(leftWing);
+			if(playerAttributesScript.removeFirstByName(leftWing.typeID) != null){
 				totalPieces++;
 				Loot.gotLeftWing = false;
 			}

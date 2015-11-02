@@ -305,6 +305,18 @@ public class PlayerAttributes : MonoBehaviour {
 		}
 	}
 
+	public InventoryItem removeFirstByName(string name) {
+		var item = inventory.First;
+		while (item != null) {
+			if (item.Value.typeID.Equals(name)) {			
+				inventory.Remove(item.Value);
+				return item.Value;
+			}
+			item = item.Next;
+		}
+		return null;
+	}
+
 	public LinkedList <InventoryItem> storage {
 		get {
 		return myAttributes.storage;

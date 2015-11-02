@@ -79,7 +79,6 @@ public class EnemySpawner : MonoBehaviour {
 		clearLoot ();
 
 		planet = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
-		int playerLevel = playerAttributes.level;
 		GameObject enemy;
 
 		//Spawn Normal Enemies
