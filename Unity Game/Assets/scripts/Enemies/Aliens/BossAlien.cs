@@ -109,6 +109,7 @@ public class BossAlien : Enemy {
 				this.GetComponent<Animator> ().speed = 0;
 				if (Camera.main.GetComponent<CameraControl> ().birdsEye) {
 					this.GetComponentInChildren<ParticleSystem> ().enableEmission = true;
+					this.GetComponentInChildren<ParticleSystem> ().emissionRate = 10;
 				}
 				//lastDamage += 1;
 			}
