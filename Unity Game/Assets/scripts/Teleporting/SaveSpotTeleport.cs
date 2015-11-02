@@ -13,6 +13,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 	public bool loadTutorial {get; set;}
 	public bool notInUse {get; set;}
 	public bool showedHealthHint {get; set;}
+	public bool loadedTut {get; set;}
 
 	private bool showExitConfirmation, showEntranceConfirmation, showNoEntry, justWarped;
 	private PlayerAttributes attributesComponent;
@@ -27,7 +28,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 	private Image hint;
 
 	private HUD Hud;
-    
+
     //Used only for the cheat
 	public void setExitConf(bool val){
 		showExitConfirmation = val;
@@ -38,6 +39,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		showedHealthHint = false;
+		loadedTut = false;
 		justWarped = false;
 		notInUse = true;
 		Hud = Camera.main.GetComponent<HUD> ();
@@ -79,17 +81,24 @@ public class SaveSpotTeleport : MonoBehaviour {
 	}
 
 	void Update () {
+
 		if (!this.GetComponent<PlayerController> ().paused) {
 			if (Application.loadedLevelName == "SaveSpot" && this.GetComponent<Tutorial> ().startTutorial) {
-//			canEnterSaveSpot = false;
+				/*if(loadedTut){
+					GameObject.Find("Interaction").GetComponent<Image>().fillAmount = 0;
+				}*/
+	//			canEnterSaveSpot = false;
 				GameObject.Find ("Tech Light").GetComponent<Light> ().enabled = true;
 				GameObject.Find ("Console Light").GetComponent<Light> ().enabled = true;
 				GameObject.Find ("Bedroom Light").GetComponent<Light> ().enabled = true;
-			} else if (Application.loadedLevelName == "SaveSpot" && !this.GetComponent<Tutorial> ().startTutorial) {
+			} else if (Application.loadedLevelName == "SaveSpot" && !this.GetComponent<Tutorial> ().startTutorial && !loadedTut) {
 				GameObject.Find ("Tech Light").GetComponent<Light> ().enabled = false;
 				GameObject.Find ("Console Light").GetComponent<Light> ().enabled = false;
 				GameObject.Find ("Bedroom Light").GetComponent<Light> ().enabled = false;
 			}
+
+			if(loadedTut)
+				canEnterSaveSpot = false;
 
 			//Position player when warping into the ship
 			if (Application.loadedLevelName == "SaveSpot" && this.GetComponent<Tutorial> ().tutorialDone && !justWarped) {

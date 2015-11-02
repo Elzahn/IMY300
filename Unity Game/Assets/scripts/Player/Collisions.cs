@@ -94,6 +94,8 @@ public class Collisions : MonoBehaviour {
 			GameObject.Find ("Tech Light").GetComponent<Light> ().enabled = false;
 			GameObject.Find ("Console Light").GetComponent<Light> ().enabled = false;
 			GameObject.Find ("Bedroom Light").GetComponent<Light> ().enabled = false;
+			GameObject.Find("Player").GetComponent<SaveSpotTeleport>().loadedTut = false;
+			playerAttributesScript.removeFirstByName("Power Core");
 			playerAttributesScript.inventory.Remove (TutorialSpawner.bossPowerCore);
 			this.GetComponent<SaveSpotTeleport> ().canEnterSaveSpot = true;
 			this.GetComponent<Tutorial> ().tutorialDone = true;

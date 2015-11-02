@@ -107,7 +107,7 @@ public class NaturalDisasters : MonoBehaviour {
 		}
 
 		//if (spinNow || earthquakeNow) {
-			if (playerScript && !playerScript.paused && !Camera.main.GetComponent<CameraControl>().birdsEye) {
+			if (playerScript && !playerScript.paused && !Camera.main.GetComponent<CameraControl>().birdsEye && !LoadingScreen.loading) {
 				if ((Application.loadedLevelName == "Scene" && !LoadingScreen.loading) || Application.loadedLevelName != "Scene"){
 					var playerAttributes = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
 

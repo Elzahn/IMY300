@@ -203,10 +203,19 @@ public class MenuScript : MonoBehaviour {
 			player.GetComponent<Tutorial>().teachInventory = true;
 			GameObject.Find("HUD_Expand_Text").GetComponent<Text>().text = attributesScript.narrativeSoFar;
 			GameObject.Find("Interaction").GetComponent<Image>().fillAmount = 0;
+			GameObject.Find("Hint").GetComponent<Image>().fillAmount = 0;
 			GameObject.Find("MenuMask").GetComponent<Image>().fillAmount = 0;
 			player.GetComponent<LevelSelect>().currentLevel = attributesScript.CurrentLevel;
 			player.GetComponent<LevelSelect> ().spawnedLevel = false;
 			enableCanvas ();
+
+			var item = attributesScript.inventory.First;
+			while (item != null) {
+				if (item.Value.typeID.Equals("Power Core")) {		
+					player.GetComponent<SaveSpotTeleport>().loadedTut = true;
+				}
+				item = item.Next;
+			}
 		}
 	}
 
