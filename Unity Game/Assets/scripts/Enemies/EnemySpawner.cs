@@ -29,7 +29,6 @@ public class EnemySpawner : MonoBehaviour {
 	public static int ALL_ENEMIES{ get; set; }
 
 	FauxGravityAttractor planet;
-	int playerLevel;
 	bool noHint;
 
 	LinkedList<GameObject> enemies = new LinkedList <GameObject> ();
@@ -74,12 +73,13 @@ public class EnemySpawner : MonoBehaviour {
 
 	// Use this for initialization
 	public void spawnEnemies (int enemy_count) {	//Previously know as Start
-		ENEM_COUNT = (int)(enemy_count * GameObject.Find("Player").GetComponent<PlayerAttributes>().difficulty);
+		var playerAttributes = GameObject.Find ("Player").GetComponent<PlayerAttributes> ();
+		ENEM_COUNT = (int)(enemy_count * playerAttributes.difficulty);
 		ALL_ENEMIES = ENEM_COUNT;
 		clearLoot ();
 
 		planet = GameObject.Find("Planet").GetComponent<FauxGravityAttractor>();
-		playerLevel = GameObject.Find("Player").GetComponent<PlayerAttributes>().level;
+		int playerLevel = playerAttributes.level;
 		GameObject enemy;
 
 		//Spawn Normal Enemies
@@ -179,17 +179,22 @@ public class EnemySpawner : MonoBehaviour {
 					if(enemy.typeID == "BossAlien")
 					{
 						//hudText.text = "You found a spaceship part! \n";
-						if(GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked && GameObject.Find("Player").GetComponent<PlayerAttributes>().fallFirst){
+						var playerGO = GameObject.Find ("Player");
+						var fallThroughPlanet = playerGO.GetComponent<FallThroughPlanet> ();
 
-							GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_FALL);
-							if(GameObject.Find("Player").GetComponent<Sounds>().computerAudio.isPlaying){
-								GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallNow();
-								GameObject.Find("Player").GetComponent<PlayerAttributes>().fallFirst = false;
+						if(fallThroughPlanet.fallThroughPlanetUnlocked && playerGO.GetComponent<PlayerAttributes> ().fallFirst){
+
+							var sounds = playerGO.GetComponent<Sounds> ();
+
+							sounds.playComputerSound (Sounds.COMPUTER_FALL);
+							if(sounds.computerAudio.isPlaying){
+								fallThroughPlanet.fallNow ();
+								playerGO.GetComponent<PlayerAttributes> ().fallFirst = false;
 								Camera.main.GetComponent<HUD>().setLight("fall");
-								GameObject.Find("Player").GetComponent<Tutorial>().makeHint("You can use this ability by pressing F. It has a 10s cool down time.", GameObject.Find("Player").GetComponent<Tutorial>().Warp);
+								playerGO.GetComponent<Tutorial> ().makeHint("You can use this ability by pressing F. It has a 10s cool down time.", playerGO.GetComponent<Tutorial> ().Warp);
 							}
 
-							GameObject.Find("Player").GetComponent<FallThroughPlanet>().fallThroughPlanetUnlocked = true;
+							fallThroughPlanet.fallThroughPlanetUnlocked = true;
 
 							hudText.text += "What does this button do? I probably shouldn’t, oh well whatever I’ll press it anyway. You seem to have fallen through the planet. That could be useful. \n\n";
 							Canvas.ForceUpdateCanvases();
@@ -225,6 +230,7 @@ public class EnemySpawner : MonoBehaviour {
 	}
 
 	int chooseLevel() {
+		int playerLevel = GameObject.Find("Player").GetComponent<PlayerAttributes>().level;
 		float r = Random.value;
 		if (r <= 0.3)
 			if (playerLevel - 1 <= 0) {
@@ -291,7 +297,7 @@ public class EnemySpawner : MonoBehaviour {
 	}
 	
 	void dropLoot(Enemy enemy, Vector3 position) {
-
+		int playerLevel = GameObject.Find("Player").GetComponent<PlayerAttributes>().level;
 		GameObject.Find("Player").GetComponent<Sounds>().playDeathSound(Sounds.DEAD_MONSTER);
 		LinkedList<InventoryItem> tempLoot = new LinkedList<InventoryItem> ();;
 		InventoryItem tempItem = null;
@@ -384,21 +390,22 @@ public class EnemySpawner : MonoBehaviour {
 				} 
 				else {
 					int weaponType = Random.Range (1, 4);	//choose between available weapons
+					int weaponLevel = Random.Range(-1,1) + playerLevel;
 					switch (weaponType) {
 					case 1: {
-							if (playerLevel < 5) {
+							if (weaponLevel < 5) {
 								tempItem = new ButterKnife (5);								
 							} else {
-								tempItem = new ButterKnife (playerLevel);
+								tempItem = new ButterKnife (weaponLevel);
 							}
 							break;
 						}
 					case 2: {
-							tempItem = new Longsword (playerLevel);
+							tempItem = new Longsword (weaponLevel);
 							break;
 						}
 					case 3: {
-							tempItem = new Warhammer (playerLevel);							
+							tempItem = new Warhammer (weaponLevel);							
 							break;
 						}
 					}
@@ -416,13 +423,13 @@ public class EnemySpawner : MonoBehaviour {
 		}
 
 		if (lootCount > 0) {
-		GameObject deadEnemy = Instantiate(loot);
-		deadEnemy.transform.position = position;
-		deadEnemy.tag = "Loot";
-		deadEnemy.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
-		Loot lootComponent = deadEnemy.GetComponentInChildren<Loot> ();
-		lootComponent.storeLoot (tempLoot, "Dead " + EnemyName);
-		tempLoot.Clear ();
+			GameObject deadEnemy = Instantiate(loot);
+			deadEnemy.transform.position = position;
+			deadEnemy.tag = "Loot";
+			deadEnemy.transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+			Loot lootComponent = deadEnemy.GetComponentInChildren<Loot> ();
+			lootComponent.storeLoot (tempLoot, "Dead " + EnemyName);
+			tempLoot.Clear ();
 		}
 	}
 

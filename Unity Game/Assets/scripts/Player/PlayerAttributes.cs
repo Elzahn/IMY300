@@ -12,6 +12,7 @@ public class PlayerAttributes : MonoBehaviour {
 		public AttributeContainer(){
 			xp = 0;
 			level = 1;
+			currentLevel = 0;
 			accessories = new LinkedList<Accessory>();
 			gender = '?';
 			
@@ -31,11 +32,13 @@ public class PlayerAttributes : MonoBehaviour {
 		public float xp;
 		public float hp;
 
+		//Player Level
 		public int level;
 		public float stamina;	
 		public bool dizzy;
 		
 		public char gender;
+		//Planet Level
 		public int currentLevel;
 
 		public Weapon weapon;
@@ -348,8 +351,8 @@ public class PlayerAttributes : MonoBehaviour {
 
     public void returnToSaveSpot()
     {
-        CurrentLevel++;
-        save(0);
+		CurrentLevel++;
+		save(0);
         Application.LoadLevel("SaveSpot");
         Resources.UnloadUnusedAssets();
     }
@@ -1071,7 +1074,7 @@ public class PlayerAttributes : MonoBehaviour {
 			temp = (AttributeContainer)bformatter.Deserialize(stream);
 			stream.Close();
 			
-			if (temp != null && temp.level != 0 && temp.gotCore) {
+			if (temp != null && temp.level != 0 /*&& temp.gotCore*/) {
 				return (File.GetCreationTime(saveName) + "\nLevel: " + temp.level + "\nXp: " + temp.xp + "/" + levelXP(temp.level+1));
 			}
 		} catch (IOException) {
