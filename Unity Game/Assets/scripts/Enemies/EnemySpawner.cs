@@ -43,17 +43,20 @@ public class EnemySpawner : MonoBehaviour {
 		//creates and stores ship pieces to be dropped
 		noHint = true;
 		ENEM_COUNT = 100;
+		Collisions.backEngine = new BackEngine();
+		Collisions.landingGear = new LandingGear();
+		Collisions.tailFin = new TailFin();
+		Collisions.leftWing = new LeftWing();
+		Collisions.flightControl = new FlightControl();
 		if (bossLoot == null) {
 			bossLoot = new LinkedList<InventoryItem>();
-			Collisions.backEngine = new BackEngine();
 			bossLoot.AddLast(Collisions.backEngine);
-			Collisions.landingGear = new LandingGear();
+
 			bossLoot.AddLast(Collisions.landingGear);
-			Collisions.tailFin = new TailFin();
+
 			bossLoot.AddLast(Collisions.tailFin);
-			Collisions.leftWing = new LeftWing();
 			bossLoot.AddLast(Collisions.leftWing);
-			Collisions.flightControl = new FlightControl();
+
 			bossLoot.AddLast(Collisions.flightControl);
 		}
 
