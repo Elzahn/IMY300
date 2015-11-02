@@ -96,6 +96,8 @@ public class Sounds : MonoBehaviour {
 	public const int COMPUTER_CUTSCENE = 9;
 	public const int COMPUTER_SARCASM_1 = 10;
 	public const int COMPUTER_SARCASM_2 = 11;
+	public const int COMPUTER_PLANET_HINT = 12;
+	public const int COMPUTER_NO_ENTRY = 13;
 
 	void Start(){
 		worldAudio = GameObject.Find ("World Audio").GetComponent<AudioSource> ();
@@ -406,7 +408,10 @@ public class Sounds : MonoBehaviour {
 	public void playComputerSound(int clipAt){
 		computerClip = clipAt;
 		computerAudio.loop = false;
-		computerAudio.clip = computerClips [clipAt];
-		computerAudio.Play ();
+
+		if(!computerAudio.isPlaying || computerClip != COMPUTER_NO_ENTRY){
+			computerAudio.clip = computerClips [clipAt];
+			computerAudio.Play ();
+		}
 	}
 }

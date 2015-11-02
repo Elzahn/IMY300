@@ -327,7 +327,7 @@ public class Tutorial : MonoBehaviour {
 
 	public void makeHint(string _hintText, Sprite _hintImage){
 		//print (_hintText == Loot.inventoryHintText + " " + (Application.loadedLevelName == "Scene" + " " + !GameObject.Find("Planet").GetComponent<LoadingScreen> ().loading));
-		if (_hintText == Loot.inventoryHintText || (Application.loadedLevelName == "Scene" && !GameObject.Find("Planet").GetComponent<LoadingScreen> ().loading)) {
+		if (_hintText == Loot.inventoryHintText || (Application.loadedLevelName == "Scene" && !LoadingScreen.loading)) {
 			interaction.fillAmount = 0;
 		}
 		hint.fillAmount = 0.001f;

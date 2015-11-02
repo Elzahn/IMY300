@@ -102,8 +102,9 @@ public class SaveSpotTeleport : MonoBehaviour {
 			if (showExitConfirmation && loadTutorial) {
 				notInUse = false;
 				Hud.makeInteractionHint ("Press E to start the tutorial", pressE);
-			} else if (showNoEntry && !loadTutorial && showedHealthHint) {
+			} else if (showNoEntry && !loadTutorial && showedHealthHint && !LoadingScreen.loading) {
 				notInUse = false;
+				sound.playComputerSound(Sounds.COMPUTER_NO_ENTRY);
 				Hud.makeInteractionHint ("Kill the boss and take his loot to go back to the ship.", noEntry);
 			} else if (showEntranceConfirmation) {
 				notInUse = false;

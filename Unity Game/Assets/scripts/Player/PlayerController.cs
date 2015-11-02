@@ -168,13 +168,14 @@ public class PlayerController : MonoBehaviour
 
         //skip loadingscreen
         if (Input.GetKeyDown(KeyCode.L) && Application.loadedLevelName == "Scene") {
-            GameObject.Find("Planet").GetComponent<LoadingScreen>().loading = false;
+            LoadingScreen.loading = false;
             GameObject.Find("Loading Screen").GetComponent<Canvas>().enabled = false;
 			sound.resumeSound("ambience");
             if (GameObject.Find("Player").GetComponent<LevelSelect>().currentLevel == 1) {
+				GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_PLANET_HINT);
                 GameObject.Find("Player")
                     .GetComponent<Tutorial>()
-                    .makeHint("Need a health pack? Look out for these flowers.",
+						.makeHint("Need a health pack? Look out for these flowers.",
                         GameObject.Find("Player").GetComponent<Tutorial>().Health);
             }
             GameObject.Find("Player").transform.rotation = Quaternion.Euler(0f, -95.3399f, 0f);
@@ -349,7 +350,7 @@ public class PlayerController : MonoBehaviour
 			if (Input.GetButtonDown ("Pause")) {
 				if (Application.loadedLevelName != "Scene" ||
 					(Application.loadedLevelName == "Scene" &&
-					!GameObject.Find ("Planet").GetComponent<LoadingScreen> ().loading)) {
+					!LoadingScreen.loading)) {
 					paused = !paused;
 					if (GameObject.Find ("Popup").GetComponent<Canvas> ().enabled) {
 						GameObject.Find ("Popup").GetComponent<Canvas> ().enabled = false;

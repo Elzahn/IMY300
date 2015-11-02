@@ -51,7 +51,7 @@ public class InventoryGUI : MonoBehaviour {
 					playerScript.showQuit = true;
 				}
 			} else if(Application.loadedLevelName == "Scene" || Application.loadedLevelName == "SaveSpot" || Application.loadedLevelName == "Tutorial"){
-				if (!playerScript.showQuit && Input.GetButtonDown("Menu") && !GameObject.Find("Planet").GetComponent<LoadingScreen>().loading){// && !this.GetComponent<Tutorial>().startTutorial
+				if (!playerScript.showQuit && Input.GetButtonDown("Menu") && !LoadingScreen.loading){// && !this.GetComponent<Tutorial>().startTutorial
 					playerScript.showQuit = true;
 				}
 			}
@@ -63,7 +63,7 @@ public class InventoryGUI : MonoBehaviour {
 					playerScript.paused = false;
 				}
 			} else  if(Application.loadedLevelName != "Main_Menu"){
-					if (playerScript.showQuit && (Input.GetButtonDown("Menu") || Input.GetButtonDown("Cancel")) && !GameObject.Find("Planet").GetComponent<LoadingScreen>().loading){//&& !this.GetComponent<Tutorial>().startTutorial
+					if (playerScript.showQuit && (Input.GetButtonDown("Menu") || Input.GetButtonDown("Cancel")) && !LoadingScreen.loading){//&& !this.GetComponent<Tutorial>().startTutorial
 					playerScript.showQuit = false;
 					playerScript.paused = false;
 				}
@@ -114,9 +114,9 @@ public class InventoryGUI : MonoBehaviour {
 	}
 
 	public void openInventory(){
-		GameObject planet = GameObject.Find ("Planet");
+//		GameObject planet = GameObject.Find ("Planet");
 		if (this.GetComponent<Tutorial> ().teachInventory) {
-			if((Application.loadedLevelName == "Scene" && !planet.GetComponent<LoadingScreen>().loading) || Application.loadedLevelName != "Scene"){
+			if((Application.loadedLevelName == "Scene" && !LoadingScreen.loading) || Application.loadedLevelName != "Scene"){
 				//Disabled so it isn't in the way
 				GameObject.Find("Hint").GetComponent<Image>().enabled = false;
 				GameObject.Find("Hint_Image").GetComponent<Image>().enabled = false;
