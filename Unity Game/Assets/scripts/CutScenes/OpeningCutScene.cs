@@ -4,11 +4,15 @@ using System.Collections;
 using System.IO;
 using System;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class OpeningCutScene : MonoBehaviour {
 
 	private MovieTexture movie;
 	private GameObject player;
 	private PlayerAttributes attributesScript;
+	private AudioSource movieAudio;
+
 
 	// Use this for initialization
 	void Start () {
@@ -19,11 +23,24 @@ public class OpeningCutScene : MonoBehaviour {
 
 		movie = (MovieTexture)GameObject.Find ("MovieScreen").GetComponent<Renderer> ().material.mainTexture;// = movie;
 		movie.Play();
+
+		movieAudio = GetComponent<AudioSource>();
+
+		if(movieAudio){
+			movieAudio.clip = movie.audioClip;
+
+			if(player.GetComponent<PlayerAttributes>().soundVolume == 1){
+				movieAudio.Play();
+			}	
+		}
 	}
 
 	void Update() {
 		if(Input.GetButtonDown("Skip")){
 			movie.Stop();
+			if(movieAudio){
+				movieAudio.Stop();
+			}
 		}
 
 		if (!movie.isPlaying) {
