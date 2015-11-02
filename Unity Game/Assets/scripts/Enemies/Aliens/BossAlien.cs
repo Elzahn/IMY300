@@ -36,82 +36,82 @@ public class BossAlien : Enemy {
 	}
 
 	void Update () {
-		PlayerController playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
+		PlayerController playerScript;
+		if (GameObject.Find ("Player")) {
+			playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
 
-
-
-		if (playerScript.paused == false && !Camera.main.GetComponent<CameraControl>().birdsEye) {
-			this.GetComponent<Animator>().speed = 1;
-			this.GetComponentInChildren<ParticleSystem>().enableEmission = false;
-			/* Called once per frame. AI comes Here */
-			GameObject player = GameObject.Find ("Player");
-			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
+			if (playerScript.paused == false && !Camera.main.GetComponent<CameraControl> ().birdsEye) {
+				this.GetComponent<Animator> ().speed = 1;
+				this.GetComponentInChildren<ParticleSystem> ().enableEmission = false;
+				/* Called once per frame. AI comes Here */
+				GameObject player = GameObject.Find ("Player");
+				Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
 
 			
-			/*Vector3 lookPos = PlayerPos - transform.position;
+				/*Vector3 lookPos = PlayerPos - transform.position;
 			Quaternion rotation = Quaternion.LookRotation(lookPos);
 			transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 4000f);*/
 
-			Vector3 myPos = GetComponent<Rigidbody> ().position;
+				Vector3 myPos = GetComponent<Rigidbody> ().position;
 			
-			if (Vector3.Distance (PlayerPos, myPos) < 16) {
+				if (Vector3.Distance (PlayerPos, myPos) < 16) {
 				
-				if(GameObject.Find("Player").GetComponent<PlayerController>().moving){
-					if(suspicion < SUSPICION_ALERT){
-						suspicion++;
-					} else {
-						if(!seekingRevenge){
-							followPlayer();
+					if (GameObject.Find ("Player").GetComponent<PlayerController> ().moving) {
+						if (suspicion < SUSPICION_ALERT) {
+							suspicion++;
 						} else {
-							seekOutPlayer();
+							if (!seekingRevenge) {
+								followPlayer ();
+							} else {
+								seekOutPlayer ();
+							}
+							animator.SetBool ("Attacking", false);
 						}
-						animator.SetBool("Attacking", false);
-					}
 					
-				} else {
-					if(suspicion > 0)
-					{
-						suspicion--;
-					}
-				}
-				
-				if (Vector3.Distance (PlayerPos, myPos) < 6) {
-					if(!seekingRevenge){
-						followPlayer();
 					} else {
-						seekOutPlayer();
+						if (suspicion > 0) {
+							suspicion--;
+						}
 					}
-					animator.SetBool("Attacking", false);
-				} else {
-					GameObject.Find("Player").GetComponent<Sounds>().stopMonsterSound(this);
-				}
-			} else{
-				attackPlayer = false;
-				animator.SetBool("Attacking", false);
-			}
-			
-			if (attackPlayer) {
-				if (Time.time >= nextMAttack) {
-					nextMAttack = Time.time + mDelay;
-					attack (player.GetComponent<PlayerAttributes> ());
-				}
 				
-				animator.SetBool("Attacking", true);
-			}
-			
-			if (Time.time >= nextRegeneration) {
-				nextRegeneration = Time.time + delayRegeneration;
-				if (Time.time >= (lastDamage+3) && getHealth () < getMaxHp ()) {
-					hp += (int)(getMaxHp () * 0.01);
+					if (Vector3.Distance (PlayerPos, myPos) < 6) {
+						if (!seekingRevenge) {
+							followPlayer ();
+						} else {
+							seekOutPlayer ();
+						}
+						animator.SetBool ("Attacking", false);
+					} else {
+						GameObject.Find ("Player").GetComponent<Sounds> ().stopMonsterSound (this);
+					}
+				} else {
+					attackPlayer = false;
+					animator.SetBool ("Attacking", false);
 				}
+			
+				if (attackPlayer) {
+					if (Time.time >= nextMAttack) {
+						nextMAttack = Time.time + mDelay;
+						attack (player.GetComponent<PlayerAttributes> ());
+					}
+				
+					animator.SetBool ("Attacking", true);
+				}
+			
+				if (Time.time >= nextRegeneration) {
+					nextRegeneration = Time.time + delayRegeneration;
+					if (Time.time >= (lastDamage + 3) && getHealth () < getMaxHp ()) {
+						hp += (int)(getMaxHp () * 0.01);
+					}
+				}
+			} else {
+				nextRegeneration = Time.time + delayRegeneration;
+				this.GetComponent<Animator> ().speed = 0;
+				if (Camera.main.GetComponent<CameraControl> ().birdsEye) {
+					this.GetComponentInChildren<ParticleSystem> ().enableEmission = true;
+				}
+				//lastDamage += 1;
 			}
-		} else {
-			nextRegeneration = Time.time + delayRegeneration;
-			this.GetComponent<Animator>().speed = 0;
-			if(Camera.main.GetComponent<CameraControl>().birdsEye){
-				this.GetComponentInChildren<ParticleSystem>().enableEmission = true;
-			}
-			//lastDamage += 1;
 		}
 	}
 	

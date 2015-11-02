@@ -54,73 +54,75 @@ public class OctoAlien : Enemy {
 	}
 	
 	void Update () {
-		PlayerController playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
-		if (playerScript.paused == false && !Camera.main.GetComponent<CameraControl>().birdsEye) {
-			this.GetComponent<Animator>().speed = 1;
-			this.GetComponentInChildren<ParticleSystem>().enableEmission = false;
-			/* Called once per frame. AI comes Here */
+		PlayerController playerScript;
+		if (GameObject.Find ("Player")) {
+			playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
+			if (playerScript.paused == false && !Camera.main.GetComponent<CameraControl> ().birdsEye) {
+				this.GetComponent<Animator> ().speed = 1;
+				this.GetComponentInChildren<ParticleSystem> ().enableEmission = false;
+				/* Called once per frame. AI comes Here */
 		
-			GameObject player = GameObject.Find ("Player");
-			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
-			Vector3 myPos = GetComponent<Rigidbody> ().position;
+				GameObject player = GameObject.Find ("Player");
+				Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
+				Vector3 myPos = GetComponent<Rigidbody> ().position;
 
-			if (Vector3.Distance (PlayerPos, myPos) < 16) {
+				if (Vector3.Distance (PlayerPos, myPos) < 16) {
 				
-				if(GameObject.Find("Player").GetComponent<PlayerController>().moving){
-					if(suspicion < 10){
-						suspicion++;
-					} else {
-						if(!seekingRevenge){
-							followPlayer();
+					if (GameObject.Find ("Player").GetComponent<PlayerController> ().moving) {
+						if (suspicion < 10) {
+							suspicion++;
 						} else {
-							seekOutPlayer();
+							if (!seekingRevenge) {
+								followPlayer ();
+							} else {
+								seekOutPlayer ();
+							}
+							animator.SetBool ("Attacking", false);
 						}
-						animator.SetBool("Attacking", false);
-					}
 					
-				} else {
-					if(suspicion > 0)
-					{
-						suspicion--;
+					} else {
+						if (suspicion > 0) {
+							suspicion--;
+						}
 					}
+
+					if (Vector3.Distance (PlayerPos, myPos) < 6) {
+						if (Time.time >= nextTransAttack) {
+							nextTransAttack = Time.time + transDelay;
+							attack (player.GetComponent<PlayerAttributes> ());	//Attack Player
+							animator.SetBool ("Attacking", true);
+						} else if (!seekingRevenge) {
+							followPlayer ();
+							animator.SetBool ("Attacking", false);
+						} else {
+							seekOutPlayer ();
+							animator.SetBool ("Attacking", false);
+						}
+						
+					}
+				} else {
+					if (!seekingRevenge) {
+						followDark ();
+					} else {
+						seekOutPlayer ();
+					}
+					animator.SetBool ("Attacking", false);
 				}
 
-				if (Vector3.Distance (PlayerPos, myPos) < 6) {
-					if (Time.time >= nextTransAttack) {
-						nextTransAttack = Time.time + transDelay;
-						attack (player.GetComponent<PlayerAttributes> ());	//Attack Player
-						animator.SetBool("Attacking", true);
-					} else if(!seekingRevenge){
-						followPlayer();
-						animator.SetBool("Attacking", false);
-					} else {
-						seekOutPlayer();
-						animator.SetBool("Attacking", false);
+				if (Time.time >= nextTRegeneration) {
+					nextTRegeneration = Time.time + delayTRegeneration;
+					if (Time.time >= (lastDamage + 3) && getHealth () < getMaxHp ()) {
+						hp += (int)(getMaxHp () * 0.01);
 					}
-						
 				}
 			} else {
-				if(!seekingRevenge){
-					followDark();
-				} else {
-					seekOutPlayer();
-				}
-				animator.SetBool("Attacking", false);
-			}
-
-			if (Time.time >= nextTRegeneration) {
 				nextTRegeneration = Time.time + delayTRegeneration;
-				if (Time.time >= (lastDamage+3) && getHealth () < getMaxHp ()) {
-					hp += (int)(getMaxHp () * 0.01);
-				}
-			}
-		} else {
-			nextTRegeneration = Time.time + delayTRegeneration;
-			this.GetComponent<Animator>().speed = 0;
-		/*	if(Camera.main.GetComponent<CameraControl>().birdsEye){
+				this.GetComponent<Animator> ().speed = 0;
+				/*	if(Camera.main.GetComponent<CameraControl>().birdsEye){
 				this.GetComponentInChildren<ParticleSystem>().enableEmission = true;
 			}*/
-			//lastDamage += 1;
+				//lastDamage += 1;
+			}
 		}
 	}	
 }

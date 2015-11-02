@@ -43,97 +43,100 @@ public class ClayAlien : Enemy {
 	void Update () {
 		/* Called once per frame. AI comes Here */
 		GameObject player = GameObject.Find("Player");
-		PlayerController playerScript = player.GetComponent<PlayerController> ();
-		if (!playerScript.paused && !Camera.main.GetComponent<CameraControl>().birdsEye) {
-			this.GetComponent<Animator>().speed = 1;
-			this.GetComponentInChildren<ParticleSystem>().enableEmission = false;
+		PlayerController playerScript;
+		if (GameObject.Find ("Player")) {
+			playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
+			if (!playerScript.paused && !Camera.main.GetComponent<CameraControl> ().birdsEye) {
+				this.GetComponent<Animator> ().speed = 1;
+				this.GetComponentInChildren<ParticleSystem> ().enableEmission = false;
 
-			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;		
-			transform.LookAt (PlayerPos);
-			Vector3 myPos = GetComponent<Rigidbody> ().position;
+				Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;		
+				transform.LookAt (PlayerPos);
+				Vector3 myPos = GetComponent<Rigidbody> ().position;
 
-			float distance = Vector3.Distance (PlayerPos, myPos);
-			if (distance < 10 || suspicion >= 10) {
-				//player.GetComponent<Sounds>().playMonsterSound (1, this);
-				if (!onPlayer) {//distance < 10 && 
-					Vector3 direction = PlayerPos - myPos;
-					this.GetComponent<Rigidbody> ().MovePosition (this.GetComponent<Rigidbody> ().position + direction * 0.25f * Time.deltaTime);
-					//this.transform.Translate (direction * 0.025f);
-				} else if (distance >= 1.5f) {
-					onPlayer = false;
+				float distance = Vector3.Distance (PlayerPos, myPos);
+				if (distance < 10 || suspicion >= 10) {
+					//player.GetComponent<Sounds>().playMonsterSound (1, this);
+					if (!onPlayer) {//distance < 10 && 
+						Vector3 direction = PlayerPos - myPos;
+						this.GetComponent<Rigidbody> ().MovePosition (this.GetComponent<Rigidbody> ().position + direction * 0.25f * Time.deltaTime);
+						//this.transform.Translate (direction * 0.025f);
+					} else if (distance >= 1.5f) {
+						onPlayer = false;
+					}
 				}
-			}
-			var viewdist = 13;
-			var dark = LightRotation.getDark (this.gameObject);
-			if (dark == "dark") {
-				viewdist += 5;
-			} else if (dark == "dusk") {
-				viewdist += 2;
-			}
-			if (Vector3.Distance (PlayerPos, myPos) < viewdist) {
+				var viewdist = 13;
+				var dark = LightRotation.getDark (this.gameObject);
+				if (dark == "dark") {
+					viewdist += 5;
+				} else if (dark == "dusk") {
+					viewdist += 2;
+				}
+				if (Vector3.Distance (PlayerPos, myPos) < viewdist) {
 				
-				if (GameObject.Find ("Player").GetComponent<PlayerController> ().moving) {
-					if (suspicion < 10) {
-						suspicion++;
-					} else {
-						if(!seekingRevenge){
-							followPlayer();
+					if (GameObject.Find ("Player").GetComponent<PlayerController> ().moving) {
+						if (suspicion < 10) {
+							suspicion++;
 						} else {
-							seekOutPlayer();
+							if (!seekingRevenge) {
+								followPlayer ();
+							} else {
+								seekOutPlayer ();
+							}
+							animator.SetBool ("Attacking", false);
 						}
-						animator.SetBool("Attacking", false);
-					}
 					
-				} else {
-					if (suspicion > 0) {
-						suspicion--;
-					}
-				}
-				
-				if (Vector3.Distance (PlayerPos, myPos) < viewdist / 2) {
-					attackPlayer = true;
-					if(!seekingRevenge){
-						followPlayer();
-						animator.SetBool("Attacking", false);
 					} else {
-						seekOutPlayer();
-						animator.SetBool("Attacking", false);
+						if (suspicion > 0) {
+							suspicion--;
+						}
 					}
+				
+					if (Vector3.Distance (PlayerPos, myPos) < viewdist / 2) {
+						attackPlayer = true;
+						if (!seekingRevenge) {
+							followPlayer ();
+							animator.SetBool ("Attacking", false);
+						} else {
+							seekOutPlayer ();
+							animator.SetBool ("Attacking", false);
+						}
 
+					}
+				} else {
+					attackPlayer = false;
+					animator.SetBool ("Attacking", false);
 				}
+			
+				if (attackPlayer) {
+					if (Time.time >= nextMAttack) {
+						nextMAttack = Time.time + mDelay;
+						attack (player.GetComponent<PlayerAttributes> ());
+						animator.SetBool ("Attacking", true);
+					}
+				}
+			
+				if (Time.time >= nextRegeneration) {
+					nextRegeneration = Time.time + delayRegeneration;
+					if (Time.time >= (lastDamage + 3) && getHealth () < getMaxHp ()) {
+						hp += (int)(getMaxHp () * 0.01);
+					}
+				}
+			
+				if (Time.time >= changeDir) {
+					changeDir += delayedChange;
+					dir = Random.Range (1, 5);
+				}
+
+				walkAround (0.5f, dir);
 			} else {
-				attackPlayer = false;
-				animator.SetBool("Attacking", false);
-			}
-			
-			if (attackPlayer) {
-				if (Time.time >= nextMAttack) {
-					nextMAttack = Time.time + mDelay;
-					attack (player.GetComponent<PlayerAttributes> ());
-					animator.SetBool("Attacking", true);
-				}
-			}
-			
-			if (Time.time >= nextRegeneration) {
 				nextRegeneration = Time.time + delayRegeneration;
-				if (Time.time >= (lastDamage + 3) && getHealth () < getMaxHp ()) {
-					hp += (int)(getMaxHp () * 0.01);
-				}
-			}
-			
-			if (Time.time >= changeDir) {
-				changeDir += delayedChange;
-				dir = Random.Range (1, 5);
-			}
-
-			walkAround (0.5f, dir);
-		} else {
-			nextRegeneration = Time.time + delayRegeneration;
-			this.GetComponent<Animator>().speed = 0;
-			/*if(Camera.main.GetComponent<CameraControl>().birdsEye){
+				this.GetComponent<Animator> ().speed = 0;
+				/*if(Camera.main.GetComponent<CameraControl>().birdsEye){
 				this.GetComponentInChildren<ParticleSystem>().enableEmission = true;
 			}*/
-			//lastDamage += 1;
+				//lastDamage += 1;
+			}
 		}
 	}	
 }

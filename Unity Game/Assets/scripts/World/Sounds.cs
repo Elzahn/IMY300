@@ -230,7 +230,8 @@ public class Sounds : MonoBehaviour {
 			}
 			case "world":
 			{
-				worldAudio.Stop();
+				if(worldAudio)
+					worldAudio.Stop();
 				break;
 			}
 			case "computer":

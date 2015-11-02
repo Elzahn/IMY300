@@ -54,7 +54,9 @@ public class LoadingScreen : MonoBehaviour {
 			if(planet.GetComponent<EnemySpawner> ().hasEnemiesLanded() == false && !monstersLoaded){
 				background.sprite = LoadingMonsters;
 				if(loadingBar.fillAmount < (float)planet.GetComponent<EnemySpawner> ().amountEnemiesLanded() / (float)planet.GetComponent<EnemySpawner> ().ENEM_COUNT){
-					loadingBar.fillAmount = (float)planet.GetComponent<EnemySpawner> ().amountEnemiesLanded() / (float)planet.GetComponent<EnemySpawner> ().ENEM_COUNT;
+					if(loadingBar){
+						loadingBar.fillAmount = (float)planet.GetComponent<EnemySpawner> ().amountEnemiesLanded() / (float)planet.GetComponent<EnemySpawner> ().ENEM_COUNT;
+					}
 				}
 			} else if(planet.GetComponent<EnemySpawner> ().hasEnemiesLanded() == true && !monstersLoaded){
 				monstersLoaded = true;
@@ -88,7 +90,7 @@ public class LoadingScreen : MonoBehaviour {
 				loading = false;
 				GameObject.Find ("Loading Screen").GetComponent<Canvas> ().enabled = false;
 				GameObject.Find("Player").GetComponent<Sounds>().resumeSound("ambience");
-				if(GameObject.Find("Player").GetComponent<LevelSelect>().currentLevel == 1){
+				if(GameObject.Find("Player").GetComponent<LevelSelect>().currentLevel == 1 && !loading){
 					//GameObject.Find("Player").GetComponent<SaveSpotTeleport>().showedHealthHint = true;
 					GameObject.Find("Player").GetComponent<Tutorial>().makeHint("Need a health pack? Look out for these flowers.", GameObject.Find("Player").GetComponent<Tutorial>().Health);
 				}

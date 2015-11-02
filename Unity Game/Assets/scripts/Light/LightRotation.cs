@@ -8,14 +8,17 @@ public class LightRotation : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		PlayerController playerScript = GameObject.Find("Player").GetComponent<PlayerController>();
-		if (!playerScript.paused) {
-			transform.RotateAround(Vector3.zero, Vector3.up, lightSpeed * Time.deltaTime);
+		PlayerController playerScript;
+		if (GameObject.Find ("Player")) {
+			playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
+			if (!playerScript.paused) {
+				transform.RotateAround (Vector3.zero, Vector3.up, lightSpeed * Time.deltaTime);
 
-			skyrot += lightSpeed/2 * Time.deltaTime;
-			skyrot %= 360;
-			RenderSettings.skybox.SetFloat("_Rotation", skyrot );
+				skyrot += lightSpeed / 2 * Time.deltaTime;
+				skyrot %= 360;
+				RenderSettings.skybox.SetFloat ("_Rotation", skyrot);
 
+			}
 		}
 	}
 

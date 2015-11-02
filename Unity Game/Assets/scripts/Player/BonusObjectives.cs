@@ -93,6 +93,7 @@ public class BonusObjectives : MonoBehaviour {
 				showedBonus4 = true;
 				reachTheStars = true;
 				this.GetComponent<PlayerAttributes> ().inventory.AddLast (new BonusAccessory ());
+				print ("dead on level: " + deadEnemiesOnLevel + " all enemies: " + EnemySpawner.ALL_ENEMIES + " bonus3shows: " + !showedBonus3 + " killed on level: " + killAllMonstersOnLevel + " readch: " + reachTheStars);
 			}
 		}
 	}
@@ -147,16 +148,28 @@ public class BonusObjectives : MonoBehaviour {
 			killAllMonstersOnLevel = true;
 		}
 
-		if (reachTheStars)
+		if (reachTheStars) {
 			GameObject.Find ("Bonus1StrikeThrough").GetComponent<Text> ().enabled = true;
+		} else {
+			GameObject.Find ("Bonus1StrikeThrough").GetComponent<Text> ().enabled = false;
+		}
 
-		if (killAllMonstersInGame) 
+		if (killAllMonstersInGame) {
 			GameObject.Find ("Bonus2StrikeThrough").GetComponent<Text> ().enabled = true;
+		} else {
+			GameObject.Find ("Bonus2StrikeThrough").GetComponent<Text> ().enabled = false;
+		}
 		
-		if(killAllMonstersOnLevel)
+		if (killAllMonstersOnLevel) {
 			GameObject.Find ("Bonus3StrikeThrough").GetComponent<Text> ().enabled = true;
+		} else {
+			GameObject.Find ("Bonus3StrikeThrough").GetComponent<Text> ().enabled = false;
+		}
 
-		if(completeAllQuests)
-			GameObject.Find ("Bonus4StrikeThrough").GetComponent<Text> ().enabled = true;
+		if (completeAllQuests) {
+			GameObject.Find ("Bonus3trikeThrough").GetComponent<Text> ().enabled = true;
+		} else {
+			GameObject.Find ("Bonus3StrikeThrough").GetComponent<Text> ().enabled = false;
+		}
 	}
 }

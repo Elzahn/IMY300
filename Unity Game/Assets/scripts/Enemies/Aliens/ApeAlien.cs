@@ -41,73 +41,75 @@ public class ApeAlien : Enemy {
 	}
 	
 	void Update () {
-		PlayerController playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
-		if (playerScript.paused  == false && !Camera.main.GetComponent<CameraControl>().birdsEye) {
-			this.GetComponent<Animator>().speed = 1;
-			this.GetComponentInChildren<ParticleSystem>().enableEmission = false;
-			/* Called once per frame. AI comes Here */
+		PlayerController playerScript;
+		if (GameObject.Find ("Player")) {
+			playerScript = GameObject.Find ("Player").GetComponent<PlayerController> ();
+			if (playerScript.paused == false && !Camera.main.GetComponent<CameraControl> ().birdsEye) {
+				this.GetComponent<Animator> ().speed = 1;
+				this.GetComponentInChildren<ParticleSystem> ().enableEmission = false;
+				/* Called once per frame. AI comes Here */
 			
-			GameObject player = GameObject.Find ("Player");
-			Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
-			Vector3 myPos = GetComponent<Rigidbody> ().position;
+				GameObject player = GameObject.Find ("Player");
+				Vector3 PlayerPos = player.GetComponent<Rigidbody> ().position;
+				Vector3 myPos = GetComponent<Rigidbody> ().position;
 			
-			var viewdist = 22;
-			var dark = LightRotation.getDark(this.gameObject);
-			if (dark == "dark") {
-				viewdist -= 8;
-			} else if (dark == "dusk") {
-				viewdist -= 4;
-			}
-			if (Vector3.Distance (PlayerPos, myPos) < viewdist) {
+				var viewdist = 22;
+				var dark = LightRotation.getDark (this.gameObject);
+				if (dark == "dark") {
+					viewdist -= 8;
+				} else if (dark == "dusk") {
+					viewdist -= 4;
+				}
+				if (Vector3.Distance (PlayerPos, myPos) < viewdist) {
 				
-				if(GameObject.Find("Player").GetComponent<PlayerController>().moving){
-					if(suspicion < 10){
-						suspicion++;
-					} else {
-						if(!seekingRevenge){
-							followPlayer();
+					if (GameObject.Find ("Player").GetComponent<PlayerController> ().moving) {
+						if (suspicion < 10) {
+							suspicion++;
 						} else {
-							seekOutPlayer();
+							if (!seekingRevenge) {
+								followPlayer ();
+							} else {
+								seekOutPlayer ();
+							}
+							animator.SetBool ("Attacking", false);
 						}
-						animator.SetBool("Attacking", false);
-					}
 					
-				} else {
-					if(suspicion > 0)
-					{
-						suspicion--;
-					}
-				}
-
-				if (Vector3.Distance (PlayerPos, myPos) < viewdist/2) {
-					if (Time.time >= nextApeAttack) {
-						nextApeAttack = Time.time + apeDelay;
-						attack (player.GetComponent<PlayerAttributes> ());	//Attack Player
-						animator.SetBool("Attacking", true);
-					} else if(!seekingRevenge){
-						followPlayer();
-						animator.SetBool("Attacking", false);
 					} else {
-						seekOutPlayer();
-						animator.SetBool("Attacking", false);
+						if (suspicion > 0) {
+							suspicion--;
+						}
 					}
 
-				}
-			}
+					if (Vector3.Distance (PlayerPos, myPos) < viewdist / 2) {
+						if (Time.time >= nextApeAttack) {
+							nextApeAttack = Time.time + apeDelay;
+							attack (player.GetComponent<PlayerAttributes> ());	//Attack Player
+							animator.SetBool ("Attacking", true);
+						} else if (!seekingRevenge) {
+							followPlayer ();
+							animator.SetBool ("Attacking", false);
+						} else {
+							seekOutPlayer ();
+							animator.SetBool ("Attacking", false);
+						}
 
-			if (Time.time >= nextARegeneration) {
-				nextARegeneration = Time.time + delayARegeneration;
-				if (Time.time >= (lastDamage+3) && getHealth () < getMaxHp ()) {
-					hp += (int)(getMaxHp () * 0.01);
+					}
 				}
-			}
-		}else {
-			nextARegeneration = Time.time + delayARegeneration;
-			this.GetComponent<Animator>().speed = 0;
-			/*if(Camera.main.GetComponent<CameraControl>().birdsEye){
+
+				if (Time.time >= nextARegeneration) {
+					nextARegeneration = Time.time + delayARegeneration;
+					if (Time.time >= (lastDamage + 3) && getHealth () < getMaxHp ()) {
+						hp += (int)(getMaxHp () * 0.01);
+					}
+				}
+			} else {
+				nextARegeneration = Time.time + delayARegeneration;
+				this.GetComponent<Animator> ().speed = 0;
+				/*if(Camera.main.GetComponent<CameraControl>().birdsEye){
 				this.GetComponentInChildren<ParticleSystem>().enableEmission = true;
 			}*/
-			//lastDamage += 1;
+				//lastDamage += 1;
+			}
 		}
 	}	
 }

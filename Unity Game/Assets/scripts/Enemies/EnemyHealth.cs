@@ -27,18 +27,17 @@ public class EnemyHealth : MonoBehaviour {
 
 		Vector3 worldPos = new Vector3 (transform.position.x, transform.position.y, transform.position.z);
 
-		float distance = (worldPos - Camera.main.transform.position).magnitude;
+		if (Camera.main) {
+			float distance = (worldPos - Camera.main.transform.position).magnitude;
 
-		float alpha = 3 - (distance) / 2.0f;
+			float alpha = 3 - (distance) / 2.0f;
 
-		//Shows or hide healthbar depending on distance from player
-		if (myRenderer.isVisible && alpha > -4)
-		{
-			canvas.enabled = true;
-		}
-		else
-		{
-			canvas.enabled = false;
+			//Shows or hide healthbar depending on distance from player
+			if (myRenderer.isVisible && alpha > -4) {
+				canvas.enabled = true;
+			} else {
+				canvas.enabled = false;
+			}
 		}
 	}
 }
