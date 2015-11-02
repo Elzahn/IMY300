@@ -1,7 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
-using System.Linq;
 
 public class InventoryScript : MonoBehaviour {
 	private PlayerAttributes attributesScript;
@@ -26,6 +23,19 @@ public class InventoryScript : MonoBehaviour {
 		attributesScript.inventory.Remove (item);
 		sound.playWorldSound(Sounds.DROP_ITEM);
 		scrollableList.setUpInventory();
+	}
+
+	public InventoryItem removeFirstByName(string name) {
+
+		var item = attributesScript.inventory.First;
+		while (item != null) {
+			if (item.Value.typeID.Equals(name)) {			
+				attributesScript.inventory.Remove(item.Value);
+				return item.Value;
+			}
+			item = item.Next;
+		}
+		return null;
 	}
 	
 	public void equipItem(){
