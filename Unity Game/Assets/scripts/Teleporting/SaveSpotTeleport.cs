@@ -172,7 +172,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 				this.GetComponent<Rigidbody> ().mass = 0.1f;
 				sound.playWorldSound (Sounds.TELEPORTING);
 				attributesComponent.saveInventoryAndStorage ();
-				interaction.fillAmount = 0;
+				//interaction.fillAmount = 0;
 				sound.stopSound ("computer");
 				this.GetComponent<LevelSelect> ().currentLevel = 0;
 				interaction.fillAmount = 0;

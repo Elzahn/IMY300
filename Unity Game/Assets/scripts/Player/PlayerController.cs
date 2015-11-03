@@ -168,15 +168,17 @@ public class PlayerController : MonoBehaviour
 
         //skip loadingscreen
         if (Input.GetKeyDown(KeyCode.L) && Application.loadedLevelName == "Scene") {
-            LoadingScreen.loading = false;
             GameObject.Find("Loading Screen").GetComponent<Canvas>().enabled = false;
 			sound.resumeSound("ambience");
-            if (GameObject.Find("Player").GetComponent<LevelSelect>().currentLevel == 1) {
+            if (GameObject.Find("Player").GetComponent<LevelSelect>().currentLevel == 1 && LoadingScreen.loading) {
+				LoadingScreen.loading = false;
 				GameObject.Find("Player").GetComponent<Sounds>().playComputerSound(Sounds.COMPUTER_PLANET_HINT);
                 GameObject.Find("Player")
                     .GetComponent<Tutorial>()
 						.makeHint("Need a health pack? Look out for these flowers.",
                         GameObject.Find("Player").GetComponent<Tutorial>().Health);
+				//GameObject.Find("Player").GetComponent<Tutorial>().hudText.text += "\nNeed a health pack? Look out for flowers on the plants. Some monsters follow the dark while otehrs prefer the dark.\n\n";
+				//GameObject.Find("Player").GetComponent<Tutorial>().attribteScript.narrativeSoFar += "\nNeed a health pack? Look out for flowers on the plants. Some monsters follow the dark while others prefer the dark.\n\n";
             }
             GameObject.Find("Player").transform.rotation = Quaternion.Euler(0f, -95.3399f, 0f);
             GameObject.Find("Player").transform.position = new Vector3(-1.651f, 80.82f, 0.84f);
@@ -288,6 +290,11 @@ public class PlayerController : MonoBehaviour
 
 	public void OnMouseDown() {
 		if (!paused) {
+
+			if (GameObject.Find ("Stamina").GetComponent<Image> ().isActiveAndEnabled == false && Application.loadedLevelName != "SaveSpot") {
+				GameObject.Find ("Stamina").GetComponent<Image> ().enabled = true;
+			}
+
 			var collidedItems = Physics.OverlapSphere(transform.position, 5f);
 
 			Enemy enemy = null;

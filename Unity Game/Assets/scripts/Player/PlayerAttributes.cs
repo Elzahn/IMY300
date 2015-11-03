@@ -903,6 +903,10 @@ public class PlayerAttributes : MonoBehaviour {
 		healthAltered = Time.time;
 
 		GameObject.Find ("Health").GetComponent<Image> ().fillAmount = hp / maxHP ();
+		
+		if (GameObject.Find ("Health").GetComponent<Image> ().isActiveAndEnabled == false && Application.loadedLevelName != "SaveSpot") {
+			GameObject.Find ("Health").GetComponent<Image> ().enabled = true;
+		}
 	}
 
 	public void HideHealhtAltered(){
