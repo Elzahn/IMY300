@@ -91,14 +91,15 @@ public class HUD : MonoBehaviour {
 		interactionImage.GetComponent<Mask>().showMaskGraphic = true;
 	}
 
+	public void resetCanvas(){	
+		Canvas.ForceUpdateCanvases();
+		Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
+		scrollbar.value = 0f;
+	}
+
 	public void showOrHideNarative(){
 		if (shrinkTheHud) {
 			//0 = hide; 1 = show
-
-			Canvas.ForceUpdateCanvases();
-			Scrollbar scrollbar = GameObject.Find ("Scrollbar").GetComponent<Scrollbar> ();
-			scrollbar.value = 0f;
-
 			player.GetComponent<PlayerAttributes>().narrativeShown = 1;
 			shrink.enabled = true;
 			expand.enabled = false;
@@ -119,6 +120,7 @@ public class HUD : MonoBehaviour {
 			shrinkTheHud = true;
 		} else {
 			shrinkTheHud = false;
+
 		}
 
 		showOrHideNarative ();

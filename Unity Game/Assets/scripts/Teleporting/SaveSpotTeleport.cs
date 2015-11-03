@@ -114,6 +114,8 @@ public class SaveSpotTeleport : MonoBehaviour {
 			} else if (showNoEntry && !loadTutorial && showedHealthHint && !LoadingScreen.loading) {
 				notInUse = false;
 				sound.playComputerSound(Sounds.COMPUTER_NO_ENTRY);
+				GameObject.Find("Player").GetComponent<Tutorial>().hudText.text += "\nKill the boss and take his loot to go back to the ship.\n\n";
+				GameObject.Find("Player").GetComponent<Tutorial>().attribteScript.narrativeSoFar += "\nKill the boss and take his loot to go back to the ship.\n\n";
 				Hud.makeInteractionHint ("Kill the boss and take his loot to go back to the ship.", noEntry);
 			} else if (showEntranceConfirmation) {
 				notInUse = false;
@@ -126,7 +128,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 				Hud.makeInteractionHint ("Press E to go home.", pressE);
 			} else if (showEndGameFail){
 				notInUse = false;
-				Hud.makeInteractionHint ("You must first fix the ship.", noEntry);
+				Hud.makeInteractionHint ("You must first fix the ship by replacing all ship pieces.", noEntry);
 			} else if (!showExitConfirmation && !showNoEntry && !showExitConfirmation && !showEntranceConfirmation && !showEndGameFail && !showEndGameSuccess) {
 				notInUse = true;
 			}
@@ -247,8 +249,7 @@ public class SaveSpotTeleport : MonoBehaviour {
 	void unequipWeapon(){
 		if(attributesComponent.weapon != null){
 			GameObject.Find("Character_Final").GetComponent<Animator>().SetBool("Weapon", false);
-			
-			print (attributesComponent.weapon.typeID);
+
 			if(attributesComponent.weapon.typeID == "ButterKnife"){
 				Destroy(GameObject.Find("ButterKnife(Clone)"));
 			} else if(attributesComponent.weapon.typeID == "Longsword"){

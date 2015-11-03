@@ -22,12 +22,12 @@ public class Tutorial : MonoBehaviour {
 	private Image hint;
 	private Image hintImage;
 	private Text hintText;
-	private Text hudText;
+	public Text hudText;
 	private bool justStarted = true;
 	private bool justArrivedOnPlanet = false;
 	private Sounds sound;
 	private int visualDuration = 7;
-	private PlayerAttributes attribteScript;
+	public PlayerAttributes attribteScript;
 
 	public Sprite Walk;
 	public Sprite Run;
