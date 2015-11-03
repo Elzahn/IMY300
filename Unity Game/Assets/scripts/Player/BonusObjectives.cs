@@ -116,7 +116,7 @@ public class BonusObjectives : MonoBehaviour {
 			showedBonus2 = true;
 		}
 
-		if(deadEnemiesOnLevel == EnemySpawner.ALL_ENEMIES){
+		if((deadEnemiesOnLevel == 20 && levelSelect.currentLevel == 1) || (deadEnemiesOnLevel == 35  && levelSelect.currentLevel == 2) || (deadEnemiesOnLevel == 10 && levelSelect.currentLevel == 3) || (deadEnemiesOnLevel == 40 && levelSelect.currentLevel == 4) || (deadEnemiesOnLevel == 50 && levelSelect.currentLevel == 5)){//if(deadEnemiesOnLevel == EnemySpawner.ALL_ENEMIES){
 			switch(levelSelect.currentLevel){
 			case 1:{
 				killAllMonstersInUniverseLevel1 = true;

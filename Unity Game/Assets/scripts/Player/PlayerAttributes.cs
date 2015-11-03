@@ -379,6 +379,7 @@ public class PlayerAttributes : MonoBehaviour {
 		save(0);
         Application.LoadLevel("SaveSpot");
         Resources.UnloadUnusedAssets();
+		soundComponent.stopAlarmSound(Sounds.DISASTER_ALARM);
     }
 	
 	public int CurrentLevel {get {

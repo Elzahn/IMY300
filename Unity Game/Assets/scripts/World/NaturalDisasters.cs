@@ -239,7 +239,7 @@ public class NaturalDisasters : MonoBehaviour {
 										moveDirection = Random.Range (1, 21);	
 										enemiesToBeMoved [index].transform.position = new Vector3 (moveDirection, enemiesToBeMoved [index].transform.position.y, moveDirection);
 										enemiesToBeMoved [index].GetComponentInParent<PositionMe>().checkMyPosition = true;
-									enemiesToBeMoved [index].GetComponentInParent<PositionMe>().touching = false;
+										enemiesToBeMoved [index].GetComponentInParent<PositionMe>().touching = false;
 										index++;
 									}
 								
