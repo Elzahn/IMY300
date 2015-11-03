@@ -114,8 +114,8 @@ public class SaveSpotTeleport : MonoBehaviour {
 			} else if (showNoEntry && !loadTutorial && showedHealthHint && !LoadingScreen.loading) {
 				notInUse = false;
 				sound.playComputerSound(Sounds.COMPUTER_NO_ENTRY);
-				GameObject.Find("Player").GetComponent<Tutorial>().hudText.text += "\nKill the boss and take his loot to go back to the ship.\n\n";
-				GameObject.Find("Player").GetComponent<Tutorial>().attribteScript.narrativeSoFar += "\nKill the boss and take his loot to go back to the ship.\n\n";
+				//GameObject.Find("Player").GetComponent<Tutorial>().hudText.text += "\nKill the boss and take his loot to go back to the ship.\n\n";
+				//GameObject.Find("Player").GetComponent<Tutorial>().attribteScript.narrativeSoFar += "\nKill the boss and take his loot to go back to the ship.\n\n";
 				Hud.makeInteractionHint ("Kill the boss and take his loot to go back to the ship.", noEntry);
 			} else if (showEntranceConfirmation) {
 				notInUse = false;
